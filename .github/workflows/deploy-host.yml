@@ -19,26 +19,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install FTP client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
       - name: Deploy by FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ${{ secrets.FTP_PROTOCOL }}
-          port: ${{ secrets.FTP_PORT }}
-          timeout: 120000
-          log-level: verbose
-          local-dir: ./
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
-            deploy/**
-            rule vs skill/**
-            file sản phẩm từ shopee/**
-            ảnh bài viết/**
-            **/.DS_Store
-            README.md
-            GITHUB_DEPLOY.md
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+        run: |
+          set -euo pipefail
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER:$FTP_PORT" <<EOF
+          set ftp:ssl-allow no
+          set ftp:passive-mode on
+          set net:timeout 60
+          set net:max-retries 2
+          set cmd:fail-exit yes
+          mirror --reverse --delete --verbose \
+            --exclude-glob .git/ \
+            --exclude-glob .github/ \
+            --exclude-glob deploy/ \
+            --exclude-glob "rule vs skill/" \
+            --exclude-glob "file sản phẩm từ shopee/" \
+            --exclude-glob "ảnh bài viết/" \
+            --exclude-glob .DS_Store \
+            --exclude-glob README.md \
+            --exclude-glob GITHUB_DEPLOY.md \
+            ./ "$FTP_SERVER_DIR"
+          bye
+          EOF
