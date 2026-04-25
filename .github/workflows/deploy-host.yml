@@ -39,7 +39,7 @@ jobs:
           set net:timeout 60
           set net:max-retries 2
           set cmd:fail-exit yes
-          mirror --reverse --delete --verbose \
+          mirror --reverse --verbose \
             --exclude-glob .git/ \
             --exclude-glob .github/ \
             --exclude-glob deploy/ \
