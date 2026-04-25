@@ -8,6 +8,10 @@ deploy/
 rule vs skill/
 file sản phẩm từ shopee/
 ảnh bài viết/
+ảnh bài viết
+ảnh bài viết/
+*shopee/
+*ba*i*vie*t/
 
 # Local/editor noise.
 .env
