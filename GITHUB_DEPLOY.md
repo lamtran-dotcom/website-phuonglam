@@ -6,12 +6,14 @@ This project is prepared for automatic hosting deployment with GitHub Actions.
 
 Add these in GitHub repo settings:
 
-- `FTP_SERVER`: hosting FTP/SFTP server, for example `ftp.phuonglam.com`
+- `FTP_SERVER`: hosting FTP/FTPS server, for example `ftp.phuonglam.com`
 - `FTP_USERNAME`: hosting username
 - `FTP_PASSWORD`: hosting password
-- `FTP_PROTOCOL`: usually `ftp`, `ftps`, or `sftp`
-- `FTP_PORT`: usually `21` for FTP, `990` for FTPS, or `22` for SFTP
+- `FTP_PROTOCOL`: usually `ftp` or `ftps`
+- `FTP_PORT`: usually `21` for FTP or `990` for FTPS
 - `FTP_SERVER_DIR`: hosting public folder, usually `/public_html/`
+
+If the hosting account only supports SFTP, replace the workflow action with an SFTP deploy action before adding secrets.
 
 ## How it works
 
