@@ -39,11 +39,11 @@ jobs:
           FTP_PASSWORD_CLEAN="$(printf '%s' "$FTP_PASSWORD" | tr -d '\r\n')"
           FTP_SERVER_DIR_CLEAN="$(printf '%s' "$FTP_SERVER_DIR" | tr -d '\r\n ')"
           if [ -z "$FTP_PORT_CLEAN" ]; then FTP_PORT_CLEAN=21; fi
+          FTP_USERNAME_ENC="$(FTP_USERNAME_CLEAN="$FTP_USERNAME_CLEAN" python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["FTP_USERNAME_CLEAN"], safe=""))')"
+          FTP_PASSWORD_ENC="$(FTP_PASSWORD_CLEAN="$FTP_PASSWORD_CLEAN" python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["FTP_PASSWORD_CLEAN"], safe=""))')"
           printf "Deploy target: %s:%s -> %s\n" "$FTP_SERVER_CLEAN" "$FTP_PORT_CLEAN" "$FTP_SERVER_DIR_CLEAN"
           printf "FTP user: %s\n" "$FTP_USERNAME_CLEAN"
-          printf "machine %s login %s password %s\n" "$FTP_SERVER_CLEAN" "$FTP_USERNAME_CLEAN" "$FTP_PASSWORD_CLEAN" > ~/.netrc
-          chmod 600 ~/.netrc
-          lftp "ftp://$FTP_SERVER_CLEAN:$FTP_PORT_CLEAN" <<EOF
+          lftp "ftp://$FTP_USERNAME_ENC:$FTP_PASSWORD_ENC@$FTP_SERVER_CLEAN:$FTP_PORT_CLEAN" <<EOF
           set ftp:ssl-allow no
           set ftp:passive-mode on
           set net:timeout 60
