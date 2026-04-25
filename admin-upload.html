@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phương Lâm Admin - Upload sản phẩm</title>
+  <style>
+    :root {
+      --green: #2f7d24;
+      --green-dark: #25651d;
+      --soft: #f5faf2;
+      --line: #dde8d8;
+      --text: #1f1f1f;
+      --muted: #777;
+      --danger: #d64545;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
+      background: linear-gradient(135deg, #fbfff8, #f3f8ef);
+      color: var(--text);
+    }
+
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 28px; }
+    .topbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 22px; }
+    h1 { margin: 0; font-size: 34px; letter-spacing: -.03em; }
+    .sub { color: var(--muted); margin-top: 6px; }
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 50px rgba(38, 91, 30, .08);
+    }
+
+    .login { max-width: 480px; margin: 80px auto; padding: 28px; }
+    .grid { display: grid; grid-template-columns: 360px 1fr; gap: 22px; align-items: start; }
+    .side { padding: 18px; position: sticky; top: 18px; max-height: calc(100vh - 36px); overflow: auto; }
+    .editor { padding: 22px; }
+
+    input, textarea, select, button {
+      font: inherit;
+      border-radius: 14px;
+    }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #ddd;
+      padding: 13px 14px;
+      background: #fff;
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(47,125,36,.12); }
+    textarea { min-height: 100px; resize: vertical; }
+    label { display: block; font-weight: 800; color: #4b4b4b; margin: 14px 0 7px; }
+
+    button {
+      border: 0;
+      padding: 12px 18px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(47,125,36,.18); }
+    button.secondary { background: #fff; color: var(--green); border: 1px solid var(--line); }
+    button.danger { background: #fff5f5; color: var(--danger); border: 1px solid #ffd0d0; }
+    button.small { padding: 9px 12px; font-size: 13px; }
+
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .tab {
+      background: #fff;
+      color: #4f614b;
+      border: 1px solid var(--line);
+      padding: 10px 16px;
+      border-radius: 999px;
+      box-shadow: none;
+    }
+    .tab.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .status { margin-top: 12px; font-weight: 800; color: var(--green); }
+
+    .product-item {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      margin-bottom: 8px;
+    }
+    .product-item.active { background: var(--soft); border-color: var(--line); }
+    .product-item.is-hidden { opacity: .58; background: #fbfbfb; }
+    .hidden-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 6px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #888;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      vertical-align: middle;
+    }
+    .thumb {
+      width: 58px;
+      height: 58px;
+      aspect-ratio: 1 / 1;
+      border-radius: 14px;
+      background: repeating-linear-gradient(45deg, #eef5ec, #eef5ec 10px, #f7fbf5 10px, #f7fbf5 20px);
+      object-fit: cover;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: #999;
+      font-size: 11px;
+    }
+    .name { font-weight: 900; line-height: 1.25; }
+    .price { color: var(--green); font-weight: 900; margin-top: 4px; }
+    .muted { color: var(--muted); }
+
+    .images {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .image-box {
+      width: 100%;
+      border: 2px dashed #d7d7d7;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      background: #fafafa;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #aaa;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .image-box.dragging,
+    .variant-img.dragging {
+      border-color: var(--green);
+      background: #f1faee;
+      box-shadow: 0 16px 34px rgba(47,125,36,.16);
+      transform: translateY(-2px);
+    }
+    .image-box img { width: 100%; height: 100%; object-fit: cover; }
+    .image-box span { padding: 10px; }
+    .remove-img {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,255,255,.92);
+      color: var(--danger);
+      border: 1px solid #ffd0d0;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .variant {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      margin-top: 12px;
+      background: #fff;
+    }
+    .variant-grid {
+      display: grid;
+      grid-template-columns: 82px 1.2fr .8fr .8fr .7fr .8fr 70px;
+      gap: 10px;
+      align-items: end;
+    }
+    .variant-img {
+      width: 72px;
+      height: 72px;
+      aspect-ratio: 1 / 1;
+      border: 1px dashed #ccc;
+      border-radius: 14px;
+      background: #fafafa;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      cursor: pointer;
+      color: #999;
+      font-size: 12px;
+      transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .variant-img img { width: 100%; height: 100%; object-fit: cover; }
+    .mini-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .mini-card.active {
+      border-color: var(--green);
+      background: #f3fbf1;
+      box-shadow: 0 12px 28px rgba(47,125,36,.12);
+    }
+    .mini-card:hover { transform: translateY(-2px); }
+    .order-table { width: 100%; border-collapse: collapse; min-width: 780px; }
+    .order-table th, .order-table td { padding: 12px 10px; border-bottom: 1px solid #eef2eb; text-align: left; vertical-align: top; }
+    .order-table th { color: #66705f; font-size: 13px; }
+
+    .empty { padding: 30px; text-align: center; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .wrap { padding: 16px; }
+      .topbar, .grid { display: block; }
+      .side { position: static; max-height: none; margin-bottom: 16px; }
+      .row, .row3, .images, .variant-grid, .card-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="app"></div>
+  </div>
+
+  <script>
+    const API_PRODUCTS = 'api/products.php';
+    const API_UPLOAD = 'api/upload.php';
+    const API_SETTINGS = 'api/settings.php';
+    const API_ORDERS = 'api/orders.php';
+    const PASS_KEY = 'phuonglam_admin_password';
+    const CATEGORIES = [
+      ['nen-thom', 'Nến Xông'],
+      ['combo', 'Combo Xông Nhà'],
+      ['thao-moc-xong', 'Thảo Mộc Xông'],
+      ['tinh-dau', 'Đèn Xông Tinh Dầu'],
+      ['nen-tru', 'Nến Trụ'],
+      ['nu-tram', 'Nụ Trầm'],
+      ['phu-kien', 'Phụ Kiện Xông'],
+      ['nen-ly', 'Nến Ly']
+    ];
+    const PRODUCT_TAGS = ['', 'Bán chạy', 'Mới', 'Nổi bật', 'Sale', 'Hết hàng'];
+
+    let password = localStorage.getItem(PASS_KEY) || '';
+    let products = [];
+    let settings = { featuredIds: [], headerImages: [], categoryImages: {} };
+    let orders = [];
+    let selectedId = null;
+    let listSearch = '';
+    let listCategory = '';
+    let activeTab = 'products';
+    let saving = false;
+    let apiOnline = true;
+    const app = document.getElementById('app');
+
+    const fmt = value => Number(value || 0).toLocaleString('vi-VN') + 'đ';
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+    const id = () => 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+    const firstImage = product => (product.images || []).find(Boolean) || (product.variants || []).map(v => v.image).find(Boolean) || '';
+    const isHidden = product => product?.hidden === true || product?.hidden === 'true';
+    const selectedProduct = () => products.find(product => String(product.id) === String(selectedId));
+
+    async function readJsonResponse(response, label) {
+      const text = await response.text();
+      try {
+        return JSON.parse(text);
+      } catch {
+        if (text.trim().startsWith('<?php')) {
+          throw new Error(`${label} chưa chạy được vì preview local không thực thi PHP.`);
+        }
+        throw new Error(`${label} trả về dữ liệu không đúng định dạng JSON.`);
+      }
+    }
+
+    function normalizeProduct(product) {
+      return {
+        id: product.id || id(),
+        sku: product.sku || '',
+        categoryId: product.categoryId || 'nen-thom',
+        name: product.name || '',
+        price: Number(product.price || 0),
+        originalPrice: product.originalPrice === '' ? null : (product.originalPrice == null ? null : Number(product.originalPrice || 0)),
+        shortDesc: product.shortDesc || '',
+        description: product.description || '',
+        usage: product.usage || '',
+        tag: product.tag || '',
+        weight: product.weight === '' ? null : (product.weight == null ? null : Number(product.weight || 0)),
+        hidden: isHidden(product),
+        images: Array.isArray(product.images) ? product.images.filter(Boolean).slice(0, 9) : [],
+        reviews: Array.isArray(product.reviews) ? product.reviews : [],
+        variants: Array.isArray(product.variants) ? product.variants.map(v => ({
+          id: v.id || id(),
+          name: v.name || '',
+          sku: v.sku || '',
+          price: Number(v.price || 0),
+          originalPrice: v.originalPrice === '' ? null : (v.originalPrice == null ? null : Number(v.originalPrice || 0)),
+          weight: v.weight === '' ? null : (v.weight == null ? null : Number(v.weight || 0)),
+          image: v.image || ''
+        })) : []
+      };
+    }
+
+    async function loadProducts() {
+      app.innerHTML = '<div class="panel empty">Đang tải dữ liệu quản trị...</div>';
+      try {
+        const [productRes, settingRes, orderRes] = await Promise.all([
+          fetch(API_PRODUCTS, { cache: 'no-store' }),
+          fetch(API_SETTINGS, { cache: 'no-store' }),
+          fetch(API_ORDERS, { cache: 'no-store', headers: { 'X-Admin-Password': password } }).catch(() => null)
+        ]);
+        const productData = await readJsonResponse(productRes, 'API sản phẩm');
+        const settingData = await readJsonResponse(settingRes, 'API cài đặt');
+        const orderData = orderRes ? await readJsonResponse(orderRes, 'API đơn hàng') : { ok: true, orders: [] };
+        if (!productData.ok) throw new Error(productData.message || 'Không tải được dữ liệu sản phẩm.');
+        if (!settingData.ok) throw new Error(settingData.message || 'Không tải được cài đặt website.');
+        apiOnline = true;
+        products = (productData.products || []).map(normalizeProduct);
+        settings = normalizeSettings(settingData.settings || {});
+        orders = Array.isArray(orderData.orders) ? orderData.orders : [];
+        selectedId = products[0]?.id || null;
+        render();
+      } catch (error) {
+        try {
+          const localRes = await fetch('data/products.json', { cache: 'no-store' });
+          const localData = await localRes.json();
+          const localProducts = Array.isArray(localData) ? localData : (localData.products || []);
+          apiOnline = false;
+          products = localProducts.map(normalizeProduct);
+          settings = normalizeSettings({});
+          orders = [];
+          selectedId = products[0]?.id || null;
+          render();
+        } catch {
+          app.innerHTML = `<div class="panel empty"><h2>Không tải được API</h2><p>${esc(error.message)}</p><p>Kiểm tra đã upload đủ file trong thư mục <strong>api</strong> và có thư mục <strong>data</strong>, <strong>uploads</strong> trên host chưa.</p></div>`;
+        }
+      }
+    }
+
+    function normalizeSettings(value) {
+      return {
+        featuredIds: Array.isArray(value.featuredIds) ? value.featuredIds.map(String) : [],
+        headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
+        categoryImages: value.categoryImages && typeof value.categoryImages === 'object' && !Array.isArray(value.categoryImages) ? value.categoryImages : {}
+      };
+    }
+
+    function renderLogin() {
+      app.innerHTML = `
+        <div class="panel login">
+          <h1>Phương Lâm Admin</h1>
+          <p class="sub">Nhập mật khẩu admin để thêm/sửa sản phẩm trực tiếp trên host.</p>
+          <label>Mật khẩu admin</label>
+          <input id="password" type="password" value="${esc(password)}" placeholder="Nhập mật khẩu" />
+          <div class="actions" style="margin-top:16px">
+            <button onclick="login()">Đăng nhập</button>
+            <a href="index.html"><button class="secondary">Về trang chủ</button></a>
+          </div>
+        </div>
+      `;
+    }
+
+    function login() {
+      password = document.getElementById('password').value.trim();
+      localStorage.setItem(PASS_KEY, password);
+      loadProducts();
+    }
+
+    function render() {
+      const product = selectedProduct();
+      app.innerHTML = `
+        <div class="topbar">
+          <div>
+            <h1>Quản lý website</h1>
+            <div class="sub">Sản phẩm, phân loại, ảnh, bán chạy, header, danh mục và đơn hàng.</div>
+            ${!apiOnline ? '<div class="sub" style="color:#d98221;font-weight:900">Đang ở chế độ preview local: xem được dữ liệu nhưng không lưu/upload trực tiếp. Lên host có PHP thì sẽ lưu được.</div>' : ''}
+          </div>
+          <div class="actions">
+            <button onclick="saveAll()" ${saving || !apiOnline ? 'disabled' : ''}>${apiOnline ? 'Lưu lên website' : 'Preview local'}</button>
+            <button class="secondary" onclick="location.href='index.html'">Về trang chủ</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          ${[
+            ['products', 'Sản phẩm'],
+            ['featured', 'Bán chạy'],
+            ['header', 'Ảnh header'],
+            ['categories', 'Ảnh danh mục'],
+            ['orders', 'Đơn hàng']
+          ].map(([key, label]) => `<button class="${activeTab === key ? 'tab active' : 'tab'}" onclick="activeTab='${key}'; render()">${label}</button>`).join('')}
+        </div>
+
+        ${activeTab === 'products' ? `
+        <div class="grid">
+          <aside class="panel side">
+            <div class="actions" style="margin-bottom:12px">
+              <button onclick="addProduct()">+ Thêm sản phẩm</button>
+            </div>
+            <input id="search" placeholder="Tìm sản phẩm..." value="${esc(listSearch)}" oninput="listSearch = this.value; renderProductList()" />
+            <select id="catFilter" style="margin-top:10px" onchange="listCategory = this.value; renderProductList()">
+              <option value="">Tất cả danh mục</option>
+              ${CATEGORIES.map(([value, label]) => `<option value="${value}" ${listCategory === value ? 'selected' : ''}>${label}</option>`).join('')}
+            </select>
+            <div id="productList" style="margin-top:12px"></div>
+          </aside>
+
+          <main class="panel editor">
+            ${product ? editorHtml(product) : '<div class="empty">Chưa có sản phẩm. Bấm “+ Thêm sản phẩm” để tạo mới.</div>'}
+          </main>
+        </div>
+        ` : `<main class="panel editor">${adminTabHtml()}</main>`}
+      `;
+      if (activeTab === 'products') renderProductList();
+    }
+
+    function renderProductList() {
+      const list = document.getElementById('productList');
+      if (!list) return;
+      const q = listSearch.toLowerCase();
+      const cat = listCategory;
+      const filtered = products.filter(product => {
+        const matchesText = !q || [product.name, product.sku].join(' ').toLowerCase().includes(q);
+        const matchesCat = !cat || product.categoryId === cat;
+        return matchesText && matchesCat;
+      });
+      list.innerHTML = filtered.map(product => {
+        const img = firstImage(product);
+        const hidden = isHidden(product);
+        return `
+          <div class="product-item ${String(product.id) === String(selectedId) ? 'active' : ''} ${hidden ? 'is-hidden' : ''}" onclick="selectProduct('${esc(product.id)}')">
+            ${img ? `<img class="thumb" src="${esc(img)}" />` : `<div class="thumb">Ảnh</div>`}
+            <div>
+              <div class="name">${esc(product.name || 'Chưa đặt tên')}${hidden ? '<span class="hidden-badge">Ẩn</span>' : ''}</div>
+              <div class="price">${fmt(product.price)}</div>
+              <div class="muted">${esc(product.sku || '')}</div>
+            </div>
+          </div>
+        `;
+      }).join('') || '<div class="empty">Không có sản phẩm phù hợp.</div>';
+    }
+
+    function adminTabHtml() {
+      if (activeTab === 'featured') return featuredHtml();
+      if (activeTab === 'header') return headerHtml();
+      if (activeTab === 'categories') return categoryImagesHtml();
+      if (activeTab === 'orders') return ordersHtml();
+      return '';
+    }
+
+    function featuredHtml() {
+      const selected = new Set(settings.featuredIds || []);
+      return `
+        <h2>Sản phẩm bán chạy</h2>
+        <p class="muted">Bấm chọn sản phẩm muốn hiển thị ở khu vực bán chạy trên trang chủ.</p>
+        <div class="card-grid">
+          ${products.map(product => {
+            const img = firstImage(product);
+            const active = selected.has(String(product.id));
+            const hidden = isHidden(product);
+            return `
+              <div class="${active ? 'mini-card active' : 'mini-card'}" style="${hidden ? 'opacity:.55' : ''}" onclick="toggleFeatured('${esc(product.id)}')">
+                ${img ? `<img src="${esc(img)}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;margin-bottom:10px" />` : `<div class="thumb" style="width:100%;height:auto;aspect-ratio:1/1;margin-bottom:10px">Ảnh</div>`}
+                <div class="name">${esc(product.name)}${hidden ? '<span class="hidden-badge">Ẩn</span>' : ''}</div>
+                <div class="price">${fmt(product.price)}</div>
+                <div class="muted">${active ? 'Đang chọn' : 'Bấm để chọn'}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function headerHtml() {
+      const imgs = settings.headerImages || [];
+      return `
+        <h2>Ảnh header</h2>
+        <p class="muted">Kéo thả hoặc bấm vào ô để thêm ảnh header. Ảnh sẽ tự chạy slider trên trang chủ.</p>
+        <div class="images">
+          ${Array.from({ length: 6 }).map((_, index) => {
+            const src = imgs[index] || '';
+            return `
+              <div class="image-box" onclick="pickHeaderImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropHeaderImage(event, ${index})">
+                ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeHeaderImage(${index})">Xoá</button>` : `<span>+<br>Header ${index + 1}</span>`}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function categoryImagesHtml() {
+      return `
+        <h2>Ảnh danh mục</h2>
+        <p class="muted">Mỗi danh mục dùng ảnh 1:1 để hiển thị đẹp ở trang chủ.</p>
+        <div class="card-grid">
+          ${CATEGORIES.map(([catId, label]) => {
+            const src = settings.categoryImages?.[catId] || '';
+            return `
+              <div class="mini-card">
+                <div class="image-box" onclick="pickCategoryImage('${catId}')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropCategoryImage(event, '${catId}')">
+                  ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeCategoryImage('${catId}')">Xoá</button>` : `<span>+<br>${esc(label)}</span>`}
+                </div>
+                <div class="name" style="margin-top:10px">${esc(label)}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function ordersHtml() {
+      return `
+        <h2>Đơn hàng</h2>
+        <p class="muted">Đơn mới từ website sẽ hiện ở đây. Có thể đổi trạng thái để theo dõi xử lý.</p>
+        <div style="overflow:auto">
+          <table class="order-table">
+            <thead>
+              <tr><th>Mã đơn</th><th>Khách hàng</th><th>Sản phẩm</th><th>Tổng</th><th>Ngày</th><th>Trạng thái</th></tr>
+            </thead>
+            <tbody>
+              ${orders.map(order => `
+                <tr>
+                  <td><strong>${esc(order.id || '')}</strong></td>
+                  <td>
+                    <div><strong>${esc(order.customer || order.name || '')}</strong></div>
+                    <div class="muted">${esc(order.phone || '')}</div>
+                    <div class="muted">${esc(order.address || '')}</div>
+                  </td>
+                  <td>${(order.items || []).map(item => `<div>${esc(item.name || '')}${item.variant ? ` - ${esc(item.variant)}` : ''} x${item.qty || 1}</div>`).join('')}</td>
+                  <td><strong>${fmt(order.total || 0)}</strong></td>
+                  <td>${esc(order.date || '')}</td>
+                  <td>
+                    <select onchange="updateOrderStatus('${esc(order.id || '')}', this.value)">
+                      ${[
+                        ['New', 'Mới'],
+                        ['Processing', 'Đang xử lý'],
+                        ['Done', 'Hoàn tất'],
+                        ['Cancelled', 'Đã huỷ']
+                      ].map(([value, label]) => `<option value="${value}" ${order.status === value ? 'selected' : ''}>${label}</option>`).join('')}
+                    </select>
+                  </td>
+                </tr>
+              `).join('') || `<tr><td colspan="6" class="empty">Chưa có đơn hàng.</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function editorHtml(product) {
+      return `
+        <div class="actions" style="justify-content:space-between">
+          <div class="actions">
+            <button class="${isHidden(product) ? 'secondary' : 'danger'}" onclick="toggleHidden()">${isHidden(product) ? 'Hiện sản phẩm' : 'Ẩn sản phẩm'}</button>
+            <button class="secondary" onclick="duplicateProduct()">Nhân bản</button>
+            <button class="danger" onclick="deleteProduct()">Xoá sản phẩm</button>
+          </div>
+          <strong>ID: ${esc(product.id)} ${isHidden(product) ? '<span class="hidden-badge">Đang ẩn</span>' : ''}</strong>
+        </div>
+        ${isHidden(product) ? '<p class="status" style="color:#8a5b00;background:#fff8e8;border-radius:12px;padding:10px 12px">Sản phẩm này đang ẩn khỏi trang khách xem. Bấm “Hiện sản phẩm” rồi “Lưu lên website” để mở lại.</p>' : ''}
+
+        <div class="row">
+          <div><label>Tên sản phẩm *</label><input value="${esc(product.name)}" oninput="updateField('name', this.value)" /></div>
+          <div><label>Danh mục *</label><select onchange="updateField('categoryId', this.value)">${CATEGORIES.map(([value, label]) => `<option value="${value}" ${product.categoryId === value ? 'selected' : ''}>${label}</option>`).join('')}</select></div>
+        </div>
+        <div class="row3">
+          <div><label>Giá bán *</label><input type="number" value="${esc(product.price)}" oninput="updateField('price', this.value)" /></div>
+          <div><label>Giá gốc</label><input type="number" value="${esc(product.originalPrice ?? '')}" oninput="updateField('originalPrice', this.value)" /></div>
+          <div><label>Gram</label><input type="number" value="${esc(product.weight ?? '')}" oninput="updateField('weight', this.value)" /></div>
+        </div>
+        <div class="row3">
+          <div><label>SKU</label><input value="${esc(product.sku)}" oninput="updateField('sku', this.value)" /></div>
+          <div><label>Nhãn</label><select onchange="updateField('tag', this.value)">${PRODUCT_TAGS.map(tag => `<option value="${esc(tag)}" ${(product.tag || '') === tag ? 'selected' : ''}>${tag || 'Không gắn nhãn'}</option>`).join('')}</select></div>
+          <div><label>Trạng thái sản phẩm</label><select onchange="updateField('hidden', this.value)"><option value="" ${!isHidden(product) ? 'selected' : ''}>Đang hiện trên website</option><option value="true" ${isHidden(product) ? 'selected' : ''}>Đang ẩn khỏi khách</option></select></div>
+        </div>
+
+        <label>Mô tả ngắn</label>
+        <textarea oninput="updateField('shortDesc', this.value)">${esc(product.shortDesc)}</textarea>
+        <label>Mô tả chi tiết</label>
+        <textarea oninput="updateField('description', this.value)">${esc(product.description)}</textarea>
+        <label>Hướng dẫn sử dụng</label>
+        <textarea oninput="updateField('usage', this.value)">${esc(product.usage)}</textarea>
+
+        <h2>Ảnh sản phẩm <span class="muted">(tối đa 9 ảnh)</span></h2>
+        <div class="images">
+          ${Array.from({ length: 9 }).map((_, index) => imageBox(product, index)).join('')}
+        </div>
+
+        <h2>Phân loại sản phẩm</h2>
+        <p class="muted">Ví dụ: hộp 10 viên, hộp 100 viên, mùi Mai, mùi Lavender...</p>
+        <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
+        <div>
+          ${(product.variants || []).map((variant, index) => variantHtml(variant, index)).join('')}
+        </div>
+      `;
+    }
+
+    function imageBox(product, index) {
+      const src = product.images[index] || '';
+      return `
+        <div class="image-box" onclick="pickProductImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropProductImage(event, ${index})">
+          ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeProductImage(${index})">Xoá</button>` : `<span>+<br>Ảnh ${index + 1}</span>`}
+        </div>
+      `;
+    }
+
+    function variantHtml(variant, index) {
+      return `
+        <div class="variant">
+          <div class="variant-grid">
+            <div>
+              <label>Ảnh</label>
+              <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">${variant.image ? `<img src="${esc(variant.image)}" />` : '+'}</div>
+            </div>
+            <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
+            <div><label>Giá bán *</label><input type="number" value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
+            <div><label>Giá gốc</label><input type="number" value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
+            <div><label>Gram</label><input type="number" value="${esc(variant.weight ?? '')}" oninput="updateVariant(${index}, 'weight', this.value)" /></div>
+            <div><label>SKU</label><input value="${esc(variant.sku)}" oninput="updateVariant(${index}, 'sku', this.value)" /></div>
+            <div><label>&nbsp;</label><button class="danger small" onclick="removeVariant(${index})">Xoá</button></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectProduct(productId) {
+      selectedId = productId;
+      render();
+    }
+
+    function updateSelected(mutator, shouldRender = false) {
+      const product = selectedProduct();
+      if (!product) return;
+      mutator(product);
+      if (shouldRender) render();
+    }
+
+    function updateField(field, value) {
+      updateSelected(product => {
+        if (field === 'hidden') {
+          product.hidden = value === 'true';
+        } else if (['price', 'originalPrice', 'weight'].includes(field)) {
+          product[field] = value === '' ? null : Number(value);
+        } else {
+          product[field] = value;
+        }
+      });
+      renderProductList();
+    }
+
+    function addProduct() {
+      const product = normalizeProduct({
+        id: id(),
+        sku: 'PL-' + String(Date.now()).slice(-4),
+        categoryId: listCategory || 'nen-thom',
+        name: 'Sản phẩm mới',
+        price: 0,
+        images: [],
+        variants: []
+      });
+      products.unshift(product);
+      selectedId = product.id;
+      render();
+    }
+
+    function duplicateProduct() {
+      const product = selectedProduct();
+      if (!product) return;
+      const copy = normalizeProduct(JSON.parse(JSON.stringify(product)));
+      copy.id = id();
+      copy.name = copy.name + ' - bản sao';
+      products.unshift(copy);
+      selectedId = copy.id;
+      render();
+    }
+
+    function deleteProduct() {
+      const product = selectedProduct();
+      if (!product || !confirm('Xoá sản phẩm này?')) return;
+      products = products.filter(item => String(item.id) !== String(product.id));
+      selectedId = products[0]?.id || null;
+      render();
+    }
+
+    function toggleHidden() {
+      updateSelected(product => {
+        product.hidden = !isHidden(product);
+      }, true);
+    }
+
+    function addVariant() {
+      updateSelected(product => {
+        product.variants = product.variants || [];
+        product.variants.push({ id: id(), name: '', sku: '', price: product.price || 0, originalPrice: product.originalPrice || null, weight: product.weight || null, image: '' });
+      }, true);
+    }
+
+    function updateVariant(index, field, value) {
+      updateSelected(product => {
+        const variant = product.variants[index];
+        if (!variant) return;
+        if (['price', 'originalPrice', 'weight'].includes(field)) {
+          variant[field] = value === '' ? null : Number(value);
+        } else {
+          variant[field] = value;
+        }
+      });
+    }
+
+    function removeVariant(index) {
+      updateSelected(product => product.variants.splice(index, 1), true);
+    }
+
+    async function uploadFile(file) {
+      if (!apiOnline) throw new Error('Preview local không upload ảnh trực tiếp được. Hãy dùng admin trên host để lưu ảnh thật.');
+      if (!file) return '';
+      const form = new FormData();
+      form.append('password', password);
+      form.append('image', file);
+      const res = await fetch(API_UPLOAD, { method: 'POST', body: form });
+      const data = await readJsonResponse(res, 'API upload ảnh');
+      if (!data.ok) throw new Error(data.message || 'Upload ảnh thất bại.');
+      return data.url;
+    }
+
+    function chooseFile(callback) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = async () => {
+        try {
+          const url = await uploadFile(input.files[0]);
+          callback(url);
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+      input.click();
+    }
+
+    function getDroppedImage(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.currentTarget.classList.remove('dragging');
+      const file = [...(event.dataTransfer?.files || [])].find(item => item.type && item.type.startsWith('image/'));
+      if (!file) alert('Hãy kéo đúng file ảnh vào ô này.');
+      return file;
+    }
+
+    function handleDragOver(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.currentTarget.classList.add('dragging');
+    }
+
+    function handleDragLeave(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.currentTarget.classList.remove('dragging');
+    }
+
+    async function dropProductImage(event, index) {
+      const file = getDroppedImage(event);
+      if (!file) return;
+      try {
+        const url = await uploadFile(file);
+        updateSelected(product => {
+          product.images = product.images || [];
+          product.images[index] = url;
+        }, true);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function dropVariantImage(event, index) {
+      const file = getDroppedImage(event);
+      if (!file) return;
+      try {
+        const url = await uploadFile(file);
+        updateSelected(product => {
+          product.variants[index].image = url;
+        }, true);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function uploadDropped(event, callback) {
+      const file = getDroppedImage(event);
+      if (!file) return;
+      try {
+        const url = await uploadFile(file);
+        callback(url);
+        render();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    function pickProductImage(index) {
+      chooseFile(url => updateSelected(product => {
+        product.images = product.images || [];
+        product.images[index] = url;
+      }, true));
+    }
+
+    function removeProductImage(index) {
+      updateSelected(product => {
+        product.images.splice(index, 1);
+      }, true);
+    }
+
+    function pickVariantImage(index) {
+      chooseFile(url => updateSelected(product => {
+        product.variants[index].image = url;
+      }, true));
+    }
+
+    function toggleFeatured(productId) {
+      const id = String(productId);
+      const current = new Set(settings.featuredIds || []);
+      if (current.has(id)) current.delete(id);
+      else current.add(id);
+      settings.featuredIds = [...current];
+      render();
+    }
+
+    function pickHeaderImage(index) {
+      chooseFile(url => {
+        settings.headerImages = settings.headerImages || [];
+        settings.headerImages[index] = url;
+        render();
+      });
+    }
+
+    function dropHeaderImage(event, index) {
+      uploadDropped(event, url => {
+        settings.headerImages = settings.headerImages || [];
+        settings.headerImages[index] = url;
+      });
+    }
+
+    function removeHeaderImage(index) {
+      settings.headerImages.splice(index, 1);
+      render();
+    }
+
+    function pickCategoryImage(categoryId) {
+      chooseFile(url => {
+        settings.categoryImages = settings.categoryImages || {};
+        settings.categoryImages[categoryId] = url;
+        render();
+      });
+    }
+
+    function dropCategoryImage(event, categoryId) {
+      uploadDropped(event, url => {
+        settings.categoryImages = settings.categoryImages || {};
+        settings.categoryImages[categoryId] = url;
+      });
+    }
+
+    function removeCategoryImage(categoryId) {
+      delete settings.categoryImages[categoryId];
+      render();
+    }
+
+    async function saveSettings() {
+      if (!apiOnline) throw new Error('Preview local không lưu trực tiếp được. Hãy mở admin trên host để cập nhật website thật.');
+      const res = await fetch(API_SETTINGS, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': password
+        },
+        body: JSON.stringify({ settings: normalizeSettings(settings) })
+      });
+      const data = await readJsonResponse(res, 'API cài đặt');
+      if (!data.ok) throw new Error(data.message || 'Lưu cài đặt thất bại.');
+      settings = normalizeSettings(data.settings || settings);
+    }
+
+    async function updateOrderStatus(orderId, status) {
+      try {
+        if (!apiOnline) throw new Error('Preview local không cập nhật đơn hàng trực tiếp được.');
+        const res = await fetch(API_ORDERS, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Admin-Password': password
+          },
+          body: JSON.stringify({ action: 'updateStatus', id: orderId, status })
+        });
+        const data = await readJsonResponse(res, 'API đơn hàng');
+        if (!data.ok) throw new Error(data.message || 'Không cập nhật được đơn hàng.');
+        orders = Array.isArray(data.orders) ? data.orders : orders;
+        render();
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function saveProducts() {
+      if (!apiOnline) throw new Error('Preview local không lưu trực tiếp được. Hãy mở admin trên host để cập nhật website thật.');
+      const res = await fetch(API_PRODUCTS, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': password
+        },
+        body: JSON.stringify({ products: products.map(normalizeProduct) })
+      });
+      const data = await readJsonResponse(res, 'API sản phẩm');
+      if (!data.ok) throw new Error(data.message || 'Lưu thất bại.');
+      products = (data.products || []).map(normalizeProduct);
+    }
+
+    async function saveAll() {
+      saving = true;
+      render();
+      try {
+        await saveProducts();
+        await saveSettings();
+        alert('Đã lưu lên website.');
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        saving = false;
+        render();
+      }
+    }
+
+    if (!password) renderLogin();
+    else loadProducts();
+  </script>
+</body>
+</html>

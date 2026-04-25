@@ -1,0 +1,15 @@
+.DS_Store
+**/.DS_Store
+
+# Local deployment bundles generated for manual upload.
+deploy/
+
+# Internal working files that should not be deployed to hosting.
+rule vs skill/
+file sản phẩm từ shopee/
+ảnh bài viết/
+
+# Local/editor noise.
+.env
+.env.*
+*.log
