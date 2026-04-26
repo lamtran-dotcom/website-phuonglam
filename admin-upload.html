@@ -363,6 +363,11 @@
       };
     }
 
+    function b64ToUtf8(b64) {
+      const bytes = Uint8Array.from(atob(b64.replace(/\n/g, '')), c => c.charCodeAt(0));
+      return new TextDecoder('utf-8').decode(bytes);
+    }
+
     async function loadProducts() {
       app.innerHTML = '<div class="panel empty">Đang tải dữ liệu từ GitHub...</div>';
       try {
@@ -370,8 +375,8 @@
           githubGetFile('data/products.json'),
           githubGetFile('data/settings.json').catch(() => null)
         ]);
-        const productData = JSON.parse(decodeURIComponent(escape(atob(productFile.content.replace(/\n/g, '')))));
-        const settingData = settingFile ? JSON.parse(decodeURIComponent(escape(atob(settingFile.content.replace(/\n/g, ''))))) : {};
+        const productData = JSON.parse(b64ToUtf8(productFile.content));
+        const settingData = settingFile ? JSON.parse(b64ToUtf8(settingFile.content)) : {};
         apiOnline = true;
         products = (Array.isArray(productData) ? productData : (productData.products || [])).map(normalizeProduct);
         settings = normalizeSettings(Array.isArray(settingData) ? {} : settingData);
