@@ -239,11 +239,10 @@
   </div>
 
   <script>
-    const API_PRODUCTS = 'api/products.php';
-    const API_UPLOAD = 'api/upload.php';
-    const API_SETTINGS = 'api/settings.php';
-    const API_ORDERS = 'api/orders.php';
-    const PASS_KEY = 'phuonglam_admin_password';
+    const GITHUB_OWNER = 'lamtran-dotcom';
+    const GITHUB_REPO = 'website-phuonglam';
+    const GITHUB_BRANCH = 'main';
+    const PASS_KEY = 'phuonglam_github_token';
     const CATEGORIES = [
       ['nen-thom', 'Nến Xông'],
       ['combo', 'Combo Xông Nhà'],
@@ -267,6 +266,55 @@
     let saving = false;
     let apiOnline = true;
     const app = document.getElementById('app');
+
+    const GITHUB_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
+
+    async function githubGetFile(path) {
+      const res = await fetch(`${GITHUB_API}/${path}?ref=${GITHUB_BRANCH}`, {
+        headers: { Authorization: `token ${password}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      if (!res.ok) throw new Error(`Không đọc được file ${path} (${res.status})`);
+      return res.json();
+    }
+
+    async function githubCommitFile(path, content, message) {
+      let sha;
+      try { sha = (await githubGetFile(path)).sha; } catch {}
+      const body = { message, content: btoa(unescape(encodeURIComponent(content))), branch: GITHUB_BRANCH };
+      if (sha) body.sha = sha;
+      const res = await fetch(`${GITHUB_API}/${path}`, {
+        method: 'PUT',
+        headers: { Authorization: `token ${password}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) { const err = await res.json(); throw new Error(err.message || `Commit thất bại (${res.status})`); }
+      return res.json();
+    }
+
+    async function githubUploadImage(filename, file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          try {
+            const base64 = reader.result.split(',')[1];
+            const path = `anh-bai-viet/${filename}`;
+            let sha;
+            try { sha = (await githubGetFile(path)).sha; } catch {}
+            const body = { message: `Upload ảnh ${filename}`, content: base64, branch: GITHUB_BRANCH };
+            if (sha) body.sha = sha;
+            const res = await fetch(`${GITHUB_API}/${path}`, {
+              method: 'PUT',
+              headers: { Authorization: `token ${password}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+              body: JSON.stringify(body)
+            });
+            if (!res.ok) { const err = await res.json(); throw new Error(err.message || 'Upload ảnh thất bại'); }
+            resolve(`anh-bai-viet/${filename}`);
+          } catch (e) { reject(e); }
+        };
+        reader.onerror = () => reject(new Error('Đọc file thất bại'));
+        reader.readAsDataURL(file);
+      });
+    }
 
     const fmt = value => Number(value || 0).toLocaleString('vi-VN') + 'đ';
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
@@ -316,38 +364,22 @@
     }
 
     async function loadProducts() {
-      app.innerHTML = '<div class="panel empty">Đang tải dữ liệu quản trị...</div>';
+      app.innerHTML = '<div class="panel empty">Đang tải dữ liệu từ GitHub...</div>';
       try {
-        const [productRes, settingRes, orderRes] = await Promise.all([
-          fetch(API_PRODUCTS, { cache: 'no-store' }),
-          fetch(API_SETTINGS, { cache: 'no-store' }),
-          fetch(API_ORDERS, { cache: 'no-store', headers: { 'X-Admin-Password': password } }).catch(() => null)
+        const [productFile, settingFile] = await Promise.all([
+          githubGetFile('data/products.json'),
+          githubGetFile('data/settings.json').catch(() => null)
         ]);
-        const productData = await readJsonResponse(productRes, 'API sản phẩm');
-        const settingData = await readJsonResponse(settingRes, 'API cài đặt');
-        const orderData = orderRes ? await readJsonResponse(orderRes, 'API đơn hàng') : { ok: true, orders: [] };
-        if (!productData.ok) throw new Error(productData.message || 'Không tải được dữ liệu sản phẩm.');
-        if (!settingData.ok) throw new Error(settingData.message || 'Không tải được cài đặt website.');
+        const productData = JSON.parse(decodeURIComponent(escape(atob(productFile.content.replace(/\n/g, '')))));
+        const settingData = settingFile ? JSON.parse(decodeURIComponent(escape(atob(settingFile.content.replace(/\n/g, ''))))) : {};
         apiOnline = true;
-        products = (productData.products || []).map(normalizeProduct);
-        settings = normalizeSettings(settingData.settings || {});
-        orders = Array.isArray(orderData.orders) ? orderData.orders : [];
+        products = (Array.isArray(productData) ? productData : (productData.products || [])).map(normalizeProduct);
+        settings = normalizeSettings(Array.isArray(settingData) ? {} : settingData);
+        orders = [];
         selectedId = products[0]?.id || null;
         render();
       } catch (error) {
-        try {
-          const localRes = await fetch('data/products.json', { cache: 'no-store' });
-          const localData = await localRes.json();
-          const localProducts = Array.isArray(localData) ? localData : (localData.products || []);
-          apiOnline = false;
-          products = localProducts.map(normalizeProduct);
-          settings = normalizeSettings({});
-          orders = [];
-          selectedId = products[0]?.id || null;
-          render();
-        } catch {
-          app.innerHTML = `<div class="panel empty"><h2>Không tải được API</h2><p>${esc(error.message)}</p><p>Kiểm tra đã upload đủ file trong thư mục <strong>api</strong> và có thư mục <strong>data</strong>, <strong>uploads</strong> trên host chưa.</p></div>`;
-        }
+        app.innerHTML = `<div class="panel empty"><h2>Không tải được dữ liệu</h2><p>${esc(error.message)}</p><p>Kiểm tra GitHub Token có đúng và có quyền <strong>repo</strong> không.</p><button onclick="localStorage.removeItem('${PASS_KEY}');location.reload()">Đổi token</button></div>`;
       }
     }
 
@@ -363,9 +395,10 @@
       app.innerHTML = `
         <div class="panel login">
           <h1>Phương Lâm Admin</h1>
-          <p class="sub">Nhập mật khẩu admin để thêm/sửa sản phẩm trực tiếp trên host.</p>
-          <label>Mật khẩu admin</label>
-          <input id="password" type="password" value="${esc(password)}" placeholder="Nhập mật khẩu" />
+          <p class="sub">Nhập GitHub Token để cập nhật sản phẩm trực tiếp lên website.</p>
+          <label>GitHub Personal Access Token</label>
+          <input id="password" type="password" value="${esc(password)}" placeholder="ghp_xxxxxxxxxxxx" style="font-family:monospace" />
+          <p class="sub" style="font-size:12px;margin-top:8px">Tạo token tại: github.com/settings/tokens → chọn quyền <strong>repo</strong></p>
           <div class="actions" style="margin-top:16px">
             <button onclick="login()">Đăng nhập</button>
             <a href="index.html"><button class="secondary">Về trang chủ</button></a>
@@ -387,10 +420,9 @@
           <div>
             <h1>Quản lý website</h1>
             <div class="sub">Sản phẩm, phân loại, ảnh, bán chạy, header, danh mục và đơn hàng.</div>
-            ${!apiOnline ? '<div class="sub" style="color:#d98221;font-weight:900">Đang ở chế độ preview local: xem được dữ liệu nhưng không lưu/upload trực tiếp. Lên host có PHP thì sẽ lưu được.</div>' : ''}
           </div>
           <div class="actions">
-            <button onclick="saveAll()" ${saving || !apiOnline ? 'disabled' : ''}>${apiOnline ? 'Lưu lên website' : 'Preview local'}</button>
+            <button onclick="saveAll()" ${saving ? 'disabled' : ''}>Lưu lên website</button>
             <button class="secondary" onclick="location.href='index.html'">Về trang chủ</button>
           </div>
         </div>
@@ -727,15 +759,10 @@
     }
 
     async function uploadFile(file) {
-      if (!apiOnline) throw new Error('Preview local không upload ảnh trực tiếp được. Hãy dùng admin trên host để lưu ảnh thật.');
       if (!file) return '';
-      const form = new FormData();
-      form.append('password', password);
-      form.append('image', file);
-      const res = await fetch(API_UPLOAD, { method: 'POST', body: form });
-      const data = await readJsonResponse(res, 'API upload ảnh');
-      if (!data.ok) throw new Error(data.message || 'Upload ảnh thất bại.');
-      return data.url;
+      const ext = file.name.split('.').pop().toLowerCase();
+      const filename = `product_${Date.now()}.${ext}`;
+      return await githubUploadImage(filename, file);
     }
 
     function chooseFile(callback) {
@@ -882,34 +909,15 @@
     }
 
     async function saveSettings() {
-      if (!apiOnline) throw new Error('Preview local không lưu trực tiếp được. Hãy mở admin trên host để cập nhật website thật.');
-      const res = await fetch(API_SETTINGS, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Password': password
-        },
-        body: JSON.stringify({ settings: normalizeSettings(settings) })
-      });
-      const data = await readJsonResponse(res, 'API cài đặt');
-      if (!data.ok) throw new Error(data.message || 'Lưu cài đặt thất bại.');
-      settings = normalizeSettings(data.settings || settings);
+      const content = JSON.stringify(normalizeSettings(settings), null, 2);
+      await githubCommitFile('data/settings.json', content, 'Update settings via admin');
     }
 
     async function updateOrderStatus(orderId, status) {
       try {
-        if (!apiOnline) throw new Error('Preview local không cập nhật đơn hàng trực tiếp được.');
-        const res = await fetch(API_ORDERS, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Admin-Password': password
-          },
-          body: JSON.stringify({ action: 'updateStatus', id: orderId, status })
-        });
-        const data = await readJsonResponse(res, 'API đơn hàng');
-        if (!data.ok) throw new Error(data.message || 'Không cập nhật được đơn hàng.');
-        orders = Array.isArray(data.orders) ? data.orders : orders;
+        orders = orders.map(o => o.id === orderId ? { ...o, status } : o);
+        const content = JSON.stringify(orders, null, 2);
+        await githubCommitFile('data/orders.json', content, 'Update order status via admin');
         render();
       } catch (error) {
         alert(error.message);
@@ -917,18 +925,8 @@
     }
 
     async function saveProducts() {
-      if (!apiOnline) throw new Error('Preview local không lưu trực tiếp được. Hãy mở admin trên host để cập nhật website thật.');
-      const res = await fetch(API_PRODUCTS, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Password': password
-        },
-        body: JSON.stringify({ products: products.map(normalizeProduct) })
-      });
-      const data = await readJsonResponse(res, 'API sản phẩm');
-      if (!data.ok) throw new Error(data.message || 'Lưu thất bại.');
-      products = (data.products || []).map(normalizeProduct);
+      const content = JSON.stringify(products.map(normalizeProduct), null, 2);
+      await githubCommitFile('data/products.json', content, 'Update products via admin');
     }
 
     async function saveAll() {
