@@ -1,34 +1,15 @@
-name: Deploy to Hosting
+name: FTP deploy disabled
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  disabled:
+    name: Netlify handles deploys
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Test FTP login (curl)
+      - name: Explain current deploy workflow
         run: |
-          curl -v \
-            "ftp://${{ secrets.FTP_SERVER }}/" \
-            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
-            --connect-timeout 15 \
-            2>&1 | tail -30
-        continue-on-error: true
-
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: ${{ secrets.FTP_PORT }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./
-          exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
+          echo "FTP deploy is disabled."
+          echo "The website is deployed automatically by Netlify when main is pushed."
+          echo "Live site: https://phuonglam.com"

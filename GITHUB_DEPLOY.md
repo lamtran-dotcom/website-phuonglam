@@ -1,22 +1,48 @@
-# GitHub deploy setup
+# Deploy workflow
 
-This project is prepared for automatic hosting deployment with GitHub Actions.
+Muc tieu cua project: push code len GitHub, Netlify tu dong deploy website
+`phuonglam.com`.
 
-## Required GitHub secrets
+## Workflow hien tai
 
-Add these in GitHub repo settings:
+1. Sua code website tren may local.
+2. Commit va push len repo GitHub:
+   `https://github.com/lamtran-dotcom/website-phuonglam.git`
+3. Netlify tu dong lay code moi tu branch `main`.
+4. Netlify deploy website va cap nhat `https://phuonglam.com`.
 
-- `FTP_SERVER`: hosting FTP/FTPS server, for example `ftp.phuonglam.com`
-- `FTP_USERNAME`: hosting username
-- `FTP_PASSWORD`: hosting password
-- `FTP_PROTOCOL`: usually `ftp` or `ftps`
-- `FTP_PORT`: usually `21` for FTP or `990` for FTPS
-- `FTP_SERVER_DIR`: hosting public folder, usually `/public_html/`
+Khong can upload thu cong bang FTP nua.
 
-If the hosting account only supports SFTP, replace the workflow action with an SFTP deploy action before adding secrets.
+## Hosting hien tai
 
-## How it works
+Website dang chay qua Netlify:
 
-Every push to the `main` branch runs `.github/workflows/deploy-host.yml` and uploads the website files to the hosting folder.
+- Domain chinh: `https://phuonglam.com`
+- Netlify site: `beamish-beignet-69d71e.netlify.app`
+- SSL/HTTPS: Netlify tu cap mien phi va tu gia han
+- Deploy trigger: push len GitHub branch `main`
 
-The workflow excludes GitHub files, local deploy bundles, `.DS_Store`, and local documentation files.
+## DNS tai inet.vn
+
+Domain `phuonglam.com` dang tro ve Netlify bang DNS:
+
+- `A` record cho root domain: `75.2.60.5`
+- `CNAME` record cho `www`: `beamish-beignet-69d71e.netlify.app`
+
+## FTP da bo
+
+Truoc do da thu deploy qua FTP len hosting 000nethost nhung that bai voi loi:
+
+```text
+530 Login authentication failed
+```
+
+Da test nhieu cach va xac dinh luong FTP khong phu hop de tu dong deploy tu
+GitHub Actions, nen da chuyen sang Netlify.
+
+## Ghi chu
+
+- Khong can GitHub secrets FTP nua cho workflow deploy chinh.
+- Khong can chay GitHub Actions de deploy website.
+- Moi thay doi website chi can commit va push len GitHub.
+- Netlify se tu upload va cap nhat website that.
