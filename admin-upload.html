@@ -368,15 +368,25 @@
       return new TextDecoder('utf-8').decode(bytes);
     }
 
+    async function githubGetFileContent(path) {
+      const file = await githubGetFile(path);
+      if (file.content) return b64ToUtf8(file.content);
+      if (file.download_url) {
+        const res = await fetch(file.download_url);
+        return res.text();
+      }
+      throw new Error(`File ${path} trống`);
+    }
+
     async function loadProducts() {
       app.innerHTML = '<div class="panel empty">Đang tải dữ liệu từ GitHub...</div>';
       try {
-        const [productFile, settingFile] = await Promise.all([
-          githubGetFile('data/products.json'),
-          githubGetFile('data/settings.json').catch(() => null)
+        const [productText, settingText] = await Promise.all([
+          githubGetFileContent('data/products.json'),
+          githubGetFileContent('data/settings.json').catch(() => null)
         ]);
-        const productData = JSON.parse(b64ToUtf8(productFile.content));
-        const settingData = settingFile ? JSON.parse(b64ToUtf8(settingFile.content)) : {};
+        const productData = JSON.parse(productText);
+        const settingData = settingText ? JSON.parse(settingText) : {};
         apiOnline = true;
         products = (Array.isArray(productData) ? productData : (productData.products || [])).map(normalizeProduct);
         settings = normalizeSettings(Array.isArray(settingData) ? {} : settingData);
