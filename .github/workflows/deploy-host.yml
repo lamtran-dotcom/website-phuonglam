@@ -1,64 +1,34 @@
-name: Deploy website to hosting
+name: Deploy to Hosting
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-
-concurrency:
-  group: deploy-host
-  cancel-in-progress: true
+    branches: [main]
 
 jobs:
   deploy:
-    name: Upload to hosting
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Install FTP client
+      - name: Test FTP login (curl)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
+          curl -v \
+            "ftp://${{ secrets.FTP_SERVER }}/" \
+            --user "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            --connect-timeout 15 \
+            2>&1 | tail -30
+        continue-on-error: true
 
-      - name: Deploy by FTP
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_PORT: ${{ secrets.FTP_PORT }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
-        run: |
-          set -euo pipefail
-          FTP_SERVER_CLEAN="$(printf '%s' "$FTP_SERVER" | tr -d '\r\n ' | sed -E 's#^[a-zA-Z]+://##; s#/.*$##; s#:.*$##')"
-          FTP_PORT_CLEAN="$(printf '%s' "${FTP_PORT:-21}" | tr -cd '0-9')"
-          FTP_USERNAME_CLEAN="$(printf '%s' "$FTP_USERNAME" | tr -d '\r\n ')"
-          FTP_PASSWORD_CLEAN="$(printf '%s' "$FTP_PASSWORD" | tr -d '\r\n')"
-          FTP_SERVER_DIR_CLEAN="$(printf '%s' "$FTP_SERVER_DIR" | tr -d '\r\n ')"
-          if [ -z "$FTP_PORT_CLEAN" ]; then FTP_PORT_CLEAN=21; fi
-          FTP_USERNAME_ENC="$(FTP_USERNAME_CLEAN="$FTP_USERNAME_CLEAN" python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["FTP_USERNAME_CLEAN"], safe=""))')"
-          FTP_PASSWORD_ENC="$(FTP_PASSWORD_CLEAN="$FTP_PASSWORD_CLEAN" python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["FTP_PASSWORD_CLEAN"], safe=""))')"
-          printf "Deploy target: %s:%s -> %s\n" "$FTP_SERVER_CLEAN" "$FTP_PORT_CLEAN" "$FTP_SERVER_DIR_CLEAN"
-          printf "FTP user: %s\n" "$FTP_USERNAME_CLEAN"
-          lftp "ftp://$FTP_USERNAME_ENC:$FTP_PASSWORD_ENC@$FTP_SERVER_CLEAN:$FTP_PORT_CLEAN" <<EOF
-          set ftp:ssl-allow no
-          set ftp:passive-mode on
-          set net:timeout 60
-          set net:max-retries 2
-          set cmd:fail-exit yes
-          mirror --reverse --verbose \
-            --exclude-glob .git/ \
-            --exclude-glob .github/ \
-            --exclude-glob deploy/ \
-            --exclude-glob "rule vs skill/" \
-            --exclude-glob "file sản phẩm từ shopee/" \
-            --exclude-glob "ảnh bài viết/" \
-            --exclude-glob .DS_Store \
-            --exclude-glob README.md \
-            --exclude-glob GITHUB_DEPLOY.md \
-            ./ "$FTP_SERVER_DIR_CLEAN"
-          bye
-          EOF
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
