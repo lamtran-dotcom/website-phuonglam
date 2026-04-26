@@ -11,6 +11,8 @@
     "usage": "Đặt nến trên bề mặt phẳng, không cháy. Không để gần vật dễ cháy. Cắt tim nến 5mm trước khi thắp. Không để nến cháy quá 4 giờ liên tục.",
     "tag": "Bán chạy",
     "weight": 1200,
+    "hidden": false,
+    "images": [],
     "reviews": [
       {
         "name": "Nguyễn Thị Mai",
@@ -70,6 +72,8 @@
     "usage": "Tương tự nến hoa hồng lavender.",
     "tag": "Nổi bật",
     "weight": 200,
+    "hidden": false,
+    "images": [],
     "reviews": [
       {
         "name": "Phạm Minh Khoa",
@@ -91,13 +95,16 @@
     "usage": "Cho thảo mộc vào nồi nước sôi, xông 15–20 phút. Dùng 2–3 lần/tuần.",
     "tag": "Bán chạy",
     "weight": 150,
+    "hidden": false,
+    "images": [],
     "reviews": [
       {
         "name": "Hoàng Thị Lan",
         "rating": 5,
         "comment": "Xông xong người nhẹ hẳn, ngủ ngon hơn hẳn. Rất hài lòng!"
       }
-    ]
+    ],
+    "variants": []
   },
   {
     "id": 4,
@@ -109,9 +116,12 @@
     "shortDesc": "Hương sả gừng tươi mát, kháng khuẩn tự nhiên, thích hợp dùng vào mùa lạnh.",
     "description": "Kết hợp sả và gừng tươi sấy khô, giúp làm ấm cơ thể, tăng sức đề kháng và xua đuổi vi khuẩn tự nhiên.",
     "usage": "Tương tự thảo mộc ngải cứu.",
-    "tag": null,
+    "tag": "",
     "weight": 150,
-    "reviews": []
+    "hidden": false,
+    "images": [],
+    "reviews": [],
+    "variants": []
   },
   {
     "id": 5,
@@ -124,13 +134,17 @@
     "description": "Làm từ đất sét nung truyền thống, mỗi sản phẩm là một tác phẩm thủ công độc đáo. Thiết kế thoáng, giúp hương toả đều trong không gian.",
     "usage": "Đặt nến tealight phía dưới, cho tinh dầu hoặc nước thơm vào bát phía trên.",
     "tag": "Nổi bật",
+    "weight": null,
+    "hidden": false,
+    "images": [],
     "reviews": [
       {
         "name": "Vũ Thị Bích",
         "rating": 5,
         "comment": "Đẹp lắm, trưng phòng khách sang hẳn. Chất lượng xuất sắc!"
       }
-    ]
+    ],
+    "variants": []
   },
   {
     "id": 6,
@@ -144,6 +158,8 @@
     "usage": "Xem hướng dẫn của từng sản phẩm trong combo.",
     "tag": "Bán chạy",
     "weight": 800,
+    "hidden": false,
+    "images": [],
     "reviews": [
       {
         "name": "Đinh Thị Nga",
@@ -155,7 +171,8 @@
         "rating": 5,
         "comment": "Giá tốt hơn mua lẻ nhiều. Chất lượng không thua kém."
       }
-    ]
+    ],
+    "variants": []
   },
   {
     "id": 7,
@@ -169,6 +186,8 @@
     "usage": "Đặt nến lên đĩa trước khi thắp.",
     "tag": "Nổi bật",
     "weight": 200,
+    "hidden": false,
+    "images": [],
     "reviews": [],
     "variants": []
   },
@@ -182,8 +201,10 @@
     "shortDesc": "Dụng cụ cắt tim nến chuyên dụng bằng inox, giúp nến cháy đều và sạch hơn.",
     "description": "Inox 304 không gỉ, thiết kế ergonomic dễ cầm. Cắt tim nến đúng cách giúp nến thơm tỏa hương đều và kéo dài tuổi thọ.",
     "usage": "Cắt tim nến xuống còn 5mm trước mỗi lần thắp.",
-    "tag": null,
+    "tag": "",
     "weight": 222,
+    "hidden": false,
+    "images": [],
     "reviews": [],
     "variants": [
       {
@@ -217,7 +238,11 @@
     "description": "22",
     "usage": "22",
     "tag": "Mới",
-    "weight": 2222
+    "weight": 2222,
+    "hidden": false,
+    "images": [],
+    "reviews": [],
+    "variants": []
   },
   {
     "id": "new_1776857397825",
@@ -231,6 +256,9 @@
     "usage": "",
     "tag": "Bán chạy",
     "weight": 1200,
+    "hidden": false,
+    "images": [],
+    "reviews": [],
     "variants": []
   },
   {
@@ -243,8 +271,11 @@
     "shortDesc": "",
     "description": "",
     "usage": "",
-    "tag": null,
+    "tag": "",
     "weight": 500,
+    "hidden": false,
+    "images": [],
+    "reviews": [],
     "variants": [
       {
         "id": "variant_1776857499133_4s0di",
@@ -276,8 +307,11 @@
     "shortDesc": "",
     "description": "",
     "usage": "",
-    "tag": null,
+    "tag": "",
     "weight": null,
+    "hidden": false,
+    "images": [],
+    "reviews": [],
     "variants": []
   },
   {
@@ -292,6 +326,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG QUẾ THANH\n\n✔ Nấu ăn:\nCho 1-2 thanh quế vào phở, bò kho, món hầm hoặc nước dùng. Vớt ra khi hương quế đã đủ thơm để món ăn không bị gắt mùi.\n\n✔ Pha trà:\nHãm 1 thanh quế nhỏ với nước nóng 5-10 phút. Có thể thêm mật ong, gừng, táo đỏ hoặc thảo mộc tùy khẩu vị.\n\n✔ Tạo hương tự nhiên:\nĐặt vài thanh quế ở bàn trà, kệ decor, tủ quần áo hoặc túi thơm để tạo mùi ấm nhẹ.\n\n✔ Bảo quản:\nBuộc kín túi sau khi dùng, để nơi khô ráo, tránh nắng gắt và tránh ẩm để giữ mùi thơm lâu hơn.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-miaao8qg5csibd",
       "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
@@ -306,7 +341,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9"
       },
       {
@@ -316,7 +350,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 2,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9"
       },
       {
@@ -326,7 +359,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 6,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9"
       }
     ]
@@ -343,6 +375,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT\n\n✔ Dùng để trang trí:\nĐặt nến trong ly nến, khay decor hoặc khu vực bàn tiệc để tạo ánh sáng ấm và không gian thư giãn.\n\n✔ Dùng với đèn xông tinh dầu:\nĐặt nến vào khoang đốt của đèn xông, sau đó thêm nước và tinh dầu vào khay phía trên theo hướng dẫn của từng loại đèn.\n\n✔ Dùng với bếp xông thảo mộc:\nƯu tiên chọn phân loại vỏ nhôm nếu cần đốt liên tục để xông thảo mộc hoặc giữ nhiệt lâu hơn.\n\n✔ An toàn khi sử dụng:\nKhông để nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy và luôn tắt nến trước khi rời khỏi phòng.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp để giữ form nến đẹp và hạn chế chảy sáp.",
     "tag": "",
     "weight": 2000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c46ppkwsj39",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4aqbcd1i4e",
@@ -359,7 +392,6 @@
         "price": 600000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4cb39bhfk3ec"
       },
       {
@@ -369,7 +401,6 @@
         "price": 500000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c46ppkwsj39"
       }
     ]
@@ -386,6 +417,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG DĨA LÓT BẾP XÔNG\n\n✔ Cách dùng:\nĐặt dĩa lót trên mặt bàn phẳng, sau đó đặt bếp xông thảo mộc, bếp xông bồ kết hoặc phụ kiện xông lên giữa dĩa.\n\n✔ Khi dùng với nến:\nĐặt nến tealight vào đúng vị trí của bếp xông. Dĩa lót bên dưới giúp hứng tàn, sáp hoặc vụn thảo mộc nếu có rơi xuống.\n\n✔ Vệ sinh:\nSau khi bếp nguội hoàn toàn, lau dĩa bằng khăn khô hoặc khăn ẩm nhẹ. Không ngâm nước quá lâu để giữ độ bền của đất nung.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh va đập mạnh. Khi không dùng, có thể đặt chung với bộ bếp xông để giữ trọn bộ gọn gàng.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mik5ksxnhrew1f"
     ],
@@ -404,6 +436,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BỘ BẾP XÔNG THẢO MỘC\n\n✔ Bước 1: Chuẩn bị bếp\nĐặt dĩa lót trên mặt bàn phẳng, sau đó đặt bếp niêu đất nung lên giữa dĩa.\n\n✔ Bước 2: Đốt nến\nĐặt 1 viên nến tealight vào đế đựng nến, châm lửa rồi đưa đế nến vào lòng bếp qua cửa lò.\n\n✔ Bước 3: Cho thảo mộc\nCho một lượng thảo mộc vừa đủ vào lòng niêu phía trên. Không cần thêm nước, để thảo mộc được làm nóng khô và tỏa hương tự nhiên.\n\n✔ Bước 4: Tận hưởng hương thơm\nĐặt bếp ở nơi thông thoáng nhẹ để hương thảo mộc lan đều. Có thể thêm thảo mộc nếu muốn mùi rõ hơn.\n\n✔ Sau khi dùng:\nChờ bếp nguội hoàn toàn rồi lấy phần thảo mộc đã xông ra. Lau bếp và dĩa lót bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ An toàn:\nKhông di chuyển bếp khi nến đang cháy. Không để gần rèm, giấy, gỗ mỏng hoặc vật dễ bắt lửa. Luôn tắt nến trước khi rời khỏi phòng.",
     "tag": "",
     "weight": 2000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mik62n59xzpiea",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mia82lp7gkqu39",
@@ -420,7 +453,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": ""
       },
       {
@@ -430,7 +462,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": ""
       },
       {
@@ -440,7 +471,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": ""
       },
       {
@@ -450,7 +480,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": ""
       },
       {
@@ -460,7 +489,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": ""
       },
       {
@@ -470,7 +498,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 3,
         "image": ""
       },
       {
@@ -480,7 +507,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 2,
         "image": ""
       },
       {
@@ -490,7 +516,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": ""
       },
       {
@@ -500,7 +525,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": ""
       },
       {
@@ -510,7 +534,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 3,
         "image": ""
       },
       {
@@ -520,7 +543,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 2,
         "image": ""
       },
       {
@@ -530,7 +552,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": ""
       },
       {
@@ -540,7 +561,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 2,
         "image": ""
       },
       {
@@ -550,7 +570,6 @@
         "price": 230000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": ""
       }
     ]
@@ -567,6 +586,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TRỤ TRẮNG 72H TRANG TRÍ BÀN TIỆC CHÁY ÊM KHÔNG KHÓI\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 800,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e5ubuwaoae1",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6j2o2rka4f",
@@ -585,7 +605,6 @@
         "price": 140000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 8,
         "image": ""
       },
       {
@@ -595,7 +614,6 @@
         "price": 160000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 14,
         "image": ""
       },
       {
@@ -605,7 +623,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 18,
         "image": ""
       }
     ]
@@ -622,6 +639,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG LÁ DỨA KHÔ TỰ NHIÊN XÔNG NHÀ THƠM DỊU THANH LỌC KHÔNG GIAN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazm74o66tk75",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazn33ab2mgd6"
@@ -641,6 +659,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG TINH DẦU THƠM PHÒNG KHÁCH SẠN KHỬ MÙI THƯ GIÃN CAO CẤP\n\n✔ Với đèn xông:\nNhỏ vài giọt tinh dầu vào nước trong khay đèn xông, sau đó làm nóng bằng nến hoặc điện tùy loại đèn.\n\n✔ Với máy khuếch tán:\nThêm tinh dầu theo dung tích máy và hướng dẫn của thiết bị.\n\n✔ Lưu ý:\nKhông uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để xa tầm tay trẻ em.\n\n✔ Bảo quản:\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
     "tag": "",
     "weight": 300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mtdyrtsec90",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mi8n6t5hrsw179",
@@ -661,7 +680,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       },
       {
@@ -671,7 +689,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       },
       {
@@ -681,7 +698,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       },
       {
@@ -691,7 +707,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       },
       {
@@ -701,7 +716,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       },
       {
@@ -711,7 +725,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       },
       {
@@ -721,7 +734,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": ""
       }
     ]
@@ -738,6 +750,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG LY ĐỰNG NẾN ĐẤT NUNG DÙNG BẾP XÔNG AN TOÀN TIỆN CẦM\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mi0auosgwcn5af"
     ],
@@ -756,6 +769,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG MÁY XÔNG TINH DẦU TỰ ĐỘNG THƠM PHÒNG NHANH SANG TRỌNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifmqtp3mbl19",
       "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifn56m36bl37",
@@ -776,7 +790,6 @@
         "price": 170000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifojhmgzgsa8"
       },
       {
@@ -786,7 +799,6 @@
         "price": 170000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifo7gs2e9t19"
       },
       {
@@ -796,7 +808,6 @@
         "price": 34000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifobv7mjsxca"
       },
       {
@@ -806,7 +817,6 @@
         "price": 34000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijr2zegptt26"
       },
       {
@@ -816,7 +826,6 @@
         "price": 170000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijrkh8tm0xc6"
       },
       {
@@ -826,7 +835,6 @@
         "price": 34000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijqochudhdb0"
       },
       {
@@ -836,7 +844,6 @@
         "price": 34000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijqm86y18h4b"
       },
       {
@@ -846,7 +853,6 @@
         "price": 34000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijqtdygts168"
       },
       {
@@ -856,7 +862,6 @@
         "price": 170000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifohof4eddad"
       },
       {
@@ -866,7 +871,6 @@
         "price": 150000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijq6a4a4e9c5"
       },
       {
@@ -876,7 +880,6 @@
         "price": 34000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijqcbnfsg1e7"
       },
       {
@@ -886,7 +889,6 @@
         "price": 170000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maijrcqo59xo1f"
       },
       {
@@ -896,7 +898,6 @@
         "price": 170000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-maifo6dxn8oxad"
       }
     ]
@@ -913,6 +914,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BỘ PHỤ KIỆN XÔNG NHÀ ĐẤT NUNG DÙNG BẾP NIÊU TIỆN LỢI\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0cmrtqtgcd",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0fet179i8f",
@@ -928,7 +930,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4"
       },
       {
@@ -938,7 +939,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0ibhwhz989"
       },
       {
@@ -948,7 +948,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0fet179i8f"
       },
       {
@@ -958,7 +957,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4"
       }
     ]
@@ -975,6 +973,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NỤ TRẦM HƯƠNG TỰ NHIÊN XÔNG NHÀ THIỀN ĐỊNH THƠM DỊU\n\n✔ Cách đốt:\nĐặt nụ trầm lên đế đốt chịu nhiệt, châm lửa phần đầu nụ rồi thổi nhẹ để nụ cháy âm ỉ.\n\n✔ Không gian phù hợp:\nDùng trong phòng khách, phòng thiền, phòng làm việc hoặc góc thư giãn.\n\n✔ An toàn:\nKhông đặt gần vật dễ cháy và không để nụ trầm cháy khi không có người trông coi.\n\n✔ Bảo quản:\nĐậy kín hộp/túi sau khi dùng, tránh ẩm để giữ hương tốt hơn.",
     "tag": "",
     "weight": 300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pt9elz4si94",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2ea975ppty9b",
@@ -995,7 +994,6 @@
         "price": 500000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51"
       },
       {
@@ -1005,7 +1003,6 @@
         "price": 400000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51"
       }
     ]
@@ -1022,6 +1019,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG CỐC KÊ NẾN TEALIGHT DÙNG BẾP XÔNG TIỆN NÂNG NHIỆT AN TOÀN\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 50,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m0abi75o9ii51b",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m0ab0rhsrukv40",
@@ -1045,6 +1043,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ HƯƠNG LÀI TRANG TRÍ TIỆC KHÔNG KHÓI\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m08tssymndsfd0",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uo4lchx4d73",
@@ -1063,7 +1062,6 @@
         "price": 145000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uknnxbcode6"
       },
       {
@@ -1073,7 +1071,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 7,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukpzpwqkvfe"
       },
       {
@@ -1083,7 +1080,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1500,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukwrc08lrde"
       }
     ]
@@ -1100,6 +1096,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BỘ XÔNG NHÀ TẨY UẾ THẢO MỘC KHỬ MÙI THU HÚT MAY MẮN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 2000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-meracf95o3cxaf",
       "https://cf.shopee.vn/file/vn-11134207-820l4-meraaf49fz0h1e",
@@ -1120,7 +1117,6 @@
         "price": 270000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32r4zy0bgn4c"
       },
       {
@@ -1130,7 +1126,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hr3h3hfm8e"
       },
       {
@@ -1140,7 +1135,6 @@
         "price": 140000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1q9r3cax2e"
       },
       {
@@ -1150,7 +1144,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1otr7zt63b"
       },
       {
@@ -1160,7 +1153,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32i51tmy9ua0"
       },
       {
@@ -1170,7 +1162,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32ip10ei9y4f"
       },
       {
@@ -1180,7 +1171,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fds8pxxi86"
       },
       {
@@ -1190,7 +1180,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jv2qdlhd09"
       },
       {
@@ -1200,7 +1189,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32s9cz9gqp42"
       },
       {
@@ -1210,7 +1198,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32kec7nxfqb1"
       },
       {
@@ -1220,7 +1207,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32r2z058u99d"
       },
       {
@@ -1230,7 +1216,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 2000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fcbv5k3l74"
       }
     ]
@@ -1247,6 +1232,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NỤ TRẦM HƯƠNG PHƯƠNG LÂM XÔNG NHÀ TẨY UẾ THƯ GIÃN\n\n✔ Cách đốt:\nĐặt nụ trầm lên đế đốt chịu nhiệt, châm lửa phần đầu nụ rồi thổi nhẹ để nụ cháy âm ỉ.\n\n✔ Không gian phù hợp:\nDùng trong phòng khách, phòng thiền, phòng làm việc hoặc góc thư giãn.\n\n✔ An toàn:\nKhông đặt gần vật dễ cháy và không để nụ trầm cháy khi không có người trông coi.\n\n✔ Bảo quản:\nĐậy kín hộp/túi sau khi dùng, tránh ẩm để giữ hương tốt hơn.",
     "tag": "",
     "weight": 500,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2q20lgcmbq5d",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pw2qxztaedb",
@@ -1267,7 +1253,6 @@
         "price": 600000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51"
       },
       {
@@ -1277,7 +1262,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51"
       }
     ]
@@ -1294,6 +1278,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẮP BẾP NIÊU XÔNG THẢO MỘC ĐẤT NUNG GIỮ NHIỆT TIỆN THAY\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4"
     ],
@@ -1306,7 +1291,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 17,
         "image": ""
       },
       {
@@ -1316,7 +1300,6 @@
         "price": 25000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 10,
         "image": ""
       }
     ]
@@ -1333,6 +1316,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 8 GIỜ VỎ NHÔM XÔNG TINH DẦU KHÔNG MÙI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 23,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d",
       "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4a6cl1vq50",
@@ -1357,6 +1341,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG THẢO MỘC GIẢM CẢM XÔNG HƠI DỄ CHỊU THANH LỌC KHÔNG KHÍ\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -1376,7 +1361,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94"
       },
       {
@@ -1386,7 +1370,6 @@
         "price": 110000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94"
       },
       {
@@ -1396,7 +1379,6 @@
         "price": 190000,
         "originalPrice": null,
         "weight": 600,
-        "stock": 8,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94"
       }
     ]
@@ -1413,6 +1395,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG ĐÈN XÔNG TINH DẦU TRANG TRÍ PHÒNG NGỦ THƠM NHẸ SANG TRỌNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 20,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8ktgi5l6mz55",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8ktgi5ml7fce",
@@ -1433,7 +1416,6 @@
         "price": 130000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8lryudjavt71"
       },
       {
@@ -1443,7 +1425,6 @@
         "price": 130000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8ktgi5xtqz91"
       },
       {
@@ -1453,7 +1434,6 @@
         "price": 110000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8lryudkpg9b3"
       },
       {
@@ -1463,7 +1443,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 20,
-        "stock": 45,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8lryudm40p7d"
       },
       {
@@ -1473,7 +1452,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 20,
-        "stock": 53,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8lryudnil52b"
       },
       {
@@ -1483,7 +1461,6 @@
         "price": 130000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8ktgi5wf6j7e"
       }
     ]
@@ -1500,6 +1477,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 8 GIỜ VỎ NHÔM XÔNG THẢO MỘC KHÔNG KHÓI\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr8dil4j8atb5",
       "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d",
@@ -1518,7 +1496,6 @@
         "price": 160000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr8dil4j8atb5"
       },
       {
@@ -1528,7 +1505,6 @@
         "price": 380000,
         "originalPrice": null,
         "weight": 1200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qmim11p50x65"
       },
       {
@@ -1538,7 +1514,6 @@
         "price": 80000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d"
       }
     ]
@@ -1555,6 +1530,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG THẢO MỘC XÔNG NHÀ TỰ NHIÊN TẨY UẾ KHỬ MÙI XUA CÔN TRÙNG\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me83k4bvilfm0a",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -1575,7 +1551,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 6,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b"
       },
       {
@@ -1585,7 +1560,6 @@
         "price": 45000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j76kg9tz7ab"
       },
       {
@@ -1595,7 +1569,6 @@
         "price": 25000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 12,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0"
       },
       {
@@ -1605,7 +1578,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 22,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63"
       },
       {
@@ -1615,7 +1587,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jduorludfaf"
       },
       {
@@ -1625,7 +1596,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg6i6d4w44e"
       },
       {
@@ -1635,7 +1605,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 12,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba"
       },
       {
@@ -1645,7 +1614,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 9,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mki70t518yyq60"
       },
       {
@@ -1655,7 +1623,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnb9a6ez07b641"
       },
       {
@@ -1665,7 +1632,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 35,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8"
       },
       {
@@ -1675,7 +1641,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jejtmns3k41"
       },
       {
@@ -1685,7 +1650,6 @@
         "price": 45000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j897yj28498"
       },
       {
@@ -1695,7 +1659,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 17,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jfioudxc2c8"
       },
       {
@@ -1705,7 +1668,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 7,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26"
       },
       {
@@ -1715,7 +1677,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 8,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16"
       },
       {
@@ -1725,7 +1686,6 @@
         "price": 37000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9ltsy29vb4"
       },
       {
@@ -1735,7 +1695,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f"
       },
       {
@@ -1745,7 +1704,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38"
       },
       {
@@ -1755,7 +1713,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 8,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7qxurk022c"
       },
       {
@@ -1765,7 +1722,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 6,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9"
       },
       {
@@ -1775,7 +1731,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 208,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32"
       },
       {
@@ -1785,7 +1740,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7"
       },
       {
@@ -1795,7 +1749,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 17,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7lt5ecjp4c"
       }
     ]
@@ -1812,6 +1765,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG VỎ QUẾ KHÔ YÊN BÁI XÔNG THẢO MỘC KHỬ MÙI THƠM ẤM\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me83bmwd7chyc0",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mia82lp7gkqu39",
@@ -1832,7 +1786,6 @@
         "price": 69000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0"
       },
       {
@@ -1842,7 +1795,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32"
       },
       {
@@ -1852,7 +1804,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32"
       },
       {
@@ -1862,7 +1813,6 @@
         "price": 22000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0"
       },
       {
@@ -1872,7 +1822,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0"
       }
     ]
@@ -1889,6 +1838,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG LÁ KHUYNH DIỆP KHÔ XÔNG NHÀ GIẢM CẢM THANH LỌC KHÔNG KHÍ\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 100,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81yjdhmxhhe4",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -1908,7 +1858,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 6,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba"
       },
       {
@@ -1918,7 +1867,6 @@
         "price": 75000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba"
       },
       {
@@ -1928,7 +1876,6 @@
         "price": 22000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba"
       }
     ]
@@ -1945,6 +1892,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG HOA ĐẠI HỒI KHÔ XÔNG THẢO MỘC THƠM ẤM XUA CÔN TRÙNG\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 50,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me83ehkpjklg65",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -1964,7 +1912,6 @@
         "price": 25000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 11,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26"
       },
       {
@@ -1974,7 +1921,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 46,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26"
       },
       {
@@ -1984,7 +1930,6 @@
         "price": 10000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26"
       }
     ]
@@ -2001,6 +1946,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG CAM VÀNG SẤY KHÔ XÔNG NHÀ KHỬ MÙI THANH LỌC KHÔNG KHÍ\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 50,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81rpd7l0ci00",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -2021,7 +1967,6 @@
         "price": 53000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 29,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9"
       },
       {
@@ -2031,7 +1976,6 @@
         "price": 26471,
         "originalPrice": null,
         "weight": 50,
-        "stock": 39,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9"
       },
       {
@@ -2041,7 +1985,6 @@
         "price": 14100,
         "originalPrice": null,
         "weight": 50,
-        "stock": 47,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9"
       }
     ]
@@ -2058,6 +2001,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG LÁ NGUYỆT QUẾ KHÔ XÔNG NHÀ THANH TẨY XUA CÔN TRÙNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 60,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81u0q9jx8m9e",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -2078,7 +2022,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b"
       },
       {
@@ -2088,7 +2031,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 37,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b"
       },
       {
@@ -2098,7 +2040,6 @@
         "price": 26000,
         "originalPrice": null,
         "weight": 60,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b"
       }
     ]
@@ -2115,6 +2056,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG TINH DẦU THƠM PHÒNG KHÁCH SẠN KHỬ MÙI THƯ GIÃN CAO CẤP\n\n✔ Với đèn xông:\nNhỏ vài giọt tinh dầu vào nước trong khay đèn xông, sau đó làm nóng bằng nến hoặc điện tùy loại đèn.\n\n✔ Với máy khuếch tán:\nThêm tinh dầu theo dung tích máy và hướng dẫn của thiết bị.\n\n✔ Lưu ý:\nKhông uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để xa tầm tay trẻ em.\n\n✔ Bảo quản:\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mtdyrtsec90",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g7l5cmwy87",
@@ -2134,7 +2076,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51x9162o8f7"
       },
       {
@@ -2144,7 +2085,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc53qh26adgec"
       },
       {
@@ -2154,7 +2094,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8myc673ime37"
       },
       {
@@ -2164,7 +2103,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc575gudslf5a"
       },
       {
@@ -2174,7 +2112,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwfaorh8m35"
       },
       {
@@ -2184,7 +2121,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwbkw4qo75f"
       },
       {
@@ -2194,7 +2130,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51yqdce8801"
       }
     ]
@@ -2211,6 +2146,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN XÔNG THẢO MỘC 4 GIỜ MÀU VÀNG THANH LỌC XUA MUỖI\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 1300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mer6bemekc1t80",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lry8hy96z8p099",
@@ -2230,7 +2166,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 22,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer6bemekc1t80"
       },
       {
@@ -2240,7 +2175,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 42,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry98a41trd00b"
       }
     ]
@@ -2257,6 +2191,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN XÔNG THẢO MỘC 4 GIỜ DÙNG TINH DẦU XUA CÔN TRÙNG\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 1300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mer6d5nakagw94",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lry98a41wkhwcb",
@@ -2277,7 +2212,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 19,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkdcjod6"
       },
       {
@@ -2287,7 +2221,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer6d5nakagw94"
       }
     ]
@@ -2304,6 +2237,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG ĐÈN XÔNG TINH DẦU HÌNH HƯƠU GỐM SỨ TRANG TRÍ SANG TRỌNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 800,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j13ynce",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3noho70",
@@ -2324,7 +2258,6 @@
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3i27w4c"
       },
       {
@@ -2334,7 +2267,6 @@
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3jgsc5b"
       },
       {
@@ -2344,7 +2276,6 @@
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3kvcsc8"
       },
       {
@@ -2354,7 +2285,6 @@
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3gnng9b"
       }
     ]
@@ -2371,6 +2301,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG ĐÈN XÔNG TINH DẦU CHÉN RỜI GỐM SỨ TIỆN THAY NƯỚC\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 1000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmq29lcf1uxr5b",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-ll1z8ft84vd769",
@@ -2391,7 +2322,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-ll1z8ft7z93ff5"
       },
       {
@@ -2401,7 +2331,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-ll1z8ft83gsr86"
       },
       {
@@ -2411,7 +2340,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-ll1z8ft80nnv1a"
       },
       {
@@ -2421,7 +2349,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-ll1z8ft8228b9b"
       }
     ]
@@ -2438,6 +2365,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG ĐÈN XÔNG TINH DẦU GỐM SỨ BÁT TRÀNG TRANG TRÍ SANG TRỌNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 500,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmq29lces0ynf0",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3p32443",
@@ -2458,7 +2386,6 @@
         "price": 37647,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wyj84dc5"
       },
       {
@@ -2468,7 +2395,6 @@
         "price": 37647,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22idc72j8f"
       },
       {
@@ -2478,7 +2404,6 @@
         "price": 116471,
         "originalPrice": null,
         "weight": 500,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5ivhov14"
       },
       {
@@ -2488,7 +2413,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wynftp3b"
       },
       {
@@ -2498,7 +2422,6 @@
         "price": 49500,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22iddlmzb9"
       },
       {
@@ -2508,7 +2431,6 @@
         "price": 49500,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wyrnj121"
       },
       {
@@ -2518,7 +2440,6 @@
         "price": 111765,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3euke9udmc5"
       },
       {
@@ -2528,7 +2449,6 @@
         "price": 116471,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5iyatra2"
       },
       {
@@ -2538,7 +2458,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wym199d6"
       },
       {
@@ -2548,7 +2467,6 @@
         "price": 49500,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22idf07f89"
       },
       {
@@ -2558,7 +2476,6 @@
         "price": 37647,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wyoue5ce"
       },
       {
@@ -2568,7 +2485,6 @@
         "price": 75000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3f3a7sg7iab"
       },
       {
@@ -2578,7 +2494,6 @@
         "price": 49500,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22idasi3d0"
       },
       {
@@ -2588,7 +2503,6 @@
         "price": 116571,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5izpe7f3"
       },
       {
@@ -2598,7 +2512,6 @@
         "price": 37647,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22id9dxnb6"
       },
       {
@@ -2608,7 +2521,6 @@
         "price": 31765,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wyq8ylef"
       },
       {
@@ -2618,7 +2530,6 @@
         "price": 31765,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22id3rnv19"
       },
       {
@@ -2628,7 +2539,6 @@
         "price": 37647,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuv22idgerv85"
       },
       {
@@ -2638,7 +2548,6 @@
         "price": 116471,
         "originalPrice": null,
         "weight": 500,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5iww9b6b"
       },
       {
@@ -2648,7 +2557,6 @@
         "price": 31765,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-ll2xblcn9jh917"
       },
       {
@@ -2658,7 +2566,6 @@
         "price": 76471,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7pkcsc0a"
       },
       {
@@ -2668,7 +2575,6 @@
         "price": 49500,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkuxg7wykmota0"
       }
     ]
@@ -2685,6 +2591,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG ĐẾ ĐỰNG NẾN TEALIGHT GỐM SỨ DÙNG ĐÈN XÔNG TIỆN LỢI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 50,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmq29lceqme7ca",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1qqm31f",
@@ -2705,7 +2612,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1s56j73"
       },
       {
@@ -2715,7 +2621,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 38,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0agzho5f5u43"
       },
       {
@@ -2725,7 +2630,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1nxh70b"
       }
     ]
@@ -2742,6 +2646,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BẠC HÀ KHÔ XÔNG NHÀ THANH LỌC KHÔNG KHÍ XUA CÔN TRÙNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81zledf7cz16",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -2762,7 +2667,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 600,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38"
       },
       {
@@ -2772,7 +2676,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38"
       },
       {
@@ -2782,7 +2685,6 @@
         "price": 90000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38"
       }
     ]
@@ -2790,7 +2692,7 @@
   {
     "id": "shopee_23250987135",
     "sku": "SP-23250987135",
-    "categoryId": "tinh-dau",
+    "categoryId": "nen-thom",
     "name": "Nến tealight 4 giờ bông mai đốt tinh dầu không khói",
     "price": 46000,
     "originalPrice": null,
@@ -2799,6 +2701,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ BÔNG MAI ĐỐT TINH DẦU KHÔNG KHÓI\n\n✔ Với đèn xông:\nNhỏ vài giọt tinh dầu vào nước trong khay đèn xông, sau đó làm nóng bằng nến hoặc điện tùy loại đèn.\n\n✔ Với máy khuếch tán:\nThêm tinh dầu theo dung tích máy và hướng dẫn của thiết bị.\n\n✔ Lưu ý:\nKhông uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để xa tầm tay trẻ em.\n\n✔ Bảo quản:\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0ukr0r74",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llc0vbpfe85217",
@@ -2819,7 +2722,6 @@
         "price": 46000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llc16wj9c6vc80"
       },
       {
@@ -2829,7 +2731,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lyn174whf73596"
       },
       {
@@ -2839,7 +2740,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 44,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llc16wj9asaw27"
       }
     ]
@@ -2856,6 +2756,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG GỪNG KHÔ XÔNG THẢO MỘC GIẢM CẢM THANH LỌC KHÔNG KHÍ\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 50,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me83d3qykg0061",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -2876,7 +2777,6 @@
         "price": 20000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7"
       },
       {
@@ -2886,7 +2786,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 32,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7"
       },
       {
@@ -2896,7 +2795,6 @@
         "price": 80000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 38,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7"
       }
     ]
@@ -2913,6 +2811,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG DAO RỌC GIẤY MINI INOX CẮT GÓI HÀNG NHỎ GỌN CHỐNG RỈ\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 10,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0um5l7c6",
       "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cohm9j05",
@@ -2934,6 +2833,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN THƠM HOA KHÔ 40 GIỜ PHONG CÁCH BẮC ÂU THƯ GIÃN\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 70,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfmq3jveyfmb5",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lqeybpc11xhu3c",
@@ -2953,7 +2853,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lso6jtkiwqmcee"
       },
       {
@@ -2963,7 +2862,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llohgs95k5pbfe"
       },
       {
@@ -2973,7 +2871,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igt0pe51"
       },
       {
@@ -2983,7 +2880,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-ln3q6a5gewns40"
       },
       {
@@ -2993,7 +2889,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lt4ni6vh0t5l8f"
       },
       {
@@ -3003,7 +2898,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lloqzh9tmqqn54"
       },
       {
@@ -3013,7 +2907,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30ih01jm2a"
       },
       {
@@ -3023,7 +2916,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igymz639"
       },
       {
@@ -3033,7 +2925,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lso6jtkisix01e"
       },
       {
@@ -3043,7 +2934,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lm8e344hcau7fc"
       },
       {
@@ -3053,7 +2943,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lm5kj0ztj3rzb1"
       },
       {
@@ -3063,7 +2952,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lloqzh9to5b353"
       },
       {
@@ -3073,7 +2961,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lloqzh9tjxlr4b"
       },
       {
@@ -3083,7 +2970,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lm8e344haw9r9a"
       },
       {
@@ -3093,7 +2979,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igx8eq58"
       },
       {
@@ -3103,7 +2988,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30iguf9uea"
       },
       {
@@ -3113,7 +2997,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igvtuadf"
       },
       {
@@ -3123,7 +3006,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lso6jtkivc1wdf"
       },
       {
@@ -3133,7 +3015,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igq7kid4"
       },
       {
@@ -3143,7 +3024,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30ih1g4297"
       },
       {
@@ -3153,7 +3033,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lso6jtkitxhg6b"
       },
       {
@@ -3163,7 +3042,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igot0263"
       },
       {
@@ -3173,7 +3051,6 @@
         "price": 35000,
         "originalPrice": null,
         "weight": 70,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lq3e30igrm4y51"
       }
     ]
@@ -3190,6 +3067,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BỒ KẾT KHÔ GỘI ĐẦU XÔNG NHÀ KHỬ MÙI THƠM TỰ NHIÊN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me821wr79y4h47",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -3207,7 +3085,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63"
       },
       {
@@ -3217,7 +3094,6 @@
         "price": 142000,
         "originalPrice": null,
         "weight": 600,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63"
       },
       {
@@ -3227,7 +3103,6 @@
         "price": 32000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 13,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63"
       }
     ]
@@ -3244,6 +3119,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG THẢO MỘC XÔNG NHÀ PHƯƠNG LÂM THANH TẨY XUA CÔN TRÙNG\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mfv6ps7h86ix96",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -3264,7 +3140,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 11,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jejtmns3k41"
       },
       {
@@ -3274,7 +3149,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 16,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26"
       },
       {
@@ -3284,7 +3158,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 17,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv7hggy4dmz28"
       },
       {
@@ -3294,7 +3167,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv7hsp9lix478"
       },
       {
@@ -3304,7 +3176,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jduorludfaf"
       },
       {
@@ -3314,7 +3185,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv7i0rgtp1oa1"
       },
       {
@@ -3324,7 +3194,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg2rweq6fe0"
       },
       {
@@ -3334,7 +3203,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg6i6d4w44e"
       },
       {
@@ -3344,7 +3212,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0"
       },
       {
@@ -3354,7 +3221,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnb9a6ez07b641"
       },
       {
@@ -3364,7 +3230,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 31,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63"
       },
       {
@@ -3374,7 +3239,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv7hp7nzg9ae2"
       },
       {
@@ -3384,7 +3248,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 16,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv7hxl08r9k27"
       },
       {
@@ -3394,7 +3257,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38"
       },
       {
@@ -3404,7 +3266,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jfioudxc2c8"
       },
       {
@@ -3414,7 +3275,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 16,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv7hbqhm2o88e"
       },
       {
@@ -3424,7 +3284,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7"
       },
       {
@@ -3434,7 +3293,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv73sc9o4y7d4"
       },
       {
@@ -3444,7 +3302,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 2,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv78e9n8a30d5"
       }
     ]
@@ -3461,6 +3318,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ HOA MAI TRANG TRÍ TIỆC KHÔNG KHÓI\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0itth90rg6a",
       "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0irnhy9uge7",
@@ -3481,7 +3339,6 @@
         "price": 46000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbt0ffow5n58"
       },
       {
@@ -3491,7 +3348,6 @@
         "price": 46000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbt0ffhvbff3"
       },
       {
@@ -3501,7 +3357,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 43,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0jattw21k91"
       },
       {
@@ -3511,7 +3366,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0j86drpy40a"
       },
       {
@@ -3521,7 +3375,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 87,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0jdfw2es8d3"
       },
       {
@@ -3531,7 +3384,6 @@
         "price": 46000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbt0ffnhl78e"
       }
     ]
@@ -3548,6 +3400,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG ĐÈN XÔNG TINH DẦU ĐỐT NẾN TRANG TRÍ PHÒNG NGỦ SANG TRỌNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 333,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7zuii26m966",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7f5z611j7b4",
@@ -3568,7 +3421,6 @@
         "price": 140000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbtzrj42"
       },
       {
@@ -3578,7 +3430,6 @@
         "price": 89000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3f3a7sg7iab"
       },
       {
@@ -3588,7 +3439,6 @@
         "price": 150000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbsl73aa"
       },
       {
@@ -3598,7 +3448,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnlfx02cjtb44"
       },
       {
@@ -3608,7 +3457,6 @@
         "price": 150000,
         "originalPrice": null,
         "weight": 333,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8223pc9hd54"
       },
       {
@@ -3618,7 +3466,6 @@
         "price": 100000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gkcnlybm19"
       },
       {
@@ -3628,7 +3475,6 @@
         "price": 100000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbr6mn6c"
       },
       {
@@ -3638,7 +3484,6 @@
         "price": 150000,
         "originalPrice": null,
         "weight": 333,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8279dxvr700"
       },
       {
@@ -3648,7 +3493,6 @@
         "price": 150000,
         "originalPrice": null,
         "weight": 500,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gn3k4cg4ee"
       },
       {
@@ -3658,7 +3502,6 @@
         "price": 150000,
         "originalPrice": null,
         "weight": 600,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3euke9udmc5"
       }
     ]
@@ -3675,6 +3518,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG VỎ BƯỞI KHÔ XÔNG NHÀ GỘI ĐẦU THƠM DỊU TỰ NHIÊN\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 180,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me83dsqju3gk26",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -3695,7 +3539,6 @@
         "price": 14119,
         "originalPrice": null,
         "weight": 180,
-        "stock": 40,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8"
       },
       {
@@ -3705,7 +3548,6 @@
         "price": 21716,
         "originalPrice": null,
         "weight": 180,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8"
       },
       {
@@ -3715,7 +3557,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 180,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8"
       }
     ]
@@ -3732,6 +3573,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG SÁP THƠM WAX MELTS DÙNG ĐÈN XÔNG THƠM PHÒNG TIỆN LỢI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 50,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbvebz58",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llnnj1iwj0i7ce",
@@ -3750,7 +3592,6 @@
         "price": 79000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnownqyn83g28"
       },
       {
@@ -3760,7 +3601,6 @@
         "price": 79000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnownqyomnw59"
       },
       {
@@ -3770,7 +3610,6 @@
         "price": 79000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnownqyj0e408"
       },
       {
@@ -3780,7 +3619,6 @@
         "price": 79000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnownqykeyk43"
       },
       {
@@ -3790,7 +3628,6 @@
         "price": 79000,
         "originalPrice": null,
         "weight": 50,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnownqyltj026"
       }
     ]
@@ -3807,6 +3644,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG TINH DẦU THIÊN NHIÊN PHƯƠNG LÂM THƠM PHÒNG THƯ GIÃN AN TOÀN\n\n✔ Với đèn xông:\nNhỏ vài giọt tinh dầu vào nước trong khay đèn xông, sau đó làm nóng bằng nến hoặc điện tùy loại đèn.\n\n✔ Với máy khuếch tán:\nThêm tinh dầu theo dung tích máy và hướng dẫn của thiết bị.\n\n✔ Lưu ý:\nKhông uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để xa tầm tay trẻ em.\n\n✔ Bảo quản:\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
     "tag": "",
     "weight": 100,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfmq3jvoseq6d",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8ofebiqa3",
@@ -3822,7 +3660,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8ofjxsi19"
       },
       {
@@ -3832,7 +3669,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8ofh4nmb0"
       },
       {
@@ -3842,7 +3678,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8oflccy0f"
       },
       {
@@ -3852,7 +3687,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8ofij8231"
       },
       {
@@ -3862,7 +3696,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8ofmqxecb"
       },
       {
@@ -3872,7 +3705,6 @@
         "price": 30000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqfre8ofo5hufe"
       }
     ]
@@ -3889,6 +3721,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TRANG TRÍ KHÔNG KHÓI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 100,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmqvki7i74rj1b",
       "https://cf.shopee.vn/file/vn-11134207-7qukw-lkarlyg9xbj04f",
@@ -3909,7 +3742,6 @@
         "price": 48000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3trim9g5g5c"
       },
       {
@@ -3919,7 +3751,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw73prz7k3d"
       },
       {
@@ -3929,7 +3760,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw2eemm8673"
       },
       {
@@ -3939,7 +3769,6 @@
         "price": 48000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 19,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc4h1vub6kj01"
       },
       {
@@ -3949,7 +3778,6 @@
         "price": 48000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc4h3kxmgw025"
       },
       {
@@ -3959,7 +3787,6 @@
         "price": 40000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw4j8derkb5"
       },
       {
@@ -3969,7 +3796,6 @@
         "price": 48000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 30,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3ucnze3gh7a"
       },
       {
@@ -3979,7 +3805,6 @@
         "price": 85000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7ywhhos0zr4b"
       },
       {
@@ -3989,7 +3814,6 @@
         "price": 90000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 45,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yyjv3sxkwa0"
       },
       {
@@ -3999,7 +3823,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 12,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3tk0q328497"
       },
       {
@@ -4009,7 +3832,6 @@
         "price": 42000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 13,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3toasd0jpaf"
       },
       {
@@ -4019,7 +3841,6 @@
         "price": 42000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc41ehj01sf69"
       },
       {
@@ -4029,7 +3850,6 @@
         "price": 42000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc41g5qqyo530"
       },
       {
@@ -4039,7 +3859,6 @@
         "price": 90000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7ywk3nzmkk70"
       }
     ]
@@ -4056,6 +3875,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG LÁ SẢ KHÔ XÔNG NHÀ THANH LỌC KHÔNG KHÍ XUA CÔN TRÙNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81vo6c8xky63",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -4076,7 +3896,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 34,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16"
       },
       {
@@ -4086,7 +3905,6 @@
         "price": 80000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 50,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16"
       },
       {
@@ -4096,7 +3914,6 @@
         "price": 20000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 46,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16"
       }
     ]
@@ -4113,6 +3930,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG COMBO THẢO MỘC XÔNG NHÀ THANH LỌC KHỬ MÙI TỰ NHIÊN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me83kcluw9390c",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f",
@@ -4130,7 +3948,6 @@
         "price": 45000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 96,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f"
       },
       {
@@ -4140,7 +3957,6 @@
         "price": 169000,
         "originalPrice": null,
         "weight": 600,
-        "stock": 172,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f"
       }
     ]
@@ -4157,6 +3973,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BẾP XÔNG THẢO MỘC BỒ KẾT ĐẤT NUNG KHỬ MÙI THƠM NHÀ\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 1300,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mesdeg5484cj59",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mi32lies5on597",
@@ -4177,7 +3994,6 @@
         "price": 100000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5s9y6b47a1a"
       },
       {
@@ -4187,7 +4003,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfttnprcgmx718"
       },
       {
@@ -4197,7 +4012,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fcbv5k3l74"
       },
       {
@@ -4207,7 +4021,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 2,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1otr7zt63b"
       },
       {
@@ -4217,7 +4030,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jcl77xfk0d"
       },
       {
@@ -4227,7 +4039,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hc6h0nie3f"
       },
       {
@@ -4237,7 +4048,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fds8pxxi86"
       },
       {
@@ -4247,7 +4057,6 @@
         "price": 140000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1q9r3cax2e"
       },
       {
@@ -4257,7 +4066,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hr3h3hfm8e"
       },
       {
@@ -4267,7 +4075,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32ip10ei9y4f"
       },
       {
@@ -4277,7 +4084,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32i8lbot1j63"
       },
       {
@@ -4287,7 +4093,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32i51tmy9ua0"
       },
       {
@@ -4297,7 +4102,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jv2qdlhd09"
       },
       {
@@ -4307,7 +4111,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32kbn7qxojb5"
       },
       {
@@ -4317,7 +4120,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hui9yps0a7"
       },
       {
@@ -4327,7 +4129,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jzkqgpom28"
       },
       {
@@ -4337,7 +4138,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32h76byhhca4"
       },
       {
@@ -4347,7 +4147,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32kec7nxfqb1"
       },
       {
@@ -4357,7 +4156,6 @@
         "price": 130000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mgw6bulk3aiwef"
       },
       {
@@ -4367,7 +4165,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32iso81xjcf3"
       }
     ]
@@ -4384,6 +4181,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG BẾP XÔNG THẢO MỘC BỒ KẾT ĐẤT NUNG THANH TẨY KHÔNG KHÍ\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 1000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mgw6arugeu4v32",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
@@ -4404,7 +4202,6 @@
         "price": 260000,
         "originalPrice": null,
         "weight": 1500,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fds8pxxi86"
       },
       {
@@ -4414,7 +4211,6 @@
         "price": 100000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mgw6bulk3aiwef"
       },
       {
@@ -4424,7 +4220,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hr3h3hfm8e"
       },
       {
@@ -4434,7 +4229,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hc6h0nie3f"
       },
       {
@@ -4444,7 +4238,6 @@
         "price": 90000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5s9y6b47a1a"
       },
       {
@@ -4454,7 +4247,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jcl77xfk0d"
       },
       {
@@ -4464,7 +4256,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32i51tmy9ua0"
       },
       {
@@ -4474,7 +4265,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1500,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fcbv5k3l74"
       },
       {
@@ -4484,7 +4274,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32kec7nxfqb1"
       },
       {
@@ -4494,7 +4283,6 @@
         "price": 120000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1otr7zt63b"
       },
       {
@@ -4504,7 +4292,6 @@
         "price": 140000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1q9r3cax2e"
       },
       {
@@ -4514,7 +4301,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jv2qdlhd09"
       },
       {
@@ -4524,7 +4310,6 @@
         "price": 250000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32ip10ei9y4f"
       },
       {
@@ -4534,7 +4319,6 @@
         "price": 280000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32r4zy0bgn4c"
       }
     ]
@@ -4551,6 +4335,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TINH DẦU TRANG TRÍ TIỆC\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 1000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmqvki7ie5lr2a",
       "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1m59la5dg7c",
@@ -4571,7 +4356,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llipto0yrx6wa7"
       },
       {
@@ -4581,7 +4365,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 24,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbmc2zepjfc0"
       },
       {
@@ -4591,7 +4374,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbmc2zdayz8d"
       }
     ]
@@ -4608,6 +4390,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ HỘP NHỎ TRANG TRÍ KHÔNG KHÓI KHÔNG MÙI\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 100,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmqvki7ifk6773",
       "https://cf.shopee.vn/file/vn-11134211-7qukw-ljy635dunj5gdf",
@@ -4628,7 +4411,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 74,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-lfz923nhgpd64b"
       },
       {
@@ -4638,7 +4420,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 19,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-lgalu7897f56dd"
       },
       {
@@ -4648,7 +4429,6 @@
         "price": 60000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljy5js01i3ec3b"
       },
       {
@@ -4658,7 +4438,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 43,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbmc2zbweja5"
       },
       {
@@ -4668,7 +4447,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 53,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkzbmc2zahu33f"
       }
     ]
@@ -4685,6 +4463,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4-8 GIỜ XÔNG TINH DẦU THẢO MỘC SANG TRỌNG\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 100,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lxva6hgm8xjvab",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llc0vbpf8lva97",
@@ -4705,7 +4484,6 @@
         "price": 52000,
         "originalPrice": null,
         "weight": 170,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-meio9h9tqadja1"
       },
       {
@@ -4715,7 +4493,6 @@
         "price": 245000,
         "originalPrice": null,
         "weight": 1400,
-        "stock": 1,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08wnbrrlhbhf2"
       },
       {
@@ -4725,7 +4502,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 22,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw8ktgi5js2jd5"
       },
       {
@@ -4735,7 +4511,6 @@
         "price": 49000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-lgalu789d1ey84"
       },
       {
@@ -4745,7 +4520,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry8hy96wfk499"
       },
       {
@@ -4755,7 +4529,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 900,
-        "stock": 19,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0bnv09s9k7d"
       },
       {
@@ -4765,7 +4538,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 19,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljy1awep3yk4a0"
       },
       {
@@ -4775,7 +4547,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 9,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lxwlwbhzww63b0"
       },
       {
@@ -4785,7 +4556,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 17,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lxwlx45bznx518"
       },
       {
@@ -4795,7 +4565,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llc34ft8bw0886"
       },
       {
@@ -4805,7 +4574,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljxzqs4vuhaa52"
       },
       {
@@ -4815,7 +4583,6 @@
         "price": 65000,
         "originalPrice": null,
         "weight": 200,
-        "stock": 14,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08wnib215v1a9"
       },
       {
@@ -4825,7 +4592,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer6d5nakagw94"
       },
       {
@@ -4835,7 +4601,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljy1awep2jzoc8"
       },
       {
@@ -4845,7 +4610,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lxwlwzbx1fizb6"
       },
       {
@@ -4855,7 +4619,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 400,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lxwlwthblm8pbb"
       },
       {
@@ -4865,7 +4628,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 900,
-        "stock": 21,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0bts3lxr072"
       },
       {
@@ -4875,7 +4637,6 @@
         "price": 125000,
         "originalPrice": null,
         "weight": 900,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-m1e0bfqk5qfwaa"
       },
       {
@@ -4885,7 +4646,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 17,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer6bemekc1t80"
       },
       {
@@ -4895,7 +4655,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 18,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-meio9jkq20auec"
       },
       {
@@ -4905,7 +4664,6 @@
         "price": 135000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08wnekhi3kf51"
       },
       {
@@ -4915,7 +4673,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 6,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry8hy96tmf8e7"
       }
     ]
@@ -4932,6 +4689,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 8 GIỜ TIÊU CHUẨN ÂU TRANG TRÍ KHÔNG KHÓI\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 120,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr8ajuspyr311",
       "https://cf.shopee.vn/file/vn-11134207-7qukw-lkhkxzfw87fsf4",
@@ -4949,7 +4707,6 @@
         "price": 50000,
         "originalPrice": null,
         "weight": 120,
-        "stock": 15,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7ywk3nzmkk70"
       },
       {
@@ -4959,7 +4716,6 @@
         "price": 95000,
         "originalPrice": null,
         "weight": 300,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr8ajuspyr311"
       },
       {
@@ -4969,7 +4725,6 @@
         "price": 190000,
         "originalPrice": null,
         "weight": 700,
-        "stock": 40,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mgxm9x2lcyrs73"
       }
     ]
@@ -4986,6 +4741,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 8 GIỜ TRANG TRÍ KHÔNG KHÓI TẠO KHÔNG GIAN ẤM\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 30,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8v8snr7yg42",
       "https://cf.shopee.vn/file/vn-11134211-7qukw-ljy6f9znqf422e",
@@ -5005,7 +4761,6 @@
         "price": 10000,
         "originalPrice": null,
         "weight": 30,
-        "stock": 98,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr89134v9o107"
       },
       {
@@ -5015,7 +4770,6 @@
         "price": 8000,
         "originalPrice": null,
         "weight": 30,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d"
       }
     ]
@@ -5032,6 +4786,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN LY 72H NƠ LỚN THỜ CÚNG KHÔNG KHÓI PHƯƠNG LÂM\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 1000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0uysp7ac",
       "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4s2b805",
@@ -5049,7 +4804,6 @@
         "price": 195000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 31,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4xol084"
       },
       {
@@ -5059,7 +4813,6 @@
         "price": 195000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 31,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4uvg4fb"
       },
       {
@@ -5069,7 +4822,6 @@
         "price": 195000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4wa0k5f"
       }
     ]
@@ -5086,6 +4838,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ TRƠN ĐỐT ĐÈN XÔNG TINH DẦU MINI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
     "tag": "",
     "weight": 100,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-7r98o-lmqvki7igyqn01",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-llc16wj9j7pkbf",
@@ -5106,7 +4859,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 20,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-lgalu789h94ad4"
       },
       {
@@ -5116,7 +4868,6 @@
         "price": 175000,
         "originalPrice": null,
         "weight": 1300,
-        "stock": 8,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llc34ft8dakoec"
       },
       {
@@ -5126,7 +4877,6 @@
         "price": 55000,
         "originalPrice": null,
         "weight": 100,
-        "stock": 10,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-lgalu789efze2e"
       }
     ]
@@ -5143,6 +4893,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN LY 120H THỜ CÚNG NƠ ĐẠI KHÔNG KHÓI TRANG NGHIÊM\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 1000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0v1lu3e1",
       "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cp1a7r48",
@@ -5158,7 +4909,6 @@
         "price": 320000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 5,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc76dv82f"
       },
       {
@@ -5168,7 +4918,6 @@
         "price": 190000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc73kqc20"
       },
       {
@@ -5178,7 +4927,6 @@
         "price": 190000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 4,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc74zas1f"
       },
       {
@@ -5188,7 +4936,6 @@
         "price": 320000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 3,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc77sfo74"
       }
     ]
@@ -5205,6 +4952,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TRỤ THÁNH GIÁ 72H THỜ CÚNG KHÔNG KHÓI TRANG NGHIÊM\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 1000,
+    "hidden": false,
     "images": [
       "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0v30ej1b",
       "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4l1h0ce",
@@ -5220,7 +4968,6 @@
         "price": 70000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/60289003c22759f985b4a77ef47c9bdb"
       },
       {
@@ -5230,7 +4977,6 @@
         "price": 140000,
         "originalPrice": null,
         "weight": 1000,
-        "stock": 0,
         "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4nulwd8"
       }
     ]
