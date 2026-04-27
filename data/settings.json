@@ -1,12 +1,12 @@
 {
   "featuredIds": [
+    "shopee_7510227721",
     "shopee_29011454025",
-    "1",
     "shopee_17395821074",
     "new_1776857467847",
-    "shopee_7510227721",
     "shopee_54450013830",
-    "shopee_57058955812"
+    "shopee_57058955812",
+    "7"
   ],
   "headerImages": [
     "/assets/media/generated/embedded-002.jpg",
@@ -22,6 +22,7 @@
     "thao-moc-xong": "/assets/media/generated/embedded-027.jpg",
     "bep-xong": "/assets/media/generated/embedded-028.jpg",
     "nu-tram": "/assets/media/generated/embedded-029.jpg",
-    "phu-kien": "/assets/media/generated/embedded-009.jpg"
+    "phu-kien": "/assets/media/generated/embedded-009.jpg",
+    "nen-tru": "/assets/products/uploads/1777285327929-nen-tru.webp"
   }
 }

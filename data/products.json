@@ -62,72 +62,6 @@
     "slug": "nen-tealight-4-gio-phuong-lam-trang-tri-thu-gian-khong-khoi"
   },
   {
-    "id": 2,
-    "sku": "PL-002",
-    "categoryId": "nen-thom",
-    "name": "Nến tealight 8 giờ vỏ nhôm xông tinh dầu không mùi",
-    "price": 9000,
-    "originalPrice": 11000,
-    "shortDesc": "Hương gỗ đàn hương ấm áp, sang trọng. Phù hợp cho phòng khách và phòng làm việc.",
-    "description": "Được chiết xuất từ gỗ đàn hương Ấn Độ nguyên chất, tạo ra không gian ấm áp và sang trọng. Sáp đậu nành tự nhiên, cháy sạch không khói đen.",
-    "usage": "Tương tự nến hoa hồng lavender.",
-    "tag": "Nổi bật",
-    "weight": 200,
-    "hidden": false,
-    "images": [],
-    "reviews": [
-      {
-        "name": "Phạm Minh Khoa",
-        "rating": 5,
-        "comment": "Hương rất đặc trưng, không bị ngấy. Phòng khách nhà mình thơm cả tuần."
-      }
-    ],
-    "variants": [],
-    "slug": "nen-tealight-8-gio-vo-nhom-xong-tinh-dau-khong-mui"
-  },
-  {
-    "id": 3,
-    "sku": "PL-003",
-    "categoryId": "thao-moc-xong",
-    "name": "Thảo mộc ngải cứu xông hơi thư giãn thơm dịu tự nhiên",
-    "price": 65000,
-    "originalPrice": 80000,
-    "shortDesc": "Ngải cứu sấy khô tự nhiên, thơm dịu, giúp lưu thông khí huyết và giảm đau nhức.",
-    "description": "Ngải cứu được thu hoạch tự nhiên, sấy khô ở nhiệt độ thấp để giữ nguyên dưỡng chất. Kết hợp các loại thảo mộc truyền thống giúp xông hơi hiệu quả.",
-    "usage": "Cho thảo mộc vào nồi nước sôi, xông 15–20 phút. Dùng 2–3 lần/tuần.",
-    "tag": "Bán chạy",
-    "weight": 150,
-    "hidden": false,
-    "images": [],
-    "reviews": [
-      {
-        "name": "Hoàng Thị Lan",
-        "rating": 5,
-        "comment": "Xông xong người nhẹ hẳn, ngủ ngon hơn hẳn. Rất hài lòng!"
-      }
-    ],
-    "variants": [],
-    "slug": "thao-moc-ngai-cuu-xong-hoi-thu-gian-thom-diu-tu-nhien"
-  },
-  {
-    "id": 4,
-    "sku": "PL-004",
-    "categoryId": "thao-moc-xong",
-    "name": "Thảo mộc sả gừng xông nhà khử mùi làm ấm tự nhiên",
-    "price": 55000,
-    "originalPrice": null,
-    "shortDesc": "Hương sả gừng tươi mát, kháng khuẩn tự nhiên, thích hợp dùng vào mùa lạnh.",
-    "description": "Kết hợp sả và gừng tươi sấy khô, giúp làm ấm cơ thể, tăng sức đề kháng và xua đuổi vi khuẩn tự nhiên.",
-    "usage": "Tương tự thảo mộc ngải cứu.",
-    "tag": "",
-    "weight": 150,
-    "hidden": false,
-    "images": [],
-    "reviews": [],
-    "variants": [],
-    "slug": "thao-moc-sa-gung-xong-nha-khu-mui-lam-am-tu-nhien"
-  },
-  {
     "id": 5,
     "sku": "PL-005",
     "categoryId": "bep-xong",
@@ -150,35 +84,6 @@
     ],
     "variants": [],
     "slug": "bep-xong-gom-thu-cong-dung-nen-toa-huong-deu-sang-trong"
-  },
-  {
-    "id": 6,
-    "sku": "PL-006",
-    "categoryId": "combo",
-    "name": "Combo xông nhà thư giãn cuối tuần đủ món tiện dùng Phương Lâm",
-    "price": 265000,
-    "originalPrice": 325000,
-    "shortDesc": "Bộ combo gồm: 1 nến thơm lavender + 2 gói thảo mộc xông + 1 bếp xông gốm mini.",
-    "description": "Combo tiết kiệm dành cho những ai muốn trải nghiệm trọn bộ sản phẩm chăm sóc sức khỏe tại nhà. Đóng hộp quà tặng sang trọng.",
-    "usage": "Xem hướng dẫn của từng sản phẩm trong combo.",
-    "tag": "Bán chạy",
-    "weight": 800,
-    "hidden": false,
-    "images": [],
-    "reviews": [
-      {
-        "name": "Đinh Thị Nga",
-        "rating": 5,
-        "comment": "Mua làm quà tặng bạn, được khen xinh lắm. Đóng gói rất đẹp!"
-      },
-      {
-        "name": "Cao Minh Tú",
-        "rating": 5,
-        "comment": "Giá tốt hơn mua lẻ nhiều. Chất lượng không thua kém."
-      }
-    ],
-    "variants": [],
-    "slug": "combo-xong-nha-thu-gian-cuoi-tuan-du-mon-tien-dung-phuong-lam"
   },
   {
     "id": 7,
@@ -252,24 +157,6 @@
     "reviews": [],
     "variants": [],
     "slug": "nen-ly-120h-tho-cung-phuong-lam-khong-khoi-trang-nghiem"
-  },
-  {
-    "id": "new_1776857397825",
-    "sku": "PL-7825",
-    "categoryId": "nen-thom",
-    "name": "Nến tealight 4 giờ Phương Lâm xông tinh dầu không mùi",
-    "price": 140000,
-    "originalPrice": 250000,
-    "shortDesc": "",
-    "description": "",
-    "usage": "",
-    "tag": "Bán chạy",
-    "weight": 1200,
-    "hidden": false,
-    "images": [],
-    "reviews": [],
-    "variants": [],
-    "slug": "nen-tealight-4-gio-phuong-lam-xong-tinh-dau-khong-mui"
   },
   {
     "id": "new_1776857467847",
@@ -666,98 +553,6 @@
     "slug": "la-dua-kho-tu-nhien-xong-nha-thom-diu-thanh-loc-khong-gian"
   },
   {
-    "id": "shopee_49903096228",
-    "sku": "SP-49903096228",
-    "categoryId": "tinh-dau",
-    "name": "Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp",
-    "price": 60000,
-    "originalPrice": null,
-    "shortDesc": "BIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC.",
-    "description": "TINH DẦU THƠM PHÒNG KHÁCH SẠN KHỬ MÙI THƯ GIÃN CAO CẤP\n\n✔ Tổng quan sản phẩm:\nBIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC.\n\n✔ Mô tả chi tiết:\n🏨 \nBIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC\n 🏨\n\nChào mừng bạn đến với Nến Phương Lâm. Chúng tôi mang đến dòng tinh dầu thơm phòng cao cấp, được chiết xuất 100% tự nhiên, giúp không gian sống của bạn trở nên đẳng cấp, thư thái như đang ở trong những resort sang trọng nhất.\n\n🔥 ƯU ĐIỂM NỔI BẬT: \n✅ Hương thơm sang trọng: Tone mùi Coco/Hilton thanh lịch, quyến rũ, lưu hương lâu. \n✅ 100% Tự nhiên: An toàn tuyệt đối cho sức khỏe, không chứa hóa chất độc hại. \n✅ Khử mùi hiệu quả: Loại bỏ mùi ẩm mốc, mùi thức ăn, trả lại bầu không khí trong lành. \n✅ Thư giãn tinh thần: Hương thơm dịu nhẹ giúp giảm căng thẳng (stress), cải thiện giấc ngủ ngon và sâu hơn.\n\n📝 HƯỚNG DẪN SỬ DỤNG:\nXông phòng: Nhỏ 3-5 giọt tinh dầu vào đèn xông (đèn gốm nến hoặc đèn điện) hoặc máy khuếch tán đã có nước.\nTắm bồn: Nhỏ vài giọt vào bồn tắm nước ấm để ngâm mình thư giãn.\nTreo xe/Tủ quần áo: Có thể dùng kèm với túi thơm hoặc đá khuếch tán.\n\n📦 THÔNG TIN SẢN PHẨM:\nThương hiệu: Nến Phương Lâm\nDung tích: 10ml\nQuy cách đóng gói: Chai thủy tinh tối màu bảo quản tốt chất lượng tinh dầu.\nĐóng gói: Việt Nam\n\n🛡️ CAM KẾT CỦA SHOP:\nSản phẩm giống 100% mô tả.\nĐổi trả theo quy định của Shopee.\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp\n- Danh mục: Tinh dầu\n- Phân loại: Hoa Hồng(Quyến Rũ), Trầm Hương(Tĩnh Tâm), Hoa MộcTê Thah Khiết, Khách sạn Hilton🔥, Resort (Tươi Mát), Coco (Ngọt Ngào), Ấm Áp (Quế & Thông)\n- Cân nặng vận chuyển: 300g\n- Mã sản phẩm: SP-49903096228\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.",
-    "usage": "HƯỚNG DẪN SỬ DỤNG TINH DẦU THƠM PHÒNG KHÁCH SẠN KHỬ MÙI THƯ GIÃN CAO CẤP\n\n✔ Với đèn xông:\nNhỏ vài giọt tinh dầu vào nước trong khay đèn xông, sau đó làm nóng bằng nến hoặc điện tùy loại đèn.\n\n✔ Với máy khuếch tán:\nThêm tinh dầu theo dung tích máy và hướng dẫn của thiết bị.\n\n✔ Lưu ý:\nKhông uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để xa tầm tay trẻ em.\n\n✔ Bảo quản:\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
-    "tag": "",
-    "weight": 300,
-    "hidden": false,
-    "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mtdyrtsec90",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8n6t5hrsw179",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g7l5cmwy87",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mydjghhqba5",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwbkw4qo75f",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwddb44qqdc",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwfaorh8m35",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwgus31u034",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8myc673ime37"
-    ],
-    "reviews": [],
-    "variants": [
-      {
-        "id": "shopee_variant_445296108203",
-        "name": "Hoa Hồng(Quyến Rũ)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      },
-      {
-        "id": "shopee_variant_445296108204",
-        "name": "Trầm Hương(Tĩnh Tâm)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      },
-      {
-        "id": "shopee_variant_445296108205",
-        "name": "Hoa MộcTê Thah Khiết",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      },
-      {
-        "id": "shopee_variant_445296108199",
-        "name": "Khách sạn Hilton🔥",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      },
-      {
-        "id": "shopee_variant_445296108200",
-        "name": "Resort (Tươi Mát)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      },
-      {
-        "id": "shopee_variant_445296108201",
-        "name": "Coco (Ngọt Ngào)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      },
-      {
-        "id": "shopee_variant_445296108202",
-        "name": "Ấm Áp (Quế & Thông)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 300,
-        "image": ""
-      }
-    ],
-    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap"
-  },
-  {
     "id": "shopee_48452789252",
     "sku": "470514_mod470514",
     "categoryId": "bep-xong",
@@ -926,7 +721,7 @@
   {
     "id": "shopee_41330081336",
     "sku": "SP-41330081336",
-    "categoryId": "combo",
+    "categoryId": "phu-kien",
     "name": "Bộ phụ kiện xông nhà đất nung dùng bếp niêu tiện lợi",
     "price": 40000,
     "originalPrice": null,
@@ -1331,7 +1126,7 @@
     ],
     "reviews": [],
     "variants": [],
-    "slug": "nen-tealight-8-gio-vo-nhom-xong-tinh-dau-khong-mui-2"
+    "slug": "nen-tealight-8-gio-vo-nhom-xong-tinh-dau-khong-mui"
   },
   {
     "id": "shopee_28125966432",
@@ -2060,7 +1855,7 @@
   {
     "id": "shopee_24604156053",
     "sku": "SP-24604156053",
-    "categoryId": "tinh-dau",
+    "categoryId": "bep-xong",
     "name": "Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp",
     "price": 60000,
     "originalPrice": null,
@@ -2146,7 +1941,7 @@
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51yqdce8801"
       }
     ],
-    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap-2"
+    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap"
   },
   {
     "id": "shopee_24564267189",
