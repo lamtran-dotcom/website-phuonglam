@@ -383,6 +383,15 @@ const bakeSettingsIntoApp = (settings) => {
   fs.writeFileSync(appPath, source);
 };
 
+const bakeProductsIntoApp = (products) => {
+  const appPath = path.join(paths.jsDir, 'app.jsx');
+  let source = fs.readFileSync(appPath, 'utf8');
+  // Strip slug field (used only for static page generation) before baking
+  const appProducts = products.map(({ slug: _slug, ...rest }) => rest);
+  source = writeInlineJson(source, 'BAKED_PRODUCTS', appProducts);
+  fs.writeFileSync(appPath, source);
+};
+
 const renderProductPage = ({ product, categoryName }) => {
   const image = firstImage(product);
   const productUrl = `${siteUrl}/san-pham/${product.slug}/`;
@@ -682,6 +691,7 @@ const main = () => {
   const initialData = externalizeIndex();
   const products = updateProductsJson();
   replaceSiteDataProducts(products);
+  bakeProductsIntoApp(products);
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
   compileAppJs();
