@@ -617,6 +617,38 @@ const externalizeIndex = () => {
   return initialData;
 };
 
+const replaceSiteDataProducts = (products) => {
+  const siteDataPath = path.join(paths.jsDir, 'site-data.js');
+  if (!fs.existsSync(siteDataPath)) return;
+
+  let source = fs.readFileSync(siteDataPath, 'utf8');
+  const startMarker = 'const PRODUCTS = [';
+  const startIdx = source.indexOf(startMarker);
+  if (startIdx === -1) return;
+
+  // Find matching ]; by counting bracket depth
+  let depth = 0;
+  let endIdx = -1;
+  for (let i = startIdx + startMarker.length - 1; i < source.length; i++) {
+    if (source[i] === '[') depth++;
+    else if (source[i] === ']') {
+      depth--;
+      if (depth === 0) {
+        endIdx = i + 1;
+        if (source[endIdx] === ';') endIdx++;
+        break;
+      }
+    }
+  }
+  if (endIdx === -1) return;
+
+  // Strip fields not used by the React app (slug is build-time only)
+  const appProducts = products.map(({ slug: _slug, ...rest }) => rest);
+  const newBlock = `const PRODUCTS = ${JSON.stringify(appProducts, null, 2)};`;
+  source = source.slice(0, startIdx) + newBlock + source.slice(endIdx);
+  fs.writeFileSync(siteDataPath, source);
+};
+
 const updateProductsJson = () => {
   const extractor = makeDataUrlExtractor({
     dir: paths.generatedProductDir,
@@ -637,6 +669,7 @@ const main = () => {
   ensureDir(paths.jsDir);
   const initialData = externalizeIndex();
   const products = updateProductsJson();
+  replaceSiteDataProducts(products);
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
   compileAppJs();
