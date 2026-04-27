@@ -215,7 +215,7 @@ const BLOG_ARTICLES = {
       { type: 'p', text: 'Trên thị trường hiện nay có nhiều lựa chọn để làm thơm phòng: máy khuếch tán tinh dầu, bình xịt phòng, sáp thơm hoặc đèn xông điện. Tuy nhiên, bếp xông thảo mộc vẫn có ưu điểm riêng vì dùng nhiệt tự nhiên từ nến tealight để làm nóng nguyên liệu, giúp hương thơm lan chậm, dịu và gần gũi hơn.' },
       { type: 'p', text: 'Thứ nhất, bếp hoạt động hoàn toàn bằng nhiệt từ nến - không cần điện, không phụ thuộc ổ cắm và dễ đặt ở phòng ngủ, phòng khách, góc làm việc hoặc khu vực thiền. Thứ hai, bạn chủ động chọn nguyên liệu tự nhiên như vỏ bưởi, sả, gừng, quế, bồ kết hoặc thảo mộc khô, nhờ vậy mùi hương không bị gắt như nhiều sản phẩm tạo mùi công nghiệp.' },
       { type: 'p', text: 'Nhiều khách hàng của Nến Phương Lâm dùng bếp xông để khử mùi nấm mốc sau mùa mưa, giảm mùi thức ăn trong căn hộ, làm dịu cảm giác căng thẳng buổi tối hoặc tạo không khí ấm cúng khi tiếp khách. Khi dùng đúng cách, bếp xông thảo mộc vừa là vật dụng chăm sóc không gian sống, vừa là món decor mộc mạc rất hợp với nhà Việt.' },
-      { type: 'image', src: '/anh-bai-viet/bep-xong-thao-moc-san-pham-chinh.webp', alt: 'Hình ảnh bếp xông thảo mộc chính hãng Nến Phương Lâm', caption: 'Bếp xông thảo mộc kết hợp vỏ bưởi, sả và quế cho hương thơm ấm dịu.' },
+      { type: 'image', src: '/assets/blog/bep-xong-thao-moc-san-pham-chinh.webp', alt: 'Hình ảnh bếp xông thảo mộc chính hãng Nến Phương Lâm', caption: 'Bếp xông thảo mộc kết hợp vỏ bưởi, sả và quế cho hương thơm ấm dịu.' },
       { type: 'h2', text: '2. Cách kết hợp bếp xông thảo mộc với nến tealight và nguyên liệu tự nhiên' },
       { type: 'h3', text: '2.1. Chọn nến phù hợp để đốt bếp xông' },
       { type: 'p', text: 'Đây là bước quan trọng nhất vì nến quyết định độ ổn định của nhiệt. Với bếp xông thảo mộc đất nung, nên ưu tiên nến tealight không khói, không mùi để hương thảo mộc là mùi chính trong không gian.' },
@@ -225,7 +225,7 @@ const BLOG_ARTICLES = {
         'Tránh dùng nến to hoặc nến cây: ngọn lửa quá lớn làm bếp đất nung nóng đột ngột, dễ giảm độ bền của bếp.'
       ] },
       { type: 'p', text: 'Thay vì dùng bật lửa thông thường, bạn có thể dùng diêm dài hoặc que mồi nến để thao tác an toàn hơn, đặc biệt khi đặt nến sâu bên trong thân bếp.' },
-      { type: 'image', src: '/anh-bai-viet/cach-chon-nen-tealight-cho-bep-xong.webp', alt: 'Cách chọn nến tealight phù hợp cho bếp xông thảo mộc', caption: 'Nến tealight phù hợp giúp bếp xông tỏa nhiệt ổn định và an toàn hơn.' },
+      { type: 'image', src: '/assets/blog/cach-chon-nen-tealight-cho-bep-xong.webp', alt: 'Cách chọn nến tealight phù hợp cho bếp xông thảo mộc', caption: 'Nến tealight phù hợp giúp bếp xông tỏa nhiệt ổn định và an toàn hơn.' },
       { type: 'h3', text: '2.2. Các loại thảo mộc tự nhiên phù hợp và cách dùng từng bước' },
       { type: 'p', text: 'Gần như mọi thứ trong bếp nhà bạn đều có thể dùng để xông thảo mộc nếu sạch, khô ráo và có mùi hương dễ chịu. Điều quan trọng là dùng lượng vừa phải để hương lan nhẹ, không bị nồng.' },
       { type: 'list', items: [
@@ -236,7 +236,7 @@ const BLOG_ARTICLES = {
       ] },
       { type: 'p', text: 'Các bước sử dụng bếp xông thảo mộc đúng cách: đặt bếp trên mặt phẳng chịu nhiệt, cho lượng thảo mộc vừa phải, đốt nến tealight, chờ khoảng 5 phút để bếp nóng dần và thổi tắt nến sau 30-60 phút hoặc khi rời khỏi phòng.' },
       { type: 'p', text: 'Mẹo nhỏ: kết hợp 2-3 loại thảo mộc cùng lúc để tạo hương thơm riêng. Ví dụ vỏ bưởi + sả cho cảm giác sạch mát, quế + vỏ cam cho cảm giác ấm áp, bồ kết + sả phù hợp khi cần khử mùi mạnh hơn.' },
-      { type: 'image', src: '/anh-bai-viet/cach-dung-bep-xong-thao-moc-an-toan.webp', alt: 'Cách dùng bếp xông thảo mộc đúng cách và an toàn tại nhà', caption: 'Đặt bếp xông trên bề mặt chịu nhiệt, xa vật dễ cháy và luôn quan sát khi nến đang cháy.' },
+      { type: 'image', src: '/assets/blog/cach-dung-bep-xong-thao-moc-an-toan.webp', alt: 'Cách dùng bếp xông thảo mộc đúng cách và an toàn tại nhà', caption: 'Đặt bếp xông trên bề mặt chịu nhiệt, xa vật dễ cháy và luôn quan sát khi nến đang cháy.' },
       { type: 'h2', text: '3. Lưu ý quan trọng khi sử dụng bếp xông thảo mộc' },
       { type: 'p', text: 'Bếp xông thảo mộc bằng đất nung an toàn khi dùng đúng cách, nhưng vẫn có nhiệt và lửa nên cần giữ vài nguyên tắc cơ bản.' },
       { type: 'list', items: [
@@ -247,7 +247,7 @@ const BLOG_ARTICLES = {
         'Không rời khỏi nhà khi nến vẫn đang cháy.'
       ] },
       { type: 'p', text: 'Điều làm cho bếp xông thảo mộc đặc biệt bền bỉ là chất liệu đất nung không tráng men, giữ nhiệt tốt và hợp với các nguyên liệu tự nhiên. Sau khi dùng, bạn chỉ cần để bếp nguội, lau nhẹ bằng khăn khô và bảo quản nơi thoáng.' },
-      { type: 'image', src: '/anh-bai-viet/luu-y-an-toan-bep-xong-thao-moc.webp', alt: 'Lưu ý an toàn khi sử dụng bếp xông thảo mộc đất nung', caption: 'Bảo quản bếp đất nung nơi khô ráo và vệ sinh nhẹ bằng khăn khô sau khi dùng.' },
+      { type: 'image', src: '/assets/blog/luu-y-an-toan-bep-xong-thao-moc.webp', alt: 'Lưu ý an toàn khi sử dụng bếp xông thảo mộc đất nung', caption: 'Bảo quản bếp đất nung nơi khô ráo và vệ sinh nhẹ bằng khăn khô sau khi dùng.' },
       { type: 'h2', text: '4. Mua bếp xông thảo mộc và nến tealight uy tín ở đâu?' },
       { type: 'p', text: 'Để trải nghiệm xông thảo mộc thực sự hiệu quả, bạn nên chọn bếp đất nung chắc tay, nến tealight cháy ổn định và nguyên liệu sạch. Một bộ sản phẩm tốt giúp hương thơm lên đều, hạn chế khói và an toàn hơn khi dùng trong nhà.' },
       { type: 'p', text: 'Tại Nến Phương Lâm, bộ combo bếp xông thảo mộc được phối cùng nến tealight không khói, phù hợp cho phòng ngủ, phòng khách, spa mini tại nhà hoặc làm quà tặng chăm sóc sức khỏe.' },
