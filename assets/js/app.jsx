@@ -798,18 +798,26 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
           </div>
           <div style={{ ...hpStyles.blogGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
             {BLOG_POSTS.slice(0, 6).map(post => (
-              <div key={post.id} style={hpStyles.blogCard}
-                onClick={() => { if (post.url) window.location.href = post.url; else setPage({ name: 'blog-post', slug: post.slug }); }}
-                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.10)'; }}
-                onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'; }}
+              <a key={post.id} href={post.url || '#'}
+                style={{ ...hpStyles.blogCard, display: 'block', textDecoration: 'none', color: 'inherit' }}
+                onClick={e => { if (!post.url) { e.preventDefault(); setPage({ name: 'blog-post', slug: post.slug }); } }}
+                onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.10)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'; e.currentTarget.style.transform = 'none'; }}
               >
+                <ImgPlaceholder
+                  label={`blog — ${post.title}`}
+                  bg="#dde8d9"
+                  aspectRatio="16 / 9"
+                  src={getBlogImage(post.slug)}
+                  style={{ width: '100%' }}
+                />
                 <div style={hpStyles.blogInfo}>
                   <div style={hpStyles.blogMeta}>{post.date} · {post.readTime}</div>
                   <div style={hpStyles.blogTitle}>{post.title}</div>
                   <div style={hpStyles.blogExcerpt}>{post.excerpt}</div>
                   <span style={hpStyles.blogReadMore}>Đọc tiếp →</span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -862,7 +870,7 @@ const hpStyles = {
   benefitTitle: { fontSize: 15, fontWeight: 700, color: '#1a1a1a', marginBottom: 8 },
   benefitDesc: { fontSize: 13, color: '#777', lineHeight: 1.7 },
   blogGrid: { display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 },
-  blogCard: { background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', transition: 'box-shadow .25s', cursor: 'pointer' },
+  blogCard: { background: '#fff', borderRadius: 12, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', transition: 'box-shadow .25s, transform .25s', cursor: 'pointer' },
   blogInfo: { padding: '18px 20px 22px' },
   blogMeta: { fontSize: 12, color: '#318223', fontWeight: 600, marginBottom: 8 },
   blogTitle: { fontSize: 15, fontWeight: 700, color: '#1a1a1a', marginBottom: 8, lineHeight: 1.5 },

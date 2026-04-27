@@ -1,7 +1,9 @@
 const http = require('http');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
+const vm = require('vm');
 
 const root = path.resolve(__dirname, '..');
 const port = Number(process.env.PORT || 8000);
@@ -26,7 +28,15 @@ const files = {
   products: path.join(root, 'data', 'products.json'),
   settings: path.join(root, 'data', 'settings.json'),
   uploads: path.join(root, 'assets', 'products', 'uploads'),
+  blogAssets: path.join(root, 'assets', 'blog'),
+  siteData: path.join(root, 'assets', 'js', 'site-data.js'),
   build: path.join(root, 'tools', 'build_static_site.js'),
+};
+
+const siteUrl = 'https://phuonglam.com';
+const blogCategories = {
+  'huong-dan-xong': 'Hướng dẫn',
+  'kien-thuc': 'Kiến thức',
 };
 
 const categoryAliases = {
@@ -79,6 +89,27 @@ const safeName = (name) =>
     .toLowerCase()
     .replace(/[^a-z0-9.]+/g, '-')
     .replace(/^-+|-+$/g, '');
+
+const stripHtml = (value = '') => String(value).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+const escapeRegex = (value = '') => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const escapeHtml = (value = '') =>
+  String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const viDate = () => {
+  const now = new Date();
+  return `${now.getDate()} tháng ${now.getMonth() + 1}, ${now.getFullYear()}`;
+};
+
+const truncate = (value = '', max = 155) => {
+  const text = stripHtml(value);
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 1).replace(/\s+\S*$/, '')}…`;
+};
 
 const runBuild = () => {
   const result = spawnSync(process.execPath, [files.build], {
@@ -178,6 +209,285 @@ const parseMultipartImage = (contentType, body) => {
   return null;
 };
 
+// Parse all fields from a multipart form (text fields + file fields)
+const parseMultipartFields = (contentType, body) => {
+  const boundaryMatch = contentType.match(/boundary=(.+)$/);
+  if (!boundaryMatch) return null;
+  const boundary = Buffer.from(`--${boundaryMatch[1]}`);
+  const fields = {};
+  let start = body.indexOf(boundary);
+  while (start !== -1) {
+    const next = body.indexOf(boundary, start + boundary.length);
+    if (next === -1) break;
+    const part = body.slice(start + boundary.length + 2, next - 2);
+    const sep = part.indexOf(Buffer.from('\r\n\r\n'));
+    if (sep !== -1) {
+      const header = part.slice(0, sep).toString('utf8');
+      const nameMatch = header.match(/name="([^"]*)"/);
+      if (nameMatch) {
+        const name = nameMatch[1];
+        const data = part.slice(sep + 4);
+        if (header.includes('filename=')) {
+          fields[name] = {
+            filename: header.match(/filename="([^"]*)"/)?.[1] || '',
+            data,
+          };
+        } else {
+          fields[name] = data.toString('utf8');
+        }
+      }
+    }
+    start = next;
+  }
+  return fields;
+};
+
+const walkFiles = (dir) => {
+  const files = [];
+  if (!fs.existsSync(dir)) return files;
+  for (const entry of fs.readdirSync(dir)) {
+    const fullPath = path.join(dir, entry);
+    const stat = fs.statSync(fullPath);
+    if (stat.isDirectory()) files.push(...walkFiles(fullPath));
+    else files.push(fullPath);
+  }
+  return files;
+};
+
+const getMetaContent = (html, selector) => {
+  const attrPattern = selector.startsWith('property=') ? 'property' : 'name';
+  const attrValue = selector.replace(/^(property|name)=/, '');
+  const pattern = new RegExp(`<meta[^>]+${attrPattern}=["']${escapeRegex(attrValue)}["'][^>]+content=["']([^"']+)["'][^>]*>`, 'i');
+  return html.match(pattern)?.[1] || '';
+};
+
+const getHtmlTitle = (html) =>
+  stripHtml(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '');
+
+const getDescription = (html) =>
+  getMetaContent(html, 'name=description') ||
+  stripHtml(html.match(/<p[^>]*class=["'][^"']*sapo[^"']*["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || '') ||
+  truncate(stripHtml(html), 155);
+
+const setOrInsertHeadTag = (html, pattern, tag) => {
+  if (pattern.test(html)) return html.replace(pattern, tag);
+  return html.replace(/<\/head>/i, `  ${tag}\n</head>`);
+};
+
+const convertImageToWebp = (srcPath, outPath) => {
+  const candidates = [
+    process.env.PHUONGLAM_PYTHON,
+    '/Users/lamtran/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3',
+    'python3',
+  ].filter(Boolean);
+  const script = [
+    'from PIL import Image',
+    'import sys',
+    'src, out = sys.argv[1], sys.argv[2]',
+    'with Image.open(src) as im:',
+    '    im = im.convert("RGB")',
+    '    im.thumbnail((1200, 1200), Image.Resampling.LANCZOS)',
+    '    im.save(out, "WEBP", quality=80, method=6)',
+  ].join('\n');
+  for (const python of candidates) {
+    const result = spawnSync(python, ['-c', script, srcPath, outPath], { cwd: root, encoding: 'utf8' });
+    if (result.status === 0 && fs.existsSync(outPath)) return true;
+  }
+  return false;
+};
+
+const copyBlogAsset = ({ sourcePath, slug }) => {
+  const ext = path.extname(sourcePath).toLowerCase();
+  const base = safeName(path.basename(sourcePath, ext));
+  fs.mkdirSync(files.blogAssets, { recursive: true });
+  if (['.png', '.jpg', '.jpeg', '.webp'].includes(ext)) {
+    const outName = safeName(`${slug}-${base}`).replace(/\.+/g, '-') + '.webp';
+    const outPath = path.join(files.blogAssets, outName);
+    if (ext === '.webp') fs.copyFileSync(sourcePath, outPath);
+    else if (!convertImageToWebp(sourcePath, outPath)) {
+      const fallbackName = safeName(`${slug}-${base}${ext}`);
+      const fallbackPath = path.join(files.blogAssets, fallbackName);
+      fs.copyFileSync(sourcePath, fallbackPath);
+      return `/assets/blog/${fallbackName}`;
+    }
+    return `/assets/blog/${outName}`;
+  }
+  const outName = safeName(`${slug}-${base}${ext}`);
+  fs.copyFileSync(sourcePath, path.join(files.blogAssets, outName));
+  return `/assets/blog/${outName}`;
+};
+
+const normalizeBlogHtml = ({ html, htmlPath, category, slug }) => {
+  const dir = path.dirname(htmlPath);
+  const publicUrl = `/blog/${category}/${slug}/`;
+  const canonical = `${siteUrl}${publicUrl}`;
+  const copied = new Map();
+  const resolveAsset = (assetUrl) => {
+    if (!assetUrl || /^(https?:)?\/\//i.test(assetUrl) || assetUrl.startsWith('/') || assetUrl.startsWith('data:')) return assetUrl;
+    const cleanUrl = assetUrl.split('#')[0].split('?')[0];
+    const sourcePath = path.normalize(path.join(dir, decodeURIComponent(cleanUrl)));
+    if (!sourcePath.startsWith(path.dirname(dir)) && !sourcePath.startsWith(dir)) return assetUrl;
+    if (!fs.existsSync(sourcePath) || fs.statSync(sourcePath).isDirectory()) return assetUrl;
+    if (!copied.has(sourcePath)) copied.set(sourcePath, copyBlogAsset({ sourcePath, slug }));
+    return copied.get(sourcePath);
+  };
+
+  html = html.replace(/\b(src|href)=["']([^"']+\.(?:png|jpe?g|webp|gif|svg))["']/gi, (match, attr, assetUrl) => {
+    const nextUrl = resolveAsset(assetUrl);
+    return `${attr}="${nextUrl}"`;
+  });
+
+  const title = getHtmlTitle(html) || slug.replace(/-/g, ' ');
+  const description = truncate(getDescription(html), 155);
+  const image = html.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1] || '';
+  const absoluteImage = image ? (image.startsWith('/') ? `${siteUrl}${image}` : image) : '';
+
+  html = setOrInsertHeadTag(html, /<link[^>]+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${canonical}">`);
+  html = setOrInsertHeadTag(html, /<meta[^>]+name=["']description["'][^>]*>/i, `<meta name="description" content="${escapeHtml(description)}">`);
+  html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeHtml(title)}">`);
+  html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${escapeHtml(description)}">`);
+  html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:url["'][^>]*>/i, `<meta property="og:url" content="${canonical}">`);
+  html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:type["'][^>]*>/i, '<meta property="og:type" content="article">');
+  if (absoluteImage) {
+    html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${absoluteImage}">`);
+  }
+  if (!/application\/ld\+json/i.test(html)) {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      image: absoluteImage ? [absoluteImage] : undefined,
+      url: canonical,
+      datePublished: new Date().toISOString().slice(0, 10),
+      dateModified: new Date().toISOString().slice(0, 10),
+      author: { '@type': 'Organization', name: 'Phương Lâm' },
+      publisher: { '@type': 'Organization', name: 'Phương Lâm' },
+      mainEntityOfPage: canonical,
+    };
+    html = html.replace(/<\/head>/i, `  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>\n</head>`);
+  }
+
+  return { html, meta: { title, description, image, url: publicUrl, tag: blogCategories[category] || 'Kiến thức' } };
+};
+
+const readBlogPostsFromSiteData = () => {
+  if (!fs.existsSync(files.siteData)) return [];
+  const source = fs.readFileSync(files.siteData, 'utf8');
+  const context = { window: {} };
+  vm.createContext(context);
+  vm.runInContext(source, context);
+  return Array.isArray(context.window.BLOG_POSTS) ? context.window.BLOG_POSTS : [];
+};
+
+const replaceBlogPostsInSiteData = (posts) => {
+  if (!fs.existsSync(files.siteData)) return;
+  let source = fs.readFileSync(files.siteData, 'utf8');
+  const startMarker = 'const BLOG_POSTS = [';
+  const startIdx = source.indexOf(startMarker);
+  if (startIdx === -1) return;
+  let depth = 0;
+  let endIdx = -1;
+  for (let i = startIdx + startMarker.length - 1; i < source.length; i += 1) {
+    if (source[i] === '[') depth += 1;
+    else if (source[i] === ']') {
+      depth -= 1;
+      if (depth === 0) {
+        endIdx = i + 1;
+        if (source[endIdx] === ';') endIdx += 1;
+        break;
+      }
+    }
+  }
+  if (endIdx === -1) return;
+  const block = `const BLOG_POSTS = ${JSON.stringify(posts, null, 2)};`;
+  source = source.slice(0, startIdx) + block + source.slice(endIdx);
+  fs.writeFileSync(files.siteData, source);
+};
+
+const upsertBlogPost = ({ category, slug, meta }) => {
+  const posts = readBlogPostsFromSiteData();
+  const existing = posts.find((post) => String(post.slug) === slug);
+  const ids = posts.map((post) => Number(post.id) || 0);
+  const nextPost = {
+    id: existing?.id || Math.max(0, ...ids) + 1,
+    title: meta.title,
+    excerpt: meta.description,
+    date: existing?.date || viDate(),
+    readTime: `${Math.max(3, Math.ceil(stripHtml(meta.description + ' ' + meta.title).split(/\s+/).length / 180))} phút đọc`,
+    slug,
+    tag: blogCategories[category] || 'Kiến thức',
+    url: `/blog/${category}/${slug}/`,
+    image: meta.image || existing?.image || '',
+  };
+  const nextPosts = [nextPost, ...posts.filter((post) => String(post.slug) !== slug)];
+  replaceBlogPostsInSiteData(nextPosts);
+};
+
+const removeBlogPostFromSiteData = (slug) => {
+  const posts = readBlogPostsFromSiteData();
+  replaceBlogPostsInSiteData(posts.filter((post) => String(post.slug) !== slug));
+};
+
+const findHtmlFile = (dir) => {
+  const htmlFiles = walkFiles(dir).filter((file) => /\.html?$/i.test(file));
+  return htmlFiles.find((file) => path.basename(file).toLowerCase() === 'index.html') || htmlFiles[0] || '';
+};
+
+const unpackBlogZip = ({ zipField, category, requestedSlug }) => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-blog-'));
+  try {
+    const zipPath = path.join(tempDir, safeName(zipField.filename || 'blog.zip'));
+    const extractDir = path.join(tempDir, 'extract');
+    fs.writeFileSync(zipPath, zipField.data);
+    fs.mkdirSync(extractDir, { recursive: true });
+    const list = spawnSync('unzip', ['-Z1', zipPath], { encoding: 'utf8' });
+    if (list.status !== 0) throw new Error(list.stderr || 'Không đọc được file ZIP');
+    const entries = list.stdout.split('\n').filter(Boolean);
+    if (entries.some((entry) => path.isAbsolute(entry) || entry.split(/[\\/]+/).includes('..'))) {
+      throw new Error('File ZIP có đường dẫn không an toàn');
+    }
+    const unzip = spawnSync('unzip', ['-q', zipPath, '-d', extractDir], { encoding: 'utf8' });
+    if (unzip.status !== 0) throw new Error(unzip.stderr || 'Không giải nén được file ZIP');
+    const htmlPath = findHtmlFile(extractDir);
+    if (!htmlPath) throw new Error('ZIP phải có ít nhất 1 file HTML');
+    const rawHtml = fs.readFileSync(htmlPath, 'utf8');
+    if (!rawHtml.includes('<html') && !rawHtml.includes('<!DOCTYPE')) throw new Error('File HTML trong ZIP không hợp lệ');
+    const canonicalPath = rawHtml.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)?.[1] || '';
+    const canonicalSlug = canonicalPath.split('?')[0].replace(/\/$/, '').split('/').pop();
+    const slug = safeName(requestedSlug || canonicalSlug || path.basename(htmlPath, path.extname(htmlPath)));
+    if (!slug) throw new Error('Không xác định được slug bài viết');
+    const normalized = normalizeBlogHtml({ html: rawHtml, htmlPath, category, slug });
+    const outDir = path.join(root, 'blog', category, slug);
+    fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(path.join(outDir, 'index.html'), normalized.html);
+    upsertBlogPost({ category, slug, meta: normalized.meta });
+    return { slug, url: `/blog/${category}/${slug}/` };
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+};
+
+// Scan blog/ directory and return list of posts
+const listBlogPosts = () => {
+  const blogDir = path.join(root, 'blog');
+  const posts = [];
+  if (!fs.existsSync(blogDir)) return posts;
+  for (const cat of fs.readdirSync(blogDir)) {
+    if (!blogCategories[cat]) continue;
+    const catPath = path.join(blogDir, cat);
+    if (!fs.statSync(catPath).isDirectory()) continue;
+    for (const slug of fs.readdirSync(catPath)) {
+      const htmlPath = path.join(catPath, slug, 'index.html');
+      if (fs.existsSync(htmlPath)) {
+        const html = fs.readFileSync(htmlPath, 'utf8');
+        posts.push({ category: cat, categoryLabel: blogCategories[cat], slug, title: getHtmlTitle(html), url: `/blog/${cat}/${slug}/` });
+      }
+    }
+  }
+  return posts;
+};
+
 const handleApi = async (req, res, pathname) => {
   try {
     if (pathname === '/api/products.php' && req.method === 'GET') {
@@ -235,6 +545,40 @@ const handleApi = async (req, res, pathname) => {
       const filePath = path.join(files.uploads, filename);
       fs.writeFileSync(filePath, image.data);
       sendJson(res, { ok: true, url: `/assets/products/uploads/${filename}` });
+      return true;
+    }
+
+    if (pathname === '/api/blog.php' && req.method === 'GET') {
+      sendJson(res, { ok: true, posts: listBlogPosts() });
+      return true;
+    }
+
+    if (pathname === '/api/blog.php' && req.method === 'POST') {
+      const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
+      if (!fields) throw new Error('Không đọc được dữ liệu form');
+      const category = safeName(String(fields.category || ''));
+      if (!blogCategories[category]) throw new Error('Danh mục bài viết chỉ được chọn Hướng dẫn hoặc Kiến thức');
+      const zipField = fields.zip || fields.file;
+      if (!zipField || !zipField.data) throw new Error('Thiếu file ZIP bài viết');
+      if (!/\.zip$/i.test(zipField.filename || '')) throw new Error('Vui lòng upload file .zip gồm HTML và ảnh');
+      const result = unpackBlogZip({ zipField, category, requestedSlug: fields.slug });
+      runBuild();
+      sendJson(res, { ok: true, url: result.url, slug: result.slug, posts: listBlogPosts() });
+      return true;
+    }
+
+    if (pathname === '/api/blog.php' && req.method === 'DELETE') {
+      const body = JSON.parse((await readBody(req)).toString('utf8'));
+      const category = safeName(String(body.category || ''));
+      const slug = safeName(String(body.slug || ''));
+      if (!category || !slug) throw new Error('Thiếu category hoặc slug');
+      const dir = path.join(root, 'blog', category, slug);
+      if (fs.existsSync(dir)) {
+        fs.rmSync(dir, { recursive: true, force: true });
+      }
+      removeBlogPostFromSiteData(slug);
+      runBuild();
+      sendJson(res, { ok: true, posts: listBlogPosts() });
       return true;
     }
   } catch (error) {

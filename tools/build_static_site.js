@@ -516,8 +516,22 @@ const writeSitemapAndRobots = ({ products, blogPosts = [] }) => {
     if (product.categoryId) categoryIds.add(product.categoryId);
   }
   for (const id of categoryIds) urls.add(`${siteUrl}/danh-muc/${id}/`);
+  // BLOG_POSTS with explicit url field
   for (const post of blogPosts) {
     if (post.url) urls.add(absoluteUrl(post.url));
+  }
+  // Scan blog/ directory — picks up ALL blog posts regardless of BLOG_POSTS list
+  const blogDir = path.join(root, 'blog');
+  if (fs.existsSync(blogDir)) {
+    for (const cat of fs.readdirSync(blogDir)) {
+      const catPath = path.join(blogDir, cat);
+      if (!fs.statSync(catPath).isDirectory()) continue;
+      for (const slug of fs.readdirSync(catPath)) {
+        if (fs.existsSync(path.join(catPath, slug, 'index.html'))) {
+          urls.add(`${siteUrl}/blog/${cat}/${slug}/`);
+        }
+      }
+    }
   }
   for (const file of ['bep-xong-thao-moc-phuong-lam_3.html', 'phan-biet-nen-tealight-nen-2h-4h-8h-phuong-lam_7.html']) {
     if (fs.existsSync(path.join(root, file))) urls.add(`${siteUrl}/${file}`);
