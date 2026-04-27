@@ -489,7 +489,7 @@ const writeSeoPages = ({ products, categories }) => {
   }
 };
 
-const writeSitemapAndRobots = ({ products }) => {
+const writeSitemapAndRobots = ({ products, blogPosts = [] }) => {
   const urls = new Set([`${siteUrl}/`]);
   const categoryIds = new Set();
   for (const product of products) {
@@ -497,6 +497,9 @@ const writeSitemapAndRobots = ({ products }) => {
     if (product.categoryId) categoryIds.add(product.categoryId);
   }
   for (const id of categoryIds) urls.add(`${siteUrl}/danh-muc/${id}/`);
+  for (const post of blogPosts) {
+    if (post.url) urls.add(absoluteUrl(post.url));
+  }
   for (const file of ['bep-xong-thao-moc-phuong-lam_3.html', 'phan-biet-nen-tealight-nen-2h-4h-8h-phuong-lam_7.html']) {
     if (fs.existsSync(path.join(root, file))) urls.add(`${siteUrl}/${file}`);
   }
@@ -625,7 +628,7 @@ const main = () => {
   bakeSettingsIntoApp(settings);
   compileAppJs();
   writeSeoPages({ products, categories: initialData.categories });
-  writeSitemapAndRobots({ products });
+  writeSitemapAndRobots({ products, blogPosts: initialData.blogPosts });
   console.log(`Optimized index, extracted assets, and generated ${products.length} product pages.`);
 };
 

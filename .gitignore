@@ -7,15 +7,18 @@ deploy/
 # Internal working files that should not be deployed to hosting.
 rule vs skill/
 file sản phẩm từ shopee/
+ảnh website/
 ảnh bài viết/
 ảnh bài viết
 ảnh bài viết/
 *shopee/
 *ba*i*vie*t/
 !anh-bai-viet/
-!phan-biet-nen-tealight-nen-2h-4h-8h-assets/
 
 # Local/editor noise.
+node_modules/
+package.json
+package-lock.json
 .env
 .env.*
 *.log
