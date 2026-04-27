@@ -29,6 +29,27 @@ const files = {
   build: path.join(root, 'tools', 'build_static_site.js'),
 };
 
+const categoryAliases = {
+  'tinh-dau': 'bep-xong',
+};
+
+const normalizeCategoryId = (value) => categoryAliases[String(value || '')] || String(value || 'nen-thom');
+
+const normalizeSettings = (value = {}) => {
+  const rawCategoryImages = value.categoryImages && typeof value.categoryImages === 'object' && !Array.isArray(value.categoryImages)
+    ? value.categoryImages
+    : {};
+  const categoryImages = {};
+  for (const [categoryId, src] of Object.entries(rawCategoryImages)) {
+    if (src) categoryImages[normalizeCategoryId(categoryId)] = src;
+  }
+  return {
+    featuredIds: Array.isArray(value.featuredIds) ? value.featuredIds.map(String).filter(Boolean) : [],
+    headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
+    categoryImages,
+  };
+};
+
 const send = (res, status, body, headers = {}) => {
   res.writeHead(status, headers);
   res.end(body);
@@ -123,12 +144,12 @@ const loadSettings = () => {
   if (!fs.existsSync(files.settings)) {
     return { featuredIds: [], headerImages: [], categoryImages: {} };
   }
-  return JSON.parse(fs.readFileSync(files.settings, 'utf8'));
+  return normalizeSettings(JSON.parse(fs.readFileSync(files.settings, 'utf8')));
 };
 
 const saveSettings = (settings) => {
   fs.mkdirSync(path.dirname(files.settings), { recursive: true });
-  fs.writeFileSync(files.settings, JSON.stringify(settings || {}, null, 2) + '\n');
+  fs.writeFileSync(files.settings, JSON.stringify(normalizeSettings(settings), null, 2) + '\n');
 };
 
 const parseMultipartImage = (contentType, body) => {

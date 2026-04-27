@@ -334,11 +334,13 @@
     const API_ORDERS = 'api/orders.php';
     const API_GIT = 'api/git.php';
     const PASS_KEY = 'phuonglam_admin_password';
+    const CATEGORY_ALIASES = { 'tinh-dau': 'bep-xong' };
+    const normalizeCategoryId = value => CATEGORY_ALIASES[String(value || '')] || String(value || 'nen-thom');
     const CATEGORIES = [
       ['nen-thom', 'Nến Xông'],
       ['combo', 'Combo Xông Nhà'],
       ['thao-moc-xong', 'Thảo Mộc Xông'],
-      ['tinh-dau', 'Đèn Xông Tinh Dầu'],
+      ['bep-xong', 'Đèn Xông Tinh Dầu'],
       ['nen-tru', 'Nến Trụ'],
       ['nu-tram', 'Nụ Trầm'],
       ['phu-kien', 'Phụ Kiện Xông'],
@@ -389,7 +391,7 @@
       return {
         id: product.id || id(),
         sku: product.sku || '',
-        categoryId: product.categoryId || 'nen-thom',
+        categoryId: normalizeCategoryId(product.categoryId),
         name: product.name || '',
         price: Number(product.price || 0),
         originalPrice: product.originalPrice === '' ? null : (product.originalPrice == null ? null : Number(product.originalPrice || 0)),
@@ -450,10 +452,15 @@
     }
 
     function normalizeSettings(value) {
+      const rawCategoryImages = value.categoryImages && typeof value.categoryImages === 'object' && !Array.isArray(value.categoryImages) ? value.categoryImages : {};
+      const categoryImages = {};
+      Object.entries(rawCategoryImages).forEach(([catId, src]) => {
+        if (src) categoryImages[normalizeCategoryId(catId)] = src;
+      });
       return {
         featuredIds: Array.isArray(value.featuredIds) ? value.featuredIds.map(String) : [],
         headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
-        categoryImages: value.categoryImages && typeof value.categoryImages === 'object' && !Array.isArray(value.categoryImages) ? value.categoryImages : {}
+        categoryImages
       };
     }
 

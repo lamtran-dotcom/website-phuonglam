@@ -29,6 +29,12 @@ const categoryFallback = {
   'nen-ly': 'Nến Ly',
 };
 
+const categoryAliases = {
+  'tinh-dau': 'bep-xong',
+};
+
+const normalizeCategoryId = (value) => categoryAliases[String(value || '')] || String(value || 'nen-thom');
+
 const ensureDir = (dir) => fs.mkdirSync(dir, { recursive: true });
 
 const resetDir = (dir) => {
@@ -324,9 +330,13 @@ const normalizeSettings = (value = {}) => {
     if (normalized && !featuredIds.includes(normalized)) featuredIds.push(normalized);
   }
   const headerImages = (Array.isArray(value.headerImages) ? value.headerImages : []).filter(Boolean);
-  const categoryImages = value.categoryImages && typeof value.categoryImages === 'object' && !Array.isArray(value.categoryImages)
-    ? Object.fromEntries(Object.entries(value.categoryImages).filter(([, src]) => Boolean(src)))
+  const rawCategoryImages = value.categoryImages && typeof value.categoryImages === 'object' && !Array.isArray(value.categoryImages)
+    ? value.categoryImages
     : {};
+  const categoryImages = {};
+  for (const [categoryId, src] of Object.entries(rawCategoryImages)) {
+    if (src) categoryImages[normalizeCategoryId(categoryId)] = src;
+  }
   return { featuredIds, headerImages, categoryImages };
 };
 
@@ -614,7 +624,10 @@ const updateProductsJson = () => {
     prefix: 'product',
   });
   const original = JSON.parse(fs.readFileSync(paths.products, 'utf8'));
-  const products = makeUniqueSlugs(replaceDataUrlsInObject(original, extractor));
+  const products = makeUniqueSlugs(replaceDataUrlsInObject(original, extractor).map((product) => ({
+    ...product,
+    categoryId: normalizeCategoryId(product.categoryId),
+  })));
   fs.writeFileSync(paths.products, JSON.stringify(products, null, 2) + '\n');
   return products;
 };
