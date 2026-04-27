@@ -114,6 +114,7 @@ const BLOG_POSTS = [
     readTime: '5 phút đọc',
     slug: 'huong-dan-dung-bep-xong-thao-moc',
     tag: 'Hướng dẫn',
+    url: '/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/',
     image: '/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp',
   },
   {
@@ -124,6 +125,7 @@ const BLOG_POSTS = [
     readTime: '6 phút đọc',
     slug: 'phan-biet-nen-tealight-nen-2h-4h-8h',
     tag: 'Kiến thức',
+    url: '/blog/kien-thuc/phan-biet-nen-tealight-2h-4h-8h/',
     image: '/assets/blog/nen-tealight-khong-khoi-featured.webp',
   },
   {
