@@ -4055,6 +4055,17 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    id: 12,
+    title: 'Đèn xông tinh dầu bằng nến: cách dùng đúng và chọn tinh dầu phù hợp',
+    excerpt: 'Hướng dẫn cách dùng đèn xông tinh dầu bằng nến an toàn, chọn nến tealight và tinh dầu phù hợp để hương thơm lan tỏa nhẹ nhàng trong không gian sống.',
+    date: '27 tháng 4, 2026',
+    readTime: '5 phút đọc',
+    slug: 'den-xong-tinh-dau-bang-nen-cach-dung-dung',
+    tag: 'Hướng dẫn',
+    url: '/blog/kien-thuc/den-xong-tinh-dau-bang-nen-cach-dung-dung/',
+    image: '/assets/blog/featured-den-xong-tinh-dau-phuong-lam.webp',
+  },
+  {
     id: 11,
     title: 'Hướng dẫn dùng bếp xông thảo mộc đúng cách, an toàn',
     excerpt: 'Bếp xông thảo mộc giúp thanh lọc không khí, khử mùi ẩm mốc và thư giãn tinh thần. Hướng dẫn cách dùng đúng cách cùng nến tealight và thảo mộc tự nhiên.',

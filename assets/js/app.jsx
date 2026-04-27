@@ -799,7 +799,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
           <div style={{ ...hpStyles.blogGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
             {BLOG_POSTS.slice(0, 6).map(post => (
               <div key={post.id} style={hpStyles.blogCard}
-                onClick={() => setPage({ name: 'blog-post', slug: post.slug })}
+                onClick={() => { if (post.url) window.location.href = post.url; else setPage({ name: 'blog-post', slug: post.slug }); }}
                 onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.10)'; }}
                 onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'; }}
               >
@@ -3723,7 +3723,7 @@ const BlogPage = ({ setPage }) => {
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
           {filtered.slice(0, 6).map(post => (
             <article key={post.id} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', transition: 'transform .2s, box-shadow .2s', cursor: 'pointer' }}
-              onClick={() => setPage({ name: 'blog-post', slug: post.slug })}
+              onClick={() => { if (post.url) window.location.href = post.url; else setPage({ name: 'blog-post', slug: post.slug }); }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.12)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'; }}
             >
@@ -3881,7 +3881,7 @@ const BlogPostPage = ({ slug, setPage, goBack }) => {
               {relatedPosts.map(item => (
                 <div
                   key={item.slug}
-                  onClick={() => setPage({ name: 'blog-post', slug: item.slug })}
+                  onClick={() => { if (item.url) window.location.href = item.url; else setPage({ name: 'blog-post', slug: item.slug }); }}
                   style={{ background: '#fff', borderRadius: 18, padding: '18px 18px 20px', boxShadow: '0 6px 18px rgba(0,0,0,0.05)', cursor: 'pointer', transition: 'transform .2s, box-shadow .2s' }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(0,0,0,0.10)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.05)'; }}
