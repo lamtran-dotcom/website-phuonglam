@@ -1,0 +1,64 @@
+name: Auto Compress Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'anh-bai-viet/**'
+
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install sharp
+        run: npm install sharp
+
+      - name: Compress new/changed images
+        run: |
+          node << 'EOF'
+          const sharp = require('sharp');
+          const fs = require('fs');
+          const path = require('path');
+
+          const dir = 'anh-bai-viet';
+          const files = fs.readdirSync(dir).filter(f => /\.(png|jpg|jpeg)$/i.test(f));
+
+          Promise.all(files.map(async file => {
+            const filePath = path.join(dir, file);
+            const stat = fs.statSync(filePath);
+
+            // Chỉ nén file lớn hơn 200KB
+            if (stat.size < 200 * 1024) return;
+
+            const ext = path.extname(file).toLowerCase();
+            const nameNoExt = path.basename(file, ext);
+            const outPath = path.join(dir, nameNoExt + '.webp');
+
+            await sharp(filePath)
+              .resize({ width: 1200, withoutEnlargement: true })
+              .webp({ quality: 80 })
+              .toFile(outPath);
+
+            // Xóa file gốc nếu đã tạo webp thành công
+            if (outPath !== filePath) fs.unlinkSync(filePath);
+
+            console.log(`Compressed: ${file} → ${nameNoExt}.webp`);
+          }));
+          EOF
+
+      - name: Commit compressed images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add anh-bai-viet/
+          git diff --staged --quiet || git commit -m "Auto compress images [skip ci]"
+          git push
