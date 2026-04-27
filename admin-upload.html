@@ -91,6 +91,8 @@
     .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
     .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .config-images { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
+    .config-card-grid { grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
     .status { margin-top: 12px; font-weight: 800; color: var(--green); }
 
     .product-item {
@@ -163,6 +165,7 @@
     }
     .image-box img { width: 100%; height: 100%; object-fit: cover; }
     .image-box span { padding: 10px; }
+    .config-image-box { border-radius: 14px; font-size: 12px; }
     .remove-img {
       position: absolute;
       top: 8px;
@@ -218,6 +221,91 @@
       box-shadow: 0 12px 28px rgba(47,125,36,.12);
     }
     .mini-card:hover { transform: translateY(-2px); }
+    .config-mini { padding: 8px; border-radius: 14px; }
+    .config-mini .name { font-size: 13px; }
+    .featured-slots {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+      gap: 12px;
+    }
+    .featured-slot {
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+    .featured-slot.active { border-color: var(--green); background: #f3fbf1; }
+    .featured-slot:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(47,125,36,.12); }
+    .featured-slot-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      background: repeating-linear-gradient(45deg, #eef5ec, #eef5ec 10px, #f7fbf5 10px, #f7fbf5 20px);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: #999;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .featured-slot-img img { width: 100%; height: 100%; object-fit: cover; }
+    .slot-no { font-size: 12px; color: var(--green); font-weight: 900; margin-bottom: 4px; }
+    .slot-name { font-size: 12px; font-weight: 900; line-height: 1.3; min-height: 32px; }
+    .slot-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 8px; }
+    .slot-actions button { padding: 7px 5px; font-size: 11px; border-radius: 10px; }
+    .picker-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(17, 28, 14, .38);
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+    .picker-modal {
+      width: min(980px, 100%);
+      max-height: min(760px, calc(100vh - 36px));
+      overflow: auto;
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: 0 26px 80px rgba(20, 40, 16, .24);
+      padding: 18px;
+    }
+    .picker-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px; }
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .picker-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 8px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .picker-card:hover { border-color: var(--green); box-shadow: 0 10px 24px rgba(47,125,36,.12); }
+    .picker-card.selected { border-color: var(--green); background: #f3fbf1; }
+    .picker-card.is-hidden { opacity: .48; }
+    .picker-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 11px;
+      overflow: hidden;
+      background: #f2f6ef;
+      display: grid;
+      place-items: center;
+      color: #999;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .picker-img img { width: 100%; height: 100%; object-fit: cover; }
+    .picker-title { font-size: 12px; font-weight: 900; line-height: 1.35; min-height: 48px; }
+    .picker-price { color: var(--green); font-size: 12px; font-weight: 900; margin-top: 5px; }
     .order-table { width: 100%; border-collapse: collapse; min-width: 780px; }
     .order-table th, .order-table td { padding: 12px 10px; border-bottom: 1px solid #eef2eb; text-align: left; vertical-align: top; }
     .order-table th { color: #66705f; font-size: 13px; }
@@ -229,6 +317,7 @@
       .topbar, .grid { display: block; }
       .side { position: static; max-height: none; margin-bottom: 16px; }
       .row, .row3, .images, .variant-grid, .card-grid { grid-template-columns: 1fr; }
+      .config-images, .config-card-grid, .featured-slots, .picker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 28px; }
     }
   </style>
@@ -239,10 +328,12 @@
   </div>
 
   <script>
-    const GITHUB_OWNER = 'lamtran-dotcom';
-    const GITHUB_REPO = 'website-phuonglam';
-    const GITHUB_BRANCH = 'main';
-    const PASS_KEY = 'phuonglam_github_token';
+    const API_PRODUCTS = 'api/products.php';
+    const API_UPLOAD = 'api/upload.php';
+    const API_SETTINGS = 'api/settings.php';
+    const API_ORDERS = 'api/orders.php';
+    const API_GIT = 'api/git.php';
+    const PASS_KEY = 'phuonglam_admin_password';
     const CATEGORIES = [
       ['nen-thom', 'Nến Xông'],
       ['combo', 'Combo Xông Nhà'],
@@ -263,61 +354,20 @@
     let listSearch = '';
     let listCategory = '';
     let activeTab = 'products';
+    let featuredPickerIndex = null;
+    let featuredPickerSearch = '';
     let saving = false;
     let apiOnline = true;
     const app = document.getElementById('app');
 
-    const GITHUB_API = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents`;
-
-    async function githubGetFile(path) {
-      const res = await fetch(`${GITHUB_API}/${path}?ref=${GITHUB_BRANCH}`, {
-        headers: { Authorization: `token ${password}`, Accept: 'application/vnd.github.v3+json' }
-      });
-      if (!res.ok) throw new Error(`Không đọc được file ${path} (${res.status})`);
-      return res.json();
-    }
-
-    async function githubCommitFile(path, content, message) {
-      let sha;
-      try { sha = (await githubGetFile(path)).sha; } catch {}
-      const body = { message, content: btoa(unescape(encodeURIComponent(content))), branch: GITHUB_BRANCH };
-      if (sha) body.sha = sha;
-      const res = await fetch(`${GITHUB_API}/${path}`, {
-        method: 'PUT',
-        headers: { Authorization: `token ${password}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) { const err = await res.json(); throw new Error(err.message || `Commit thất bại (${res.status})`); }
-      return res.json();
-    }
-
-    async function githubUploadImage(filename, file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = async () => {
-          try {
-            const base64 = reader.result.split(',')[1];
-            const path = `anh-bai-viet/${filename}`;
-            let sha;
-            try { sha = (await githubGetFile(path)).sha; } catch {}
-            const body = { message: `Upload ảnh ${filename}`, content: base64, branch: GITHUB_BRANCH };
-            if (sha) body.sha = sha;
-            const res = await fetch(`${GITHUB_API}/${path}`, {
-              method: 'PUT',
-              headers: { Authorization: `token ${password}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-              body: JSON.stringify(body)
-            });
-            if (!res.ok) { const err = await res.json(); throw new Error(err.message || 'Upload ảnh thất bại'); }
-            resolve(`anh-bai-viet/${filename}`);
-          } catch (e) { reject(e); }
-        };
-        reader.onerror = () => reject(new Error('Đọc file thất bại'));
-        reader.readAsDataURL(file);
-      });
-    }
-
     const fmt = value => Number(value || 0).toLocaleString('vi-VN') + 'đ';
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+    const normalizeText = value => String(value ?? '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .trim();
     const id = () => 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
     const firstImage = product => (product.images || []).find(Boolean) || (product.variants || []).map(v => v.image).find(Boolean) || '';
     const isHidden = product => product?.hidden === true || product?.hidden === 'true';
@@ -363,38 +413,39 @@
       };
     }
 
-    function b64ToUtf8(b64) {
-      const bytes = Uint8Array.from(atob(b64.replace(/\n/g, '')), c => c.charCodeAt(0));
-      return new TextDecoder('utf-8').decode(bytes);
-    }
-
-    async function githubGetFileContent(path) {
-      const file = await githubGetFile(path);
-      if (file.content) return b64ToUtf8(file.content);
-      if (file.download_url) {
-        const res = await fetch(file.download_url);
-        return res.text();
-      }
-      throw new Error(`File ${path} trống`);
-    }
-
     async function loadProducts() {
-      app.innerHTML = '<div class="panel empty">Đang tải dữ liệu từ GitHub...</div>';
+      app.innerHTML = '<div class="panel empty">Đang tải dữ liệu quản trị...</div>';
       try {
-        const [productText, settingText] = await Promise.all([
-          githubGetFileContent('data/products.json'),
-          githubGetFileContent('data/settings.json').catch(() => null)
+        const [productRes, settingRes, orderRes] = await Promise.all([
+          fetch(API_PRODUCTS, { cache: 'no-store' }),
+          fetch(API_SETTINGS, { cache: 'no-store' }),
+          fetch(API_ORDERS, { cache: 'no-store', headers: { 'X-Admin-Password': password } }).catch(() => null)
         ]);
-        const productData = JSON.parse(productText);
-        const settingData = settingText ? JSON.parse(settingText) : {};
+        const productData = await readJsonResponse(productRes, 'API sản phẩm');
+        const settingData = await readJsonResponse(settingRes, 'API cài đặt');
+        const orderData = orderRes ? await readJsonResponse(orderRes, 'API đơn hàng') : { ok: true, orders: [] };
+        if (!productData.ok) throw new Error(productData.message || 'Không tải được dữ liệu sản phẩm.');
+        if (!settingData.ok) throw new Error(settingData.message || 'Không tải được cài đặt website.');
         apiOnline = true;
-        products = (Array.isArray(productData) ? productData : (productData.products || [])).map(normalizeProduct);
-        settings = normalizeSettings(Array.isArray(settingData) ? {} : settingData);
-        orders = [];
+        products = (productData.products || []).map(normalizeProduct);
+        settings = normalizeSettings(settingData.settings || {});
+        orders = Array.isArray(orderData.orders) ? orderData.orders : [];
         selectedId = products[0]?.id || null;
         render();
       } catch (error) {
-        app.innerHTML = `<div class="panel empty"><h2>Không tải được dữ liệu</h2><p>${esc(error.message)}</p><p>Kiểm tra GitHub Token có đúng và có quyền <strong>repo</strong> không.</p><button onclick="localStorage.removeItem('${PASS_KEY}');location.reload()">Đổi token</button></div>`;
+        try {
+          const localRes = await fetch('data/products.json', { cache: 'no-store' });
+          const localData = await localRes.json();
+          const localProducts = Array.isArray(localData) ? localData : (localData.products || []);
+          apiOnline = false;
+          products = localProducts.map(normalizeProduct);
+          settings = normalizeSettings({});
+          orders = [];
+          selectedId = products[0]?.id || null;
+          render();
+        } catch {
+          app.innerHTML = `<div class="panel empty"><h2>Không tải được API</h2><p>${esc(error.message)}</p><p>Kiểm tra đã upload đủ file trong thư mục <strong>api</strong> và có thư mục <strong>data</strong>, <strong>uploads</strong> trên host chưa.</p></div>`;
+        }
       }
     }
 
@@ -410,10 +461,9 @@
       app.innerHTML = `
         <div class="panel login">
           <h1>Phương Lâm Admin</h1>
-          <p class="sub">Nhập GitHub Token để cập nhật sản phẩm trực tiếp lên website.</p>
-          <label>GitHub Personal Access Token</label>
-          <input id="password" type="password" value="${esc(password)}" placeholder="ghp_xxxxxxxxxxxx" style="font-family:monospace" />
-          <p class="sub" style="font-size:12px;margin-top:8px">Tạo token tại: github.com/settings/tokens → chọn quyền <strong>repo</strong></p>
+          <p class="sub">Nhập mật khẩu admin để thêm/sửa sản phẩm trực tiếp trên host.</p>
+          <label>Mật khẩu admin</label>
+          <input id="password" type="password" value="${esc(password)}" placeholder="Nhập mật khẩu" />
           <div class="actions" style="margin-top:16px">
             <button onclick="login()">Đăng nhập</button>
             <a href="index.html"><button class="secondary">Về trang chủ</button></a>
@@ -435,10 +485,12 @@
           <div>
             <h1>Quản lý website</h1>
             <div class="sub">Sản phẩm, phân loại, ảnh, bán chạy, header, danh mục và đơn hàng.</div>
+            ${!apiOnline ? '<div class="sub" style="color:#d98221;font-weight:900">Đang ở chế độ preview local: xem được dữ liệu nhưng không lưu/upload trực tiếp. Lên host có PHP thì sẽ lưu được.</div>' : ''}
           </div>
           <div class="actions">
-            <button onclick="saveAll()" ${saving ? 'disabled' : ''}>Lưu lên website</button>
-            <button class="secondary" onclick="location.href='index.html'">Về trang chủ</button>
+            <button onclick="saveAll()" ${saving || !apiOnline ? 'disabled' : ''}>${apiOnline ? 'Lưu local' : 'Preview local'}</button>
+            <button class="secondary" onclick="previewWebsite()">Preview</button>
+            <button class="secondary" onclick="pushGit()" ${saving || !apiOnline ? 'disabled' : ''}>Push Git</button>
           </div>
         </div>
 
@@ -471,6 +523,7 @@
           </main>
         </div>
         ` : `<main class="panel editor">${adminTabHtml()}</main>`}
+        ${featuredPickerIndex !== null ? featuredPickerHtml() : ''}
       `;
       if (activeTab === 'products') renderProductList();
     }
@@ -510,24 +563,74 @@
     }
 
     function featuredHtml() {
-      const selected = new Set(settings.featuredIds || []);
+      const ids = settings.featuredIds || [];
+      const slotCount = Math.max(7, ids.length + 1);
       return `
         <h2>Sản phẩm bán chạy</h2>
-        <p class="muted">Bấm chọn sản phẩm muốn hiển thị ở khu vực bán chạy trên trang chủ.</p>
-        <div class="card-grid">
-          ${products.map(product => {
-            const img = firstImage(product);
-            const active = selected.has(String(product.id));
-            const hidden = isHidden(product);
+        <p class="muted">Bấm vào từng ô để chọn sản phẩm bằng hình ảnh. Vị trí 1 hiện đầu tiên ngoài trang chủ, vị trí 5 hiện ô thứ 5.</p>
+        <div class="featured-slots">
+          ${Array.from({ length: slotCount }).map((_, index) => {
+            const selectedId = ids[index] || '';
+            const selectedProduct = products.find(product => String(product.id) === String(selectedId));
+            const img = selectedProduct ? firstImage(selectedProduct) : '';
             return `
-              <div class="${active ? 'mini-card active' : 'mini-card'}" style="${hidden ? 'opacity:.55' : ''}" onclick="toggleFeatured('${esc(product.id)}')">
-                ${img ? `<img src="${esc(img)}" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px;margin-bottom:10px" />` : `<div class="thumb" style="width:100%;height:auto;aspect-ratio:1/1;margin-bottom:10px">Ảnh</div>`}
-                <div class="name">${esc(product.name)}${hidden ? '<span class="hidden-badge">Ẩn</span>' : ''}</div>
-                <div class="price">${fmt(product.price)}</div>
-                <div class="muted">${active ? 'Đang chọn' : 'Bấm để chọn'}</div>
+              <div class="featured-slot ${selectedProduct ? 'active' : ''}" onclick="openFeaturedPicker(${index})">
+                <div class="featured-slot-img">
+                  ${img ? `<img src="${esc(img)}" />` : '<span>+<br>Chọn sản phẩm</span>'}
+                </div>
+                <div class="slot-no">Vị trí ${index + 1}</div>
+                <div class="slot-name">${selectedProduct ? esc(selectedProduct.name) : 'Chưa chọn'}</div>
+                ${selectedProduct ? `<div class="picker-price">${fmt(selectedProduct.price)}</div>` : '<div class="muted" style="font-size:12px;margin-top:5px">Bấm để chọn</div>'}
+                <div class="slot-actions">
+                  <button class="secondary" onclick="event.stopPropagation(); moveFeatured(${index}, -1)" ${index === 0 ? 'disabled' : ''}>Lên</button>
+                  <button class="secondary" onclick="event.stopPropagation(); moveFeatured(${index}, 1)" ${index >= ids.length - 1 ? 'disabled' : ''}>Xuống</button>
+                  <button class="danger" onclick="event.stopPropagation(); removeFeaturedSlot(${index})" ${!selectedProduct ? 'disabled' : ''}>Xoá</button>
+                </div>
               </div>
             `;
           }).join('')}
+        </div>
+      `;
+    }
+
+    function featuredPickerHtml() {
+      const selectedId = String((settings.featuredIds || [])[featuredPickerIndex] || '');
+      const q = normalizeText(featuredPickerSearch);
+      const filtered = products.filter(product => {
+        if (!q) return true;
+        return normalizeText([product.name, product.sku, product.categoryId].join(' ')).includes(q);
+      });
+      return `
+        <div class="picker-backdrop" onclick="closeFeaturedPicker()">
+          <div class="picker-modal" onclick="event.stopPropagation()">
+            <div class="picker-head">
+              <div>
+                <h2 style="margin:0">Chọn sản phẩm cho vị trí ${featuredPickerIndex + 1}</h2>
+                <p class="muted" style="margin:4px 0 0">Bấm vào sản phẩm có ảnh để đưa lên khu bán chạy.</p>
+              </div>
+              <button class="secondary" onclick="closeFeaturedPicker()">Đóng</button>
+            </div>
+            <input placeholder="Tìm sản phẩm theo tên, SKU hoặc danh mục..." value="${esc(featuredPickerSearch)}" oninput="featuredPickerSearch=this.value; render()" />
+            <div class="picker-grid">
+              <div class="picker-card ${!selectedId ? 'selected' : ''}" onclick="setFeaturedSlot(${featuredPickerIndex}, ''); closeFeaturedPicker()">
+                <div class="picker-img">Trống</div>
+                <div class="picker-title">Không chọn sản phẩm ở vị trí này</div>
+                <div class="muted" style="font-size:12px;margin-top:5px">Ô này sẽ không hiện ngoài trang chủ.</div>
+              </div>
+              ${filtered.map(product => {
+                const img = firstImage(product);
+                const hidden = isHidden(product);
+                const isSelected = String(product.id) === selectedId;
+                return `
+                  <div class="picker-card ${isSelected ? 'selected' : ''} ${hidden ? 'is-hidden' : ''}" onclick="chooseFeaturedProduct(${featuredPickerIndex}, '${esc(product.id)}')">
+                    <div class="picker-img">${img ? `<img src="${esc(img)}" />` : 'Ảnh'}</div>
+                    <div class="picker-title">${esc(product.name)}${hidden ? '<span class="hidden-badge">Ẩn</span>' : ''}</div>
+                    <div class="picker-price">${fmt(product.price)}</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
         </div>
       `;
     }
@@ -537,11 +640,11 @@
       return `
         <h2>Ảnh header</h2>
         <p class="muted">Kéo thả hoặc bấm vào ô để thêm ảnh header. Ảnh sẽ tự chạy slider trên trang chủ.</p>
-        <div class="images">
+        <div class="images config-images">
           ${Array.from({ length: 6 }).map((_, index) => {
             const src = imgs[index] || '';
             return `
-              <div class="image-box" onclick="pickHeaderImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropHeaderImage(event, ${index})">
+              <div class="image-box config-image-box" onclick="pickHeaderImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropHeaderImage(event, ${index})">
                 ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeHeaderImage(${index})">Xoá</button>` : `<span>+<br>Header ${index + 1}</span>`}
               </div>
             `;
@@ -554,15 +657,15 @@
       return `
         <h2>Ảnh danh mục</h2>
         <p class="muted">Mỗi danh mục dùng ảnh 1:1 để hiển thị đẹp ở trang chủ.</p>
-        <div class="card-grid">
+        <div class="card-grid config-card-grid">
           ${CATEGORIES.map(([catId, label]) => {
             const src = settings.categoryImages?.[catId] || '';
             return `
-              <div class="mini-card">
-                <div class="image-box" onclick="pickCategoryImage('${catId}')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropCategoryImage(event, '${catId}')">
+              <div class="mini-card config-mini">
+                <div class="image-box config-image-box" onclick="pickCategoryImage('${catId}')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropCategoryImage(event, '${catId}')">
                   ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeCategoryImage('${catId}')">Xoá</button>` : `<span>+<br>${esc(label)}</span>`}
                 </div>
-                <div class="name" style="margin-top:10px">${esc(label)}</div>
+                <div class="name" style="margin-top:8px">${esc(label)}</div>
               </div>
             `;
           }).join('')}
@@ -773,11 +876,50 @@
       updateSelected(product => product.variants.splice(index, 1), true);
     }
 
+    function canvasToBlob(canvas, type, quality) {
+      return new Promise(resolve => canvas.toBlob(resolve, type, quality));
+    }
+
+    async function optimizeImageFile(file) {
+      if (!file || !file.type?.startsWith('image/')) return file;
+      const imageUrl = URL.createObjectURL(file);
+      try {
+        const image = new Image();
+        image.src = imageUrl;
+        await image.decode();
+
+        const maxSize = 1600;
+        const ratio = Math.min(1, maxSize / Math.max(image.width, image.height));
+        const width = Math.max(1, Math.round(image.width * ratio));
+        const height = Math.max(1, Math.round(image.height * ratio));
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d', { alpha: false });
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(image, 0, 0, width, height);
+
+        const webpBlob = await canvasToBlob(canvas, 'image/webp', 0.82);
+        if (!webpBlob) return file;
+        const baseName = file.name.replace(/\.[^.]+$/, '') || 'product-image';
+        return new File([webpBlob], `${baseName}.webp`, { type: 'image/webp' });
+      } finally {
+        URL.revokeObjectURL(imageUrl);
+      }
+    }
+
     async function uploadFile(file) {
+      if (!apiOnline) throw new Error('Chế độ mở file tĩnh không upload ảnh trực tiếp được. Hãy chạy node tools/local_admin_server.js rồi mở admin qua http://127.0.0.1:8000/admin-upload.html.');
       if (!file) return '';
-      const ext = file.name.split('.').pop().toLowerCase();
-      const filename = `product_${Date.now()}.${ext}`;
-      return await githubUploadImage(filename, file);
+      const optimizedFile = await optimizeImageFile(file);
+      const form = new FormData();
+      form.append('password', password);
+      form.append('image', optimizedFile);
+      const res = await fetch(API_UPLOAD, { method: 'POST', body: form });
+      const data = await readJsonResponse(res, 'API upload ảnh');
+      if (!data.ok) throw new Error(data.message || 'Upload ảnh thất bại.');
+      return data.url;
     }
 
     function chooseFile(callback) {
@@ -874,12 +1016,61 @@
       }, true));
     }
 
-    function toggleFeatured(productId) {
-      const id = String(productId);
-      const current = new Set(settings.featuredIds || []);
-      if (current.has(id)) current.delete(id);
-      else current.add(id);
-      settings.featuredIds = [...current];
+    function openFeaturedPicker(index) {
+      featuredPickerIndex = index;
+      featuredPickerSearch = '';
+      render();
+    }
+
+    function closeFeaturedPicker() {
+      featuredPickerIndex = null;
+      featuredPickerSearch = '';
+      render();
+    }
+
+    function chooseFeaturedProduct(index, productId) {
+      setFeaturedSlot(index, productId);
+      featuredPickerIndex = null;
+      featuredPickerSearch = '';
+      render();
+    }
+
+    function cleanFeaturedIds(ids) {
+      const seen = new Set();
+      return ids.map(id => String(id || '')).filter(id => {
+        if (!id || seen.has(id)) return false;
+        seen.add(id);
+        return true;
+      });
+    }
+
+    function setFeaturedSlot(index, productId) {
+      const id = String(productId || '');
+      const ids = [...(settings.featuredIds || [])].map(String);
+      const existingIndex = id ? ids.findIndex(item => item === id) : -1;
+      const currentId = ids[index] || '';
+      if (id && existingIndex !== -1 && existingIndex !== index) {
+        ids[existingIndex] = currentId;
+        ids[index] = id;
+      } else if (id) ids[index] = id;
+      else ids.splice(index, 1);
+      settings.featuredIds = cleanFeaturedIds(ids);
+      render();
+    }
+
+    function moveFeatured(index, direction) {
+      const ids = [...(settings.featuredIds || [])];
+      const nextIndex = index + direction;
+      if (nextIndex < 0 || nextIndex >= ids.length) return;
+      [ids[index], ids[nextIndex]] = [ids[nextIndex], ids[index]];
+      settings.featuredIds = cleanFeaturedIds(ids);
+      render();
+    }
+
+    function removeFeaturedSlot(index) {
+      const ids = [...(settings.featuredIds || [])];
+      ids.splice(index, 1);
+      settings.featuredIds = cleanFeaturedIds(ids);
       render();
     }
 
@@ -924,15 +1115,34 @@
     }
 
     async function saveSettings() {
-      const content = JSON.stringify(normalizeSettings(settings), null, 2);
-      await githubCommitFile('data/settings.json', content, 'Update settings via admin');
+      if (!apiOnline) throw new Error('Chế độ mở file tĩnh không lưu trực tiếp được. Hãy chạy node tools/local_admin_server.js rồi mở admin qua http://127.0.0.1:8000/admin-upload.html.');
+      const res = await fetch(API_SETTINGS, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': password
+        },
+        body: JSON.stringify({ settings: normalizeSettings(settings) })
+      });
+      const data = await readJsonResponse(res, 'API cài đặt');
+      if (!data.ok) throw new Error(data.message || 'Lưu cài đặt thất bại.');
+      settings = normalizeSettings(data.settings || settings);
     }
 
     async function updateOrderStatus(orderId, status) {
       try {
-        orders = orders.map(o => o.id === orderId ? { ...o, status } : o);
-        const content = JSON.stringify(orders, null, 2);
-        await githubCommitFile('data/orders.json', content, 'Update order status via admin');
+        if (!apiOnline) throw new Error('Chế độ mở file tĩnh không cập nhật đơn hàng trực tiếp được.');
+        const res = await fetch(API_ORDERS, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Admin-Password': password
+          },
+          body: JSON.stringify({ action: 'updateStatus', id: orderId, status })
+        });
+        const data = await readJsonResponse(res, 'API đơn hàng');
+        if (!data.ok) throw new Error(data.message || 'Không cập nhật được đơn hàng.');
+        orders = Array.isArray(data.orders) ? data.orders : orders;
         render();
       } catch (error) {
         alert(error.message);
@@ -940,8 +1150,18 @@
     }
 
     async function saveProducts() {
-      const content = JSON.stringify(products.map(normalizeProduct), null, 2);
-      await githubCommitFile('data/products.json', content, 'Update products via admin');
+      if (!apiOnline) throw new Error('Chế độ mở file tĩnh không lưu trực tiếp được. Hãy chạy node tools/local_admin_server.js rồi mở admin qua http://127.0.0.1:8000/admin-upload.html.');
+      const res = await fetch(API_PRODUCTS, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Password': password
+        },
+        body: JSON.stringify({ products: products.map(normalizeProduct) })
+      });
+      const data = await readJsonResponse(res, 'API sản phẩm');
+      if (!data.ok) throw new Error(data.message || 'Lưu thất bại.');
+      products = (data.products || []).map(normalizeProduct);
     }
 
     async function saveAll() {
@@ -950,7 +1170,39 @@
       try {
         await saveProducts();
         await saveSettings();
-        alert('Đã lưu lên website.');
+        alert('Đã lưu local và build lại trang SEO/sitemap. Bấm Preview để kiểm tra trước khi Push Git.');
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        saving = false;
+        render();
+      }
+    }
+
+    function previewWebsite() {
+      window.open('/', '_blank');
+    }
+
+    async function pushGit() {
+      if (!apiOnline) {
+        alert('Push Git chỉ dùng được khi chạy admin bằng node tools/local_admin_server.js.');
+        return;
+      }
+      const ok = confirm('Push Git sẽ commit toàn bộ thay đổi local và đẩy lên GitHub. GitHub Pages có thể deploy website chính sau vài phút. Tiếp tục?');
+      if (!ok) return;
+      saving = true;
+      render();
+      try {
+        await saveProducts();
+        await saveSettings();
+        const res = await fetch(API_GIT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'push' })
+        });
+        const data = await readJsonResponse(res, 'API Git');
+        if (!data.ok) throw new Error(data.message || 'Push Git thất bại.');
+        alert(data.git?.message || 'Đã push lên GitHub.');
       } catch (error) {
         alert(error.message);
       } finally {

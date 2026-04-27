@@ -1,5 +1,23 @@
 /*
-  Cache-Control: no-cache
+  Cache-Control: public, max-age=300, must-revalidate
 
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
+
+/sitemap.xml
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/robots.txt
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/assets/products/*
+  Cache-Control: public, max-age=86400
+
+/assets/media/*
+  Cache-Control: public, max-age=86400
+
+/assets/css/*
+  Cache-Control: public, max-age=3600
+
+/assets/js/*
+  Cache-Control: public, max-age=3600

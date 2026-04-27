@@ -19,3 +19,4 @@ ảnh bài viết
 .env
 .env.*
 *.log
+.claude/

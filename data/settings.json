@@ -1,5 +1,27 @@
 {
-  "featuredIds": [],
-  "headerImages": [],
-  "categoryImages": {}
+  "featuredIds": [
+    "shopee_29011454025",
+    "1",
+    "shopee_17395821074",
+    "new_1776857467847",
+    "shopee_7510227721",
+    "shopee_54450013830",
+    "shopee_57058955812"
+  ],
+  "headerImages": [
+    "/assets/media/generated/embedded-002.jpg",
+    "/assets/media/generated/embedded-003.jpg",
+    "/assets/media/generated/embedded-004.jpg",
+    "/assets/media/generated/embedded-008.jpg",
+    "/assets/media/generated/embedded-005.jpg",
+    "/assets/media/generated/embedded-009.jpg"
+  ],
+  "categoryImages": {
+    "nen-thom": "/assets/media/generated/embedded-018.jpg",
+    "combo": "/assets/media/generated/embedded-026.jpg",
+    "thao-moc-xong": "/assets/media/generated/embedded-027.jpg",
+    "bep-xong": "/assets/media/generated/embedded-028.jpg",
+    "nu-tram": "/assets/media/generated/embedded-029.jpg",
+    "phu-kien": "/assets/media/generated/embedded-009.jpg"
+  }
 }
