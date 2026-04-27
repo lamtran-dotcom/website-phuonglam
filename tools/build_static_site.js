@@ -664,6 +664,18 @@ const updateProductsJson = () => {
   return products;
 };
 
+const bustIndexCache = () => {
+  const indexPath = paths.index;
+  let html = fs.readFileSync(indexPath, 'utf8');
+  const v = Date.now();
+  // Update ?v= on site-data.js and app.min.js for cache-busting
+  html = html.replace(
+    /(<script src="\/assets\/js\/(?:site-data|app\.min)\.js)(?:\?v=\d+)?("><\/script>)/g,
+    `$1?v=${v}$2`
+  );
+  fs.writeFileSync(indexPath, html);
+};
+
 const main = () => {
   ensureDir(paths.cssDir);
   ensureDir(paths.jsDir);
@@ -673,6 +685,7 @@ const main = () => {
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
   compileAppJs();
+  bustIndexCache();
   writeSeoPages({ products, categories: initialData.categories });
   writeSitemapAndRobots({ products, blogPosts: initialData.blogPosts });
   console.log(`Optimized index, extracted assets, and generated ${products.length} product pages.`);
