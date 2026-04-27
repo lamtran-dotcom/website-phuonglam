@@ -69,12 +69,14 @@
     "price": 35000,
     "originalPrice": 40000,
     "shortDesc": "Chuyên dùng cho đốt nến xông, an toàn tiện lợi",
-    "description": "Gốm trắng men bóng, dễ lau chùi. Phù hợp với mọi loại nến đường kính dưới 10cm.",
+    "description": "",
     "usage": "Đặt nến lên đĩa trước khi thắp.",
     "tag": "Nổi bật",
     "weight": 200,
     "hidden": false,
-    "images": [],
+    "images": [
+      "/assets/products/uploads/1777288855211-anh-dai-dien-quet-gas-2.webp"
+    ],
     "reviews": [],
     "variants": [],
     "slug": "hot-quet-gas-thap-nen-dau-dai-an-toan-nho-gon-tien-loi"
