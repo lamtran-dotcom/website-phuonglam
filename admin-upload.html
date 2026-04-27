@@ -1187,7 +1187,7 @@
     }
 
     function previewWebsite() {
-      window.open('/', '_blank');
+      window.open(`${window.location.origin}/?preview=${Date.now()}`, '_blank');
     }
 
     async function pushGit() {
