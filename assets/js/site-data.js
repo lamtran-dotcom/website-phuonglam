@@ -4055,38 +4055,38 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
-    id: 12,
-    title: 'Đèn xông tinh dầu bằng nến: cách dùng đúng và chọn tinh dầu phù hợp',
-    excerpt: 'Hướng dẫn cách dùng đèn xông tinh dầu bằng nến an toàn, chọn nến tealight và tinh dầu phù hợp để hương thơm lan tỏa nhẹ nhàng trong không gian sống.',
-    date: '27 tháng 4, 2026',
-    readTime: '5 phút đọc',
-    slug: 'den-xong-tinh-dau-bang-nen-cach-dung-dung',
-    tag: 'Hướng dẫn',
-    url: '/blog/kien-thuc/den-xong-tinh-dau-bang-nen-cach-dung-dung/',
-    image: '/assets/blog/featured-den-xong-tinh-dau-phuong-lam.webp',
+    "id": 12,
+    "title": "Đèn xông tinh dầu bằng nến: cách dùng đúng và chọn tinh dầu phù hợp",
+    "excerpt": "Hướng dẫn cách dùng đèn xông tinh dầu bằng nến an toàn, chọn nến tealight và tinh dầu phù hợp để hương thơm lan tỏa nhẹ nhàng trong không gian sống.",
+    "date": "27 tháng 4, 2026",
+    "readTime": "5 phút đọc",
+    "slug": "den-xong-tinh-dau-bang-nen-cach-dung-dung",
+    "tag": "Hướng dẫn",
+    "url": "/blog/kien-thuc/den-xong-tinh-dau-bang-nen-cach-dung-dung/",
+    "image": "/assets/blog/featured-den-xong-tinh-dau-phuong-lam.webp"
   },
   {
-    id: 11,
-    title: 'Hướng dẫn dùng bếp xông thảo mộc đúng cách, an toàn',
-    excerpt: 'Bếp xông thảo mộc giúp thanh lọc không khí, khử mùi ẩm mốc và thư giãn tinh thần. Hướng dẫn cách dùng đúng cách cùng nến tealight và thảo mộc tự nhiên.',
-    date: '26 tháng 4, 2026',
-    readTime: '5 phút đọc',
-    slug: 'huong-dan-dung-bep-xong-thao-moc',
-    tag: 'Hướng dẫn',
-    url: '/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/',
-    image: '/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp',
+    "id": 11,
+    "title": "Hướng dẫn dùng bếp xông thảo mộc đúng cách, an toàn",
+    "excerpt": "Bếp xông thảo mộc giúp thanh lọc không khí, khử mùi ẩm mốc và thư giãn tinh thần. Hướng dẫn cách dùng đúng cách cùng nến tealight và thảo mộc tự nhiên.",
+    "date": "26 tháng 4, 2026",
+    "readTime": "5 phút đọc",
+    "slug": "huong-dan-dung-bep-xong-thao-moc",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/",
+    "image": "/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp"
   },
   {
-    id: 10,
-    title: 'Phân biệt nến 2h, nến 4h, nến 8h dùng cho mục đích gì',
-    excerpt: 'Hiểu rõ sự khác nhau giữa nến tealight 2h, 4h và 8h để chọn đúng loại cho bàn thờ, xông tinh dầu, trang trí hoặc những buổi thư giãn dài.',
-    date: '25 tháng 4, 2025',
-    readTime: '6 phút đọc',
-    slug: 'phan-biet-nen-tealight-nen-2h-4h-8h',
-    tag: 'Kiến thức',
-    url: '/blog/kien-thuc/phan-biet-nen-tealight-2h-4h-8h/',
-    image: '/assets/blog/nen-tealight-khong-khoi-featured.webp',
-  },
+    "id": 10,
+    "title": "Phân biệt nến 2h, nến 4h, nến 8h dùng cho mục đích gì",
+    "excerpt": "Hiểu rõ sự khác nhau giữa nến tealight 2h, 4h và 8h để chọn đúng loại cho bàn thờ, xông tinh dầu, trang trí hoặc những buổi thư giãn dài.",
+    "date": "25 tháng 4, 2025",
+    "readTime": "6 phút đọc",
+    "slug": "phan-biet-nen-tealight-nen-2h-4h-8h",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/phan-biet-nen-tealight-2h-4h-8h/",
+    "image": "/assets/blog/nen-tealight-khong-khoi-featured.webp"
+  }
 ];
 
 const BLOG_ARTICLES = {
