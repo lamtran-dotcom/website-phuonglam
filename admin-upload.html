@@ -372,6 +372,7 @@
     const fmt = value => Number(value || 0).toLocaleString('vi-VN') + 'đ';
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
     const jsString = value => JSON.stringify(String(value ?? '')).replace(/</g, '\\u003c');
+    const jsAttr = value => esc(jsString(value));
     const normalizeText = value => String(value ?? '')
       .toLowerCase()
       .normalize('NFD')
@@ -979,7 +980,7 @@
       return `
         <div>
           <label>${esc(group.name)}</label>
-          <select onchange="updateVariantOption(${index}, ${jsString(group.name)}, this.value)">
+          <select onchange="updateVariantOption(${index}, ${jsAttr(group.name)}, this.value)">
             <option value="">Chọn ${esc(group.name)}</option>
             ${values.map(value => `<option value="${esc(value)}" ${current === value ? 'selected' : ''}>${esc(value)}</option>`).join('')}
           </select>
@@ -1031,7 +1032,7 @@
       const active = variantEditorColor === color;
       const swatch = colorSwatch(color);
       return `
-        <button class="secondary" onclick="setVariantEditorColor(${jsString(color)})" style="display:flex;align-items:center;gap:8px;border-color:${active ? '#318223' : '#dbe8d7'};background:${active ? '#f0f8ef' : '#fff'}">
+        <button class="secondary" onclick="setVariantEditorColor(${jsAttr(color)})" style="display:flex;align-items:center;gap:8px;border-color:${active ? '#318223' : '#dbe8d7'};background:${active ? '#f0f8ef' : '#fff'}">
           <span style="width:20px;height:20px;border-radius:50%;display:inline-block;background:${swatch.background};border:1.5px solid ${swatch.border}"></span>
           <strong>${esc(color)}</strong>
         </button>
@@ -1046,7 +1047,7 @@
           <div class="variant">
             <div class="actions" style="justify-content:space-between">
               <strong>${esc(quantityValue)}</strong>
-              <button class="secondary small" onclick="addVariantForOptions(${jsString(colorGroup.name)}, ${jsString(colorValue)}, ${jsString(quantityGroup.name)}, ${jsString(quantityValue)})">+ Tạo phân loại</button>
+              <button class="secondary small" onclick="addVariantForOptions(${jsAttr(colorGroup.name)}, ${jsAttr(colorValue)}, ${jsAttr(quantityGroup.name)}, ${jsAttr(quantityValue)})">+ Tạo phân loại</button>
             </div>
           </div>
         `;
