@@ -39,6 +39,14 @@ const blogCategories = {
   'kien-thuc': 'Kiến thức',
 };
 
+const blogLinkRedirects = {
+  '/nen-tealight': '/san-pham/nen-tealight-4-gio-phuong-lam-trang-tri-thu-gian-khong-khoi/',
+  '/bep-xong-thao-moc': '/danh-muc/bep-xong/',
+  '/den-xong-tinh-dau': '/danh-muc/bep-xong/',
+  '/thao-moc-xong-nha': '/danh-muc/thao-moc-xong/',
+  '/phu-kien-thap-nen': '/danh-muc/phu-kien/',
+};
+
 const categoryAliases = {
   'tinh-dau': 'bep-xong',
 };
@@ -322,6 +330,14 @@ const normalizeBlogHtml = ({ html, htmlPath, category, slug }) => {
   const publicUrl = `/blog/${category}/${slug}/`;
   const canonical = `${siteUrl}${publicUrl}`;
   const copied = new Map();
+  const rewriteBlogHref = (href) => {
+    const suffix = href.match(/[?#].*$/)?.[0] || '';
+    const clean = href.split(/[?#]/)[0].replace(/\/+$/, '');
+    const siteRoot = siteUrl.replace(/\/+$/, '');
+    const pathOnly = clean.startsWith(siteRoot) ? clean.slice(siteRoot.length) : clean.startsWith('/') ? clean : '';
+    const target = blogLinkRedirects[pathOnly];
+    return target ? `${siteRoot}${target}${suffix}` : href;
+  };
   const resolveAsset = (assetUrl) => {
     if (!assetUrl || /^(https?:)?\/\//i.test(assetUrl) || assetUrl.startsWith('/') || assetUrl.startsWith('data:')) return assetUrl;
     const cleanUrl = assetUrl.split('#')[0].split('?')[0];
@@ -336,6 +352,8 @@ const normalizeBlogHtml = ({ html, htmlPath, category, slug }) => {
     const nextUrl = resolveAsset(assetUrl);
     return `${attr}="${nextUrl}"`;
   });
+
+  html = html.replace(/\bhref=["']([^"']+)["']/gi, (match, href) => `href="${rewriteBlogHref(href)}"`);
 
   const title = getHtmlTitle(html) || slug.replace(/-/g, ' ');
   const description = truncate(getDescription(html), 155);
