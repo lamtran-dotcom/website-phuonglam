@@ -931,7 +931,7 @@
         </div>
 
         <h2>Phân loại sản phẩm</h2>
-        <p class="muted">Mỗi dòng là một biến thể bán được. Nếu có nhóm tuỳ chọn, hãy chọn đủ giá trị cho từng dòng.</p>
+        <p class="muted">Mỗi dòng là một biến thể bán được. Ảnh trong từng dòng sẽ dùng để hiện preview cho phân loại ngoài website.</p>
         <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
         <div>
           ${(product.variants || []).map((variant, index) => variantHtml(product, variant, index)).join('')}
@@ -984,7 +984,7 @@
           ${optionText ? `<div class="muted" style="font-size:12px;margin-bottom:8px">Tuỳ chọn: ${esc(optionText)}</div>` : ''}
           <div class="variant-grid">
             <div>
-              <label>Ảnh</label>
+              <label>Ảnh phân loại</label>
               <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">${variant.image ? `<img src="${esc(variant.image)}" />` : '+'}</div>
             </div>
             <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>

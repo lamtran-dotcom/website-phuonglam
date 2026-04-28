@@ -1115,6 +1115,21 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
   const selectedVariant = selectedVariantByOptions || variants.find(variant => variant.id === selectedVariantId) || defaultVariant;
   const currentPrice = selectedVariant ? selectedVariant.price : Number(product.price) || 0;
   const currentOriginalPrice = selectedVariant ? selectedVariant.originalPrice : product.originalPrice;
+  const isColorOptionGroup = (group) => ['mau', 'color'].includes(normalizeSearchText(group?.name));
+  const getColorSwatch = (value) => {
+    const key = normalizeSearchText(value);
+    if (key.includes('trang') || key.includes('white')) return { background: '#fff', border: '#cfd8cf' };
+    if (key.includes('vang') || key.includes('yellow')) return { background: '#f5c84c', border: '#d5a91f' };
+    if (key.includes('do') || key.includes('red')) return { background: '#d93636', border: '#b72525' };
+    return { background: '#dfe6dc', border: '#bac8b8' };
+  };
+  const getOptionPreviewVariant = (groupName, value) => {
+    const nextOptions = { ...selectedOptions, [groupName]: value };
+    return variants.find(variant => optionGroups.every(group => {
+      const selectedValue = nextOptions[group.name];
+      return !selectedValue || variant.options?.[group.name] === selectedValue;
+    })) || variants.find(variant => variant.options?.[groupName] === value);
+  };
   const isOptionValueAvailable = (groupName, value) => {
     if (!optionGroups.length) return true;
     const nextOptions = { ...selectedOptions, [groupName]: value };
@@ -1183,6 +1198,12 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
   React.useEffect(() => {
     if (activeImg >= displayImgs.length) setActiveImg(0);
   }, [activeImg, displayImgs.length]);
+
+  React.useEffect(() => {
+    if (!selectedVariant?.image || !galleryImgs.length) return;
+    const imageIndex = galleryImgs.findIndex(src => src === selectedVariant.image);
+    if (imageIndex >= 0 && imageIndex !== activeImg) setActiveImg(imageIndex);
+  }, [selectedVariant?.image, galleryImgs.join('|')]);
 
   React.useEffect(() => {
     if (displayImgs.length <= 1) return;
@@ -1315,19 +1336,24 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
               {optionGroups.map(group => (
                 <div key={group.name} style={{ marginBottom: 14 }}>
                   <span style={ppStyles.label}>{group.name}</span>
-                  <div style={ppStyles.variantGrid}>
+                  <div style={isColorOptionGroup(group) ? ppStyles.colorGrid : ppStyles.variantGrid}>
                     {group.values.map(value => {
                       const active = selectedOptions[group.name] === value;
                       const available = isOptionValueAvailable(group.name, value);
+                      const previewVariant = getOptionPreviewVariant(group.name, value);
+                      const isColor = isColorOptionGroup(group);
+                      const swatch = getColorSwatch(value);
                       return (
                         <button
                           key={value}
                           className="product-variant-btn"
+                          title={value}
+                          aria-label={`${group.name}: ${value}`}
                           disabled={!available}
                           style={{
-                            ...ppStyles.variantBtn,
-                            ...(isMobile ? ppStyles.variantBtnMobile : {}),
-                            ...(active ? ppStyles.variantBtnActive : {}),
+                            ...(isColor ? ppStyles.colorBtn : ppStyles.variantBtn),
+                            ...(!isColor && isMobile ? ppStyles.variantBtnMobile : {}),
+                            ...(active ? (isColor ? ppStyles.colorBtnActive : ppStyles.variantBtnActive) : {}),
                             opacity: available ? 1 : 0.45,
                             cursor: available ? 'pointer' : 'not-allowed',
                           }}
@@ -1336,9 +1362,25 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
                             setSelectedOptions(prev => ({ ...prev, [group.name]: value }));
                           }}
                         >
-                          <span style={ppStyles.variantText}>
-                            <span>{value}</span>
-                          </span>
+                          {isColor ? (
+                            <span style={{ ...ppStyles.colorDot, background: swatch.background, borderColor: swatch.border }} />
+                          ) : (
+                            <>
+                              {previewVariant?.image && (
+                                <img
+                                  src={previewVariant.image}
+                                  alt={value}
+                                  style={{ ...ppStyles.variantThumb, ...(isMobile ? ppStyles.variantThumbMobile : {}) }}
+                                />
+                              )}
+                              <span style={ppStyles.variantText}>
+                                <span>{value}</span>
+                                {previewVariant?.price ? (
+                                  <span style={ppStyles.variantPrice}>{previewVariant.price.toLocaleString('vi-VN')}đ</span>
+                                ) : null}
+                              </span>
+                            </>
+                          )}
                         </button>
                       );
                     })}
@@ -1502,7 +1544,12 @@ const ppStyles = {
   variantThumb: { width: 44, height: 44, borderRadius: 8, objectFit: 'cover', flexShrink: 0, border: '1px solid #e6eee3', background: '#f7faf6' },
   variantThumbMobile: { width: 34, height: 34, borderRadius: 7 },
   variantText: { display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 },
+  variantPrice: { fontSize: 12, fontWeight: 800, color: '#318223' },
   variantBtnActive: { borderColor: '#318223', background: '#f0f8ef', color: '#318223', boxShadow: '0 8px 20px rgba(49,130,35,0.12)' },
+  colorGrid: { display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 10 },
+  colorBtn: { width: 42, height: 42, borderRadius: '50%', padding: 3, background: '#fff', border: '2px solid #e1e8df', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all .2s' },
+  colorBtnActive: { borderColor: '#318223', boxShadow: '0 0 0 4px rgba(49,130,35,0.12)' },
+  colorDot: { display: 'block', width: 28, height: 28, borderRadius: '50%', border: '1.5px solid #cfd8cf' },
   qtyRow: { display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20 },
   label: { fontSize: 14, fontWeight: 600, color: '#555' },
   qtyControl: { display: 'flex', alignItems: 'center', gap: 0, border: '1px solid #e0e0e0', borderRadius: 10, overflow: 'hidden' },
