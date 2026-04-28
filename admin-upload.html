@@ -354,6 +354,7 @@
     let settings = { featuredIds: [], headerImages: [], categoryImages: {} };
     let orders = [];
     let selectedId = null;
+    let variantEditorColor = '';
     let listSearch = '';
     let listCategory = '';
     let activeTab = 'products';
@@ -378,6 +379,13 @@
       .replace(/đ/g, 'd')
       .trim();
     const isColorOptionGroup = group => ['mau', 'color'].includes(normalizeText(group?.name));
+    const colorSwatch = value => {
+      const key = normalizeText(value);
+      if (key.includes('trang') || key.includes('white')) return { background: '#fff', border: '#cfd8cf' };
+      if (key.includes('vang') || key.includes('yellow')) return { background: '#f5c84c', border: '#d5a91f' };
+      if (key.includes('do') || key.includes('red')) return { background: '#d93636', border: '#b72525' };
+      return { background: '#dfe6dc', border: '#bac8b8' };
+    };
     const id = () => 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
     const firstImage = product => (product.images || []).find(Boolean) || (product.variants || []).map(v => v.image).find(Boolean) || '';
     const isHidden = product => product?.hidden === true || product?.hidden === 'true';
@@ -938,14 +946,9 @@
         <div style="display:grid;gap:10px;margin-top:10px">
           ${(product.optionGroups || []).map((group, index) => optionGroupHtml(group, index)).join('') || '<p class="muted">Chưa có nhóm tuỳ chọn. Sản phẩm sẽ dùng phân loại 1 tầng như cũ.</p>'}
         </div>
-        ${optionImagesHtml(product)}
 
         <h2>Phân loại sản phẩm</h2>
-        <p class="muted">Mỗi dòng là một biến thể bán được. Với sản phẩm có Màu + Số lượng, ảnh sẽ quản lý ở phần Ảnh theo số lượng phía trên.</p>
-        <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
-        <div>
-          ${(product.variants || []).map((variant, index) => variantHtml(product, variant, index)).join('')}
-        </div>
+        ${variantEditorHtml(product)}
       `;
     }
 
@@ -954,32 +957,6 @@
       return `
         <div class="image-box" onclick="pickProductImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropProductImage(event, ${index})">
           ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeProductImage(${index})">Xoá</button>` : `<span>+<br>Ảnh ${index + 1}</span>`}
-        </div>
-      `;
-    }
-
-    function optionImagesHtml(product) {
-      const groups = (product.optionGroups || []).filter(group => group.name && Array.isArray(group.values) && group.values.length && !isColorOptionGroup(group));
-      if (!groups.length) return '';
-      return `
-        <h2>Ảnh theo số lượng</h2>
-        <p class="muted">Chỉ cần thêm ảnh cho từng lựa chọn số lượng. Màu đã hiện bằng ô tròn ngoài website.</p>
-        ${groups.map(group => `
-          <div class="images">
-            ${group.values.map(value => optionValueImageBox(product, group, value)).join('')}
-          </div>
-        `).join('')}
-      `;
-    }
-
-    function optionValueImageBox(product, group, value) {
-      const src = product.optionImages?.[group.name]?.[value] || '';
-      return `
-        <div>
-          <div class="image-box" onclick="pickOptionValueImage(${jsString(group.name)}, ${jsString(value)})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropOptionValueImage(event, ${jsString(group.name)}, ${jsString(value)})">
-            ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeOptionValueImage(${jsString(group.name)}, ${jsString(value)})">Xoá</button>` : `<span>+<br>${esc(value)}</span>`}
-          </div>
-          <div class="muted" style="font-size:12px;margin-top:6px;text-align:center">${esc(value)}</div>
         </div>
       `;
     }
@@ -1006,6 +983,88 @@
             <option value="">Chọn ${esc(group.name)}</option>
             ${values.map(value => `<option value="${esc(value)}" ${current === value ? 'selected' : ''}>${esc(value)}</option>`).join('')}
           </select>
+        </div>
+      `;
+    }
+
+    function getColorGroup(product) {
+      return (product.optionGroups || []).find(group => group.name && Array.isArray(group.values) && group.values.length && isColorOptionGroup(group));
+    }
+
+    function getQuantityGroup(product) {
+      return (product.optionGroups || []).find(group => group.name && Array.isArray(group.values) && group.values.length && !isColorOptionGroup(group));
+    }
+
+    function findVariantIndex(product, colorGroup, colorValue, quantityGroup, quantityValue) {
+      return (product.variants || []).findIndex(variant =>
+        variant.options?.[colorGroup.name] === colorValue &&
+        variant.options?.[quantityGroup.name] === quantityValue
+      );
+    }
+
+    function variantEditorHtml(product) {
+      const colorGroup = getColorGroup(product);
+      const quantityGroup = getQuantityGroup(product);
+      if (!colorGroup || !quantityGroup) {
+        return `
+          <p class="muted">Mỗi dòng là một biến thể bán được.</p>
+          <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
+          <div>
+            ${(product.variants || []).map((variant, index) => variantHtml(product, variant, index)).join('')}
+          </div>
+        `;
+      }
+      const colors = colorGroup.values || [];
+      if (!colors.includes(variantEditorColor)) variantEditorColor = colors[0] || '';
+      return `
+        <p class="muted">Chọn màu trước, sau đó quản lý ảnh/giá/SKU cho từng số lượng của màu đó.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 16px">
+          ${colors.map(color => colorPickerButton(color)).join('')}
+        </div>
+        <div style="display:grid;gap:12px">
+          ${(quantityGroup.values || []).map(quantity => groupedVariantRow(product, colorGroup, variantEditorColor, quantityGroup, quantity)).join('')}
+        </div>
+      `;
+    }
+
+    function colorPickerButton(color) {
+      const active = variantEditorColor === color;
+      const swatch = colorSwatch(color);
+      return `
+        <button class="secondary" onclick="setVariantEditorColor(${jsString(color)})" style="display:flex;align-items:center;gap:8px;border-color:${active ? '#318223' : '#dbe8d7'};background:${active ? '#f0f8ef' : '#fff'}">
+          <span style="width:20px;height:20px;border-radius:50%;display:inline-block;background:${swatch.background};border:1.5px solid ${swatch.border}"></span>
+          <strong>${esc(color)}</strong>
+        </button>
+      `;
+    }
+
+    function groupedVariantRow(product, colorGroup, colorValue, quantityGroup, quantityValue) {
+      const index = findVariantIndex(product, colorGroup, colorValue, quantityGroup, quantityValue);
+      const variant = index >= 0 ? product.variants[index] : null;
+      if (!variant) {
+        return `
+          <div class="variant">
+            <div class="actions" style="justify-content:space-between">
+              <strong>${esc(quantityValue)}</strong>
+              <button class="secondary small" onclick="addVariantForOptions(${jsString(colorGroup.name)}, ${jsString(colorValue)}, ${jsString(quantityGroup.name)}, ${jsString(quantityValue)})">+ Tạo phân loại</button>
+            </div>
+          </div>
+        `;
+      }
+      return `
+        <div class="variant">
+          <div class="variant-grid">
+            <div>
+              <label>Ảnh ${esc(quantityValue)}</label>
+              <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">${variant.image ? `<img src="${esc(variant.image)}" />` : '+'}</div>
+            </div>
+            <div><label>Số lượng</label><input value="${esc(quantityValue)}" readonly /></div>
+            <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
+            <div><label>Giá bán *</label><input type="number" value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
+            <div><label>Giá gốc</label><input type="number" value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
+            <div><label>Gram</label><input type="number" value="${esc(variant.weight ?? '')}" oninput="updateVariant(${index}, 'weight', this.value)" /></div>
+            <div><label>SKU</label><input value="${esc(variant.sku)}" oninput="updateVariant(${index}, 'sku', this.value)" /></div>
+          </div>
         </div>
       `;
     }
@@ -1038,6 +1097,7 @@
 
     function selectProduct(productId) {
       selectedId = productId;
+      variantEditorColor = '';
       render();
     }
 
@@ -1109,6 +1169,28 @@
           if (group.name && group.values?.[0]) options[group.name] = group.values[0];
         });
         product.variants.push({ id: id(), name: '', sku: '', price: product.price || 0, originalPrice: product.originalPrice || null, weight: product.weight || null, image: '', options });
+      }, true);
+    }
+
+    function setVariantEditorColor(color) {
+      variantEditorColor = color;
+      render();
+    }
+
+    function addVariantForOptions(colorGroupName, colorValue, quantityGroupName, quantityValue) {
+      updateSelected(product => {
+        product.variants = product.variants || [];
+        const options = { [colorGroupName]: colorValue, [quantityGroupName]: quantityValue };
+        product.variants.push({
+          id: id(),
+          name: `${colorValue} - ${quantityValue}`,
+          sku: '',
+          price: product.price || 0,
+          originalPrice: product.originalPrice || null,
+          weight: product.weight || null,
+          image: '',
+          options
+        });
       }, true);
     }
 
@@ -1292,17 +1374,6 @@
       }
     }
 
-    async function dropOptionValueImage(event, groupName, value) {
-      const file = getDroppedImage(event);
-      if (!file) return;
-      try {
-        const url = await uploadFile(file);
-        setOptionValueImage(groupName, value, url);
-      } catch (error) {
-        alert(error.message);
-      }
-    }
-
     async function uploadDropped(event, callback) {
       const file = getDroppedImage(event);
       if (!file) return;
@@ -1320,24 +1391,6 @@
         product.images = product.images || [];
         product.images[index] = url;
       }, true));
-    }
-
-    function pickOptionValueImage(groupName, value) {
-      chooseFile(url => setOptionValueImage(groupName, value, url));
-    }
-
-    function setOptionValueImage(groupName, value, url) {
-      updateSelected(product => {
-        product.optionImages = product.optionImages || {};
-        product.optionImages[groupName] = product.optionImages[groupName] || {};
-        product.optionImages[groupName][value] = url;
-      }, true);
-    }
-
-    function removeOptionValueImage(groupName, value) {
-      updateSelected(product => {
-        if (product.optionImages?.[groupName]) delete product.optionImages[groupName][value];
-      }, true);
     }
 
     function removeProductImage(index) {
