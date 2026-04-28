@@ -377,6 +377,7 @@
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/đ/g, 'd')
       .trim();
+    const isColorOptionGroup = group => ['mau', 'color'].includes(normalizeText(group?.name));
     const id = () => 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
     const firstImage = product => (product.images || []).find(Boolean) || (product.variants || []).map(v => v.image).find(Boolean) || '';
     const isHidden = product => product?.hidden === true || product?.hidden === 'true';
@@ -412,6 +413,14 @@
           name: group.name || '',
           values: Array.isArray(group.values) ? group.values.filter(Boolean) : []
         })).filter(group => group.name && group.values.length) : [],
+        optionImages: product.optionImages && typeof product.optionImages === 'object' && !Array.isArray(product.optionImages)
+          ? Object.fromEntries(Object.entries(product.optionImages).map(([groupName, values]) => [
+            groupName,
+            values && typeof values === 'object' && !Array.isArray(values)
+              ? Object.fromEntries(Object.entries(values).filter(([, src]) => !!src))
+              : {}
+          ]))
+          : {},
         images: Array.isArray(product.images) ? product.images.filter(Boolean).slice(0, 9) : [],
         reviews: Array.isArray(product.reviews) ? product.reviews : [],
         variants: Array.isArray(product.variants) ? product.variants.map(v => ({
@@ -929,9 +938,10 @@
         <div style="display:grid;gap:10px;margin-top:10px">
           ${(product.optionGroups || []).map((group, index) => optionGroupHtml(group, index)).join('') || '<p class="muted">Chưa có nhóm tuỳ chọn. Sản phẩm sẽ dùng phân loại 1 tầng như cũ.</p>'}
         </div>
+        ${optionImagesHtml(product)}
 
         <h2>Phân loại sản phẩm</h2>
-        <p class="muted">Mỗi dòng là một biến thể bán được. Ảnh trong từng dòng sẽ dùng để hiện preview cho phân loại ngoài website.</p>
+        <p class="muted">Mỗi dòng là một biến thể bán được. Với sản phẩm có Màu + Số lượng, ảnh sẽ quản lý ở phần Ảnh theo số lượng phía trên.</p>
         <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
         <div>
           ${(product.variants || []).map((variant, index) => variantHtml(product, variant, index)).join('')}
@@ -944,6 +954,32 @@
       return `
         <div class="image-box" onclick="pickProductImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropProductImage(event, ${index})">
           ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeProductImage(${index})">Xoá</button>` : `<span>+<br>Ảnh ${index + 1}</span>`}
+        </div>
+      `;
+    }
+
+    function optionImagesHtml(product) {
+      const groups = (product.optionGroups || []).filter(group => group.name && Array.isArray(group.values) && group.values.length && !isColorOptionGroup(group));
+      if (!groups.length) return '';
+      return `
+        <h2>Ảnh theo số lượng</h2>
+        <p class="muted">Chỉ cần thêm ảnh cho từng lựa chọn số lượng. Màu đã hiện bằng ô tròn ngoài website.</p>
+        ${groups.map(group => `
+          <div class="images">
+            ${group.values.map(value => optionValueImageBox(product, group, value)).join('')}
+          </div>
+        `).join('')}
+      `;
+    }
+
+    function optionValueImageBox(product, group, value) {
+      const src = product.optionImages?.[group.name]?.[value] || '';
+      return `
+        <div>
+          <div class="image-box" onclick="pickOptionValueImage(${jsString(group.name)}, ${jsString(value)})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropOptionValueImage(event, ${jsString(group.name)}, ${jsString(value)})">
+            ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeOptionValueImage(${jsString(group.name)}, ${jsString(value)})">Xoá</button>` : `<span>+<br>${esc(value)}</span>`}
+          </div>
+          <div class="muted" style="font-size:12px;margin-top:6px;text-align:center">${esc(value)}</div>
         </div>
       `;
     }
@@ -979,14 +1015,15 @@
       const optionText = variant.options && Object.keys(variant.options).length
         ? Object.entries(variant.options).map(([key, value]) => `${key}: ${value}`).join(' · ')
         : '';
+      const usesGroupedOptions = optionGroups.length > 0;
       return `
         <div class="variant">
           ${optionText ? `<div class="muted" style="font-size:12px;margin-bottom:8px">Tuỳ chọn: ${esc(optionText)}</div>` : ''}
           <div class="variant-grid">
-            <div>
+            ${!usesGroupedOptions ? `<div>
               <label>Ảnh phân loại</label>
               <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">${variant.image ? `<img src="${esc(variant.image)}" />` : '+'}</div>
-            </div>
+            </div>` : ''}
             <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
             <div><label>Giá bán *</label><input type="number" value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
             <div><label>Giá gốc</label><input type="number" value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
@@ -1099,6 +1136,10 @@
             variant.options[value] = variant.options[oldName];
             delete variant.options[oldName];
           });
+          if (product.optionImages?.[oldName]) {
+            product.optionImages[value] = product.optionImages[oldName];
+            delete product.optionImages[oldName];
+          }
         }
       });
     }
@@ -1111,6 +1152,7 @@
           (product.variants || []).forEach(variant => {
             if (variant.options) delete variant.options[group.name];
           });
+          if (product.optionImages) delete product.optionImages[group.name];
         }
       }, true);
     }
@@ -1250,6 +1292,17 @@
       }
     }
 
+    async function dropOptionValueImage(event, groupName, value) {
+      const file = getDroppedImage(event);
+      if (!file) return;
+      try {
+        const url = await uploadFile(file);
+        setOptionValueImage(groupName, value, url);
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
     async function uploadDropped(event, callback) {
       const file = getDroppedImage(event);
       if (!file) return;
@@ -1267,6 +1320,24 @@
         product.images = product.images || [];
         product.images[index] = url;
       }, true));
+    }
+
+    function pickOptionValueImage(groupName, value) {
+      chooseFile(url => setOptionValueImage(groupName, value, url));
+    }
+
+    function setOptionValueImage(groupName, value, url) {
+      updateSelected(product => {
+        product.optionImages = product.optionImages || {};
+        product.optionImages[groupName] = product.optionImages[groupName] || {};
+        product.optionImages[groupName][value] = url;
+      }, true);
+    }
+
+    function removeOptionValueImage(groupName, value) {
+      updateSelected(product => {
+        if (product.optionImages?.[groupName]) delete product.optionImages[groupName][value];
+      }, true);
     }
 
     function removeProductImage(index) {

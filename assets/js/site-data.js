@@ -177,7 +177,14 @@ const PRODUCTS = [
           "Hộp 100 Viên 4h"
         ]
       }
-    ]
+    ],
+    "optionImages": {
+      "Số lượng": {
+        "2 Vỉ 4h = 20 viên": "/assets/products/generated/product-002.jpg",
+        "50 Viên 4h": "/assets/products/generated/product-001.jpg",
+        "Hộp 100 Viên 4h": "/assets/products/generated/product-003.jpg"
+      }
+    }
   },
   {
     "id": 7,
