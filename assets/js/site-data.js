@@ -15,13 +15,13 @@ const PRODUCTS = [
     "sku": "PL-001",
     "categoryId": "nen-thom",
     "name": "Nến tealight 4 giờ Phương Lâm trang trí thư giãn không khói",
-    "price": 125000,
-    "originalPrice": 155000,
+    "price": 55000,
+    "originalPrice": null,
     "shortDesc": "Hương hoa hồng và lavender dịu nhẹ, thư giãn tuyệt vời sau ngày dài làm việc.",
     "description": "Nến thơm được làm từ sáp đậu nành tự nhiên 100%, không chứa paraffin hay hóa chất độc hại. Hương hoa hồng kết hợp lavender tạo cảm giác thư giãn, giảm căng thẳng hiệu quả. Thời gian đốt lên đến 40 giờ.",
     "usage": "Đặt nến trên bề mặt phẳng, không cháy. Không để gần vật dễ cháy. Cắt tim nến 5mm trước khi thắp. Không để nến cháy quá 4 giờ liên tục.",
     "tag": "Bán chạy",
-    "weight": 1200,
+    "weight": 200,
     "hidden": false,
     "images": [],
     "reviews": [
@@ -43,31 +43,139 @@ const PRODUCTS = [
     ],
     "variants": [
       {
-        "id": "variant_1776848693205_p4ov3",
-        "name": "Vàng 4h",
-        "sku": "",
-        "price": 125000,
-        "originalPrice": 200000,
-        "weight": 1200,
-        "image": "/assets/products/generated/product-001.jpg"
+        "id": "pl001_trang_20v",
+        "name": "Trắng - 2 Vỉ 4h = 20 viên",
+        "sku": "PL-001-TRANG-20V",
+        "price": 55000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/generated/product-002.jpg",
+        "options": {
+          "Màu": "Trắng",
+          "Số lượng": "2 Vỉ 4h = 20 viên"
+        }
       },
       {
-        "id": "variant_1776848705967_wanr8",
-        "name": "Trắng 4h",
-        "sku": "",
-        "price": 130000,
-        "originalPrice": 200000,
-        "weight": 1200,
-        "image": "/assets/products/generated/product-002.jpg"
+        "id": "pl001_trang_50v",
+        "name": "Trắng - 50 Viên 4h",
+        "sku": "PL-001-TRANG-50V",
+        "price": 95000,
+        "originalPrice": null,
+        "weight": 700,
+        "image": "/assets/products/generated/product-002.jpg",
+        "options": {
+          "Màu": "Trắng",
+          "Số lượng": "50 Viên 4h"
+        }
       },
       {
-        "id": "variant_1776848713550_oi6u7",
-        "name": "Đỏ 4h",
-        "sku": "",
-        "price": 125000,
-        "originalPrice": 200000,
-        "weight": 1200,
-        "image": "/assets/products/generated/product-003.jpg"
+        "id": "pl001_trang_100v",
+        "name": "Trắng - Hộp 100 Viên 4h",
+        "sku": "PL-001-TRANG-100V",
+        "price": 175000,
+        "originalPrice": null,
+        "weight": 1300,
+        "image": "/assets/products/generated/product-002.jpg",
+        "options": {
+          "Màu": "Trắng",
+          "Số lượng": "Hộp 100 Viên 4h"
+        }
+      },
+      {
+        "id": "pl001_vang_20v",
+        "name": "Vàng - 2 Vỉ 4h = 20 viên",
+        "sku": "PL-001-VANG-20V",
+        "price": 55000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/generated/product-001.jpg",
+        "options": {
+          "Màu": "Vàng",
+          "Số lượng": "2 Vỉ 4h = 20 viên"
+        }
+      },
+      {
+        "id": "pl001_vang_50v",
+        "name": "Vàng - 50 Viên 4h",
+        "sku": "PL-001-VANG-50V",
+        "price": 95000,
+        "originalPrice": null,
+        "weight": 700,
+        "image": "/assets/products/generated/product-001.jpg",
+        "options": {
+          "Màu": "Vàng",
+          "Số lượng": "50 Viên 4h"
+        }
+      },
+      {
+        "id": "pl001_vang_100v",
+        "name": "Vàng - Hộp 100 Viên 4h",
+        "sku": "PL-001-VANG-100V",
+        "price": 175000,
+        "originalPrice": null,
+        "weight": 1300,
+        "image": "/assets/products/generated/product-001.jpg",
+        "options": {
+          "Màu": "Vàng",
+          "Số lượng": "Hộp 100 Viên 4h"
+        }
+      },
+      {
+        "id": "pl001_do_20v",
+        "name": "Đỏ - 2 Vỉ 4h = 20 viên",
+        "sku": "PL-001-DO-20V",
+        "price": 55000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/generated/product-003.jpg",
+        "options": {
+          "Màu": "Đỏ",
+          "Số lượng": "2 Vỉ 4h = 20 viên"
+        }
+      },
+      {
+        "id": "pl001_do_50v",
+        "name": "Đỏ - 50 Viên 4h",
+        "sku": "PL-001-DO-50V",
+        "price": 95000,
+        "originalPrice": null,
+        "weight": 700,
+        "image": "/assets/products/generated/product-003.jpg",
+        "options": {
+          "Màu": "Đỏ",
+          "Số lượng": "50 Viên 4h"
+        }
+      },
+      {
+        "id": "pl001_do_100v",
+        "name": "Đỏ - Hộp 100 Viên 4h",
+        "sku": "PL-001-DO-100V",
+        "price": 175000,
+        "originalPrice": null,
+        "weight": 1300,
+        "image": "/assets/products/generated/product-003.jpg",
+        "options": {
+          "Màu": "Đỏ",
+          "Số lượng": "Hộp 100 Viên 4h"
+        }
+      }
+    ],
+    "optionGroups": [
+      {
+        "name": "Màu",
+        "values": [
+          "Trắng",
+          "Vàng",
+          "Đỏ"
+        ]
+      },
+      {
+        "name": "Số lượng",
+        "values": [
+          "2 Vỉ 4h = 20 viên",
+          "50 Viên 4h",
+          "Hộp 100 Viên 4h"
+        ]
       }
     ]
   },

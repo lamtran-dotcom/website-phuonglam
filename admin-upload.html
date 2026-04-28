@@ -370,6 +370,7 @@
 
     const fmt = value => Number(value || 0).toLocaleString('vi-VN') + 'đ';
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+    const jsString = value => JSON.stringify(String(value ?? '')).replace(/</g, '\\u003c');
     const normalizeText = value => String(value ?? '')
       .toLowerCase()
       .normalize('NFD')
@@ -407,6 +408,10 @@
         tag: product.tag || '',
         weight: product.weight === '' ? null : (product.weight == null ? null : Number(product.weight || 0)),
         hidden: isHidden(product),
+        optionGroups: Array.isArray(product.optionGroups) ? product.optionGroups.map(group => ({
+          name: group.name || '',
+          values: Array.isArray(group.values) ? group.values.filter(Boolean) : []
+        })).filter(group => group.name && group.values.length) : [],
         images: Array.isArray(product.images) ? product.images.filter(Boolean).slice(0, 9) : [],
         reviews: Array.isArray(product.reviews) ? product.reviews : [],
         variants: Array.isArray(product.variants) ? product.variants.map(v => ({
@@ -416,7 +421,8 @@
           price: Number(v.price || 0),
           originalPrice: v.originalPrice === '' ? null : (v.originalPrice == null ? null : Number(v.originalPrice || 0)),
           weight: v.weight === '' ? null : (v.weight == null ? null : Number(v.weight || 0)),
-          image: v.image || ''
+          image: v.image || '',
+          options: v.options && typeof v.options === 'object' && !Array.isArray(v.options) ? v.options : {}
         })) : []
       };
     }
@@ -917,11 +923,18 @@
           ${Array.from({ length: 9 }).map((_, index) => imageBox(product, index)).join('')}
         </div>
 
+        <h2>Nhóm tuỳ chọn</h2>
+        <p class="muted">Dùng khi một sản phẩm có nhiều lớp chọn, ví dụ: Màu rồi tới Số lượng.</p>
+        <button class="secondary" onclick="addOptionGroup()">+ Thêm nhóm tuỳ chọn</button>
+        <div style="display:grid;gap:10px;margin-top:10px">
+          ${(product.optionGroups || []).map((group, index) => optionGroupHtml(group, index)).join('') || '<p class="muted">Chưa có nhóm tuỳ chọn. Sản phẩm sẽ dùng phân loại 1 tầng như cũ.</p>'}
+        </div>
+
         <h2>Phân loại sản phẩm</h2>
-        <p class="muted">Ví dụ: hộp 10 viên, hộp 100 viên, mùi Mai, mùi Lavender...</p>
+        <p class="muted">Mỗi dòng là một biến thể bán được. Nếu có nhóm tuỳ chọn, hãy chọn đủ giá trị cho từng dòng.</p>
         <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
         <div>
-          ${(product.variants || []).map((variant, index) => variantHtml(variant, index)).join('')}
+          ${(product.variants || []).map((variant, index) => variantHtml(product, variant, index)).join('')}
         </div>
       `;
     }
@@ -935,9 +948,40 @@
       `;
     }
 
-    function variantHtml(variant, index) {
+    function optionGroupHtml(group, index) {
       return `
         <div class="variant">
+          <div class="row3">
+            <div><label>Tên nhóm</label><input value="${esc(group.name || '')}" oninput="updateOptionGroup(${index}, 'name', this.value)" placeholder="Màu" /></div>
+            <div><label>Giá trị <span class="muted">(cách nhau bằng dấu phẩy)</span></label><input value="${esc((group.values || []).join(', '))}" oninput="updateOptionGroup(${index}, 'values', this.value)" placeholder="Trắng, Vàng, Đỏ" /></div>
+            <div><label>&nbsp;</label><button class="danger small" onclick="removeOptionGroup(${index})">Xoá nhóm</button></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function optionInputHtml(group, variant, index) {
+      const values = Array.isArray(group.values) ? group.values : [];
+      const current = variant.options?.[group.name] || '';
+      return `
+        <div>
+          <label>${esc(group.name)}</label>
+          <select onchange="updateVariantOption(${index}, ${jsString(group.name)}, this.value)">
+            <option value="">Chọn ${esc(group.name)}</option>
+            ${values.map(value => `<option value="${esc(value)}" ${current === value ? 'selected' : ''}>${esc(value)}</option>`).join('')}
+          </select>
+        </div>
+      `;
+    }
+
+    function variantHtml(product, variant, index) {
+      const optionGroups = Array.isArray(product.optionGroups) ? product.optionGroups.filter(group => group.name && Array.isArray(group.values) && group.values.length) : [];
+      const optionText = variant.options && Object.keys(variant.options).length
+        ? Object.entries(variant.options).map(([key, value]) => `${key}: ${value}`).join(' · ')
+        : '';
+      return `
+        <div class="variant">
+          ${optionText ? `<div class="muted" style="font-size:12px;margin-bottom:8px">Tuỳ chọn: ${esc(optionText)}</div>` : ''}
           <div class="variant-grid">
             <div>
               <label>Ảnh</label>
@@ -950,6 +994,7 @@
             <div><label>SKU</label><input value="${esc(variant.sku)}" oninput="updateVariant(${index}, 'sku', this.value)" /></div>
             <div><label>&nbsp;</label><button class="danger small" onclick="removeVariant(${index})">Xoá</button></div>
           </div>
+          ${optionGroups.length ? `<div class="row3" style="margin-top:10px">${optionGroups.map(group => optionInputHtml(group, variant, index)).join('')}</div>` : ''}
         </div>
       `;
     }
@@ -1022,7 +1067,51 @@
     function addVariant() {
       updateSelected(product => {
         product.variants = product.variants || [];
-        product.variants.push({ id: id(), name: '', sku: '', price: product.price || 0, originalPrice: product.originalPrice || null, weight: product.weight || null, image: '' });
+        const options = {};
+        (product.optionGroups || []).forEach(group => {
+          if (group.name && group.values?.[0]) options[group.name] = group.values[0];
+        });
+        product.variants.push({ id: id(), name: '', sku: '', price: product.price || 0, originalPrice: product.originalPrice || null, weight: product.weight || null, image: '', options });
+      }, true);
+    }
+
+    function addOptionGroup() {
+      updateSelected(product => {
+        product.optionGroups = product.optionGroups || [];
+        product.optionGroups.push({ name: '', values: [] });
+      }, true);
+    }
+
+    function updateOptionGroup(index, field, value) {
+      updateSelected(product => {
+        product.optionGroups = product.optionGroups || [];
+        const group = product.optionGroups[index];
+        if (!group) return;
+        const oldName = group.name;
+        if (field === 'values') {
+          group.values = value.split(',').map(item => item.trim()).filter(Boolean);
+          return;
+        }
+        group.name = value;
+        if (oldName && oldName !== value) {
+          (product.variants || []).forEach(variant => {
+            if (!variant.options || !(oldName in variant.options)) return;
+            variant.options[value] = variant.options[oldName];
+            delete variant.options[oldName];
+          });
+        }
+      });
+    }
+
+    function removeOptionGroup(index) {
+      updateSelected(product => {
+        const group = product.optionGroups?.[index];
+        product.optionGroups.splice(index, 1);
+        if (group?.name) {
+          (product.variants || []).forEach(variant => {
+            if (variant.options) delete variant.options[group.name];
+          });
+        }
       }, true);
     }
 
@@ -1036,6 +1125,16 @@
           variant[field] = value;
         }
       });
+    }
+
+    function updateVariantOption(index, groupName, value) {
+      updateSelected(product => {
+        const variant = product.variants[index];
+        if (!variant) return;
+        variant.options = variant.options || {};
+        if (value) variant.options[groupName] = value;
+        else delete variant.options[groupName];
+      }, true);
     }
 
     function removeVariant(index) {
