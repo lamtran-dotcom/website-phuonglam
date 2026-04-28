@@ -1,11 +1,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; width: 100%; max-width: 100%; overflow-x: hidden; }
     body {
       font-family: 'Be Vietnam Pro', sans-serif;
       background: #ffffff;
       color: #1a1a1a;
       -webkit-font-smoothing: antialiased;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
+    #root { width: 100%; max-width: 100%; overflow-x: hidden; }
     input, select, textarea, button { font-family: inherit; }
     @media print {
       .no-print { display: none !important; }

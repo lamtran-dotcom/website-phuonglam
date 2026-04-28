@@ -1258,7 +1258,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
   };
 
   return (
-    <div style={{ maxWidth: 1440, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px' }}>
+    <div style={{ width: '100%', maxWidth: 1440, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px', overflowX: 'hidden', boxSizing: 'border-box' }}>
       {/* Breadcrumb */}
       <div style={ppStyles.breadcrumb}>
         <span style={ppStyles.breadLink} onClick={() => setPage({ name: 'home' })}>Trang chủ</span>
@@ -1271,7 +1271,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
       </div>
 
       {/* MAIN LAYOUT */}
-      <div style={{ ...ppStyles.layout, gridTemplateColumns: isMobile ? '1fr' : 'minmax(360px, 480px) minmax(0, 1fr)', gap: isMobile ? 20 : 40 }}>
+      <div style={{ ...ppStyles.layout, gridTemplateColumns: isMobile ? 'minmax(0, 1fr)' : 'minmax(360px, 480px) minmax(0, 1fr)', gap: isMobile ? 20 : 40 }}>
         {/* LEFT: Gallery */}
         <div style={{ ...ppStyles.gallery, width: '100%', maxWidth: isMobile ? '100%' : 480, justifySelf: 'start' }}>
           <div style={ppStyles.mainImg}>
@@ -1323,7 +1323,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
 
         {/* RIGHT: Info */}
         <div style={ppStyles.info}>
-          <h1 style={ppStyles.name}>{product.name}</h1>
+          <h1 style={{ ...ppStyles.name, ...(isMobile ? ppStyles.nameMobile : {}) }}>{product.name}</h1>
           <div style={ppStyles.catBadge} onClick={() => setPage({ name: 'category', cat: product.categoryId })}>
             {CATEGORIES.find(c => c.id === product.categoryId)?.name}
           </div>
@@ -1352,7 +1352,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
               {optionGroups.map(group => (
                 <div key={group.name} style={{ marginBottom: 14 }}>
                   <span style={ppStyles.label}>{group.name}</span>
-                  <div style={isColorOptionGroup(group) ? ppStyles.colorGrid : ppStyles.variantGrid}>
+                  <div style={isColorOptionGroup(group) ? ppStyles.colorGrid : (isMobile ? ppStyles.variantGridMobile : ppStyles.variantGrid)}>
                     {group.values.map(value => {
                       const active = selectedOptions[group.name] === value;
                       const available = isOptionValueAvailable(group.name, value);
@@ -1415,7 +1415,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
           {variants.length > 0 && optionGroups.length === 0 && (
             <div style={ppStyles.variantWrap}>
               <span style={ppStyles.label}>Phân loại</span>
-              <div style={ppStyles.variantGrid}>
+              <div style={isMobile ? ppStyles.variantGridMobile : ppStyles.variantGrid}>
                 {variants.map(variant => {
                   const active = selectedVariant && selectedVariant.id === variant.id;
                   return (
@@ -1531,8 +1531,8 @@ const ppStyles = {
   breadLink: { color: '#318223', cursor: 'pointer', fontWeight: 500 },
   breadSep: { color: '#ccc' },
   breadCurrent: { color: '#666' },
-  layout: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, marginBottom: 56 },
-  gallery: {},
+  layout: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, marginBottom: 56, minWidth: 0 },
+  gallery: { minWidth: 0 },
   mainImg: { position: 'relative', marginBottom: 12 },
   sliderViewport: { width: '100%', overflow: 'hidden', borderRadius: 14 },
   sliderTrack: { display: 'flex', width: '100%', transition: 'transform .58s cubic-bezier(.22,.61,.36,1)', willChange: 'transform' },
@@ -1544,9 +1544,10 @@ const ppStyles = {
   thumbTrack: { display: 'flex', flexWrap: 'nowrap', width: 'max-content', padding: '2px 0' },
   thumbArrow: { position: 'absolute', top: '50%', transform: 'translateY(-50%)', zIndex: 2, width: 34, height: 34, borderRadius: 999, border: 'none', background: 'rgba(255,255,255,0.92)', color: '#7d8f78', fontSize: 30, fontWeight: 400, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 14px rgba(0,0,0,0.12)' },
   thumb: { borderRadius: 10, overflow: 'hidden', cursor: 'pointer', transition: 'border-color .2s', flexShrink: 0 },
-  info: {},
+  info: { minWidth: 0, maxWidth: '100%' },
   catBadge: { display: 'inline-block', fontSize: 12, fontWeight: 600, color: '#318223', background: '#eaf4e9', padding: '4px 12px', borderRadius: 20, marginBottom: 14, cursor: 'pointer' },
-  name: { fontSize: 28, fontWeight: 800, color: '#1a1a1a', margin: '0 0 12px', lineHeight: 1.3, letterSpacing: '-0.5px' },
+  name: { fontSize: 28, fontWeight: 800, color: '#1a1a1a', margin: '0 0 12px', lineHeight: 1.3, letterSpacing: '0em', overflowWrap: 'anywhere' },
+  nameMobile: { fontSize: 24, lineHeight: 1.25 },
   ratingRow: { display: 'flex', alignItems: 'center', marginBottom: 16 },
   priceRow: { display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 },
   price: { fontSize: 28, fontWeight: 800, color: '#318223' },
@@ -1556,11 +1557,12 @@ const ppStyles = {
   divider: { borderTop: '1px solid #f0f0f0', margin: '20px 0' },
   variantWrap: { marginBottom: 20 },
   variantGrid: { display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 10 },
-  variantBtn: { minWidth: 140, background: '#fff', border: '1.5px solid #e1e8df', borderRadius: 10, padding: '10px 12px', color: '#333', cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10, textAlign: 'left', transition: 'all .2s' },
-  variantBtnMobile: { minWidth: 0, flex: '1 1 calc(33.333% - 8px)', padding: '8px 10px', gap: 8 },
+  variantGridMobile: { display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: 10, marginTop: 10 },
+  variantBtn: { minWidth: 140, maxWidth: '100%', background: '#fff', border: '1.5px solid #e1e8df', borderRadius: 10, padding: '10px 12px', color: '#333', cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10, textAlign: 'left', transition: 'all .2s', overflow: 'hidden', boxSizing: 'border-box' },
+  variantBtnMobile: { width: '100%', minWidth: 0, flex: 'none', padding: '9px 10px', gap: 8 },
   variantThumb: { width: 44, height: 44, borderRadius: 8, objectFit: 'cover', flexShrink: 0, border: '1px solid #e6eee3', background: '#f7faf6' },
   variantThumbMobile: { width: 34, height: 34, borderRadius: 7 },
-  variantText: { display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0 },
+  variantText: { display: 'flex', flexDirection: 'column', gap: 4, minWidth: 0, overflow: 'hidden', overflowWrap: 'anywhere', lineHeight: 1.35 },
   variantPrice: { fontSize: 12, fontWeight: 800, color: '#318223' },
   variantBtnActive: { borderColor: '#318223', background: '#f0f8ef', color: '#318223', boxShadow: '0 8px 20px rgba(49,130,35,0.12)' },
   colorGrid: { display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 10 },
@@ -1578,7 +1580,7 @@ const ppStyles = {
   buyNowBtn: { flex: 1, background: '#318223', color: '#fff', border: '2px solid #318223', padding: '14px 20px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', transition: 'transform .2s, box-shadow .2s, background .2s' },
   perks: { display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'stretch', background: '#f7faf6', borderRadius: 12, padding: '16px 18px' },
   perkList: { display: 'flex', flexDirection: 'column', gap: 8 },
-  perk: { fontSize: 13, color: '#555', whiteSpace: 'nowrap' },
+  perk: { fontSize: 13, color: '#555', whiteSpace: 'normal', overflowWrap: 'anywhere' },
   supportWrap: { width: '100%', display: 'flex', justifyContent: 'center' },
   supportCard: { display: 'flex', flexDirection: 'column', gap: 4, alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: 360, padding: '14px 16px', borderRadius: 12, background: '#fff', border: '1px solid #dfe8dc', textDecoration: 'none', textAlign: 'center' },
   supportLabel: { fontSize: 12, fontWeight: 600, color: '#6f7f6a', textTransform: 'uppercase', letterSpacing: '0.04em' },
