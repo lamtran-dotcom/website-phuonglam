@@ -42,7 +42,17 @@ const PRODUCTS = [
       }
     ],
     "optionImages": {},
-    "images": [],
+    "images": [
+      "/assets/products/uploads/1777435799447-chatgpt-image-14-52-27-22-thg-4-2026.webp",
+      "/assets/products/uploads/1777435820024-image.webp",
+      "/assets/products/uploads/1777435808676-chatgpt-image-17-07-26-22-thg-4-2026.webp",
+      "/assets/products/uploads/1777435598313-cach-dung-bep-xong-thao-moc-an-toan.webp",
+      "/assets/products/uploads/1777435605298-nen-tealight-khong-khoi-xong-tinh-dau-202604280600-nen-tealight-khong-khoi-chay-sach.webp",
+      "/assets/products/uploads/1777435829023-chatgpt-image-17-10-45-22-thg-4-2026.webp",
+      "/assets/products/uploads/1777435857424-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
+      "/assets/products/uploads/1777435866129-nen-tealight-ban-tho-gia-dinh.webp",
+      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
+    ],
     "reviews": [
       {
         "name": "Nguyễn Thị Mai",
@@ -107,7 +117,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "image": "/assets/products/generated/product-001.jpg",
+        "image": "",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -120,7 +130,7 @@ const PRODUCTS = [
         "price": 95000,
         "originalPrice": null,
         "weight": 700,
-        "image": "/assets/products/generated/product-001.jpg",
+        "image": "/assets/products/uploads/1777435902832-8.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "50 Viên 4h"
@@ -146,7 +156,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "image": "/assets/products/generated/product-003.jpg",
+        "image": "",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -159,7 +169,7 @@ const PRODUCTS = [
         "price": 95000,
         "originalPrice": null,
         "weight": 700,
-        "image": "/assets/products/generated/product-003.jpg",
+        "image": "/assets/products/uploads/1777435920684-11.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "50 Viên 4h"
