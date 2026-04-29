@@ -896,8 +896,7 @@
       "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e63iax1jff1",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e66ng4pvy99",
       "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e68l9kydo3e",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6aehmtjha0",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6e3w3nyid1"
+      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6aehmtjha0"
     ],
     "reviews": [],
     "variants": [
@@ -905,8 +904,8 @@
         "id": "shopee_variant_405001591546",
         "name": "Size M 7x15",
         "sku": "",
-        "price": 140000,
-        "originalPrice": null,
+        "price": 109000,
+        "originalPrice": 150000,
         "weight": 800,
         "image": "",
         "options": {}
@@ -915,8 +914,8 @@
         "id": "shopee_variant_405001591547",
         "name": "Size L 7x20",
         "sku": "",
-        "price": 160000,
-        "originalPrice": null,
+        "price": 138000,
+        "originalPrice": 200000,
         "weight": 800,
         "image": "",
         "options": {}
@@ -925,8 +924,8 @@
         "id": "shopee_variant_405001591545",
         "name": "Size S 7x10",
         "sku": "",
-        "price": 120000,
-        "originalPrice": null,
+        "price": 82000,
+        "originalPrice": 120000,
         "weight": 800,
         "image": "",
         "options": {}
