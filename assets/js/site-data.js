@@ -42,11 +42,14 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777436017221-nen-4h-tron-100v.webp",
-      "/assets/products/uploads/1777435598313-cach-dung-bep-xong-thao-moc-an-toan.webp",
-      "/assets/products/uploads/1777435605298-nen-tealight-khong-khoi-xong-tinh-dau-202604280600-nen-tealight-khong-khoi-chay-sach.webp",
-      "/assets/products/uploads/1777435857424-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
+      "/assets/products/uploads/1777455420691-chatgpt-image-16-14-50-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777455426597-chatgpt-image-16-13-51-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777455435623-chatgpt-image-16-18-14-29-thg-4-2026.webp",
       "/assets/products/uploads/1777435866129-nen-tealight-ban-tho-gia-dinh.webp",
-      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
+      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
+      "/assets/products/uploads/1777455438162-chatgpt-image-16-16-54-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777455472866-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
+      "/assets/products/uploads/1777455477308-bep-xong-thao-moc-san-pham-chinh.webp"
     ],
     "reviews": [
       {
