@@ -141,6 +141,10 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
     }
+    .product-images {
+      grid-template-columns: repeat(auto-fill, minmax(76px, 134px));
+      justify-content: start;
+    }
     .image-box {
       width: 100%;
       border: 2px dashed #d7d7d7;
@@ -205,8 +209,77 @@
       color: #999;
       font-size: 12px;
       transition: border-color .18s ease, background .18s ease, box-shadow .18s ease, transform .18s ease;
+      position: relative;
     }
     .variant-img img { width: 100%; height: 100%; object-fit: cover; }
+    .variant-img .hint {
+      padding: 6px;
+      line-height: 1.25;
+      font-size: 11px;
+      font-weight: 800;
+      color: #79a274;
+    }
+    .variant-img .remove-img {
+      top: 4px;
+      right: 4px;
+      padding: 3px 6px;
+      font-size: 11px;
+    }
+    .option-group-grid {
+      display: grid;
+      grid-template-columns: minmax(180px, .75fr) minmax(260px, 1.7fr) auto;
+      gap: 12px;
+      align-items: start;
+    }
+    .option-value-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .option-value-pill {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1.5px solid #dbe8d7;
+      border-radius: 10px;
+      background: #fbfdfb;
+      padding: 2px 4px 2px 8px;
+    }
+    .option-value-pill input {
+      width: 118px;
+      min-width: 70px;
+      border: 0;
+      background: transparent;
+      padding: 4px 2px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .option-value-pill input:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+    .option-value-remove,
+    .option-value-add {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      display: inline-grid;
+      place-items: center;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .option-value-remove {
+      border: 1px solid #ffd0d0;
+      background: #fff8f8;
+      color: var(--danger);
+    }
+    .option-value-add {
+      border: 1.5px dashed #9fc899;
+      background: #f4fbf2;
+      color: var(--green);
+      font-size: 19px;
+    }
     .mini-card {
       border: 1px solid var(--line);
       border-radius: 18px;
@@ -317,6 +390,7 @@
       .topbar, .grid { display: block; }
       .side { position: static; max-height: none; margin-bottom: 16px; }
       .row, .row3, .images, .variant-grid, .card-grid { grid-template-columns: 1fr; }
+      .option-group-grid { grid-template-columns: 1fr; }
       .config-images, .config-card-grid, .featured-slots, .picker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 28px; }
     }
@@ -420,7 +494,7 @@
         hidden: isHidden(product),
         optionGroups: Array.isArray(product.optionGroups) ? product.optionGroups.map(group => ({
           name: group.name || '',
-          values: Array.isArray(group.values) ? group.values.filter(Boolean) : []
+          values: Array.isArray(group.values) ? group.values.map(value => String(value || '').trim()).filter(Boolean) : []
         })).filter(group => group.name && group.values.length) : [],
         optionImages: product.optionImages && typeof product.optionImages === 'object' && !Array.isArray(product.optionImages)
           ? Object.fromEntries(Object.entries(product.optionImages).map(([groupName, values]) => [
@@ -567,6 +641,14 @@
         ${featuredPickerIndex !== null ? featuredPickerHtml() : ''}
       `;
       if (activeTab === 'products') renderProductList();
+    }
+
+    function renderKeepScroll() {
+      const scrollingElement = document.scrollingElement || document.documentElement;
+      const scrollTop = scrollingElement.scrollTop;
+      const scrollLeft = scrollingElement.scrollLeft;
+      render();
+      requestAnimationFrame(() => scrollingElement.scrollTo(scrollLeft, scrollTop));
     }
 
     function renderProductList() {
@@ -937,7 +1019,7 @@
         <textarea oninput="updateField('usage', this.value)">${esc(product.usage)}</textarea>
 
         <h2>Ảnh sản phẩm <span class="muted">(tối đa 9 ảnh)</span></h2>
-        <div class="images">
+        <div class="images product-images">
           ${Array.from({ length: 9 }).map((_, index) => imageBox(product, index)).join('')}
         </div>
 
@@ -965,11 +1047,26 @@
     function optionGroupHtml(group, index) {
       return `
         <div class="variant">
-          <div class="row3">
+          <div class="option-group-grid">
             <div><label>Tên nhóm</label><input value="${esc(group.name || '')}" oninput="updateOptionGroup(${index}, 'name', this.value)" placeholder="Màu" /></div>
-            <div><label>Giá trị <span class="muted">(cách nhau bằng dấu phẩy)</span></label><input value="${esc((group.values || []).join(', '))}" oninput="updateOptionGroup(${index}, 'values', this.value)" placeholder="Trắng, Vàng, Đỏ" /></div>
+            <div>
+              <label>Giá trị</label>
+              <div class="option-value-list">
+                ${(group.values || []).map((value, valueIndex) => optionValueHtml(index, value, valueIndex)).join('')}
+                <button class="option-value-add" onclick="addOptionValue(${index})" title="Thêm giá trị">+</button>
+              </div>
+            </div>
             <div><label>&nbsp;</label><button class="danger small" onclick="removeOptionGroup(${index})">Xoá nhóm</button></div>
           </div>
+        </div>
+      `;
+    }
+
+    function optionValueHtml(groupIndex, value, valueIndex) {
+      return `
+        <div class="option-value-pill">
+          <input value="${esc(value || '')}" oninput="updateOptionValue(${groupIndex}, ${valueIndex}, this.value)" onchange="renderKeepScroll()" placeholder="Phân loại" />
+          <button class="option-value-remove" onclick="removeOptionValue(${groupIndex}, ${valueIndex})" title="Xoá giá trị">×</button>
         </div>
       `;
     }
@@ -1057,7 +1154,7 @@
           <div class="variant-grid">
             <div>
               <label>Ảnh ${esc(quantityValue)}</label>
-              <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">${variant.image ? `<img src="${esc(variant.image)}" />` : '+'}</div>
+              ${variantImageBox(variant, index)}
             </div>
             <div><label>Số lượng</label><input value="${esc(quantityValue)}" readonly /></div>
             <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
@@ -1075,15 +1172,14 @@
       const optionText = variant.options && Object.keys(variant.options).length
         ? Object.entries(variant.options).map(([key, value]) => `${key}: ${value}`).join(' · ')
         : '';
-      const usesGroupedOptions = optionGroups.length > 0;
       return `
         <div class="variant">
           ${optionText ? `<div class="muted" style="font-size:12px;margin-bottom:8px">Tuỳ chọn: ${esc(optionText)}</div>` : ''}
           <div class="variant-grid">
-            ${!usesGroupedOptions ? `<div>
+            <div>
               <label>Ảnh phân loại</label>
-              <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">${variant.image ? `<img src="${esc(variant.image)}" />` : '+'}</div>
-            </div>` : ''}
+              ${variantImageBox(variant, index)}
+            </div>
             <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
             <div><label>Giá bán *</label><input type="number" value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
             <div><label>Giá gốc</label><input type="number" value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
@@ -1092,6 +1188,16 @@
             <div><label>&nbsp;</label><button class="danger small" onclick="removeVariant(${index})">Xoá</button></div>
           </div>
           ${optionGroups.length ? `<div class="row3" style="margin-top:10px">${optionGroups.map(group => optionInputHtml(group, variant, index)).join('')}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function variantImageBox(variant, index) {
+      return `
+        <div class="variant-img" onclick="pickVariantImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropVariantImage(event, ${index})">
+          ${variant.image
+            ? `<img src="${esc(variant.image)}" /><button class="remove-img" onclick="event.stopPropagation(); removeVariantImage(${index})">Xoá</button>`
+            : '<span class="hint">+<br>Kéo thả ảnh</span>'}
         </div>
       `;
     }
@@ -1106,7 +1212,7 @@
       const product = selectedProduct();
       if (!product) return;
       mutator(product);
-      if (shouldRender) render();
+      if (shouldRender) renderKeepScroll();
     }
 
     function updateField(field, value) {
@@ -1175,7 +1281,7 @@
 
     function setVariantEditorColor(color) {
       variantEditorColor = color;
-      render();
+      renderKeepScroll();
     }
 
     function addVariantForOptions(colorGroupName, colorValue, quantityGroupName, quantityValue) {
@@ -1225,6 +1331,48 @@
           }
         }
       });
+    }
+
+    function addOptionValue(groupIndex) {
+      updateSelected(product => {
+        product.optionGroups = product.optionGroups || [];
+        const group = product.optionGroups[groupIndex];
+        if (!group) return;
+        group.values = Array.isArray(group.values) ? group.values : [];
+        group.values.push('');
+      }, true);
+    }
+
+    function updateOptionValue(groupIndex, valueIndex, value) {
+      updateSelected(product => {
+        product.optionGroups = product.optionGroups || [];
+        const group = product.optionGroups[groupIndex];
+        if (!group) return;
+        group.values = Array.isArray(group.values) ? group.values : [];
+        const oldValue = group.values[valueIndex] || '';
+        group.values[valueIndex] = value;
+        if (!oldValue || oldValue === value || !group.name) return;
+
+        (product.variants || []).forEach(variant => {
+          if (variant.options?.[group.name] === oldValue) variant.options[group.name] = value;
+        });
+        const images = product.optionImages?.[group.name];
+        if (images?.[oldValue]) {
+          images[value] = images[oldValue];
+          delete images[oldValue];
+        }
+        if (variantEditorColor === oldValue) variantEditorColor = value;
+      });
+    }
+
+    function removeOptionValue(groupIndex, valueIndex) {
+      updateSelected(product => {
+        const group = product.optionGroups?.[groupIndex];
+        if (!group || !Array.isArray(group.values)) return;
+        const [removedValue] = group.values.splice(valueIndex, 1);
+        if (removedValue && product.optionImages?.[group.name]) delete product.optionImages[group.name][removedValue];
+        if (variantEditorColor === removedValue) variantEditorColor = group.values[0] || '';
+      }, true);
     }
 
     function removeOptionGroup(index) {
@@ -1404,6 +1552,13 @@
       chooseFile(url => updateSelected(product => {
         product.variants[index].image = url;
       }, true));
+    }
+
+    function removeVariantImage(index) {
+      updateSelected(product => {
+        if (!product.variants?.[index]) return;
+        product.variants[index].image = '';
+      }, true);
     }
 
     function openFeaturedPicker(index) {

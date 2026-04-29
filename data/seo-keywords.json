@@ -1,0 +1,322 @@
+{
+  "site": "phuonglam.com",
+  "brand": "Phương Lâm",
+  "updatedAt": "2026-04-29",
+  "seoPrinciple": "Mỗi danh mục đẩy một nhóm từ khóa chính, mỗi bài blog đánh một từ khóa dài và gắn link về đúng danh mục hoặc sản phẩm liên quan.",
+  "primaryKeywordGroups": [
+    {
+      "group": "Nến tealight / nến xông",
+      "targetPage": "/danh-muc/nen-thom/",
+      "mainKeywords": [
+        "nến tealight",
+        "nến tealight 4 giờ",
+        "nến tealight 8 giờ",
+        "nến không khói",
+        "nến xông tinh dầu"
+      ],
+      "extendedKeywords": [
+        "nến tealight 4h không khói",
+        "nến tealight 8h vỏ nhôm",
+        "nến tealight đốt tinh dầu",
+        "nến tealight trang trí tiệc",
+        "nến tealight trắng vàng đỏ",
+        "nến tealight hộp 100 viên",
+        "nến tealight 50 viên",
+        "nến tealight 20 viên",
+        "nến tealight không mùi",
+        "nến xông thảo mộc",
+        "nến xông thảo mộc 4 giờ",
+        "nến đốt đèn xông tinh dầu"
+      ]
+    },
+    {
+      "group": "Thảo mộc xông nhà",
+      "targetPage": "/danh-muc/thao-moc-xong/",
+      "mainKeywords": [
+        "thảo mộc xông nhà",
+        "thảo mộc xông thanh lọc không khí",
+        "thảo mộc xông nhà tẩy uế",
+        "thảo mộc xông nhà xua muỗi"
+      ],
+      "extendedKeywords": [
+        "lá nguyệt quế khô xông nhà",
+        "vỏ quế khô xông nhà",
+        "lá khuynh diệp khô xông nhà",
+        "bồ kết khô xông nhà",
+        "gừng khô xông thảo mộc",
+        "lá sả khô xông nhà",
+        "vỏ bưởi khô xông nhà",
+        "bạc hà khô xông nhà",
+        "cam khô xông nhà",
+        "hoa hồi khô xông nhà",
+        "thảo mộc xông nhà khử mùi",
+        "thảo mộc xông nhà xua côn trùng",
+        "thảo mộc xông giải cảm",
+        "thảo mộc xông hơi tại nhà"
+      ]
+    },
+    {
+      "group": "Combo / bộ xông nhà",
+      "targetPage": "/danh-muc/combo/",
+      "mainKeywords": [
+        "combo xông nhà",
+        "bộ xông nhà tẩy uế",
+        "bộ xông nhà khử mùi",
+        "bộ xông nhà thảo mộc"
+      ],
+      "extendedKeywords": [
+        "bộ xông nhà mới",
+        "bộ xông nhà xua côn trùng",
+        "bộ xông giải cảm",
+        "bộ bếp xông thảo mộc đất nung",
+        "bộ xông nhà thanh lọc không khí",
+        "combo thảo mộc xông nhà",
+        "bộ xông nhà thu hút may mắn",
+        "bộ xông nhà bồ kết",
+        "bộ xông tẩy uế phòng ngủ",
+        "bộ xông nhà bằng bếp đất nung"
+      ]
+    },
+    {
+      "group": "Đèn xông tinh dầu / bếp xông",
+      "targetPage": "/danh-muc/bep-xong/",
+      "mainKeywords": [
+        "đèn xông tinh dầu",
+        "đèn xông tinh dầu bằng nến",
+        "bếp xông thảo mộc",
+        "bếp xông tinh dầu"
+      ],
+      "extendedKeywords": [
+        "đèn xông tinh dầu gốm sứ",
+        "đèn xông tinh dầu Bát Tràng",
+        "đèn xông tinh dầu phòng ngủ",
+        "đèn xông tinh dầu đốt nến",
+        "đèn xông tinh dầu trang trí",
+        "bếp xông thảo mộc đất nung",
+        "bếp xông thảo mộc bồ kết",
+        "máy xông tinh dầu tự động",
+        "tinh dầu thơm phòng khách sạn",
+        "đèn xông tinh dầu hình hươu"
+      ]
+    },
+    {
+      "group": "Phụ kiện xông",
+      "targetPage": "/danh-muc/phu-kien/",
+      "mainKeywords": [
+        "phụ kiện xông nhà",
+        "phụ kiện đèn xông tinh dầu",
+        "đế đựng nến tealight"
+      ],
+      "extendedKeywords": [
+        "ly đựng nến đất nung",
+        "nắp bếp niêu xông",
+        "đĩa lót bếp xông",
+        "đế nến tealight gốm sứ",
+        "hột quẹt gas thắp nến đầu dài",
+        "đế đựng nến đèn xông",
+        "phụ kiện bếp xông đất nung"
+      ]
+    },
+    {
+      "group": "Nụ trầm",
+      "targetPage": "/danh-muc/nu-tram/",
+      "mainKeywords": [
+        "nụ trầm hương",
+        "nụ trầm hương xông nhà",
+        "nụ trầm tẩy uế"
+      ],
+      "extendedKeywords": [
+        "nụ trầm hương tự nhiên",
+        "nụ trầm hương Phương Lâm",
+        "nụ trầm thư giãn",
+        "nụ trầm thiền định",
+        "nụ trầm xông phòng",
+        "nụ trầm khử mùi"
+      ]
+    },
+    {
+      "group": "Nến ly / nến thờ",
+      "targetPage": "/danh-muc/nen-ly/",
+      "mainKeywords": [
+        "nến ly thờ cúng",
+        "nến ly không khói",
+        "nến ly 72h",
+        "nến ly 120h"
+      ],
+      "extendedKeywords": [
+        "nến ly 72h thờ cúng",
+        "nến ly 120h không khói",
+        "nến ly nơ lớn",
+        "nến ly nơ đại",
+        "nến thờ cúng không khói",
+        "nến ly trang nghiêm"
+      ]
+    },
+    {
+      "group": "Nến trụ",
+      "targetPage": "/danh-muc/nen-tru/",
+      "mainKeywords": [
+        "nến trụ trắng",
+        "nến trụ trang trí",
+        "nến trụ 72h"
+      ],
+      "extendedKeywords": [
+        "nến trụ trắng 72h",
+        "nến trụ trang trí bàn tiệc",
+        "nến trụ không khói",
+        "nến trụ cháy lâu",
+        "nến trụ size S M L"
+      ]
+    }
+  ],
+  "priorityLongTailKeywords": [
+    "nến tealight 4 giờ không khói",
+    "nến tealight 8 giờ vỏ nhôm",
+    "đèn xông tinh dầu bằng nến",
+    "bếp xông thảo mộc đất nung",
+    "thảo mộc xông nhà xua muỗi",
+    "thảo mộc xông nhà khử mùi",
+    "bộ xông nhà tẩy uế",
+    "lá nguyệt quế khô xông nhà",
+    "vỏ quế khô xông nhà",
+    "bồ kết khô xông nhà"
+  ],
+  "blogTopicPlan": [
+    {
+      "title": "Nến tealight 4 giờ là gì? Cách dùng nến tealight đốt tinh dầu",
+      "primaryKeyword": "nến tealight 4 giờ",
+      "secondaryKeywords": [
+        "nến tealight đốt tinh dầu",
+        "nến tealight không khói",
+        "nến đốt đèn xông tinh dầu"
+      ],
+      "category": "kiến thức",
+      "internalLinks": [
+        "/danh-muc/nen-thom/",
+        "/danh-muc/bep-xong/"
+      ]
+    },
+    {
+      "title": "Phân biệt nến tealight 2h, 4h, 8h: nên chọn loại nào?",
+      "primaryKeyword": "phân biệt nến tealight 2h 4h 8h",
+      "secondaryKeywords": [
+        "nến tealight 4 giờ",
+        "nến tealight 8 giờ",
+        "nến tealight cháy bao lâu"
+      ],
+      "category": "kiến thức",
+      "internalLinks": [
+        "/danh-muc/nen-thom/"
+      ]
+    },
+    {
+      "title": "Thảo mộc xông nhà gồm những gì? Công dụng từng loại",
+      "primaryKeyword": "thảo mộc xông nhà gồm những gì",
+      "secondaryKeywords": [
+        "lá nguyệt quế khô xông nhà",
+        "vỏ quế khô xông nhà",
+        "bồ kết khô xông nhà",
+        "lá sả khô xông nhà"
+      ],
+      "category": "kiến thức",
+      "internalLinks": [
+        "/danh-muc/thao-moc-xong/"
+      ]
+    },
+    {
+      "title": "Cách xông nhà bằng thảo mộc để khử mùi, thanh lọc không khí",
+      "primaryKeyword": "cách xông nhà bằng thảo mộc",
+      "secondaryKeywords": [
+        "thảo mộc xông nhà khử mùi",
+        "thảo mộc xông thanh lọc không khí",
+        "xông nhà bằng bồ kết"
+      ],
+      "category": "hướng dẫn",
+      "internalLinks": [
+        "/danh-muc/thao-moc-xong/",
+        "/danh-muc/combo/"
+      ]
+    },
+    {
+      "title": "Xông nhà tẩy uế là gì? Khi nào nên dùng bộ xông nhà?",
+      "primaryKeyword": "xông nhà tẩy uế",
+      "secondaryKeywords": [
+        "bộ xông nhà tẩy uế",
+        "combo xông nhà",
+        "thảo mộc xông nhà tẩy uế"
+      ],
+      "category": "kiến thức",
+      "internalLinks": [
+        "/danh-muc/combo/",
+        "/danh-muc/thao-moc-xong/"
+      ]
+    },
+    {
+      "title": "Đèn xông tinh dầu bằng nến dùng thế nào cho đúng?",
+      "primaryKeyword": "đèn xông tinh dầu bằng nến",
+      "secondaryKeywords": [
+        "đèn xông tinh dầu đốt nến",
+        "nến tealight đốt tinh dầu",
+        "đèn xông tinh dầu gốm sứ"
+      ],
+      "category": "hướng dẫn",
+      "internalLinks": [
+        "/danh-muc/bep-xong/",
+        "/danh-muc/nen-thom/"
+      ]
+    },
+    {
+      "title": "Bếp xông thảo mộc đất nung có tốt không?",
+      "primaryKeyword": "bếp xông thảo mộc đất nung",
+      "secondaryKeywords": [
+        "bếp xông thảo mộc",
+        "bộ bếp xông thảo mộc đất nung",
+        "bếp xông thảo mộc bồ kết"
+      ],
+      "category": "kiến thức",
+      "internalLinks": [
+        "/danh-muc/combo/",
+        "/danh-muc/bep-xong/"
+      ]
+    },
+    {
+      "title": "Lá nguyệt quế khô xông nhà có tác dụng gì?",
+      "primaryKeyword": "lá nguyệt quế khô xông nhà",
+      "secondaryKeywords": [
+        "lá nguyệt quế khô",
+        "thảo mộc xông nhà",
+        "xông nhà xua côn trùng"
+      ],
+      "category": "kiến thức",
+      "internalLinks": [
+        "/danh-muc/thao-moc-xong/"
+      ]
+    },
+    {
+      "title": "Vỏ quế khô xông nhà: công dụng và cách dùng",
+      "primaryKeyword": "vỏ quế khô xông nhà",
+      "secondaryKeywords": [
+        "quế khô xông nhà",
+        "thảo mộc xông nhà khử mùi",
+        "xông nhà thơm ấm"
+      ],
+      "category": "hướng dẫn",
+      "internalLinks": [
+        "/danh-muc/thao-moc-xong/"
+      ]
+    },
+    {
+      "title": "Bồ kết khô dùng để xông nhà và gội đầu như thế nào?",
+      "primaryKeyword": "bồ kết khô xông nhà",
+      "secondaryKeywords": [
+        "bồ kết khô gội đầu",
+        "bồ kết khô khử mùi",
+        "thảo mộc xông nhà"
+      ],
+      "category": "hướng dẫn",
+      "internalLinks": [
+        "/danh-muc/thao-moc-xong/"
+      ]
+    }
+  ]
+}

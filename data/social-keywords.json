@@ -1,0 +1,395 @@
+{
+  "site": "phuonglam.com",
+  "brand": "Phương Lâm",
+  "purpose": "Bộ từ khóa và cụm nội dung dùng cho bài đăng mạng xã hội như Facebook, Threads, Zalo, TikTok caption và nội dung ngắn.",
+  "updatedAt": "2026-04-29",
+  "usagePrinciple": [
+    "Không nhồi từ khóa như bài SEO Google.",
+    "Ưu tiên câu tự nhiên, dễ hiểu, gần với nhu cầu thật của khách.",
+    "Mỗi bài chỉ chọn 1 chủ đề chính, 2-4 cụm từ khóa phụ và 3-8 hashtag.",
+    "Câu đầu nên chạm vào vấn đề hoặc lợi ích: khử mùi, thư giãn, xông nhà, đốt tinh dầu, trang trí, thờ cúng.",
+    "Bài bán hàng nên có lời kêu gọi hành động nhẹ: nhắn shop, xem mẫu, chọn combo, lưu lại khi cần."
+  ],
+  "platformGuides": {
+    "facebook": {
+      "tone": "Gần gũi, rõ lợi ích, có thể kể chuyện ngắn hoặc chia sẻ mẹo.",
+      "bestUse": [
+        "Bài giới thiệu sản phẩm",
+        "Bài mẹo sử dụng",
+        "Bài trước/sau khi xông nhà",
+        "Album sản phẩm",
+        "Bài chốt đơn nhẹ"
+      ],
+      "captionLength": "80-250 chữ",
+      "hashtagCount": "3-8"
+    },
+    "threads": {
+      "tone": "Ngắn, đời thường, có góc nhìn hoặc câu hỏi gợi tương tác.",
+      "bestUse": [
+        "Câu hỏi gợi thảo luận",
+        "Mẹo ngắn",
+        "Quan sát đời sống",
+        "Chia sẻ công dụng từng loại thảo mộc"
+      ],
+      "captionLength": "20-80 chữ",
+      "hashtagCount": "0-4"
+    },
+    "zalo": {
+      "tone": "Tin cậy, trực tiếp, dễ hiểu, phù hợp khách quen và khách địa phương.",
+      "bestUse": [
+        "Thông báo hàng mới",
+        "Combo đang có sẵn",
+        "Nhắc khách cách dùng",
+        "Ưu đãi nhỏ",
+        "Bài tư vấn chọn sản phẩm"
+      ],
+      "captionLength": "50-180 chữ",
+      "hashtagCount": "0-5"
+    }
+  },
+  "contentPillars": [
+    {
+      "pillar": "Khử mùi và thanh lọc không gian",
+      "customerNeed": [
+        "nhà có mùi ẩm",
+        "phòng mới dọn cần thơm sạch",
+        "mùi bếp, mùi thuốc lá, mùi thú cưng",
+        "muốn không gian dễ chịu hơn"
+      ],
+      "naturalKeywords": [
+        "xông nhà khử mùi",
+        "thảo mộc xông nhà",
+        "thanh lọc không khí trong nhà",
+        "làm thơm phòng tự nhiên",
+        "khử mùi phòng kín",
+        "xông nhà sau khi dọn dẹp",
+        "mùi thơm thảo mộc dễ chịu"
+      ],
+      "hooks": [
+        "Nhà vừa dọn xong nhưng vẫn còn mùi ẩm?",
+        "Một nồi thảo mộc nhỏ có thể làm căn phòng dễ chịu hơn rất nhiều.",
+        "Nếu phòng kín hay có mùi, thử xông nhà bằng thảo mộc tự nhiên.",
+        "Không cần xịt phòng quá nồng, mùi thảo mộc nhẹ vẫn đủ làm nhà thơm sạch."
+      ],
+      "hashtags": [
+        "#thaomocxongnha",
+        "#xongnhakhumui",
+        "#thanhlockhongkhi",
+        "#nhathom",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Tẩy uế, xông nhà mới, lấy lại cảm giác an yên",
+      "customerNeed": [
+        "về nhà mới",
+        "khai trương",
+        "dọn phòng lâu ngày",
+        "muốn không gian nhẹ và sạch năng lượng hơn"
+      ],
+      "naturalKeywords": [
+        "xông nhà tẩy uế",
+        "bộ xông nhà mới",
+        "combo xông nhà",
+        "xông nhà thanh tẩy",
+        "xông nhà đầu tháng",
+        "xông nhà khai trương",
+        "bộ thảo mộc xông nhà"
+      ],
+      "hooks": [
+        "Nhà mới, phòng mới hay góc làm việc mới đều nên có một lần xông nhẹ.",
+        "Xông nhà không chỉ để thơm, mà còn để mình có cảm giác bắt đầu lại.",
+        "Một combo xông nhà nhỏ cho ngày dọn dẹp, khai trương hoặc đầu tháng.",
+        "Khi không gian bí và nặng mùi, xông thảo mộc là cách rất dễ bắt đầu."
+      ],
+      "hashtags": [
+        "#xongnhatayue",
+        "#boxongnha",
+        "#combo xongnha",
+        "#nhamoi",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Xua muỗi, xua côn trùng bằng mùi thảo mộc",
+      "customerNeed": [
+        "nhà có muỗi",
+        "phòng ẩm có côn trùng nhỏ",
+        "muốn mùi tự nhiên thay vì hóa chất",
+        "xông phòng buổi chiều tối"
+      ],
+      "naturalKeywords": [
+        "thảo mộc xông nhà xua muỗi",
+        "xông nhà xua côn trùng",
+        "lá sả khô xông nhà",
+        "vỏ quế khô xông nhà",
+        "lá nguyệt quế khô",
+        "bạc hà khô xông nhà",
+        "mùi thảo mộc xua muỗi"
+      ],
+      "hooks": [
+        "Chiều tối nhà hay có muỗi, thử xông một ít sả khô và vỏ quế.",
+        "Mùi thảo mộc ấm nhẹ giúp không gian dễ chịu và bớt côn trùng nhỏ.",
+        "Không phải lúc nào cũng cần mùi nồng, thảo mộc khô xông nhẹ là đủ.",
+        "Một góc phòng thơm mùi sả, quế, nguyệt quế sẽ dễ chịu hơn nhiều."
+      ],
+      "hashtags": [
+        "#xuamuoi",
+        "#xongnhaxuamuoi",
+        "#lasa",
+        "#voque",
+        "#thaomockho",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Đốt tinh dầu, thư giãn phòng ngủ, góc làm việc",
+      "customerNeed": [
+        "muốn phòng ngủ thơm nhẹ",
+        "muốn góc làm việc dễ tập trung",
+        "dùng đèn xông tinh dầu",
+        "cần nến tealight để đốt tinh dầu"
+      ],
+      "naturalKeywords": [
+        "đèn xông tinh dầu",
+        "đèn xông tinh dầu bằng nến",
+        "nến tealight đốt tinh dầu",
+        "nến tealight 4 giờ",
+        "nến tealight 8 giờ",
+        "nến không khói",
+        "tinh dầu thơm phòng"
+      ],
+      "hooks": [
+        "Một chiếc đèn xông nhỏ là đủ làm góc phòng dịu lại.",
+        "Dùng đèn xông tinh dầu thì nến tealight cháy đều rất quan trọng.",
+        "Nến 4 giờ hợp dùng buổi tối, nến 8 giờ hợp khi cần cháy lâu hơn.",
+        "Thơm nhẹ, ánh nến ấm, phòng ngủ tự nhiên dễ chịu hơn."
+      ],
+      "hashtags": [
+        "#denxongtinhdau",
+        "#nentealight",
+        "#nentealight4gio",
+        "#dot tinhdau",
+        "#phongngu",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Trang trí tiệc, không gian ấm bằng nến",
+      "customerNeed": [
+        "trang trí bàn tiệc",
+        "trang trí sinh nhật",
+        "làm không gian ấm hơn",
+        "cần nến nhỏ số lượng nhiều"
+      ],
+      "naturalKeywords": [
+        "nến tealight trang trí tiệc",
+        "nến tealight trắng vàng đỏ",
+        "nến tealight hộp 100 viên",
+        "nến tealight 50 viên",
+        "nến trụ trang trí",
+        "nến trang trí bàn tiệc",
+        "ánh nến ấm"
+      ],
+      "hooks": [
+        "Bàn tiệc chỉ cần thêm vài viên tealight là không khí khác hẳn.",
+        "Nến nhỏ nhưng lên hình rất xinh, nhất là khi trang trí theo cụm.",
+        "Trắng, vàng, đỏ: mỗi màu nến cho một cảm giác tiệc khác nhau.",
+        "Muốn tiệc ấm hơn mà không rối mắt, dùng tealight là lựa chọn gọn nhất."
+      ],
+      "hashtags": [
+        "#nentrangtri",
+        "#nentealight",
+        "#trangtritiec",
+        "#ban tiec",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Thảo mộc đơn lẻ: quế, bồ kết, sả, gừng, nguyệt quế",
+      "customerNeed": [
+        "muốn tự phối thảo mộc",
+        "thích từng mùi riêng",
+        "cần nguyên liệu xông nhà",
+        "cần nguyên liệu gội đầu tự nhiên"
+      ],
+      "naturalKeywords": [
+        "vỏ quế khô",
+        "bồ kết khô",
+        "lá sả khô",
+        "gừng khô",
+        "lá nguyệt quế khô",
+        "lá khuynh diệp khô",
+        "vỏ bưởi khô",
+        "bạc hà khô"
+      ],
+      "hooks": [
+        "Mỗi loại thảo mộc có một mùi riêng, phối đúng thì nhà thơm rất dễ chịu.",
+        "Vỏ quế cho mùi ấm, sả cho cảm giác sạch, bồ kết cho mùi mộc tự nhiên.",
+        "Ai thích mùi nhà kiểu mộc mạc có thể bắt đầu từ quế, sả và bồ kết.",
+        "Thảo mộc khô không chỉ để xông nhà, nhiều loại còn dùng được cho gội đầu."
+      ],
+      "hashtags": [
+        "#thaomockho",
+        "#voque",
+        "#boket",
+        "#lasa",
+        "#gung kho",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Nụ trầm, thiền, thư giãn",
+      "customerNeed": [
+        "muốn mùi trầm dịu",
+        "thiền, đọc sách, làm việc",
+        "khử mùi nhẹ",
+        "tạo cảm giác tĩnh"
+      ],
+      "naturalKeywords": [
+        "nụ trầm hương",
+        "nụ trầm hương xông nhà",
+        "nụ trầm thư giãn",
+        "nụ trầm thiền định",
+        "nụ trầm khử mùi",
+        "nụ trầm tẩy uế"
+      ],
+      "hooks": [
+        "Có những ngày chỉ cần một nụ trầm nhỏ là căn phòng dịu lại.",
+        "Mùi trầm hợp với lúc đọc sách, thiền nhẹ hoặc dọn lại góc làm việc.",
+        "Nụ trầm không cần dùng nhiều, chỉ cần vừa đủ để không gian có chiều sâu.",
+        "Một mùi thơm trầm ấm cho những lúc muốn chậm lại."
+      ],
+      "hashtags": [
+        "#nutram",
+        "#tramhuong",
+        "#thugian",
+        "#thiendinh",
+        "#phuonglam"
+      ]
+    },
+    {
+      "pillar": "Nến thờ, nến ly, không gian trang nghiêm",
+      "customerNeed": [
+        "thờ cúng",
+        "đốt rằm, lễ, Tết",
+        "cần nến cháy lâu",
+        "cần nến sạch, ít khói"
+      ],
+      "naturalKeywords": [
+        "nến ly thờ cúng",
+        "nến ly 72h",
+        "nến ly 120h",
+        "nến thờ cúng không khói",
+        "nến ly không khói",
+        "nến ly trang nghiêm"
+      ],
+      "hooks": [
+        "Nến thờ nên chọn loại cháy ổn định, ít khói và nhìn trang nghiêm.",
+        "Dịp rằm, lễ, Tết nên chuẩn bị sẵn nến ly cháy lâu trong nhà.",
+        "Nến ly 72h, 120h hợp cho không gian thờ cúng cần sự gọn gàng.",
+        "Một cặp nến sạch, sáng đều làm bàn thờ nhìn ấm và trang trọng hơn."
+      ],
+      "hashtags": [
+        "#nenly",
+        "#nenthocung",
+        "#nenkhongkhoi",
+        "#ramle",
+        "#phuonglam"
+      ]
+    }
+  ],
+  "readyToUsePostAngles": [
+    {
+      "angle": "Mẹo nhanh",
+      "templates": [
+        "Nếu {painPoint}, thử dùng {productType}. Mùi nhẹ hơn xịt phòng, nhưng vẫn giúp không gian dễ chịu.",
+        "{productType} hợp với những lúc {useCase}. Dùng ít thôi, đủ thơm là đẹp.",
+        "Một mẹo nhỏ: {tip}. Cách này giúp {benefit} mà không bị mùi quá nồng."
+      ]
+    },
+    {
+      "angle": "Bán hàng mềm",
+      "templates": [
+        "Shop có sẵn {productType} cho khách cần {useCase}. Nhắn Phương Lâm để chọn mùi/combo phù hợp.",
+        "Ai đang tìm {productType} thì Phương Lâm có nhiều loại: {variantList}. Cần tư vấn cứ nhắn shop.",
+        "{productType} phù hợp cho {useCase}. Có sẵn hàng, đóng gói gọn, dùng được ngay."
+      ]
+    },
+    {
+      "angle": "Câu hỏi tương tác",
+      "templates": [
+        "Nhà bạn thích mùi thảo mộc kiểu ấm như quế hay mát như sả?",
+        "Bạn thường xông nhà khi nào: sau dọn dẹp, đầu tháng hay khi phòng có mùi?",
+        "Nếu dùng đèn xông tinh dầu, bạn hay chọn nến 4 giờ hay 8 giờ?"
+      ]
+    },
+    {
+      "angle": "Giải thích công dụng",
+      "templates": [
+        "{ingredient} thường được dùng để {benefit}. Khi xông nhẹ, mùi sẽ lan chậm và dễ chịu hơn.",
+        "{productType} không chỉ để thơm phòng, mà còn giúp {benefit}.",
+        "Với {useCase}, nên chọn {productType} vì {reason}."
+      ]
+    }
+  ],
+  "hashtagsByTopic": {
+    "brand": [
+      "#phuonglam",
+      "#phuonglamofficial",
+      "#nhathomphuonglam"
+    ],
+    "tealight": [
+      "#nentealight",
+      "#nentealight4gio",
+      "#nentealight8gio",
+      "#nenkhongkhoi",
+      "#dottinhdau",
+      "#denxongtinhdau"
+    ],
+    "herbal": [
+      "#thaomocxongnha",
+      "#thaomockho",
+      "#xongnha",
+      "#xongnhakhumui",
+      "#thanhlockhongkhi",
+      "#xongnhaxuamuoi"
+    ],
+    "combo": [
+      "#boxongnha",
+      "#comboxongnha",
+      "#xongnhatayue",
+      "#nhamoi",
+      "#khumui"
+    ],
+    "oilBurner": [
+      "#denxongtinhdau",
+      "#bepxongthaomoc",
+      "#denxonggom su",
+      "#tinhdauthomphong",
+      "#phongngu"
+    ],
+    "incense": [
+      "#nutram",
+      "#tramhuong",
+      "#tramhuongxongnha",
+      "#thugian",
+      "#thiendinh"
+    ],
+    "worshipCandle": [
+      "#nenly",
+      "#nenthocung",
+      "#nenkhongkhoi",
+      "#nentho",
+      "#ramle"
+    ]
+  },
+  "doNotOveruseKeywords": [
+    "giá rẻ nhất",
+    "chữa bệnh",
+    "trị bệnh",
+    "cam kết khỏi",
+    "tẩy uế tuyệt đối",
+    "đuổi hết muỗi 100%"
+  ]
+}
