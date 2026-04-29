@@ -1345,15 +1345,50 @@
     "sku": "SP-28991652145",
     "categoryId": "combo",
     "name": "Bộ xông nhà tẩy uế thảo mộc khử mùi thu hút may mắn",
-    "price": 120000,
-    "originalPrice": null,
+    "price": 150000,
+    "originalPrice": 220000,
     "shortDesc": "BẢO HÀNH: NẾU TRONG QUÁ TRÌNH VẬN CHUYỂN BỊ BỂ VỠ SHOP SẼ ĐỔI CHO BẠN CÁI MỚI.",
     "description": "BỘ XÔNG NHÀ TẨY UẾ THẢO MỘC KHỬ MÙI THU HÚT MAY MẮN\n\n✔ Tổng quan sản phẩm:\nBẢO HÀNH: NẾU TRONG QUÁ TRÌNH VẬN CHUYỂN BỊ BỂ VỠ SHOP SẼ ĐỔI CHO BẠN CÁI MỚI.\n\n✔ Mô tả chi tiết:\nBẢO HÀNH: NẾU TRONG QUÁ TRÌNH VẬN CHUYỂN BỊ BỂ VỠ SHOP SẼ ĐỔI CHO BẠN CÁI MỚI\n\nTHÔNG TIN SẢN PHẨM:\n+ Bếp: Nhiều kích cỡ tự chọn\n+ 10 Viên nến đốt trong 4 giờ/ Viên (bộ tiết kiệm chỉ có 1 viên)\n+ Gói thảo mộc xông: mix nhiều mùi theo từng nhu cầu\n+ 1 đế đựng nến tránh bỏng tay (bộ tiết kiệm sẽ không có)\n\nHướng dẫn sử dụng: đốt 1 - 3 viên nến dưới bếp, cho thảo mộc lên mặt bếp\n\nCÔNG DỤNG XÔNG THẢO MỘC\nMỗi ngôi nhà đều cần một khởi đầu mới mẻ. Bộ Xông Nhà Khởi Đầu Thuận Lợi sẽ giúp bạn làm mọi chuyện dễ dàng.\n\nCảm giác thư thái ngay từ hơi thở: Từ khoảnh khắc đầu tiên, hương thơm tự nhiên của thảo mộc sẽ lan tỏa, mang lại cảm giác thanh khiết, giúp đường thở thông thoáng và dễ chịu, đón chào khong khi trong lành!\n\nKhông gian sạch sẽ, không lo côn trùng: Thay vì dùng hóa chất, hãy để sức mạnh của tự nhiên bảo vệ ngôi nhà bạn. Khói thảo mộc vừa làm sạch không khí, vừa nhẹ nhàng xua đuổi các vị khách không mời như muỗi, ruồi, kiến.\n\nNăng lượng tươi mới cho ngôi nhà: Một nén thảo mộc được đốt lên không chỉ là khói và hương thơm, mà còn là cách để bạn xua tan những điều không may, mang lại nguồn năng lượng tích cực, sự thịnh vượng và bình an cho cả gia đình.\n\nXUẤT XỨ: VIỆT NAM\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Bộ xông nhà tẩy uế thảo mộc khử mùi thu hút may mắn\n- Danh mục: Combo xông nhà\n- Phân loại: BỘ BẾP 16CM, BỘ XÔNG XUA MUỖI, BỘ TIẾT KIỆM 16CM, BỘ TIẾT KIỆM 13CM, BỘ XÔNG GIẢI CẢM, BỘ XÔNG THƯ GIÃN, BỘ XÔNG CAO CẤP 13CM, BỘ XÔNG NHÀ MỚI, BỘ XÔNG KHỬ MÙI, BỘ XÔNG TẨY UẾ, BỘ BẾP 13CM, BỘ XÔNG CAO CẤP 16CM\n- Cân nặng vận chuyển: 2000g\n- Mã sản phẩm: SP-28991652145\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.",
     "usage": "HƯỚNG DẪN SỬ DỤNG BỘ XÔNG NHÀ TẨY UẾ THẢO MỘC KHỬ MÙI THU HÚT MAY MẮN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 2000,
     "hidden": false,
-    "optionGroups": [],
+    "optionGroups": [
+      {
+        "name": "Kích Thước",
+        "values": [
+          "13cm",
+          "16cm"
+        ]
+      },
+      {
+        "name": "Bộ Thảo mộc",
+        "values": [
+          "BỘ XÔNG XUA MUỖI 13CM",
+          "BỘ XÔNG GIẢI CẢM 13CM",
+          "BỘ XÔNG THƯ GIÃN 13CM",
+          "BỘ XÔNG NHÀ MỚI 13CM",
+          "BỘ XÔNG KHỬ MÙI 13CM",
+          "BỘ XÔNG TẨY UẾ 13CM",
+          "BỘ XÔNG 12 VỊ 13CM",
+          "BỘ THANH LỌC KK 13CM",
+          "BỘ TIẾT KIỆM 13CM",
+          "BỘ XÔNG CAO CẤP 13CM",
+          "BỘ BẾP 13CM",
+          "BỘ XÔNG XUA MUỖI 16CM",
+          "BỘ XÔNG GIẢI CẢM 16CM",
+          "BỘ XÔNG THƯ GIÃN 16CM",
+          "BỘ XÔNG NHÀ MỚI 16CM",
+          "BỘ XÔNG KHỬ MÙI 16CM",
+          "BỘ XÔNG TẨY UẾ 16CM",
+          "BỘ XÔNG 12 VỊ 16CM",
+          "BỘ THANH LỌC KK 16CM",
+          "BỘ TIẾT KIỆM 16CM",
+          "BỘ XÔNG CAO CẤP 16CM",
+          "BỘ BẾP 16CM"
+        ]
+      }
+    ],
     "optionImages": {},
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-meracf95o3cxaf",
@@ -1369,124 +1404,212 @@
     "reviews": [],
     "variants": [
       {
-        "id": "shopee_variant_276593039596",
-        "name": "BỘ BẾP 16CM",
-        "sku": "",
-        "price": 270000,
-        "originalPrice": null,
-        "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32r4zy0bgn4c",
-        "options": {}
-      },
-      {
         "id": "shopee_variant_276593039600",
-        "name": "BỘ XÔNG XUA MUỖI",
+        "name": "BỘ XÔNG XUA MUỖI 13CM",
         "sku": "",
-        "price": 260000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32hr3h3hfm8e",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_291959085301",
-        "name": "BỘ TIẾT KIỆM 16CM",
-        "sku": "",
-        "price": 140000,
-        "originalPrice": null,
-        "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1q9r3cax2e",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_291959085300",
-        "name": "BỘ TIẾT KIỆM 13CM",
-        "sku": "",
-        "price": 120000,
-        "originalPrice": null,
-        "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mftq1otr7zt63b",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG XUA MUỖI 13CM"
+        }
       },
       {
         "id": "shopee_variant_276593039603",
-        "name": "BỘ XÔNG GIẢI CẢM",
+        "name": "BỘ XÔNG GIẢI CẢM 13CM",
         "sku": "",
-        "price": 260000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32i51tmy9ua0",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG GIẢI CẢM 13CM"
+        }
       },
       {
         "id": "shopee_variant_276593039597",
-        "name": "BỘ XÔNG THƯ GIÃN",
+        "name": "BỘ XÔNG THƯ GIÃN 13CM",
         "sku": "",
-        "price": 260000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32ip10ei9y4f",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_262243998906",
-        "name": "BỘ XÔNG CAO CẤP 13CM",
-        "sku": "",
-        "price": 260000,
-        "originalPrice": null,
-        "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fds8pxxi86",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG THƯ GIÃN 13CM"
+        }
       },
       {
         "id": "shopee_variant_276593039601",
-        "name": "BỘ XÔNG NHÀ MỚI",
+        "name": "BỘ XÔNG NHÀ MỚI 13CM",
         "sku": "",
-        "price": 260000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32jv2qdlhd09",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG NHÀ MỚI 13CM"
+        }
       },
       {
         "id": "shopee_variant_276593039599",
-        "name": "BỘ XÔNG KHỬ MÙI",
+        "name": "BỘ XÔNG KHỬ MÙI 13CM",
         "sku": "",
-        "price": 260000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32s9cz9gqp42",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG KHỬ MÙI 13CM"
+        }
       },
       {
         "id": "shopee_variant_276593039598",
-        "name": "BỘ XÔNG TẨY UẾ",
+        "name": "BỘ XÔNG TẨY UẾ 13CM",
         "sku": "",
-        "price": 260000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32kec7nxfqb1",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG TẨY UẾ 13CM"
+        }
       },
       {
-        "id": "shopee_variant_276593039595",
-        "name": "BỘ BẾP 13CM",
+        "id": "sp289_bo_xong_12_vi_13",
+        "name": "BỘ XÔNG 12 VỊ 13CM",
         "sku": "",
-        "price": 250000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi32r2z058u99d",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ XÔNG 12 VỊ 13CM"
+        }
       },
       {
-        "id": "shopee_variant_262243998907",
-        "name": "BỘ XÔNG CAO CẤP 16CM",
+        "id": "sp289_bo_thanh_loc_kk_13",
+        "name": "BỘ THANH LỌC KK 13CM",
         "sku": "",
-        "price": 280000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 220000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5fcbv5k3l74",
-        "options": {}
+        "image": "",
+        "options": {
+          "Kích Thước": "13cm",
+          "Bộ Thảo mộc": "BỘ THANH LỌC KK 13CM"
+        }
+      },
+      {
+        "id": "shopee_variant_276593039596",
+        "name": "BỘ XÔNG XUA MUỖI 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG XUA MUỖI 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_xong_giai_cam_16",
+        "name": "BỘ XÔNG GIẢI CẢM 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG GIẢI CẢM 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_xong_thu_gian_16",
+        "name": "BỘ XÔNG THƯ GIÃN 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG THƯ GIÃN 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_xong_nha_moi_16",
+        "name": "BỘ XÔNG NHÀ MỚI 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG NHÀ MỚI 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_xong_khu_mui_16",
+        "name": "BỘ XÔNG KHỬ MÙI 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG KHỬ MÙI 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_xong_tay_ue_16",
+        "name": "BỘ XÔNG TẨY UẾ 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG TẨY UẾ 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_xong_12_vi_16",
+        "name": "BỘ XÔNG 12 VỊ 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ XÔNG 12 VỊ 16CM"
+        }
+      },
+      {
+        "id": "sp289_bo_thanh_loc_kk_16",
+        "name": "BỘ THANH LỌC KK 16CM",
+        "sku": "",
+        "price": 165000,
+        "originalPrice": 250000,
+        "weight": 2000,
+        "image": "",
+        "options": {
+          "Kích Thước": "16cm",
+          "Bộ Thảo mộc": "BỘ THANH LỌC KK 16CM"
+        }
       }
     ],
     "slug": "bo-xong-nha-tay-ue-thao-moc-khu-mui-thu-hut-may-man"
