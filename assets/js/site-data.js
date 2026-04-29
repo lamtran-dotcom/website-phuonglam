@@ -581,7 +581,7 @@ const PRODUCTS = [
     "usage": "HƯỚNG DẪN SỬ DỤNG QUẾ THANH\n\n✔ Nấu ăn:\nCho 1-2 thanh quế vào phở, bò kho, món hầm hoặc nước dùng. Vớt ra khi hương quế đã đủ thơm để món ăn không bị gắt mùi.\n\n✔ Pha trà:\nHãm 1 thanh quế nhỏ với nước nóng 5-10 phút. Có thể thêm mật ong, gừng, táo đỏ hoặc thảo mộc tùy khẩu vị.\n\n✔ Tạo hương tự nhiên:\nĐặt vài thanh quế ở bàn trà, kệ decor, tủ quần áo hoặc túi thơm để tạo mùi ấm nhẹ.\n\n✔ Bảo quản:\nBuộc kín túi sau khi dùng, để nơi khô ráo, tránh nắng gắt và tránh ẩm để giữ mùi thơm lâu hơn.",
     "tag": "",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
@@ -947,7 +947,7 @@ const PRODUCTS = [
     "usage": "HƯỚNG DẪN SỬ DỤNG LÁ DỨA KHÔ TỰ NHIÊN XÔNG NHÀ THƠM DỊU THANH LỌC KHÔNG GIAN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
@@ -1671,7 +1671,10 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83k4bvilfm0a"
+      "https://cf.shopee.vn/file/vn-11134207-820l4-me83k4bvilfm0a",
+      "/assets/products/uploads/1777469632817-bep-xong-thao-moc-san-pham-chinh.webp",
+      "/assets/products/uploads/1777469641086-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
+      "/assets/products/uploads/1777469642912-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2770,11 +2773,10 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-me821wr79y4h47",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
       "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-log7xpeen2rb9d",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lyn1i7qfs28d3c"
+      "/assets/products/uploads/1777469612987-bo-ket-xong-nha-phuong-lam-202604280416-featured-bo-ket-xong-nha-phuong-lam.webp",
+      "/assets/products/uploads/1777469619221-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2782,8 +2784,8 @@ const PRODUCTS = [
         "id": "shopee_variant_235832531169",
         "name": "200g Bồ Kết",
         "sku": "",
-        "price": 60000,
-        "originalPrice": null,
+        "price": 45000,
+        "originalPrice": 55000,
         "weight": 300,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
         "options": {}
@@ -2792,8 +2794,8 @@ const PRODUCTS = [
         "id": "shopee_variant_235832531170",
         "name": "500g Bồ Kết",
         "sku": "",
-        "price": 142000,
-        "originalPrice": null,
+        "price": 119000,
+        "originalPrice": 150000,
         "weight": 600,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
         "options": {}
@@ -2802,8 +2804,8 @@ const PRODUCTS = [
         "id": "shopee_variant_235832531168",
         "name": "100g Bồ Kết",
         "sku": "",
-        "price": 32000,
-        "originalPrice": null,
+        "price": 25000,
+        "originalPrice": 35000,
         "weight": 200,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
         "options": {}
