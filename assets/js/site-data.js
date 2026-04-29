@@ -73,8 +73,8 @@ const PRODUCTS = [
         "id": "pl001_trang_20v",
         "name": "Trắng - 2 Vỉ 4h = 20 viên",
         "sku": "PL-001-TRANG-20V",
-        "price": 55000,
-        "originalPrice": null,
+        "price": 38000,
+        "originalPrice": 50000,
         "weight": 200,
         "image": "/assets/products/uploads/1777436104847-11.webp",
         "options": {
@@ -86,8 +86,8 @@ const PRODUCTS = [
         "id": "pl001_trang_50v",
         "name": "Trắng - 50 Viên 4h",
         "sku": "PL-001-TRANG-50V",
-        "price": 95000,
-        "originalPrice": null,
+        "price": 78000,
+        "originalPrice": 100000,
         "weight": 700,
         "image": "/assets/products/uploads/1777436122417-10.webp",
         "options": {
@@ -99,8 +99,8 @@ const PRODUCTS = [
         "id": "pl001_trang_100v",
         "name": "Trắng - Hộp 100 Viên 4h",
         "sku": "PL-001-TRANG-100V",
-        "price": 175000,
-        "originalPrice": null,
+        "price": 150000,
+        "originalPrice": 200000,
         "weight": 1300,
         "image": "/assets/products/uploads/1777436090522-nen-4h-tron-100v.webp",
         "options": {
