@@ -1108,7 +1108,7 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
-      "/assets/products/uploads/1777457682831-chatgpt-image-17-13-34-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777466312414-image.webp",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uo4lchx4d73",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uot2kocy7ed",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoca98p2l7a",
@@ -1137,7 +1137,7 @@ const PRODUCTS = [
         "name": "2Vỉ 4h/20v - Lài",
         "sku": "",
         "price": 55000,
-        "originalPrice": 40000,
+        "originalPrice": 70000,
         "weight": 200,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukpzpwqkvfe",
         "options": {
@@ -3212,7 +3212,9 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lmqvki7i74rj1b"
+      "/assets/products/uploads/1777466149628-chatgpt-image-19-34-30-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777466421671-chatgpt-image-19-36-10-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777466423224-chatgpt-image-19-39-43-29-thg-4-2026.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3220,8 +3222,8 @@ const PRODUCTS = [
         "id": "shopee_variant_181860225801",
         "name": "2 HỘP/ 20V 4H TRƠN🤍",
         "sku": "",
-        "price": 48000,
-        "originalPrice": null,
+        "price": 38000,
+        "originalPrice": 55000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3trim9g5g5c",
         "options": {
@@ -3233,8 +3235,8 @@ const PRODUCTS = [
         "id": "shopee_variant_281265692611",
         "name": "HỘP 10V TRƠN 4H🤍",
         "sku": "",
-        "price": 50000,
-        "originalPrice": null,
+        "price": 19000,
+        "originalPrice": 25000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw73prz7k3d",
         "options": {
@@ -3246,8 +3248,8 @@ const PRODUCTS = [
         "id": "shopee_variant_281265692609",
         "name": "HỘP 10V TRẮNG 4H🤍",
         "sku": "",
-        "price": 50000,
-        "originalPrice": null,
+        "price": 16000,
+        "originalPrice": 22000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw2eemm8673",
         "options": {
@@ -3259,8 +3261,8 @@ const PRODUCTS = [
         "id": "shopee_variant_281265692610",
         "name": "HỘP 10V TRẮNG 2H🤍",
         "sku": "",
-        "price": 40000,
-        "originalPrice": null,
+        "price": 14000,
+        "originalPrice": 20000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw4j8derkb5",
         "options": {
@@ -3272,8 +3274,8 @@ const PRODUCTS = [
         "id": "shopee_variant_220387704321",
         "name": "2 HỘP/ 20V 4H🤍",
         "sku": "",
-        "price": 48000,
-        "originalPrice": null,
+        "price": 32000,
+        "originalPrice": 45000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3ucnze3gh7a",
         "options": {
@@ -3285,8 +3287,8 @@ const PRODUCTS = [
         "id": "shopee_variant_291432885081",
         "name": "HỘP 10V LÀI 4H💛",
         "sku": "",
-        "price": 90000,
-        "originalPrice": null,
+        "price": 25000,
+        "originalPrice": 30000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yyjv3sxkwa0",
         "options": {
@@ -3298,8 +3300,8 @@ const PRODUCTS = [
         "id": "shopee_variant_272429767579",
         "name": "2 HỘP/ 20V 4H - LÀI🔥",
         "sku": "",
-        "price": 60000,
-        "originalPrice": null,
+        "price": 55000,
+        "originalPrice": 70000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3tk0q328497",
         "options": {
@@ -3311,39 +3313,13 @@ const PRODUCTS = [
         "id": "shopee_variant_240485670557",
         "name": "2 HỘP/ 20V 2H🤍",
         "sku": "",
-        "price": 42000,
-        "originalPrice": null,
+        "price": 28000,
+        "originalPrice": 35000,
         "weight": 100,
         "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3toasd0jpaf",
         "options": {
           "Loại": "2h Giờ",
           "Số lượng": "2 hộp / 20V - Trắng"
-        }
-      },
-      {
-        "id": "shopee_variant_240485670559",
-        "name": "2 HỘP/ 20V 2H💛",
-        "sku": "",
-        "price": 42000,
-        "originalPrice": null,
-        "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc41ehj01sf69",
-        "options": {
-          "Loại": "2h Giờ",
-          "Số lượng": "2 hộp / 20V - Vàng"
-        }
-      },
-      {
-        "id": "shopee_variant_240485670558",
-        "name": "2 HỘP/ 20V 2H❤️",
-        "sku": "",
-        "price": 42000,
-        "originalPrice": null,
-        "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc41g5qqyo530",
-        "options": {
-          "Loại": "2h Giờ",
-          "Số lượng": "2 hộp / 20V - Đỏ"
         }
       }
     ]
