@@ -3843,17 +3843,6 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
-    "id": 15,
-    "title": "Bồ Kết Xông Nhà Có Tác Dụng Gì? Cách Dùng Đúng &amp; An Toàn | Nến Phương Lâm",
-    "excerpt": "Bồ kết xông nhà giúp khử mùi ẩm mốc, đuổi côn trùng, thanh lọc không khí và cân bằng phong thủy. Hướng dẫn cách xông nhà bằng bồ kết đúng cách, an toàn…",
-    "date": "29 tháng 4, 2026",
-    "readTime": "3 phút đọc",
-    "slug": "bo-ket-xong-nha-phuong-lam-202604291359",
-    "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/bo-ket-xong-nha-phuong-lam-202604291359/",
-    "image": "/assets/blog/bo-ket-xong-nha-phuong-lam-202604291359-featured-bo-ket-xong-nha-phuong-lam.webp"
-  },
-  {
     "id": 14,
     "title": "Nến Tealight Không Khói: Cách Chọn Đúng Loại 2h, 4h, 8h Cho Xông Tinh Dầu | Nến Phương Lâm",
     "excerpt": "Nến tealight không khói là chìa khóa để xông tinh dầu đúng cách — không muội đen, không át mùi hương. Hướng dẫn phân biệt nến 2h, 4h, 8h và cách chọn…",
