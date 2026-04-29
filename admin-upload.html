@@ -457,6 +457,7 @@
     const colorSwatch = value => {
       const key = normalizeText(value);
       if (key.includes('trang') || key.includes('white')) return { background: '#fff', border: '#cfd8cf' };
+      if (key.includes('huong lai') || key.includes('lai')) return { background: '#f5c84c', border: '#d5a91f' };
       if (key.includes('vang') || key.includes('yellow')) return { background: '#f5c84c', border: '#d5a91f' };
       if (key.includes('do') || key.includes('red')) return { background: '#d93636', border: '#b72525' };
       return { background: '#dfe6dc', border: '#bac8b8' };
