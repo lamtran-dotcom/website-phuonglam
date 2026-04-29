@@ -34,6 +34,76 @@ const categoryAliases = {
 };
 
 const normalizeCategoryId = (value) => categoryAliases[String(value || '')] || String(value || 'nen-thom');
+const pl004Quantities = ['2 Vỉ 4h = 20 viên', '50 Viên 4h', 'Hộp 100 Viên 4h'];
+
+const pl004QuantityFromName = (name) => {
+  const text = String(name || '').toLowerCase();
+  if (text.includes('100')) return pl004Quantities[2];
+  if (text.includes('50')) return pl004Quantities[1];
+  return pl004Quantities[0];
+};
+
+const normalizePl004Product = (product) => {
+  if (product?.sku !== 'PL-004') return product;
+  return {
+    ...product,
+    optionGroups: [
+      { name: 'Màu', values: ['Hương lài'] },
+      { name: 'Số lượng', values: pl004Quantities },
+    ],
+    variants: (product.variants || []).map((variant) => ({
+      ...variant,
+      options: {
+        'Màu': 'Hương lài',
+        'Số lượng': pl004QuantityFromName(variant.name),
+      },
+    })),
+  };
+};
+
+const sp196OptionValues = [
+  '2 hộp / 20V - Trơn',
+  'Hộp 10V - Trơn',
+  'Hộp 10V - Trắng',
+  '2 hộp / 20V - Đỏ',
+  '2 hộp / 20V - Vàng',
+  '2 hộp / 20V - Trắng',
+  'Hộp 10V - Lài',
+  '2 hộp / 20V - Lài',
+];
+
+const sp196OptionByVariantId = {
+  shopee_variant_181860225801: '2 hộp / 20V - Trơn',
+  shopee_variant_281265692611: 'Hộp 10V - Trơn',
+  shopee_variant_281265692609: 'Hộp 10V - Trắng',
+  shopee_variant_240485670556: '2 hộp / 20V - Đỏ',
+  shopee_variant_220387704322: '2 hộp / 20V - Vàng',
+  shopee_variant_281265692610: 'Hộp 10V - Trắng',
+  shopee_variant_220387704321: '2 hộp / 20V - Trắng',
+  shopee_variant_291432885081: 'Hộp 10V - Lài',
+  shopee_variant_272429767579: '2 hộp / 20V - Lài',
+  shopee_variant_240485670557: '2 hộp / 20V - Trắng',
+  shopee_variant_240485670559: '2 hộp / 20V - Vàng',
+  shopee_variant_240485670558: '2 hộp / 20V - Đỏ',
+};
+
+const normalizeSp196Product = (product) => {
+  if (product?.sku !== 'SP-19636361517') return product;
+  return {
+    ...product,
+    optionGroups: [
+      { name: 'Loại', values: ['4 Giờ Mai', '4 Giờ Trơn', '4 Giờ Lài', '2h Giờ'] },
+      { name: 'Số lượng', values: sp196OptionValues },
+    ],
+    variants: (product.variants || []).map((variant) => ({
+      ...variant,
+      options: {
+        ...(variant.options || {}),
+        'Số lượng': sp196OptionByVariantId[variant.id] || variant.options?.['Số lượng'] || variant.name,
+      },
+    })),
+  };
+};
 
 const ensureDir = (dir) => fs.mkdirSync(dir, { recursive: true });
 
@@ -682,10 +752,10 @@ const updateProductsJson = () => {
     prefix: 'product',
   });
   const original = JSON.parse(fs.readFileSync(paths.products, 'utf8'));
-  const products = makeUniqueSlugs(replaceDataUrlsInObject(original, extractor).map((product) => ({
+  const products = makeUniqueSlugs(replaceDataUrlsInObject(original, extractor).map((product) => normalizeSp196Product(normalizePl004Product({
     ...product,
     categoryId: normalizeCategoryId(product.categoryId),
-  })));
+  }))));
   fs.writeFileSync(paths.products, JSON.stringify(products, null, 2) + '\n');
   return products;
 };

@@ -465,6 +465,29 @@
     const id = () => 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
     const firstImage = product => (product.images || []).find(Boolean) || (product.variants || []).map(v => v.image).find(Boolean) || '';
     const isHidden = product => product?.hidden === true || product?.hidden === 'true';
+    const pl004QuantityFromName = name => {
+      const text = normalizeText(name);
+      if (text.includes('100')) return 'Hộp 100 Viên 4h';
+      if (text.includes('50')) return '50 Viên 4h';
+      return '2 Vỉ 4h = 20 viên';
+    };
+    const normalizePl004Options = product => {
+      if (product?.sku !== 'PL-004') return product;
+      return {
+        ...product,
+        optionGroups: [
+          { name: 'Màu', values: ['Hương lài'] },
+          { name: 'Số lượng', values: ['2 Vỉ 4h = 20 viên', '50 Viên 4h', 'Hộp 100 Viên 4h'] }
+        ],
+        variants: (product.variants || []).map(variant => ({
+          ...variant,
+          options: {
+            'Màu': 'Hương lài',
+            'Số lượng': pl004QuantityFromName(variant.name)
+          }
+        }))
+      };
+    };
     const selectedProduct = () => products.find(product => String(product.id) === String(selectedId));
 
     async function readJsonResponse(response, label) {
@@ -480,7 +503,7 @@
     }
 
     function normalizeProduct(product) {
-      return {
+      const normalized = {
         id: product.id || id(),
         sku: product.sku || '',
         categoryId: normalizeCategoryId(product.categoryId),
@@ -518,6 +541,7 @@
           options: v.options && typeof v.options === 'object' && !Array.isArray(v.options) ? v.options : {}
         })) : []
       };
+      return normalizePl004Options(normalized);
     }
 
     async function loadProducts() {
