@@ -3843,6 +3843,17 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 15,
+    "title": "Phụ Kiện Thắp Nến Bằng Gas: Tại Sao Nên Dùng Quẹt Gas Thay Bật Lửa? | Nến Phương Lâm",
+    "excerpt": "Phụ kiện thắp nến bằng gas giúp mồi nến ly sâu, nến tealight an toàn hơn, không bỏng tay. So sánh quẹt gas, bật lửa điện và diêm — chọn loại nào tốt nhất…",
+    "date": "29 tháng 4, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "phu-kien-thap-nen-quet-gas-202604291546",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/phu-kien-thap-nen-quet-gas-202604291546/",
+    "image": "/assets/blog/phu-kien-thap-nen-quet-gas-202604291546-1777478758688-lfh7p78icaf-chatgpt-image-16-30-11-29-thg-4-2026-trung-binh.webp"
+  },
+  {
     "id": 14,
     "title": "Nến Tealight Không Khói: Cách Chọn Đúng Loại 2h, 4h, 8h Cho Xông Tinh Dầu | Nến Phương Lâm",
     "excerpt": "Nến tealight không khói là chìa khóa để xông tinh dầu đúng cách — không muội đen, không át mùi hương. Hướng dẫn phân biệt nến 2h, 4h, 8h và cách chọn…",
