@@ -3622,7 +3622,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG COMBO THẢO MỘC XÔNG NHÀ THANH LỌC KHỬ MÙI TỰ NHIÊN\n\n✔ Cách dùng:\nCho một lượng sản phẩm vừa đủ vào bếp xông hoặc dụng cụ phù hợp, làm nóng bằng nến tealight để hương thơm tỏa ra tự nhiên.\n\n✔ Liều lượng:\nDùng lượng nhỏ trước, sau đó tăng dần tùy diện tích phòng và độ đậm mùi mong muốn.\n\n✔ Sau khi dùng:\nChờ dụng cụ nguội hoàn toàn rồi vệ sinh phần thảo mộc đã xông.\n\n✔ An toàn:\nLuôn đặt bếp/dụng cụ xông trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.",
     "tag": "",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
