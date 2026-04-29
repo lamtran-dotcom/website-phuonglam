@@ -1,4 +1,5 @@
 const LOGO_SRC = "/assets/media/generated/embedded-001.png";
+const ORDER_WEBHOOK_URL = "https://phuonglam-order-webhook.tranquanglam1998.workers.dev/";
 
 const HERO_IMAGES = [
   "/assets/media/generated/embedded-002.jpg",
@@ -2041,6 +2042,8 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   const [form, setForm] = React.useState({ name: '', phone: '', city: '', district: '', ward: '', address: '', note: '' });
   const [deliveryMethod, setDeliveryMethod] = React.useState('standard');
   const [errors, setErrors] = React.useState({});
+  const [orderSending, setOrderSending] = React.useState(false);
+  const [orderError, setOrderError] = React.useState('');
 
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const hasCandleCup = cart.some(item => item.categoryId === 'nen-ly');
@@ -2084,30 +2087,62 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 
   const handleSubmit = () => {
     if (isCandleDeliveryBlocked) return;
+    setOrderError('');
     if (validate()) setStep(2);
   };
 
+  const buildOrderPayload = () => ({
+    customerName: form.name.trim(),
+    phone: form.phone.trim(),
+    address: fullAddress,
+    note: form.note.trim(),
+    city: form.city,
+    district: form.district,
+    ward: form.ward,
+    deliveryMethod: deliveryMethodLabel,
+    deliveryNote,
+    subtotal,
+    shipping,
+    total,
+    weight: shippingInfo.weight,
+    source: 'phuonglam.com',
+    createdAt: new Date().toISOString(),
+    items: cart.map(item => ({
+      id: item.id,
+      sku: item.sku || '',
+      name: item.selectedVariant?.name ? `${item.name} - ${item.selectedVariant.name}` : item.name,
+      productName: item.name,
+      variantName: item.selectedVariant?.name || '',
+      qty: item.qty,
+      price: item.price,
+      total: item.price * item.qty,
+      weight: item.weight || null,
+    })),
+  });
+
   const handleConfirm = async () => {
-    const order = {
-      customer: form.name,
-      phone: form.phone,
-      address: fullAddress,
-      note: form.note,
-      deliveryMethod: deliveryMethodLabel,
-      shipping,
-      subtotal,
-      total,
-      items: cart.map(item => ({
-        id: item.id,
-        name: item.name,
-        variant: item.selectedVariant?.name || '',
-        qty: item.qty,
-        price: item.price,
-      })),
-    };
-    console.info('Order created locally', order);
-    setStep(3);
-    setTimeout(() => { setCart([]); }, 500);
+    if (orderSending) return;
+    setOrderError('');
+    setOrderSending(true);
+    try {
+      const response = await fetch(ORDER_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(buildOrderPayload()),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.ok === false) {
+        throw new Error(result.error || 'Không gửi được đơn hàng');
+      }
+      setCart([]);
+      setStep(3);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.error('Order webhook failed', error);
+      setOrderError('Chưa gửi được đơn. Vui lòng thử lại hoặc gọi/Zalo 0773829593.');
+    } finally {
+      setOrderSending(false);
+    }
   };
 
   const fullAddress = [form.address, form.ward, form.district, form.city].filter(Boolean).join(', ');
@@ -2318,7 +2353,14 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
             {step === 2 && (
               <div style={coStyles.confirmActions}>
                 <button style={coStyles.secondaryBtnSmall} onClick={() => setStep(1)}>← Sửa thông tin</button>
-                <button style={coStyles.primaryBtnSmall} onClick={handleConfirm}>Xác nhận đặt hàng</button>
+                <button
+                  style={{ ...coStyles.primaryBtnSmall, opacity: orderSending ? 0.72 : 1, cursor: orderSending ? 'wait' : 'pointer' }}
+                  onClick={handleConfirm}
+                  disabled={orderSending}
+                >
+                  {orderSending ? 'Đang gửi đơn...' : 'Xác nhận đặt hàng'}
+                </button>
+                {orderError && <div style={coStyles.orderError}>{orderError}</div>}
               </div>
             )}
           </div>
@@ -2357,6 +2399,7 @@ const coStyles = {
   primaryBtn: { width: '100%', background: '#318223', color: '#fff', border: 'none', padding: '14px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 8 },
   secondaryBtn: { background: '#fff', color: '#318223', border: '1.5px solid #318223', padding: '13px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: 'pointer' },
   confirmActions: { display: 'flex', gap: 12, marginTop: 24, justifyContent: 'center', flexWrap: 'wrap' },
+  orderError: { width: '100%', background: '#fff4e8', border: '1px solid #f2c799', borderRadius: 10, padding: '10px 12px', color: '#8a4a10', fontSize: 13, lineHeight: 1.5, fontWeight: 700, textAlign: 'center' },
   primaryBtnSmall: { background: '#318223', color: '#fff', border: 'none', width: '40%', minWidth: 220, padding: '11px 16px', borderRadius: 10, fontSize: 13, fontWeight: 700, cursor: 'pointer' },
   secondaryBtnSmall: { background: '#fff', color: '#318223', border: '1.5px solid #318223', width: '40%', minWidth: 220, padding: '10px 16px', borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: 'pointer' },
   confirmInfo: { background: '#f7faf6', borderRadius: 10, padding: '16px 18px', marginBottom: 20 },
