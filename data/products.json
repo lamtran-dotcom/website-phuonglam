@@ -441,9 +441,9 @@
   },
   {
     "id": "shopee_57058955812",
-    "sku": "SP-57058955812",
+    "sku": "SP-1",
     "categoryId": "nen-thom",
-    "name": "Nến tealight 4 giờ trang trí tiệc ánh sáng ấm cháy ổn định",
+    "name": "Nến tealight 8 giờ trang trí tiệc ánh sáng ấm cháy ổn định l Phương Lâm",
     "price": 500000,
     "originalPrice": null,
     "shortDesc": "Set 50 viên nến tealight nhỏ gọn, ánh sáng ấm, phù hợp trang trí bàn tiệc, phòng ngủ, spa, thiền thư giãn và dùng kèm đèn xông tinh dầu hoặc bếp xông thảo mộc.",
@@ -455,7 +455,6 @@
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c46ppkwsj39",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4aqbcd1i4e",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4eu7yf44ff",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4c8sak1y98",
@@ -465,7 +464,7 @@
     "variants": [
       {
         "id": "shopee_variant_277543299479",
-        "name": "50 Viên Trong Suốt",
+        "name": "50 Viên ",
         "sku": "",
         "price": 600000,
         "originalPrice": null,
@@ -474,17 +473,37 @@
         "options": {}
       },
       {
-        "id": "shopee_variant_277543299480",
-        "name": "50 Viên Vỏ Nhôm",
+        "id": "p_1777455989449_h4bxv",
+        "name": "20 Viên",
         "sku": "",
         "price": 500000,
         "originalPrice": null,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c46ppkwsj39",
+        "image": "",
+        "options": {}
+      },
+      {
+        "id": "p_1777455991092_3eay7",
+        "name": "10 Viên ",
+        "sku": "",
+        "price": 500000,
+        "originalPrice": null,
+        "weight": 2000,
+        "image": "",
+        "options": {}
+      },
+      {
+        "id": "p_1777456018392_mnrfv",
+        "name": "5 Viên ",
+        "sku": "",
+        "price": 500000,
+        "originalPrice": null,
+        "weight": 2000,
+        "image": "",
         "options": {}
       }
     ],
-    "slug": "nen-tealight-4-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh"
+    "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam"
   },
   {
     "id": "shopee_56102764086",
