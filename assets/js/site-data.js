@@ -1079,7 +1079,7 @@ const PRODUCTS = [
   },
   {
     "id": "shopee_29011454025",
-    "sku": "SP-29011454025",
+    "sku": "PL-003",
     "categoryId": "nen-thom",
     "name": "Nến tealight 4 giờ hương lài trang trí tiệc không khói",
     "price": 60000,
