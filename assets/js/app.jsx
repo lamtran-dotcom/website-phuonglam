@@ -12,7 +12,7 @@ const HERO_IMAGES = [
 ];
 HERO_IMAGES[4] = "quẹt gas.jpg";
 HERO_IMAGES.splice(5, 1);
-const BAKED_HEADER_IMAGES = /*BAKED_HEADER_IMAGES*/["/assets/media/generated/embedded-002.jpg","/assets/media/generated/embedded-003.jpg","/assets/media/generated/embedded-004.jpg","/assets/media/generated/embedded-008.jpg","/assets/media/generated/embedded-005.jpg","/assets/products/uploads/1777451872306-shop-1-phu-kien.webp"]/*END_BAKED_HEADER_IMAGES*/;
+const BAKED_HEADER_IMAGES = /*BAKED_HEADER_IMAGES*/["/assets/media/generated/embedded-002.jpg","/assets/media/generated/embedded-003.jpg","/assets/media/generated/embedded-004.jpg","/assets/media/generated/embedded-008.jpg","/assets/media/generated/embedded-005.jpg","/assets/products/uploads/1777479221546-chatgpt-image-16-31-00-29-thg-4-2026-trung-binh.webp"]/*END_BAKED_HEADER_IMAGES*/;
 
 const BLOG_IMAGE_MAP = {
   'huong-dan-dung-bep-xong-thao-moc': '/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp',
