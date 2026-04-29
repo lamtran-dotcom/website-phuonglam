@@ -367,21 +367,21 @@ const PRODUCTS = [
   },
   {
     "id": 7,
-    "sku": "PL-007",
+    "sku": "PL-003",
     "categoryId": "phu-kien",
-    "name": "Hột quẹt gas thắp nến đầu dài an toàn nhỏ gọn tiện lợi",
-    "price": 35000,
+    "name": "Hột quẹt gas thắp nến đầu dài an có thể thu gọn tiện lợi I Phương Lâm",
+    "price": 25000,
     "originalPrice": 40000,
     "shortDesc": "Chuyên dùng cho đốt nến xông, an toàn tiện lợi",
-    "description": "",
-    "usage": "Đặt nến lên đĩa trước khi thắp.",
+    "description": "Hột quẹt gas thắp nến đầu dài Phương Lâm dùng để châm nến tealight, nến thơm, bếp xông thảo mộc, đèn xông tinh dầu và các góc trang trí cần lửa nhỏ. Thiết kế đầu dài giúp tay cách xa ngọn lửa hơn khi thắp nến trong ly, bếp xông hoặc vị trí sâu khó châm.\n\nSản phẩm nhỏ gọn, dễ cầm, có thể thu gọn tiện cất trong ngăn kéo, túi đồ xông hoặc kệ nến. Phù hợp dùng tại nhà, spa, quán cafe, phòng thờ, bàn tiệc hoặc khi setup không gian thư giãn.",
+    "usage": "HƯỚNG DẪN SỬ DỤNG HỘT QUẸT GAS ĐẦU DÀI\n\n✔ Cách dùng:\nMở đầu bật lửa, hướng đầu lửa vào tim nến hoặc vị trí cần châm rồi bấm đánh lửa. Giữ khoảng cách vừa đủ, không để tay quá gần ngọn lửa.\n\n✔ Sau khi dùng:\nTắt lửa hoàn toàn, chờ đầu bật lửa nguội rồi thu gọn và cất lại.\n\n✔ Lưu ý an toàn:\nKhông dùng gần xăng dầu, cồn hoặc vật dễ cháy. Không để bật lửa dưới nắng nóng, gần bếp lửa hoặc nơi nhiệt độ cao. Để xa tầm tay trẻ em.",
     "tag": "Nổi bật",
     "weight": 200,
     "hidden": false,
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/uploads/1777288855211-anh-dai-dien-quet-gas-2.webp"
+      "/assets/products/uploads/1777451754260-shop-1-phu-kien.webp"
     ],
     "reviews": [],
     "variants": []
