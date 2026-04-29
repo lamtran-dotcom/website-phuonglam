@@ -447,6 +447,18 @@
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
     const jsString = value => JSON.stringify(String(value ?? '')).replace(/</g, '\\u003c');
     const jsAttr = value => esc(jsString(value));
+    const parseNumberInput = value => {
+      if (value === '' || value == null) return null;
+      if (typeof value === 'number') return Number.isFinite(value) ? value : null;
+      const normalized = String(value)
+        .trim()
+        .replace(/\s+/g, '')
+        .replace(/[,.]/g, '');
+      if (!normalized) return null;
+      const number = Number(normalized);
+      return Number.isFinite(number) ? number : null;
+    };
+    const numberInputAttrs = 'type="text" inputmode="numeric" pattern="[0-9., ]*"';
     const normalizeText = value => String(value ?? '')
       .toLowerCase()
       .normalize('NFD')
@@ -508,13 +520,13 @@
         sku: product.sku || '',
         categoryId: normalizeCategoryId(product.categoryId),
         name: product.name || '',
-        price: Number(product.price || 0),
-        originalPrice: product.originalPrice === '' ? null : (product.originalPrice == null ? null : Number(product.originalPrice || 0)),
+        price: parseNumberInput(product.price) || 0,
+        originalPrice: parseNumberInput(product.originalPrice),
         shortDesc: product.shortDesc || '',
         description: product.description || '',
         usage: product.usage || '',
         tag: product.tag || '',
-        weight: product.weight === '' ? null : (product.weight == null ? null : Number(product.weight || 0)),
+        weight: parseNumberInput(product.weight),
         hidden: isHidden(product),
         optionGroups: Array.isArray(product.optionGroups) ? product.optionGroups.map(group => ({
           name: group.name || '',
@@ -534,9 +546,9 @@
           id: v.id || id(),
           name: v.name || '',
           sku: v.sku || '',
-          price: Number(v.price || 0),
-          originalPrice: v.originalPrice === '' ? null : (v.originalPrice == null ? null : Number(v.originalPrice || 0)),
-          weight: v.weight === '' ? null : (v.weight == null ? null : Number(v.weight || 0)),
+          price: parseNumberInput(v.price) || 0,
+          originalPrice: parseNumberInput(v.originalPrice),
+          weight: parseNumberInput(v.weight),
           image: v.image || '',
           options: v.options && typeof v.options === 'object' && !Array.isArray(v.options) ? v.options : {}
         })) : []
@@ -1026,9 +1038,9 @@
           <div><label>Danh mục *</label><select onchange="updateField('categoryId', this.value)">${CATEGORIES.map(([value, label]) => `<option value="${value}" ${product.categoryId === value ? 'selected' : ''}>${label}</option>`).join('')}</select></div>
         </div>
         <div class="row3">
-          <div><label>Giá bán *</label><input type="number" value="${esc(product.price)}" oninput="updateField('price', this.value)" /></div>
-          <div><label>Giá gốc</label><input type="number" value="${esc(product.originalPrice ?? '')}" oninput="updateField('originalPrice', this.value)" /></div>
-          <div><label>Gram</label><input type="number" value="${esc(product.weight ?? '')}" oninput="updateField('weight', this.value)" /></div>
+          <div><label>Giá bán *</label><input ${numberInputAttrs} value="${esc(product.price)}" oninput="updateField('price', this.value)" /></div>
+          <div><label>Giá gốc</label><input ${numberInputAttrs} value="${esc(product.originalPrice ?? '')}" oninput="updateField('originalPrice', this.value)" /></div>
+          <div><label>Gram</label><input ${numberInputAttrs} value="${esc(product.weight ?? '')}" oninput="updateField('weight', this.value)" /></div>
         </div>
         <div class="row3">
           <div><label>SKU</label><input value="${esc(product.sku)}" oninput="updateField('sku', this.value)" /></div>
@@ -1183,9 +1195,9 @@
             </div>
             <div><label>Số lượng</label><input value="${esc(quantityValue)}" readonly /></div>
             <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
-            <div><label>Giá bán *</label><input type="number" value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
-            <div><label>Giá gốc</label><input type="number" value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
-            <div><label>Gram</label><input type="number" value="${esc(variant.weight ?? '')}" oninput="updateVariant(${index}, 'weight', this.value)" /></div>
+            <div><label>Giá bán *</label><input ${numberInputAttrs} value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
+            <div><label>Giá gốc</label><input ${numberInputAttrs} value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
+            <div><label>Gram</label><input ${numberInputAttrs} value="${esc(variant.weight ?? '')}" oninput="updateVariant(${index}, 'weight', this.value)" /></div>
             <div><label>SKU</label><input value="${esc(variant.sku)}" oninput="updateVariant(${index}, 'sku', this.value)" /></div>
           </div>
         </div>
@@ -1206,9 +1218,9 @@
               ${variantImageBox(variant, index)}
             </div>
             <div><label>Tên phân loại *</label><input value="${esc(variant.name)}" oninput="updateVariant(${index}, 'name', this.value)" /></div>
-            <div><label>Giá bán *</label><input type="number" value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
-            <div><label>Giá gốc</label><input type="number" value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
-            <div><label>Gram</label><input type="number" value="${esc(variant.weight ?? '')}" oninput="updateVariant(${index}, 'weight', this.value)" /></div>
+            <div><label>Giá bán *</label><input ${numberInputAttrs} value="${esc(variant.price)}" oninput="updateVariant(${index}, 'price', this.value)" /></div>
+            <div><label>Giá gốc</label><input ${numberInputAttrs} value="${esc(variant.originalPrice ?? '')}" oninput="updateVariant(${index}, 'originalPrice', this.value)" /></div>
+            <div><label>Gram</label><input ${numberInputAttrs} value="${esc(variant.weight ?? '')}" oninput="updateVariant(${index}, 'weight', this.value)" /></div>
             <div><label>SKU</label><input value="${esc(variant.sku)}" oninput="updateVariant(${index}, 'sku', this.value)" /></div>
             <div><label>&nbsp;</label><button class="danger small" onclick="removeVariant(${index})">Xoá</button></div>
           </div>
@@ -1245,7 +1257,7 @@
         if (field === 'hidden') {
           product.hidden = value === 'true';
         } else if (['price', 'originalPrice', 'weight'].includes(field)) {
-          product[field] = value === '' ? null : Number(value);
+          product[field] = field === 'price' ? (parseNumberInput(value) || 0) : parseNumberInput(value);
         } else {
           product[field] = value;
         }
@@ -1418,7 +1430,7 @@
         const variant = product.variants[index];
         if (!variant) return;
         if (['price', 'originalPrice', 'weight'].includes(field)) {
-          variant[field] = value === '' ? null : Number(value);
+          variant[field] = field === 'price' ? (parseNumberInput(value) || 0) : parseNumberInput(value);
         } else {
           variant[field] = value;
         }

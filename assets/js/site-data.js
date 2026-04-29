@@ -2542,8 +2542,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lmq29lceqme7ca",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1qqm31f",
+      "/assets/products/uploads/1777467924337-de-dot-nen.webp",
       "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7p2yj03",
       "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzfy1634",
       "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7qhizda",
@@ -2558,8 +2557,8 @@ const PRODUCTS = [
         "id": "shopee_variant_221952128688",
         "name": "Đế Trắng",
         "sku": "",
-        "price": 30000,
-        "originalPrice": null,
+        "price": 22000,
+        "originalPrice": 35000,
         "weight": 50,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1s56j73",
         "options": {}
@@ -2568,8 +2567,8 @@ const PRODUCTS = [
         "id": "shopee_variant_320267970308",
         "name": "Ly đựng Nến",
         "sku": "",
-        "price": 30000,
-        "originalPrice": null,
+        "price": 22000,
+        "originalPrice": 35000,
         "weight": 50,
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0agzho5f5u43",
         "options": {}
@@ -2578,8 +2577,8 @@ const PRODUCTS = [
         "id": "shopee_variant_221952128687",
         "name": "Đế Đen",
         "sku": "",
-        "price": 30000,
-        "originalPrice": null,
+        "price": 22000,
+        "originalPrice": 35000,
         "weight": 50,
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1nxh70b",
         "options": {}
@@ -3183,7 +3182,7 @@ const PRODUCTS = [
     "shortDesc": "Đóng gói theo 10 viên / vỉ loại 2h và 4h",
     "description": "NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TRANG TRÍ KHÔNG KHÓI\n\n✔ Tổng quan sản phẩm:\nMô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ dùng để xông tinh dầu, xông thảo mộc, trang trí tiệc cưới, quán cafe, ngoài ra còn được dùng để hâm nóng trà, hâm nóng đồ ăn. Đặc biệt không khói không mùi khi đốt liên tụ.\n\n✔ Mô tả chi tiết:\n✔ Mô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ dùng để xông tinh dầu, xông thảo mộc, trang trí tiệc cưới, quán cafe, ngoài ra còn được dùng để hâm nóng trà, hâm nóng đồ ăn. Đặc biệt không khói không mùi khi đốt liên tục 4 giờ\n\nLƯU Ý: Trên thị trường có 2 Loại NẾN ĐỦ GIỜ Và NẾN THIẾU GIỜ, Shop chỉ bán NẾN ĐỦ GIỜ nên giá sẽ nhỉnh hơn 1 chút.\n\n✔ Thông số kĩ thuật: \nKích thước 1 viên: \n-Nến 4h 3.8 x 3.8 x 1.6 cm\n-Nến 2h 3.8 x 3.8 x 1 cm\nKhối lượng: 8-14 gam/ viên\nChất liệu: vỏ nhôm, sáp cọ \nThời gian cháy: 2h - 4h \n✔ Quy cách đóng gói:1 Viên\n\n✔ Mô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ dùng để xông tinh dầu, xông thảo mộc, trang trí tiệc cưới, quán cafe, ngoài ra còn được dùng để hâm nóng trà, hâm nóng đồ ăn. Đặc biệt không khói không mùi khi đốt liên tục 4 giờ\n\n✔ Công dụng: Chuyên dùng để trang trí tiệc sinh nhật, thờ cúng, thả đèn hòa đăng ngoài ra còn dùng đốt tinh dầu để xông hương trong Spa, nhà hàng, khách sạn, quán cà phê hay xông phòng tạo cảm giác thư giãn, giảm stress cho người dùng....\nXuất xứ: Việt Nam\n\nCần hỗ trợ thêm hãy nhắn tin trực tiếp với shop nhé, hỗ trợ online 24/7\n📍 Cam kết\n👉 Chọn lọc và phân phối các mặt hàng chính hãng, sản phẩm gần gũi với thiên nhiên, an toàn cho sức khỏe\n👉 Trả hàng hoàn tiền nhanh nếu phát hiện sản phẩm bị lỗi, quy trình nhanh chóng\n👉 Chúng tôi luôn hoàn thiện mình và không ngừng phát triển để đem lại những trải nghiệm tốt nhất cho bạn\n\n🌈Xin cảm ơn đã dành ít phút tham quan gian hàng của shop, Hy vọng bạn có được trải nghiệm mua sắm tốt nhất nhé!\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến tealight 4 giờ đốt đèn xông trang trí không khói\n- Danh mục: Bếp xông / đèn xông\n- Phân loại: 2 HỘP/ 20V 4H TRƠN🤍, HỘP 10V TRƠN 4H🤍, HỘP 10V TRẮNG 4H🤍, 2 HỘP/ 20V 4H❤️, 2 HỘP/ 20V 4H💛, HỘP 10V TRẮNG 2H🤍, 2 HỘP/ 20V 4H🤍, 5 VIÊN VỎ NHÔM 8H, HỘP 10V LÀI 4H💛, 2 HỘP/ 20V 4H - LÀI🔥, 2 HỘP/ 20V 2H🤍, 2 HỘP/ 20V 2H💛, và 2 phân loại khác\n- Cân nặng vận chuyển: 100g\n- Mã sản phẩm: SP-19636361517\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.",
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TRANG TRÍ KHÔNG KHÓI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
-    "tag": "",
+    "tag": "Sale",
     "weight": 100,
     "hidden": false,
     "optionGroups": [
@@ -3838,21 +3837,38 @@ const PRODUCTS = [
     "name": "Nến tealight 2 giờ đốt đèn xông tinh dầu trang trí tiệc I Phương Lâm",
     "price": 125000,
     "originalPrice": null,
-    "shortDesc": "Nến Tealight đốt đèn xông tinh dầu, xông thảo mộc, trang trí tiệc sinh nhật, làm thơm phòng, thôi nôi, đám cưới, xông thảo mộc, hâm nóng đồ ăn, hâm nóng trà, trà thiền, cúng sao",
-    "description": "NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TINH DẦU TRANG TRÍ TIỆC\n\n✔ Tổng quan sản phẩm:\nNến Tealight đốt đèn xông tinh dầu, xông thảo mộc, trang trí tiệc sinh nhật, làm thơm phòng, thôi nôi, đám cưới, xông thảo mộc, hâm nóng đồ ăn, hâm nóng trà, trà thiền, cúng sao\n\n✔ Mô tả chi tiết:\nNến Tealight đốt đèn xông tinh dầu, xông thảo mộc, trang trí tiệc sinh nhật, làm thơm phòng, thôi nôi, đám cưới, xông thảo mộc, hâm nóng đồ ăn, hâm nóng trà, trà thiền, cúng sao,...\n\n✔ Thông số kĩ thuật: \nKích thước 1 viên: 3.8 x 3.8 x 1.6 cm\nKích thước 1 hộp 100 viên: 20 x 20 x 7 cm\nKhối lượng: 8-13 gam/ viên\nChất liệu: vỏ nhôm, sáp cọ \nThời gian cháy: 2h - 4h - 10h\n\n✔ Quy cách đóng gói:100 Viên, 50 viên, 10 viên.\n\n✔ Mô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ gọn dùng để đốt trong đèn xông tinh dầu. Khi cháy không khói, không mùi, có thể cháy trong 4 tiếng liên tục.\n\n✔ Công dụng: Chuyên dùng để trang trí tiệc sinh nhật, thờ cúng, thả đèn hòa đăng ngoài ra còn dùng đốt tinh dầu để xông hương trong Spa, nhà hàng, khách sạn, quán cà phê hay xông phòng tạo cảm giác thư giãn, giảm stress cho người dùng....\nXuất xứ: Việt Nam\n\nCần hỗ trợ thêm hãy nhắn tin trực tiếp với shop nhé, hỗ trợ online 24/7\n📍 Cam kết\n👉 Chọn lọc và phân phối các mặt hàng chính hãng, sản phẩm gần gũi với thiên nhiên, an toàn cho sức khỏe\n👉 Trả hàng hoàn tiền ngay nếu phát hiện sản phẩm bị lỗi, quy trình nhanh chóng\n👉 Chúng tôi luôn hoàn thiện mình và không ngừng phát triển để đem lại những trải nghiệm tốt nhất cho bạn\n🌈Xin cảm ơn đã dành ít phút tham quan gian hàng của shop, Hy vọng bạn có được trải nghiệm mua sắm thật tốt tại shop nhé!\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến tealight 4 giờ đốt đèn xông tinh dầu trang trí tiệc\n- Danh mục: Bếp xông / đèn xông\n- Phân loại: 100V 2H-TRẮNG, 100V 2H-VÀNG, 100V 2H-ĐỎ\n- Cân nặng vận chuyển: 1000g\n- Mã sản phẩm: SP-12551285956\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.",
-    "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TINH DẦU TRANG TRÍ TIỆC\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.",
+    "shortDesc": "Loại 2h mai, thời gian cháy thực tế 1h35 - 1h50",
+    "description": "MÔ TẢ SẢN PHẨM\n\nNẾN TEALIGHT 2 GIỜ ĐỐT ĐÈN XÔNG TINH DẦU TRANG TRÍ TIỆC\n\n✔ Tổng quan sản phẩm:\nNến tealight 2 giờ Phương Lâm là dòng nến viên nhỏ gọn, vỏ nhôm tiện dùng cho đèn xông tinh dầu, bếp xông thảo mộc, hâm trà, hâm nóng đồ ăn nhẹ và trang trí không gian. Sản phẩm phù hợp cho gia đình, spa, quán cafe, phòng thiền, bàn tiệc, sinh nhật, thôi nôi, đám cưới hoặc khu vực thờ cúng cần ánh nến ổn định trong thời gian ngắn.\n\n✔ Điểm nổi bật:\n- Dạng viên tròn nhỏ, dễ đặt vào đèn xông, bếp xông, ly nến hoặc khay trang trí.\n- Vỏ nhôm gọn sạch, giúp giữ sáp ổn định khi đốt và dễ thay sau khi dùng.\n- Cháy ít khói, mùi nhẹ, không lấn át mùi tinh dầu hoặc mùi thảo mộc đang xông.\n- Thời gian cháy thực tế khoảng 1 giờ 35 phút đến 1 giờ 50 phút tùy điều kiện gió, nhiệt độ phòng và cách đặt nến.\n- Có 3 phân loại màu: trắng, vàng, đỏ; mỗi hộp 100 viên, tiện dùng thường xuyên hoặc mua dự trữ.\n\n✔ Ứng dụng phổ biến:\n- Đốt đèn xông tinh dầu, giúp tinh dầu khuếch tán hương thơm nhẹ nhàng.\n- Dùng với bếp xông thảo mộc, bồ kết hoặc nguyên liệu xông phòng.\n- Hâm trà, giữ ấm món ăn nhẹ bằng dụng cụ phù hợp.\n- Trang trí bàn tiệc, phòng ngủ, phòng khách, spa, quán cafe hoặc góc thư giãn.\n- Dùng trong các dịp cúng sao, thờ cúng, lễ tiệc, sinh nhật, thôi nôi, đám cưới.\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến tealight 2 giờ đốt đèn xông tinh dầu trang trí tiệc\n- Danh mục: Nến thơm / nến tealight\n- Phân loại: 100V 2H-TRẮNG, 100V 2H-VÀNG, 100V 2H-ĐỎ\n- Quy cách: 100 viên / hộp\n- Chất liệu: vỏ nhôm, sáp cọ\n- Kích thước 1 viên: khoảng 3.8 x 3.8 x 1 cm\n- Khối lượng vận chuyển: 1000g\n- Mã sản phẩm: SP-12551285956\n- Xuất xứ: Việt Nam\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại màu trước khi đặt hàng.\n- Đặt nến trên bề mặt phẳng, chịu nhiệt và tránh nơi có gió mạnh.\n- Không để nến cháy khi không có người trông coi.\n- Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.\n",
+    "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 2 GIỜ\n\n✔ Cách dùng với đèn xông tinh dầu:\nCho nước và tinh dầu vào khay đèn xông theo lượng phù hợp. Đặt 1 viên nến tealight vào khoang đốt bên dưới, châm lửa ở tim nến rồi theo dõi lượng nước trong khay để tránh bị cạn khi nến còn cháy.\n\n✔ Cách dùng với bếp xông thảo mộc:\nĐặt nến vào vị trí giữ nến của bếp xông. Châm lửa, sau đó cho thảo mộc khô hoặc nguyên liệu xông lên phần khay phía trên. Dùng lượng thảo mộc vừa phải để hương tỏa đều và không làm quá nóng bếp.\n\n✔ Cách dùng trang trí hoặc hâm trà:\nĐặt nến trong ly, chân nến, khay decor hoặc dụng cụ hâm chuyên dụng chịu nhiệt. Luôn giữ khoảng cách an toàn giữa ngọn lửa và vật dụng phía trên.\n\n✔ An toàn khi sử dụng:\n- Không đặt nến gần rèm, giấy, khăn, gỗ mỏng hoặc vật dễ cháy.\n- Không di chuyển nến khi đang cháy hoặc khi sáp còn nóng.\n- Không đặt nhiều viên nến quá sát nhau vì nhiệt có thể tập trung mạnh.\n- Để xa tầm tay trẻ em và vật nuôi.\n- Tắt nến trước khi rời khỏi phòng hoặc trước khi đi ngủ.\n\n✔ Cách tắt nến:\nDùng dụng cụ tắt nến hoặc que nhỏ nhấn nhẹ tim nến xuống phần sáp lỏng rồi dựng tim lại. Hạn chế thổi trực tiếp để tránh bắn sáp nóng và giảm khói nhẹ sau khi tắt.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và khu vực có nhiệt độ cao để nến không bị mềm, chảy sáp hoặc biến dạng.",
     "tag": "",
     "weight": 1000,
     "hidden": false,
-    "optionGroups": [],
+    "optionGroups": [
+      {
+        "name": "Màu",
+        "values": [
+          "Trắng",
+          "Vàng",
+          "Đỏ"
+        ]
+      },
+      {
+        "name": "Số Lượng",
+        "values": [
+          "2 vỉ 2h",
+          "50 viên 2h",
+          "Hộp 100 viên 2h"
+        ]
+      }
+    ],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lmqvki7ie5lr2a",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1m59la5dg7c",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1m59lbjxwfe",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1m59lcyic45",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lkusos724xr140",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1m59led2s28"
+      "/assets/products/uploads/1777467008947-chatgpt-image-19-49-49-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777467347068-chatgpt-image-19-55-37-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777467410350-bep-xong-thao-moc-san-pham-chinh.webp",
+      "/assets/products/uploads/1777467411850-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
+      "/assets/products/uploads/1777467413591-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
+      "/assets/products/uploads/1777467416466-luu-y-an-toan-den-xong-tinh-dau.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3900,18 +3916,11 @@ const PRODUCTS = [
     "usage": "HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 8 GIỜ TRANG TRÍ KHÔNG KHÓI TẠO KHÔNG GIAN ẤM\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.",
     "tag": "",
     "weight": 30,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8v8snr7yg42",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-ljy6f9znqf422e",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-ljy6f9znrtoi3a",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-ljy6f9znt88y14",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-ljy635duxd4k63",
-      "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr8970s6mcx80",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-lkarlyg9yq3g1e",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-lkarlyga1j8c97"
+      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8v8snr7yg42"
     ],
     "reviews": [],
     "variants": [
