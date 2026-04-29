@@ -3381,7 +3381,9 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "https://cf.shopee.vn/file/vn-11134207-820l4-mesdeg5484cj59",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9"
+      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
+      "/assets/products/uploads/1777472272766-1777471993642-11ba7642-instagram-square-1080x1080.webp",
+      "/assets/products/uploads/1777472291130-chatgpt-image-20-58-14-29-thg-4-2026.webp"
     ],
     "reviews": [],
     "variants": [
