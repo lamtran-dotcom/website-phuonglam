@@ -3851,7 +3851,7 @@ const BLOG_POSTS = [
     "slug": "phu-kien-thap-nen-quet-gas-202604291546",
     "tag": "Hướng dẫn",
     "url": "/blog/huong-dan-xong/phu-kien-thap-nen-quet-gas-202604291546/",
-    "image": "/assets/blog/phu-kien-thap-nen-quet-gas-202604291546-1777478758688-lfh7p78icaf-chatgpt-image-16-30-11-29-thg-4-2026-trung-binh.webp"
+    "image": "/assets/blog/phu-kien-thap-nen-quet-gas-202604291546-1777479141258-b1cszjhhnbl-chatgpt-image-23-11-47-29-thg-4-2026.webp"
   },
   {
     "id": 14,
