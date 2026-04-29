@@ -462,11 +462,11 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4aqbcd1i4e",
+      "/assets/products/uploads/1777463252181-chatgpt-image-16-52-36-29-thg-4-2026.webp",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4c8sak1y98",
       "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4dla213918",
       "/assets/products/uploads/1777456781347-chatgpt-image-16-56-34-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777456782992-chatgpt-image-16-52-36-29-thg-4-2026.webp",
+      "/assets/products/uploads/1777463257471-gemini-generated-image-pv1ly5pv1ly5pv1l.webp",
       "/assets/products/uploads/1777456967920-chatgpt-image-17-02-27-29-thg-4-2026.webp",
       "/assets/products/uploads/1777457022840-chatgpt-image-17-03-36-29-thg-4-2026.webp"
     ],
@@ -476,8 +476,8 @@ const PRODUCTS = [
         "id": "shopee_variant_277543299479",
         "name": "50 Viên ",
         "sku": "",
-        "price": 600000,
-        "originalPrice": null,
+        "price": 350000,
+        "originalPrice": 550000,
         "weight": 2000,
         "image": "/assets/products/uploads/1777456336392-gemini-generated-image-17lmfa17lmfa17lm.webp",
         "options": {}
@@ -486,8 +486,8 @@ const PRODUCTS = [
         "id": "p_1777455989449_h4bxv",
         "name": "20 Viên",
         "sku": "",
-        "price": 500000,
-        "originalPrice": null,
+        "price": 145000,
+        "originalPrice": 220000,
         "weight": 2000,
         "image": "/assets/products/uploads/1777456986752-chatgpt-image-16-52-36-29-thg-4-2026.webp",
         "options": {}
@@ -496,8 +496,8 @@ const PRODUCTS = [
         "id": "p_1777455991092_3eay7",
         "name": "10 Viên ",
         "sku": "",
-        "price": 500000,
-        "originalPrice": null,
+        "price": 75000,
+        "originalPrice": 110000,
         "weight": 2000,
         "image": "/assets/products/uploads/1777456985099-chatgpt-image-16-52-36-29-thg-4-2026.webp",
         "options": {}
@@ -506,8 +506,8 @@ const PRODUCTS = [
         "id": "p_1777456018392_mnrfv",
         "name": "5 Viên ",
         "sku": "",
-        "price": 500000,
-        "originalPrice": null,
+        "price": 38000,
+        "originalPrice": 55000,
         "weight": 2000,
         "image": "/assets/products/uploads/1777456983322-chatgpt-image-16-52-36-29-thg-4-2026.webp",
         "options": {}
