@@ -2796,7 +2796,7 @@ const PRODUCTS = [
         ]
       },
       {
-        "name": "Mẫu",
+        "name": "Kiểu dáng",
         "values": [
           "BÚP SEN + ĐẾ TRẮNG",
           "ĐÈN TO + ĐẾ TRẮNG",
@@ -2835,7 +2835,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbtzrj42",
         "options": {
           "Phân loại": "Đèn Lẻ",
-          "Mẫu": "BÚP SEN + ĐẾ TRẮNG"
+          "Kiểu dáng": "BÚP SEN + ĐẾ TRẮNG"
         }
       },
       {
@@ -2848,7 +2848,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3f3a7sg7iab",
         "options": {
           "Phân loại": "Đèn + Đế nến",
-          "Mẫu": "HOA TRẮNG NHỎ"
+          "Kiểu dáng": "HOA TRẮNG NHỎ"
         }
       },
       {
@@ -2861,7 +2861,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbsl73aa",
         "options": {
           "Phân loại": "Đèn Lẻ",
-          "Mẫu": "ĐÈN TO + ĐẾ TRẮNG"
+          "Kiểu dáng": "ĐÈN TO + ĐẾ TRẮNG"
         }
       },
       {
@@ -2874,7 +2874,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnlfx02cjtb44",
         "options": {
           "Phân loại": "Đèn + Đế nến",
-          "Mẫu": "BÚP SEN"
+          "Kiểu dáng": "BÚP SEN"
         }
       },
       {
@@ -2887,7 +2887,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8223pc9hd54",
         "options": {
           "Phân loại": "Đèn + Đế nến",
-          "Mẫu": "CON HƯU ĐEN"
+          "Kiểu dáng": "CON HƯU ĐEN"
         }
       },
       {
@@ -2900,7 +2900,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gkcnlybm19",
         "options": {
           "Phân loại": "Đèn + Đế nến",
-          "Mẫu": "ĐÀI SEN"
+          "Kiểu dáng": "ĐÀI SEN"
         }
       },
       {
@@ -2913,7 +2913,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbr6mn6c",
         "options": {
           "Phân loại": "Đèn Lẻ",
-          "Mẫu": "ĐÈN NHỎ + ĐẾ TRẮNG"
+          "Kiểu dáng": "ĐÈN NHỎ + ĐẾ TRẮNG"
         }
       },
       {
@@ -2926,7 +2926,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8279dxvr700",
         "options": {
           "Phân loại": "Đèn + Đế nến",
-          "Mẫu": "CON HƯU VÀNG"
+          "Kiểu dáng": "CON HƯU VÀNG"
         }
       },
       {
@@ -2939,7 +2939,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gn3k4cg4ee",
         "options": {
           "Phân loại": "Đèn Lẻ",
-          "Mẫu": "ĐÀI SEN + ĐẾ TRẮNG"
+          "Kiểu dáng": "ĐÀI SEN + ĐẾ TRẮNG"
         }
       },
       {
@@ -2952,7 +2952,7 @@ const PRODUCTS = [
         "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3euke9udmc5",
         "options": {
           "Phân loại": "Đèn + Đế nến",
-          "Mẫu": "HOA TRẮNG TO"
+          "Kiểu dáng": "HOA TRẮNG TO"
         }
       }
     ]
