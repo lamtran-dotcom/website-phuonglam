@@ -3426,20 +3426,10 @@ const PRODUCTS = [
       },
       {
         "id": "shopee_variant_77432782821",
-        "name": "Hộp Nơ Lớn (Đỏ)",
+        "name": "Hộp Nơ Đại (Trắng)",
         "sku": "",
-        "price": 175000,
-        "originalPrice": 190000,
-        "weight": 1000,
-        "image": "",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_77432782822",
-        "name": "Hộp Nơ Lớn (Vàng)",
-        "sku": "",
-        "price": 175000,
-        "originalPrice": 190000,
+        "price": 230000,
+        "originalPrice": 320000,
         "weight": 1000,
         "image": "",
         "options": {}
