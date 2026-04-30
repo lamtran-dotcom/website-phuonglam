@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -166,6 +172,46 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_25759395070","sku":"SP-25759395070","categoryId":"thao-moc-xong","name":"Vỏ quế khô Yên Bái xông thảo mộc khử mùi thơm ấm","price":22000,"originalPrice":null,"shortDesc":"📍Quế thanh là hương liệu được dùng rất phổ biến trên khắp thế giới, nó là phần vỏ của cây quế sau khi phơi khô. Mùi hương của quế thanh rất đặc biệt, vị ấm, ngọt không lẫn với hương liệu nào khác. Quế thanh có rất nhiều","description":"VỎ QUẾ KHÔ YÊN BÁI XÔNG THẢO MỘC KHỬ MÙI THƠM ẤM\n\n✔ Tổng quan sản phẩm:\n📍Quế thanh là hương liệu được dùng rất phổ biến trên khắp thế giới, nó là phần vỏ của cây quế sau khi phơi khô. Mùi hương của quế thanh rất đặc biệt, vị ấm, ngọt không lẫn với hương liệu nào khác. Quế thanh có rất nhiều\n\n✔ Mô tả chi tiết:\n🌳 VỎ QUẾ NHẬP YÊN BÁI |NẾN PHƯƠNG LÂM 🌳\n\n📍Quế thanh là hương liệu được dùng rất phổ biến trên khắp thế giới, nó là phần vỏ của cây quế sau khi phơi khô. Mùi hương của quế thanh rất đặc biệt, vị ấm, ngọt không lẫn với hương liệu nào khác. Quế thanh có rất nhiều công dụng: hỗ trợ rất tốt cho sức khỏe, đánh bay một số chứng bịnh liên quan đến hệ hô hấp (cả.m, cú.m), hệ tim mạch, nhiễ.m trùng da, đái t.h.á.o đường. Ngoài ra, quế thanh khô cũng là thảo dược thiên nhiên vô cùng thân thiện, giúp chị em làm đẹp hiệu quả.\n\n*Thành phần: 100% Vỏ quế khô chưa cạo vỏ\n*Định lượng: Vỏ quế 50g, 100G, 200g đựng trong túi zip. \n\nHướng dẫn sử dụng:\n- Vỏ quế: cho vỏ quế lên trên mặt bếp xông (có thể kèm thêm hoa hồi, bồ kết, bưởi,... để tạo thêm mùi) đốt 1-3 viên nến tròn bên dưới. Nên đốt ở không gian thoáng trong nhà.\n\n👉 Bảo quản: Nơi khô thoáng, tránh ánh nắng trực tiếp.\nXuất xứ: Yên Bái, Việt Nam\n\n📍Cam kết\n+ Đảm bảo chất lượng, dịch vụ tốt, hàng được giao từ 1-3 ngày kể từ ngày đặt hàng.\n+ Giao hàng toàn quốc - nhận hàng trả tiền\n+ Đổi trả theo quy định của Shopee nhanh chóng\n\nCần hỗ trợ thêm hãy nhắn tin trực tiếp với shop nhé, hỗ trợ online 24/7\n🌈Xin cảm ơn đã dành ít phút tham quan gian hàng của shop, Hy vọng bạn có được trải nghiệm mua sắm thật tốt tại shop nhé!\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Vỏ quế khô Yên Bái xông thảo mộc khử mùi thơm ấm\n- Danh mục: Bếp xông / đèn xông\n- Phân loại: 200g Vỏ Quế, 50g Vỏ Quế Cao Cấp🔥, 100g Vỏ Quế Cao Cấp, 50g Vỏ Quế, 100g Vỏ Quế\n- Cân nặng vận chuyển: 200g\n- Mã sản phẩm: SP-25759395070\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG VỎ QUẾ KHÔ YÊN BÁI XÔNG THẢO MỘC KHỬ MÙI THƠM ẤM\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.","tag":"","weight":200,"hidden":true,"optionGroups":[],"optionImages":{},"images":["/assets/products/mirrored/c5c1fada.webp","/assets/products/mirrored/fad014be.webp","/assets/products/mirrored/cb0406bb.webp","/assets/products/mirrored/44f5db92.webp","/assets/products/mirrored/033ae47e.webp","/assets/products/mirrored/324335de.webp","/assets/products/mirrored/f1b0c979.webp","/assets/products/mirrored/aa6a527b.webp","/assets/products/mirrored/814d1390.webp"],"reviews":[],"variants":[{"id":"shopee_variant_250242247741","name":"200g Vỏ Quế","sku":"","price":69000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/44f5db92.webp","options":{}},{"id":"shopee_variant_360301129707","name":"50g Vỏ Quế Cao Cấp🔥","sku":"","price":30000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/28252371.webp","options":{}},{"id":"shopee_variant_360301129708","name":"100g Vỏ Quế Cao Cấp","sku":"","price":50000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/28252371.webp","options":{}},{"id":"shopee_variant_250242247739","name":"50g Vỏ Quế","sku":"","price":22000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/44f5db92.webp","options":{}},{"id":"shopee_variant_250242247740","name":"100g Vỏ Quế","sku":"","price":40000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/44f5db92.webp","options":{}}],"slug":"vo-que-kho-yen-bai-xong-thao-moc-khu-mui-thom-am"};
@@ -231,6 +277,9 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

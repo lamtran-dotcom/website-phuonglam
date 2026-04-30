@@ -291,6 +291,11 @@ a { color: inherit; }
 .seo-logo { font-weight: 900; color: var(--seo-primary); text-decoration: none; font-size: 22px; }
 .seo-nav { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--seo-muted); }
 .seo-nav a { text-decoration: none; }
+.seo-actions { display: flex; align-items: center; gap: 10px; }
+.seo-cart { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid var(--seo-border); border-radius: 12px; color: var(--seo-text); text-decoration: none; background: #fff; }
+.seo-cart-count { position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; border-radius: 999px; background: var(--seo-primary); color: #fff; font-size: 11px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+.static-toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 14px); z-index: 30; background: #15331a; color: #fff; border-radius: 999px; padding: 12px 18px; box-shadow: 0 14px 34px rgba(0,0,0,.18); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; font-weight: 800; font-size: 14px; }
+.static-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 .seo-main { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px; overflow-x: hidden; }
 .breadcrumb { font-size: 13px; color: var(--seo-muted); margin: 0 0 18px; overflow-wrap: anywhere; }
 .breadcrumb a { color: var(--seo-muted); text-decoration: none; }
@@ -328,10 +333,51 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .buy-row { grid-template-columns: 1fr; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .seo-header, .seo-footer { align-items: flex-start; flex-direction: column; }
+  .seo-actions { align-self: stretch; justify-content: flex-end; }
 }
 `;
   fs.writeFileSync(path.join(paths.cssDir, 'static-seo.css'), css);
 };
+
+const renderStaticRuntimeScript = () => `<script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>`;
 
 const pageShell = ({ title, description, canonical, image, schema, body, scripts = '' }) => `<!DOCTYPE html>
 <html lang="vi">
@@ -357,12 +403,20 @@ const pageShell = ({ title, description, canonical, image, schema, body, scripts
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   ${body}
   <footer class="seo-footer">
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  ${renderStaticRuntimeScript()}
 ${scripts ? `  ${scripts}\n` : ''}</body>
 </html>
 `;
@@ -621,6 +675,9 @@ const renderStaticBuyScript = (product) => {
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>`;

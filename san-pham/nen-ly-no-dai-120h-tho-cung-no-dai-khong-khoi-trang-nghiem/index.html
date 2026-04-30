@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -161,6 +167,46 @@ Tắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_4903385000","sku":"SP-4903385000","categoryId":"nen-ly","name":"Nến ly Nơ Đại 120h thờ cúng nơ đại không khói trang nghiêm","price":190000,"originalPrice":null,"shortDesc":"Nến ly thờ cúng, đốt rằm, tết niên, khai trương","description":"NẾN LY 120H THỜ CÚNG NƠ ĐẠI KHÔNG KHÓI TRANG NGHIÊM\n\n✔ Tổng quan sản phẩm:\nNến ly thờ cúng, đốt rằm, tết niên, khai trương\n\n✔ Mô tả chi tiết:\nNến ly thờ cúng, đốt rằm, tết niên, khai trương,... \nGiá bán = hộp = 6 ly = 3 cặp\n🔰 Thông Số:\n✔ Kích thước: 22x7cm (Cao,Rộng)\n✔ Đóng gói: 6ly /hộp\n✔ Thời gian cháy: 5 -6 ngày\n✔ không mùi, không khói\n✔ thân thiện với môi trường\n\n*Cách bảo quản nến ly\nBảo quản ở nơi có nhiệt độ thấp & thoáng mát, tránh bụi.\nHạn chế & tránh để sản phẩm Nến ly tiếp xúc trực tiếp với ánh sáng mặt trời, huỳnh quang hay ánh sáng khác.\n\n👉 Lưu ý: sản phẩm này chỉ giao trong nội thành HCM\nCần hỗ trợ thêm hãy nhắn tin trực tiếp với shop nhé, hỗ trợ online 24/7\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến ly 120h thờ cúng nơ đại không khói trang nghiêm\n- Danh mục: Nến ly\n- Phân loại: Hộp Nơ Đại (Vàng), Hộp Nơ Lớn (Đỏ), Hộp Nơ Lớn (Vàng), Hộp Nơ Đại (Đỏ)\n- Cân nặng vận chuyển: 1000g\n- Mã sản phẩm: SP-4903385000\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG NẾN LY 120H THỜ CÚNG NƠ ĐẠI KHÔNG KHÓI TRANG NGHIÊM\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.","tag":"","weight":1000,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/mirrored/d268b77b.webp","/assets/products/mirrored/5dccccf3.webp","/assets/products/mirrored/eeaa83a2.webp","/assets/products/mirrored/fc1c4310.webp"],"reviews":[],"variants":[{"id":"shopee_variant_8642375206","name":"Hộp Nơ Đại (Vàng)","sku":"","price":230000,"originalPrice":320000,"weight":1000,"image":"","options":{}},{"id":"shopee_variant_77432782821","name":"Hộp Nơ Đại (Trắng)","sku":"","price":230000,"originalPrice":320000,"weight":1000,"image":"","options":{}},{"id":"shopee_variant_8642375205","name":"Hộp Nơ Đại (Đỏ)","sku":"","price":230000,"originalPrice":320000,"weight":1000,"image":"","options":{}}],"slug":"nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem"};
@@ -226,6 +272,9 @@ Tắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

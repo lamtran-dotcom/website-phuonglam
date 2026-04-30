@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -171,6 +177,46 @@ Phương Lâm áp dụng **bảo hành bể vỡ — 1 đổi 1 ngay** cho toàn
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_55553449576","sku":"SP-55553449576","categoryId":"combo","name":"Bộ bếp xông cao cấp xông thảo xông nhà thư giãn đầy đủ","price":169000,"originalPrice":250000,"shortDesc":"Bao Gồm: bếp + đế nến + 10 viên 4h + dĩa lót bếp + combo thảo mộc","description":"# BỘ XÔNG NHÀ CAO CẤP — PHƯƠNG LÂM\n\n## Mô tả sản phẩm\n\nBộ Xông Nhà Cao Cấp là phiên bản nâng cấp toàn diện so với bộ trải nghiệm — được thiết kế cho những ai muốn một hệ thống xông nhà **hoàn chỉnh, bền lâu và thẩm mỹ hơn**. Tất cả phụ kiện trong bộ đều làm từ đất nung tự nhiên thủ công, đồng bộ về chất liệu và màu sắc, vừa tiện dụng vừa đẹp khi đặt trong không gian sống.\n\nPhương Lâm soạn sẵn toàn bộ theo công thức độc quyền — nhận hàng là dùng được ngay, không cần tìm kiếm thêm bất cứ thứ gì.\n\n---\n\n## Bộ gồm những gì?\n\nTrọn bộ **5 món** đầy đủ:\n\n**🏺 Bếp Niêu Đất Nung** — bếp xông thủ công hình niêu truyền thống, ô cửa rộng thoáng giúp nến cháy đều và toả nhiệt ổn định, dung tích nắp lớn chứa được nhiều thảo mộc hơn\n\n**🫙 Dĩa Lót Bếp** — đĩa đất nung tròn phẳng đặt bên dưới bếp, bảo vệ mặt bàn, sàn nhà khỏi nhiệt và vết bẩn từ thảo mộc rơi xuống — chi tiết thường bị bỏ qua nhưng rất cần thiết khi dùng lâu dài\n\n**🕯️ Đế Đựng Nến** — chén đất nung nhỏ có tay cầm, đặt nến vào bên trong rồi đặt cả cụm vào lòng bếp — giúp lấy nến ra dễ dàng sau khi dùng, không bị bỏng tay, không để lại sáp trực tiếp trên nền bếp\n\n**🕯️ Nến Tealight 4H** (10 viên) — nến trắng không mùi, không khói, mỗi viên cháy đủ 4 tiếng, dùng được nhiều lần thay vì chỉ 1 lần như bộ trải nghiệm\n\n**🌿 Thảo Mộc Mix 5 Loại** — được soạn theo công thức độc quyền của Phương Lâm, kết hợp 5 nguyên liệu tự nhiên: Hoa Hồi, Vỏ Bưởi, Vỏ Quế, Bồ Kết, Gừng\n\n\n- **Xông định kỳ:** 2–4 lần/tháng để duy trì không khí trong lành\n- **Xông đặc biệt:** Đầu tháng, rằm, đầu năm mới, sau dọn nhà, sau tang lễ\n- **Mùa mưa:** Nên xông 1–2 lần/tuần để khử ẩm và đuổi muỗi hiệu quả\n\n> 💡 Với 10 viên nến và lượng thảo mộc trong bộ, bạn có thể xông **8–10 lần** trước khi cần bổ sung thêm nguyên liệu.","usage":"**Bước 1 — Chuẩn bị bếp**\nĐặt dĩa lót đất nung xuống trước trên mặt phẳng ổn định. Đặt bếp niêu lên trên dĩa lót. Đây là bước quan trọng để bảo vệ mặt bàn và giữ vệ sinh khi xông.\n\n**Bước 2 — Đặt nến vào đế**\nLấy đế đựng nến có tay cầm, đặt 1 viên nến tealight vào trong lòng chén. Đưa cả cụm vào bên trong bếp niêu qua ô cửa phía trước.\n\n**Bước 3 — Thắp lửa**\nDùng quẹt gas hoặc diêm thắp nến qua ô cửa bếp. Để nến cháy ổn định 2–3 phút trước khi cho thảo mộc.\n\n**Bước 4 — Cho thảo mộc lên nắp**\nLấy một lượng thảo mộc vừa đủ (khoảng 10–15g cho mỗi lần xông), rải đều lên mặt nắp đất nung phía trên bếp. Nhiệt từ nến sẽ từ từ làm nóng và toả hương ra không gian.\n\n**Bước 5 — Xông và thông thoáng**\nĐóng cửa phòng lại, để bếp xông trong 20–40 phút tuỳ diện tích. Sau đó mở cửa để hương lan ra toàn nhà. Dùng tay cầm của đế nến để lấy nến ra an toàn khi cần dừng sớm.\n\n**Bước 6 — Vệ sinh sau khi dùng**\nĐể bếp nguội hoàn toàn. Đổ phần thảo mộc đã xông ra ngoài. Lau nhẹ nắp và lòng bếp bằng khăn khô. Bộ có thể dùng lại nhiều lần.\n\n> ⚠️ **Lưu ý an toàn:** Không đặt bếp gần rèm vải, giấy hoặc vật dễ cháy. Không để trẻ nhỏ tiếp xúc trực tiếp khi bếp đang hoạt động. Luôn có người trông coi khi nến còn cháy. Bếp và dĩa lót sẽ rất nóng trong và sau khi sử dụng — dùng tay cầm của đế nến để thao tác bên trong bếp.\n\n\n\n## Chính sách bảo hành\n\nPhương Lâm áp dụng **bảo hành bể vỡ — 1 đổi 1 ngay** cho toàn bộ các món đất nung trong bộ (bếp niêu, dĩa lót, đế đựng nến). Nếu sản phẩm bị vỡ do vận chuyển hoặc lỗi sản xuất, shop đổi mới không cần hoàn trả, không cần giải thích.\n","tag":"","weight":2000,"hidden":false,"optionGroups":[{"name":"Kích Thước","values":["13cm","16cm"]},{"name":"Bộ Thảo mộc","values":["BỘ XÔNG XUA MUỖI CAO CẤP 13CM","BỘ XÔNG GIẢI CẢM CAO CẤP 13CM","BỘ XÔNG THƯ GIÃN CAO CẤP 13CM","BỘ XÔNG NHÀ MỚI CAO CẤP 13CM","BỘ XÔNG KHỬ MÙI CAO CẤP 13CM","BỘ XÔNG TẨY UẾ CAO CẤP 13CM","BỘ XÔNG 12 VỊ CAO CẤP 13CM","BỘ THANH LỌC KHÔNG KHÍ CAO CẤP 13CM","BỘ XÔNG XUA MUỖI CAO CẤP 16CM","BỘ XÔNG GIẢI CẢM CAO CẤP 16CM","BỘ XÔNG THƯ GIÃN CAO CẤP 16CM","BỘ XÔNG NHÀ MỚI CAO CẤP 16CM","BỘ XÔNG KHỬ MÙI CAO CẤP 16CM","BỘ XÔNG TẨY UẾ CAO CẤP 16CM","BỘ XÔNG 12 VỊ CAO CẤP 16CM","BỘ THANH LỌC KHÔNG KHÍ CAO CẤP 16CM"]}],"optionImages":{},"images":["/assets/products/uploads/sp-55553449576-cover-720.jpg","/assets/products/mirrored/0b84f8cd.webp","/assets/products/mirrored/fad014be.webp","/assets/products/mirrored/ef26e671.webp","/assets/products/mirrored/94dfd037.webp","/assets/products/mirrored/f2321967.webp"],"reviews":[],"variants":[{"id":"shopee_variant_405332605549","name":"BỘ XÔNG XUA MUỖI CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG XUA MUỖI CAO CẤP 13CM"}},{"id":"shopee_variant_405332605553","name":"BỘ XÔNG GIẢI CẢM CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG GIẢI CẢM CAO CẤP 13CM"}},{"id":"shopee_variant_405332605548","name":"BỘ XÔNG THƯ GIÃN CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG THƯ GIÃN CAO CẤP 13CM"}},{"id":"shopee_variant_405332605550","name":"BỘ XÔNG NHÀ MỚI CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG NHÀ MỚI CAO CẤP 13CM"}},{"id":"shopee_variant_405332605551","name":"BỘ XÔNG KHỬ MÙI CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG KHỬ MÙI CAO CẤP 13CM"}},{"id":"shopee_variant_405332605547","name":"BỘ XÔNG TẨY UẾ CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG TẨY UẾ CAO CẤP 13CM"}},{"id":"shopee_variant_405332605552","name":"BỘ THANH LỌC KHÔNG KHÍ CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ THANH LỌC KHÔNG KHÍ CAO CẤP 13CM"}},{"id":"shopee_variant_405332605556","name":"BỘ XÔNG XUA MUỖI CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG XUA MUỖI CAO CẤP 16CM"}},{"id":"shopee_variant_405332605560","name":"BỘ XÔNG GIẢI CẢM CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG GIẢI CẢM CAO CẤP 16CM"}},{"id":"shopee_variant_405332605555","name":"BỘ XÔNG THƯ GIÃN CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG THƯ GIÃN CAO CẤP 16CM"}},{"id":"shopee_variant_405332605557","name":"BỘ XÔNG NHÀ MỚI CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG NHÀ MỚI CAO CẤP 16CM"}},{"id":"shopee_variant_405332605558","name":"BỘ XÔNG KHỬ MÙI CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG KHỬ MÙI CAO CẤP 16CM"}},{"id":"shopee_variant_405332605554","name":"BỘ XÔNG TẨY UẾ CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG TẨY UẾ CAO CẤP 16CM"}},{"id":"shopee_variant_405332605559","name":"BỘ THANH LỌC KHÔNG KHÍ CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ THANH LỌC KHÔNG KHÍ CAO CẤP 16CM"}},{"id":"sp555_bo_xong_12_vi_cao_cap_13","name":"BỘ XÔNG 12 VỊ CAO CẤP 13CM","sku":"","price":169000,"originalPrice":250000,"weight":2000,"image":"","options":{"Kích Thước":"13cm","Bộ Thảo mộc":"BỘ XÔNG 12 VỊ CAO CẤP 13CM"}},{"id":"sp555_bo_xong_12_vi_cao_cap_16","name":"BỘ XÔNG 12 VỊ CAO CẤP 16CM","sku":"","price":185000,"originalPrice":280000,"weight":2000,"image":"","options":{"Kích Thước":"16cm","Bộ Thảo mộc":"BỘ XÔNG 12 VỊ CAO CẤP 16CM"}}],"slug":"bo-bep-xong-cao-cap-xong-thao-xong-nha-thu-gian-day-du"};
@@ -236,6 +282,9 @@ Phương Lâm áp dụng **bảo hành bể vỡ — 1 đổi 1 ngay** cho toàn
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -171,6 +177,46 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_19636361517","sku":"SP-19636361517","categoryId":"nen-thom","name":"Vỉ Nến tealight 2h-4h không khói không mùi - 10 viên/ vỉ ","price":40000,"originalPrice":null,"shortDesc":"Đóng gói theo 10 viên / vỉ loại 2h và 4h","description":"NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TRANG TRÍ KHÔNG KHÓI\n\n✔ Tổng quan sản phẩm:\nMô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ dùng để xông tinh dầu, xông thảo mộc, trang trí tiệc cưới, quán cafe, ngoài ra còn được dùng để hâm nóng trà, hâm nóng đồ ăn. Đặc biệt không khói không mùi khi đốt liên tụ.\n\n✔ Mô tả chi tiết:\n✔ Mô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ dùng để xông tinh dầu, xông thảo mộc, trang trí tiệc cưới, quán cafe, ngoài ra còn được dùng để hâm nóng trà, hâm nóng đồ ăn. Đặc biệt không khói không mùi khi đốt liên tục 4 giờ\n\nLƯU Ý: Trên thị trường có 2 Loại NẾN ĐỦ GIỜ Và NẾN THIẾU GIỜ, Shop chỉ bán NẾN ĐỦ GIỜ nên giá sẽ nhỉnh hơn 1 chút.\n\n✔ Thông số kĩ thuật: \nKích thước 1 viên: \n-Nến 4h 3.8 x 3.8 x 1.6 cm\n-Nến 2h 3.8 x 3.8 x 1 cm\nKhối lượng: 8-14 gam/ viên\nChất liệu: vỏ nhôm, sáp cọ \nThời gian cháy: 2h - 4h \n✔ Quy cách đóng gói:1 Viên\n\n✔ Mô tả sản phẩm: Nến Tealight dạng viên tròn, nhỏ dùng để xông tinh dầu, xông thảo mộc, trang trí tiệc cưới, quán cafe, ngoài ra còn được dùng để hâm nóng trà, hâm nóng đồ ăn. Đặc biệt không khói không mùi khi đốt liên tục 4 giờ\n\n✔ Công dụng: Chuyên dùng để trang trí tiệc sinh nhật, thờ cúng, thả đèn hòa đăng ngoài ra còn dùng đốt tinh dầu để xông hương trong Spa, nhà hàng, khách sạn, quán cà phê hay xông phòng tạo cảm giác thư giãn, giảm stress cho người dùng....\nXuất xứ: Việt Nam\n\nCần hỗ trợ thêm hãy nhắn tin trực tiếp với shop nhé, hỗ trợ online 24/7\n📍 Cam kết\n👉 Chọn lọc và phân phối các mặt hàng chính hãng, sản phẩm gần gũi với thiên nhiên, an toàn cho sức khỏe\n👉 Trả hàng hoàn tiền nhanh nếu phát hiện sản phẩm bị lỗi, quy trình nhanh chóng\n👉 Chúng tôi luôn hoàn thiện mình và không ngừng phát triển để đem lại những trải nghiệm tốt nhất cho bạn\n\n🌈Xin cảm ơn đã dành ít phút tham quan gian hàng của shop, Hy vọng bạn có được trải nghiệm mua sắm tốt nhất nhé!\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến tealight 4 giờ đốt đèn xông trang trí không khói\n- Danh mục: Bếp xông / đèn xông\n- Phân loại: 2 HỘP/ 20V 4H TRƠN🤍, HỘP 10V TRƠN 4H🤍, HỘP 10V TRẮNG 4H🤍, 2 HỘP/ 20V 4H❤️, 2 HỘP/ 20V 4H💛, HỘP 10V TRẮNG 2H🤍, 2 HỘP/ 20V 4H🤍, 5 VIÊN VỎ NHÔM 8H, HỘP 10V LÀI 4H💛, 2 HỘP/ 20V 4H - LÀI🔥, 2 HỘP/ 20V 2H🤍, 2 HỘP/ 20V 2H💛, và 2 phân loại khác\n- Cân nặng vận chuyển: 100g\n- Mã sản phẩm: SP-19636361517\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 4 GIỜ ĐỐT ĐÈN XÔNG TRANG TRÍ KHÔNG KHÓI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.","tag":"Sale","weight":100,"hidden":false,"optionGroups":[{"name":"Loại","values":["4 Giờ Mai","4 Giờ Trơn","4 Giờ Lài","2h Giờ"]},{"name":"Số lượng","values":["2 hộp / 20V - Trơn","Hộp 10V - Trơn","Hộp 10V - Trắng","2 hộp / 20V - Đỏ","2 hộp / 20V - Vàng","2 hộp / 20V - Trắng","Hộp 10V - Lài","2 hộp / 20V - Lài"]}],"optionImages":{},"images":["/assets/products/uploads/1777466149628-chatgpt-image-19-34-30-29-thg-4-2026.webp","/assets/products/uploads/1777466421671-chatgpt-image-19-36-10-29-thg-4-2026.webp","/assets/products/uploads/1777466423224-chatgpt-image-19-39-43-29-thg-4-2026.webp"],"reviews":[],"variants":[{"id":"shopee_variant_181860225801","name":"2 HỘP/ 20V 4H TRƠN🤍","sku":"","price":38000,"originalPrice":55000,"weight":100,"image":"/assets/products/mirrored/fb091dc4.webp","options":{"Loại":"4 Giờ Trơn","Số lượng":"2 hộp / 20V - Trơn"}},{"id":"shopee_variant_281265692611","name":"HỘP 10V TRƠN 4H🤍","sku":"","price":19000,"originalPrice":25000,"weight":100,"image":"/assets/products/mirrored/7b5113de.webp","options":{"Loại":"4 Giờ Trơn","Số lượng":"Hộp 10V - Trơn"}},{"id":"shopee_variant_281265692609","name":"HỘP 10V TRẮNG 4H🤍","sku":"","price":16000,"originalPrice":22000,"weight":100,"image":"/assets/products/mirrored/720aea9f.webp","options":{"Loại":"4 Giờ Mai","Số lượng":"Hộp 10V - Trắng"}},{"id":"shopee_variant_281265692610","name":"HỘP 10V TRẮNG 2H🤍","sku":"","price":14000,"originalPrice":20000,"weight":100,"image":"/assets/products/mirrored/55ec03bd.webp","options":{"Loại":"2h Giờ","Số lượng":"Hộp 10V - Trắng"}},{"id":"shopee_variant_220387704321","name":"2 HỘP/ 20V 4H🤍","sku":"","price":32000,"originalPrice":45000,"weight":100,"image":"/assets/products/mirrored/84610ca8.webp","options":{"Loại":"4 Giờ Mai","Số lượng":"2 hộp / 20V - Trắng"}},{"id":"shopee_variant_291432885081","name":"HỘP 10V LÀI 4H💛","sku":"","price":25000,"originalPrice":30000,"weight":100,"image":"/assets/products/mirrored/c5d70fd1.webp","options":{"Loại":"4 Giờ Lài","Số lượng":"Hộp 10V - Lài"}},{"id":"shopee_variant_272429767579","name":"2 HỘP/ 20V 4H - LÀI🔥","sku":"","price":55000,"originalPrice":70000,"weight":100,"image":"/assets/products/mirrored/4283a5c2.webp","options":{"Loại":"4 Giờ Lài","Số lượng":"2 hộp / 20V - Lài"}},{"id":"shopee_variant_240485670557","name":"2 HỘP/ 20V 2H🤍","sku":"","price":28000,"originalPrice":35000,"weight":100,"image":"/assets/products/mirrored/099fcfd4.webp","options":{"Loại":"2h Giờ","Số lượng":"2 hộp / 20V - Trắng"}}],"slug":"vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi"};
@@ -236,6 +282,9 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

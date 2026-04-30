@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -161,6 +167,46 @@ Không để nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Khô
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_57058955812","sku":"SP-1","categoryId":"nen-thom","name":"Nến tealight 8 giờ trang trí tiệc ánh sáng ấm cháy ổn định l Phương Lâm","price":500000,"originalPrice":null,"shortDesc":"Nến 8h vỏ mica chịu nhiệt dùng trang trí sang trọng","description":"SET 50 NẾN TEALIGHT TRANG TRÍ\n\n✔ Tổng quan sản phẩm:\n viên nến tealight được thiết kế nhỏ gọn, dễ dùng và cháy ổn định, phù hợp để tạo ánh sáng ấm cho bàn tiệc, phòng ngủ, spa, góc thiền hoặc không gian thư giãn tại nhà.\nSản phẩm có 2 phân loại để khách chọn theo nhu cầu: vỏ trong suốt đẹp khi decor và vỏ nhôm phù hợp hơn khi dùng để xông tinh dầu, xông thảo mộc liên tục.\n\n✔ Điểm nổi bật:\n- Set 50 viên tiện lợi, dễ dự trữ và sử dụng hằng ngày.\n- Ánh sáng ấm, dịu mắt, tạo cảm giác thư giãn và chill vào buổi tối.\n- Kích thước nhỏ gọn, dễ đặt trong ly nến, đèn xông tinh dầu hoặc phụ kiện decor.\n- Vỏ trong suốt cho hiệu ứng ánh sáng đẹp, phù hợp chụp ảnh, trang trí bàn tiệc và decor phòng.\n- Vỏ nhôm chịu nhiệt tốt hơn, phù hợp dùng kèm bếp xông thảo mộc hoặc đèn xông tinh dầu trong thời gian dài.\n\n✔ Ứng dụng phổ biến:\n- Trang trí bàn tiệc, sinh nhật, đám cưới, quán cà phê, spa hoặc phòng ngủ.\n- Dùng cùng đèn xông tinh dầu để khuếch tán hương thơm nhẹ nhàng.\n- Dùng cùng bếp xông thảo mộc để tạo nhiệt ổn định khi xông nhà.\n- Setup thiền, yoga, đọc sách hoặc thư giãn buổi tối.\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Set 50 nến tealight trang trí\n- Phân loại: 50 viên vỏ trong suốt, 50 viên vỏ nhôm\n- Cân nặng vận chuyển: 2000g\n- Dạng sản phẩm: nến tealight viên nhỏ\n- Phù hợp: decor, spa, thiền, xông tinh dầu, xông thảo mộc\n\n✔ Lưu ý quan trọng:\n- Vỏ trong suốt đẹp hơn khi dùng để trang trí/decor.\n- Nếu dùng để xông tinh dầu hoặc xông thảo mộc liên tục, nên chọn loại vỏ nhôm để chịu nhiệt tốt hơn và bền hơn.\n- Luôn đặt nến trên bề mặt phẳng, chịu nhiệt và tránh xa vật dễ cháy.","usage":"HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT\n\n✔ Dùng để trang trí:\nĐặt nến trong ly nến, khay decor hoặc khu vực bàn tiệc để tạo ánh sáng ấm và không gian thư giãn.\n\n✔ Dùng với đèn xông tinh dầu:\nĐặt nến vào khoang đốt của đèn xông, sau đó thêm nước và tinh dầu vào khay phía trên theo hướng dẫn của từng loại đèn.\n\n✔ Dùng với bếp xông thảo mộc:\nƯu tiên chọn phân loại vỏ nhôm nếu cần đốt liên tục để xông thảo mộc hoặc giữ nhiệt lâu hơn.\n\n✔ An toàn khi sử dụng:\nKhông để nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy và luôn tắt nến trước khi rời khỏi phòng.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp để giữ form nến đẹp và hạn chế chảy sáp.","tag":"Mới","weight":2000,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/uploads/1777463252181-chatgpt-image-16-52-36-29-thg-4-2026.webp","/assets/products/mirrored/1cde6bc9.webp","/assets/products/mirrored/58a68e52.webp","/assets/products/uploads/1777456781347-chatgpt-image-16-56-34-29-thg-4-2026.webp","/assets/products/uploads/1777463257471-gemini-generated-image-pv1ly5pv1ly5pv1l.webp","/assets/products/uploads/1777456967920-chatgpt-image-17-02-27-29-thg-4-2026.webp","/assets/products/uploads/1777457022840-chatgpt-image-17-03-36-29-thg-4-2026.webp"],"reviews":[],"variants":[{"id":"shopee_variant_277543299479","name":"50 Viên","sku":"","price":350000,"originalPrice":550000,"weight":2000,"image":"/assets/products/uploads/1777456336392-gemini-generated-image-17lmfa17lmfa17lm.webp","options":{}},{"id":"p_1777455989449_h4bxv","name":"20 Viên","sku":"","price":145000,"originalPrice":220000,"weight":2000,"image":"/assets/products/uploads/1777456986752-chatgpt-image-16-52-36-29-thg-4-2026.webp","options":{}},{"id":"p_1777455991092_3eay7","name":"10 Viên","sku":"","price":75000,"originalPrice":110000,"weight":2000,"image":"/assets/products/uploads/1777456985099-chatgpt-image-16-52-36-29-thg-4-2026.webp","options":{}},{"id":"p_1777456018392_mnrfv","name":"5 Viên","sku":"","price":38000,"originalPrice":55000,"weight":2000,"image":"/assets/products/uploads/1777456983322-chatgpt-image-16-52-36-29-thg-4-2026.webp","options":{}}],"slug":"nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam"};
@@ -226,6 +272,9 @@ Không để nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Khô
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

@@ -4344,6 +4344,7 @@ const App = () => {
   const [page, setPage] = React.useState(() => {
     try {
       if (IS_PREVIEW_REFRESH) return { name: 'home' };
+      if (new URLSearchParams(window.location.search).get('cart') === 'open') return { name: 'cart' };
       if (window.history.state?.page) return window.history.state.page;
       return JSON.parse(localStorage.getItem('phuonglam-page')) || { name: 'home' };
     } catch {

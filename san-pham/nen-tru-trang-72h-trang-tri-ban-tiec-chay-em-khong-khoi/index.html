@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -173,6 +179,46 @@ Tắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_54450013830","sku":"SP-54450013830","categoryId":"nen-tru","name":"Nến trụ trắng 72h trang trí bàn tiệc cháy êm không khói","price":120000,"originalPrice":null,"shortDesc":"NẾN TRỤ KHÔNG KHÓI MÀU TRẮNG TINH KHIẾT – NÂNG TẦM KHÔNG GIAN SANG TRỌNG CỦA BẠN.","description":"NẾN TRỤ TRẮNG 72H TRANG TRÍ BÀN TIỆC CHÁY ÊM KHÔNG KHÓI\n\n✔ Tổng quan sản phẩm:\nNẾN TRỤ KHÔNG KHÓI MÀU TRẮNG TINH KHIẾT – NÂNG TẦM KHÔNG GIAN SANG TRỌNG CỦA BẠN.\n\n✔ Mô tả chi tiết:\nNẾN TRỤ KHÔNG KHÓI MÀU TRẮNG TINH KHIẾT – NÂNG TẦM KHÔNG GIAN SANG TRỌNG CỦA BẠN\n\nThông tin sản phẩm:\nSize S 7cm x 10cm Trang trí bàn ăn cá nhân, decor theo bộ, tạo sự cân đối.\nSize M 7cm x 15cm Kích thước phổ thông, lý tưởng cho trung tâm bàn tiệc, sảnh.\nSize L 7cm x 20cm Tạo điểm nhấn cao, ấn tượng, thích hợp đặt trên bệ lò sưởi, góc decor.\n\nThời gian đốt:\nSize S: 48h\nSize M: 68h\nSize L: 90h\n\n✨ ĐẶC ĐIỂM NỔI BẬT VÀ CHẤT LƯỢNG:\n\nKhông Khói & Sạch Sẽ: Được làm từ sáp sạch, nến cháy sạch, không tạo khói đen, không gây mùi khó chịu, giữ cho không khí trong lành, lý tưởng cho không gian kín như nhà hàng, bàn ăn.\n\nÁnh Sáng Ấm Cúng: Ngọn lửa ổn định, cháy lâu, tạo ra ánh sáng vàng dịu nhẹ, lãng mạn, hoàn hảo để tạo không khí ấm áp, thư giãn.\n\nThiết Kế Sang Trọng: Màu trắng tinh khôi, hình trụ thẳng đứng, mang lại vẻ ngoài tối giản nhưng cực kỳ tinh tế và đẳng cấp, dễ dàng hòa hợp với mọi kiểu decor từ cổ điển đến hiện đại.\n\n🍽️ ỨNG DỤNG ĐA NĂNG:\n\nTrang Trí Bàn Tiệc: Là điểm nhấn không thể thiếu cho các bữa tiệc lãng mạn, tiệc cưới, sinh nhật, sự kiện cao cấp.\n\nNhà Hàng & Khách Sạn: Tạo không gian dùng bữa ấm cúng, sang trọng, nâng cao trải nghiệm của khách hàng.\n\nKhông Gian Sống: Đặt tại phòng khách, phòng ngủ, hoặc bồn tắm để thư giãn, thiền định, hoặc tạo mùi hương nhẹ nhàng nếu dùng kèm đĩa tinh dầu.\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến trụ trắng 72h trang trí bàn tiệc cháy êm không khói\n- Danh mục: Nến trụ\n- Phân loại: Size M 7x15, Size L 7x20, Size S 7x10\n- Cân nặng vận chuyển: 800g\n- Mã sản phẩm: SP-54450013830\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG NẾN TRỤ TRẮNG 72H TRANG TRÍ BÀN TIỆC CHÁY ÊM KHÔNG KHÓI\n\n✔ Cách đốt:\nĐặt nến trên bề mặt phẳng, chịu nhiệt rồi châm lửa ở tim nến.\n\n✔ Khi sử dụng:\nKhông đặt nến gần rèm, giấy, gỗ mỏng hoặc vật dễ cháy. Không di chuyển nến khi đang cháy.\n\n✔ Sau khi dùng:\nTắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn trước khi cất giữ.\n\n✔ Bảo quản:\nĐể nến nơi khô ráo, thoáng mát, tránh nắng nóng trực tiếp.","tag":"","weight":800,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/mirrored/9da69a94.webp","/assets/products/mirrored/864e6aef.webp","/assets/products/mirrored/ceb830cf.webp","/assets/products/mirrored/b9afc202.webp","/assets/products/mirrored/dc71bd43.webp","/assets/products/mirrored/8b174002.webp"],"reviews":[],"variants":[{"id":"shopee_variant_405001591546","name":"Size M 7x15","sku":"","price":109000,"originalPrice":150000,"weight":800,"image":"","options":{}},{"id":"shopee_variant_405001591547","name":"Size L 7x20","sku":"","price":138000,"originalPrice":200000,"weight":800,"image":"","options":{}},{"id":"shopee_variant_405001591545","name":"Size S 7x10","sku":"","price":82000,"originalPrice":120000,"weight":800,"image":"","options":{}}],"slug":"nen-tru-trang-72h-trang-tri-ban-tiec-chay-em-khong-khoi"};
@@ -238,6 +284,9 @@ Tắt nến trước khi rời khỏi phòng và chờ nến nguội hoàn toàn
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

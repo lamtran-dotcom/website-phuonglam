@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -170,6 +176,46 @@ Không uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_24604156053","sku":"SP-24604156053","categoryId":"bep-xong","name":"Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp","price":60000,"originalPrice":null,"shortDesc":"BIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC.","description":"TINH DẦU THƠM PHÒNG KHÁCH SẠN KHỬ MÙI THƯ GIÃN CAO CẤP\n\n✔ Tổng quan sản phẩm:\nBIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC.\n\n✔ Mô tả chi tiết:\nBIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC\n\nChào mừng bạn đến với Nến Phương Lâm. Chúng tôi mang đến dòng tinh dầu thơm phòng cao cấp, được chiết xuất 100% tự nhiên, giúp không gian sống của bạn trở nên đẳng cấp, thư thái như đang ở trong những resort sang trọng nhất.\n\n🔥 ƯU ĐIỂM NỔI BẬT: \n✅ Hương thơm sang trọng: Tone mùi Coco/Hilton thanh lịch, quyến rũ, lưu hương lâu. \n✅ 100% Tự nhiên: An toàn tuyệt đối cho sức khỏe, không chứa hóa chất độc hại. \n✅ Khử mùi hiệu quả: Loại bỏ mùi ẩm mốc, mùi thức ăn, trả lại bầu không khí trong lành. \n✅ Thư giãn tinh thần: Hương thơm dịu nhẹ giúp giảm căng thẳng (stress), cải thiện giấc ngủ ngon và sâu hơn.\n\n📝 HƯỚNG DẪN SỬ DỤNG:\nXông phòng: Nhỏ 3-5 giọt tinh dầu vào đèn xông (đèn gốm nến hoặc đèn điện) hoặc máy khuếch tán đã có nước.\nTắm bồn: Nhỏ vài giọt vào bồn tắm nước ấm để ngâm mình thư giãn.\nTreo xe/Tủ quần áo: Có thể dùng kèm với túi thơm hoặc đá khuếch tán.\n\n📦 THÔNG TIN SẢN PHẨM:\nThương hiệu: Nến Phương Lâm\nDung tích: 10ml\nQuy cách đóng gói: Chai thủy tinh tối màu bảo quản tốt chất lượng tinh dầu.\nĐóng gói: Việt Nam\n\n🛡️ CAM KẾT CỦA SHOP:\nSản phẩm giống 100% mô tả.\nĐổi trả theo quy định của Shopee.\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp\n- Danh mục: Tinh dầu\n- Phân loại: Gỗ Đàn Hương, Hoa Lê Anh, Khánh Sạn Hilton🔥, Resort ( Sheraton ), Coco (Ngọt Ngào), Ấm Áp (Quế & Thông), Trà Trắng (Mùi Sang)\n- Cân nặng vận chuyển: 200g\n- Mã sản phẩm: SP-24604156053\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG TINH DẦU THƠM PHÒNG KHÁCH SẠN KHỬ MÙI THƯ GIÃN CAO CẤP\n\n✔ Với đèn xông:\nNhỏ vài giọt tinh dầu vào nước trong khay đèn xông, sau đó làm nóng bằng nến hoặc điện tùy loại đèn.\n\n✔ Với máy khuếch tán:\nThêm tinh dầu theo dung tích máy và hướng dẫn của thiết bị.\n\n✔ Lưu ý:\nKhông uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để xa tầm tay trẻ em.\n\n✔ Bảo quản:\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.","tag":"","weight":200,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/mirrored/5a254a10.webp","/assets/products/mirrored/c8b1c450.webp","/assets/products/mirrored/f2c600ca.webp","/assets/products/mirrored/dc290562.webp","/assets/products/mirrored/24f9a207.webp","/assets/products/mirrored/9dc9ce24.webp","/assets/products/mirrored/954776e6.webp","/assets/products/mirrored/226cace9.webp"],"reviews":[],"variants":[{"id":"shopee_variant_440296119911","name":"Gỗ Đàn Hương","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/3f689f12.webp","options":{}},{"id":"shopee_variant_440296119912","name":"Hoa Lê Anh","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/7c02b18f.webp","options":{}},{"id":"shopee_variant_250211429868","name":"Khánh Sạn Hilton🔥","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/356f1263.webp","options":{}},{"id":"shopee_variant_360296129288","name":"Resort ( Sheraton )","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/9502482d.webp","options":{}},{"id":"shopee_variant_440296119908","name":"Coco (Ngọt Ngào)","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/9dc9ce24.webp","options":{}},{"id":"shopee_variant_440296119909","name":"Ấm Áp (Quế & Thông)","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/954776e6.webp","options":{}},{"id":"shopee_variant_440296119910","name":"Trà Trắng (Mùi Sang)","sku":"","price":60000,"originalPrice":null,"weight":200,"image":"/assets/products/mirrored/cfbf70de.webp","options":{}}],"slug":"tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap"};
@@ -235,6 +281,9 @@ Không uống tinh dầu, tránh tiếp xúc trực tiếp với mắt và để
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

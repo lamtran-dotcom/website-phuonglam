@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -162,6 +168,46 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_28251842874","sku":"PL-05","categoryId":"nen-thom","name":"Nến tealight 8 giờ vỏ nhôm xông thảo mộc, tinh dầu l Phương Lâm","price":11000,"originalPrice":null,"shortDesc":"Kích thước 1 viên: Cao 2,5cm đường kính 3,5cm.","description":"NẾN TEALIGHT 8 GIỜ VỎ NHÔM XÔNG TINH DẦU KHÔNG MÙI\n\n✔ Tổng quan sản phẩm:\nKích thước 1 viên: Cao 2,5cm đường kính 3,5cm.\n\n✔ Mô tả chi tiết:\nNẾN TEALIGHT VIÊN CHÁY 8 GIỜ.\n✔ Thông số kĩ thuật: \nKích thước 1 viên: Cao 2,5cm đường kính 3,5cm\nKhối lượng: 25 gam/ viên\nChất liệu: Vổ nhôm, sáp\nThời gian cháy: 8h\n\n✔ Mô tả sản phẩm: Nến Tealight dạng viên tròn vỏ nhôm, Chuyên dùng để trang trí tiệc, thờ cúng, thả đèn hòa đăng ngoài ra còn dùng đốt tinh dầu để xông hương trong Spa, nhà hàng, khách sạn, quán cà phê hay xông phòng tạo cảm giác thư giãn, giảm stress cho người dùng..... Khi cháy không khói, không mùi, có thể cháy trong 8 tới 10 giờ tiếng liên tục.\n\nXuất xứ: Việt nam \n\nCần hỗ trợ thêm hãy nhắn tin trực tiếp với shop nhé, hỗ trợ online 24/7\n📍 Cam kết\n👉 Luôn chọn lọc và phân phối các mặt hàng chính hãng, sản phẩm gần gũi với thiên nhiên, an toàn cho sức khỏe\n👉 Trả hàng hoàn tiền nhanh nếu phát hiện sản phẩm bị lỗi, quy trình nhanh chóng\n👉 Chúng tôi luôn hoàn thiện mình và không ngừng phát triển để đem lại những trải nghiệm tốt nhất cho bạn\n🌈Xin cảm ơn đã dành ít phút tham quan gian hàng của shop, Hy vọng bạn có được trải nghiệm mua sắm tốt nhất nhé!\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Nến tealight 8 giờ vỏ nhôm xông tinh dầu không mùi\n- Danh mục: Bếp xông / đèn xông\n- Cân nặng vận chuyển: 23g\n- Mã sản phẩm: 470535_mod470535\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG NẾN TEALIGHT 8 GIỜ VỎ NHÔM XÔNG TINH DẦU KHÔNG MÙI\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.","tag":"Sale","weight":23,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/uploads/1777462920577-chatgpt-image-17-20-00-29-thg-4-2026.webp","/assets/products/mirrored/40197b9f.webp","/assets/products/mirrored/552f7f4e.webp","/assets/products/mirrored/b4b92d7d.webp","/assets/products/mirrored/705c7d46.webp","/assets/products/uploads/1777462947338-chatgpt-image-18-40-43-29-thg-4-2026.webp","/assets/products/uploads/1777463028222-chatgpt-image-18-43-20-29-thg-4-2026.webp"],"reviews":[],"variants":[{"id":"p_1777457979114_r47mk","name":"50 Viên","sku":"","price":325000,"originalPrice":450000,"weight":2000,"image":"/assets/products/uploads/1777462967683-gemini-generated-image-17lmfa17lmfa17lm.webp","options":{}},{"id":"p_1777457981867_pe1bz","name":"20 Viên","sku":"","price":135000,"originalPrice":180000,"weight":500,"image":"/assets/products/uploads/1777463014205-chatgpt-image-18-43-20-29-thg-4-2026.webp","options":{}},{"id":"p_1777457982222_vm3gd","name":"10 Viên","sku":"","price":69000,"originalPrice":90000,"weight":200,"image":"/assets/products/uploads/1777463015691-chatgpt-image-18-43-20-29-thg-4-2026.webp","options":{}},{"id":"p_1777457992666_n0oo3","name":"5 Viên","sku":"","price":35000,"originalPrice":45000,"weight":100,"image":"/assets/products/uploads/1777463017288-chatgpt-image-18-43-20-29-thg-4-2026.webp","options":{}}],"slug":"nen-tealight-8-gio-vo-nhom-xong-thao-moc-tinh-dau-l-phuong-lam"};
@@ -227,6 +273,9 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>

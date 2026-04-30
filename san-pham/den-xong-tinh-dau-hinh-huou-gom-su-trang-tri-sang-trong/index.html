@@ -72,6 +72,12 @@
       <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
       <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
     </nav>
+    <div class="seo-actions">
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        🛍
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+    </div>
   </header>
   <main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -170,6 +176,46 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script>
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const toastEl = document.querySelector('[data-static-toast]');
+  let toastTimer = null;
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+    return count;
+  };
+  const showToast = (message) => {
+    if (!toastEl) return;
+    toastEl.textContent = message || 'Đã cập nhật giỏ hàng.';
+    toastEl.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('is-visible'), 2200);
+  };
+  document.addEventListener('phuonglam-cart-updated', (event) => {
+    updateCartCount();
+    showToast(event.detail?.message || 'Đã thêm vào giỏ hàng.');
+  });
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  window.PhuongLamStaticCart = { updateCartCount, showToast };
+  updateCartCount();
+})();
+</script>
   <script>
 (() => {
   const product = {"id":"shopee_23980156399","sku":"SP-23980156399","categoryId":"bep-xong","name":"Đèn xông tinh dầu hình hươu gốm sứ trang trí sang trọng","price":165000,"originalPrice":null,"shortDesc":"Đèn xông con HƯƠU chất liệu bằng SẮT được sơn tĩnh điện sang trọng hiện đại, chén đựng nước to bằng gốm sứ.","description":"ĐÈN XÔNG TINH DẦU HÌNH HƯƠU GỐM SỨ TRANG TRÍ SANG TRỌNG\n\n✔ Tổng quan sản phẩm:\nĐèn xông con HƯƠU chất liệu bằng SẮT được sơn tĩnh điện sang trọng hiện đại, chén đựng nước to bằng gốm sứ.\n\n✔ Mô tả chi tiết:\nĐèn xông con HƯƠU chất liệu bằng SẮT được sơn tĩnh điện sang trọng hiện đại, chén đựng nước to bằng gốm sứ\n\nKÍCH THƯỚC: \n✔ Chân sắt 11 x 6.5 x 17 cm\n✔ Chén trắng: 10 x 10 x 2.5 cm\nMàu sắc Chân: Vàng, Trắng, Đen\n\nHướng dẫn sử dụng\n✔Bước 1\n Cung cấp nhiệt\n* Đặt nến vào trong khoang đốt nến của đèn\n* Châm lửa đốt nến để cung cấp nhiệt\n✔ Bước 2\n đổ nước nóng vào đĩa đựng nước của đèn\n* Đổ nước khoảng 2/3 chén đựng nước xông, (Khuyến khích nên sử dụng nước ấm khoảng 60 độ C)\n✔ Bước 3\n Nhỏ tinh dầu lên nước nóng\n* Nhỏ tinh dầu lên cốc đựng nước của đèn khi nước nóng\n* Nhỏ khoảng từ 3-4 giọt tinh dầu trong một lần sử dụng\n\n📍SHOP CAM KẾT sẽ đèn bù hàng cho khách nếu quá trình vận chuyển làm vỡ đèn.\nNếu phát hiện bể, vỡ đèn - shop sẽ hỗ trợ ĐỔI đèn nhanh nhất có thể\n\n🌈Cảm ơn bạn đã giành thời gian cho shop, chúc bạn và gia đình có nhiều sức khỏe ạ!\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Đèn xông tinh dầu hình hươu gốm sứ trang trí sang trọng\n- Danh mục: Bếp xông / đèn xông\n- Phân loại: CHÂN ĐEN + CHÉN, CHÂN TRẮNG + CHÉN, CON VOI SEN, CHÂN VÀNG + CHÉN\n- Cân nặng vận chuyển: 800g\n- Mã sản phẩm: SP-23980156399\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.\n- Bảo quản sản phẩm nơi khô ráo, thoáng mát, tránh ẩm và nắng gắt.\n- Màu sắc, kích thước hoặc hình dáng có thể chênh nhẹ do ánh sáng chụp ảnh hoặc đặc tính thủ công/tự nhiên của từng sản phẩm.","usage":"HƯỚNG DẪN SỬ DỤNG ĐÈN XÔNG TINH DẦU HÌNH HƯƠU GỐM SỨ TRANG TRÍ SANG TRỌNG\n\n✔ Cách dùng:\nĐặt sản phẩm trên bề mặt phẳng, khô ráo và lắp cùng bếp xông, nến hoặc phụ kiện phù hợp theo đúng công năng.\n\n✔ Khi sử dụng:\nNếu dùng với nhiệt hoặc nến, luôn để xa vật dễ cháy và không chạm tay trực tiếp khi sản phẩm còn nóng.\n\n✔ Vệ sinh:\nChờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn ẩm nhẹ.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh rơi vỡ hoặc va đập mạnh.","tag":"","weight":800,"hidden":true,"optionGroups":[],"optionImages":{},"images":["/assets/products/mirrored/c239e398.webp","/assets/products/mirrored/a5c14901.webp","/assets/products/mirrored/b2fdd4ff.webp","/assets/products/mirrored/4a55cdc0.webp","/assets/products/mirrored/6aa1760c.webp","/assets/products/mirrored/7297a93b.webp","/assets/products/mirrored/69f982b6.webp","/assets/products/mirrored/708c79bc.webp","/assets/products/mirrored/a8c2381b.webp"],"reviews":[],"variants":[{"id":"shopee_variant_88783509950","name":"CHÂN ĐEN + CHÉN","sku":"","price":165000,"originalPrice":null,"weight":800,"image":"/assets/products/mirrored/8c2abda8.webp","options":{}},{"id":"shopee_variant_88783509951","name":"CHÂN TRẮNG + CHÉN","sku":"","price":165000,"originalPrice":null,"weight":800,"image":"/assets/products/mirrored/95f2a5a8.webp","options":{}},{"id":"shopee_variant_88783509952","name":"CON VOI SEN","sku":"","price":165000,"originalPrice":null,"weight":800,"image":"/assets/products/mirrored/2dabb7a9.webp","options":{}},{"id":"shopee_variant_88783509949","name":"CHÂN VÀNG + CHÉN","sku":"","price":165000,"originalPrice":null,"weight":800,"image":"/assets/products/mirrored/41b03c17.webp","options":{}}],"slug":"den-xong-tinh-dau-hinh-huou-gom-su-trang-tri-sang-trong"};
@@ -235,6 +281,9 @@ Chờ sản phẩm nguội hoàn toàn rồi lau bằng khăn khô hoặc khăn 
     }
     writeCart(cart);
     if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+    document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
+      detail: { message: 'Đã thêm vào giỏ hàng.' },
+    }));
   });
 })();
 </script>
