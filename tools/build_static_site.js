@@ -241,6 +241,15 @@ const normalizeProductVariants = (product) => {
     .filter((variant) => variant.name && variant.price > 0);
 };
 
+const uniqueTruthy = (items) => {
+  const seen = new Set();
+  return items.filter((item) => {
+    if (!item || seen.has(item)) return false;
+    seen.add(item);
+    return true;
+  });
+};
+
 const getStaticPriceInfo = (product) => {
   const variants = normalizeProductVariants(product);
   if (!variants.length) {
@@ -269,6 +278,43 @@ const getStaticOptionGroups = (product, variants = normalizeProductVariants(prod
       ),
     }))
     .filter((group) => group.values.length);
+};
+
+const getProductGalleryImages = (product) => {
+  const variants = normalizeProductVariants(product);
+  return uniqueTruthy([
+    firstImage(product),
+    ...(Array.isArray(product.images) ? product.images : []),
+    ...variants.map((variant) => variant.image),
+  ]);
+};
+
+const renderStaticParagraphs = (text) => {
+  const normalized = String(text || '').replace(/\r\n/g, '\n').trim();
+  if (!normalized) return '';
+  return normalized
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => `<p>${paragraph.split('\n').map((line) => escapeHtml(line)).join('<br>')}</p>`)
+    .join('\n      ');
+};
+
+const getStaticOptionImage = (product, variants, groupName, value) => {
+  const optionImages = product.optionImages && typeof product.optionImages === 'object' ? product.optionImages : {};
+  if (typeof optionImages[`${groupName}:${value}`] === 'string') return optionImages[`${groupName}:${value}`];
+  if (typeof optionImages[value] === 'string') return optionImages[value];
+  if (optionImages[groupName] && typeof optionImages[groupName][value] === 'string') return optionImages[groupName][value];
+  return variants.find((variant) => variant.options?.[groupName] === value && variant.image)?.image || '';
+};
+
+const renderStaticVariantPill = ({ value, image = '', attrs = '' }) => {
+  const thumb = image
+    ? `\n          <img class="variant-pill-thumb" src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 24px, 28px')} alt="" loading="lazy" />`
+    : '';
+  return `<button class="variant-pill" type="button" data-option-value="${escapeHtml(value)}"${attrs}>${thumb}
+          <span class="variant-pill-text">${escapeHtml(value)}</span>
+        </button>`;
 };
 
 const responsiveImageAttrs = (src, sizes) => {
@@ -327,23 +373,57 @@ a { color: inherit; }
 .breadcrumb { font-size: 13px; color: var(--seo-muted); margin: 0 0 18px; overflow-wrap: anywhere; }
 .breadcrumb a { color: var(--seo-muted); text-decoration: none; }
 .product-layout { display: grid; grid-template-columns: minmax(280px, 480px) minmax(0, 1fr); gap: 40px; align-items: start; min-width: 0; }
+.product-gallery { display: grid; gap: 12px; min-width: 0; }
 .product-image { width: 100%; border-radius: 18px; border: 1px solid var(--seo-border); background: var(--seo-bg); aspect-ratio: 1 / 1; object-fit: cover; }
+.product-thumbs-wrap { position: relative; min-width: 0; padding: 0 26px; }
+.product-thumbs { display: flex; gap: 10px; overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; scroll-snap-type: x proximity; scrollbar-width: none; }
+.product-thumbs::-webkit-scrollbar { display: none; }
+.product-thumb { flex: 0 0 calc((100% - 40px) / 5); width: calc((100% - 40px) / 5); padding: 0; border: 1.5px solid var(--seo-border); border-radius: 10px; background: #fff; cursor: pointer; overflow: hidden; transition: border-color .15s ease, box-shadow .15s ease; scroll-snap-align: start; }
+.product-thumb img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: var(--seo-bg); }
+.product-thumb.is-active { border-color: var(--seo-primary); box-shadow: 0 0 0 2px rgba(49, 130, 35, .12); }
+.thumb-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 30px; height: 42px; border: 0; border-radius: 8px; background: rgba(255,255,255,.95); color: var(--seo-primary); box-shadow: 0 6px 18px rgba(22,63,22,.16); cursor: pointer; font-size: 28px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+.thumb-arrow:hover { background: #f2f8f0; }
+.thumb-arrow.prev { left: 0; }
+.thumb-arrow.next { right: 0; }
 .product-kicker { color: var(--seo-primary); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 8px; }
 h1 { font-size: clamp(28px, 5vw, 52px); line-height: 1.08; margin: 0 0 16px; letter-spacing: 0; overflow-wrap: anywhere; }
+.product-layout h1 { font-size: clamp(16px, 1.8vw, 20px); line-height: 1.35; font-weight: 800; }
 h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; }
 .price { color: var(--seo-primary); font-size: 30px; font-weight: 900; margin: 18px 0; }
 .original-price { color: #9aa49a; text-decoration: line-through; font-size: 18px; margin-left: 10px; }
 .summary, .content { color: #334833; font-size: 17px; overflow-wrap: anywhere; }
+.content p { margin: 0 0 14px; }
 .meta-list { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 14px; background: var(--seo-bg); margin: 22px 0; }
 .cta { display: inline-flex; align-items: center; justify-content: center; background: var(--seo-primary); color: #fff; text-decoration: none; border-radius: 10px; padding: 14px 20px; font-weight: 800; margin-top: 10px; }
 .buy-box { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .08); margin-top: 18px; }
 .buy-price { color: var(--seo-primary); font-size: 28px; font-weight: 900; line-height: 1.1; }
 .buy-original { color: #9aa49a; text-decoration: line-through; font-size: 16px; font-weight: 600; margin-left: 8px; }
-.buy-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.buy-options { display: grid; gap: 24px; }
 .buy-label { display: grid; gap: 6px; font-size: 13px; font-weight: 800; color: #334833; }
 .buy-select, .buy-qty { width: 100%; border: 1px solid var(--seo-border); border-radius: 10px; padding: 12px 13px; font: inherit; background: #fff; color: var(--seo-text); }
-.buy-row { display: grid; grid-template-columns: minmax(0, 120px) minmax(0, 1fr); gap: 12px; align-items: end; }
-.buy-btn { border: 0; border-radius: 10px; padding: 14px 18px; background: var(--seo-primary); color: #fff; font: inherit; font-weight: 900; cursor: pointer; }
+.variant-group { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: start; }
+.variant-label { color: #657265; font-size: 13px; font-weight: 800; padding-top: 12px; }
+.variant-options { display: flex; flex-wrap: wrap; gap: 9px; min-width: 0; }
+.variant-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; max-width: 100%; padding: 7px 12px; border: 1.5px solid #d8e0d3; border-radius: 5px; background: #fff; color: var(--seo-text); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .15s ease, background .15s ease, color .15s ease, opacity .15s ease; }
+.variant-pill:hover { border-color: var(--seo-primary); color: var(--seo-primary); }
+.variant-pill.is-active { border-color: var(--seo-primary); background: #f0f8ed; color: var(--seo-primary); font-weight: 900; }
+.variant-pill.is-active::after { content: ""; position: absolute; right: 0; bottom: 0; width: 0; height: 0; border-style: solid; border-width: 0 0 14px 14px; border-color: transparent transparent var(--seo-primary) transparent; }
+.variant-pill.is-hidden { display: none; }
+.variant-pill-thumb { width: 28px; height: 28px; object-fit: cover; border-radius: 3px; flex-shrink: 0; background: var(--seo-bg); }
+.variant-pill-text { min-width: 0; overflow-wrap: anywhere; line-height: 1.3; }
+.buy-purchase { display: grid; gap: 18px; margin-top: 8px; }
+.qty-row { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: center; }
+.qty-label { color: #657265; font-size: 13px; font-weight: 800; }
+.qty-line { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.qty-stepper { display: inline-grid; grid-template-columns: 42px 58px 42px; height: 42px; border: 1px solid var(--seo-border); border-radius: 6px; overflow: hidden; background: #fff; }
+.qty-stepper button { border: 0; border-right: 1px solid var(--seo-border); background: #fff; color: #657265; font-size: 22px; cursor: pointer; }
+.qty-stepper button:last-child { border-right: 0; border-left: 1px solid var(--seo-border); }
+.buy-qty { width: 100%; border: 0; border-radius: 0; padding: 0; text-align: center; font: inherit; font-weight: 800; color: var(--seo-text); background: #fff; }
+.stock-note { color: #657265; font-size: 14px; font-weight: 700; }
+.buy-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: stretch; }
+.buy-btn { border: 1.5px solid var(--seo-primary); border-radius: 4px; padding: 14px 18px; min-height: 54px; background: #f0f8ed; color: var(--seo-primary); font: inherit; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.buy-icon { width: 24px; height: 24px; flex: 0 0 auto; stroke: currentColor; }
+.buy-now-btn { border: 1.5px solid var(--seo-primary); border-radius: 4px; padding: 14px 18px; min-height: 54px; background: var(--seo-primary); color: #fff; font: inherit; font-weight: 900; cursor: pointer; }
 .buy-link { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--seo-primary); border-radius: 10px; padding: 12px 16px; color: var(--seo-primary); text-decoration: none; font-weight: 800; }
 .buy-status { min-height: 22px; color: var(--seo-primary); font-weight: 800; font-size: 14px; }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 24px; }
@@ -364,8 +444,18 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .seo-icon-link, .seo-cart, .seo-menu-btn { width: 38px; height: 38px; }
   .seo-main { padding: 16px; }
   .product-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .product-thumbs-wrap { padding: 0 22px; }
+  .product-thumbs { gap: 8px; }
+  .product-thumb { flex-basis: calc((100% - 32px) / 5); width: calc((100% - 32px) / 5); }
+  .thumb-arrow { width: 26px; height: 38px; font-size: 24px; }
   h1 { font-size: 28px; line-height: 1.15; }
-  .buy-options, .buy-row { grid-template-columns: 1fr; }
+  .product-layout h1 { font-size: 18px; line-height: 1.36; }
+  .variant-group { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .variant-label { padding-top: 0; }
+  .variant-pill { min-height: 40px; padding: 6px 11px; font-size: 13px; }
+  .variant-pill-thumb { width: 24px; height: 24px; }
+  .buy-options, .buy-row, .qty-row { grid-template-columns: 1fr; }
+  .qty-stepper { grid-template-columns: 40px 56px 40px; height: 40px; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .seo-footer { align-items: flex-start; flex-direction: column; margin-top: 34px; }
 }
@@ -633,29 +723,52 @@ const renderStaticBuyBox = (product) => {
     : null;
   const price = cheapestVariant ? cheapestVariant.price : Number(product.price || 0);
   const originalPrice = cheapestVariant ? cheapestVariant.originalPrice : product.originalPrice;
-  const variantOptions = variants.map((variant) =>
-    `<option value="${escapeHtml(variant.id)}">${escapeHtml(variant.name)} - ${formatVnd(variant.price)}</option>`
-  ).join('');
   const optionFields = optionGroups.length ? `<div class="buy-options">
-      ${optionGroups.map((group, index) => `<label class="buy-label">${escapeHtml(group.name)}
-        <select class="buy-select" data-option-select data-option-index="${index}" data-option-name="${escapeHtml(group.name)}"></select>
-      </label>`).join('\n      ')}
+      ${optionGroups.map((group, index) => `<div class="variant-group">
+        <div class="variant-label">${escapeHtml(group.name)}</div>
+        <div class="variant-options" data-option-pills data-option-index="${index}" data-option-name="${escapeHtml(group.name)}">
+          ${group.values.map((value) => renderStaticVariantPill({
+            value,
+            image: index === 0 ? '' : getStaticOptionImage(product, variants, group.name, value),
+          })).join('\n          ')}
+        </div>
+      </div>`).join('\n      ')}
     </div>
     ` : '';
-  const variantField = !optionGroups.length && variants.length ? `<label class="buy-label">Phân loại
-      <select class="buy-select" data-variant-select>${variantOptions}</select>
-    </label>
+  const variantField = !optionGroups.length && variants.length ? `<div class="variant-group">
+      <div class="variant-label">Phân loại</div>
+      <div class="variant-options" data-variant-pills>
+        ${variants.map((variant) => renderStaticVariantPill({
+          value: variant.name,
+          image: variant.image,
+          attrs: ` data-variant-id="${escapeHtml(variant.id)}"`,
+        })).join('\n        ')}
+      </div>
+    </div>
     ` : '';
 
   return `<form class="buy-box" data-buy-box>
     <div class="buy-price" data-buy-price>${formatVnd(price)}${originalPrice ? `<span class="buy-original" data-buy-original>${formatVnd(originalPrice)}</span>` : '<span class="buy-original" data-buy-original hidden></span>'}</div>
-    ${optionFields}${variantField}<div class="buy-row">
-      <label class="buy-label">Số lượng
-        <input class="buy-qty" data-buy-qty type="number" min="1" step="1" value="1" inputmode="numeric" />
-      </label>
-      <button class="buy-btn" type="submit">+ Thêm vào giỏ</button>
+    ${optionFields}${variantField}<div class="buy-purchase" data-purchase-panel hidden>
+      <div class="qty-row">
+        <div class="qty-label">Số lượng</div>
+        <div class="qty-line">
+          <div class="qty-stepper">
+            <button type="button" data-qty-step="-1" aria-label="Giảm số lượng">−</button>
+            <input class="buy-qty" data-buy-qty type="number" min="1" step="1" value="1" inputmode="numeric" aria-label="Số lượng" />
+            <button type="button" data-qty-step="1" aria-label="Tăng số lượng">+</button>
+          </div>
+          <span class="stock-note">Còn hàng</span>
+        </div>
+      </div>
+      <div class="buy-row">
+        <button class="buy-btn" type="submit">
+          <svg class="buy-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2.5 3h3l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H7"></path><path d="M9 11h6"></path><path d="M12 8v6"></path></svg>
+          <span>Thêm Vào Giỏ Hàng</span>
+        </button>
+        <button class="buy-now-btn" type="button" data-buy-now>Mua Ngay</button>
+      </div>
     </div>
-    <a class="buy-link" href="/?cart=open">Xem giỏ hàng</a>
     <div class="buy-status" data-buy-status aria-live="polite"></div>
   </form>`;
 };
@@ -680,13 +793,17 @@ const renderStaticBuyScript = (product) => {
   const originalImage = ${jsonForInlineScript(originalImage)};
   const form = document.querySelector('[data-buy-box]');
   if (!form) return;
-  const select = form.querySelector('[data-variant-select]');
-  const optionSelects = [...form.querySelectorAll('[data-option-select]')];
+  const variantPills = form.querySelector('[data-variant-pills]');
+  const optionPillGroups = [...form.querySelectorAll('[data-option-pills]')];
   const qtyInput = form.querySelector('[data-buy-qty]');
+  const purchasePanel = form.querySelector('[data-purchase-panel]');
+  const addCartButton = form.querySelector('.buy-btn');
+  const buyNowButton = form.querySelector('[data-buy-now]');
   const priceEl = form.querySelector('[data-buy-price]');
   const originalEl = form.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
+  const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];
   const money = (value) => Number(value || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   const responsiveAttrs = (src) => {
     if (!src || typeof src !== 'string' || src.startsWith('data:')) return null;
@@ -700,14 +817,23 @@ const renderStaticBuyScript = (product) => {
       sizes: '(max-width: 767px) 100vw, 480px',
     };
   };
-  const getSelectedOptions = () => Object.fromEntries(optionSelects.map((item) => [item.dataset.optionName, item.value]).filter(([, value]) => value));
+  const getActiveValue = (container) => container?.querySelector('.variant-pill.is-active')?.dataset.optionValue || '';
+  const setActiveValue = (container, value) => {
+    [...(container?.querySelectorAll('.variant-pill') || [])].forEach((button) => {
+      button.classList.toggle('is-active', button.dataset.optionValue === value);
+    });
+  };
+  const getSelectedOptions = () => Object.fromEntries(optionPillGroups.map((item) => [item.dataset.optionName, getActiveValue(item)]).filter(([, value]) => value));
   const getVariantByOptions = () => {
     const selected = getSelectedOptions();
     return variants.find((variant) => optionGroups.every((group) => variant.options?.[group.name] === selected[group.name])) || null;
   };
   const getVariant = () => optionGroups.length
-    ? (getVariantByOptions() || defaultVariant || variants[0] || null)
-    : (variants.find((variant) => variant.id === select?.value) || defaultVariant || variants[0] || null);
+    ? getVariantByOptions()
+    : (variants.find((variant) => variant.id === variantPills?.querySelector('.variant-pill.is-active')?.dataset.variantId) || null);
+  const isSelectionComplete = () => optionGroups.length
+    ? optionGroups.every((group, index) => getActiveValue(optionPillGroups[index]))
+    : (!variants.length || !!variantPills?.querySelector('.variant-pill.is-active'));
   const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
   const buildItem = (variant) => {
     if (!variant) return { ...product, cartKey: String(product.id) };
@@ -734,23 +860,70 @@ const renderStaticBuyScript = (product) => {
     }
   };
   const writeCart = (cart) => localStorage.setItem('phuonglam-cart', JSON.stringify(cart));
-  const rebuildOptionSelects = () => {
+  const updateActiveThumb = (src) => {
+    thumbButtons.forEach((button) => {
+      button.classList.toggle('is-active', button.dataset.thumbSrc === src);
+    });
+  };
+  const scrollThumbs = (direction) => {
+    const track = document.querySelector('[data-thumbs-track]');
+    if (!track) return;
+    const firstThumb = track.querySelector('[data-thumb-src]');
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
+    const step = firstThumb ? (firstThumb.getBoundingClientRect().width + gap) * 5 : track.clientWidth;
+    track.scrollBy({ left: direction * step, behavior: 'smooth' });
+  };
+  document.querySelectorAll('[data-thumb-scroll]').forEach((button) => {
+    button.addEventListener('click', () => scrollThumbs(Number(button.dataset.thumbScroll || 1)));
+  });
+  thumbButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextSrc = button.dataset.thumbSrc;
+      if (!mainImage || !nextSrc) return;
+      mainImage.src = nextSrc;
+      const attrs = responsiveAttrs(nextSrc);
+      if (attrs) {
+        mainImage.setAttribute('srcset', attrs.srcset);
+        mainImage.setAttribute('sizes', attrs.sizes);
+      } else {
+        mainImage.removeAttribute('srcset');
+        mainImage.removeAttribute('sizes');
+      }
+      updateActiveThumb(nextSrc);
+    });
+  });
+  const initVariantPills = () => {
+    if (!variantPills || optionGroups.length) return;
+    [...variantPills.querySelectorAll('.variant-pill')].forEach((button) => {
+      button.addEventListener('click', () => {
+        setActiveValue(variantPills, '');
+        button.classList.add('is-active');
+        updatePrice();
+      });
+    });
+  };
+  const rebuildPillStates = () => {
     if (!optionGroups.length) return;
     optionGroups.forEach((group, index) => {
-      const input = optionSelects[index];
-      if (!input) return;
+      const container = optionPillGroups[index];
+      if (!container) return;
+      const hasPriorSelection = optionGroups.slice(0, index).every((priorGroup, priorIndex) => getActiveValue(optionPillGroups[priorIndex]));
+      container.closest('.variant-group')?.toggleAttribute('hidden', index > 0 && !hasPriorSelection);
       const priorGroups = optionGroups.slice(0, index);
-      const previousValue = input.value || defaultVariant?.options?.[group.name] || '';
-      const values = group.values.filter((value) => variants.some((variant) =>
+      const pills = [...container.querySelectorAll('.variant-pill')];
+      pills.forEach((pill) => {
+        const value = pill.dataset.optionValue;
+        const isValid = variants.some((variant) =>
         variant.options?.[group.name] === value &&
         priorGroups.every((priorGroup, priorIndex) => {
-          const selectedValue = optionSelects[priorIndex]?.value;
+          const selectedValue = getActiveValue(optionPillGroups[priorIndex]);
           return !selectedValue || variant.options?.[priorGroup.name] === selectedValue;
         })
-      ));
-      input.replaceChildren(...values.map((value) => new Option(value, value)));
-      const defaultValue = defaultVariant?.options?.[group.name] || '';
-      input.value = values.includes(previousValue) ? previousValue : values.includes(defaultValue) ? defaultValue : (values[0] || '');
+        );
+        pill.hidden = !isValid;
+        pill.classList.toggle('is-hidden', !isValid);
+        if (!isValid) pill.classList.remove('is-active');
+      });
     });
   };
   const updateMainImage = (variant) => {
@@ -766,6 +939,7 @@ const renderStaticBuyScript = (product) => {
       mainImage.removeAttribute('srcset');
       mainImage.removeAttribute('sizes');
     }
+    updateActiveThumb(nextSrc);
   };
   const updatePrice = () => {
     const variant = getVariant();
@@ -776,20 +950,38 @@ const renderStaticBuyScript = (product) => {
       originalEl.textContent = original ? money(original) : '';
       originalEl.hidden = !original;
     }
-    updateMainImage(variant);
+    if (variant) updateMainImage(variant);
+    if (purchasePanel) purchasePanel.hidden = !isSelectionComplete();
   };
-  select?.addEventListener('change', updatePrice);
-  optionSelects.forEach((input, index) => input.addEventListener('change', () => {
-    optionSelects.slice(index + 1).forEach((nextInput) => { nextInput.value = ''; });
-    rebuildOptionSelects();
-    updatePrice();
-  }));
-  rebuildOptionSelects();
+  form.querySelectorAll('[data-qty-step]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const delta = Number(button.dataset.qtyStep || 0);
+      const nextValue = Math.max(1, (parseInt(qtyInput?.value || '1', 10) || 1) + delta);
+      if (qtyInput) qtyInput.value = String(nextValue);
+    });
+  });
+  optionPillGroups.forEach((container, index) => {
+    container.querySelectorAll('.variant-pill').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.hidden || button.classList.contains('is-hidden')) return;
+        setActiveValue(container, button.dataset.optionValue);
+        optionPillGroups.slice(index + 1).forEach((nextContainer) => setActiveValue(nextContainer, ''));
+        rebuildPillStates();
+        updatePrice();
+      });
+    });
+  });
+  initVariantPills();
+  rebuildPillStates();
   updatePrice();
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
+  const addSelectedToCart = () => {
+    const variant = getVariant();
+    if ((variants.length || optionGroups.length) && !variant) {
+      if (statusEl) statusEl.textContent = 'Vui lòng chọn đủ phân loại.';
+      return false;
+    }
     const qty = Math.max(1, parseInt(qtyInput?.value || '1', 10) || 1);
-    const item = buildItem(getVariant());
+    const item = buildItem(variant);
     const key = keyOf(item);
     const cart = readCart();
     const existing = cart.find((cartItem) => keyOf(cartItem) === key);
@@ -803,6 +995,18 @@ const renderStaticBuyScript = (product) => {
     document.dispatchEvent(new CustomEvent('phuonglam-cart-updated', {
       detail: { message: 'Đã thêm vào giỏ hàng.' },
     }));
+    return true;
+  };
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    addSelectedToCart();
+  });
+  addCartButton?.addEventListener('click', (event) => {
+    event.preventDefault();
+    addSelectedToCart();
+  });
+  buyNowButton?.addEventListener('click', () => {
+    if (addSelectedToCart()) window.location.href = '/?cart=open';
   });
 })();
 </script>`;
@@ -810,16 +1014,29 @@ const renderStaticBuyScript = (product) => {
 
 const renderProductPage = ({ product, categoryName }) => {
   const image = firstImage(product);
+  const galleryImages = getProductGalleryImages(product);
   const productUrl = `${siteUrl}/san-pham/${product.slug}/`;
   const description = truncate(product.shortDesc || product.description || product.name);
   const priceInfo = getStaticPriceInfo(product);
+  const thumbs = galleryImages.length > 1 ? `<div class="product-thumbs-wrap">
+            <button class="thumb-arrow prev" type="button" data-thumb-scroll="-1" aria-label="Xem ảnh trước">‹</button>
+            <div class="product-thumbs" data-thumbs-track aria-label="Ảnh sản phẩm">
+            ${galleryImages.map((src, index) => `<button class="product-thumb${index === 0 ? ' is-active' : ''}" type="button" data-thumb-src="${escapeHtml(src)}" aria-label="Xem ảnh ${index + 1}">
+              <img src="${escapeHtml(src)}"${responsiveImageAttrs(src, '(max-width: 767px) 68px, 88px')} alt="" loading="${index < 5 ? 'eager' : 'lazy'}" />
+            </button>`).join('\n            ')}
+            </div>
+            <button class="thumb-arrow next" type="button" data-thumb-scroll="1" aria-label="Xem ảnh tiếp theo">›</button>
+          </div>` : '';
+  const gallery = galleryImages.length ? `<div class="product-gallery">
+          <img class="product-image" src="${escapeHtml(galleryImages[0])}"${responsiveImageAttrs(galleryImages[0], '(max-width: 767px) 100vw, 480px')} alt="${escapeHtml(product.name)}" fetchpriority="high" />${thumbs ? `\n          ${thumbs}` : ''}
+        </div>` : `<div class="product-image" role="img" aria-label="${escapeHtml(product.name)}"></div>`;
   const body = `<main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Trang chủ</a> / <a href="/danh-muc/${escapeHtml(product.categoryId)}/">${escapeHtml(categoryName)}</a> / ${escapeHtml(product.name)}
     </nav>
     <article class="product-layout">
       <div>
-        ${image ? `<img class="product-image" src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 100vw, 480px')} alt="${escapeHtml(product.name)}" fetchpriority="high" />` : `<div class="product-image" role="img" aria-label="${escapeHtml(product.name)}"></div>`}
+        ${gallery}
       </div>
       <div>
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
@@ -827,7 +1044,7 @@ const renderProductPage = ({ product, categoryName }) => {
         <p class="summary">${escapeHtml(product.shortDesc || '')}</p>
         <div class="price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price">${formatVnd(priceInfo.originalPrice)}</span>` : ''}</div>
         <div class="meta-list">
-          <div><strong>Thương hiệu:</strong> Phương Lâm</div>
+          <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Mã sản phẩm:</strong> ${escapeHtml(product.sku || String(product.id))}</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
@@ -836,8 +1053,8 @@ const renderProductPage = ({ product, categoryName }) => {
     </article>
     <section class="content">
       <h2>Mô tả sản phẩm</h2>
-      <p>${escapeHtml(product.description || product.shortDesc || product.name)}</p>
-      ${product.usage ? `<h2>Cách dùng và lưu ý</h2><p>${escapeHtml(product.usage)}</p>` : ''}
+      ${renderStaticParagraphs(product.description || product.shortDesc || product.name)}
+      ${product.usage ? `<h2>Cách dùng và lưu ý</h2>${renderStaticParagraphs(product.usage)}` : ''}
     </section>
   </main>`;
 
