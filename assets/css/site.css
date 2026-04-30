@@ -18,6 +18,8 @@
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #f5f5f5; }
     ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+    .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
     .product-action-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 14px 30px rgba(49, 130, 35, 0.18);
