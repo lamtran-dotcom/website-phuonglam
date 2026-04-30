@@ -459,9 +459,9 @@ const bakeSettingsIntoApp = (settings) => {
 const bakeProductsIntoApp = (products) => {
   const appPath = path.join(paths.jsDir, 'app.jsx');
   let source = fs.readFileSync(appPath, 'utf8');
-  // Strip slug field (used only for static page generation) before baking
-  const appProducts = products.map(({ slug: _slug, ...rest }) => rest);
-  source = writeInlineJson(source, 'BAKED_PRODUCTS', appProducts);
+  // Product data already lives in site-data.js. Keep the baked slot empty to
+  // avoid shipping and parsing the same catalog twice on the storefront.
+  source = writeInlineJson(source, 'BAKED_PRODUCTS', []);
   fs.writeFileSync(appPath, source);
 };
 
@@ -766,9 +766,49 @@ const bustIndexCache = () => {
   const v = Date.now();
   // Update ?v= on site-data.js and app.min.js for cache-busting
   html = html.replace(
-    /(<script src="\/assets\/js\/(?:site-data|app\.min)\.js)(?:\?v=\d+)?("><\/script>)/g,
+    /(<script\b[^>]*\bsrc="\/assets\/js\/(?:site-data|app\.min)\.js)(?:\?v=\d+)?("[^>]*><\/script>)/g,
     `$1?v=${v}$2`
   );
+  fs.writeFileSync(indexPath, html);
+};
+
+const optimizeIndexRuntime = () => {
+  const indexPath = paths.index;
+  let html = fs.readFileSync(indexPath, 'utf8');
+
+  const runtimeTags = `  <script defer src="/assets/vendor/react.production.min.js"></script>
+  <script defer src="/assets/vendor/react-dom.production.min.js"></script>`;
+  html = html
+    .replace(/\n?\s*<script\s+[^>]*src="https:\/\/unpkg\.com\/react@[^"]+"[^>]*><\/script>/g, '')
+    .replace(/\n?\s*<script\s+[^>]*src="https:\/\/unpkg\.com\/react-dom@[^"]+"[^>]*><\/script>/g, '')
+    .replace(/\n?\s*<script\s+[^>]*src="\/assets\/vendor\/react\.production\.min\.js[^"]*"[^>]*><\/script>/g, '')
+    .replace(/\n?\s*<script\s+[^>]*src="\/assets\/vendor\/react-dom\.production\.min\.js[^"]*"[^>]*><\/script>/g, '')
+    .replace(/\n?\s*<link\s+rel="preconnect"\s+href="https:\/\/cf\.shopee\.vn"[^>]*>/g, '')
+    .replace(/\n?\s*<link\s+rel="icon"\s+href="\/favicon\.ico"[^>]*>/g, '')
+    .replace(/\n?\s*<link\s+rel="apple-touch-icon"\s+href="\/apple-touch-icon\.png"[^>]*>/g, '')
+    .replace(/\n?\s*<meta\s+name="theme-color"\s+content="#318223"\s*\/?>/g, '')
+    .replace(/\n?\s*<meta\s+property="og:image"\s+content="https:\/\/phuonglam\.com\/assets\/media\/generated\/embedded-002\.jpg"\s*\/?>/g, '');
+  html = html.replace('</head>', `${runtimeTags}\n</head>`);
+
+  html = html
+    .replace(/<script\s+src="\/assets\/js\/site-data\.js([^"]*)"[^>]*><\/script>/g, '<script defer src="/assets/js/site-data.js$1"></script>')
+    .replace(/<script\s+src="\/assets\/js\/app\.min\.js([^"]*)"[^>]*><\/script>/g, '<script defer src="/assets/js/app.min.js$1"></script>');
+
+  const preloadLinks = [
+    '<link rel="icon" href="/favicon.ico" sizes="any" />',
+    '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />',
+    '<meta name="theme-color" content="#318223" />',
+    '<meta property="og:image" content="https://phuonglam.com/assets/media/generated/embedded-002.jpg" />',
+    '<link rel="preload" as="image" href="/assets/media/generated/embedded-002.jpg" fetchpriority="high" />',
+    '<link rel="preload" as="image" href="/assets/products/uploads/1777435799447-chatgpt-image-14-52-27-22-thg-4-2026.webp" fetchpriority="high" />',
+  ];
+  for (const link of preloadLinks) {
+    const marker = link.match(/(?:href|property|name)="([^"]+)"/)?.[1];
+    if (marker && !html.includes(marker)) {
+      html = html.replace('</head>', `  ${link}\n</head>`);
+    }
+  }
+
   fs.writeFileSync(indexPath, html);
 };
 
@@ -782,6 +822,7 @@ const main = () => {
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
   compileAppJs();
+  optimizeIndexRuntime();
   bustIndexCache();
   writeSeoPages({ products, categories: initialData.categories });
   writeSitemapAndRobots({ products, blogPosts: initialData.blogPosts });

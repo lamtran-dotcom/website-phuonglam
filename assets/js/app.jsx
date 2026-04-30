@@ -10,8 +10,6 @@ const HERO_IMAGES = [
   "/assets/media/generated/embedded-007.jpg",
   "/assets/media/generated/embedded-008.jpg",
 ];
-HERO_IMAGES[4] = "quẹt gas.jpg";
-HERO_IMAGES.splice(5, 1);
 const BAKED_HEADER_IMAGES = /*BAKED_HEADER_IMAGES*/["/assets/media/generated/embedded-002.jpg","/assets/media/generated/embedded-003.jpg","/assets/media/generated/embedded-004.jpg","/assets/media/generated/embedded-008.jpg","/assets/media/generated/embedded-005.jpg","/assets/products/uploads/1777479221546-chatgpt-image-16-31-00-29-thg-4-2026-trung-binh.webp"]/*END_BAKED_HEADER_IMAGES*/;
 
 const BLOG_IMAGE_MAP = {
@@ -477,7 +475,7 @@ const buildCartItem = (product, variant = null) => {
   };
 };
 
-const getCartItemKey = (item) => item.cartKey || String(item.id);
+const getCartItemKey = (item) => item.cartKey || (item.selectedVariant?.id ? `${item.id}__${item.selectedVariant.id}` : String(item.id));
 
 const animateAddToCart = (sourceEl, imageSrc) => {
   const cartEl = document.getElementById('site-cart-button');
@@ -617,7 +615,7 @@ const Footer = ({ setPage }) => {
       </div>
     </div>
     <div style={footerStyles.bottom}>
-      <span>© 2025 Phương Lâm. Bảo lưu mọi quyền.</span>
+      <span>© 2026 Phương Lâm. Bảo lưu mọi quyền.</span>
     </div>
   </footer>
   );
@@ -2249,6 +2247,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     items: cart.map(item => ({
       id: item.id,
       sku: item.sku || '',
+      variantId: item.selectedVariant?.id || '',
       name: item.selectedVariant?.name ? `${item.name} - ${item.selectedVariant.name}` : item.name,
       productName: item.name,
       variantName: item.selectedVariant?.name || '',

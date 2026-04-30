@@ -55,11 +55,12 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mik62n59xzpiea",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mia82lp7gkqu39",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mik63sfpts0665",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mik62pwl1q83bc",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mik62rohxcsnbc"
+      "/assets/products/uploads/sp-55553449576-cover-720.jpg",
+      "/assets/products/mirrored/0b84f8cd.webp",
+      "/assets/products/mirrored/fad014be.webp",
+      "/assets/products/mirrored/ef26e671.webp",
+      "/assets/products/mirrored/94dfd037.webp",
+      "/assets/products/mirrored/f2321967.webp"
     ],
     "reviews": [],
     "variants": [
@@ -324,15 +325,15 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-meracf95o3cxaf",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-meraaf49fz0h1e",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-merad9z3yznr95",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-merabdphgirk6b",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-merabp9yoohv75",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-merab4dmduypb8",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-meraatrq2wp128"
+      "/assets/products/mirrored/8fdaba5f.webp",
+      "/assets/products/mirrored/fb836c44.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/285e6501.webp",
+      "/assets/products/mirrored/e69cf290.webp",
+      "/assets/products/mirrored/ecdbb39a.webp",
+      "/assets/products/mirrored/9d9c0fae.webp",
+      "/assets/products/mirrored/8f7a08e9.webp"
     ],
     "reviews": [],
     "variants": [
@@ -608,31 +609,31 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mesdeg5484cj59",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
+      "/assets/products/mirrored/8049c44e.webp",
+      "/assets/products/mirrored/e889ad36.webp",
       "/assets/products/uploads/1777472272766-1777471993642-11ba7642-instagram-square-1080x1080.webp",
       "/assets/products/uploads/1777472291130-chatgpt-image-20-58-14-29-thg-4-2026.webp"
     ],
     "reviews": [],
     "variants": [
       {
-        "id": "shopee_variant_194717189919",
+        "id": "shopee_17395821074__shopee_variant_194717189919",
         "name": "Bếp Xông 13cm (Lẻ)",
         "sku": "",
         "price": 65000,
         "originalPrice": 90000,
         "weight": 1300,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5s9y6b47a1a",
+        "image": "/assets/products/mirrored/57b57d56.webp",
         "options": {}
       },
       {
-        "id": "shopee_variant_194717189920",
+        "id": "shopee_17395821074__shopee_variant_194717189920",
         "name": "Bếp xông 16cm (Lẻ)",
         "sku": "",
         "price": 75000,
         "originalPrice": 100000,
         "weight": 1300,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mgw6bulk3aiwef",
+        "image": "/assets/products/mirrored/7cfe1bfc.webp",
         "options": {}
       }
     ]
@@ -875,7 +876,7 @@ const PRODUCTS = [
     ],
     "variants": [
       {
-        "id": "pl001_trang_20v",
+        "id": "p_1777468148980_4ztop__pl001_trang_20v",
         "name": "Trắng - 2 Vỉ 2h = 20 viên",
         "sku": "",
         "price": 28000,
@@ -888,7 +889,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_trang_50v",
+        "id": "p_1777468148980_4ztop__pl001_trang_50v",
         "name": "Trắng - 50 Viên 2h",
         "sku": "",
         "price": 55000,
@@ -901,7 +902,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_trang_100v",
+        "id": "p_1777468148980_4ztop__pl001_trang_100v",
         "name": "Trắng - Hộp 100 Viên 2h",
         "sku": "",
         "price": 99000,
@@ -914,7 +915,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_vang_20v",
+        "id": "p_1777468148980_4ztop__pl001_vang_20v",
         "name": "Vàng - 2 Vỉ 2h = 20 viên",
         "sku": "",
         "price": 28000,
@@ -927,7 +928,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_vang_50v",
+        "id": "p_1777468148980_4ztop__pl001_vang_50v",
         "name": "Vàng - 50 Viên 2h",
         "sku": "",
         "price": 55000,
@@ -940,7 +941,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_vang_100v",
+        "id": "p_1777468148980_4ztop__pl001_vang_100v",
         "name": "Vàng - Hộp 100 Viên 2h",
         "sku": "",
         "price": 99000,
@@ -953,7 +954,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_do_20v",
+        "id": "p_1777468148980_4ztop__pl001_do_20v",
         "name": "Đỏ - 2 Vỉ 2h = 20 viên",
         "sku": "",
         "price": 28000,
@@ -966,7 +967,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_do_50v",
+        "id": "p_1777468148980_4ztop__pl001_do_50v",
         "name": "Đỏ - 50 Viên 2h",
         "sku": "",
         "price": 55000,
@@ -979,7 +980,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_do_100v",
+        "id": "p_1777468148980_4ztop__pl001_do_100v",
         "name": "Đỏ - Hộp 100 Viên 2h",
         "sku": "",
         "price": 99000,
@@ -1053,7 +1054,7 @@ const PRODUCTS = [
     ],
     "variants": [
       {
-        "id": "pl001_trang_20v",
+        "id": "p_1777435996053_fbofd__pl001_trang_20v",
         "name": "Trắng - 2 Vỉ 4h = 20 viên",
         "sku": "PL-001-TRANG-20V",
         "price": 38000,
@@ -1066,7 +1067,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_trang_50v",
+        "id": "p_1777435996053_fbofd__pl001_trang_50v",
         "name": "Trắng - 50 Viên 4h",
         "sku": "PL-001-TRANG-50V",
         "price": 78000,
@@ -1079,7 +1080,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_trang_100v",
+        "id": "p_1777435996053_fbofd__pl001_trang_100v",
         "name": "Trắng - Hộp 100 Viên 4h",
         "sku": "PL-001-TRANG-100V",
         "price": 150000,
@@ -1092,7 +1093,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_vang_20v",
+        "id": "p_1777435996053_fbofd__pl001_vang_20v",
         "name": "Vàng - 2 Vỉ 4h = 20 viên",
         "sku": "PL-001-VANG-20V",
         "price": 55000,
@@ -1105,7 +1106,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_vang_50v",
+        "id": "p_1777435996053_fbofd__pl001_vang_50v",
         "name": "Vàng - 50 Viên 4h",
         "sku": "PL-001-VANG-50V",
         "price": 95000,
@@ -1118,7 +1119,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_vang_100v",
+        "id": "p_1777435996053_fbofd__pl001_vang_100v",
         "name": "Vàng - Hộp 100 Viên 4h",
         "sku": "PL-001-VANG-100V",
         "price": 175000,
@@ -1131,7 +1132,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_do_20v",
+        "id": "p_1777435996053_fbofd__pl001_do_20v",
         "name": "Đỏ - 2 Vỉ 4h = 20 viên",
         "sku": "PL-001-DO-20V",
         "price": 55000,
@@ -1144,7 +1145,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_do_50v",
+        "id": "p_1777435996053_fbofd__pl001_do_50v",
         "name": "Đỏ - 50 Viên 4h",
         "sku": "PL-001-DO-50V",
         "price": 95000,
@@ -1157,7 +1158,7 @@ const PRODUCTS = [
         }
       },
       {
-        "id": "pl001_do_100v",
+        "id": "p_1777435996053_fbofd__pl001_do_100v",
         "name": "Đỏ - Hộp 100 Viên 4h",
         "sku": "PL-001-DO-100V",
         "price": 175000,
@@ -1212,9 +1213,9 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-miaao8qg5csibd",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32"
+      "/assets/products/mirrored/0ac9444b.webp",
+      "/assets/products/mirrored/77ad5f9a.webp",
+      "/assets/products/mirrored/28252371.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1225,7 +1226,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
+        "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
       },
       {
@@ -1235,7 +1236,7 @@ const PRODUCTS = [
         "price": 120000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
+        "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
       },
       {
@@ -1245,7 +1246,7 @@ const PRODUCTS = [
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
+        "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
       }
     ]
@@ -1267,8 +1268,8 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777463252181-chatgpt-image-16-52-36-29-thg-4-2026.webp",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4c8sak1y98",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4dla213918",
+      "/assets/products/mirrored/1cde6bc9.webp",
+      "/assets/products/mirrored/58a68e52.webp",
       "/assets/products/uploads/1777456781347-chatgpt-image-16-56-34-29-thg-4-2026.webp",
       "/assets/products/uploads/1777463257471-gemini-generated-image-pv1ly5pv1ly5pv1l.webp",
       "/assets/products/uploads/1777456967920-chatgpt-image-17-02-27-29-thg-4-2026.webp",
@@ -1334,7 +1335,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mik5ksxnhrew1f"
+      "/assets/products/mirrored/d3e9edf3.webp"
     ],
     "reviews": [],
     "variants": []
@@ -1355,12 +1356,12 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e5ubuwaoae1",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6j2o2rka4f",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e63iax1jff1",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e66ng4pvy99",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e68l9kydo3e",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6aehmtjha0"
+      "/assets/products/mirrored/9da69a94.webp",
+      "/assets/products/mirrored/864e6aef.webp",
+      "/assets/products/mirrored/ceb830cf.webp",
+      "/assets/products/mirrored/b9afc202.webp",
+      "/assets/products/mirrored/dc71bd43.webp",
+      "/assets/products/mirrored/8b174002.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1412,8 +1413,8 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazm74o66tk75",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazn33ab2mgd6"
+      "/assets/products/mirrored/44ee5b50.webp",
+      "/assets/products/mirrored/770dfd2f.webp"
     ],
     "reviews": [],
     "variants": []
@@ -1434,7 +1435,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi0auosgwcn5af"
+      "/assets/products/mirrored/981d6659.webp"
     ],
     "reviews": [],
     "variants": []
@@ -1455,10 +1456,10 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0cmrtqtgcd",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0fet179i8f",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0ibhwhz989"
+      "/assets/products/mirrored/72eecef5.webp",
+      "/assets/products/mirrored/71ced047.webp",
+      "/assets/products/mirrored/cae1a77b.webp",
+      "/assets/products/mirrored/3f070c64.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1469,7 +1470,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4",
+        "image": "/assets/products/mirrored/cae1a77b.webp",
         "options": {}
       },
       {
@@ -1479,7 +1480,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0ibhwhz989",
+        "image": "/assets/products/mirrored/3f070c64.webp",
         "options": {}
       },
       {
@@ -1489,7 +1490,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0fet179i8f",
+        "image": "/assets/products/mirrored/71ced047.webp",
         "options": {}
       },
       {
@@ -1499,7 +1500,7 @@ const PRODUCTS = [
         "price": 20000,
         "originalPrice": 34000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4",
+        "image": "/assets/products/mirrored/cae1a77b.webp",
         "options": {}
       }
     ]
@@ -1520,15 +1521,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pt9elz4si94",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2ea975ppty9b",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2e90dsun0g67",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2eaiwrtcld9b",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mez84dov3957db",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mez84cdel8gfff",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mez84s36df6500",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mez84lr2fmz09b",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mez84n44bx1q77"
+      "/assets/products/mirrored/bf9f8e4c.webp",
+      "/assets/products/mirrored/779a83f5.webp",
+      "/assets/products/mirrored/278345e8.webp",
+      "/assets/products/mirrored/d2555353.webp",
+      "/assets/products/mirrored/b7d7fd04.webp",
+      "/assets/products/mirrored/7b0c2719.webp",
+      "/assets/products/mirrored/dcbcf461.webp",
+      "/assets/products/mirrored/d1844a96.webp",
+      "/assets/products/mirrored/3794a125.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1539,7 +1540,7 @@ const PRODUCTS = [
         "price": 260000,
         "originalPrice": 450000,
         "weight": 300,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51",
+        "image": "/assets/products/mirrored/ce1c8e75.webp",
         "options": {}
       },
       {
@@ -1549,7 +1550,7 @@ const PRODUCTS = [
         "price": 168000,
         "originalPrice": 350000,
         "weight": 300,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51",
+        "image": "/assets/products/mirrored/ce1c8e75.webp",
         "options": {}
       }
     ]
@@ -1586,12 +1587,12 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777466312414-image.webp",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uo4lchx4d73",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uot2kocy7ed",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoca98p2l7a",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoj2paz8t8c",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-m08updmklgnj96",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-m08upm4w56uld9",
+      "/assets/products/mirrored/5c62b76f.webp",
+      "/assets/products/mirrored/0ac3e598.webp",
+      "/assets/products/mirrored/aa119daa.webp",
+      "/assets/products/mirrored/a0dd2034.webp",
+      "/assets/products/mirrored/3e814638.webp",
+      "/assets/products/mirrored/47b5cf43.webp",
       "/assets/products/uploads/1777457727432-chatgpt-image-17-15-20-29-thg-4-2026.webp"
     ],
     "reviews": [],
@@ -1603,7 +1604,7 @@ const PRODUCTS = [
         "price": 115000,
         "originalPrice": 160000,
         "weight": 700,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uknnxbcode6",
+        "image": "/assets/products/mirrored/a11cc19a.webp",
         "options": {
           "Màu": "Hương lài",
           "Số lượng": "50 Viên 4h"
@@ -1616,7 +1617,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukpzpwqkvfe",
+        "image": "/assets/products/mirrored/de9ea08a.webp",
         "options": {
           "Màu": "Hương lài",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -1629,7 +1630,7 @@ const PRODUCTS = [
         "price": 220000,
         "originalPrice": 320000,
         "weight": 1500,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukwrc08lrde",
+        "image": "/assets/products/mirrored/42235667.webp",
         "options": {
           "Màu": "Hương lài",
           "Số lượng": "Hộp 100 Viên 4h"
@@ -1653,7 +1654,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4"
+      "/assets/products/mirrored/cae1a77b.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1696,10 +1697,10 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777462920577-chatgpt-image-17-20-00-29-thg-4-2026.webp",
-      "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4a6cl1vq50",
-      "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4bo6eaerad",
-      "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm46urg1xi78",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lw5qxdpa3pi34e",
+      "/assets/products/mirrored/40197b9f.webp",
+      "/assets/products/mirrored/552f7f4e.webp",
+      "/assets/products/mirrored/b4b92d7d.webp",
+      "/assets/products/mirrored/705c7d46.webp",
       "/assets/products/uploads/1777462947338-chatgpt-image-18-40-43-29-thg-4-2026.webp",
       "/assets/products/uploads/1777463028222-chatgpt-image-18-43-20-29-thg-4-2026.webp"
     ],
@@ -1763,14 +1764,14 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9k99qoraww84",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83kr38d6v80a",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-7ra0g-m65ib3dm2ps35a",
-      "https://cf.shopee.vn/file/vn-11134207-7ra0g-m65ibkucilw7ae"
+      "/assets/products/mirrored/1e442f2b.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/3eef544b.webp",
+      "/assets/products/mirrored/0dc7d68f.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/6986d8bf.webp",
+      "/assets/products/mirrored/b0ce2e4a.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1781,7 +1782,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
+        "image": "/assets/products/mirrored/1e442f2b.webp",
         "options": {}
       },
       {
@@ -1791,7 +1792,7 @@ const PRODUCTS = [
         "price": 110000,
         "originalPrice": null,
         "weight": 300,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
+        "image": "/assets/products/mirrored/1e442f2b.webp",
         "options": {}
       },
       {
@@ -1801,7 +1802,7 @@ const PRODUCTS = [
         "price": 190000,
         "originalPrice": null,
         "weight": 600,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
+        "image": "/assets/products/mirrored/1e442f2b.webp",
         "options": {}
       }
     ]
@@ -1822,7 +1823,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83k4bvilfm0a",
+      "/assets/products/mirrored/1621efcd.webp",
       "/assets/products/uploads/1777469632817-bep-xong-thao-moc-san-pham-chinh.webp",
       "/assets/products/uploads/1777469641086-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777469642912-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
@@ -1836,7 +1837,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 55000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
+        "image": "/assets/products/mirrored/0eb610e6.webp",
         "options": {}
       },
       {
@@ -1846,7 +1847,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
+        "image": "/assets/products/mirrored/44f5db92.webp",
         "options": {}
       },
       {
@@ -1856,7 +1857,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
+        "image": "/assets/products/mirrored/2e6d5918.webp",
         "options": {}
       },
       {
@@ -1866,7 +1867,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
+        "image": "/assets/products/mirrored/ae946cc0.webp",
         "options": {}
       },
       {
@@ -1876,7 +1877,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 24000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
+        "image": "/assets/products/mirrored/50cf46f0.webp",
         "options": {}
       },
       {
@@ -1886,7 +1887,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 45000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j897yj28498",
+        "image": "/assets/products/mirrored/95a4b745.webp",
         "options": {}
       },
       {
@@ -1896,7 +1897,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
+        "image": "/assets/products/mirrored/26da0749.webp",
         "options": {}
       },
       {
@@ -1906,7 +1907,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 25000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
+        "image": "/assets/products/mirrored/baf27518.webp",
         "options": {}
       },
       {
@@ -1916,7 +1917,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 25000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9ltsy29vb4",
+        "image": "/assets/products/mirrored/384f418c.webp",
         "options": {}
       },
       {
@@ -1926,7 +1927,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
+        "image": "/assets/products/mirrored/8b89e6d8.webp",
         "options": {}
       },
       {
@@ -1936,7 +1937,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 55000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7qxurk022c",
+        "image": "/assets/products/mirrored/e8a9b246.webp",
         "options": {}
       },
       {
@@ -1946,7 +1947,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
+        "image": "/assets/products/mirrored/759a6203.webp",
         "options": {}
       },
       {
@@ -1956,7 +1957,7 @@ const PRODUCTS = [
         "price": 30000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32",
+        "image": "/assets/products/mirrored/28252371.webp",
         "options": {}
       },
       {
@@ -1966,7 +1967,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
+        "image": "/assets/products/mirrored/58680219.webp",
         "options": {}
       },
       {
@@ -1976,7 +1977,7 @@ const PRODUCTS = [
         "price": 20000,
         "originalPrice": 25000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7lt5ecjp4c",
+        "image": "/assets/products/mirrored/9b9fc9e0.webp",
         "options": {}
       },
       {
@@ -2007,15 +2008,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83bmwd7chyc0",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mia82lp7gkqu39",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lt901teh0e552e",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lt901teh1spl79",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9ba5rkid7",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9bacseqa3",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9bah04238"
+      "/assets/products/mirrored/c5c1fada.webp",
+      "/assets/products/mirrored/fad014be.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/44f5db92.webp",
+      "/assets/products/mirrored/033ae47e.webp",
+      "/assets/products/mirrored/324335de.webp",
+      "/assets/products/mirrored/f1b0c979.webp",
+      "/assets/products/mirrored/aa6a527b.webp",
+      "/assets/products/mirrored/814d1390.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2026,7 +2027,7 @@ const PRODUCTS = [
         "price": 69000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
+        "image": "/assets/products/mirrored/44f5db92.webp",
         "options": {}
       },
       {
@@ -2036,7 +2037,7 @@ const PRODUCTS = [
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32",
+        "image": "/assets/products/mirrored/28252371.webp",
         "options": {}
       },
       {
@@ -2046,7 +2047,7 @@ const PRODUCTS = [
         "price": 50000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32",
+        "image": "/assets/products/mirrored/28252371.webp",
         "options": {}
       },
       {
@@ -2056,7 +2057,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
+        "image": "/assets/products/mirrored/44f5db92.webp",
         "options": {}
       },
       {
@@ -2066,7 +2067,7 @@ const PRODUCTS = [
         "price": 40000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
+        "image": "/assets/products/mirrored/44f5db92.webp",
         "options": {}
       }
     ]
@@ -2087,14 +2088,14 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81yjdhmxhhe4",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwinp3mb6",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwip3o2ef",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwiqi8i60"
+      "/assets/products/mirrored/56306196.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/ae946cc0.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/f5b49596.webp",
+      "/assets/products/mirrored/de57f0a9.webp",
+      "/assets/products/mirrored/71f07c33.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2105,7 +2106,7 @@ const PRODUCTS = [
         "price": 40000,
         "originalPrice": null,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
+        "image": "/assets/products/mirrored/ae946cc0.webp",
         "options": {}
       },
       {
@@ -2115,7 +2116,7 @@ const PRODUCTS = [
         "price": 75000,
         "originalPrice": null,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
+        "image": "/assets/products/mirrored/ae946cc0.webp",
         "options": {}
       },
       {
@@ -2125,7 +2126,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": null,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
+        "image": "/assets/products/mirrored/ae946cc0.webp",
         "options": {}
       }
     ]
@@ -2146,14 +2147,14 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83ehkpjklg65",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnklryc8a",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkn6isf8",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkol38f6",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lryao6hbktcpbd"
+      "/assets/products/mirrored/def98448.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/26da0749.webp",
+      "/assets/products/mirrored/c93434a6.webp",
+      "/assets/products/mirrored/36417a45.webp",
+      "/assets/products/mirrored/bc84809a.webp",
+      "/assets/products/mirrored/bb1c4d7f.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2164,7 +2165,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
+        "image": "/assets/products/mirrored/26da0749.webp",
         "options": {}
       },
       {
@@ -2174,7 +2175,7 @@ const PRODUCTS = [
         "price": 50000,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
+        "image": "/assets/products/mirrored/26da0749.webp",
         "options": {}
       },
       {
@@ -2184,7 +2185,7 @@ const PRODUCTS = [
         "price": 10000,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
+        "image": "/assets/products/mirrored/26da0749.webp",
         "options": {}
       }
     ]
@@ -2205,15 +2206,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81rpd7l0ci00",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgndbg797",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgn93qv8f",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgnbwvr43",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgnaibb79"
+      "/assets/products/mirrored/1dfab21e.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/759a6203.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/bd1ab7b1.webp",
+      "/assets/products/mirrored/a699a621.webp",
+      "/assets/products/mirrored/0b9ab6cf.webp",
+      "/assets/products/mirrored/6ff9d3b7.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2224,7 +2225,7 @@ const PRODUCTS = [
         "price": 53000,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
+        "image": "/assets/products/mirrored/759a6203.webp",
         "options": {}
       },
       {
@@ -2234,7 +2235,7 @@ const PRODUCTS = [
         "price": 26471,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
+        "image": "/assets/products/mirrored/759a6203.webp",
         "options": {}
       },
       {
@@ -2244,7 +2245,7 @@ const PRODUCTS = [
         "price": 14100,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
+        "image": "/assets/products/mirrored/759a6203.webp",
         "options": {}
       }
     ]
@@ -2265,15 +2266,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81u0q9jx8m9e",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72tck914",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72qjfde4",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72rxzte0",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72ur4p68"
+      "/assets/products/mirrored/d584a8b2.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/0eb610e6.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/71dc81d4.webp",
+      "/assets/products/mirrored/7f5f13d5.webp",
+      "/assets/products/mirrored/c5a3f5e5.webp",
+      "/assets/products/mirrored/478c67aa.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2284,7 +2285,7 @@ const PRODUCTS = [
         "price": 50000,
         "originalPrice": null,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
+        "image": "/assets/products/mirrored/0eb610e6.webp",
         "options": {}
       },
       {
@@ -2294,7 +2295,7 @@ const PRODUCTS = [
         "price": 95000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
+        "image": "/assets/products/mirrored/0eb610e6.webp",
         "options": {}
       },
       {
@@ -2304,7 +2305,7 @@ const PRODUCTS = [
         "price": 26000,
         "originalPrice": null,
         "weight": 60,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
+        "image": "/assets/products/mirrored/0eb610e6.webp",
         "options": {}
       }
     ]
@@ -2325,14 +2326,14 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mtdyrtsec90",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g7l5cmwy87",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8n6t5hrsw179",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g9usos1wc8",
-      "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc57xq4l4w836",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwfaorh8m35",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwbkw4qo75f",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwgus31u034"
+      "/assets/products/mirrored/5a254a10.webp",
+      "/assets/products/mirrored/c8b1c450.webp",
+      "/assets/products/mirrored/f2c600ca.webp",
+      "/assets/products/mirrored/dc290562.webp",
+      "/assets/products/mirrored/24f9a207.webp",
+      "/assets/products/mirrored/9dc9ce24.webp",
+      "/assets/products/mirrored/954776e6.webp",
+      "/assets/products/mirrored/226cace9.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2343,7 +2344,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51x9162o8f7",
+        "image": "/assets/products/mirrored/3f689f12.webp",
         "options": {}
       },
       {
@@ -2353,7 +2354,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc53qh26adgec",
+        "image": "/assets/products/mirrored/7c02b18f.webp",
         "options": {}
       },
       {
@@ -2363,7 +2364,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8myc673ime37",
+        "image": "/assets/products/mirrored/356f1263.webp",
         "options": {}
       },
       {
@@ -2373,7 +2374,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc575gudslf5a",
+        "image": "/assets/products/mirrored/9502482d.webp",
         "options": {}
       },
       {
@@ -2383,7 +2384,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwfaorh8m35",
+        "image": "/assets/products/mirrored/9dc9ce24.webp",
         "options": {}
       },
       {
@@ -2393,7 +2394,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwbkw4qo75f",
+        "image": "/assets/products/mirrored/954776e6.webp",
         "options": {}
       },
       {
@@ -2403,7 +2404,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51yqdce8801",
+        "image": "/assets/products/mirrored/cfbf70de.webp",
         "options": {}
       }
     ]
@@ -2424,15 +2425,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j13ynce",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3noho70",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3m9x848",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j2ij33a",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j5bnza4",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j3x3jb0",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j84sv86",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j6q8f64",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3cfy486"
+      "/assets/products/mirrored/c239e398.webp",
+      "/assets/products/mirrored/a5c14901.webp",
+      "/assets/products/mirrored/b2fdd4ff.webp",
+      "/assets/products/mirrored/4a55cdc0.webp",
+      "/assets/products/mirrored/6aa1760c.webp",
+      "/assets/products/mirrored/7297a93b.webp",
+      "/assets/products/mirrored/69f982b6.webp",
+      "/assets/products/mirrored/708c79bc.webp",
+      "/assets/products/mirrored/a8c2381b.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2443,7 +2444,7 @@ const PRODUCTS = [
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3i27w4c",
+        "image": "/assets/products/mirrored/8c2abda8.webp",
         "options": {}
       },
       {
@@ -2453,7 +2454,7 @@ const PRODUCTS = [
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3jgsc5b",
+        "image": "/assets/products/mirrored/95f2a5a8.webp",
         "options": {}
       },
       {
@@ -2463,7 +2464,7 @@ const PRODUCTS = [
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3kvcsc8",
+        "image": "/assets/products/mirrored/2dabb7a9.webp",
         "options": {}
       },
       {
@@ -2473,7 +2474,7 @@ const PRODUCTS = [
         "price": 165000,
         "originalPrice": null,
         "weight": 800,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3gnng9b",
+        "image": "/assets/products/mirrored/41b03c17.webp",
         "options": {}
       }
     ]
@@ -2495,13 +2496,13 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777467924337-de-dot-nen.webp",
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7p2yj03",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzfy1634",
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7qhizda",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzhclm37",
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7rw3fb4",
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7tanv31",
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7xid736"
+      "/assets/products/mirrored/ff5d996f.webp",
+      "/assets/products/mirrored/12a70968.webp",
+      "/assets/products/mirrored/dd1d28f0.webp",
+      "/assets/products/mirrored/5109856e.webp",
+      "/assets/products/mirrored/4a022e45.webp",
+      "/assets/products/mirrored/47339075.webp",
+      "/assets/products/mirrored/0ed3b822.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2512,7 +2513,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": 35000,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1s56j73",
+        "image": "/assets/products/mirrored/130a52de.webp",
         "options": {}
       },
       {
@@ -2522,7 +2523,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": 35000,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0agzho5f5u43",
+        "image": "/assets/products/mirrored/6637f383.webp",
         "options": {}
       },
       {
@@ -2532,7 +2533,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": 35000,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1nxh70b",
+        "image": "/assets/products/mirrored/5623155a.webp",
         "options": {}
       }
     ]
@@ -2553,15 +2554,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81zledf7cz16",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8q1tifd",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf0clka9",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf1r60ba",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf35qgb6",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf5yvcbb"
+      "/assets/products/mirrored/c42144ef.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/8b89e6d8.webp",
+      "/assets/products/mirrored/c3342352.webp",
+      "/assets/products/mirrored/6f55232c.webp",
+      "/assets/products/mirrored/bcab6ac8.webp",
+      "/assets/products/mirrored/9552fd48.webp",
+      "/assets/products/mirrored/e44f8417.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2572,7 +2573,7 @@ const PRODUCTS = [
         "price": 120000,
         "originalPrice": null,
         "weight": 600,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
+        "image": "/assets/products/mirrored/8b89e6d8.webp",
         "options": {}
       },
       {
@@ -2582,7 +2583,7 @@ const PRODUCTS = [
         "price": 30000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
+        "image": "/assets/products/mirrored/8b89e6d8.webp",
         "options": {}
       },
       {
@@ -2592,7 +2593,7 @@ const PRODUCTS = [
         "price": 90000,
         "originalPrice": null,
         "weight": 400,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
+        "image": "/assets/products/mirrored/8b89e6d8.webp",
         "options": {}
       }
     ]
@@ -2613,15 +2614,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83d3qykg0061",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye730dehe0",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72yyu157",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye731ryxb6",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye7336jdcc",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72xk9l9c"
+      "/assets/products/mirrored/c01cf13c.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/58680219.webp",
+      "/assets/products/mirrored/772cc6b6.webp",
+      "/assets/products/mirrored/df4b3e96.webp",
+      "/assets/products/mirrored/3ec7b817.webp",
+      "/assets/products/mirrored/2cf4940e.webp",
+      "/assets/products/mirrored/ec706e73.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2632,7 +2633,7 @@ const PRODUCTS = [
         "price": 20000,
         "originalPrice": null,
         "weight": 50,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
+        "image": "/assets/products/mirrored/58680219.webp",
         "options": {}
       },
       {
@@ -2642,7 +2643,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": null,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
+        "image": "/assets/products/mirrored/58680219.webp",
         "options": {}
       },
       {
@@ -2652,7 +2653,7 @@ const PRODUCTS = [
         "price": 80000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
+        "image": "/assets/products/mirrored/58680219.webp",
         "options": {}
       }
     ]
@@ -2673,9 +2674,9 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me821wr79y4h47",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-log7xpeen2rb9d",
+      "/assets/products/mirrored/9f75d6ef.webp",
+      "/assets/products/mirrored/2e6d5918.webp",
+      "/assets/products/mirrored/87aa2505.webp",
       "/assets/products/uploads/1777469612987-bo-ket-xong-nha-phuong-lam-202604280416-featured-bo-ket-xong-nha-phuong-lam.webp",
       "/assets/products/uploads/1777469619221-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp"
     ],
@@ -2688,7 +2689,7 @@ const PRODUCTS = [
         "price": 45000,
         "originalPrice": 55000,
         "weight": 300,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
+        "image": "/assets/products/mirrored/2e6d5918.webp",
         "options": {}
       },
       {
@@ -2698,7 +2699,7 @@ const PRODUCTS = [
         "price": 119000,
         "originalPrice": 150000,
         "weight": 600,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
+        "image": "/assets/products/mirrored/2e6d5918.webp",
         "options": {}
       },
       {
@@ -2708,7 +2709,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
+        "image": "/assets/products/mirrored/2e6d5918.webp",
         "options": {}
       }
     ]
@@ -2744,7 +2745,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jejtmns3k41",
+        "image": "/assets/products/mirrored/39075608.webp",
         "options": {}
       },
       {
@@ -2754,7 +2755,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jduorludfaf",
+        "image": "/assets/products/mirrored/3f823af3.webp",
         "options": {}
       },
       {
@@ -2764,7 +2765,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg2rweq6fe0",
+        "image": "/assets/products/mirrored/d8257f13.webp",
         "options": {}
       },
       {
@@ -2774,7 +2775,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg6i6d4w44e",
+        "image": "/assets/products/mirrored/b104471d.webp",
         "options": {}
       },
       {
@@ -2784,7 +2785,7 @@ const PRODUCTS = [
         "price": 45000,
         "originalPrice": 90000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnb9a6ez07b641",
+        "image": "/assets/products/mirrored/662d23ea.webp",
         "options": {}
       },
       {
@@ -2794,7 +2795,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jfioudxc2c8",
+        "image": "/assets/products/mirrored/fa6b91f1.webp",
         "options": {}
       },
       {
@@ -2804,7 +2805,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv73sc9o4y7d4",
+        "image": "/assets/products/mirrored/020acc30.webp",
         "options": {}
       },
       {
@@ -2814,7 +2815,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 70000,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv78e9n8a30d5",
+        "image": "/assets/products/mirrored/07e645db.webp",
         "options": {}
       }
     ]
@@ -2857,14 +2858,14 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777538330793-chatgpt-image-15-38-23-30-thg-4-2026.webp",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7f5z611j7b4",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g7l5cmwy87",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g9usos1wc8",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzk5qi1f",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzir621d",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7ppz24a6",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7prdmkc1",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7pss70b0"
+      "/assets/products/mirrored/35bad26e.webp",
+      "/assets/products/mirrored/c8b1c450.webp",
+      "/assets/products/mirrored/dc290562.webp",
+      "/assets/products/mirrored/1af6be42.webp",
+      "/assets/products/mirrored/337d4903.webp",
+      "/assets/products/mirrored/d6af1029.webp",
+      "/assets/products/mirrored/950d8fc2.webp",
+      "/assets/products/mirrored/262cd1a5.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2875,7 +2876,7 @@ const PRODUCTS = [
         "price": 95000,
         "originalPrice": 150000,
         "weight": 400,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbtzrj42",
+        "image": "/assets/products/mirrored/cc48756e.webp",
         "options": {
           "Phân loại": "Đèn + Đế nến",
           "Kiểu dáng": "BÚP SEN + ĐẾ TRẮNG"
@@ -2888,7 +2889,7 @@ const PRODUCTS = [
         "price": 65000,
         "originalPrice": 110000,
         "weight": 400,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3f3a7sg7iab",
+        "image": "/assets/products/mirrored/805754e1.webp",
         "options": {
           "Phân loại": "Đèn Lẻ",
           "Kiểu dáng": "HOA TRẮNG NHỎ"
@@ -2901,7 +2902,7 @@ const PRODUCTS = [
         "price": 1150000,
         "originalPrice": 170000,
         "weight": 400,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbsl73aa",
+        "image": "/assets/products/mirrored/9484b668.webp",
         "options": {
           "Phân loại": "Đèn + Đế nến",
           "Kiểu dáng": "ĐÈN TO + ĐẾ TRẮNG"
@@ -2914,7 +2915,7 @@ const PRODUCTS = [
         "price": 75000,
         "originalPrice": 120000,
         "weight": 400,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnlfx02cjtb44",
+        "image": "/assets/products/mirrored/2712a0ba.webp",
         "options": {
           "Phân loại": "Đèn Lẻ",
           "Kiểu dáng": "BÚP SEN"
@@ -2927,7 +2928,7 @@ const PRODUCTS = [
         "price": 79000,
         "originalPrice": 150000,
         "weight": 500,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gkcnlybm19",
+        "image": "/assets/products/mirrored/de42a70b.webp",
         "options": {
           "Phân loại": "Đèn Lẻ",
           "Kiểu dáng": "ĐÀI SEN"
@@ -2940,7 +2941,7 @@ const PRODUCTS = [
         "price": 79000,
         "originalPrice": 120000,
         "weight": 400,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbr6mn6c",
+        "image": "/assets/products/mirrored/eb23643c.webp",
         "options": {
           "Phân loại": "Đèn + Đế nến",
           "Kiểu dáng": "ĐÈN NHỎ + ĐẾ TRẮNG"
@@ -2953,7 +2954,7 @@ const PRODUCTS = [
         "price": 95000,
         "originalPrice": 150000,
         "weight": 500,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gn3k4cg4ee",
+        "image": "/assets/products/mirrored/5301d87f.webp",
         "options": {
           "Phân loại": "Đèn + Đế nến",
           "Kiểu dáng": "ĐÀI SEN + ĐẾ TRẮNG"
@@ -2966,7 +2967,7 @@ const PRODUCTS = [
         "price": 99000,
         "originalPrice": 150000,
         "weight": 600,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3euke9udmc5",
+        "image": "/assets/products/mirrored/aa457a01.webp",
         "options": {
           "Phân loại": "Đèn Lẻ",
           "Kiểu dáng": "HOA TRẮNG TO"
@@ -2990,15 +2991,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83dsqju3gk26",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8depi56",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8et9yde",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8g7ueaa",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8j0za58"
+      "/assets/products/mirrored/be62eef1.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/50cf46f0.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/f0a6bad4.webp",
+      "/assets/products/mirrored/e2385510.webp",
+      "/assets/products/mirrored/c0283c16.webp",
+      "/assets/products/mirrored/5997c9c1.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3009,7 +3010,7 @@ const PRODUCTS = [
         "price": 14119,
         "originalPrice": null,
         "weight": 180,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
+        "image": "/assets/products/mirrored/50cf46f0.webp",
         "options": {}
       },
       {
@@ -3019,7 +3020,7 @@ const PRODUCTS = [
         "price": 21716,
         "originalPrice": null,
         "weight": 180,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
+        "image": "/assets/products/mirrored/50cf46f0.webp",
         "options": {}
       },
       {
@@ -3029,7 +3030,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 180,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
+        "image": "/assets/products/mirrored/50cf46f0.webp",
         "options": {}
       }
     ]
@@ -3086,7 +3087,7 @@ const PRODUCTS = [
         "price": 38000,
         "originalPrice": 55000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3trim9g5g5c",
+        "image": "/assets/products/mirrored/fb091dc4.webp",
         "options": {
           "Loại": "4 Giờ Trơn",
           "Số lượng": "2 hộp / 20V - Trơn"
@@ -3099,7 +3100,7 @@ const PRODUCTS = [
         "price": 19000,
         "originalPrice": 25000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw73prz7k3d",
+        "image": "/assets/products/mirrored/7b5113de.webp",
         "options": {
           "Loại": "4 Giờ Trơn",
           "Số lượng": "Hộp 10V - Trơn"
@@ -3112,7 +3113,7 @@ const PRODUCTS = [
         "price": 16000,
         "originalPrice": 22000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw2eemm8673",
+        "image": "/assets/products/mirrored/720aea9f.webp",
         "options": {
           "Loại": "4 Giờ Mai",
           "Số lượng": "Hộp 10V - Trắng"
@@ -3125,7 +3126,7 @@ const PRODUCTS = [
         "price": 14000,
         "originalPrice": 20000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw4j8derkb5",
+        "image": "/assets/products/mirrored/55ec03bd.webp",
         "options": {
           "Loại": "2h Giờ",
           "Số lượng": "Hộp 10V - Trắng"
@@ -3138,7 +3139,7 @@ const PRODUCTS = [
         "price": 32000,
         "originalPrice": 45000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3ucnze3gh7a",
+        "image": "/assets/products/mirrored/84610ca8.webp",
         "options": {
           "Loại": "4 Giờ Mai",
           "Số lượng": "2 hộp / 20V - Trắng"
@@ -3151,7 +3152,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yyjv3sxkwa0",
+        "image": "/assets/products/mirrored/c5d70fd1.webp",
         "options": {
           "Loại": "4 Giờ Lài",
           "Số lượng": "Hộp 10V - Lài"
@@ -3164,7 +3165,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": 70000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3tk0q328497",
+        "image": "/assets/products/mirrored/4283a5c2.webp",
         "options": {
           "Loại": "4 Giờ Lài",
           "Số lượng": "2 hộp / 20V - Lài"
@@ -3177,7 +3178,7 @@ const PRODUCTS = [
         "price": 28000,
         "originalPrice": 35000,
         "weight": 100,
-        "image": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3toasd0jpaf",
+        "image": "/assets/products/mirrored/099fcfd4.webp",
         "options": {
           "Loại": "2h Giờ",
           "Số lượng": "2 hộp / 20V - Trắng"
@@ -3201,15 +3202,15 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81vo6c8xky63",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li015mt276",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li01b92ub6",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8n8om25",
-      "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li019uief1"
+      "/assets/products/mirrored/c032f6c5.webp",
+      "/assets/products/mirrored/07621c27.webp",
+      "/assets/products/mirrored/cb0406bb.webp",
+      "/assets/products/mirrored/baf27518.webp",
+      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/mirrored/e13db08c.webp",
+      "/assets/products/mirrored/fe9a73f4.webp",
+      "/assets/products/mirrored/ab609af4.webp",
+      "/assets/products/mirrored/2c000660.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3220,7 +3221,7 @@ const PRODUCTS = [
         "price": 60000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
+        "image": "/assets/products/mirrored/baf27518.webp",
         "options": {}
       },
       {
@@ -3230,7 +3231,7 @@ const PRODUCTS = [
         "price": 80000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
+        "image": "/assets/products/mirrored/baf27518.webp",
         "options": {}
       },
       {
@@ -3240,7 +3241,7 @@ const PRODUCTS = [
         "price": 20000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
+        "image": "/assets/products/mirrored/baf27518.webp",
         "options": {}
       }
     ]
@@ -3261,12 +3262,12 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83kcluw9390c",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-me83kilmeww12a",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mer5ta7gvrb8a3",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mer5tc2qg0eb34",
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mer5thsm6y2rd9"
+      "/assets/products/mirrored/576bcefe.webp",
+      "/assets/products/mirrored/fa94038f.webp",
+      "/assets/products/mirrored/aecc3538.webp",
+      "/assets/products/mirrored/fafac3e3.webp",
+      "/assets/products/mirrored/7032b533.webp",
+      "/assets/products/mirrored/7216152a.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3277,7 +3278,7 @@ const PRODUCTS = [
         "price": 45000,
         "originalPrice": null,
         "weight": 200,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f",
+        "image": "/assets/products/mirrored/fa94038f.webp",
         "options": {}
       },
       {
@@ -3287,7 +3288,7 @@ const PRODUCTS = [
         "price": 169000,
         "originalPrice": null,
         "weight": 600,
-        "image": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f",
+        "image": "/assets/products/mirrored/fa94038f.webp",
         "options": {}
       }
     ]
@@ -3308,7 +3309,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8v8snr7yg42"
+      "/assets/products/mirrored/76c35d8e.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3319,7 +3320,7 @@ const PRODUCTS = [
         "price": 10000,
         "originalPrice": null,
         "weight": 30,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr89134v9o107",
+        "image": "/assets/products/mirrored/2c2867bb.webp",
         "options": {}
       },
       {
@@ -3329,7 +3330,7 @@ const PRODUCTS = [
         "price": 8000,
         "originalPrice": null,
         "weight": 30,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d",
+        "image": "/assets/products/mirrored/ec8d7948.webp",
         "options": {}
       }
     ]
@@ -3350,12 +3351,12 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0uysp7ac",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4s2b805",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4tgvoac",
-      "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc6xygk52",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cn5uyfcf",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cn8o3bb9"
+      "/assets/products/mirrored/eeb163d3.webp",
+      "/assets/products/mirrored/9719b9db.webp",
+      "/assets/products/mirrored/db423a79.webp",
+      "/assets/products/mirrored/f63537e2.webp",
+      "/assets/products/mirrored/1fcc64b4.webp",
+      "/assets/products/mirrored/32fa3b73.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3366,7 +3367,7 @@ const PRODUCTS = [
         "price": 175000,
         "originalPrice": 195000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4xol084",
+        "image": "/assets/products/mirrored/b0948bfb.webp",
         "options": {}
       },
       {
@@ -3376,7 +3377,7 @@ const PRODUCTS = [
         "price": 175000,
         "originalPrice": 195000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4uvg4fb",
+        "image": "/assets/products/mirrored/79fab2eb.webp",
         "options": {}
       },
       {
@@ -3386,7 +3387,7 @@ const PRODUCTS = [
         "price": 175000,
         "originalPrice": 195000,
         "weight": 2000,
-        "image": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4wa0k5f",
+        "image": "/assets/products/mirrored/746ae758.webp",
         "options": {}
       }
     ]
@@ -3407,10 +3408,10 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0v1lu3e1",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cp1a7r48",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cmw0zbcf",
-      "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cmyu4721"
+      "/assets/products/mirrored/d268b77b.webp",
+      "/assets/products/mirrored/5dccccf3.webp",
+      "/assets/products/mirrored/eeaa83a2.webp",
+      "/assets/products/mirrored/fc1c4310.webp"
     ],
     "reviews": [],
     "variants": [
@@ -3473,7 +3474,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 13,
-    "title": "Bồ Kết Xông Nhà Có Tác Dụng Gì? Cách Dùng Đúng &amp; An Toàn | Nến Phương Lâm",
+    "title": "Bồ Kết Xông Nhà Có Tác Dụng Gì? Cách Dùng Đúng & An Toàn | Nến Phương Lâm",
     "excerpt": "Bồ kết xông nhà giúp khử mùi ẩm mốc, đuổi côn trùng, thanh lọc không khí và cân bằng phong thủy. Hướng dẫn cách xông nhà bằng bồ kết đúng cách, an toàn…",
     "date": "28 tháng 4, 2026",
     "readTime": "3 phút đọc",
