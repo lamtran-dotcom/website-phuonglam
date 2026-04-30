@@ -224,6 +224,17 @@ const firstImage = (product) => {
   return variants.map((variant) => variant.image).find(Boolean) || '';
 };
 
+const responsiveImageAttrs = (src, sizes) => {
+  if (!src || typeof src !== 'string' || src.startsWith('data:')) return '';
+  const pathOnly = src.split('?')[0];
+  if (!pathOnly.startsWith('/assets/products/mirrored/') && !pathOnly.startsWith('/assets/products/uploads/')) return '';
+  const fileName = pathOnly.split('/').pop() || '';
+  const baseName = fileName.replace(/\.[^.]+$/, '');
+  if (!baseName) return '';
+  const srcset = `/assets/products/responsive/${baseName}-480.webp 480w, /assets/products/responsive/${baseName}-720.webp 720w, ${src} 900w`;
+  return ` srcset="${escapeHtml(srcset)}" sizes="${escapeHtml(sizes)}"`;
+};
+
 const absoluteUrl = (url) => {
   if (!url) return '';
   if (/^https?:\/\//.test(url)) return url;
@@ -475,7 +486,7 @@ const renderProductPage = ({ product, categoryName }) => {
     </nav>
     <article class="product-layout">
       <div>
-        ${image ? `<img class="product-image" src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" fetchpriority="high" />` : `<div class="product-image" role="img" aria-label="${escapeHtml(product.name)}"></div>`}
+        ${image ? `<img class="product-image" src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 100vw, 480px')} alt="${escapeHtml(product.name)}" fetchpriority="high" />` : `<div class="product-image" role="img" aria-label="${escapeHtml(product.name)}"></div>`}
       </div>
       <div>
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
@@ -513,7 +524,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products }) => {
   const cards = products.map((product) => {
     const image = firstImage(product);
     return `<a class="card" href="/san-pham/${escapeHtml(product.slug)}/">
-      ${image ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(product.name)}" loading="lazy" />` : ''}
+      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 260px')} alt="${escapeHtml(product.name)}" loading="lazy" />` : ''}
       <div class="card-body">
         <p class="card-title">${escapeHtml(product.name)}</p>
         <div class="card-price">${formatVnd(product.price)}</div>

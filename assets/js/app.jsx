@@ -190,12 +190,26 @@ const headerStyles = {
 
 
 
+const getResponsiveImageAttrs = (src, sizes = '(max-width: 767px) 50vw, 260px') => {
+  if (!src || typeof src !== 'string' || src.startsWith('data:')) return {};
+  const pathOnly = src.split('?')[0];
+  if (!pathOnly.startsWith('/assets/products/mirrored/') && !pathOnly.startsWith('/assets/products/uploads/')) return {};
+  const fileName = pathOnly.split('/').pop() || '';
+  const baseName = fileName.replace(/\.[^.]+$/, '');
+  if (!baseName) return {};
+  return {
+    srcSet: `/assets/products/responsive/${baseName}-480.webp 480w, /assets/products/responsive/${baseName}-720.webp 720w, ${src} 900w`,
+    sizes,
+  };
+};
+
 // Placeholder image component
-const ImgPlaceholder = ({ label, w = '100%', h = 220, bg = '#e8ede8', style = {}, src = null, aspectRatio = null }) => {
+const ImgPlaceholder = ({ label, w = '100%', h = 220, bg = '#e8ede8', style = {}, src = null, aspectRatio = null, responsiveSizes = null, imageLoading = 'lazy', imageFetchPriority = null }) => {
   if (src) {
+    const responsiveAttrs = getResponsiveImageAttrs(src, responsiveSizes || '(max-width: 767px) 100vw, 480px');
     return (
       <div style={{ width: w, height: aspectRatio ? 'auto' : h, aspectRatio: aspectRatio || undefined, overflow: 'hidden', flexShrink: 0, ...style }}>
-        <img src={src} alt={label} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; e.target.parentNode.style.background=bg; }} />
+        <img src={src} {...responsiveAttrs} alt={label} loading={imageLoading} fetchPriority={imageFetchPriority || undefined} decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; e.target.parentNode.style.background=bg; }} />
       </div>
     );
   }
@@ -325,6 +339,27 @@ const safeSetLocalStorage = (key, value) => {
     return false;
   }
 };
+
+const migrateStorageKey = (newKey, oldKey, storage = localStorage) => {
+  try {
+    if (storage.getItem(newKey) === null) {
+      const oldValue = storage.getItem(oldKey);
+      if (oldValue !== null) storage.setItem(newKey, oldValue);
+    }
+  } catch {}
+};
+
+[
+  'page',
+  'cart',
+  'images',
+  'category-images',
+  'header-images',
+  'products',
+  'featured',
+  'new-products',
+].forEach(suffix => migrateStorageKey(`phuonglam-${suffix}`, `herbly-${suffix}`));
+migrateStorageKey('phuonglam-admin', 'herbly-admin', sessionStorage);
 
 const getFirstImageSource = (imageValue) => {
   if (Array.isArray(imageValue)) return imageValue.find(Boolean) || null;
@@ -530,8 +565,9 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
     >
       <div style={{ position: 'relative', cursor: 'pointer', paddingBottom: '100%', overflow: 'hidden', background: '#f0f4ef' }} onClick={() => setPage({ name: 'product', id: product.id })}>
         {(() => {
+          const responsiveAttrs = getResponsiveImageAttrs(displayImage, '(max-width: 767px) 50vw, (max-width: 1200px) 25vw, 220px');
           return displayImage
-            ? <img src={displayImage} alt={product.name} loading={imagePriority ? 'eager' : 'lazy'} fetchPriority={imagePriority ? 'high' : 'auto'} decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; }} />
+            ? <img src={displayImage} {...responsiveAttrs} alt={product.name} loading={imagePriority ? 'eager' : 'lazy'} fetchPriority={imagePriority ? 'high' : 'auto'} decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; }} />
             : <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: 'repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(0,0,0,0.03) 8px,rgba(0,0,0,0.03) 16px)' }}><span style={{ fontFamily: 'monospace', fontSize: 11, color: '#888', textAlign: 'center', padding: '0 12px' }}>{product.name}</span></div>;
         })()}
         {product.tag && (
@@ -581,6 +617,11 @@ const pcStyles = {
 
 const Footer = ({ setPage }) => {
   const isMobile = useIsMobile();
+  const socialLinks = [
+    { label: 'Facebook', href: 'https://www.facebook.com/nenphuonglam' },
+    { label: 'Instagram', href: 'https://www.instagram.com/nen.phuonglam/' },
+    { label: 'Zalo', href: 'https://zalo.me/0773829593' },
+  ];
   return (
   <footer style={footerStyles.wrap}>
     <div style={{ ...footerStyles.inner, gridTemplateColumns: isMobile ? '1fr 1fr' : '2fr 1fr 1fr 1.2fr', gap: isMobile ? '28px 20px' : 40, padding: isMobile ? '18px 20px 28px' : '60px 24px 40px' }}>
@@ -590,8 +631,8 @@ const Footer = ({ setPage }) => {
         </div>
         <p style={footerStyles.desc}>Sản phẩm thảo mộc và nến thơm tự nhiên, chăm sóc sức khỏe và không gian sống của bạn.</p>
         <div style={footerStyles.socials}>
-          {['Facebook', 'Instagram', 'Zalo'].map(s => (
-            <span key={s} style={footerStyles.social}>{s}</span>
+          {socialLinks.map(item => (
+            <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" style={footerStyles.social}>{item.label}</a>
           ))}
         </div>
       </div>
@@ -629,7 +670,7 @@ const footerStyles = {
   logoImg: { height: 240, width: 'auto', filter: 'brightness(0) invert(1)', display: 'block', transform: 'translateY(-70px)' },
   desc: { fontSize: 13, lineHeight: 1.7, color: '#9aad98', maxWidth: 240, margin: '0 0 16px' },
   socials: { display: 'flex', gap: 8 },
-  social: { fontSize: 12, padding: '5px 12px', border: '1px solid #3a4e39', borderRadius: 20, cursor: 'pointer', color: '#9aad98' },
+  social: { fontSize: 12, padding: '5px 12px', border: '1px solid #3a4e39', borderRadius: 20, cursor: 'pointer', color: '#9aad98', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' },
   colTitle: { fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 14, letterSpacing: '0.06em', textTransform: 'uppercase' },
   link: { fontSize: 13, color: '#9aad98', marginBottom: 8, cursor: 'pointer', lineHeight: 1.6 },
   contact: { fontSize: 13, color: '#9aad98', marginBottom: 8, lineHeight: 1.6 },
@@ -1412,7 +1453,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
               <div style={{ ...ppStyles.sliderTrack, transform: `translateX(-${activeImg * 100}%)` }}>
                 {displayImgs.map((src, i) => (
                   <div key={i} style={ppStyles.sliderSlide}>
-                    <ImgPlaceholder label={imgLabels[i] || `${product.name} — ảnh ${i + 1}`} bg="#f0f5ef" aspectRatio="1 / 1" style={{ borderRadius: 14, width: '100%' }} src={src || null} />
+                    <ImgPlaceholder label={imgLabels[i] || `${product.name} — ảnh ${i + 1}`} bg="#f0f5ef" aspectRatio="1 / 1" style={{ borderRadius: 14, width: '100%' }} src={src || null} responsiveSizes="(max-width: 767px) 100vw, 480px" imageLoading={i === activeImg ? 'eager' : 'lazy'} imageFetchPriority={i === activeImg ? 'high' : null} />
                   </div>
                 ))}
               </div>
@@ -1442,7 +1483,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
                       }}
                       onClick={() => setActiveImg(i)}
                     >
-                      <ImgPlaceholder label={`ảnh ${i + 1}`} bg="#e8ede7" aspectRatio="1 / 1" style={{ borderRadius: 8, width: '100%' }} src={src} />
+                      <ImgPlaceholder label={`ảnh ${i + 1}`} bg="#e8ede7" aspectRatio="1 / 1" style={{ borderRadius: 8, width: '100%' }} src={src} responsiveSizes="84px" />
                     </div>
                   ))}
                 </div>
@@ -1788,7 +1829,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
             <div key={itemKey} style={isMobile ? { padding: '14px 14px', borderBottom: '1px solid #f5f5f5', display: 'flex', gap: 12, alignItems: 'flex-start' } : cartStyles.row}>
               {isMobile ? (
                 <>
-                  <ImgPlaceholder label={item.name} w={64} h={64} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} />
+                  <ImgPlaceholder label={item.name} w={64} h={64} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="64px" />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                       <div style={{ ...cartStyles.itemName, marginBottom: 2 }} onClick={() => setPage({ name: 'product', id: item.id })}>{item.name}</div>
@@ -1809,7 +1850,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
               ) : (
                 <>
                   <div style={cartStyles.productCol}>
-                    <ImgPlaceholder label={item.name} w={84} h={84} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} />
+                    <ImgPlaceholder label={item.name} w={84} h={84} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="84px" />
                     <div style={{ minWidth: 0 }}>
                       <div style={cartStyles.itemName} onClick={() => setPage({ name: 'product', id: item.id })}>{item.name}</div>
                       <div style={cartStyles.itemCat}>{CATEGORIES.find(c => c.id === item.categoryId)?.name}</div>
@@ -2624,11 +2665,11 @@ const ProductEditor = ({ productOverrides, setProductOverrides, productImages, s
   const shouldRestoreSelectionScrollRef = React.useRef(false);
   const restoreFramesRef = React.useRef(0);
   const [newProducts, setNewProducts] = React.useState(() => {
-    try { return JSON.parse(localStorage.getItem('herbly-new-products') || '[]'); } catch { return []; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-new-products') || '[]'); } catch { return []; }
   });
 
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-new-products', JSON.stringify(newProducts));
+    safeSetLocalStorage('phuonglam-new-products', JSON.stringify(newProducts));
     if (setExtraProducts) setExtraProducts(newProducts);
     // Sync to PRODUCTS_LIVE so FeaturedEditor sees new products
     const sourceProducts = BAKED_PRODUCTS.length > 0 ? BAKED_PRODUCTS : PRODUCTS;
@@ -3227,14 +3268,14 @@ const CategoryAdmin = ({ productImages, setProductImages, productOverrides, setP
   const [showAddForm, setShowAddForm] = React.useState(false);
   const [newProduct, setNewProduct] = React.useState({ name: '', price: '', originalPrice: '', shortDesc: '', tag: '' });
   const [newProducts, setNewProducts] = React.useState(() => {
-    try { return JSON.parse(localStorage.getItem('herbly-new-products') || '[]'); } catch { return []; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-new-products') || '[]'); } catch { return []; }
   });
   const addFormRef = React.useRef(null);
   const [saved, setSaved] = React.useState(false);
   const [editImg, setEditImg] = React.useState(null);
 
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-new-products', JSON.stringify(newProducts));
+    safeSetLocalStorage('phuonglam-new-products', JSON.stringify(newProducts));
     window.EXTRA_PRODUCTS = newProducts;
   }, [newProducts]);
 
@@ -3516,7 +3557,7 @@ const FeaturedEditor = ({ featuredIds, setFeaturedIds, productImages }) => {
         })}
       </div>
       <div style={{ marginTop: 18, display: 'flex', gap: 10 }}>
-        <button onClick={() => { safeSetLocalStorage('herbly-featured', JSON.stringify(current)); window.FEATURED_IDS = current; alert('✅ Đã lưu! Vào trang chủ để xem.'); }}
+        <button onClick={() => { safeSetLocalStorage('phuonglam-featured', JSON.stringify(current)); window.FEATURED_IDS = current; alert('✅ Đã lưu! Vào trang chủ để xem.'); }}
           style={{ background: '#318223', color: '#fff', border: 'none', padding: '11px 28px', borderRadius: 9, fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
           ✓ Lưu thay đổi
         </button>
@@ -3694,14 +3735,14 @@ const CategoryImageEditor = ({ categoryImages = {}, setCategoryImages }) => {
 };
 
 const AdminPage = ({ setPage, productImages = {}, setProductImages, productOverrides = {}, setProductOverrides, featuredIds, setFeaturedIds, setExtraProducts, categoryImages = {}, setCategoryImages, headerImages = null, setHeaderImages }) => {
-  const [authed, setAuthed] = React.useState(() => sessionStorage.getItem('herbly-admin') === '1');
+  const [authed, setAuthed] = React.useState(() => sessionStorage.getItem('phuonglam-admin') === '1');
   const [pwInput, setPwInput] = React.useState('');
   const [pwError, setPwError] = React.useState(false);
   const [exportStatus, setExportStatus] = React.useState('');
 
   const handleLogin = () => {
     if (pwInput === ADMIN_PASSWORD) {
-      sessionStorage.setItem('herbly-admin', '1');
+      sessionStorage.setItem('phuonglam-admin', '1');
       setAuthed(true);
       setPwError(false);
     } else {
@@ -4250,7 +4291,7 @@ const BAKED_EXTRA = /*BAKED_EXTRA*/[]/*END_BAKED_EXTRA*/;
 const EXPORT_FILE_NAME = 'index.html';
 const IS_PREVIEW_REFRESH = new URLSearchParams(window.location.search).has('preview');
 if (IS_PREVIEW_REFRESH) {
-  ['herbly-page', 'herbly-products', 'herbly-new-products'].forEach(key => localStorage.removeItem(key));
+  ['phuonglam-page', 'phuonglam-products', 'phuonglam-new-products', 'herbly-page', 'herbly-products', 'herbly-new-products'].forEach(key => localStorage.removeItem(key));
 }
 
 const serializeForInlineScript = (value) =>
@@ -4264,14 +4305,14 @@ const exportSyncedWebsiteSnapshot = async () => {
 
   const bakedProducts = Array.isArray(window.PRODUCTS_LIVE) ? window.PRODUCTS_LIVE : PRODUCTS;
   const bakedImages = (() => {
-    try { return JSON.parse(localStorage.getItem('herbly-images') || '{}'); } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-images') || '{}'); } catch { return {}; }
   })();
   const bakedCategoryImages = (() => {
-    try { return JSON.parse(localStorage.getItem('herbly-category-images') || '{}'); } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-category-images') || '{}'); } catch { return {}; }
   })();
   const bakedHeaderImages = (() => {
     try {
-      const value = localStorage.getItem('herbly-header-images');
+      const value = localStorage.getItem('phuonglam-header-images');
       return value ? JSON.parse(value) : null;
     } catch {
       return null;
@@ -4279,7 +4320,7 @@ const exportSyncedWebsiteSnapshot = async () => {
   })();
   const bakedFeatured = (() => {
     try {
-      const value = localStorage.getItem('herbly-featured');
+      const value = localStorage.getItem('phuonglam-featured');
       return value ? JSON.parse(value) : null;
     } catch {
       return null;
@@ -4309,26 +4350,26 @@ const App = () => {
     try {
       if (IS_PREVIEW_REFRESH) return { name: 'home' };
       if (window.history.state?.page) return window.history.state.page;
-      return JSON.parse(localStorage.getItem('herbly-page')) || { name: 'home' };
+      return JSON.parse(localStorage.getItem('phuonglam-page')) || { name: 'home' };
     } catch {
       return { name: 'home' };
     }
   });
   const [cart, setCart] = React.useState(() => {
-    try { return JSON.parse(localStorage.getItem('herbly-cart')) || []; } catch { return []; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-cart')) || []; } catch { return []; }
   });
   const [productImages, setProductImages] = React.useState(() => {
     if (Object.keys(BAKED_IMAGES).length > 0) return BAKED_IMAGES;
-    try { return JSON.parse(localStorage.getItem('herbly-images')) || {}; } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-images')) || {}; } catch { return {}; }
   });
   const [categoryImages, setCategoryImages] = React.useState(() => {
     if (Object.keys(BAKED_CATEGORY_IMAGES).length > 0) return BAKED_CATEGORY_IMAGES;
-    try { return JSON.parse(localStorage.getItem('herbly-category-images')) || {}; } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-category-images')) || {}; } catch { return {}; }
   });
   const [headerImages, setHeaderImages] = React.useState(() => {
     if (Array.isArray(BAKED_HEADER_IMAGES) && BAKED_HEADER_IMAGES.length > 0) return BAKED_HEADER_IMAGES;
     try {
-      const value = localStorage.getItem('herbly-header-images');
+      const value = localStorage.getItem('phuonglam-header-images');
       return value ? JSON.parse(value) : null;
     } catch {
       return null;
@@ -4336,51 +4377,51 @@ const App = () => {
   });
   const [productOverrides, setProductOverrides] = React.useState(() => {
     if (BAKED_PRODUCTS.length > 0) return {}; // baked export uses BAKED_PRODUCTS directly
-    try { return JSON.parse(localStorage.getItem('herbly-products')) || {}; } catch { return {}; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-products')) || {}; } catch { return {}; }
   });
   const [featuredIds, setFeaturedIds] = React.useState(() => {
     if (BAKED_FEATURED !== null) return BAKED_FEATURED;
-    try { const v = localStorage.getItem('herbly-featured'); return v ? JSON.parse(v) : null; } catch { return null; }
+    try { const v = localStorage.getItem('phuonglam-featured'); return v ? JSON.parse(v) : null; } catch { return null; }
   });
 
   React.useEffect(() => {
-    if (featuredIds !== null) safeSetLocalStorage('herbly-featured', JSON.stringify(featuredIds));
+    if (featuredIds !== null) safeSetLocalStorage('phuonglam-featured', JSON.stringify(featuredIds));
   }, [featuredIds]);
 
   const [extraProducts, setExtraProducts] = React.useState(() => {
     if (BAKED_PRODUCTS.length > 0) return BAKED_EXTRA;
     if (BAKED_EXTRA.length > 0) return BAKED_EXTRA;
-    try { return JSON.parse(localStorage.getItem('herbly-new-products') || '[]'); } catch { return []; }
+    try { return JSON.parse(localStorage.getItem('phuonglam-new-products') || '[]'); } catch { return []; }
   });
   // Merge hardcoded PRODUCTS with any saved overrides
   const mergedProducts = (BAKED_PRODUCTS.length > 0 ? BAKED_PRODUCTS : PRODUCTS).map(p => productOverrides[p.id] ? { ...p, ...productOverrides[p.id] } : p);
 
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-images', JSON.stringify(productImages));
+    safeSetLocalStorage('phuonglam-images', JSON.stringify(productImages));
   }, [productImages]);
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-category-images', JSON.stringify(categoryImages));
+    safeSetLocalStorage('phuonglam-category-images', JSON.stringify(categoryImages));
   }, [categoryImages]);
   React.useEffect(() => {
     if (Array.isArray(headerImages)) {
-      safeSetLocalStorage('herbly-header-images', JSON.stringify(headerImages));
+      safeSetLocalStorage('phuonglam-header-images', JSON.stringify(headerImages));
     } else {
-      localStorage.removeItem('herbly-header-images');
+      localStorage.removeItem('phuonglam-header-images');
     }
   }, [headerImages]);
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-products', JSON.stringify(productOverrides));
+    safeSetLocalStorage('phuonglam-products', JSON.stringify(productOverrides));
   }, [productOverrides]);
 
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-page', JSON.stringify(page));
+    safeSetLocalStorage('phuonglam-page', JSON.stringify(page));
     try {
       window.history.replaceState({ ...(window.history.state || {}), page }, '', window.location.href);
     } catch {}
   }, [page]);
 
   React.useEffect(() => {
-    safeSetLocalStorage('herbly-cart', JSON.stringify(cart));
+    safeSetLocalStorage('phuonglam-cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (product) => {
@@ -4409,7 +4450,7 @@ const App = () => {
         return;
       }
       try {
-        setPage(JSON.parse(localStorage.getItem('herbly-page')) || { name: 'home' });
+        setPage(JSON.parse(localStorage.getItem('phuonglam-page')) || { name: 'home' });
       } catch {
         setPage({ name: 'home' });
       }
