@@ -121,6 +121,46 @@ const truncate = (value = '', max = 155) => {
   return `${text.slice(0, max - 1).replace(/\s+\S*$/, '')}…`;
 };
 
+// Nén ảnh về max 900px, webp quality 82 dùng Python/Pillow
+// Trả về path file sau nén (luôn là .webp)
+const compressImage = (inputPath) => {
+  const outputPath = inputPath.replace(/\.[^.]+$/, '') + '.webp';
+  const script = `
+import sys
+from PIL import Image
+import os
+
+src = sys.argv[1]
+dst = sys.argv[2]
+MAX_DIM = 900
+QUALITY = 82
+
+with Image.open(src) as img:
+    w, h = img.size
+    if max(w, h) > MAX_DIM:
+        ratio = MAX_DIM / max(w, h)
+        img = img.resize((int(w * ratio), int(h * ratio)), Image.LANCZOS)
+    if img.mode not in ('RGB', 'RGBA'):
+        img = img.convert('RGBA' if img.mode == 'P' and 'transparency' in img.info else 'RGB')
+    img.save(dst, 'WEBP', quality=QUALITY, method=6)
+if src != dst and os.path.exists(src):
+    os.remove(src)
+print(os.path.getsize(dst))
+`.trim();
+
+  const result = spawnSync('python3', ['-c', script, inputPath, outputPath], {
+    encoding: 'utf8',
+    timeout: 30000,
+  });
+
+  if (result.status !== 0) {
+    // Nén lỗi → giữ file gốc, không crash server
+    console.warn('compressImage failed:', result.stderr || result.stdout);
+    return inputPath;
+  }
+  return outputPath;
+};
+
 const runBuild = () => {
   const result = spawnSync(process.execPath, [files.build], {
     cwd: root,
@@ -657,12 +697,16 @@ const handleApi = async (req, res, pathname) => {
       const image = parseMultipartImage(req.headers['content-type'] || '', await readBody(req));
       if (!image) throw new Error('No image uploaded');
       fs.mkdirSync(files.uploads, { recursive: true });
-      const ext = path.extname(image.filename) || (image.type.includes('png') ? '.png' : '.jpg');
+      const origExt = path.extname(image.filename).toLowerCase() || '.jpg';
       const base = safeName(path.basename(image.filename, path.extname(image.filename)));
-      const filename = `${Date.now()}-${base}${ext.toLowerCase()}`;
-      const filePath = path.join(files.uploads, filename);
-      fs.writeFileSync(filePath, image.data);
-      sendJson(res, { ok: true, url: `/assets/products/uploads/${filename}` });
+      // Luôn lưu tạm với tên gốc, sau đó nén → đổi thành .webp
+      const tempFilename = `${Date.now()}-${base}${origExt}`;
+      const tempPath = path.join(files.uploads, tempFilename);
+      fs.writeFileSync(tempPath, image.data);
+      // Nén + resize về max 900px, output .webp
+      const finalPath = compressImage(tempPath);
+      const finalFilename = path.basename(finalPath);
+      sendJson(res, { ok: true, url: `/assets/products/uploads/${finalFilename}` });
       return true;
     }
 
