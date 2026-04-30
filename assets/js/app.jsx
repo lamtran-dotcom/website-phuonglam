@@ -2670,18 +2670,31 @@ const ProductEditor = ({ productOverrides, setProductOverrides, productImages, s
   const listScrollTopRef = React.useRef(0);
   const shouldRestoreSelectionScrollRef = React.useRef(false);
   const restoreFramesRef = React.useRef(0);
+  const [catalogProducts, setCatalogProducts] = React.useState(() => window.PRODUCTS_LIVE || PRODUCTS);
   const [newProducts, setNewProducts] = React.useState(() => {
     try { return JSON.parse(localStorage.getItem('phuonglam-new-products') || '[]'); } catch { return []; }
   });
 
   React.useEffect(() => {
+    let cancelled = false;
+    fetch('/api/products.php', { cache: 'no-store' })
+      .then(response => response.ok ? response.json() : null)
+      .then(data => {
+        if (cancelled || !Array.isArray(data?.products)) return;
+        setCatalogProducts(data.products);
+        window.PRODUCTS_LIVE = data.products;
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
+  React.useEffect(() => {
     safeSetLocalStorage('phuonglam-new-products', JSON.stringify(newProducts));
     if (setExtraProducts) setExtraProducts(newProducts);
     // Sync to PRODUCTS_LIVE so FeaturedEditor sees new products
-    const sourceProducts = BAKED_PRODUCTS.length > 0 ? BAKED_PRODUCTS : PRODUCTS;
-    const base = sourceProducts.map(p => productOverrides[p.id] ? { ...p, ...productOverrides[p.id] } : p);
+    const base = catalogProducts.map(p => productOverrides[p.id] ? { ...p, ...productOverrides[p.id] } : p);
     window.PRODUCTS_LIVE = [...base, ...newProducts];
-  }, [newProducts, productOverrides]);
+  }, [newProducts, productOverrides, catalogProducts]);
 
   const createEmptyVariant = () => ({
     id: 'variant_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
@@ -2796,7 +2809,7 @@ const ProductEditor = ({ productOverrides, setProductOverrides, productImages, s
     setTimeout(() => setAddSaved(false), 2500);
   };
 
-  const allProducts = [...(window.PRODUCTS_LIVE || PRODUCTS), ...newProducts.filter(np => !(window.PRODUCTS_LIVE || []).find(p => p.id === np.id))];
+  const allProducts = [...catalogProducts, ...newProducts.filter(np => !catalogProducts.find(p => p.id === np.id))];
   const products = filterCat === 'all' ? allProducts : allProducts.filter(p => p.categoryId === filterCat);
 
   const selectProduct = (p) => {
@@ -2870,6 +2883,7 @@ const ProductEditor = ({ productOverrides, setProductOverrides, productImages, s
       const idx = window.PRODUCTS_LIVE.findIndex(p => p.id === selected);
       if (idx !== -1) window.PRODUCTS_LIVE[idx] = { ...window.PRODUCTS_LIVE[idx], ...updated };
     }
+    setCatalogProducts(prev => prev.map(p => p.id === selected ? { ...p, ...updated } : p));
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   };
@@ -2880,7 +2894,7 @@ const ProductEditor = ({ productOverrides, setProductOverrides, productImages, s
     if (selected === id) { setSelected(null); setForm({}); }
   };
 
-  const selectedProduct = selected ? (window.PRODUCTS_LIVE || PRODUCTS).find(p => p.id === selected) : null;
+  const selectedProduct = selected ? allProducts.find(p => p.id === selected) : null;
   const discount = form.price && form.originalPrice ? Math.round((1 - Number(form.price) / Number(form.originalPrice)) * 100) : null;
 
   return (

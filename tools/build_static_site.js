@@ -962,8 +962,9 @@ const replaceSiteDataProducts = (products) => {
   }
   if (endIdx === -1) return;
 
-  // Keep slugs in the React catalog so product cards can link to static pages.
-  const appProducts = products;
+  // Keep storefront data lean; full descriptions stay in static product pages
+  // and are loaded through /api/products.php inside the local admin editor.
+  const appProducts = products.map(({ description: _description, usage: _usage, ...rest }) => rest);
   const newBlock = `const PRODUCTS = ${JSON.stringify(appProducts, null, 2)};`;
   source = source.slice(0, startIdx) + newBlock + source.slice(endIdx);
   fs.writeFileSync(siteDataPath, source);
