@@ -1,0 +1,12 @@
+{
+  "success": [],
+  "fail": [],
+  "skipped": [],
+  "summary": {
+    "total_unique": 0,
+    "success": 0,
+    "skipped": 0,
+    "fail": 0,
+    "replaced_locations": 0
+  }
+}
