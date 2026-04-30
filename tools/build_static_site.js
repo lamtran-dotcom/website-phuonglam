@@ -521,10 +521,13 @@ const renderProductPage = ({ product, categoryName }) => {
 const renderCategoryPage = ({ categoryId, categoryName, products }) => {
   const categoryUrl = `${siteUrl}/danh-muc/${categoryId}/`;
   const description = `${categoryName} Phương Lâm: sản phẩm chọn lọc, phù hợp cho thư giãn, xông hương và chăm sóc không gian sống tự nhiên.`;
-  const cards = products.map((product) => {
+  const cards = products.map((product, index) => {
     const image = firstImage(product);
+    const imagePriority = index < 6
+      ? ' loading="eager" fetchpriority="high"'
+      : ' loading="lazy"';
     return `<a class="card" href="/san-pham/${escapeHtml(product.slug)}/">
-      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 260px')} alt="${escapeHtml(product.name)}" loading="lazy" />` : ''}
+      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 260px')} alt="${escapeHtml(product.name)}"${imagePriority} />` : ''}
       <div class="card-body">
         <p class="card-title">${escapeHtml(product.name)}</p>
         <div class="card-price">${formatVnd(product.price)}</div>
