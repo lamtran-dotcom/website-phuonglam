@@ -272,7 +272,8 @@ const PRODUCTS = [
           "Bộ Thảo mộc": "BỘ XÔNG 12 VỊ CAO CẤP 16CM"
         }
       }
-    ]
+    ],
+    "slug": "bo-bep-xong-cao-cap-xong-thao-xong-nha-thu-gian-day-du"
   },
   {
     "id": "shopee_28991652145",
@@ -545,7 +546,8 @@ const PRODUCTS = [
           "Bộ Thảo mộc": "BỘ THANH LỌC KK 16CM"
         }
       }
-    ]
+    ],
+    "slug": "bo-xong-nha-tay-ue-thao-moc-khu-mui-thu-hut-may-man"
   },
   {
     "id": "p_1777474804043_1b5kn",
@@ -591,7 +593,8 @@ const PRODUCTS = [
         "image": "",
         "options": {}
       }
-    ]
+    ],
+    "slug": "bo-xong-nha-trai-nghiem-bep-nieu-dat-nung-thao-moc-mix-5-loai-nen-4h-phuonglam"
   },
   {
     "id": "shopee_17395821074",
@@ -636,7 +639,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/7cfe1bfc.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "bep-xong-le-xong-thao-moc-bo-ket-khu-mui-thom-nha"
   },
   {
     "id": 1,
@@ -815,7 +819,8 @@ const PRODUCTS = [
           "Số lượng": "Hộp 100 Viên 4h"
         }
       }
-    ]
+    ],
+    "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-mai"
   },
   {
     "id": "p_1777468148980_4ztop",
@@ -992,7 +997,8 @@ const PRODUCTS = [
           "Số lượng": "Hộp 100 Viên 2h"
         }
       }
-    ]
+    ],
+    "slug": "nen-tealight-2-gio-dot-den-xong-tinh-dau-trang-tri-tiec-i-phuong-lam"
   },
   {
     "id": "p_1777435996053_fbofd",
@@ -1170,7 +1176,8 @@ const PRODUCTS = [
           "Số lượng": "Hộp 100 Viên 4h"
         }
       }
-    ]
+    ],
+    "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-tron"
   },
   {
     "id": 7,
@@ -1195,7 +1202,8 @@ const PRODUCTS = [
       "/assets/products/uploads/1777455581435-chatgpt-image-16-25-05-29-thg-4-2026-trung-binh.webp"
     ],
     "reviews": [],
-    "variants": []
+    "variants": [],
+    "slug": "hot-quet-gas-thap-nen-dau-dai-an-co-the-thu-gon-tien-loi-i-phuong-lam"
   },
   {
     "id": "shopee_57653126590",
@@ -1249,7 +1257,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "que-thanh-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien"
   },
   {
     "id": "shopee_57058955812",
@@ -1317,7 +1326,8 @@ const PRODUCTS = [
         "image": "/assets/products/uploads/1777456983322-chatgpt-image-16-52-36-29-thg-4-2026.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam"
   },
   {
     "id": "shopee_56102764086",
@@ -1338,7 +1348,8 @@ const PRODUCTS = [
       "/assets/products/mirrored/d3e9edf3.webp"
     ],
     "reviews": [],
-    "variants": []
+    "variants": [],
+    "slug": "dia-lot-bep-xong-dat-nung-cach-nhiet-giu-sach-mat-ban"
   },
   {
     "id": "shopee_54450013830",
@@ -1395,7 +1406,8 @@ const PRODUCTS = [
         "image": "",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nen-tru-trang-72h-trang-tri-ban-tiec-chay-em-khong-khoi"
   },
   {
     "id": "shopee_53859220256",
@@ -1417,7 +1429,8 @@ const PRODUCTS = [
       "/assets/products/mirrored/770dfd2f.webp"
     ],
     "reviews": [],
-    "variants": []
+    "variants": [],
+    "slug": "la-dua-kho-tu-nhien-xong-nha-thom-diu-thanh-loc-khong-gian"
   },
   {
     "id": "shopee_48452789252",
@@ -1438,7 +1451,8 @@ const PRODUCTS = [
       "/assets/products/mirrored/981d6659.webp"
     ],
     "reviews": [],
-    "variants": []
+    "variants": [],
+    "slug": "ly-dung-nen-dat-nung-dung-bep-xong-an-toan-tien-cam"
   },
   {
     "id": "shopee_41330081336",
@@ -1503,7 +1517,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/cae1a77b.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "bo-phu-kien-xong-nha-dat-nung-dung-bep-nieu-tien-loi"
   },
   {
     "id": "shopee_40170692234",
@@ -1553,7 +1568,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/ce1c8e75.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nu-tram-huong-tu-nhien-xong-nha-thien-dinh-thom-diu"
   },
   {
     "id": "shopee_29011454025",
@@ -1636,7 +1652,8 @@ const PRODUCTS = [
           "Số lượng": "Hộp 100 Viên 4h"
         }
       }
-    ]
+    ],
+    "slug": "nen-tealight-4-gio-huong-lai-trang-tri-tiec-khong-khoi-l-phuong-lam"
   },
   {
     "id": "shopee_28422178672",
@@ -1678,7 +1695,8 @@ const PRODUCTS = [
         "image": "",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nap-bep-nieu-xong-thao-moc-dat-nung-chiunhiet"
   },
   {
     "id": "shopee_28251842874",
@@ -1746,7 +1764,8 @@ const PRODUCTS = [
         "image": "/assets/products/uploads/1777463017288-chatgpt-image-18-43-20-29-thg-4-2026.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nen-tealight-8-gio-vo-nhom-xong-thao-moc-tinh-dau-l-phuong-lam"
   },
   {
     "id": "shopee_28125966432",
@@ -1805,7 +1824,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/1e442f2b.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "thao-moc-giam-cam-xong-hoi-de-chiu-thanh-loc-khong-khi"
   },
   {
     "id": "shopee_26007254880",
@@ -1990,7 +2010,8 @@ const PRODUCTS = [
         "image": "/assets/products/uploads/1777469331358-chon-thao-moc-2.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "thao-moc-xong-nha-tu-nhien-tay-ue-khu-mui-xua-con-trung-nhieu-loai-tu-chon"
   },
   {
     "id": "shopee_25759395070",
@@ -2070,7 +2091,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/44f5db92.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "vo-que-kho-yen-bai-xong-thao-moc-khu-mui-thom-am"
   },
   {
     "id": "shopee_25659397266",
@@ -2129,7 +2151,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/ae946cc0.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "la-khuynh-diep-kho-xong-nha-giam-cam-thanh-loc-khong-khi"
   },
   {
     "id": "shopee_25314272283",
@@ -2188,7 +2211,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/26da0749.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "hoa-dai-hoi-kho-xong-thao-moc-thom-am-xua-con-trung"
   },
   {
     "id": "shopee_25158793608",
@@ -2248,7 +2272,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/759a6203.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "cam-vang-say-kho-xong-nha-khu-mui-thanh-loc-khong-khi"
   },
   {
     "id": "shopee_24656264608",
@@ -2308,7 +2333,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/0eb610e6.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "la-nguyet-que-kho-xong-nha-thanh-tay-xua-con-trung"
   },
   {
     "id": "shopee_24604156053",
@@ -2407,7 +2433,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/cfbf70de.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap"
   },
   {
     "id": "shopee_23980156399",
@@ -2477,7 +2504,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/41b03c17.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "den-xong-tinh-dau-hinh-huou-gom-su-trang-tri-sang-trong"
   },
   {
     "id": "shopee_23752423694",
@@ -2536,7 +2564,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/5623155a.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "de-dung-nen-tealight-dung-xong-tinh-dau-thao-moc"
   },
   {
     "id": "shopee_23579313881",
@@ -2596,7 +2625,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/8b89e6d8.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "bac-ha-kho-xong-nha-thanh-loc-khong-khi-xua-con-trung"
   },
   {
     "id": "shopee_22755245517",
@@ -2656,7 +2686,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/58680219.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "gung-kho-xong-thao-moc-giam-cam-thanh-loc-khong-khi"
   },
   {
     "id": "shopee_22361508205",
@@ -2712,7 +2743,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/2e6d5918.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "bo-ket-kho-goi-dau-xong-nha-khu-mui-thom-tu-nhien"
   },
   {
     "id": "shopee_22353875434",
@@ -2818,7 +2850,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/07e645db.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "combo-thao-moc-xong-nha-phuong-lam-thanh-tay-xua-con-trung"
   },
   {
     "id": "shopee_22080262041",
@@ -2973,7 +3006,8 @@ const PRODUCTS = [
           "Kiểu dáng": "HOA TRẮNG TO"
         }
       }
-    ]
+    ],
+    "slug": "den-xong-tinh-dau-dot-nen-trang-tri-phong-ngu-sang-trong"
   },
   {
     "id": "shopee_21583817320",
@@ -3033,7 +3067,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/50cf46f0.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "vo-buoi-kho-xong-nha-goi-dau-thom-diu-tu-nhien"
   },
   {
     "id": "shopee_19636361517",
@@ -3184,7 +3219,8 @@ const PRODUCTS = [
           "Số lượng": "2 hộp / 20V - Trắng"
         }
       }
-    ]
+    ],
+    "slug": "vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi"
   },
   {
     "id": "shopee_18592779414",
@@ -3244,7 +3280,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/baf27518.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "la-sa-kho-xong-nha-thanh-loc-khong-khi-xua-con-trung"
   },
   {
     "id": "shopee_18092365763",
@@ -3291,7 +3328,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/fa94038f.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "combo-thao-moc-xong-nha-thanh-loc-khu-mui-tu-nhien"
   },
   {
     "id": "shopee_6228169441",
@@ -3333,7 +3371,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/ec8d7948.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nen-tealight-8-gio-trang-tri-khong-khoi-tao-khong-gian-am"
   },
   {
     "id": "shopee_6203380691",
@@ -3390,7 +3429,8 @@ const PRODUCTS = [
         "image": "/assets/products/mirrored/746ae758.webp",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nen-ly-72h-no-lon-tho-cung-khong-khoi-phuong-lam"
   },
   {
     "id": "shopee_4903385000",
@@ -3445,7 +3485,8 @@ const PRODUCTS = [
         "image": "",
         "options": {}
       }
-    ]
+    ],
+    "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem"
   }
 ];
 

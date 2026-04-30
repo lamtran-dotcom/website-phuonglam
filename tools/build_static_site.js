@@ -962,8 +962,8 @@ const replaceSiteDataProducts = (products) => {
   }
   if (endIdx === -1) return;
 
-  // Strip fields not used by the React app (slug is build-time only)
-  const appProducts = products.map(({ slug: _slug, ...rest }) => rest);
+  // Keep slugs in the React catalog so product cards can link to static pages.
+  const appProducts = products;
   const newBlock = `const PRODUCTS = ${JSON.stringify(appProducts, null, 2)};`;
   source = source.slice(0, startIdx) + newBlock + source.slice(endIdx);
   fs.writeFileSync(siteDataPath, source);

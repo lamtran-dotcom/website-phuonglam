@@ -40,6 +40,7 @@ const useIsMobile = () => {
 };
 
 const categoryUrl = (categoryId) => `/danh-muc/${categoryId}/`;
+const productUrl = (product) => product?.slug ? `/san-pham/${product.slug}/` : '#';
 
 const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -557,6 +558,12 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
   const priceInfo = getProductPriceInfo(product);
   const displayImage = getProductDisplayImage(product, productImages);
   const displayName = getShortProductName(product.name, 6);
+  const href = productUrl(product);
+  const handleProductLinkFallback = (event) => {
+    if (href !== '#') return;
+    event.preventDefault();
+    setPage({ name: 'product', id: product.id });
+  };
   const discount = priceInfo.originalPrice
     ? Math.round((1 - priceInfo.price / priceInfo.originalPrice) * 100)
     : null;
@@ -567,7 +574,7 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div style={{ position: 'relative', cursor: 'pointer', paddingBottom: '100%', overflow: 'hidden', background: '#f0f4ef' }} onClick={() => setPage({ name: 'product', id: product.id })}>
+      <a href={href} style={{ position: 'relative', cursor: 'pointer', paddingBottom: '100%', overflow: 'hidden', background: '#f0f4ef', display: 'block', color: 'inherit', textDecoration: 'none' }} onClick={handleProductLinkFallback}>
         {(() => {
           const responsiveAttrs = getResponsiveImageAttrs(displayImage, '(max-width: 767px) 50vw, (max-width: 1200px) 25vw, 220px');
           return displayImage
@@ -580,9 +587,9 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
           </span>
         )}
         {discount && <span style={{ ...pcStyles.discount, ...(compact ? pcStyles.discountCompact : {}) }}>-{discount}%</span>}
-      </div>
+      </a>
       <div style={{ ...pcStyles.info, ...(compact ? pcStyles.infoCompact : {}) }}>
-        <div title={product.name} style={{ ...pcStyles.name, ...(compact ? pcStyles.nameCompact : {}) }} onClick={() => setPage({ name: 'product', id: product.id })}>{displayName}</div>
+        <a href={href} title={product.name} style={{ ...pcStyles.name, ...(compact ? pcStyles.nameCompact : {}) }} onClick={handleProductLinkFallback}>{displayName}</a>
         <div style={{ ...pcStyles.priceRow, ...(compact ? pcStyles.priceRowCompact : {}) }}>
           <span style={{ ...pcStyles.price, ...(compact ? pcStyles.priceCompact : {}) }}>{priceInfo.hasVariants ? 'Từ ' : ''}{priceInfo.price.toLocaleString('vi-VN')}đ</span>
           {priceInfo.originalPrice && (
@@ -607,7 +614,7 @@ const pcStyles = {
   discountCompact: { top: 6, right: 6, fontSize: 10, padding: '3px 7px', borderRadius: 6 },
   info: { padding: '8px 9px 10px', display: 'flex', flexDirection: 'column', flex: 1 },
   infoCompact: { padding: '8px 9px 10px' },
-  name: { fontSize: 16.5, fontWeight: 600, color: '#1a1a1a', marginBottom: 5, cursor: 'pointer', lineHeight: 1.35 },
+  name: { fontSize: 16.5, fontWeight: 600, color: '#1a1a1a', marginBottom: 5, cursor: 'pointer', lineHeight: 1.35, textDecoration: 'none' },
   nameCompact: { fontSize: 16.5, marginBottom: 5, lineHeight: 1.35 },
   priceRow: { display: 'flex', alignItems: 'center', gap: 4, marginBottom: 8, flexWrap: 'wrap' },
   priceRowCompact: { gap: 4, marginBottom: 8, flexWrap: 'wrap' },
@@ -726,6 +733,10 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
   const handleHomeSearchSelect = (product) => {
     setHomeSearch(product.name);
     setHomeSearchOpen(false);
+    if (product.slug) {
+      window.location.href = productUrl(product);
+      return;
+    }
     setPage({ name: 'product', id: product.id });
   };
 
