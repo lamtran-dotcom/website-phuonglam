@@ -4,6 +4,7 @@ const vm = require('vm');
 
 const root = path.resolve(__dirname, '..');
 const siteUrl = 'https://phuonglam.com';
+const assetVersion = Date.now();
 
 const paths = {
   index: path.join(root, 'index.html'),
@@ -257,6 +258,19 @@ const getStaticPriceInfo = (product) => {
   };
 };
 
+const getStaticOptionGroups = (product, variants = normalizeProductVariants(product)) => {
+  if (!Array.isArray(product.optionGroups)) return [];
+  return product.optionGroups
+    .filter((group) => group?.name && Array.isArray(group.values) && group.values.length)
+    .map((group) => ({
+      name: group.name,
+      values: group.values.filter((value) =>
+        variants.some((variant) => variant.options?.[group.name] === value)
+      ),
+    }))
+    .filter((group) => group.values.length);
+};
+
 const responsiveImageAttrs = (src, sizes) => {
   if (!src || typeof src !== 'string' || src.startsWith('data:')) return '';
   const pathOnly = src.split('?')[0];
@@ -287,13 +301,26 @@ const writeStaticCss = () => {
 html { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { margin: 0; width: 100%; max-width: 100%; overflow-x: hidden; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--seo-text); background: #fff; line-height: 1.65; }
 a { color: inherit; }
-.seo-header, .seo-footer { max-width: 1120px; margin: 0 auto; padding: 22px 20px; display: flex; gap: 18px; align-items: center; justify-content: space-between; }
-.seo-logo { font-weight: 900; color: var(--seo-primary); text-decoration: none; font-size: 22px; }
-.seo-nav { display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--seo-muted); }
-.seo-nav a { text-decoration: none; }
+.seo-header { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid #f0f0f0; }
+.seo-header-inner { max-width: 1320px; margin: 0 auto; padding: 0 28px; min-height: 128px; display: flex; gap: 22px; align-items: center; justify-content: space-between; }
+.seo-logo { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; }
+.seo-logo img { height: 120px; width: auto; display: block; transform: translateY(-10px); }
+.seo-menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.seo-menu-btn { display: none; width: 42px; height: 42px; border: 0; background: transparent; border-radius: 10px; align-items: center; justify-content: center; cursor: pointer; }
+.seo-menu-icon, .seo-menu-icon::before, .seo-menu-icon::after { display: block; width: 22px; height: 2px; border-radius: 2px; background: #333; content: ""; transition: transform .2s ease, opacity .2s ease; }
+.seo-menu-icon { position: relative; }
+.seo-menu-icon::before { position: absolute; top: -7px; left: 0; }
+.seo-menu-icon::after { position: absolute; top: 7px; left: 0; }
+.seo-menu-toggle:checked ~ .seo-actions .seo-menu-icon { background: transparent; }
+.seo-menu-toggle:checked ~ .seo-actions .seo-menu-icon::before { transform: translateY(7px) rotate(45deg); }
+.seo-menu-toggle:checked ~ .seo-actions .seo-menu-icon::after { transform: translateY(-7px) rotate(-45deg); }
+.seo-nav { display: flex; gap: 16px; flex: 1; justify-content: center; align-items: center; flex-wrap: nowrap; font-size: 14.5px; color: #2d2d2d; font-weight: 700; }
+.seo-nav a { text-decoration: none; white-space: nowrap; transition: color .2s ease; }
+.seo-nav a:hover { color: var(--seo-primary); }
 .seo-actions { display: flex; align-items: center; gap: 10px; }
-.seo-cart { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid var(--seo-border); border-radius: 12px; color: var(--seo-text); text-decoration: none; background: #fff; }
+.seo-icon-link, .seo-cart { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border: 0; border-radius: 10px; color: #444; text-decoration: none; background: transparent; }
 .seo-cart-count { position: absolute; top: -7px; right: -7px; min-width: 20px; height: 20px; border-radius: 999px; background: var(--seo-primary); color: #fff; font-size: 11px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+.seo-footer { max-width: 1120px; margin: 50px auto 0; padding: 22px 20px; display: flex; gap: 18px; align-items: center; justify-content: space-between; border-top: 1px solid var(--seo-border); color: var(--seo-muted); font-size: 14px; }
 .static-toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 14px); z-index: 30; background: #15331a; color: #fff; border-radius: 999px; padding: 12px 18px; box-shadow: 0 14px 34px rgba(0,0,0,.18); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; font-weight: 800; font-size: 14px; }
 .static-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 .seo-main { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px; overflow-x: hidden; }
@@ -312,6 +339,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .buy-box { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .08); margin-top: 18px; }
 .buy-price { color: var(--seo-primary); font-size: 28px; font-weight: 900; line-height: 1.1; }
 .buy-original { color: #9aa49a; text-decoration: line-through; font-size: 16px; font-weight: 600; margin-left: 8px; }
+.buy-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .buy-label { display: grid; gap: 6px; font-size: 13px; font-weight: 800; color: #334833; }
 .buy-select, .buy-qty { width: 100%; border: 1px solid var(--seo-border); border-radius: 10px; padding: 12px 13px; font: inherit; background: #fff; color: var(--seo-text); }
 .buy-row { display: grid; grid-template-columns: minmax(0, 120px) minmax(0, 1fr); gap: 12px; align-items: end; }
@@ -325,15 +353,21 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .card-title { font-weight: 800; line-height: 1.4; margin: 0 0 8px; font-size: 15px; }
 .card-price { color: var(--seo-primary); font-weight: 900; }
 .category-intro { max-width: 780px; color: var(--seo-muted); font-size: 17px; }
-.seo-footer { border-top: 1px solid var(--seo-border); margin-top: 50px; color: var(--seo-muted); font-size: 14px; }
 @media (max-width: 820px) {
+  .seo-header-inner { min-height: 104px; padding: 0 18px; gap: 12px; }
+  .seo-logo img { height: 96px; transform: translateY(-8px); }
+  .seo-menu-btn { display: inline-flex; }
+  .seo-nav { position: absolute; top: 100%; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; background: #fff; border-top: 1px solid #f0f0f0; box-shadow: 0 18px 34px rgba(28, 43, 28, .08); padding: 8px 22px 14px; font-size: 15px; }
+  .seo-menu-toggle:checked ~ .seo-nav { display: flex; }
+  .seo-nav a { padding: 11px 0; border-bottom: 1px solid #f5f5f5; }
+  .seo-actions { gap: 4px; }
+  .seo-icon-link, .seo-cart, .seo-menu-btn { width: 38px; height: 38px; }
   .seo-main { padding: 16px; }
   .product-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   h1 { font-size: 28px; line-height: 1.15; }
-  .buy-row { grid-template-columns: 1fr; }
+  .buy-options, .buy-row { grid-template-columns: 1fr; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .seo-header, .seo-footer { align-items: flex-start; flex-direction: column; }
-  .seo-actions { align-self: stretch; justify-content: flex-end; }
+  .seo-footer { align-items: flex-start; flex-direction: column; margin-top: 34px; }
 }
 `;
   fs.writeFileSync(path.join(paths.cssDir, 'static-seo.css'), css);
@@ -391,23 +425,38 @@ const pageShell = ({ title, description, canonical, image, schema, body, scripts
   <meta property="og:title" content="${escapeHtml(title)}" />
   <meta property="og:description" content="${escapeHtml(description)}" />
   ${image ? `<meta property="og:image" content="${escapeHtml(absoluteUrl(image))}" />` : ''}
-  <link rel="stylesheet" href="/assets/css/static-seo.css" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=${assetVersion}" />
   <script type="application/ld+json">${jsonForHtml(schema)}</script>
 </head>
 <body>
   <header class="seo-header">
-    <a class="seo-logo" href="/">Phương Lâm</a>
+    <div class="seo-header-inner">
+    <a class="seo-logo" href="/" aria-label="Phương Lâm">
+      <img src="/assets/media/generated/embedded-001.png" alt="Phương Lâm" />
+    </a>
+    <input class="seo-menu-toggle" type="checkbox" id="seo-menu-toggle" aria-label="Mở menu" />
     <nav class="seo-nav" aria-label="Điều hướng chính">
-      <a href="/">Trang chủ</a>
-      <a href="/danh-muc/nen-thom/">Nến xông</a>
-      <a href="/danh-muc/thao-moc-xong/">Thảo mộc xông</a>
-      <a href="/danh-muc/bep-xong/">Đèn xông tinh dầu</a>
+      <a href="/danh-muc/nen-thom/">Nến Tealight Xông</a>
+      <a href="/danh-muc/combo/">Combo Xông Nhà</a>
+      <a href="/danh-muc/thao-moc-xong/">Thảo Mộc Xông</a>
+      <a href="/danh-muc/bep-xong/">Đèn Xông Tinh Dầu</a>
+      <a href="/danh-muc/phu-kien/">Phụ Kiện Xông</a>
+      <a href="/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/">Hướng Dẫn</a>
     </nav>
     <div class="seo-actions">
+      <a class="seo-icon-link" href="/?search=open" aria-label="Tìm kiếm">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
       <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
-        🛍
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path>
+        </svg>
         <span class="seo-cart-count" data-static-cart-count hidden>0</span>
       </a>
+      <label class="seo-menu-btn" for="seo-menu-toggle" aria-label="Mở menu"><span class="seo-menu-icon"></span></label>
+    </div>
     </div>
   </header>
   ${body}
@@ -578,22 +627,29 @@ const bakeProductsIntoApp = (products) => {
 
 const renderStaticBuyBox = (product) => {
   const variants = normalizeProductVariants(product);
+  const optionGroups = getStaticOptionGroups(product, variants);
   const cheapestVariant = variants.length
     ? variants.reduce((best, variant) => (variant.price < best.price ? variant : best), variants[0])
     : null;
   const price = cheapestVariant ? cheapestVariant.price : Number(product.price || 0);
   const originalPrice = cheapestVariant ? cheapestVariant.originalPrice : product.originalPrice;
-  const options = variants.map((variant) =>
+  const variantOptions = variants.map((variant) =>
     `<option value="${escapeHtml(variant.id)}">${escapeHtml(variant.name)} - ${formatVnd(variant.price)}</option>`
   ).join('');
-  const variantField = variants.length ? `<label class="buy-label">Phân loại
-      <select class="buy-select" data-variant-select>${options}</select>
+  const optionFields = optionGroups.length ? `<div class="buy-options">
+      ${optionGroups.map((group, index) => `<label class="buy-label">${escapeHtml(group.name)}
+        <select class="buy-select" data-option-select data-option-index="${index}" data-option-name="${escapeHtml(group.name)}"></select>
+      </label>`).join('\n      ')}
+    </div>
+    ` : '';
+  const variantField = !optionGroups.length && variants.length ? `<label class="buy-label">Phân loại
+      <select class="buy-select" data-variant-select>${variantOptions}</select>
     </label>
     ` : '';
 
   return `<form class="buy-box" data-buy-box>
     <div class="buy-price" data-buy-price>${formatVnd(price)}${originalPrice ? `<span class="buy-original" data-buy-original>${formatVnd(originalPrice)}</span>` : '<span class="buy-original" data-buy-original hidden></span>'}</div>
-    ${variantField}<div class="buy-row">
+    ${optionFields}${variantField}<div class="buy-row">
       <label class="buy-label">Số lượng
         <input class="buy-qty" data-buy-qty type="number" min="1" step="1" value="1" inputmode="numeric" />
       </label>
@@ -606,6 +662,11 @@ const renderStaticBuyBox = (product) => {
 
 const renderStaticBuyScript = (product) => {
   const variants = normalizeProductVariants(product);
+  const optionGroups = getStaticOptionGroups(product, variants);
+  const cheapestVariant = variants.length
+    ? variants.reduce((best, variant) => (variant.price < best.price ? variant : best), variants[0])
+    : null;
+  const originalImage = firstImage(product);
   const payload = {
     ...product,
     variants,
@@ -614,15 +675,39 @@ const renderStaticBuyScript = (product) => {
 (() => {
   const product = ${jsonForInlineScript(payload)};
   const variants = ${jsonForInlineScript(variants)};
+  const optionGroups = ${jsonForInlineScript(optionGroups)};
+  const defaultVariant = ${jsonForInlineScript(cheapestVariant)};
+  const originalImage = ${jsonForInlineScript(originalImage)};
   const form = document.querySelector('[data-buy-box]');
   if (!form) return;
   const select = form.querySelector('[data-variant-select]');
+  const optionSelects = [...form.querySelectorAll('[data-option-select]')];
   const qtyInput = form.querySelector('[data-buy-qty]');
   const priceEl = form.querySelector('[data-buy-price]');
   const originalEl = form.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
+  const mainImage = document.querySelector('.product-image');
   const money = (value) => Number(value || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-  const getVariant = () => variants.find((variant) => variant.id === select?.value) || variants[0] || null;
+  const responsiveAttrs = (src) => {
+    if (!src || typeof src !== 'string' || src.startsWith('data:')) return null;
+    const pathOnly = src.split('?')[0];
+    if (!pathOnly.startsWith('/assets/products/mirrored/') && !pathOnly.startsWith('/assets/products/uploads/')) return null;
+    const fileName = pathOnly.split('/').pop() || '';
+    const baseName = fileName.replace(/\\.[^.]+$/, '');
+    if (!baseName) return null;
+    return {
+      srcset: '/assets/products/responsive/' + baseName + '-480.webp 480w, /assets/products/responsive/' + baseName + '-720.webp 720w, ' + src + ' 900w',
+      sizes: '(max-width: 767px) 100vw, 480px',
+    };
+  };
+  const getSelectedOptions = () => Object.fromEntries(optionSelects.map((item) => [item.dataset.optionName, item.value]).filter(([, value]) => value));
+  const getVariantByOptions = () => {
+    const selected = getSelectedOptions();
+    return variants.find((variant) => optionGroups.every((group) => variant.options?.[group.name] === selected[group.name])) || null;
+  };
+  const getVariant = () => optionGroups.length
+    ? (getVariantByOptions() || defaultVariant || variants[0] || null)
+    : (variants.find((variant) => variant.id === select?.value) || defaultVariant || variants[0] || null);
   const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
   const buildItem = (variant) => {
     if (!variant) return { ...product, cartKey: String(product.id) };
@@ -649,6 +734,39 @@ const renderStaticBuyScript = (product) => {
     }
   };
   const writeCart = (cart) => localStorage.setItem('phuonglam-cart', JSON.stringify(cart));
+  const rebuildOptionSelects = () => {
+    if (!optionGroups.length) return;
+    optionGroups.forEach((group, index) => {
+      const input = optionSelects[index];
+      if (!input) return;
+      const priorGroups = optionGroups.slice(0, index);
+      const previousValue = input.value || defaultVariant?.options?.[group.name] || '';
+      const values = group.values.filter((value) => variants.some((variant) =>
+        variant.options?.[group.name] === value &&
+        priorGroups.every((priorGroup, priorIndex) => {
+          const selectedValue = optionSelects[priorIndex]?.value;
+          return !selectedValue || variant.options?.[priorGroup.name] === selectedValue;
+        })
+      ));
+      input.replaceChildren(...values.map((value) => new Option(value, value)));
+      const defaultValue = defaultVariant?.options?.[group.name] || '';
+      input.value = values.includes(previousValue) ? previousValue : values.includes(defaultValue) ? defaultValue : (values[0] || '');
+    });
+  };
+  const updateMainImage = (variant) => {
+    if (!mainImage || !('src' in mainImage)) return;
+    const nextSrc = variant?.image || originalImage;
+    if (!nextSrc) return;
+    mainImage.src = nextSrc;
+    const attrs = responsiveAttrs(nextSrc);
+    if (attrs) {
+      mainImage.setAttribute('srcset', attrs.srcset);
+      mainImage.setAttribute('sizes', attrs.sizes);
+    } else {
+      mainImage.removeAttribute('srcset');
+      mainImage.removeAttribute('sizes');
+    }
+  };
   const updatePrice = () => {
     const variant = getVariant();
     const price = variant ? variant.price : product.price;
@@ -658,8 +776,15 @@ const renderStaticBuyScript = (product) => {
       originalEl.textContent = original ? money(original) : '';
       originalEl.hidden = !original;
     }
+    updateMainImage(variant);
   };
   select?.addEventListener('change', updatePrice);
+  optionSelects.forEach((input, index) => input.addEventListener('change', () => {
+    optionSelects.slice(index + 1).forEach((nextInput) => { nextInput.value = ''; });
+    rebuildOptionSelects();
+    updatePrice();
+  }));
+  rebuildOptionSelects();
   updatePrice();
   form.addEventListener('submit', (event) => {
     event.preventDefault();

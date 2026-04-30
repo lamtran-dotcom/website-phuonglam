@@ -41,6 +41,7 @@ const useIsMobile = () => {
 
 const categoryUrl = (categoryId) => `/danh-muc/${categoryId}/`;
 const productUrl = (product) => product?.slug ? `/san-pham/${product.slug}/` : '#';
+const queryFlag = (key) => new URLSearchParams(window.location.search).get(key) === 'open';
 
 const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -702,9 +703,10 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
   const isMobile = useIsMobile();
   const [slideIdx, setSlideIdx] = React.useState(0);
   const [homeSearch, setHomeSearch] = React.useState('');
-  const [homeSearchOpen, setHomeSearchOpen] = React.useState(false);
+  const [homeSearchOpen, setHomeSearchOpen] = React.useState(() => queryFlag('search'));
   const [homeSearchHover, setHomeSearchHover] = React.useState(false);
   const homeSearchRef = React.useRef(null);
+  const homeSearchInputRef = React.useRef(null);
   const normalizedHomeQuery = normalizeSearchText(homeSearch);
   const homeSearchSuggestions = normalizedHomeQuery
     ? [
@@ -730,6 +732,12 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
     return () => document.removeEventListener('mousedown', handleOutside);
   }, []);
 
+  React.useEffect(() => {
+    if (!queryFlag('search')) return;
+    homeSearchInputRef.current?.focus();
+    setHomeSearchOpen(true);
+  }, []);
+
   const handleHomeSearchSelect = (product) => {
     setHomeSearch(product.name);
     setHomeSearchOpen(false);
@@ -753,6 +761,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
               <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
             <input
+              ref={homeSearchInputRef}
               style={hpStyles.heroSearchInput}
               placeholder="Tìm sản phẩm... ví dụ: nến, combo, thảo mộc"
               value={homeSearch}
@@ -1056,7 +1065,7 @@ const CategoryPage = ({ cat, setPage, addToCart, productImages = {} }) => {
     <div style={{ maxWidth: 1440, margin: '0 auto', padding: isMobile ? '20px 16px' : '32px 24px' }}>
       {/* Breadcrumb */}
       <div style={cpStyles.breadcrumb}>
-        <span style={cpStyles.breadLink} onClick={() => setPage({ name: 'home' })}>Trang chủ</span>
+        <a href="/" style={cpStyles.breadLink}>Trang chủ</a>
         <span style={cpStyles.breadSep}>›</span>
         <span style={cpStyles.breadCurrent}>{catInfo.name}</span>
       </div>
@@ -1810,7 +1819,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
       <div style={{ fontSize: 64, marginBottom: 16 }}>🛒</div>
       <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1a1a1a', marginBottom: 12 }}>Giỏ hàng trống</h2>
       <p style={{ color: '#888', marginBottom: 28 }}>Hãy thêm sản phẩm yêu thích vào giỏ nhé!</p>
-      <button style={cartStyles.ctaBtn} onClick={() => setPage({ name: 'home' })}>Tiếp tục mua sắm</button>
+      <a href="/" style={cartStyles.ctaBtn}>Tiếp tục mua sắm</a>
     </div>
   );
 
@@ -1831,6 +1840,12 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
           )}
           {cart.map(item => {
             const itemKey = getCartItemKey(item);
+            const itemHref = productUrl(item);
+            const handleItemLink = (event) => {
+              if (itemHref !== '#') return;
+              event.preventDefault();
+              setPage({ name: 'product', id: item.id });
+            };
             return (
             <div key={itemKey} style={isMobile ? { padding: '14px 14px', borderBottom: '1px solid #f5f5f5', display: 'flex', gap: 12, alignItems: 'flex-start' } : cartStyles.row}>
               {isMobile ? (
@@ -1838,7 +1853,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
                   <ImgPlaceholder label={item.name} w={64} h={64} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="64px" />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <div style={{ ...cartStyles.itemName, marginBottom: 2 }} onClick={() => setPage({ name: 'product', id: item.id })}>{item.name}</div>
+                      <a href={itemHref} style={{ ...cartStyles.itemName, marginBottom: 2 }} onClick={handleItemLink}>{item.name}</a>
                       <button style={{ ...cartStyles.removeBtn, color: '#bbb', marginLeft: 8, flexShrink: 0 }} onClick={() => removeItem(itemKey)} title="Xóa">✕</button>
                     </div>
                     <div style={{ ...cartStyles.itemCat, marginBottom: 8 }}>{CATEGORIES.find(c => c.id === item.categoryId)?.name}</div>
@@ -1858,7 +1873,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
                   <div style={cartStyles.productCol}>
                     <ImgPlaceholder label={item.name} w={84} h={84} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="84px" />
                     <div style={{ minWidth: 0 }}>
-                      <div style={cartStyles.itemName} onClick={() => setPage({ name: 'product', id: item.id })}>{item.name}</div>
+                      <a href={itemHref} style={cartStyles.itemName} onClick={handleItemLink}>{item.name}</a>
                       <div style={cartStyles.itemCat}>{CATEGORIES.find(c => c.id === item.categoryId)?.name}</div>
                       {item.selectedVariant && <div style={cartStyles.itemVariant}>Phân loại: {item.selectedVariant.name}</div>}
                     </div>
@@ -1881,7 +1896,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
             );
           })}
           <div style={{ textAlign: 'left', marginTop: 16 }}>
-            <button style={cartStyles.continueBtn} onClick={() => setPage({ name: 'home' })}>← Tiếp tục mua sắm</button>
+            <a href="/" style={cartStyles.continueBtn}>← Tiếp tục mua sắm</a>
           </div>
         </div>
 
@@ -1924,7 +1939,7 @@ const cartStyles = {
   colLabel: { fontSize: 12, fontWeight: 700, color: '#888', letterSpacing: '0.05em', textTransform: 'uppercase' },
   row: { display: 'grid', gridTemplateColumns: 'minmax(0, 2.4fr) 1fr 1fr 1fr 32px', gap: 16, padding: '18px 16px', borderBottom: '1px solid #f5f5f5', alignItems: 'center' },
   productCol: { display: 'flex', alignItems: 'center', gap: 16, minWidth: 0 },
-  itemName: { fontSize: 14, fontWeight: 600, color: '#1a1a1a', marginBottom: 4, cursor: 'pointer', lineHeight: 1.4 },
+  itemName: { display: 'block', fontSize: 14, fontWeight: 600, color: '#1a1a1a', marginBottom: 4, cursor: 'pointer', lineHeight: 1.4, textDecoration: 'none' },
   itemCat: { fontSize: 12, color: '#aaa' },
   itemVariant: { fontSize: 12, color: '#318223', fontWeight: 600, marginTop: 3, marginBottom: 6 },
   priceCol: { fontSize: 14, color: '#444' },
@@ -1933,13 +1948,13 @@ const cartStyles = {
   qtyBtn: { width: 32, height: 32, background: '#f7f7f5', border: 'none', fontSize: 16, cursor: 'pointer', color: '#333' },
   qtyNum: { width: 36, textAlign: 'center', fontSize: 14, fontWeight: 700 },
   removeBtn: { background: 'none', border: 'none', cursor: 'pointer', color: '#ccc', fontSize: 14, padding: 4, borderRadius: 6 },
-  continueBtn: { background: 'none', border: 'none', color: '#318223', fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: '8px 20px' },
+  continueBtn: { display: 'inline-flex', background: 'none', border: 'none', color: '#318223', fontSize: 13, fontWeight: 600, cursor: 'pointer', padding: '8px 20px', textDecoration: 'none' },
   summary: { background: '#fff', borderRadius: 14, border: '1px solid #f0f0f0', padding: '24px', position: 'sticky', top: 80 },
   summaryTitle: { fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginBottom: 20 },
   summaryRow: { display: 'flex', justifyContent: 'space-between', fontSize: 14, color: '#555', marginBottom: 12 },
   freeShipNote: { fontSize: 12, color: '#318223', background: '#eaf4e9', padding: '8px 12px', borderRadius: 8, marginBottom: 12 },
   divider: { borderTop: '1px solid #f0f0f0', margin: '16px 0' },
-  ctaBtn: { width: '100%', background: '#318223', color: '#fff', border: 'none', padding: '14px 0', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 16 },
+  ctaBtn: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '100%', background: '#318223', color: '#fff', border: 'none', padding: '14px 0', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 16, textDecoration: 'none' },
   secureBadge: { textAlign: 'center', fontSize: 12, color: '#aaa', marginTop: 12 },
 };
 
@@ -4369,7 +4384,8 @@ const App = () => {
   const [page, setPage] = React.useState(() => {
     try {
       if (IS_PREVIEW_REFRESH) return { name: 'home' };
-      if (new URLSearchParams(window.location.search).get('cart') === 'open') return { name: 'cart' };
+      if (queryFlag('cart')) return { name: 'cart' };
+      if (queryFlag('search')) return { name: 'home' };
       if (window.history.state?.page) return window.history.state.page;
       return JSON.parse(localStorage.getItem('phuonglam-page')) || { name: 'home' };
     } catch {
@@ -4444,6 +4460,20 @@ const App = () => {
   React.useEffect(() => {
     safeSetLocalStorage('phuonglam-cart', JSON.stringify(cart));
   }, [cart]);
+
+  React.useEffect(() => {
+    const handleStorage = (event) => {
+      if (event.key !== 'phuonglam-cart') return;
+      try {
+        const nextCart = JSON.parse(event.newValue || '[]');
+        setCart(Array.isArray(nextCart) ? nextCart : []);
+      } catch {
+        setCart([]);
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
 
   const addToCart = (product) => {
     setCart(prev => {
