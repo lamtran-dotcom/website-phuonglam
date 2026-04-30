@@ -39,6 +39,8 @@ const useIsMobile = () => {
   return w < 768;
 };
 
+const categoryUrl = (categoryId) => `/danh-muc/${categoryId}/`;
+
 const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [adminLoginOpen, setAdminLoginOpen] = React.useState(false);
@@ -48,11 +50,11 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const isMobile = useIsMobile();
 
   const navLinks = [
-    { label: 'Nến Tealight Xông', page: 'category', cat: 'nen-thom' },
-    { label: 'Combo Xông Nhà', page: 'category', cat: 'combo' },
-    { label: 'Thảo Mộc Xông', page: 'category', cat: 'thao-moc-xong' },
-    { label: 'Đèn Xông Tinh Dầu', page: 'category', cat: 'bep-xong' },
-    { label: 'Phụ Kiện Xông', page: 'category', cat: 'phu-kien' },
+    { label: 'Nến Tealight Xông', page: 'category', cat: 'nen-thom', href: categoryUrl('nen-thom') },
+    { label: 'Combo Xông Nhà', page: 'category', cat: 'combo', href: categoryUrl('combo') },
+    { label: 'Thảo Mộc Xông', page: 'category', cat: 'thao-moc-xong', href: categoryUrl('thao-moc-xong') },
+    { label: 'Đèn Xông Tinh Dầu', page: 'category', cat: 'bep-xong', href: categoryUrl('bep-xong') },
+    { label: 'Phụ Kiện Xông', page: 'category', cat: 'phu-kien', href: categoryUrl('phu-kien') },
     { label: 'Hướng Dẫn', page: 'blog' },
   ];
 
@@ -90,19 +92,19 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
         {/* Desktop Nav */}
         {!isMobile && (
           <nav style={headerStyles.nav}>
-            {navLinks.map(l => (
-              <span
-                key={l.label}
-                style={{
-                  ...headerStyles.navLink,
-                  color: page.name === l.page && (!l.cat || page.cat === l.cat) ? '#318223' : '#2d2d2d',
-                  fontWeight: page.name === l.page && (!l.cat || page.cat === l.cat) ? '800' : '700',
-                }}
-                onClick={() => setPage(l.cat ? { name: 'category', cat: l.cat } : { name: l.page })}
-              >
-                {l.label}
-              </span>
-            ))}
+            {navLinks.map(l => {
+              const active = page.name === l.page && (!l.cat || page.cat === l.cat);
+              const style = {
+                ...headerStyles.navLink,
+                color: active ? '#318223' : '#2d2d2d',
+                fontWeight: active ? '800' : '700',
+              };
+              return l.href ? (
+                <a key={l.label} href={l.href} style={style}>{l.label}</a>
+              ) : (
+                <span key={l.label} style={style} onClick={() => setPage({ name: l.page })}>{l.label}</span>
+              );
+            })}
           </nav>
         )}
 
@@ -128,9 +130,11 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
       {/* Mobile menu */}
       {menuOpen && (
         <div style={headerStyles.mobileMenu}>
-          {navLinks.map(l => (
+          {navLinks.map(l => l.href ? (
+            <a key={l.label} href={l.href} style={headerStyles.mobileLink}>{l.label}</a>
+          ) : (
             <span key={l.label} style={headerStyles.mobileLink}
-              onClick={() => { setPage(l.cat ? { name: 'category', cat: l.cat } : { name: l.page }); setMenuOpen(false); }}>
+              onClick={() => { setPage({ name: l.page }); setMenuOpen(false); }}>
               {l.label}
             </span>
           ))}
@@ -168,7 +172,7 @@ const headerStyles = {
   logoMark: { color: '#318223', fontSize: 20 },
   logoText: { fontSize: 22, fontWeight: 700, letterSpacing: '0.5px', color: '#318223', textTransform: 'uppercase' },
   nav: { display: 'flex', gap: 16, flex: 1, justifyContent: 'center', flexWrap: 'nowrap' },
-  navLink: { fontSize: 14.5, cursor: 'pointer', transition: 'color .2s', letterSpacing: '0em', whiteSpace: 'nowrap' },
+  navLink: { fontSize: 14.5, cursor: 'pointer', transition: 'color .2s', letterSpacing: '0em', whiteSpace: 'nowrap', textDecoration: 'none' },
   actions: { display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 },
   iconBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 8, borderRadius: 8, color: '#444', display: 'flex', alignItems: 'center' },
   cartBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 8, borderRadius: 8, color: '#444', display: 'flex', alignItems: 'center', position: 'relative' },
@@ -176,7 +180,7 @@ const headerStyles = {
   menuBtn: { display: 'none', flexDirection: 'column', gap: 4, background: 'none', border: 'none', cursor: 'pointer', padding: 8 },
   hamburger: { display: 'block', width: 20, height: 2, background: '#333', borderRadius: 2 },
   mobileMenu: { padding: '12px 24px 16px', display: 'flex', flexDirection: 'column', gap: 4, borderTop: '1px solid #f0f0f0' },
-  mobileLink: { padding: '10px 0', fontSize: 15, fontWeight: 700, cursor: 'pointer', borderBottom: '1px solid #f5f5f5', color: '#333' },
+  mobileLink: { padding: '10px 0', fontSize: 15, fontWeight: 700, cursor: 'pointer', borderBottom: '1px solid #f5f5f5', color: '#333', textDecoration: 'none' },
   adminOverlay: { position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(18, 32, 17, .42)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 },
   adminModal: { width: '100%', maxWidth: 420, background: '#fff', border: '1px solid #e3efde', borderRadius: 24, boxShadow: '0 28px 80px rgba(28, 73, 22, .24)', padding: '30px 28px 24px', textAlign: 'center', animation: 'modalPop .18s ease-out' },
   adminIcon: { width: 62, height: 62, borderRadius: '50%', background: '#edf8e9', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', fontSize: 28 },
@@ -639,7 +643,7 @@ const Footer = ({ setPage }) => {
       <div style={footerStyles.col}>
         <div style={footerStyles.colTitle}>Danh mục</div>
         {CATEGORIES.map(c => (
-          <div key={c.id} style={footerStyles.link} onClick={() => setPage({ name: 'category', cat: c.id })}>{c.name}</div>
+          <a key={c.id} href={categoryUrl(c.id)} style={footerStyles.link}>{c.name}</a>
         ))}
       </div>
       <div style={footerStyles.col}>
@@ -672,7 +676,7 @@ const footerStyles = {
   socials: { display: 'flex', gap: 8 },
   social: { fontSize: 12, padding: '5px 12px', border: '1px solid #3a4e39', borderRadius: 20, cursor: 'pointer', color: '#9aad98', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' },
   colTitle: { fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 14, letterSpacing: '0.06em', textTransform: 'uppercase' },
-  link: { fontSize: 13, color: '#9aad98', marginBottom: 8, cursor: 'pointer', lineHeight: 1.6 },
+  link: { display: 'block', fontSize: 13, color: '#9aad98', marginBottom: 8, cursor: 'pointer', lineHeight: 1.6, textDecoration: 'none' },
   contact: { fontSize: 13, color: '#9aad98', marginBottom: 8, lineHeight: 1.6 },
   bottom: { borderTop: '1px solid #2a3e29', textAlign: 'center', padding: '16px 24px', fontSize: 12, color: '#6a7d69' },
 };
@@ -789,8 +793,8 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
           </h1>
           <p style={{ ...hpStyles.heroSub, fontSize: isMobile ? 13 : 18, marginBottom: isMobile ? 18 : 24, maxWidth: isMobile ? '100%' : 620 }}>Sản phẩm thảo mộc và nến thơm tự nhiên 100%, không hóa chất — chăm sóc không gian sống của bạn.</p>
           <div style={{ ...hpStyles.heroBtns, flexDirection: isMobile ? 'column' : 'row' }}>
-            <button style={{ ...hpStyles.heroCta, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }} onClick={() => setPage({ name: 'category', cat: 'nen-thom' })}>Xem sản phẩm</button>
-            <button style={{ ...hpStyles.heroSecondary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }} onClick={() => setPage({ name: 'category', cat: 'combo' })}>Xem combo ưu đãi</button>
+            <a href={categoryUrl('nen-thom')} style={{ ...hpStyles.heroCta, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }}>Xem sản phẩm</a>
+            <a href={categoryUrl('combo')} style={{ ...hpStyles.heroSecondary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }}>Xem combo ưu đãi</a>
           </div>
         </div>
         {!isMobile && (
@@ -845,9 +849,9 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
             ))}
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
-            <button style={hpStyles.viewAllBtn} onClick={() => setPage({ name: 'category', cat: 'nen-thom' })}>
+            <a href={categoryUrl('nen-thom')} style={hpStyles.viewAllBtn}>
               Xem tất cả sản phẩm →
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -860,7 +864,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         </div>
         <div style={{ ...hpStyles.catGrid, gridTemplateColumns: isMobile ? 'repeat(4, 1fr)' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? 8 : 16 }}>
           {CATEGORIES.map(cat => (
-            <div key={cat.id} style={hpStyles.catCard} onClick={() => setPage({ name: 'category', cat: cat.id })}
+            <a key={cat.id} href={categoryUrl(cat.id)} style={hpStyles.catCard}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(0,0,0,0.10)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'; }}
             >
@@ -871,7 +875,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
                 <div style={{ ...hpStyles.catName, fontSize: isMobile ? 15 : 20 }}>{cat.name}</div>
                 <div style={{ ...hpStyles.catFrom, fontSize: isMobile ? 9 : 11 }}>{cat.from}</div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
@@ -967,8 +971,8 @@ const hpStyles = {
   heroTitle: { fontSize: 44, fontWeight: 800, lineHeight: 1.2, color: '#1a1a1a', margin: '0 0 20px', letterSpacing: '-1px' },
   heroSub: { fontSize: 16, color: '#666', lineHeight: 1.7, margin: '0 0 32px', maxWidth: 420 },
   heroBtns: { display: 'flex', gap: 12, flexWrap: 'wrap' },
-  heroCta: { background: '#318223', color: '#fff', border: 'none', padding: '14px 28px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.02em' },
-  heroSecondary: { background: '#fff', color: '#318223', border: '1.5px solid #318223', padding: '14px 28px', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer' },
+  heroCta: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#318223', color: '#fff', border: 'none', padding: '14px 28px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.02em', textDecoration: 'none', boxSizing: 'border-box' },
+  heroSecondary: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#318223', border: '1.5px solid #318223', padding: '14px 28px', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', boxSizing: 'border-box' },
   heroImageFrame: { background: '#f6f3e8', borderRadius: 28, padding: 18, boxShadow: '0 18px 44px rgba(35, 58, 27, 0.06)' },
   heroImage: { background: '#fff8ec' },
   trustBar: { background: '#f7faf6', borderTop: '1px solid #eef3ed', borderBottom: '1px solid #eef3ed', padding: '20px 24px', display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap' },
@@ -980,14 +984,14 @@ const hpStyles = {
   sectionTitle: { fontSize: 32, fontWeight: 800, color: '#1a1a1a', margin: '0 0 10px', letterSpacing: '-0.5px' },
   sectionSub: { fontSize: 15, color: '#777', margin: 0 },
   catGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 },
-  catCard: { background: '#fff', border: '1px solid #f0f0f0', borderRadius: 12, overflow: 'hidden', cursor: 'pointer', transition: 'all .25s', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' },
+  catCard: { display: 'block', background: '#fff', border: '1px solid #f0f0f0', borderRadius: 12, overflow: 'hidden', cursor: 'pointer', transition: 'all .25s', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', color: 'inherit', textDecoration: 'none' },
   catImgWrap: { padding: '12px 12px 0' },
   catInfo: { padding: '12px 16px 16px' },
   catName: { fontSize: 21, fontWeight: 700, color: '#1a1a1a', marginBottom: 4 },
   catFrom: { fontSize: 12, color: '#318223', fontWeight: 600 },
   productGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 },
   bestsellerGrid: { display: 'grid', alignItems: 'stretch' },
-  viewAllBtn: { background: 'none', border: '1.5px solid #318223', color: '#318223', padding: '12px 28px', borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: 'pointer' },
+  viewAllBtn: { background: 'none', border: '1.5px solid #318223', color: '#318223', padding: '12px 28px', borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: 'pointer', textDecoration: 'none' },
   benefitGrid: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 },
   benefitCard: { background: '#fff', border: '1px solid #f0f0f0', borderRadius: 14, padding: '28px 24px', boxShadow: '0 2px 10px rgba(0,0,0,0.04)', transition: 'transform .25s ease, box-shadow .25s ease, border-color .25s ease', cursor: 'default' },
   benefitIcon: { fontSize: 32, marginBottom: 14 },
@@ -1025,15 +1029,6 @@ const CategoryPage = ({ cat, setPage, addToCart, productImages = {} }) => {
         window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
       });
     });
-  };
-
-  const handleCategorySelect = (categoryId) => {
-    setActiveCat(categoryId);
-    setPage({ name: 'category', cat: categoryId });
-    if (isMobile) {
-      setShowFilters(false);
-      scrollToProductResults();
-    }
   };
 
   const catInfo = CATEGORIES.find(c => c.id === activeCat) || CATEGORIES[0];
@@ -1074,12 +1069,12 @@ const CategoryPage = ({ cat, setPage, addToCart, productImages = {} }) => {
           <div style={cpStyles.sideSection}>
             <div style={cpStyles.sideTitle}>Danh mục</div>
             {CATEGORIES.map(c => (
-              <div key={c.id}
+              <a key={c.id}
+                href={categoryUrl(c.id)}
                 style={{ ...cpStyles.sideLink, color: activeCat === c.id ? '#318223' : '#444', fontWeight: activeCat === c.id ? 700 : 400, background: activeCat === c.id ? '#eaf4e9' : 'none' }}
-                onClick={() => handleCategorySelect(c.id)}
               >
                 {c.name}
-              </div>
+              </a>
             ))}
           </div>
 
@@ -1155,14 +1150,14 @@ const CategoryPage = ({ cat, setPage, addToCart, productImages = {} }) => {
 
 const cpStyles = {
   breadcrumb: { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 28, fontSize: 13 },
-  breadLink: { color: '#318223', cursor: 'pointer', fontWeight: 500 },
+  breadLink: { color: '#318223', cursor: 'pointer', fontWeight: 500, textDecoration: 'none' },
   breadSep: { color: '#ccc' },
   breadCurrent: { color: '#666' },
   layout: { display: 'grid', gridTemplateColumns: '230px 1fr', gap: 36 },
   sidebar: { flexShrink: 0 },
   sideSection: { marginBottom: 28, paddingBottom: 24, borderBottom: '1px solid #f0f0f0' },
   sideTitle: { fontSize: 13, fontWeight: 700, color: '#1a1a1a', marginBottom: 12, letterSpacing: '0.05em', textTransform: 'uppercase' },
-  sideLink: { padding: '8px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 13, marginBottom: 2, transition: 'all .15s' },
+  sideLink: { display: 'block', padding: '8px 10px', borderRadius: 8, cursor: 'pointer', fontSize: 13, marginBottom: 2, transition: 'all .15s', textDecoration: 'none' },
   priceInputs: { display: 'flex', gap: 8, alignItems: 'center', marginBottom: 4 },
   priceInput: { flex: 1, border: '1px solid #e8e8e8', borderRadius: 8, padding: '7px 10px', fontSize: 12, outline: 'none', width: 0 },
   tagWrap: { display: 'flex', flexWrap: 'wrap', gap: 6 },
@@ -1435,11 +1430,11 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
     <div style={{ width: '100%', maxWidth: 1440, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px', overflowX: 'hidden', boxSizing: 'border-box' }}>
       {/* Breadcrumb */}
       <div style={ppStyles.breadcrumb}>
-        <span style={ppStyles.breadLink} onClick={() => setPage({ name: 'home' })}>Trang chủ</span>
+        <a href="/" style={ppStyles.breadLink}>Trang chủ</a>
         <span style={ppStyles.breadSep}>›</span>
-        <span style={ppStyles.breadLink} onClick={() => setPage({ name: 'category', cat: product.categoryId })}>
+        <a href={categoryUrl(product.categoryId)} style={ppStyles.breadLink}>
           {CATEGORIES.find(c => c.id === product.categoryId)?.name}
-        </span>
+        </a>
         <span style={ppStyles.breadSep}>›</span>
         <span style={ppStyles.breadCurrent}>{product.name}</span>
       </div>
@@ -1498,9 +1493,9 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
         {/* RIGHT: Info */}
         <div style={ppStyles.info}>
           <h1 style={{ ...ppStyles.name, ...(isMobile ? ppStyles.nameMobile : {}) }}>{product.name}</h1>
-          <div style={ppStyles.catBadge} onClick={() => setPage({ name: 'category', cat: product.categoryId })}>
+          <a href={categoryUrl(product.categoryId)} style={ppStyles.catBadge}>
             {CATEGORIES.find(c => c.id === product.categoryId)?.name}
-          </div>
+          </a>
 
           <div style={ppStyles.ratingRow}>
             {'★★★★★'.split('').map((s, i) => <span key={i} style={{ color: '#f5a623', fontSize: 16 }}>{s}</span>)}
@@ -1707,7 +1702,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
 const ppStyles = {
   backBtn: { display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fff', border: '1px solid #dfe7dc', borderRadius: 999, padding: '10px 16px', fontSize: 13, fontWeight: 700, color: '#2f6e24', cursor: 'pointer', marginBottom: 18 },
   breadcrumb: { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 28, fontSize: 13, flexWrap: 'wrap' },
-  breadLink: { color: '#318223', cursor: 'pointer', fontWeight: 500 },
+  breadLink: { color: '#318223', cursor: 'pointer', fontWeight: 500, textDecoration: 'none' },
   breadSep: { color: '#ccc' },
   breadCurrent: { color: '#666' },
   layout: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, marginBottom: 56, minWidth: 0 },
@@ -1724,7 +1719,7 @@ const ppStyles = {
   thumbArrow: { position: 'absolute', top: '50%', transform: 'translateY(-50%)', zIndex: 2, width: 34, height: 34, borderRadius: 999, border: 'none', background: 'rgba(255,255,255,0.92)', color: '#7d8f78', fontSize: 30, fontWeight: 400, lineHeight: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 14px rgba(0,0,0,0.12)' },
   thumb: { borderRadius: 10, overflow: 'hidden', cursor: 'pointer', transition: 'border-color .2s', flexShrink: 0 },
   info: { minWidth: 0, maxWidth: '100%' },
-  catBadge: { display: 'inline-block', fontSize: 12, fontWeight: 600, color: '#318223', background: '#eaf4e9', padding: '4px 12px', borderRadius: 20, marginBottom: 14, cursor: 'pointer' },
+  catBadge: { display: 'inline-block', fontSize: 12, fontWeight: 600, color: '#318223', background: '#eaf4e9', padding: '4px 12px', borderRadius: 20, marginBottom: 14, cursor: 'pointer', textDecoration: 'none' },
   name: { fontSize: 28, fontWeight: 800, color: '#1a1a1a', margin: '0 0 12px', lineHeight: 1.3, letterSpacing: '0em', overflowWrap: 'anywhere' },
   nameMobile: { fontSize: 24, lineHeight: 1.25 },
   ratingRow: { display: 'flex', alignItems: 'center', marginBottom: 16 },
@@ -4234,14 +4229,14 @@ const BlogPostPage = ({ slug, setPage, goBack }) => {
             <div style={{ background: '#f7faf6', border: '1px solid #eef3ed', borderRadius: 12, padding: isMobile ? '32px 18px' : '40px 24px', margin: '48px 0 0', textAlign: 'center' }}>
               <h3 style={{ fontSize: isMobile ? 24 : 32, lineHeight: 1.25, fontWeight: 800, color: '#1a1a1a', margin: '0 0 12px' }}>Mua {ctaTarget.label} Chính Hãng tại Nến Phương Lâm</h3>
               <p style={{ fontSize: isMobile ? 15 : 18, color: '#666', margin: '0 0 24px', lineHeight: 1.6 }}>Giao hàng toàn quốc · Kiểm tra trước khi nhận · 100% thảo mộc & nến tự nhiên</p>
-              <button
-                onClick={() => setPage({ name: 'category', cat: ctaTarget.cat })}
-                style={{ display: 'block', width: '100%', maxWidth: 400, margin: '0 auto 20px', background: 'linear-gradient(180deg,#ffffff,#f4fbf2)', color: '#318223', border: '2px solid #318223', padding: '16px 32px', borderRadius: 10, fontSize: isMobile ? 16 : 18, fontWeight: 800, cursor: 'pointer', letterSpacing: '0.03em', boxShadow: '0 10px 0 #1f6819, 0 18px 32px rgba(49,130,35,.22)', transition: 'all .2s', boxSizing: 'border-box' }}
+              <a
+                href={categoryUrl(ctaTarget.cat)}
+                style={{ display: 'block', width: '100%', maxWidth: 400, margin: '0 auto 20px', background: 'linear-gradient(180deg,#ffffff,#f4fbf2)', color: '#318223', border: '2px solid #318223', padding: '16px 32px', borderRadius: 10, fontSize: isMobile ? 16 : 18, fontWeight: 800, cursor: 'pointer', letterSpacing: '0.03em', boxShadow: '0 10px 0 #1f6819, 0 18px 32px rgba(49,130,35,.22)', transition: 'all .2s', boxSizing: 'border-box', textDecoration: 'none' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 13px 0 #1f6819, 0 24px 38px rgba(49,130,35,.26)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 0 #1f6819, 0 18px 32px rgba(49,130,35,.22)'; }}
               >
                 Xem ngay {ctaTarget.label} →
-              </button>
+              </a>
               <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap', marginTop: 16 }}>
                 <span style={{ fontSize: isMobile ? 14 : 16, color: '#444', fontWeight: 500 }}>💬 Zalo: 077 3829 593</span>
                 <span style={{ fontSize: isMobile ? 14 : 16, color: '#444', fontWeight: 500 }}>📞 Hotline: 077 3829 593</span>
