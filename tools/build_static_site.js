@@ -224,6 +224,39 @@ const firstImage = (product) => {
   return variants.map((variant) => variant.image).find(Boolean) || '';
 };
 
+const normalizeProductVariants = (product) => {
+  if (!product || !Array.isArray(product.variants)) return [];
+  return product.variants
+    .map((variant, index) => ({
+      id: variant.id || `variant_${index}`,
+      name: String(variant.name || '').trim(),
+      sku: String(variant.sku || '').trim(),
+      price: Number(variant.price) || 0,
+      originalPrice: variant.originalPrice ? Number(variant.originalPrice) : null,
+      weight: variant.weight ? Number(variant.weight) : null,
+      image: variant.image || '',
+      options: variant.options && typeof variant.options === 'object' && !Array.isArray(variant.options) ? variant.options : {},
+    }))
+    .filter((variant) => variant.name && variant.price > 0);
+};
+
+const getStaticPriceInfo = (product) => {
+  const variants = normalizeProductVariants(product);
+  if (!variants.length) {
+    return {
+      price: Number(product.price) || 0,
+      originalPrice: product.originalPrice ? Number(product.originalPrice) : null,
+      hasVariants: false,
+    };
+  }
+  const cheapest = variants.reduce((best, variant) => (variant.price < best.price ? variant : best), variants[0]);
+  return {
+    price: cheapest.price,
+    originalPrice: cheapest.originalPrice,
+    hasVariants: true,
+  };
+};
+
 const responsiveImageAttrs = (src, sizes) => {
   if (!src || typeof src !== 'string' || src.startsWith('data:')) return '';
   const pathOnly = src.split('?')[0];
@@ -271,6 +304,15 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .summary, .content { color: #334833; font-size: 17px; overflow-wrap: anywhere; }
 .meta-list { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 14px; background: var(--seo-bg); margin: 22px 0; }
 .cta { display: inline-flex; align-items: center; justify-content: center; background: var(--seo-primary); color: #fff; text-decoration: none; border-radius: 10px; padding: 14px 20px; font-weight: 800; margin-top: 10px; }
+.buy-box { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .08); margin-top: 18px; }
+.buy-price { color: var(--seo-primary); font-size: 28px; font-weight: 900; line-height: 1.1; }
+.buy-original { color: #9aa49a; text-decoration: line-through; font-size: 16px; font-weight: 600; margin-left: 8px; }
+.buy-label { display: grid; gap: 6px; font-size: 13px; font-weight: 800; color: #334833; }
+.buy-select, .buy-qty { width: 100%; border: 1px solid var(--seo-border); border-radius: 10px; padding: 12px 13px; font: inherit; background: #fff; color: var(--seo-text); }
+.buy-row { display: grid; grid-template-columns: minmax(0, 120px) minmax(0, 1fr); gap: 12px; align-items: end; }
+.buy-btn { border: 0; border-radius: 10px; padding: 14px 18px; background: var(--seo-primary); color: #fff; font: inherit; font-weight: 900; cursor: pointer; }
+.buy-link { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--seo-primary); border-radius: 10px; padding: 12px 16px; color: var(--seo-primary); text-decoration: none; font-weight: 800; }
+.buy-status { min-height: 22px; color: var(--seo-primary); font-weight: 800; font-size: 14px; }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 24px; }
 .card { border: 1px solid var(--seo-border); border-radius: 14px; overflow: hidden; background: #fff; text-decoration: none; display: block; }
 .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--seo-bg); display: block; }
@@ -283,6 +325,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .seo-main { padding: 16px; }
   .product-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   h1 { font-size: 28px; line-height: 1.15; }
+  .buy-row { grid-template-columns: 1fr; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .seo-header, .seo-footer { align-items: flex-start; flex-direction: column; }
 }
@@ -290,7 +333,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   fs.writeFileSync(path.join(paths.cssDir, 'static-seo.css'), css);
 };
 
-const pageShell = ({ title, description, canonical, image, schema, body }) => `<!DOCTYPE html>
+const pageShell = ({ title, description, canonical, image, schema, body, scripts = '' }) => `<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
@@ -320,7 +363,7 @@ const pageShell = ({ title, description, canonical, image, schema, body }) => `<
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
-</body>
+${scripts ? `  ${scripts}\n` : ''}</body>
 </html>
 `;
 
@@ -335,33 +378,36 @@ const breadcrumbSchema = (items) => ({
   })),
 });
 
-const productSchema = ({ product, categoryName, url, image }) => ({
-  '@context': 'https://schema.org',
-  '@graph': [
-    breadcrumbSchema([
-      { name: 'Trang chủ', url: siteUrl },
-      { name: categoryName, url: `${siteUrl}/danh-muc/${product.categoryId}/` },
-      { name: product.name, url },
-    ]),
-    {
-      '@type': 'Product',
-      name: product.name,
-      image: image ? [absoluteUrl(image)] : undefined,
-      description: stripHtml(product.description || product.shortDesc || product.name),
-      sku: product.sku || String(product.id),
-      brand: { '@type': 'Brand', name: 'Phương Lâm' },
-      category: categoryName,
-      offers: {
-        '@type': 'Offer',
-        url,
-        priceCurrency: 'VND',
-        price: Number(product.price || 0),
-        availability: 'https://schema.org/InStock',
-        itemCondition: 'https://schema.org/NewCondition',
+const productSchema = ({ product, categoryName, url, image }) => {
+  const priceInfo = getStaticPriceInfo(product);
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      breadcrumbSchema([
+        { name: 'Trang chủ', url: siteUrl },
+        { name: categoryName, url: `${siteUrl}/danh-muc/${product.categoryId}/` },
+        { name: product.name, url },
+      ]),
+      {
+        '@type': 'Product',
+        name: product.name,
+        image: image ? [absoluteUrl(image)] : undefined,
+        description: stripHtml(product.description || product.shortDesc || product.name),
+        sku: product.sku || String(product.id),
+        brand: { '@type': 'Brand', name: 'Phương Lâm' },
+        category: categoryName,
+        offers: {
+          '@type': 'Offer',
+          url,
+          priceCurrency: 'VND',
+          price: priceInfo.price,
+          availability: 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
+        },
       },
-    },
-  ],
-});
+    ],
+  };
+};
 
 const categorySchema = ({ categoryName, categoryUrl }) => ({
   '@context': 'https://schema.org',
@@ -476,10 +522,115 @@ const bakeProductsIntoApp = (products) => {
   fs.writeFileSync(appPath, source);
 };
 
+const renderStaticBuyBox = (product) => {
+  const variants = normalizeProductVariants(product);
+  const cheapestVariant = variants.length
+    ? variants.reduce((best, variant) => (variant.price < best.price ? variant : best), variants[0])
+    : null;
+  const price = cheapestVariant ? cheapestVariant.price : Number(product.price || 0);
+  const originalPrice = cheapestVariant ? cheapestVariant.originalPrice : product.originalPrice;
+  const options = variants.map((variant) =>
+    `<option value="${escapeHtml(variant.id)}">${escapeHtml(variant.name)} - ${formatVnd(variant.price)}</option>`
+  ).join('');
+  const variantField = variants.length ? `<label class="buy-label">Phân loại
+      <select class="buy-select" data-variant-select>${options}</select>
+    </label>
+    ` : '';
+
+  return `<form class="buy-box" data-buy-box>
+    <div class="buy-price" data-buy-price>${formatVnd(price)}${originalPrice ? `<span class="buy-original" data-buy-original>${formatVnd(originalPrice)}</span>` : '<span class="buy-original" data-buy-original hidden></span>'}</div>
+    ${variantField}<div class="buy-row">
+      <label class="buy-label">Số lượng
+        <input class="buy-qty" data-buy-qty type="number" min="1" step="1" value="1" inputmode="numeric" />
+      </label>
+      <button class="buy-btn" type="submit">+ Thêm vào giỏ</button>
+    </div>
+    <a class="buy-link" href="/?cart=open">Xem giỏ hàng</a>
+    <div class="buy-status" data-buy-status aria-live="polite"></div>
+  </form>`;
+};
+
+const renderStaticBuyScript = (product) => {
+  const variants = normalizeProductVariants(product);
+  const payload = {
+    ...product,
+    variants,
+  };
+  return `<script>
+(() => {
+  const product = ${jsonForInlineScript(payload)};
+  const variants = ${jsonForInlineScript(variants)};
+  const form = document.querySelector('[data-buy-box]');
+  if (!form) return;
+  const select = form.querySelector('[data-variant-select]');
+  const qtyInput = form.querySelector('[data-buy-qty]');
+  const priceEl = form.querySelector('[data-buy-price]');
+  const originalEl = form.querySelector('[data-buy-original]');
+  const statusEl = form.querySelector('[data-buy-status]');
+  const money = (value) => Number(value || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  const getVariant = () => variants.find((variant) => variant.id === select?.value) || variants[0] || null;
+  const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
+  const buildItem = (variant) => {
+    if (!variant) return { ...product, cartKey: String(product.id) };
+    return {
+      ...product,
+      sku: variant.sku || product.sku,
+      price: Number(variant.price) || Number(product.price) || 0,
+      originalPrice: variant.originalPrice || product.originalPrice || null,
+      weight: variant.weight || product.weight || null,
+      selectedVariant: {
+        id: variant.id,
+        name: variant.name,
+        image: variant.image || '',
+      },
+      cartKey: product.id + '__' + variant.id,
+    };
+  };
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const writeCart = (cart) => localStorage.setItem('phuonglam-cart', JSON.stringify(cart));
+  const updatePrice = () => {
+    const variant = getVariant();
+    const price = variant ? variant.price : product.price;
+    const original = variant ? variant.originalPrice : product.originalPrice;
+    if (priceEl) priceEl.firstChild.textContent = money(price);
+    if (originalEl) {
+      originalEl.textContent = original ? money(original) : '';
+      originalEl.hidden = !original;
+    }
+  };
+  select?.addEventListener('change', updatePrice);
+  updatePrice();
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const qty = Math.max(1, parseInt(qtyInput?.value || '1', 10) || 1);
+    const item = buildItem(getVariant());
+    const key = keyOf(item);
+    const cart = readCart();
+    const existing = cart.find((cartItem) => keyOf(cartItem) === key);
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + qty;
+    } else {
+      cart.push({ ...item, qty });
+    }
+    writeCart(cart);
+    if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+  });
+})();
+</script>`;
+};
+
 const renderProductPage = ({ product, categoryName }) => {
   const image = firstImage(product);
   const productUrl = `${siteUrl}/san-pham/${product.slug}/`;
   const description = truncate(product.shortDesc || product.description || product.name);
+  const priceInfo = getStaticPriceInfo(product);
   const body = `<main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Trang chủ</a> / <a href="/danh-muc/${escapeHtml(product.categoryId)}/">${escapeHtml(categoryName)}</a> / ${escapeHtml(product.name)}
@@ -492,13 +643,13 @@ const renderProductPage = ({ product, categoryName }) => {
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
         <h1>${escapeHtml(product.name)}</h1>
         <p class="summary">${escapeHtml(product.shortDesc || '')}</p>
-        <div class="price">${formatVnd(product.price)}${product.originalPrice ? `<span class="original-price">${formatVnd(product.originalPrice)}</span>` : ''}</div>
+        <div class="price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price">${formatVnd(priceInfo.originalPrice)}</span>` : ''}</div>
         <div class="meta-list">
           <div><strong>Thương hiệu:</strong> Phương Lâm</div>
           <div><strong>Mã sản phẩm:</strong> ${escapeHtml(product.sku || String(product.id))}</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
-        <a class="cta" href="/">Xem và đặt sản phẩm trên website</a>
+        ${renderStaticBuyBox(product)}
       </div>
     </article>
     <section class="content">
@@ -515,6 +666,7 @@ const renderProductPage = ({ product, categoryName }) => {
     image,
     schema: productSchema({ product, categoryName, url: productUrl, image }),
     body,
+    scripts: renderStaticBuyScript(product),
   });
 };
 
@@ -523,6 +675,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products }) => {
   const description = `${categoryName} Phương Lâm: sản phẩm chọn lọc, phù hợp cho thư giãn, xông hương và chăm sóc không gian sống tự nhiên.`;
   const cards = products.map((product, index) => {
     const image = firstImage(product);
+    const priceInfo = getStaticPriceInfo(product);
     const imagePriority = index < 6
       ? ' loading="eager" fetchpriority="high"'
       : ' loading="lazy"';
@@ -530,7 +683,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products }) => {
       ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 260px')} alt="${escapeHtml(product.name)}"${imagePriority} />` : ''}
       <div class="card-body">
         <p class="card-title">${escapeHtml(product.name)}</p>
-        <div class="card-price">${formatVnd(product.price)}</div>
+        <div class="card-price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}</div>
       </div>
     </a>`;
   }).join('\n');

@@ -91,7 +91,17 @@
           <div><strong>Mã sản phẩm:</strong> PL-003</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
-        <a class="cta" href="/">Xem và đặt sản phẩm trên website</a>
+        <form class="buy-box" data-buy-box>
+    <div class="buy-price" data-buy-price>25.000 ₫<span class="buy-original" data-buy-original>40.000 ₫</span></div>
+    <div class="buy-row">
+      <label class="buy-label">Số lượng
+        <input class="buy-qty" data-buy-qty type="number" min="1" step="1" value="1" inputmode="numeric" />
+      </label>
+      <button class="buy-btn" type="submit">+ Thêm vào giỏ</button>
+    </div>
+    <a class="buy-link" href="/?cart=open">Xem giỏ hàng</a>
+    <div class="buy-status" data-buy-status aria-live="polite"></div>
+  </form>
       </div>
     </article>
     <section class="content">
@@ -115,5 +125,73 @@ Không dùng gần xăng dầu, cồn hoặc vật dễ cháy. Không để bậ
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <script>
+(() => {
+  const product = {"id":7,"sku":"PL-003","categoryId":"phu-kien","name":"Hột quẹt gas thắp nến đầu dài an có thể thu gọn tiện lợi I Phương Lâm","price":25000,"originalPrice":40000,"shortDesc":"Chuyên dùng cho đốt nến xông, an toàn tiện lợi","description":"Hột quẹt gas thắp nến đầu dài Phương Lâm dùng để châm nến tealight, nến thơm, bếp xông thảo mộc, đèn xông tinh dầu và các góc trang trí cần lửa nhỏ. Thiết kế đầu dài giúp tay cách xa ngọn lửa hơn khi thắp nến trong ly, bếp xông hoặc vị trí sâu khó châm.\n\nSản phẩm nhỏ gọn, dễ cầm, có thể thu gọn tiện cất trong ngăn kéo, túi đồ xông hoặc kệ nến. Phù hợp dùng tại nhà, spa, quán cafe, phòng thờ, bàn tiệc hoặc khi setup không gian thư giãn.","usage":"HƯỚNG DẪN SỬ DỤNG HỘT QUẸT GAS ĐẦU DÀI\n\n✔ Cách dùng:\nMở đầu bật lửa, hướng đầu lửa vào tim nến hoặc vị trí cần châm rồi bấm đánh lửa. Giữ khoảng cách vừa đủ, không để tay quá gần ngọn lửa.\n\n✔ Sau khi dùng:\nTắt lửa hoàn toàn, chờ đầu bật lửa nguội rồi thu gọn và cất lại.\n\n✔ Lưu ý an toàn:\nKhông dùng gần xăng dầu, cồn hoặc vật dễ cháy. Không để bật lửa dưới nắng nóng, gần bếp lửa hoặc nơi nhiệt độ cao. Để xa tầm tay trẻ em.","tag":"Nổi bật","weight":200,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/uploads/1777451754260-shop-1-phu-kien.webp","/assets/products/uploads/1777455572843-chatgpt-image-16-30-11-29-thg-4-2026-trung-binh.webp","/assets/products/uploads/1777455577721-chatgpt-image-16-27-42-29-thg-4-2026-trung-binh.webp","/assets/products/uploads/1777455579445-chatgpt-image-16-26-39-29-thg-4-2026-trung-binh.webp","/assets/products/uploads/1777455581435-chatgpt-image-16-25-05-29-thg-4-2026-trung-binh.webp"],"reviews":[],"variants":[],"slug":"hot-quet-gas-thap-nen-dau-dai-an-co-the-thu-gon-tien-loi-i-phuong-lam"};
+  const variants = [];
+  const form = document.querySelector('[data-buy-box]');
+  if (!form) return;
+  const select = form.querySelector('[data-variant-select]');
+  const qtyInput = form.querySelector('[data-buy-qty]');
+  const priceEl = form.querySelector('[data-buy-price]');
+  const originalEl = form.querySelector('[data-buy-original]');
+  const statusEl = form.querySelector('[data-buy-status]');
+  const money = (value) => Number(value || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  const getVariant = () => variants.find((variant) => variant.id === select?.value) || variants[0] || null;
+  const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
+  const buildItem = (variant) => {
+    if (!variant) return { ...product, cartKey: String(product.id) };
+    return {
+      ...product,
+      sku: variant.sku || product.sku,
+      price: Number(variant.price) || Number(product.price) || 0,
+      originalPrice: variant.originalPrice || product.originalPrice || null,
+      weight: variant.weight || product.weight || null,
+      selectedVariant: {
+        id: variant.id,
+        name: variant.name,
+        image: variant.image || '',
+      },
+      cartKey: product.id + '__' + variant.id,
+    };
+  };
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const writeCart = (cart) => localStorage.setItem('phuonglam-cart', JSON.stringify(cart));
+  const updatePrice = () => {
+    const variant = getVariant();
+    const price = variant ? variant.price : product.price;
+    const original = variant ? variant.originalPrice : product.originalPrice;
+    if (priceEl) priceEl.firstChild.textContent = money(price);
+    if (originalEl) {
+      originalEl.textContent = original ? money(original) : '';
+      originalEl.hidden = !original;
+    }
+  };
+  select?.addEventListener('change', updatePrice);
+  updatePrice();
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const qty = Math.max(1, parseInt(qtyInput?.value || '1', 10) || 1);
+    const item = buildItem(getVariant());
+    const key = keyOf(item);
+    const cart = readCart();
+    const existing = cart.find((cartItem) => keyOf(cartItem) === key);
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + qty;
+    } else {
+      cart.push({ ...item, qty });
+    }
+    writeCart(cart);
+    if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+  });
+})();
+</script>
 </body>
 </html>

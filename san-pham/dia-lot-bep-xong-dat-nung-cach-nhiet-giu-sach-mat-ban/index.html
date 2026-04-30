@@ -91,7 +91,17 @@
           <div><strong>Mã sản phẩm:</strong> 470519_mod470519</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
-        <a class="cta" href="/">Xem và đặt sản phẩm trên website</a>
+        <form class="buy-box" data-buy-box>
+    <div class="buy-price" data-buy-price>25.000 ₫<span class="buy-original" data-buy-original>30.000 ₫</span></div>
+    <div class="buy-row">
+      <label class="buy-label">Số lượng
+        <input class="buy-qty" data-buy-qty type="number" min="1" step="1" value="1" inputmode="numeric" />
+      </label>
+      <button class="buy-btn" type="submit">+ Thêm vào giỏ</button>
+    </div>
+    <a class="buy-link" href="/?cart=open">Xem giỏ hàng</a>
+    <div class="buy-status" data-buy-status aria-live="polite"></div>
+  </form>
       </div>
     </article>
     <section class="content">
@@ -143,5 +153,73 @@ Sau khi bếp nguội hoàn toàn, lau dĩa bằng khăn khô hoặc khăn ẩm 
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <script>
+(() => {
+  const product = {"id":"shopee_56102764086","sku":"470519_mod470519","categoryId":"phu-kien","name":"Dĩa lót bếp xông đất nung cách nhiệt giữ sạch mặt bàn","price":25000,"originalPrice":30000,"shortDesc":"Dĩa lót đất nung tự nhiên dùng cho bếp xông thảo mộc, bồ kết và nến tealight. Giúp cách nhiệt, giữ vệ sinh mặt bàn và hoàn thiện bộ bếp xông mộc mạc.","description":"DĨA LÓT BẾP XÔNG ĐẤT NUNG\n\n✔ Tổng quan sản phẩm:\nDĩa lót bếp xông đất nung là phụ kiện cần có khi sử dụng bếp xông thảo mộc, bồ kết hoặc đèn xông dùng nến.\nSản phẩm giúp bộ bếp xông hoàn thiện hơn, đồng thời hỗ trợ giữ vệ sinh và tăng độ an toàn khi đặt bếp trên mặt bàn.\n\n✔ Công dụng nổi bật:\n- Cách nhiệt an toàn, hạn chế nhiệt từ đáy bếp tiếp xúc trực tiếp với mặt bàn gỗ, kính hoặc đá.\n- Hứng tàn nến, sáp hoặc vụn thảo mộc rơi vãi để khu vực xông luôn gọn sạch.\n- Màu đất nung mộc mạc, ton-sur-ton với bếp xông, phù hợp không gian spa, phòng khách, bàn trà hoặc bàn thờ gia tiên.\n- Dễ kết hợp với bếp xông size 13cm và 16cm.\n\n✔ Thông tin sản phẩm:\n- Tên sản phẩm: Dĩa lót bếp xông đất nung\n- Chất liệu: đất nung tự nhiên, chịu nhiệt tốt\n- Màu sắc: nâu đỏ gốm mộc\n- Kích thước tương thích: bếp xông đường kính khoảng 13cm - 16cm\n- Xuất xứ: Việt Nam\n- Cân nặng vận chuyển: 200g\n\n✔ Lưu ý quan trọng:\n- Sản phẩm chỉ bao gồm dĩa lót, không bao gồm bếp xông, nến hoặc thảo mộc.\n- Do là gốm đất nung, màu sắc có thể chênh lệch đậm nhạt nhẹ tùy mẻ nung.\n- Nên đặt dĩa trên bề mặt phẳng, khô ráo trước khi đặt bếp xông lên trên.\n\n📍 Cam kết:\n- Hàng đúng mô tả, đóng gói chống sốc kỹ khi vận chuyển.\n- Hỗ trợ đổi trả nếu sản phẩm bị bể vỡ do quá trình vận chuyển.","usage":"HƯỚNG DẪN SỬ DỤNG DĨA LÓT BẾP XÔNG\n\n✔ Cách dùng:\nĐặt dĩa lót trên mặt bàn phẳng, sau đó đặt bếp xông thảo mộc, bếp xông bồ kết hoặc phụ kiện xông lên giữa dĩa.\n\n✔ Khi dùng với nến:\nĐặt nến tealight vào đúng vị trí của bếp xông. Dĩa lót bên dưới giúp hứng tàn, sáp hoặc vụn thảo mộc nếu có rơi xuống.\n\n✔ Vệ sinh:\nSau khi bếp nguội hoàn toàn, lau dĩa bằng khăn khô hoặc khăn ẩm nhẹ. Không ngâm nước quá lâu để giữ độ bền của đất nung.\n\n✔ Bảo quản:\nĐể nơi khô thoáng, tránh va đập mạnh. Khi không dùng, có thể đặt chung với bộ bếp xông để giữ trọn bộ gọn gàng.","tag":"Sale","weight":200,"hidden":false,"optionGroups":[],"optionImages":{},"images":["/assets/products/mirrored/d3e9edf3.webp"],"reviews":[],"variants":[],"slug":"dia-lot-bep-xong-dat-nung-cach-nhiet-giu-sach-mat-ban"};
+  const variants = [];
+  const form = document.querySelector('[data-buy-box]');
+  if (!form) return;
+  const select = form.querySelector('[data-variant-select]');
+  const qtyInput = form.querySelector('[data-buy-qty]');
+  const priceEl = form.querySelector('[data-buy-price]');
+  const originalEl = form.querySelector('[data-buy-original]');
+  const statusEl = form.querySelector('[data-buy-status]');
+  const money = (value) => Number(value || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  const getVariant = () => variants.find((variant) => variant.id === select?.value) || variants[0] || null;
+  const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
+  const buildItem = (variant) => {
+    if (!variant) return { ...product, cartKey: String(product.id) };
+    return {
+      ...product,
+      sku: variant.sku || product.sku,
+      price: Number(variant.price) || Number(product.price) || 0,
+      originalPrice: variant.originalPrice || product.originalPrice || null,
+      weight: variant.weight || product.weight || null,
+      selectedVariant: {
+        id: variant.id,
+        name: variant.name,
+        image: variant.image || '',
+      },
+      cartKey: product.id + '__' + variant.id,
+    };
+  };
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const writeCart = (cart) => localStorage.setItem('phuonglam-cart', JSON.stringify(cart));
+  const updatePrice = () => {
+    const variant = getVariant();
+    const price = variant ? variant.price : product.price;
+    const original = variant ? variant.originalPrice : product.originalPrice;
+    if (priceEl) priceEl.firstChild.textContent = money(price);
+    if (originalEl) {
+      originalEl.textContent = original ? money(original) : '';
+      originalEl.hidden = !original;
+    }
+  };
+  select?.addEventListener('change', updatePrice);
+  updatePrice();
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const qty = Math.max(1, parseInt(qtyInput?.value || '1', 10) || 1);
+    const item = buildItem(getVariant());
+    const key = keyOf(item);
+    const cart = readCart();
+    const existing = cart.find((cartItem) => keyOf(cartItem) === key);
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + qty;
+    } else {
+      cart.push({ ...item, qty });
+    }
+    writeCart(cart);
+    if (statusEl) statusEl.textContent = 'Đã thêm vào giỏ hàng.';
+  });
+})();
+</script>
 </body>
 </html>
