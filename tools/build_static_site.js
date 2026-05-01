@@ -450,6 +450,18 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .card-title { font-weight: 800; line-height: 1.4; margin: 0 0 8px; font-size: 15px; }
 .card-price { color: var(--seo-primary); font-weight: 900; }
 .category-intro { max-width: 780px; color: var(--seo-muted); font-size: 17px; }
+.blog-hero { border-radius: 24px; padding: 42px 34px; background: linear-gradient(135deg,#2e7d32,#43a047); color: #fff; text-align: center; margin-bottom: 28px; }
+.blog-hero h1 { color: #fff; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin-bottom: 12px; }
+.blog-hero p { max-width: 680px; margin: 0 auto; opacity: .9; font-size: 16px; line-height: 1.65; }
+.blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.blog-card { display: block; overflow: hidden; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; color: inherit; text-decoration: none; box-shadow: 0 2px 12px rgba(22, 63, 22, .06); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.blog-card:hover { transform: translateY(-6px); border-color: rgba(49, 130, 35, .32); box-shadow: 0 18px 34px rgba(22, 63, 22, .14); }
+.blog-card img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--seo-bg); }
+.blog-card-body { padding: 18px 18px 20px; }
+.blog-tag { display: inline-flex; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px; background: #eaf5e7; color: var(--seo-primary); font-size: 11px; font-weight: 900; text-transform: uppercase; }
+.blog-card-title { margin: 0 0 10px; font-size: 16px; line-height: 1.45; font-weight: 900; }
+.blog-excerpt { margin: 0 0 14px; color: var(--seo-muted); font-size: 13px; line-height: 1.65; }
+.blog-meta { display: flex; justify-content: space-between; gap: 12px; color: #8a968a; font-size: 12px; font-weight: 700; }
 @media (max-width: 820px) {
   .seo-header-inner { min-height: 104px; padding: 0 18px; gap: 12px; }
   .seo-logo img { height: 96px; transform: translateY(-8px); }
@@ -481,6 +493,8 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .qty-stepper { grid-template-columns: 40px 56px 40px; height: 40px; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .blog-hero { padding: 30px 18px; border-radius: 18px; }
+  .blog-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .seo-footer { align-items: flex-start; flex-direction: column; margin-top: 34px; }
 }
 `;
@@ -555,7 +569,7 @@ const pageShell = ({ title, description, canonical, image, schema, body, scripts
       <a href="/danh-muc/thao-moc-xong/">Thảo Mộc Xông</a>
       <a href="/danh-muc/bep-xong/">Đèn Xông Tinh Dầu</a>
       <a href="/danh-muc/phu-kien/">Phụ Kiện Xông</a>
-      <a href="/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/">Hướng Dẫn</a>
+      <a href="/blog/">Hướng Dẫn</a>
     </nav>
     <div class="seo-actions">
       <a class="seo-icon-link" href="/?search=open" aria-label="Tìm kiếm">
@@ -637,6 +651,21 @@ const categorySchema = ({ categoryName, categoryUrl }) => ({
       '@type': 'CollectionPage',
       name: categoryName,
       url: categoryUrl,
+    },
+  ],
+});
+
+const blogIndexSchema = () => ({
+  '@context': 'https://schema.org',
+  '@graph': [
+    breadcrumbSchema([
+      { name: 'Trang chủ', url: siteUrl },
+      { name: 'Hướng Dẫn & Kiến Thức', url: `${siteUrl}/blog/` },
+    ]),
+    {
+      '@type': 'CollectionPage',
+      name: 'Hướng Dẫn & Kiến Thức',
+      url: `${siteUrl}/blog/`,
     },
   ],
 });
@@ -1130,10 +1159,51 @@ const renderCategoryPage = ({ categoryId, categoryName, products, categories }) 
   });
 };
 
-const writeSeoPages = ({ products, categories }) => {
+const renderBlogIndexPage = ({ blogPosts = [] }) => {
+  const description = 'Hướng dẫn và kiến thức từ Phương Lâm về nến tealight, bếp xông, thảo mộc xông nhà và cách chăm sóc không gian sống tự nhiên.';
+  const posts = blogPosts.filter((post) => post.url).slice(0, 24);
+  const cards = posts.map((post, index) => {
+    const image = post.image || '';
+    const imagePriority = index < 3 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
+    return `<a class="blog-card" href="${escapeHtml(post.url)}">
+      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 100vw, 360px')} alt="${escapeHtml(post.title)}"${imagePriority} />` : ''}
+      <div class="blog-card-body">
+        <span class="blog-tag">${escapeHtml(post.tag || 'Bài viết')}</span>
+        <h2 class="blog-card-title">${escapeHtml(post.title)}</h2>
+        <p class="blog-excerpt">${escapeHtml(post.excerpt || '')}</p>
+        <div class="blog-meta">
+          <span>${escapeHtml(post.date || '')}</span>
+          <span>${escapeHtml(post.readTime || '')}</span>
+        </div>
+      </div>
+    </a>`;
+  }).join('\n');
+
+  const body = `<main class="seo-main">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Trang chủ</a> / Hướng Dẫn</nav>
+    <section class="blog-hero">
+      <h1>Hướng Dẫn &amp; Kiến Thức</h1>
+      <p>${escapeHtml(description)}</p>
+    </section>
+    <section class="blog-grid" aria-label="Danh sách bài viết">${cards}</section>
+  </main>`;
+
+  return pageShell({
+    title: 'Hướng Dẫn & Kiến Thức | Phương Lâm',
+    description,
+    canonical: `${siteUrl}/blog/`,
+    image: posts[0]?.image || '/assets/media/generated/embedded-001.png',
+    schema: blogIndexSchema(),
+    body,
+  });
+};
+
+const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
   resetDir(paths.productPagesDir);
   resetDir(paths.categoryPagesDir);
   writeStaticCss();
+  ensureDir(path.join(root, 'blog'));
+  fs.writeFileSync(path.join(root, 'blog', 'index.html'), renderBlogIndexPage({ blogPosts }));
   const categoryNameById = new Map(categories.map((category) => [category.id, category.name]));
   for (const [id, name] of Object.entries(categoryFallback)) {
     if (!categoryNameById.has(id)) categoryNameById.set(id, name);
@@ -1179,7 +1249,7 @@ const writeSeoPages = ({ products, categories }) => {
 };
 
 const writeSitemapAndRobots = ({ products, blogPosts = [] }) => {
-  const urls = new Set([`${siteUrl}/`]);
+  const urls = new Set([`${siteUrl}/`, `${siteUrl}/blog/`]);
   const categoryIds = new Set();
   for (const product of products) {
     urls.add(`${siteUrl}/san-pham/${product.slug}/`);
@@ -1422,7 +1492,7 @@ const main = () => {
   compileAppJs();
   optimizeIndexRuntime();
   bustIndexCache();
-  writeSeoPages({ products, categories: initialData.categories });
+  writeSeoPages({ products, categories: initialData.categories, blogPosts: initialData.blogPosts });
   writeSitemapAndRobots({ products, blogPosts: initialData.blogPosts });
   console.log(`Optimized index, extracted assets, and generated ${products.length} product pages.`);
 };
