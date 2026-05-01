@@ -370,8 +370,16 @@ a { color: inherit; }
 .static-toast { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 14px); z-index: 30; background: #15331a; color: #fff; border-radius: 999px; padding: 12px 18px; box-shadow: 0 14px 34px rgba(0,0,0,.18); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; font-weight: 800; font-size: 14px; }
 .static-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
 .seo-main { width: 100%; max-width: 1120px; margin: 0 auto; padding: 20px; overflow-x: hidden; }
+.category-main { max-width: 1320px; }
 .breadcrumb { font-size: 13px; color: var(--seo-muted); margin: 0 0 18px; overflow-wrap: anywhere; }
 .breadcrumb a { color: var(--seo-muted); text-decoration: none; }
+.category-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 26px; }
+.category-sidebar { position: sticky; top: 148px; display: grid; gap: 8px; padding: 14px; border: 1px solid var(--seo-border); border-radius: 14px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .06); }
+.category-sidebar-title { margin: 0 0 4px; color: var(--seo-text); font-size: 14px; font-weight: 900; text-transform: uppercase; }
+.category-side-link { display: block; padding: 10px 12px; border-radius: 9px; color: #4d5d4d; text-decoration: none; font-size: 14px; font-weight: 800; transition: background .16s ease, color .16s ease, transform .16s ease; }
+.category-side-link:hover { background: #f0f8ed; color: var(--seo-primary); transform: translateX(2px); }
+.category-side-link.is-active { background: #eaf5e7; color: var(--seo-primary); }
+.category-content { min-width: 0; }
 .product-layout { display: grid; grid-template-columns: minmax(280px, 480px) minmax(0, 1fr); gap: 40px; align-items: start; min-width: 0; }
 .product-gallery { display: grid; gap: 12px; min-width: 0; }
 .product-image { width: 100%; border-radius: 18px; border: 1px solid var(--seo-border); background: var(--seo-bg); aspect-ratio: 1 / 1; object-fit: cover; }
@@ -431,6 +439,12 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .buy-status { min-height: 22px; color: var(--seo-primary); font-weight: 800; font-size: 14px; }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 24px; }
 .card { border: 1px solid var(--seo-border); border-radius: 14px; overflow: hidden; background: #fff; text-decoration: none; display: block; }
+.category-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; margin-top: 0; }
+.category-grid .card { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; will-change: transform; }
+.category-grid .card:hover { transform: translateY(-7px); border-color: rgba(49, 130, 35, .32); box-shadow: 0 18px 34px rgba(22, 63, 22, .16); }
+.category-grid .card-body { padding: 12px; }
+.category-grid .card-title { font-size: 13px; line-height: 1.35; }
+.category-grid .card-price { font-size: 15px; }
 .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; background: var(--seo-bg); display: block; }
 .card-body { padding: 14px; }
 .card-title { font-weight: 800; line-height: 1.4; margin: 0 0 8px; font-size: 15px; }
@@ -446,6 +460,11 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .seo-actions { gap: 4px; }
   .seo-icon-link, .seo-cart, .seo-menu-btn { width: 38px; height: 38px; }
   .seo-main { padding: 16px; }
+  .category-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .category-sidebar { position: static; display: flex; gap: 8px; overflow-x: auto; padding: 10px; scrollbar-width: none; }
+  .category-sidebar::-webkit-scrollbar { display: none; }
+  .category-sidebar-title { flex: 0 0 auto; align-self: center; margin: 0 4px 0 0; white-space: nowrap; }
+  .category-side-link { flex: 0 0 auto; white-space: nowrap; }
   .product-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .product-thumbs-wrap { padding: 0 22px; }
   .product-thumbs { gap: 8px; }
@@ -461,6 +480,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .buy-options, .buy-row, .qty-row { grid-template-columns: 1fr; }
   .qty-stepper { grid-template-columns: 40px 56px 40px; height: 40px; }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .seo-footer { align-items: flex-start; flex-direction: column; margin-top: 34px; }
 }
 `;
@@ -1066,9 +1086,10 @@ const renderProductPage = ({ product, categoryName }) => {
   });
 };
 
-const renderCategoryPage = ({ categoryId, categoryName, products }) => {
+const renderCategoryPage = ({ categoryId, categoryName, products, categories }) => {
   const categoryUrl = `${siteUrl}/danh-muc/${categoryId}/`;
   const description = `${categoryName} Phương Lâm: sản phẩm chọn lọc, phù hợp cho thư giãn, xông hương và chăm sóc không gian sống tự nhiên.`;
+  const categoryLinks = categories.map((category) => `<a class="category-side-link${category.id === categoryId ? ' is-active' : ''}" href="/danh-muc/${escapeHtml(category.id)}/">${escapeHtml(category.name)}</a>`).join('\n        ');
   const cards = products.map((product, index) => {
     const image = firstImage(product);
     const priceInfo = getStaticPriceInfo(product);
@@ -1076,7 +1097,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products }) => {
       ? ' loading="eager" fetchpriority="high"'
       : ' loading="lazy"';
     return `<a class="card" href="/san-pham/${escapeHtml(product.slug)}/">
-      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 260px')} alt="${escapeHtml(product.name)}"${imagePriority} />` : ''}
+      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 210px')} alt="${escapeHtml(product.name)}"${imagePriority} />` : ''}
       <div class="card-body">
         <p class="card-title">${escapeHtml(product.name)}</p>
         <div class="card-price">${formatVnd(priceInfo.price)}</div>
@@ -1084,11 +1105,19 @@ const renderCategoryPage = ({ categoryId, categoryName, products }) => {
     </a>`;
   }).join('\n');
 
-  const body = `<main class="seo-main">
+  const body = `<main class="seo-main category-main">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Trang chủ</a> / ${escapeHtml(categoryName)}</nav>
     <h1>${escapeHtml(categoryName)} Phương Lâm</h1>
     <p class="category-intro">${escapeHtml(description)}</p>
-    <section class="grid" aria-label="Danh sách sản phẩm">${cards}</section>
+    <div class="category-layout">
+      <aside class="category-sidebar" aria-label="Danh mục sản phẩm">
+        <p class="category-sidebar-title">Danh mục</p>
+        ${categoryLinks}
+      </aside>
+      <section class="category-content">
+        <div class="grid category-grid" aria-label="Danh sách sản phẩm">${cards}</div>
+      </section>
+    </div>
   </main>`;
 
   return pageShell({
@@ -1130,6 +1159,10 @@ const writeSeoPages = ({ products, categories }) => {
     byCategory.set(product.categoryId, list);
   }
 
+  const visibleCategories = [...categoryNameById.entries()]
+    .filter(([id]) => byCategory.has(id))
+    .map(([id, name]) => ({ id, name }));
+
   for (const [categoryId, list] of byCategory.entries()) {
     const dir = path.join(paths.categoryPagesDir, categoryId);
     ensureDir(dir);
@@ -1139,6 +1172,7 @@ const writeSeoPages = ({ products, categories }) => {
         categoryId,
         categoryName: categoryNameById.get(categoryId) || categoryId,
         products: list,
+        categories: visibleCategories,
       })
     );
   }
