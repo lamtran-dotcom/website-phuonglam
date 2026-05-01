@@ -1045,7 +1045,6 @@ const renderProductPage = ({ product, categoryName }) => {
         <div class="price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price">${formatVnd(priceInfo.originalPrice)}</span>` : ''}</div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
-          <div><strong>Mã sản phẩm:</strong> ${escapeHtml(product.sku || String(product.id))}</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         ${renderStaticBuyBox(product)}
