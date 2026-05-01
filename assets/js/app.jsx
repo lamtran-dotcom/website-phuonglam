@@ -592,7 +592,7 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
       <div style={{ ...pcStyles.info, ...(compact ? pcStyles.infoCompact : {}) }}>
         <a href={href} title={product.name} style={{ ...pcStyles.name, ...(compact ? pcStyles.nameCompact : {}) }} onClick={handleProductLinkFallback}>{displayName}</a>
         <div style={{ ...pcStyles.priceRow, ...(compact ? pcStyles.priceRowCompact : {}) }}>
-          <span style={{ ...pcStyles.price, ...(compact ? pcStyles.priceCompact : {}) }}>{priceInfo.hasVariants ? 'Từ ' : ''}{priceInfo.price.toLocaleString('vi-VN')}đ</span>
+          <span style={{ ...pcStyles.price, ...(compact ? pcStyles.priceCompact : {}) }}>{priceInfo.price.toLocaleString('vi-VN')}đ</span>
           {priceInfo.originalPrice && (
             <span style={{ ...pcStyles.origPrice, ...(compact ? pcStyles.origPriceCompact : {}) }}>{priceInfo.originalPrice.toLocaleString('vi-VN')}đ</span>
           )}
@@ -2955,7 +2955,7 @@ const ProductEditor = ({ productOverrides, setProductOverrides, productImages, s
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontSize: 13, fontWeight: isSelected ? 700 : 600, color: '#1a1a1a', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
-                  <div style={{ fontSize: 12, color: '#318223', fontWeight: 600 }}>{priceInfo.hasVariants ? 'Từ ' : ''}{priceInfo.price.toLocaleString('vi-VN')}đ</div>
+                  <div style={{ fontSize: 12, color: '#318223', fontWeight: 600 }}>{priceInfo.price.toLocaleString('vi-VN')}đ</div>
                 </div>
                 {hidden && <span style={{ fontSize: 10, background: '#999', color: '#fff', padding: '2px 6px', borderRadius: 10, flexShrink: 0 }}>Ẩn</span>}
                 {hasChanges && <span style={{ fontSize: 10, background: '#318223', color: '#fff', padding: '2px 6px', borderRadius: 10, flexShrink: 0 }}>✓</span>}
@@ -3585,7 +3585,7 @@ const FeaturedEditor = ({ featuredIds, setFeaturedIds, productImages }) => {
               </div>
               <div style={{ padding: '10px 12px' }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: '#1a1a1a', marginBottom: 2, lineHeight: 1.4 }}>{p.name}</div>
-                <div style={{ fontSize: 11, color: '#888' }}>{p.sku || ''} · {priceInfo.hasVariants ? 'Từ ' : ''}{priceInfo.price.toLocaleString('vi-VN')}đ</div>
+                <div style={{ fontSize: 11, color: '#888' }}>{p.sku || ''} · {priceInfo.price.toLocaleString('vi-VN')}đ</div>
               </div>
             </div>
           );

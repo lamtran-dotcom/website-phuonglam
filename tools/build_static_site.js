@@ -1042,7 +1042,7 @@ const renderProductPage = ({ product, categoryName }) => {
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
         <h1>${escapeHtml(product.name)}</h1>
         <p class="summary">${escapeHtml(product.shortDesc || '')}</p>
-        <div class="price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price">${formatVnd(priceInfo.originalPrice)}</span>` : ''}</div>
+        <div class="price">${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price">${formatVnd(priceInfo.originalPrice)}</span>` : ''}</div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
@@ -1081,7 +1081,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products }) => {
       ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 260px')} alt="${escapeHtml(product.name)}"${imagePriority} />` : ''}
       <div class="card-body">
         <p class="card-title">${escapeHtml(product.name)}</p>
-        <div class="card-price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}</div>
+        <div class="card-price">${formatVnd(priceInfo.price)}</div>
       </div>
     </a>`;
   }).join('\n');
