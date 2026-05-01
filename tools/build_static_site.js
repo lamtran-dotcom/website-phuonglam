@@ -404,7 +404,9 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .variant-label { color: #657265; font-size: 13px; font-weight: 800; padding-top: 12px; }
 .variant-group-stacked .variant-label { padding-top: 0; }
 .variant-options { display: flex; flex-wrap: wrap; gap: 9px; min-width: 0; }
+.variant-group-stacked .variant-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
 .variant-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; max-width: 100%; padding: 7px 12px; border: 1.5px solid #d8e0d3; border-radius: 5px; background: #fff; color: var(--seo-text); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .15s ease, background .15s ease, color .15s ease, opacity .15s ease; }
+.variant-group-stacked .variant-pill { width: 100%; }
 .variant-pill:hover { border-color: var(--seo-primary); color: var(--seo-primary); }
 .variant-pill.is-active { border-color: var(--seo-primary); background: #f0f8ed; color: var(--seo-primary); font-weight: 900; }
 .variant-pill.is-active::after { content: ""; position: absolute; right: 0; bottom: 0; width: 0; height: 0; border-style: solid; border-width: 0 0 14px 14px; border-color: transparent transparent var(--seo-primary) transparent; }
@@ -451,6 +453,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   h1 { font-size: 28px; line-height: 1.15; }
   .product-layout h1 { font-size: 18px; line-height: 1.36; }
   .variant-group { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .variant-group-stacked .variant-options { grid-template-columns: minmax(0, 1fr); }
   .variant-label { padding-top: 0; }
   .variant-pill { min-height: 40px; padding: 6px 11px; font-size: 13px; }
   .variant-pill-thumb { width: 24px; height: 24px; }
