@@ -392,6 +392,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .price { color: var(--seo-primary); font-size: 30px; font-weight: 900; margin: 18px 0; }
 .original-price { color: #9aa49a; text-decoration: line-through; font-size: 18px; margin-left: 10px; }
 .summary, .content { color: #334833; font-size: 17px; overflow-wrap: anywhere; }
+.summary-box { line-height: 1.6; }
 .content p { margin: 0 0 14px; }
 .meta-list { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 14px; background: var(--seo-bg); margin: 22px 0; }
 .cta { display: inline-flex; align-items: center; justify-content: center; background: var(--seo-primary); color: #fff; text-decoration: none; border-radius: 10px; padding: 14px 20px; font-weight: 800; margin-top: 10px; }
@@ -765,6 +766,10 @@ const renderStaticBuyBox = (product) => {
         </button>
         <button class="buy-now-btn" type="button" data-buy-now>Mua Ngay</button>
       </div>
+      <div class="meta-list">
+        <div><strong>Zalo:</strong> 0773829593</div>
+        <div><strong>Tình trạng:</strong> Còn hàng</div>
+      </div>
     </div>
     <div class="buy-status" data-buy-status aria-live="polite"></div>
   </form>`;
@@ -1038,12 +1043,8 @@ const renderProductPage = ({ product, categoryName }) => {
       <div>
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
         <h1>${escapeHtml(product.name)}</h1>
-        <p class="summary">${escapeHtml(product.shortDesc || '')}</p>
         <div class="price" data-buy-price>${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price" data-buy-original>${formatVnd(priceInfo.originalPrice)}</span>` : '<span class="original-price" data-buy-original hidden></span>'}</div>
-        <div class="meta-list">
-          <div><strong>Zalo:</strong> 0773829593</div>
-          <div><strong>Tình trạng:</strong> Còn hàng</div>
-        </div>
+        ${product.shortDesc ? `<div class="meta-list summary-box">${escapeHtml(product.shortDesc)}</div>` : ''}
         ${renderStaticBuyBox(product)}
       </div>
     </article>
