@@ -10,7 +10,7 @@
   <meta property="og:title" content="Nụ trầm hương tự nhiên xông nhà thiền định thơm dịu | Phương Lâm" />
   <meta property="og:description" content="Nụ trầm hương tự nhiên, mùi thơm nhẹ nhàng, giúp thư giãn tinh thần, giảm stress và thanh lọc không gian sống. Phù hợp dùng khi thiền, yoga, làm việc…" />
   <meta property="og:image" content="https://phuonglam.com/assets/products/mirrored/bf9f8e4c.webp" />
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615513540" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615710947" />
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -144,13 +144,12 @@
         <p class="product-kicker">Nụ Trầm</p>
         <h1>Nụ trầm hương tự nhiên xông nhà thiền định thơm dịu</h1>
         <p class="summary">Nụ trầm hương tự nhiên, mùi thơm nhẹ nhàng, giúp thư giãn tinh thần, giảm stress và thanh lọc không gian sống. Phù hợp dùng khi thiền, yoga, làm việc hoặc tiếp khách</p>
-        <div class="price">168.000 ₫<span class="original-price">350.000 ₫</span></div>
+        <div class="price" data-buy-price>168.000 ₫<span class="original-price" data-buy-original>350.000 ₫</span></div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         <form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>168.000 ₫<span class="buy-original" data-buy-original>350.000 ₫</span></div>
     <div class="variant-group">
       <div class="variant-label">Phân loại</div>
       <div class="variant-options" data-variant-pills>
@@ -266,8 +265,8 @@
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];

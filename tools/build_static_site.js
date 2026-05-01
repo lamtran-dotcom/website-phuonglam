@@ -396,8 +396,6 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .meta-list { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 14px; background: var(--seo-bg); margin: 22px 0; }
 .cta { display: inline-flex; align-items: center; justify-content: center; background: var(--seo-primary); color: #fff; text-decoration: none; border-radius: 10px; padding: 14px 20px; font-weight: 800; margin-top: 10px; }
 .buy-box { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .08); margin-top: 18px; }
-.buy-price { color: var(--seo-primary); font-size: 28px; font-weight: 900; line-height: 1.1; }
-.buy-original { color: #9aa49a; text-decoration: line-through; font-size: 16px; font-weight: 600; margin-left: 8px; }
 .buy-options { display: grid; gap: 24px; }
 .buy-label { display: grid; gap: 6px; font-size: 13px; font-weight: 800; color: #334833; }
 .buy-select, .buy-qty { width: 100%; border: 1px solid var(--seo-border); border-radius: 10px; padding: 12px 13px; font: inherit; background: #fff; color: var(--seo-text); }
@@ -718,11 +716,6 @@ const bakeProductsIntoApp = (products) => {
 const renderStaticBuyBox = (product) => {
   const variants = normalizeProductVariants(product);
   const optionGroups = getStaticOptionGroups(product, variants);
-  const cheapestVariant = variants.length
-    ? variants.reduce((best, variant) => (variant.price < best.price ? variant : best), variants[0])
-    : null;
-  const price = cheapestVariant ? cheapestVariant.price : Number(product.price || 0);
-  const originalPrice = cheapestVariant ? cheapestVariant.originalPrice : product.originalPrice;
   const optionFields = optionGroups.length ? `<div class="buy-options">
       ${optionGroups.map((group, index) => `<div class="variant-group">
         <div class="variant-label">${escapeHtml(group.name)}</div>
@@ -748,7 +741,6 @@ const renderStaticBuyBox = (product) => {
     ` : '';
 
   return `<form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>${formatVnd(price)}${originalPrice ? `<span class="buy-original" data-buy-original>${formatVnd(originalPrice)}</span>` : '<span class="buy-original" data-buy-original hidden></span>'}</div>
     ${optionFields}${variantField}<div class="buy-purchase" data-purchase-panel hidden>
       <div class="qty-row">
         <div class="qty-label">Số lượng</div>
@@ -799,8 +791,8 @@ const renderStaticBuyScript = (product) => {
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];
@@ -1042,7 +1034,7 @@ const renderProductPage = ({ product, categoryName }) => {
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
         <h1>${escapeHtml(product.name)}</h1>
         <p class="summary">${escapeHtml(product.shortDesc || '')}</p>
-        <div class="price">${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price">${formatVnd(priceInfo.originalPrice)}</span>` : ''}</div>
+        <div class="price" data-buy-price>${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price" data-buy-original>${formatVnd(priceInfo.originalPrice)}</span>` : '<span class="original-price" data-buy-original hidden></span>'}</div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>

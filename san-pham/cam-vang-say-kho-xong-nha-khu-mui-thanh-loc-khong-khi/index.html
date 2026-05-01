@@ -10,7 +10,7 @@
   <meta property="og:title" content="Cam vàng sấy khô xông nhà khử mùi thanh lọc không khí | Phương Lâm" />
   <meta property="og:description" content="Trong cam lát sấy khô rất giàu vitamin C, canxi, chất xơ và nhiều loại chất dinh dưỡng khác, đặc biệt tinh dầu vỏ cam rất tốt cho da, có thể giảm m.ụn,…" />
   <meta property="og:image" content="https://phuonglam.com/assets/products/mirrored/1dfab21e.webp" />
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615513540" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615710947" />
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -141,13 +141,12 @@
         <p class="product-kicker">Thảo Mộc Xông</p>
         <h1>Cam vàng sấy khô xông nhà khử mùi thanh lọc không khí</h1>
         <p class="summary">Trong cam lát sấy khô rất giàu vitamin C, canxi, chất xơ và nhiều loại chất dinh dưỡng khác, đặc biệt tinh dầu vỏ cam rất tốt cho da, có thể giảm m.ụn, giúp làm căng mịn da</p>
-        <div class="price">14.100 ₫</div>
+        <div class="price" data-buy-price>14.100 ₫<span class="original-price" data-buy-original hidden></span></div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         <form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>14.100 ₫<span class="buy-original" data-buy-original hidden></span></div>
     <div class="variant-group">
       <div class="variant-label">Phân loại</div>
       <div class="variant-options" data-variant-pills>
@@ -269,8 +268,8 @@
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];

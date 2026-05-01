@@ -10,7 +10,7 @@
   <meta property="og:title" content="Dĩa lót bếp xông đất nung cách nhiệt giữ sạch mặt bàn | Phương Lâm" />
   <meta property="og:description" content="Dĩa lót đất nung tự nhiên dùng cho bếp xông thảo mộc, bồ kết và nến tealight. Giúp cách nhiệt, giữ vệ sinh mặt bàn và hoàn thiện bộ bếp xông mộc mạc." />
   <meta property="og:image" content="https://phuonglam.com/assets/products/mirrored/d3e9edf3.webp" />
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615513540" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615710947" />
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -108,13 +108,12 @@
         <p class="product-kicker">Phụ Kiện Xông</p>
         <h1>Dĩa lót bếp xông đất nung cách nhiệt giữ sạch mặt bàn</h1>
         <p class="summary">Dĩa lót đất nung tự nhiên dùng cho bếp xông thảo mộc, bồ kết và nến tealight. Giúp cách nhiệt, giữ vệ sinh mặt bàn và hoàn thiện bộ bếp xông mộc mạc.</p>
-        <div class="price">25.000 ₫<span class="original-price">30.000 ₫</span></div>
+        <div class="price" data-buy-price>25.000 ₫<span class="original-price" data-buy-original>30.000 ₫</span></div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         <form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>25.000 ₫<span class="buy-original" data-buy-original>30.000 ₫</span></div>
     <div class="buy-purchase" data-purchase-panel hidden>
       <div class="qty-row">
         <div class="qty-label">Số lượng</div>
@@ -213,8 +212,8 @@
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];

@@ -10,7 +10,7 @@
   <meta property="og:title" content="Nến ly 72h nơ lớn thờ cúng không khói Phương Lâm | Phương Lâm" />
   <meta property="og:description" content="Nến ly thờ cúng, đốt rằm, tết niên, khai trương" />
   <meta property="og:image" content="https://phuonglam.com/assets/products/mirrored/eeb163d3.webp" />
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615513540" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615710947" />
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -141,13 +141,12 @@
         <p class="product-kicker">Nến Ly</p>
         <h1>Nến ly 72h nơ lớn thờ cúng không khói Phương Lâm</h1>
         <p class="summary">Nến ly thờ cúng, đốt rằm, tết niên, khai trương</p>
-        <div class="price">175.000 ₫<span class="original-price">195.000 ₫</span></div>
+        <div class="price" data-buy-price>175.000 ₫<span class="original-price" data-buy-original>195.000 ₫</span></div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         <form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>175.000 ₫<span class="buy-original" data-buy-original>195.000 ₫</span></div>
     <div class="variant-group">
       <div class="variant-label">Phân loại</div>
       <div class="variant-options" data-variant-pills>
@@ -265,8 +264,8 @@
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];

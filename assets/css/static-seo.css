@@ -58,8 +58,6 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .meta-list { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 14px; background: var(--seo-bg); margin: 22px 0; }
 .cta { display: inline-flex; align-items: center; justify-content: center; background: var(--seo-primary); color: #fff; text-decoration: none; border-radius: 10px; padding: 14px 20px; font-weight: 800; margin-top: 10px; }
 .buy-box { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .08); margin-top: 18px; }
-.buy-price { color: var(--seo-primary); font-size: 28px; font-weight: 900; line-height: 1.1; }
-.buy-original { color: #9aa49a; text-decoration: line-through; font-size: 16px; font-weight: 600; margin-left: 8px; }
 .buy-options { display: grid; gap: 24px; }
 .buy-label { display: grid; gap: 6px; font-size: 13px; font-weight: 800; color: #334833; }
 .buy-select, .buy-qty { width: 100%; border: 1px solid var(--seo-border); border-radius: 10px; padding: 12px 13px; font: inherit; background: #fff; color: var(--seo-text); }

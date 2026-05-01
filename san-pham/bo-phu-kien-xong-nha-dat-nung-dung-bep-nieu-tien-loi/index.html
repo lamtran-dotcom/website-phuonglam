@@ -10,7 +10,7 @@
   <meta property="og:title" content="Bộ phụ kiện xông nhà đất nung dùng bếp niêu tiện lợi | Phương Lâm" />
   <meta property="og:description" content="Chất liệu: Gốm đất nung tự nhiên, giữ nhiệt tốt và chịu nhiệt bền bỉ" />
   <meta property="og:image" content="https://phuonglam.com/assets/products/mirrored/72eecef5.webp" />
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615513540" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615710947" />
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -126,13 +126,12 @@
         <p class="product-kicker">Phụ Kiện Xông</p>
         <h1>Bộ phụ kiện xông nhà đất nung dùng bếp niêu tiện lợi</h1>
         <p class="summary">Chất liệu: Gốm đất nung tự nhiên, giữ nhiệt tốt và chịu nhiệt bền bỉ</p>
-        <div class="price">20.000 ₫<span class="original-price">34.000 ₫</span></div>
+        <div class="price" data-buy-price>20.000 ₫<span class="original-price" data-buy-original>34.000 ₫</span></div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         <form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>20.000 ₫<span class="buy-original" data-buy-original>34.000 ₫</span></div>
     <div class="variant-group">
       <div class="variant-label">Phân loại</div>
       <div class="variant-options" data-variant-pills>
@@ -251,8 +250,8 @@
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];

@@ -10,7 +10,7 @@
   <meta property="og:title" content="Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp | Phương Lâm" />
   <meta property="og:description" content="BIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC." />
   <meta property="og:image" content="https://phuonglam.com/assets/products/mirrored/5a254a10.webp" />
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615513540" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=1777615710947" />
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -153,13 +153,12 @@
         <p class="product-kicker">Đèn Xông Tinh Dầu</p>
         <h1>Tinh dầu thơm phòng khách sạn khử mùi thư giãn cao cấp</h1>
         <p class="summary">BIẾN NGÔI NHÀ CỦA BẠN THÀNH KHÁCH SẠN 5 SAO CHỈ TRONG TÍCH TẮC.</p>
-        <div class="price">60.000 ₫</div>
+        <div class="price" data-buy-price>60.000 ₫<span class="original-price" data-buy-original hidden></span></div>
         <div class="meta-list">
           <div><strong>Zalo:</strong> 0773829593</div>
           <div><strong>Tình trạng:</strong> Còn hàng</div>
         </div>
         <form class="buy-box" data-buy-box>
-    <div class="buy-price" data-buy-price>60.000 ₫<span class="buy-original" data-buy-original hidden></span></div>
     <div class="variant-group">
       <div class="variant-label">Phân loại</div>
       <div class="variant-options" data-variant-pills>
@@ -295,8 +294,8 @@
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = form.querySelector('[data-buy-price]');
-  const originalEl = form.querySelector('[data-buy-original]');
+  const priceEl = document.querySelector('[data-buy-price]');
+  const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];
