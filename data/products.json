@@ -1198,7 +1198,7 @@
     "id": "shopee_57653126590",
     "sku": "SP-57653126590",
     "categoryId": "thao-moc-xong",
-    "name": "Quế thanh Yên Bái nấu ăn pha trà thơm đậm tự nhiên",
+    "name": "Quế thanh xuất khẩu Yên Bái nấu ăn pha trà thơm đậm tự nhiên",
     "price": 30000,
     "originalPrice": null,
     "shortDesc": "Quế thanh Yên Bái xuất khẩu, chọn từ quế già cây, thơm nồng ấm và nhiều tinh dầu. Phù hợp nấu phở, bò kho, món hầm, pha trà quế và tạo hương tự nhiên.",
@@ -1220,8 +1220,8 @@
         "id": "shopee_variant_405301400469",
         "name": "100g",
         "sku": "",
-        "price": 55000,
-        "originalPrice": null,
+        "price": 25000,
+        "originalPrice": 70000,
         "weight": 200,
         "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
@@ -1230,8 +1230,8 @@
         "id": "shopee_variant_405301400470",
         "name": "200g",
         "sku": "",
-        "price": 120000,
-        "originalPrice": null,
+        "price": 49000,
+        "originalPrice": 180000,
         "weight": 200,
         "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
@@ -1240,14 +1240,14 @@
         "id": "shopee_variant_405301400468",
         "name": "50g",
         "sku": "",
-        "price": 30000,
-        "originalPrice": null,
+        "price": 18000,
+        "originalPrice": 55000,
         "weight": 200,
         "image": "/assets/products/mirrored/77ad5f9a.webp",
         "options": {}
       }
     ],
-    "slug": "que-thanh-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien"
+    "slug": "que-thanh-xuat-khau-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien"
   },
   {
     "id": "shopee_57058955812",
