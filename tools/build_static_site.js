@@ -408,10 +408,9 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .buy-options { display: grid; gap: 24px; }
 .buy-label { display: grid; gap: 6px; font-size: 13px; font-weight: 800; color: #334833; }
 .buy-select, .buy-qty { width: 100%; border: 1px solid var(--seo-border); border-radius: 10px; padding: 12px 13px; font: inherit; background: #fff; color: var(--seo-text); }
-.variant-group { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 14px; align-items: start; }
+.variant-group { display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px; align-items: start; }
 .variant-group-stacked { grid-template-columns: minmax(0, 1fr); gap: 9px; }
-.variant-label { color: #657265; font-size: 13px; font-weight: 800; padding-top: 12px; }
-.variant-group-stacked .variant-label { padding-top: 0; }
+.variant-label { color: #657265; font-size: 13px; font-weight: 800; padding-top: 0; }
 .variant-options { display: flex; flex-wrap: wrap; gap: 9px; min-width: 0; }
 .variant-group-stacked .variant-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
 .variant-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; max-width: 100%; padding: 7px 12px; border: 1.5px solid #d8e0d3; border-radius: 5px; background: #fff; color: var(--seo-text); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .15s ease, background .15s ease, color .15s ease, opacity .15s ease; }
