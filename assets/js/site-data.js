@@ -2864,7 +2864,7 @@ const PRODUCTS = [
         "id": "shopee_variant_49699073016",
         "name": "ĐÈN TO + ĐẾ TRẮNG",
         "sku": "1",
-        "price": 1150000,
+        "price": 115000,
         "originalPrice": 170000,
         "weight": 400,
         "image": "/assets/products/mirrored/9484b668.webp",
