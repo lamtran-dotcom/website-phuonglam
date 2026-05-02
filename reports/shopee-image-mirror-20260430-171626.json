@@ -1,0 +1,3360 @@
+{
+  "timestamp": "20260430-171626",
+  "products_path": "data/products.json",
+  "total_occurrences": 304,
+  "unique_urls": 217,
+  "processed_urls": 217,
+  "dry_run": false,
+  "success": [
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4s2b805",
+      "local_path": "/assets/products/mirrored/9719b9db.webp",
+      "status": "downloaded",
+      "download_bytes": 850702,
+      "output_bytes": 64862,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4tgvoac",
+      "local_path": "/assets/products/mirrored/db423a79.webp",
+      "status": "downloaded",
+      "download_bytes": 882001,
+      "output_bytes": 64376,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4uvg4fb",
+      "local_path": "/assets/products/mirrored/79fab2eb.webp",
+      "status": "downloaded",
+      "download_bytes": 882001,
+      "output_bytes": 64376,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4wa0k5f",
+      "local_path": "/assets/products/mirrored/746ae758.webp",
+      "status": "downloaded",
+      "download_bytes": 850702,
+      "output_bytes": 64862,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4xol084",
+      "local_path": "/assets/products/mirrored/b0948bfb.webp",
+      "status": "downloaded",
+      "download_bytes": 1105204,
+      "output_bytes": 76774,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc6xygk52",
+      "local_path": "/assets/products/mirrored/f63537e2.webp",
+      "status": "downloaded",
+      "download_bytes": 294674,
+      "output_bytes": 29708,
+      "original_width": 730,
+      "original_height": 730,
+      "output_width": 730,
+      "output_height": 730,
+      "locations": [
+        "products[39].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1nxh70b",
+      "local_path": "/assets/products/mirrored/5623155a.webp",
+      "status": "downloaded",
+      "download_bytes": 123122,
+      "output_bytes": 11330,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[28].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1s56j73",
+      "local_path": "/assets/products/mirrored/130a52de.webp",
+      "status": "downloaded",
+      "download_bytes": 207903,
+      "output_bytes": 15328,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[28].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li015mt276",
+      "local_path": "/assets/products/mirrored/e13db08c.webp",
+      "status": "downloaded",
+      "download_bytes": 998699,
+      "output_bytes": 146906,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[36].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li019uief1",
+      "local_path": "/assets/products/mirrored/2c000660.webp",
+      "status": "downloaded",
+      "download_bytes": 703882,
+      "output_bytes": 51762,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[36].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li01b92ub6",
+      "local_path": "/assets/products/mirrored/fe9a73f4.webp",
+      "status": "downloaded",
+      "download_bytes": 1001978,
+      "output_bytes": 124482,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[36].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8depi56",
+      "local_path": "/assets/products/mirrored/f0a6bad4.webp",
+      "status": "downloaded",
+      "download_bytes": 439461,
+      "output_bytes": 34734,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[34].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8et9yde",
+      "local_path": "/assets/products/mirrored/e2385510.webp",
+      "status": "downloaded",
+      "download_bytes": 621598,
+      "output_bytes": 163618,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[34].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8g7ueaa",
+      "local_path": "/assets/products/mirrored/c0283c16.webp",
+      "status": "downloaded",
+      "download_bytes": 499854,
+      "output_bytes": 73460,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[34].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8j0za58",
+      "local_path": "/assets/products/mirrored/5997c9c1.webp",
+      "status": "downloaded",
+      "download_bytes": 330275,
+      "output_bytes": 82984,
+      "original_width": 750,
+      "original_height": 750,
+      "output_width": 750,
+      "output_height": 750,
+      "locations": [
+        "products[34].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8n8om25",
+      "local_path": "/assets/products/mirrored/ab609af4.webp",
+      "status": "downloaded",
+      "download_bytes": 632052,
+      "output_bytes": 49792,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[36].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8q1tifd",
+      "local_path": "/assets/products/mirrored/c3342352.webp",
+      "status": "downloaded",
+      "download_bytes": 133698,
+      "output_bytes": 21886,
+      "original_width": 612,
+      "original_height": 612,
+      "output_width": 612,
+      "output_height": 612,
+      "locations": [
+        "products[29].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf0clka9",
+      "local_path": "/assets/products/mirrored/6f55232c.webp",
+      "status": "downloaded",
+      "download_bytes": 319074,
+      "output_bytes": 55106,
+      "original_width": 765,
+      "original_height": 765,
+      "output_width": 765,
+      "output_height": 765,
+      "locations": [
+        "products[29].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf1r60ba",
+      "local_path": "/assets/products/mirrored/bcab6ac8.webp",
+      "status": "downloaded",
+      "download_bytes": 1064733,
+      "output_bytes": 169070,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[29].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf35qgb6",
+      "local_path": "/assets/products/mirrored/9552fd48.webp",
+      "status": "downloaded",
+      "download_bytes": 143114,
+      "output_bytes": 16530,
+      "original_width": 550,
+      "original_height": 550,
+      "output_width": 550,
+      "output_height": 550,
+      "locations": [
+        "products[29].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf5yvcbb",
+      "local_path": "/assets/products/mirrored/e44f8417.webp",
+      "status": "downloaded",
+      "download_bytes": 339174,
+      "output_bytes": 36424,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[29].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j13ynce",
+      "local_path": "/assets/products/mirrored/c239e398.webp",
+      "status": "downloaded",
+      "download_bytes": 340882,
+      "output_bytes": 36216,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[27].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j2ij33a",
+      "local_path": "/assets/products/mirrored/4a55cdc0.webp",
+      "status": "downloaded",
+      "download_bytes": 100631,
+      "output_bytes": 18212,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j3x3jb0",
+      "local_path": "/assets/products/mirrored/7297a93b.webp",
+      "status": "downloaded",
+      "download_bytes": 283878,
+      "output_bytes": 34314,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j5bnza4",
+      "local_path": "/assets/products/mirrored/6aa1760c.webp",
+      "status": "downloaded",
+      "download_bytes": 167176,
+      "output_bytes": 35098,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j6q8f64",
+      "local_path": "/assets/products/mirrored/708c79bc.webp",
+      "status": "downloaded",
+      "download_bytes": 145400,
+      "output_bytes": 24458,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j84sv86",
+      "local_path": "/assets/products/mirrored/69f982b6.webp",
+      "status": "downloaded",
+      "download_bytes": 252168,
+      "output_bytes": 36488,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3cfy486",
+      "local_path": "/assets/products/mirrored/a8c2381b.webp",
+      "status": "downloaded",
+      "download_bytes": 433306,
+      "output_bytes": 32464,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[27].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3gnng9b",
+      "local_path": "/assets/products/mirrored/41b03c17.webp",
+      "status": "downloaded",
+      "download_bytes": 100631,
+      "output_bytes": 18212,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].variants[3].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3i27w4c",
+      "local_path": "/assets/products/mirrored/8c2abda8.webp",
+      "status": "downloaded",
+      "download_bytes": 433306,
+      "output_bytes": 32464,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[27].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3jgsc5b",
+      "local_path": "/assets/products/mirrored/95f2a5a8.webp",
+      "status": "downloaded",
+      "download_bytes": 145400,
+      "output_bytes": 24458,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[27].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3kvcsc8",
+      "local_path": "/assets/products/mirrored/2dabb7a9.webp",
+      "status": "downloaded",
+      "download_bytes": 413143,
+      "output_bytes": 45518,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[27].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3m9x848",
+      "local_path": "/assets/products/mirrored/b2fdd4ff.webp",
+      "status": "downloaded",
+      "download_bytes": 365444,
+      "output_bytes": 29806,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[27].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3noho70",
+      "local_path": "/assets/products/mirrored/a5c14901.webp",
+      "status": "downloaded",
+      "download_bytes": 379516,
+      "output_bytes": 33206,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[27].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7ppz24a6",
+      "local_path": "/assets/products/mirrored/d6af1029.webp",
+      "status": "downloaded",
+      "download_bytes": 627358,
+      "output_bytes": 44324,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[33].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7prdmkc1",
+      "local_path": "/assets/products/mirrored/950d8fc2.webp",
+      "status": "downloaded",
+      "download_bytes": 255421,
+      "output_bytes": 22964,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7pss70b0",
+      "local_path": "/assets/products/mirrored/262cd1a5.webp",
+      "status": "downloaded",
+      "download_bytes": 363230,
+      "output_bytes": 46886,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnlfx02cjtb44",
+      "local_path": "/assets/products/mirrored/2712a0ba.webp",
+      "status": "downloaded",
+      "download_bytes": 627358,
+      "output_bytes": 44324,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[33].variants[3].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbr6mn6c",
+      "local_path": "/assets/products/mirrored/eb23643c.webp",
+      "status": "downloaded",
+      "download_bytes": 363230,
+      "output_bytes": 46886,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].variants[5].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbsl73aa",
+      "local_path": "/assets/products/mirrored/9484b668.webp",
+      "status": "downloaded",
+      "download_bytes": 179786,
+      "output_bytes": 19078,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbtzrj42",
+      "local_path": "/assets/products/mirrored/cc48756e.webp",
+      "status": "downloaded",
+      "download_bytes": 255421,
+      "output_bytes": 22964,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-log7xpeen2rb9d",
+      "local_path": "/assets/products/mirrored/87aa2505.webp",
+      "status": "downloaded",
+      "download_bytes": 132373,
+      "output_bytes": 68760,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[31].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgn93qv8f",
+      "local_path": "/assets/products/mirrored/a699a621.webp",
+      "status": "downloaded",
+      "download_bytes": 76563,
+      "output_bytes": 45108,
+      "original_width": 640,
+      "original_height": 640,
+      "output_width": 640,
+      "output_height": 640,
+      "locations": [
+        "products[24].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgnaibb79",
+      "local_path": "/assets/products/mirrored/6ff9d3b7.webp",
+      "status": "downloaded",
+      "download_bytes": 333447,
+      "output_bytes": 163966,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[24].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgnbwvr43",
+      "local_path": "/assets/products/mirrored/0b9ab6cf.webp",
+      "status": "downloaded",
+      "download_bytes": 123013,
+      "output_bytes": 65752,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[24].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgndbg797",
+      "local_path": "/assets/products/mirrored/bd1ab7b1.webp",
+      "status": "downloaded",
+      "download_bytes": 108781,
+      "output_bytes": 56400,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[24].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9ba5rkid7",
+      "local_path": "/assets/products/mirrored/f1b0c979.webp",
+      "status": "downloaded",
+      "download_bytes": 148698,
+      "output_bytes": 47388,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[21].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9bacseqa3",
+      "local_path": "/assets/products/mirrored/aa6a527b.webp",
+      "status": "downloaded",
+      "download_bytes": 130135,
+      "output_bytes": 75488,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[21].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9bah04238",
+      "local_path": "/assets/products/mirrored/814d1390.webp",
+      "status": "downloaded",
+      "download_bytes": 29330,
+      "output_bytes": 27230,
+      "original_width": 510,
+      "original_height": 510,
+      "output_width": 510,
+      "output_height": 510,
+      "locations": [
+        "products[21].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwinp3mb6",
+      "local_path": "/assets/products/mirrored/f5b49596.webp",
+      "status": "downloaded",
+      "download_bytes": 208768,
+      "output_bytes": 69640,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[22].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwip3o2ef",
+      "local_path": "/assets/products/mirrored/de57f0a9.webp",
+      "status": "downloaded",
+      "download_bytes": 405987,
+      "output_bytes": 70898,
+      "original_width": 600,
+      "original_height": 600,
+      "output_width": 600,
+      "output_height": 600,
+      "locations": [
+        "products[22].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwiqi8i60",
+      "local_path": "/assets/products/mirrored/71f07c33.webp",
+      "status": "downloaded",
+      "download_bytes": 219588,
+      "output_bytes": 48338,
+      "original_width": 375,
+      "original_height": 375,
+      "output_width": 375,
+      "output_height": 375,
+      "locations": [
+        "products[22].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnklryc8a",
+      "local_path": "/assets/products/mirrored/c93434a6.webp",
+      "status": "downloaded",
+      "download_bytes": 28298,
+      "output_bytes": 17754,
+      "original_width": 494,
+      "original_height": 494,
+      "output_width": 494,
+      "output_height": 494,
+      "locations": [
+        "products[23].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkn6isf8",
+      "local_path": "/assets/products/mirrored/36417a45.webp",
+      "status": "downloaded",
+      "download_bytes": 104157,
+      "output_bytes": 68028,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[23].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkol38f6",
+      "local_path": "/assets/products/mirrored/bc84809a.webp",
+      "status": "downloaded",
+      "download_bytes": 504697,
+      "output_bytes": 95856,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[23].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lryao6hbktcpbd",
+      "local_path": "/assets/products/mirrored/bb1c4d7f.webp",
+      "status": "downloaded",
+      "download_bytes": 195755,
+      "output_bytes": 91456,
+      "original_width": 900,
+      "original_height": 900,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[23].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lt901teh0e552e",
+      "local_path": "/assets/products/mirrored/033ae47e.webp",
+      "status": "downloaded",
+      "download_bytes": 313437,
+      "output_bytes": 131728,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[21].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lt901teh1spl79",
+      "local_path": "/assets/products/mirrored/324335de.webp",
+      "status": "downloaded",
+      "download_bytes": 132950,
+      "output_bytes": 40426,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[21].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzfy1634",
+      "local_path": "/assets/products/mirrored/12a70968.webp",
+      "status": "downloaded",
+      "download_bytes": 37085,
+      "output_bytes": 22030,
+      "original_width": 564,
+      "original_height": 564,
+      "output_width": 564,
+      "output_height": 564,
+      "locations": [
+        "products[28].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzhclm37",
+      "local_path": "/assets/products/mirrored/5109856e.webp",
+      "status": "downloaded",
+      "download_bytes": 38413,
+      "output_bytes": 25572,
+      "original_width": 564,
+      "original_height": 564,
+      "output_width": 564,
+      "output_height": 564,
+      "locations": [
+        "products[28].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzir621d",
+      "local_path": "/assets/products/mirrored/337d4903.webp",
+      "status": "downloaded",
+      "download_bytes": 37085,
+      "output_bytes": 22030,
+      "original_width": 564,
+      "original_height": 564,
+      "output_width": 564,
+      "output_height": 564,
+      "locations": [
+        "products[33].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzk5qi1f",
+      "local_path": "/assets/products/mirrored/1af6be42.webp",
+      "status": "downloaded",
+      "download_bytes": 38413,
+      "output_bytes": 25572,
+      "original_width": 564,
+      "original_height": 564,
+      "output_width": 564,
+      "output_height": 564,
+      "locations": [
+        "products[33].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw5qxdpa3pi34e",
+      "local_path": "/assets/products/mirrored/705c7d46.webp",
+      "status": "downloaded",
+      "download_bytes": 99806,
+      "output_bytes": 35384,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[18].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72qjfde4",
+      "local_path": "/assets/products/mirrored/7f5f13d5.webp",
+      "status": "downloaded",
+      "download_bytes": 119571,
+      "output_bytes": 101634,
+      "original_width": 600,
+      "original_height": 600,
+      "output_width": 600,
+      "output_height": 600,
+      "locations": [
+        "products[25].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72rxzte0",
+      "local_path": "/assets/products/mirrored/c5a3f5e5.webp",
+      "status": "downloaded",
+      "download_bytes": 57084,
+      "output_bytes": 44716,
+      "original_width": 430,
+      "original_height": 430,
+      "output_width": 430,
+      "output_height": 430,
+      "locations": [
+        "products[25].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72tck914",
+      "local_path": "/assets/products/mirrored/71dc81d4.webp",
+      "status": "downloaded",
+      "download_bytes": 1026151,
+      "output_bytes": 134712,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[25].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72ur4p68",
+      "local_path": "/assets/products/mirrored/478c67aa.webp",
+      "status": "downloaded",
+      "download_bytes": 102678,
+      "output_bytes": 52034,
+      "original_width": 760,
+      "original_height": 760,
+      "output_width": 760,
+      "output_height": 760,
+      "locations": [
+        "products[25].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72xk9l9c",
+      "local_path": "/assets/products/mirrored/ec706e73.webp",
+      "status": "downloaded",
+      "download_bytes": 365111,
+      "output_bytes": 52978,
+      "original_width": 640,
+      "original_height": 640,
+      "output_width": 640,
+      "output_height": 640,
+      "locations": [
+        "products[30].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72yyu157",
+      "local_path": "/assets/products/mirrored/df4b3e96.webp",
+      "status": "downloaded",
+      "download_bytes": 404479,
+      "output_bytes": 74556,
+      "original_width": 640,
+      "original_height": 640,
+      "output_width": 640,
+      "output_height": 640,
+      "locations": [
+        "products[30].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye730dehe0",
+      "local_path": "/assets/products/mirrored/772cc6b6.webp",
+      "status": "downloaded",
+      "download_bytes": 305099,
+      "output_bytes": 22898,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[30].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye731ryxb6",
+      "local_path": "/assets/products/mirrored/3ec7b817.webp",
+      "status": "downloaded",
+      "download_bytes": 296471,
+      "output_bytes": 33392,
+      "original_width": 639,
+      "original_height": 639,
+      "output_width": 639,
+      "output_height": 639,
+      "locations": [
+        "products[30].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye7336jdcc",
+      "local_path": "/assets/products/mirrored/2cf4940e.webp",
+      "status": "downloaded",
+      "download_bytes": 61733,
+      "output_bytes": 34736,
+      "original_width": 470,
+      "original_height": 470,
+      "output_width": 470,
+      "output_height": 470,
+      "locations": [
+        "products[30].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uknnxbcode6",
+      "local_path": "/assets/products/mirrored/a11cc19a.webp",
+      "status": "downloaded",
+      "download_bytes": 449412,
+      "output_bytes": 38730,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukpzpwqkvfe",
+      "local_path": "/assets/products/mirrored/de9ea08a.webp",
+      "status": "downloaded",
+      "download_bytes": 654162,
+      "output_bytes": 81692,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukwrc08lrde",
+      "local_path": "/assets/products/mirrored/42235667.webp",
+      "status": "downloaded",
+      "download_bytes": 563229,
+      "output_bytes": 60396,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uo4lchx4d73",
+      "local_path": "/assets/products/mirrored/5c62b76f.webp",
+      "status": "downloaded",
+      "download_bytes": 978137,
+      "output_bytes": 72596,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoca98p2l7a",
+      "local_path": "/assets/products/mirrored/aa119daa.webp",
+      "status": "downloaded",
+      "download_bytes": 828713,
+      "output_bytes": 52020,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoj2paz8t8c",
+      "local_path": "/assets/products/mirrored/a0dd2034.webp",
+      "status": "downloaded",
+      "download_bytes": 639667,
+      "output_bytes": 80472,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uot2kocy7ed",
+      "local_path": "/assets/products/mirrored/0ac3e598.webp",
+      "status": "downloaded",
+      "download_bytes": 687647,
+      "output_bytes": 79700,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08updmklgnj96",
+      "local_path": "/assets/products/mirrored/3e814638.webp",
+      "status": "downloaded",
+      "download_bytes": 449412,
+      "output_bytes": 38730,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08upm4w56uld9",
+      "local_path": "/assets/products/mirrored/47b5cf43.webp",
+      "status": "downloaded",
+      "download_bytes": 654162,
+      "output_bytes": 81692,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[16].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m65ib3dm2ps35a",
+      "local_path": "/assets/products/mirrored/6986d8bf.webp",
+      "status": "downloaded",
+      "download_bytes": 170797,
+      "output_bytes": 58656,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[19].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m65ibkucilw7ae",
+      "local_path": "/assets/products/mirrored/b0ce2e4a.webp",
+      "status": "downloaded",
+      "download_bytes": 797648,
+      "output_bytes": 64934,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[19].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm46urg1xi78",
+      "local_path": "/assets/products/mirrored/b4b92d7d.webp",
+      "status": "downloaded",
+      "download_bytes": 635051,
+      "output_bytes": 45216,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[18].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4a6cl1vq50",
+      "local_path": "/assets/products/mirrored/40197b9f.webp",
+      "status": "downloaded",
+      "download_bytes": 424042,
+      "output_bytes": 14860,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[18].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4bo6eaerad",
+      "local_path": "/assets/products/mirrored/552f7f4e.webp",
+      "status": "downloaded",
+      "download_bytes": 477831,
+      "output_bytes": 17588,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[18].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d",
+      "local_path": "/assets/products/mirrored/ec8d7948.webp",
+      "status": "downloaded",
+      "download_bytes": 403919,
+      "output_bytes": 38182,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[38].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr89134v9o107",
+      "local_path": "/assets/products/mirrored/2c2867bb.webp",
+      "status": "downloaded",
+      "download_bytes": 409348,
+      "output_bytes": 36510,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[38].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3tk0q328497",
+      "local_path": "/assets/products/mirrored/4283a5c2.webp",
+      "status": "downloaded",
+      "download_bytes": 551085,
+      "output_bytes": 63258,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[6].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3toasd0jpaf",
+      "local_path": "/assets/products/mirrored/099fcfd4.webp",
+      "status": "downloaded",
+      "download_bytes": 438356,
+      "output_bytes": 35682,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[7].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3trim9g5g5c",
+      "local_path": "/assets/products/mirrored/fb091dc4.webp",
+      "status": "downloaded",
+      "download_bytes": 420670,
+      "output_bytes": 33486,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3ucnze3gh7a",
+      "local_path": "/assets/products/mirrored/84610ca8.webp",
+      "status": "downloaded",
+      "download_bytes": 431407,
+      "output_bytes": 34742,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[4].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51x9162o8f7",
+      "local_path": "/assets/products/mirrored/3f689f12.webp",
+      "status": "downloaded",
+      "download_bytes": 352865,
+      "output_bytes": 65962,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51yqdce8801",
+      "local_path": "/assets/products/mirrored/cfbf70de.webp",
+      "status": "downloaded",
+      "download_bytes": 357773,
+      "output_bytes": 67062,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].variants[6].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc53qh26adgec",
+      "local_path": "/assets/products/mirrored/7c02b18f.webp",
+      "status": "downloaded",
+      "download_bytes": 419217,
+      "output_bytes": 68580,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc575gudslf5a",
+      "local_path": "/assets/products/mirrored/9502482d.webp",
+      "status": "downloaded",
+      "download_bytes": 418582,
+      "output_bytes": 73626,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].variants[3].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc57xq4l4w836",
+      "local_path": "/assets/products/mirrored/24f9a207.webp",
+      "status": "downloaded",
+      "download_bytes": 365356,
+      "output_bytes": 63156,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2e90dsun0g67",
+      "local_path": "/assets/products/mirrored/278345e8.webp",
+      "status": "downloaded",
+      "download_bytes": 298753,
+      "output_bytes": 64918,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2ea975ppty9b",
+      "local_path": "/assets/products/mirrored/779a83f5.webp",
+      "status": "downloaded",
+      "download_bytes": 332374,
+      "output_bytes": 73154,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2eaiwrtcld9b",
+      "local_path": "/assets/products/mirrored/d2555353.webp",
+      "status": "downloaded",
+      "download_bytes": 165713,
+      "output_bytes": 28392,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pt9elz4si94",
+      "local_path": "/assets/products/mirrored/bf9f8e4c.webp",
+      "status": "downloaded",
+      "download_bytes": 117466,
+      "output_bytes": 39052,
+      "original_width": 640,
+      "original_height": 640,
+      "output_width": 640,
+      "output_height": 640,
+      "locations": [
+        "products[15].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51",
+      "local_path": "/assets/products/mirrored/ce1c8e75.webp",
+      "status": "downloaded",
+      "download_bytes": 170564,
+      "output_bytes": 65694,
+      "original_width": 640,
+      "original_height": 640,
+      "output_width": 640,
+      "output_height": 640,
+      "locations": [
+        "products[15].variants[0].image",
+        "products[15].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4",
+      "local_path": "/assets/products/mirrored/cae1a77b.webp",
+      "status": "downloaded",
+      "download_bytes": 827513,
+      "output_bytes": 44750,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[14].images[2]",
+        "products[14].variants[0].image",
+        "products[14].variants[3].image",
+        "products[17].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0cmrtqtgcd",
+      "local_path": "/assets/products/mirrored/72eecef5.webp",
+      "status": "downloaded",
+      "download_bytes": 822859,
+      "output_bytes": 45408,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[14].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0fet179i8f",
+      "local_path": "/assets/products/mirrored/71ced047.webp",
+      "status": "downloaded",
+      "download_bytes": 885126,
+      "output_bytes": 51906,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[14].images[1]",
+        "products[14].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0ibhwhz989",
+      "local_path": "/assets/products/mirrored/3f070c64.webp",
+      "status": "downloaded",
+      "download_bytes": 845965,
+      "output_bytes": 52474,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[14].images[3]",
+        "products[14].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4c8sak1y98",
+      "local_path": "/assets/products/mirrored/1cde6bc9.webp",
+      "status": "downloaded",
+      "download_bytes": 284714,
+      "output_bytes": 55466,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[9].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4dla213918",
+      "local_path": "/assets/products/mirrored/58a68e52.webp",
+      "status": "downloaded",
+      "download_bytes": 183130,
+      "output_bytes": 30502,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[9].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazm74o66tk75",
+      "local_path": "/assets/products/mirrored/44ee5b50.webp",
+      "status": "downloaded",
+      "download_bytes": 893862,
+      "output_bytes": 71466,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[12].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazn33ab2mgd6",
+      "local_path": "/assets/products/mirrored/770dfd2f.webp",
+      "status": "downloaded",
+      "download_bytes": 234958,
+      "output_bytes": 42298,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[12].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnb9a6ez07b641",
+      "local_path": "/assets/products/mirrored/662d23ea.webp",
+      "status": "downloaded",
+      "download_bytes": 305814,
+      "output_bytes": 43810,
+      "original_width": 500,
+      "original_height": 500,
+      "output_width": 500,
+      "output_height": 500,
+      "locations": [
+        "products[32].variants[4].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw2eemm8673",
+      "local_path": "/assets/products/mirrored/720aea9f.webp",
+      "status": "downloaded",
+      "download_bytes": 389089,
+      "output_bytes": 34162,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw4j8derkb5",
+      "local_path": "/assets/products/mirrored/55ec03bd.webp",
+      "status": "downloaded",
+      "download_bytes": 403951,
+      "output_bytes": 34604,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[3].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw73prz7k3d",
+      "local_path": "/assets/products/mirrored/7b5113de.webp",
+      "status": "downloaded",
+      "download_bytes": 379503,
+      "output_bytes": 32810,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yyjv3sxkwa0",
+      "local_path": "/assets/products/mirrored/c5d70fd1.webp",
+      "status": "downloaded",
+      "download_bytes": 486982,
+      "output_bytes": 62190,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[35].variants[5].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81rpd7l0ci00",
+      "local_path": "/assets/products/mirrored/1dfab21e.webp",
+      "status": "downloaded",
+      "download_bytes": 150556,
+      "output_bytes": 81672,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[24].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
+      "local_path": "/assets/products/mirrored/07621c27.webp",
+      "status": "downloaded",
+      "download_bytes": 804195,
+      "output_bytes": 71564,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[2]",
+        "products[19].images[1]",
+        "products[22].images[1]",
+        "products[23].images[1]",
+        "products[24].images[1]",
+        "products[25].images[1]",
+        "products[29].images[1]",
+        "products[30].images[1]",
+        "products[34].images[1]",
+        "products[36].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
+      "local_path": "/assets/products/mirrored/cb0406bb.webp",
+      "status": "downloaded",
+      "download_bytes": 744343,
+      "output_bytes": 58882,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[19].images[2]",
+        "products[21].images[2]",
+        "products[22].images[2]",
+        "products[23].images[2]",
+        "products[24].images[2]",
+        "products[25].images[2]",
+        "products[29].images[2]",
+        "products[30].images[2]",
+        "products[34].images[2]",
+        "products[36].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81u0q9jx8m9e",
+      "local_path": "/assets/products/mirrored/d584a8b2.webp",
+      "status": "downloaded",
+      "download_bytes": 126397,
+      "output_bytes": 62560,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[25].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81vo6c8xky63",
+      "local_path": "/assets/products/mirrored/c032f6c5.webp",
+      "status": "downloaded",
+      "download_bytes": 168510,
+      "output_bytes": 98100,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[36].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81yjdhmxhhe4",
+      "local_path": "/assets/products/mirrored/56306196.webp",
+      "status": "downloaded",
+      "download_bytes": 142517,
+      "output_bytes": 72858,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[22].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81zledf7cz16",
+      "local_path": "/assets/products/mirrored/c42144ef.webp",
+      "status": "downloaded",
+      "download_bytes": 172721,
+      "output_bytes": 97838,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[29].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me821wr79y4h47",
+      "local_path": "/assets/products/mirrored/9f75d6ef.webp",
+      "status": "downloaded",
+      "download_bytes": 128628,
+      "output_bytes": 63338,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[31].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83bmwd7chyc0",
+      "local_path": "/assets/products/mirrored/c5c1fada.webp",
+      "status": "downloaded",
+      "download_bytes": 120861,
+      "output_bytes": 59744,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[21].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83d3qykg0061",
+      "local_path": "/assets/products/mirrored/c01cf13c.webp",
+      "status": "downloaded",
+      "download_bytes": 133405,
+      "output_bytes": 68950,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[30].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83dsqju3gk26",
+      "local_path": "/assets/products/mirrored/be62eef1.webp",
+      "status": "downloaded",
+      "download_bytes": 159514,
+      "output_bytes": 87346,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[34].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83ehkpjklg65",
+      "local_path": "/assets/products/mirrored/def98448.webp",
+      "status": "downloaded",
+      "download_bytes": 144426,
+      "output_bytes": 76256,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[23].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83k4bvilfm0a",
+      "local_path": "/assets/products/mirrored/1621efcd.webp",
+      "status": "downloaded",
+      "download_bytes": 944482,
+      "output_bytes": 95380,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83kcluw9390c",
+      "local_path": "/assets/products/mirrored/576bcefe.webp",
+      "status": "downloaded",
+      "download_bytes": 949279,
+      "output_bytes": 95642,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[37].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83kilmeww12a",
+      "local_path": "/assets/products/mirrored/aecc3538.webp",
+      "status": "downloaded",
+      "download_bytes": 919905,
+      "output_bytes": 90216,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[37].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83kr38d6v80a",
+      "local_path": "/assets/products/mirrored/0dc7d68f.webp",
+      "status": "downloaded",
+      "download_bytes": 826522,
+      "output_bytes": 70754,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[19].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f",
+      "local_path": "/assets/products/mirrored/fa94038f.webp",
+      "status": "downloaded",
+      "download_bytes": 854865,
+      "output_bytes": 80506,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[37].images[1]",
+        "products[37].variants[0].image",
+        "products[37].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
+      "local_path": "/assets/products/mirrored/1e442f2b.webp",
+      "status": "downloaded",
+      "download_bytes": 879011,
+      "output_bytes": 82664,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[19].images[0]",
+        "products[19].variants[0].image",
+        "products[19].variants[1].image",
+        "products[19].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
+      "local_path": "/assets/products/mirrored/2e6d5918.webp",
+      "status": "downloaded",
+      "download_bytes": 923633,
+      "output_bytes": 93868,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[2].image",
+        "products[31].images[1]",
+        "products[31].variants[0].image",
+        "products[31].variants[1].image",
+        "products[31].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7lt5ecjp4c",
+      "local_path": "/assets/products/mirrored/9b9fc9e0.webp",
+      "status": "downloaded",
+      "download_bytes": 887064,
+      "output_bytes": 87042,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[14].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7qxurk022c",
+      "local_path": "/assets/products/mirrored/e8a9b246.webp",
+      "status": "downloaded",
+      "download_bytes": 905318,
+      "output_bytes": 92696,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[10].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
+      "local_path": "/assets/products/mirrored/759a6203.webp",
+      "status": "downloaded",
+      "download_bytes": 998936,
+      "output_bytes": 97662,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[11].image",
+        "products[24].images[3]",
+        "products[24].variants[0].image",
+        "products[24].variants[1].image",
+        "products[24].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
+      "local_path": "/assets/products/mirrored/8b89e6d8.webp",
+      "status": "downloaded",
+      "download_bytes": 901984,
+      "output_bytes": 105916,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[9].image",
+        "products[29].images[3]",
+        "products[29].variants[0].image",
+        "products[29].variants[1].image",
+        "products[29].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j897yj28498",
+      "local_path": "/assets/products/mirrored/95a4b745.webp",
+      "status": "downloaded",
+      "download_bytes": 870925,
+      "output_bytes": 90530,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[5].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
+      "local_path": "/assets/products/mirrored/44f5db92.webp",
+      "status": "downloaded",
+      "download_bytes": 943847,
+      "output_bytes": 92592,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[1].image",
+        "products[21].images[3]",
+        "products[21].variants[0].image",
+        "products[21].variants[3].image",
+        "products[21].variants[4].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
+      "local_path": "/assets/products/mirrored/50cf46f0.webp",
+      "status": "downloaded",
+      "download_bytes": 865607,
+      "output_bytes": 84720,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[4].image",
+        "products[34].images[3]",
+        "products[34].variants[0].image",
+        "products[34].variants[1].image",
+        "products[34].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
+      "local_path": "/assets/products/mirrored/ae946cc0.webp",
+      "status": "downloaded",
+      "download_bytes": 911537,
+      "output_bytes": 89918,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[3].image",
+        "products[22].images[3]",
+        "products[22].variants[0].image",
+        "products[22].variants[1].image",
+        "products[22].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
+      "local_path": "/assets/products/mirrored/0eb610e6.webp",
+      "status": "downloaded",
+      "download_bytes": 824014,
+      "output_bytes": 72464,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[0].image",
+        "products[25].images[3]",
+        "products[25].variants[0].image",
+        "products[25].variants[1].image",
+        "products[25].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
+      "local_path": "/assets/products/mirrored/26da0749.webp",
+      "status": "downloaded",
+      "download_bytes": 937610,
+      "output_bytes": 89358,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[6].image",
+        "products[23].images[3]",
+        "products[23].variants[0].image",
+        "products[23].variants[1].image",
+        "products[23].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
+      "local_path": "/assets/products/mirrored/58680219.webp",
+      "status": "downloaded",
+      "download_bytes": 894217,
+      "output_bytes": 88012,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[13].image",
+        "products[30].images[3]",
+        "products[30].variants[0].image",
+        "products[30].variants[1].image",
+        "products[30].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
+      "local_path": "/assets/products/mirrored/baf27518.webp",
+      "status": "downloaded",
+      "download_bytes": 898920,
+      "output_bytes": 105476,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[7].image",
+        "products[36].images[3]",
+        "products[36].variants[0].image",
+        "products[36].variants[1].image",
+        "products[36].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9ltsy29vb4",
+      "local_path": "/assets/products/mirrored/384f418c.webp",
+      "status": "downloaded",
+      "download_bytes": 841398,
+      "output_bytes": 83840,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[20].variants[8].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jduorludfaf",
+      "local_path": "/assets/products/mirrored/3f823af3.webp",
+      "status": "downloaded",
+      "download_bytes": 925797,
+      "output_bytes": 99316,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jejtmns3k41",
+      "local_path": "/assets/products/mirrored/39075608.webp",
+      "status": "downloaded",
+      "download_bytes": 887636,
+      "output_bytes": 82938,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jfioudxc2c8",
+      "local_path": "/assets/products/mirrored/fa6b91f1.webp",
+      "status": "downloaded",
+      "download_bytes": 865956,
+      "output_bytes": 85412,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[5].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg2rweq6fe0",
+      "local_path": "/assets/products/mirrored/d8257f13.webp",
+      "status": "downloaded",
+      "download_bytes": 868483,
+      "output_bytes": 83152,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg6i6d4w44e",
+      "local_path": "/assets/products/mirrored/b104471d.webp",
+      "status": "downloaded",
+      "download_bytes": 893618,
+      "output_bytes": 83146,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[3].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
+      "local_path": "/assets/products/mirrored/e889ad36.webp",
+      "status": "downloaded",
+      "download_bytes": 773018,
+      "output_bytes": 64780,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[3]",
+        "products[3].images[1]",
+        "products[19].images[5]",
+        "products[22].images[4]",
+        "products[24].images[4]",
+        "products[25].images[4]",
+        "products[34].images[4]",
+        "products[36].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9k99qoraww84",
+      "local_path": "/assets/products/mirrored/3eef544b.webp",
+      "status": "downloaded",
+      "download_bytes": 769933,
+      "output_bytes": 62616,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[19].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5s9y6b47a1a",
+      "local_path": "/assets/products/mirrored/57b57d56.webp",
+      "status": "downloaded",
+      "download_bytes": 738169,
+      "output_bytes": 54586,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[3].variants[0].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5ta7gvrb8a3",
+      "local_path": "/assets/products/mirrored/fafac3e3.webp",
+      "status": "downloaded",
+      "download_bytes": 794490,
+      "output_bytes": 64054,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[37].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5tc2qg0eb34",
+      "local_path": "/assets/products/mirrored/7032b533.webp",
+      "status": "downloaded",
+      "download_bytes": 744759,
+      "output_bytes": 58928,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[37].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5thsm6y2rd9",
+      "local_path": "/assets/products/mirrored/7216152a.webp",
+      "status": "downloaded",
+      "download_bytes": 826951,
+      "output_bytes": 70672,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[37].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-meraaf49fz0h1e",
+      "local_path": "/assets/products/mirrored/fb836c44.webp",
+      "status": "downloaded",
+      "download_bytes": 799755,
+      "output_bytes": 71998,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-meraatrq2wp128",
+      "local_path": "/assets/products/mirrored/8f7a08e9.webp",
+      "status": "downloaded",
+      "download_bytes": 791860,
+      "output_bytes": 67640,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merab4dmduypb8",
+      "local_path": "/assets/products/mirrored/9d9c0fae.webp",
+      "status": "downloaded",
+      "download_bytes": 849964,
+      "output_bytes": 82668,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merabdphgirk6b",
+      "local_path": "/assets/products/mirrored/e69cf290.webp",
+      "status": "downloaded",
+      "download_bytes": 795692,
+      "output_bytes": 70346,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merabp9yoohv75",
+      "local_path": "/assets/products/mirrored/ecdbb39a.webp",
+      "status": "downloaded",
+      "download_bytes": 801413,
+      "output_bytes": 71222,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-meracf95o3cxaf",
+      "local_path": "/assets/products/mirrored/8fdaba5f.webp",
+      "status": "downloaded",
+      "download_bytes": 757373,
+      "output_bytes": 62780,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merad9z3yznr95",
+      "local_path": "/assets/products/mirrored/285e6501.webp",
+      "status": "downloaded",
+      "download_bytes": 813893,
+      "output_bytes": 73132,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[1].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mesdeg5484cj59",
+      "local_path": "/assets/products/mirrored/8049c44e.webp",
+      "status": "downloaded",
+      "download_bytes": 748971,
+      "output_bytes": 52178,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[3].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84cdel8gfff",
+      "local_path": "/assets/products/mirrored/7b0c2719.webp",
+      "status": "downloaded",
+      "download_bytes": 910102,
+      "output_bytes": 90470,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84dov3957db",
+      "local_path": "/assets/products/mirrored/b7d7fd04.webp",
+      "status": "downloaded",
+      "download_bytes": 547585,
+      "output_bytes": 48188,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84lr2fmz09b",
+      "local_path": "/assets/products/mirrored/d1844a96.webp",
+      "status": "downloaded",
+      "download_bytes": 771686,
+      "output_bytes": 65228,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84n44bx1q77",
+      "local_path": "/assets/products/mirrored/3794a125.webp",
+      "status": "downloaded",
+      "download_bytes": 877615,
+      "output_bytes": 72512,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[8]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84s36df6500",
+      "local_path": "/assets/products/mirrored/dcbcf461.webp",
+      "status": "downloaded",
+      "download_bytes": 709045,
+      "output_bytes": 49128,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[15].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv73sc9o4y7d4",
+      "local_path": "/assets/products/mirrored/020acc30.webp",
+      "status": "downloaded",
+      "download_bytes": 879011,
+      "output_bytes": 82664,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[6].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv78e9n8a30d5",
+      "local_path": "/assets/products/mirrored/07e645db.webp",
+      "status": "downloaded",
+      "download_bytes": 853372,
+      "output_bytes": 79656,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[32].variants[7].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3euke9udmc5",
+      "local_path": "/assets/products/mirrored/aa457a01.webp",
+      "status": "downloaded",
+      "download_bytes": 175272,
+      "output_bytes": 14140,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[33].variants[7].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3f3a7sg7iab",
+      "local_path": "/assets/products/mirrored/805754e1.webp",
+      "status": "downloaded",
+      "download_bytes": 676308,
+      "output_bytes": 46074,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[33].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e5ubuwaoae1",
+      "local_path": "/assets/products/mirrored/9da69a94.webp",
+      "status": "downloaded",
+      "download_bytes": 351178,
+      "output_bytes": 30820,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[11].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e63iax1jff1",
+      "local_path": "/assets/products/mirrored/ceb830cf.webp",
+      "status": "downloaded",
+      "download_bytes": 197414,
+      "output_bytes": 57414,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[11].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e66ng4pvy99",
+      "local_path": "/assets/products/mirrored/b9afc202.webp",
+      "status": "downloaded",
+      "download_bytes": 135083,
+      "output_bytes": 29546,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[11].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e68l9kydo3e",
+      "local_path": "/assets/products/mirrored/dc71bd43.webp",
+      "status": "downloaded",
+      "download_bytes": 70423,
+      "output_bytes": 36254,
+      "original_width": 700,
+      "original_height": 700,
+      "output_width": 700,
+      "output_height": 700,
+      "locations": [
+        "products[11].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6aehmtjha0",
+      "local_path": "/assets/products/mirrored/8b174002.webp",
+      "status": "downloaded",
+      "download_bytes": 126453,
+      "output_bytes": 31678,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[11].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6j2o2rka4f",
+      "local_path": "/assets/products/mirrored/864e6aef.webp",
+      "status": "downloaded",
+      "download_bytes": 66427,
+      "output_bytes": 37434,
+      "original_width": 690,
+      "original_height": 690,
+      "output_width": 690,
+      "output_height": 690,
+      "locations": [
+        "products[11].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mgw6bulk3aiwef",
+      "local_path": "/assets/products/mirrored/7cfe1bfc.webp",
+      "status": "downloaded",
+      "download_bytes": 903339,
+      "output_bytes": 62054,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[3].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7f5z611j7b4",
+      "local_path": "/assets/products/mirrored/35bad26e.webp",
+      "status": "downloaded",
+      "download_bytes": 288894,
+      "output_bytes": 56442,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[33].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gkcnlybm19",
+      "local_path": "/assets/products/mirrored/de42a70b.webp",
+      "status": "downloaded",
+      "download_bytes": 65574,
+      "output_bytes": 14516,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].variants[4].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gn3k4cg4ee",
+      "local_path": "/assets/products/mirrored/5301d87f.webp",
+      "status": "downloaded",
+      "download_bytes": 75407,
+      "output_bytes": 17462,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[33].variants[6].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g7l5cmwy87",
+      "local_path": "/assets/products/mirrored/c8b1c450.webp",
+      "status": "downloaded",
+      "download_bytes": 1052142,
+      "output_bytes": 62662,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[1]",
+        "products[33].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g9usos1wc8",
+      "local_path": "/assets/products/mirrored/dc290562.webp",
+      "status": "downloaded",
+      "download_bytes": 1201303,
+      "output_bytes": 85784,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[3]",
+        "products[33].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8v8snr7yg42",
+      "local_path": "/assets/products/mirrored/76c35d8e.webp",
+      "status": "downloaded",
+      "download_bytes": 263089,
+      "output_bytes": 51598,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[38].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0agzho5f5u43",
+      "local_path": "/assets/products/mirrored/6637f383.webp",
+      "status": "downloaded",
+      "download_bytes": 864129,
+      "output_bytes": 52386,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[28].variants[1].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0auosgwcn5af",
+      "local_path": "/assets/products/mirrored/981d6659.webp",
+      "status": "downloaded",
+      "download_bytes": 845965,
+      "output_bytes": 52474,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[13].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mtdyrtsec90",
+      "local_path": "/assets/products/mirrored/5a254a10.webp",
+      "status": "downloaded",
+      "download_bytes": 356236,
+      "output_bytes": 74918,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwbkw4qo75f",
+      "local_path": "/assets/products/mirrored/954776e6.webp",
+      "status": "downloaded",
+      "download_bytes": 358518,
+      "output_bytes": 57196,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[6]",
+        "products[26].variants[5].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwfaorh8m35",
+      "local_path": "/assets/products/mirrored/9dc9ce24.webp",
+      "status": "downloaded",
+      "download_bytes": 300085,
+      "output_bytes": 54712,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[5]",
+        "products[26].variants[4].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwgus31u034",
+      "local_path": "/assets/products/mirrored/226cace9.webp",
+      "status": "downloaded",
+      "download_bytes": 379644,
+      "output_bytes": 62476,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8myc673ime37",
+      "local_path": "/assets/products/mirrored/356f1263.webp",
+      "status": "downloaded",
+      "download_bytes": 343686,
+      "output_bytes": 57202,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8n6t5hrsw179",
+      "local_path": "/assets/products/mirrored/f2c600ca.webp",
+      "status": "downloaded",
+      "download_bytes": 394180,
+      "output_bytes": 65304,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[26].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mia82lp7gkqu39",
+      "local_path": "/assets/products/mirrored/fad014be.webp",
+      "status": "downloaded",
+      "download_bytes": 275699,
+      "output_bytes": 80294,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[0].images[2]",
+        "products[21].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32",
+      "local_path": "/assets/products/mirrored/28252371.webp",
+      "status": "downloaded",
+      "download_bytes": 457016,
+      "output_bytes": 113794,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[8].images[2]",
+        "products[20].variants[12].image",
+        "products[21].variants[1].image",
+        "products[21].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-miaao8qg5csibd",
+      "local_path": "/assets/products/mirrored/0ac9444b.webp",
+      "status": "downloaded",
+      "download_bytes": 969237,
+      "output_bytes": 72234,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[8].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
+      "local_path": "/assets/products/mirrored/77ad5f9a.webp",
+      "status": "downloaded",
+      "download_bytes": 444135,
+      "output_bytes": 95372,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[8].images[1]",
+        "products[8].variants[0].image",
+        "products[8].variants[1].image",
+        "products[8].variants[2].image"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5ksxnhrew1f",
+      "local_path": "/assets/products/mirrored/d3e9edf3.webp",
+      "status": "downloaded",
+      "download_bytes": 885126,
+      "output_bytes": 51906,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[10].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik62n59xzpiea",
+      "local_path": "/assets/products/mirrored/0b84f8cd.webp",
+      "status": "downloaded",
+      "download_bytes": 910141,
+      "output_bytes": 61964,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[0].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik62pwl1q83bc",
+      "local_path": "/assets/products/mirrored/94dfd037.webp",
+      "status": "downloaded",
+      "download_bytes": 961753,
+      "output_bytes": 77608,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[0].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik62rohxcsnbc",
+      "local_path": "/assets/products/mirrored/f2321967.webp",
+      "status": "downloaded",
+      "download_bytes": 960899,
+      "output_bytes": 77404,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[0].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik63sfpts0665",
+      "local_path": "/assets/products/mirrored/ef26e671.webp",
+      "status": "downloaded",
+      "download_bytes": 909997,
+      "output_bytes": 73312,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[0].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cmw0zbcf",
+      "local_path": "/assets/products/mirrored/eeaa83a2.webp",
+      "status": "downloaded",
+      "download_bytes": 321126,
+      "output_bytes": 61420,
+      "original_width": 730,
+      "original_height": 730,
+      "output_width": 730,
+      "output_height": 730,
+      "locations": [
+        "products[40].images[2]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cmyu4721",
+      "local_path": "/assets/products/mirrored/fc1c4310.webp",
+      "status": "downloaded",
+      "download_bytes": 739335,
+      "output_bytes": 79676,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[40].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cn5uyfcf",
+      "local_path": "/assets/products/mirrored/1fcc64b4.webp",
+      "status": "downloaded",
+      "download_bytes": 739335,
+      "output_bytes": 79676,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].images[4]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cn8o3bb9",
+      "local_path": "/assets/products/mirrored/32fa3b73.webp",
+      "status": "downloaded",
+      "download_bytes": 338720,
+      "output_bytes": 79170,
+      "original_width": 730,
+      "original_height": 730,
+      "output_width": 730,
+      "output_height": 730,
+      "locations": [
+        "products[39].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cp1a7r48",
+      "local_path": "/assets/products/mirrored/5dccccf3.webp",
+      "status": "downloaded",
+      "download_bytes": 706227,
+      "output_bytes": 80366,
+      "original_width": 1024,
+      "original_height": 1024,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[40].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7p2yj03",
+      "local_path": "/assets/products/mirrored/ff5d996f.webp",
+      "status": "downloaded",
+      "download_bytes": 259607,
+      "output_bytes": 28620,
+      "original_width": 790,
+      "original_height": 790,
+      "output_width": 790,
+      "output_height": 790,
+      "locations": [
+        "products[28].images[1]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7qhizda",
+      "local_path": "/assets/products/mirrored/dd1d28f0.webp",
+      "status": "downloaded",
+      "download_bytes": 239563,
+      "output_bytes": 21522,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[28].images[3]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7rw3fb4",
+      "local_path": "/assets/products/mirrored/4a022e45.webp",
+      "status": "downloaded",
+      "download_bytes": 584353,
+      "output_bytes": 99226,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[28].images[5]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7tanv31",
+      "local_path": "/assets/products/mirrored/47339075.webp",
+      "status": "downloaded",
+      "download_bytes": 528516,
+      "output_bytes": 71892,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[28].images[6]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7xid736",
+      "local_path": "/assets/products/mirrored/0ed3b822.webp",
+      "status": "downloaded",
+      "download_bytes": 108160,
+      "output_bytes": 9856,
+      "original_width": 800,
+      "original_height": 800,
+      "output_width": 800,
+      "output_height": 800,
+      "locations": [
+        "products[28].images[7]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0uysp7ac",
+      "local_path": "/assets/products/mirrored/eeb163d3.webp",
+      "status": "downloaded",
+      "download_bytes": 444251,
+      "output_bytes": 59916,
+      "original_width": 1000,
+      "original_height": 1000,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[39].images[0]"
+      ]
+    },
+    {
+      "ok": true,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0v1lu3e1",
+      "local_path": "/assets/products/mirrored/d268b77b.webp",
+      "status": "downloaded",
+      "download_bytes": 525679,
+      "output_bytes": 68938,
+      "original_width": 1000,
+      "original_height": 1000,
+      "output_width": 900,
+      "output_height": 900,
+      "locations": [
+        "products[40].images[0]"
+      ]
+    }
+  ],
+  "failed": [],
+  "skipped_unprocessed": [],
+  "backup_path": "data/products.json.backup-20260430-171626",
+  "replaced_unique_urls": 217,
+  "replaced_occurrences": 304,
+  "download_bytes_total": 109619484,
+  "output_bytes_total": 13266240,
+  "compression_ratio": 0.121
+}

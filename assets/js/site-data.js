@@ -549,7 +549,7 @@ const PRODUCTS = [
     "id": "p_1777474804043_1b5kn",
     "sku": "SP-17395821075",
     "categoryId": "combo",
-    "name": "Bộ Xông Nhà Trải Nghiệm — Bếp Niêu Đất Nung +  Thảo Mộc Mix 5 Loại + Nến 4H | Phuonglam",
+    "name": "Bộ Xông Nhà Trải Nghiệm tiết kiệm chi phí  I Phương Lâm",
     "price": 100000,
     "originalPrice": null,
     "shortDesc": "Bao gồm: bếp + 30g thảo mộc + 1 viên 4h",
@@ -588,7 +588,7 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "bo-xong-nha-trai-nghiem-bep-nieu-dat-nung-thao-moc-mix-5-loai-nen-4h-phuonglam"
+    "slug": "bo-xong-nha-trai-nghiem-tiet-kiem-chi-phi-i-phuong-lam"
   },
   {
     "id": "shopee_17395821074",

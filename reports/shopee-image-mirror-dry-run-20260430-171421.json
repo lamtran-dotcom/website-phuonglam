@@ -1,0 +1,11 @@
+{
+  "timestamp": "20260430-171421",
+  "products_path": "data/products.json",
+  "total_occurrences": 304,
+  "unique_urls": 217,
+  "processed_urls": 217,
+  "dry_run": true,
+  "success": [],
+  "failed": [],
+  "skipped_unprocessed": []
+}

@@ -1,0 +1,1841 @@
+{
+  "timestamp": "20260430-171434",
+  "products_path": "data/products.json",
+  "total_occurrences": 304,
+  "unique_urls": 217,
+  "processed_urls": 217,
+  "dry_run": false,
+  "success": [],
+  "failed": [
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4s2b805",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4tgvoac",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4uvg4fb",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4wa0k5f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz1vnd4xol084",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7qukw-ljz29yc6xygk52",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1nxh70b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lkte9ie1s56j73",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li015mt276",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[36].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li019uief1",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[36].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lla5li01b92ub6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[36].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8depi56",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[34].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8et9yde",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[34].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8g7ueaa",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[34].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8j0za58",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[34].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8n8om25",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[36].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llapxdo8q1tifd",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[29].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf0clka9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[29].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf1r60ba",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[29].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf35qgb6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[29].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llar6fhf5yvcbb",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[29].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j13ynce",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j2ij33a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j3x3jb0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j5bnza4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j6q8f64",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm8pd5j84sv86",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3cfy486",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3gnng9b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].variants[3].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3i27w4c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3jgsc5b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3kvcsc8",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3m9x848",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llm9cyx3noho70",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[27].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7ppz24a6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7prdmkc1",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnied7pss70b0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnlfx02cjtb44",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[3].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbr6mn6c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[5].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbsl73aa",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-llnmspjbtzrj42",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-log7xpeen2rb9d",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[31].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgn93qv8f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[24].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgnaibb79",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[24].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgnbwvr43",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[24].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqko3xgndbg797",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[24].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9ba5rkid7",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[21].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9bacseqa3",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[21].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqoqw9bah04238",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[21].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwinp3mb6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[22].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwip3o2ef",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[22].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lqos9xwiqi8i60",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[22].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnklryc8a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[23].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkn6isf8",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[23].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lry9gjnkol38f6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[23].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lryao6hbktcpbd",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[23].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lt901teh0e552e",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[21].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lt901teh1spl79",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[21].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzfy1634",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzhclm37",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzir621d",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-ltmf5ttzk5qi1f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lw5qxdpa3pi34e",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[18].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72qjfde4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[25].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72rxzte0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[25].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72tck914",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[25].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72ur4p68",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[25].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72xk9l9c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[30].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye72yyu157",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[30].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye730dehe0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[30].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye731ryxb6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[30].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-lx6xye7336jdcc",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[30].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uknnxbcode6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukpzpwqkvfe",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08ukwrc08lrde",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uo4lchx4d73",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoca98p2l7a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uoj2paz8t8c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08uot2kocy7ed",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08updmklgnj96",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7r98o-m08upm4w56uld9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[16].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m65ib3dm2ps35a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[19].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m65ibkucilw7ae",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[19].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm46urg1xi78",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[18].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4a6cl1vq50",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[18].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ra0g-m7qm4bo6eaerad",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[18].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr82mbakrvz1d",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[38].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-7ras8-mdr89134v9o107",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[38].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3tk0q328497",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[6].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3toasd0jpaf",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[7].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3trim9g5g5c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc3ucnze3gh7a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[4].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51x9162o8f7",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc51yqdce8801",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].variants[6].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc53qh26adgec",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc575gudslf5a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].variants[3].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mlc57xq4l4w836",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2e90dsun0g67",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2ea975ppty9b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2eaiwrtcld9b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pt9elz4si94",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2pua8neg3k51",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].variants[0].image",
+        "products[15].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r03hcr7r7e4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[14].images[2]",
+        "products[14].variants[0].image",
+        "products[14].variants[3].image",
+        "products[17].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0cmrtqtgcd",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[14].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0fet179i8f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[14].images[1]",
+        "products[14].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn2r0ibhwhz989",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[14].images[3]",
+        "products[14].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4c8sak1y98",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[9].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mn4c4dla213918",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[9].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazm74o66tk75",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[12].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnazn33ab2mgd6",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[12].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-81ztc-mnb9a6ez07b641",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[4].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw2eemm8673",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw4j8derkb5",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[3].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yw73prz7k3d",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me7yyjv3sxkwa0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[35].variants[5].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81rpd7l0ci00",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[24].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81slwur4zme9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[2]",
+        "products[19].images[1]",
+        "products[22].images[1]",
+        "products[23].images[1]",
+        "products[24].images[1]",
+        "products[25].images[1]",
+        "products[29].images[1]",
+        "products[30].images[1]",
+        "products[34].images[1]",
+        "products[36].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81snlbxzbac9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[19].images[2]",
+        "products[21].images[2]",
+        "products[22].images[2]",
+        "products[23].images[2]",
+        "products[24].images[2]",
+        "products[25].images[2]",
+        "products[29].images[2]",
+        "products[30].images[2]",
+        "products[34].images[2]",
+        "products[36].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81u0q9jx8m9e",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[25].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81vo6c8xky63",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[36].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81yjdhmxhhe4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[22].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me81zledf7cz16",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[29].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me821wr79y4h47",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[31].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83bmwd7chyc0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[21].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83d3qykg0061",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[30].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83dsqju3gk26",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[34].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83ehkpjklg65",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[23].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83k4bvilfm0a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83kcluw9390c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[37].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83kilmeww12a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[37].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me83kr38d6v80a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[19].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6tiztp8j9f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[37].images[1]",
+        "products[37].variants[0].image",
+        "products[37].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j6xxtfj7o94",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[19].images[0]",
+        "products[19].variants[0].image",
+        "products[19].variants[1].image",
+        "products[19].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7hpw02di63",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[2].image",
+        "products[31].images[1]",
+        "products[31].variants[0].image",
+        "products[31].variants[1].image",
+        "products[31].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7lt5ecjp4c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[14].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7qxurk022c",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[10].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j7vm93ldzf9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[11].image",
+        "products[24].images[3]",
+        "products[24].variants[0].image",
+        "products[24].variants[1].image",
+        "products[24].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8293frib38",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[9].image",
+        "products[29].images[3]",
+        "products[29].variants[0].image",
+        "products[29].variants[1].image",
+        "products[29].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j897yj28498",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[5].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8k8zsydgb0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[1].image",
+        "products[21].images[3]",
+        "products[21].variants[0].image",
+        "products[21].variants[3].image",
+        "products[21].variants[4].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8rh42oedc8",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[4].image",
+        "products[34].images[3]",
+        "products[34].variants[0].image",
+        "products[34].variants[1].image",
+        "products[34].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j8ye3b9j9ba",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[3].image",
+        "products[22].images[3]",
+        "products[22].variants[0].image",
+        "products[22].variants[1].image",
+        "products[22].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j928f1hxg5b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[0].image",
+        "products[25].images[3]",
+        "products[25].variants[0].image",
+        "products[25].variants[1].image",
+        "products[25].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j97x7xdza26",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[6].image",
+        "products[23].images[3]",
+        "products[23].variants[0].image",
+        "products[23].variants[1].image",
+        "products[23].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9a13zyf4d7",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[13].image",
+        "products[30].images[3]",
+        "products[30].variants[0].image",
+        "products[30].variants[1].image",
+        "products[30].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9g85pyis16",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[7].image",
+        "products[36].images[3]",
+        "products[36].variants[0].image",
+        "products[36].variants[1].image",
+        "products[36].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9j9ltsy29vb4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[20].variants[8].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jduorludfaf",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jejtmns3k41",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jfioudxc2c8",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[5].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg2rweq6fe0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jg6i6d4w44e",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[3].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9jlzvew5xcc9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[3]",
+        "products[3].images[1]",
+        "products[19].images[5]",
+        "products[22].images[4]",
+        "products[24].images[4]",
+        "products[25].images[4]",
+        "products[34].images[4]",
+        "products[36].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-me9k99qoraww84",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[19].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5s9y6b47a1a",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[3].variants[0].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5ta7gvrb8a3",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[37].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5tc2qg0eb34",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[37].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mer5thsm6y2rd9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[37].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-meraaf49fz0h1e",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-meraatrq2wp128",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merab4dmduypb8",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merabdphgirk6b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merabp9yoohv75",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-meracf95o3cxaf",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-merad9z3yznr95",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[1].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mesdeg5484cj59",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[3].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84cdel8gfff",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84dov3957db",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84lr2fmz09b",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84n44bx1q77",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[8]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mez84s36df6500",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[15].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv73sc9o4y7d4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[6].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfv78e9n8a30d5",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[32].variants[7].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3euke9udmc5",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[7].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mfy3f3a7sg7iab",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e5ubuwaoae1",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[11].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e63iax1jff1",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[11].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e66ng4pvy99",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[11].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e68l9kydo3e",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[11].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6aehmtjha0",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[11].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mg6e6j2o2rka4f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[11].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mgw6bulk3aiwef",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[3].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7f5z611j7b4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gkcnlybm19",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[4].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj7gn3k4cg4ee",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[33].variants[6].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g7l5cmwy87",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[1]",
+        "products[33].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8g9usos1wc8",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[3]",
+        "products[33].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mhj8v8snr7yg42",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[38].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0agzho5f5u43",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].variants[1].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi0auosgwcn5af",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[13].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mtdyrtsec90",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwbkw4qo75f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[6]",
+        "products[26].variants[5].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwfaorh8m35",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[5]",
+        "products[26].variants[4].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8mwgus31u034",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8myc673ime37",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mi8n6t5hrsw179",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[26].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mia82lp7gkqu39",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[0].images[2]",
+        "products[21].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mia87b30ynlw32",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[8].images[2]",
+        "products[20].variants[12].image",
+        "products[21].variants[1].image",
+        "products[21].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-miaao8qg5csibd",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[8].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-miaaopx3emf5b9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[8].images[1]",
+        "products[8].variants[0].image",
+        "products[8].variants[1].image",
+        "products[8].variants[2].image"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik5ksxnhrew1f",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[10].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik62n59xzpiea",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[0].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik62pwl1q83bc",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[0].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik62rohxcsnbc",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[0].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134207-820l4-mik63sfpts0665",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[0].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cmw0zbcf",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[40].images[2]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cmyu4721",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[40].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cn5uyfcf",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].images[4]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cn8o3bb9",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7qukw-lfzaq3cp1a7r48",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[40].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7p2yj03",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[1]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7qhizda",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[3]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7rw3fb4",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[5]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7tanv31",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[6]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-lktieeo7xid736",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[28].images[7]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0uysp7ac",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[39].images[0]"
+      ]
+    },
+    {
+      "ok": false,
+      "url": "https://cf.shopee.vn/file/vn-11134211-7r98o-ll0arq0v1lu3e1",
+      "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "locations": [
+        "products[40].images[0]"
+      ]
+    }
+  ],
+  "skipped_unprocessed": [],
+  "backup_path": "data/products.json.backup-20260430-171434",
+  "replaced_unique_urls": 0,
+  "replaced_occurrences": 0,
+  "download_bytes_total": 0,
+  "output_bytes_total": 0,
+  "compression_ratio": null
+}
