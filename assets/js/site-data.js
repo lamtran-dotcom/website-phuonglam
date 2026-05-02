@@ -1199,7 +1199,7 @@ const PRODUCTS = [
     "shortDesc": "Quế thanh Yên Bái xuất khẩu, chọn từ quế già cây, thơm nồng ấm và nhiều tinh dầu. Phù hợp nấu phở, bò kho, món hầm, pha trà quế và tạo hương tự nhiên.",
     "tag": "",
     "weight": 200,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [],
     "optionImages": {},
     "images": [

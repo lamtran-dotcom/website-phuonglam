@@ -1206,7 +1206,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG QUẾ THANH\n\n✔ Nấu ăn:\nCho 1-2 thanh quế vào phở, bò kho, món hầm hoặc nước dùng. Vớt ra khi hương quế đã đủ thơm để món ăn không bị gắt mùi.\n\n✔ Pha trà:\nHãm 1 thanh quế nhỏ với nước nóng 5-10 phút. Có thể thêm mật ong, gừng, táo đỏ hoặc thảo mộc tùy khẩu vị.\n\n✔ Tạo hương tự nhiên:\nĐặt vài thanh quế ở bàn trà, kệ decor, tủ quần áo hoặc túi thơm để tạo mùi ấm nhẹ.\n\n✔ Bảo quản:\nBuộc kín túi sau khi dùng, để nơi khô ráo, tránh nắng gắt và tránh ẩm để giữ mùi thơm lâu hơn.",
     "tag": "",
     "weight": 200,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [],
     "optionImages": {},
     "images": [
