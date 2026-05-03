@@ -115,6 +115,11 @@ const viDate = () => {
   return `${now.getDate()} tháng ${now.getMonth() + 1}, ${now.getFullYear()}`;
 };
 
+const vietnamIsoDateTime = (date = new Date()) => {
+  const vietnamTime = new Date(date.getTime() + (7 * 60 * 60 * 1000));
+  return `${vietnamTime.toISOString().slice(0, 19)}+07:00`;
+};
+
 const truncate = (value = '', max = 155) => {
   const text = stripHtml(value);
   if (text.length <= max) return text;
@@ -426,6 +431,7 @@ const normalizeBlogHtml = ({ html, htmlPath, category, slug, imageOverrides = ne
     html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${absoluteImage}">`);
   }
   if (!/application\/ld\+json/i.test(html)) {
+    const publishedAt = vietnamIsoDateTime();
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
@@ -433,8 +439,8 @@ const normalizeBlogHtml = ({ html, htmlPath, category, slug, imageOverrides = ne
       description,
       image: absoluteImage ? [absoluteImage] : undefined,
       url: canonical,
-      datePublished: new Date().toISOString().slice(0, 10),
-      dateModified: new Date().toISOString().slice(0, 10),
+      datePublished: publishedAt,
+      dateModified: publishedAt,
       author: { '@type': 'Organization', name: 'Phương Lâm' },
       publisher: { '@type': 'Organization', name: 'Phương Lâm' },
       mainEntityOfPage: canonical,
