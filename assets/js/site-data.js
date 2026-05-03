@@ -3410,6 +3410,17 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 16,
+    "title": "Vỏ Bưởi Khô Xông Nhà: Tác Dụng Và Cách Làm Đơn Giản Tại Nhà",
+    "excerpt": "Vỏ bưởi khô xông nhà giúp khử mùi ẩm mốc, đuổi muỗi và thanh lọc không khí tự nhiên. Hướng dẫn chi tiết cách phơi, cách xông và mẹo kết hợp thảo mộc từ…",
+    "date": "3 tháng 5, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "vo-buoi-kho-xong-nha-phuong-lam-202605031028",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/vo-buoi-kho-xong-nha-phuong-lam-202605031028/",
+    "image": "/assets/blog/vo-buoi-kho-xong-nha-phuong-lam-202605031028-featured-vo-buoi-kho-xong-nha.webp"
+  },
+  {
     "id": 15,
     "title": "Phụ Kiện Thắp Nến Bằng Gas: Tại Sao Nên Dùng Quẹt Gas Thay Bật Lửa? | Nến Phương Lâm",
     "excerpt": "Phụ kiện thắp nến bằng gas giúp mồi nến ly sâu, nến tealight an toàn hơn, không bỏng tay. So sánh quẹt gas, bật lửa điện và diêm — chọn loại nào tốt nhất…",
