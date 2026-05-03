@@ -444,6 +444,7 @@
     const API_GIT = 'api/git.php';
     const API_BLOG = 'api/blog.php';
     const API_BLOG_PREVIEW = 'api/blog-preview.php';
+    const PUBLIC_SITE_URL = 'https://phuonglam.com';
     const PASS_KEY = 'phuonglam_admin_password';
     const CATEGORY_ALIASES = { 'tinh-dau': 'bep-xong' };
     const normalizeCategoryId = value => CATEGORY_ALIASES[String(value || '')] || String(value || 'nen-thom');
@@ -488,6 +489,18 @@
     const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
     const jsString = value => JSON.stringify(String(value ?? '')).replace(/</g, '\\u003c');
     const jsAttr = value => esc(jsString(value));
+    const publicSiteUrl = value => {
+      const raw = String(value || '/').trim() || '/';
+      try {
+        const parsed = new URL(raw, PUBLIC_SITE_URL);
+        return `${PUBLIC_SITE_URL}${parsed.pathname}${parsed.search}${parsed.hash}`;
+      } catch {
+        return `${PUBLIC_SITE_URL}/${raw.replace(/^\/+/, '')}`;
+      }
+    };
+    const setBlogPosts = posts => {
+      blogPosts = Array.isArray(posts) ? posts.slice() : [];
+    };
     const parseNumberInput = value => {
       if (value === '' || value == null) return null;
       if (typeof value === 'number') return Number.isFinite(value) ? value : null;
@@ -616,7 +629,7 @@
         products = (productData.products || []).map(normalizeProduct);
         settings = normalizeSettings(settingData.settings || {});
         orders = Array.isArray(orderData.orders) ? orderData.orders : [];
-        blogPosts = blogData.ok ? (blogData.posts || []) : [];
+        setBlogPosts(blogData.ok ? (blogData.posts || []) : []);
         selectedId = products[0]?.id || null;
         render();
       } catch (error) {
@@ -943,21 +956,23 @@
         ${blogPosts.length === 0
           ? '<p class="muted">Chưa có bài viết nào.</p>'
           : `<div style="display:flex;flex-direction:column;gap:10px">
-            ${blogPosts.map(post => `
+            ${blogPosts.map(post => {
+              const viewUrl = publicSiteUrl(post.url || `/blog/${post.category}/${post.slug}/`);
+              return `
               <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f9fbf7;border:1px solid #dde8d8;border-radius:14px;padding:14px 18px;flex-wrap:wrap">
                 <div>
                   <div style="font-weight:700;color:#1f3a1a">${esc(post.title || post.slug)}</div>
                   <div class="muted" style="font-size:12px;margin-top:2px">${esc(post.categoryLabel || post.category)} / ${esc(post.slug)}</div>
                   <div class="muted" style="font-size:13px;margin-top:2px">
-                    <a href="${esc(post.url)}" target="_blank" style="color:#318223">Xem bài viết ↗</a>
+                    <a href="${esc(viewUrl)}" target="_blank" rel="noopener" style="color:#318223">Xem bài viết ↗</a>
                   </div>
                 </div>
                 <div style="display:flex;gap:8px">
-                  <button class="secondary small" onclick="window.open('${esc(post.url)}','_blank')">Xem</button>
+                  <button class="secondary small" onclick="window.open(${jsAttr(viewUrl)},'_blank','noopener')">Xem</button>
                   <button class="danger small" onclick="deleteBlogPost('${esc(post.category)}','${esc(post.slug)}')">Xoá</button>
                 </div>
               </div>
-            `).join('')}
+            `}).join('')}
           </div>`
         }
       `;
@@ -1102,8 +1117,8 @@
       try {
         const res = await fetch(API_BLOG, { cache: 'no-store' });
         const data = await readJsonResponse(res, 'API Blog');
-        if (data.ok) blogPosts = data.posts || [];
-      } catch { blogPosts = []; }
+        if (data.ok) setBlogPosts(data.posts || []);
+      } catch { setBlogPosts([]); }
     }
 
     async function saveBlogPost() {
@@ -1123,14 +1138,14 @@
         const res = await fetch(API_BLOG, { method: 'POST', body: form });
         const data = await readJsonResponse(res, 'API Blog');
         if (!data.ok) throw new Error(data.message || 'Lưu bài viết thất bại');
-        blogPosts = data.posts || blogPosts;
+        setBlogPosts(data.posts || blogPosts);
         blogZipFile = null;
         blogSlug = '';
         blogPreviewImages = [];
         blogImageReplacements = [];
         blogImageReplacementPreviews = [];
         blogPreviewError = '';
-        alert(`✅ Đã lưu local! Bài viết tại: ${data.url}\nSitemap và danh sách blog đã cập nhật. Bấm Preview để kiểm tra, ổn rồi bấm Push Git.`);
+        alert(`✅ Đã lưu local! Bài viết tại: ${publicSiteUrl(data.url)}\nSitemap và danh sách blog đã cập nhật. Bấm Preview để kiểm tra, ổn rồi bấm Push Git.`);
       } catch (error) {
         alert('Lỗi: ' + error.message);
       } finally {
@@ -1149,7 +1164,7 @@
         });
         const data = await readJsonResponse(res, 'API Blog');
         if (!data.ok) throw new Error(data.message || 'Xoá thất bại');
-        blogPosts = data.posts || blogPosts;
+        setBlogPosts(data.posts || blogPosts);
         render();
       } catch (error) {
         alert('Lỗi: ' + error.message);

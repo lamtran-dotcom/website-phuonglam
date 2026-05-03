@@ -626,24 +626,57 @@ const unpackBlogZip = ({ zipField, category, requestedSlug, imageOverrides = new
   }
 };
 
-// Scan blog/ directory and return list of posts
+const normalizeBlogPostForAdmin = (post) => {
+  const url = String(post.url || '');
+  const match = url.match(/^\/?blog\/([^/]+)\/([^/]+)\/?/);
+  const category = safeName(String(post.category || match?.[1] || ''));
+  const slug = safeName(String(post.slug || match?.[2] || ''));
+  if (!blogCategories[category] || !slug) return null;
+  return {
+    ...post,
+    category,
+    categoryLabel: blogCategories[category],
+    slug,
+    title: post.title || slug,
+    url: `/blog/${category}/${slug}/`,
+  };
+};
+
+// Return blog posts newest-first from BLOG_POSTS, then append any files not in site-data.
 const listBlogPosts = () => {
   const blogDir = path.join(root, 'blog');
   const posts = [];
   if (!fs.existsSync(blogDir)) return posts;
+  const seen = new Set();
+  for (const post of readBlogPostsFromSiteData().map(normalizeBlogPostForAdmin).filter(Boolean)) {
+    const htmlPath = path.join(blogDir, post.category, post.slug, 'index.html');
+    if (!fs.existsSync(htmlPath)) continue;
+    seen.add(`${post.category}/${post.slug}`);
+    posts.push(post);
+  }
+  const scanned = [];
   for (const cat of fs.readdirSync(blogDir)) {
     if (!blogCategories[cat]) continue;
     const catPath = path.join(blogDir, cat);
     if (!fs.statSync(catPath).isDirectory()) continue;
     for (const slug of fs.readdirSync(catPath)) {
+      if (seen.has(`${cat}/${slug}`)) continue;
       const htmlPath = path.join(catPath, slug, 'index.html');
       if (fs.existsSync(htmlPath)) {
         const html = fs.readFileSync(htmlPath, 'utf8');
-        posts.push({ category: cat, categoryLabel: blogCategories[cat], slug, title: getHtmlTitle(html), url: `/blog/${cat}/${slug}/` });
+        scanned.push({
+          category: cat,
+          categoryLabel: blogCategories[cat],
+          slug,
+          title: getHtmlTitle(html),
+          url: `/blog/${cat}/${slug}/`,
+          mtimeMs: fs.statSync(htmlPath).mtimeMs,
+        });
       }
     }
   }
-  return posts;
+  scanned.sort((a, b) => b.mtimeMs - a.mtimeMs);
+  return posts.concat(scanned.map(({ mtimeMs, ...post }) => post));
 };
 
 const handleApi = async (req, res, pathname) => {
