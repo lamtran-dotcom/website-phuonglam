@@ -313,8 +313,11 @@ const walkFiles = (dir) => {
 const getMetaContent = (html, selector) => {
   const attrPattern = selector.startsWith('property=') ? 'property' : 'name';
   const attrValue = selector.replace(/^(property|name)=/, '');
-  const pattern = new RegExp(`<meta[^>]+${attrPattern}=["']${escapeRegex(attrValue)}["'][^>]+content=["']([^"']+)["'][^>]*>`, 'i');
-  return html.match(pattern)?.[1] || '';
+  const metas = html.match(/<meta\b[^>]*>/gi) || [];
+  for (const tag of metas) {
+    if (getTagAttr(tag, attrPattern) === attrValue) return getTagAttr(tag, 'content');
+  }
+  return '';
 };
 
 const getHtmlTitle = (html) =>
@@ -324,6 +327,126 @@ const getDescription = (html) =>
   getMetaContent(html, 'name=description') ||
   stripHtml(html.match(/<p[^>]*class=["'][^"']*sapo[^"']*["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || '') ||
   truncate(stripHtml(html), 155);
+
+const getTagAttr = (tag = '', attr = '') => {
+  const match = tag.match(new RegExp(`\\s${escapeRegex(attr)}=["']([^"']*)["']`, 'i'));
+  return match?.[1] || '';
+};
+
+const extractJsonLd = (html, type) => {
+  const scripts = html.matchAll(/<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi);
+  for (const match of scripts) {
+    try {
+      const data = JSON.parse(match[1]);
+      const items = Array.isArray(data?.['@graph']) ? data['@graph'] : [data];
+      const found = items.find((item) => {
+        const itemType = item?.['@type'];
+        return Array.isArray(itemType) ? itemType.includes(type) : itemType === type;
+      });
+      if (found) return found;
+    } catch {
+      // Ignore invalid JSON-LD from uploaded drafts; save flow will write clean schema.
+    }
+  }
+  return null;
+};
+
+const setOrInsertTitle = (html, title) => {
+  const tag = `<title>${escapeHtml(title)}</title>`;
+  if (/<title[\s\S]*?<\/title>/i.test(html)) return html.replace(/<title[\s\S]*?<\/title>/i, tag);
+  return html.replace(/<head[^>]*>/i, (match) => `${match}\n  ${tag}`);
+};
+
+const setJsonLdByType = (html, type, schema) => {
+  let replaced = false;
+  const nextScript = `  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`;
+  html = html.replace(/<script\s+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi, (script, json) => {
+    if (replaced) return script;
+    try {
+      const data = JSON.parse(json);
+      const items = Array.isArray(data?.['@graph']) ? data['@graph'] : [data];
+      const hasType = items.some((item) => {
+        const itemType = item?.['@type'];
+        return Array.isArray(itemType) ? itemType.includes(type) : itemType === type;
+      });
+      if (!hasType) return script;
+      replaced = true;
+      return nextScript;
+    } catch {
+      if (!script.includes(type)) return script;
+      replaced = true;
+      return nextScript;
+    }
+  });
+  if (!replaced) html = html.replace(/<\/head>/i, `${nextScript}\n</head>`);
+  return html;
+};
+
+const findMatchingDivEnd = (html, startIndex) => {
+  const tagPattern = /<\/?div\b[^>]*>/gi;
+  tagPattern.lastIndex = startIndex;
+  let depth = 0;
+  for (let match = tagPattern.exec(html); match; match = tagPattern.exec(html)) {
+    if (match[0].startsWith('</')) depth -= 1;
+    else depth += 1;
+    if (depth === 0) return tagPattern.lastIndex;
+  }
+  return -1;
+};
+
+const extractImagePrompts = (html) => {
+  const prompts = [];
+  const classPattern = /<div\b[^>]*class=["'][^"']*\bimage-prompt\b[^"']*["'][^>]*>/gi;
+  for (let match = classPattern.exec(html); match; match = classPattern.exec(html)) {
+    const start = match.index;
+    const end = findMatchingDivEnd(html, start);
+    if (end === -1) continue;
+    const block = html.slice(start, end);
+    const openingTag = match[0];
+    const label = stripHtml(block.match(/<div[^>]+class=["'][^"']*\bimage-prompt-label\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || `Prompt ảnh ${prompts.length + 1}`);
+    const promptText = stripHtml(block.match(/<div[^>]+class=["'][^"']*\bimage-prompt-text\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || '');
+    const promptAlt = stripHtml(block.match(/<div[^>]+class=["'][^"']*\bimage-prompt-alt\b[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || '');
+    const filenameFromText = promptAlt.match(/(?:Tên file|File name)\s*:\s*([^·\n]+)/i)?.[1]?.trim() || '';
+    const altFromText = promptAlt.match(/Alt\s*:\s*["“]([^"”]+)["”]/i)?.[1]?.trim() || '';
+    prompts.push({
+      index: prompts.length,
+      start,
+      end,
+      block,
+      label,
+      prompt: promptText,
+      filename: getTagAttr(openingTag, 'data-filename') || filenameFromText,
+      alt: getTagAttr(openingTag, 'data-alt') || altFromText || label,
+    });
+    classPattern.lastIndex = end;
+  }
+  return prompts;
+};
+
+const promptImageToUrl = ({ file, prompt, slug, persist, tempDir }) => {
+  if (!file?.data || !file.filename) return '';
+  if (!persist) {
+    const type = file.type || 'image/jpeg';
+    return `data:${type};base64,${file.data.toString('base64')}`;
+  }
+  fs.mkdirSync(tempDir, { recursive: true });
+  const originalExt = path.extname(file.filename).toLowerCase() || (file.type?.includes('png') ? '.png' : '.jpg');
+  const promptBase = safeName(path.basename(prompt.filename || '', path.extname(prompt.filename || '')) || path.basename(file.filename, path.extname(file.filename)) || `anh-${prompt.index + 1}`);
+  const tempPath = path.join(tempDir, `${Date.now()}-${prompt.index + 1}-${promptBase}${originalExt}`);
+  fs.writeFileSync(tempPath, file.data);
+  return copyBlogAsset({ sourcePath: tempPath, slug });
+};
+
+const figureForPrompt = ({ prompt, src }) => {
+  const isFeatured = prompt.index === 0;
+  const alt = escapeHtml(prompt.alt || `Ảnh minh họa ${prompt.index + 1}`);
+  const loadingAttrs = isFeatured ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
+  const caption = prompt.alt ? `<figcaption>${escapeHtml(prompt.alt)}</figcaption>` : '';
+  return `<figure class="article-figure">
+      <img src="${escapeHtml(src)}" alt="${alt}"${loadingAttrs}>
+      ${caption}
+    </figure>`;
+};
 
 const setOrInsertHeadTag = (html, pattern, tag) => {
   if (pattern.test(html)) return html.replace(pattern, tag);
@@ -373,8 +496,8 @@ const copyBlogAsset = ({ sourcePath, slug }) => {
   return `/assets/blog/${outName}`;
 };
 
-const normalizeBlogHtml = ({ html, htmlPath, category, slug, imageOverrides = new Map(), tempDir = os.tmpdir() }) => {
-  const dir = path.dirname(htmlPath);
+const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides = new Map(), tempDir = os.tmpdir() }) => {
+  const dir = htmlPath ? path.dirname(htmlPath) : root;
   const publicUrl = `/blog/${category}/${slug}/`;
   const canonical = `${siteUrl}${publicUrl}`;
   const copied = new Map();
@@ -420,7 +543,12 @@ const normalizeBlogHtml = ({ html, htmlPath, category, slug, imageOverrides = ne
   const description = truncate(getDescription(html), 155);
   const image = html.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1] || '';
   const absoluteImage = image ? (image.startsWith('/') ? `${siteUrl}${image}` : image) : '';
+  const existingSchema = extractJsonLd(html, 'BlogPosting') || {};
+  const publishedAt = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/.test(String(existingSchema.datePublished || ''))
+    ? existingSchema.datePublished
+    : vietnamIsoDateTime();
 
+  html = setOrInsertTitle(html, title);
   html = setOrInsertHeadTag(html, /<link[^>]+rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${canonical}">`);
   html = setOrInsertHeadTag(html, /<meta[^>]+name=["']description["'][^>]*>/i, `<meta name="description" content="${escapeHtml(description)}">`);
   html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${escapeHtml(title)}">`);
@@ -430,25 +558,105 @@ const normalizeBlogHtml = ({ html, htmlPath, category, slug, imageOverrides = ne
   if (absoluteImage) {
     html = setOrInsertHeadTag(html, /<meta[^>]+property=["']og:image["'][^>]*>/i, `<meta property="og:image" content="${absoluteImage}">`);
   }
-  if (!/application\/ld\+json/i.test(html)) {
-    const publishedAt = vietnamIsoDateTime();
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: title,
-      description,
-      image: absoluteImage ? [absoluteImage] : undefined,
-      url: canonical,
-      datePublished: publishedAt,
-      dateModified: publishedAt,
-      author: { '@type': 'Organization', name: 'Phương Lâm' },
-      publisher: { '@type': 'Organization', name: 'Phương Lâm' },
-      mainEntityOfPage: canonical,
-    };
-    html = html.replace(/<\/head>/i, `  <script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>\n</head>`);
-  }
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: absoluteImage ? [absoluteImage] : undefined,
+    url: canonical,
+    datePublished: publishedAt,
+    dateModified: vietnamIsoDateTime(),
+    author: { '@type': 'Organization', name: 'Phương Lâm' },
+    publisher: { '@type': 'Organization', name: 'Phương Lâm' },
+    mainEntityOfPage: canonical,
+  };
+  html = setJsonLdByType(html, 'BlogPosting', schema);
 
   return { html, meta: { title, description, image, url: publicUrl, tag: blogCategories[category] || 'Kiến thức' } };
+};
+
+const getUploadedBlogHtml = (fields) => {
+  const htmlField = fields.html || fields.file;
+  if (!htmlField) throw new Error('Thiếu file HTML bài viết');
+  if (typeof htmlField === 'string') return { html: htmlField, filename: 'blog.html' };
+  if (!htmlField.data) throw new Error('File HTML bài viết không hợp lệ');
+  if (!/\.html?$/i.test(htmlField.filename || '')) throw new Error('Vui lòng upload file .html, không dùng ZIP');
+  const html = htmlField.data.toString('utf8');
+  if (!html.includes('<html') && !html.includes('<!DOCTYPE')) throw new Error('File HTML không hợp lệ');
+  return { html, filename: htmlField.filename || 'blog.html' };
+};
+
+const getPromptImageFiles = (fields) => {
+  const files = [];
+  for (const [key, value] of Object.entries(fields)) {
+    const match = key.match(/^blogImage(\d+)$/);
+    if (!match || !value?.data || !value.filename) continue;
+    files[Number(match[1])] = value;
+  }
+  return files;
+};
+
+const replaceImagePromptsWithFigures = ({ html, prompts, imageFiles, slug, persist, tempDir }) => {
+  let nextHtml = html;
+  for (const prompt of [...prompts].reverse()) {
+    const file = imageFiles[prompt.index];
+    if (!file?.data || !file.filename) throw new Error(`Thiếu ảnh cho prompt ${prompt.index + 1}`);
+    const src = promptImageToUrl({ file, prompt, slug, persist, tempDir });
+    nextHtml = nextHtml.slice(0, prompt.start) + figureForPrompt({ prompt, src }) + nextHtml.slice(prompt.end);
+  }
+  return nextHtml;
+};
+
+const seoStatus = (ok, label, message, level = 'warn') => ({
+  level: ok ? 'ok' : level,
+  label,
+  message,
+});
+
+const auditBlogSeo = ({ html, prompts = [] }) => {
+  const title = stripHtml(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '');
+  const h1Count = (html.match(/<h1\b/gi) || []).length;
+  const description = getMetaContent(html, 'name=description') || getDescription(html);
+  const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)?.[1] || '';
+  const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
+  const missingAlt = imageTags.filter(tag => !/\salt=["'][^"']+["']/i.test(tag)).length;
+  const schema = extractJsonLd(html, 'BlogPosting');
+  const hasPromptBlocks = /class=["'][^"']*\bimage-prompt\b/i.test(html);
+  const hasLocalUrl = /(?:localhost|127\.0\.0\.1|file:\/\/)/i.test(html);
+  return [
+    seoStatus(title.length >= 35 && title.length <= 70, 'Title SEO', title ? `${title.length} ký tự` : 'Thiếu thẻ title', title ? 'warn' : 'error'),
+    seoStatus(description.length >= 80 && description.length <= 160, 'Meta description', description ? `${description.length} ký tự` : 'Thiếu meta description', description ? 'warn' : 'error'),
+    seoStatus(h1Count === 1, 'H1', h1Count === 1 ? 'Có đúng 1 H1' : `Đang có ${h1Count} H1`, h1Count ? 'warn' : 'error'),
+    seoStatus(Boolean(canonical), 'Canonical', canonical || 'Thiếu canonical', 'warn'),
+    seoStatus(!hasLocalUrl, 'URL public', hasLocalUrl ? 'Có link localhost/file:// cần bỏ trước khi lưu' : 'Không có URL local', 'error'),
+    seoStatus(!missingAlt, 'Alt ảnh', missingAlt ? `${missingAlt} ảnh thiếu alt` : 'Ảnh có alt đầy đủ', 'warn'),
+    seoStatus(Boolean(schema), 'Schema BlogPosting', schema ? 'Có schema bài viết' : 'Khi lưu admin sẽ tự tạo schema BlogPosting', 'warn'),
+    seoStatus(prompts.length > 0 || imageTags.length > 0, 'Ảnh theo ngữ cảnh', prompts.length ? `${prompts.length} prompt ảnh cần upload` : `${imageTags.length} ảnh trong bài`, 'warn'),
+    seoStatus(!hasPromptBlocks, 'Prompt nội bộ', hasPromptBlocks ? 'Prompt sẽ được thay bằng ảnh khi lưu' : 'Không còn prompt trong HTML', 'warn'),
+  ];
+};
+
+const buildBlogHtmlUpload = ({ fields, persist }) => {
+  const category = safeName(String(fields.category || ''));
+  if (!blogCategories[category]) throw new Error('Danh mục bài viết chỉ được chọn Hướng dẫn hoặc Kiến thức');
+  const { html: rawHtml, filename } = getUploadedBlogHtml(fields);
+  const canonicalPath = rawHtml.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)?.[1] || '';
+  const canonicalSlug = canonicalPath.split('?')[0].replace(/\/$/, '').split('/').pop();
+  const slug = safeName(fields.slug || canonicalSlug || path.basename(filename, path.extname(filename)));
+  if (!slug) throw new Error('Không xác định được slug bài viết');
+  const prompts = extractImagePrompts(rawHtml);
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-blog-html-'));
+  try {
+    const imageFiles = getPromptImageFiles(fields);
+    const htmlWithImages = prompts.length
+      ? replaceImagePromptsWithFigures({ html: rawHtml, prompts, imageFiles, slug, persist, tempDir })
+      : rawHtml;
+    const normalized = normalizeBlogHtml({ html: htmlWithImages, category, slug, tempDir });
+    return { category, slug, prompts, normalized };
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
 };
 
 const readBlogPostsFromSiteData = () => {
@@ -757,24 +965,43 @@ const handleApi = async (req, res, pathname) => {
     if (pathname === '/api/blog-preview.php' && req.method === 'POST') {
       const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
       if (!fields) throw new Error('Không đọc được dữ liệu form');
-      const zipField = fields.zip || fields.file;
-      if (!zipField || !zipField.data) throw new Error('Thiếu file ZIP bài viết');
-      if (!/\.zip$/i.test(zipField.filename || '')) throw new Error('Vui lòng upload file .zip gồm HTML và ảnh');
-      sendJson(res, { ok: true, images: collectBlogPreviewImages(zipField) });
+      if (fields.render === '1') {
+        const result = buildBlogHtmlUpload({ fields, persist: false });
+        sendJson(res, {
+          ok: true,
+          slug: result.slug,
+          title: result.normalized.meta.title,
+          prompts: result.prompts.map(({ block, start, end, ...prompt }) => prompt),
+          seo: auditBlogSeo({ html: result.normalized.html, prompts: [] }),
+          previewHtml: result.normalized.html,
+        });
+        return true;
+      }
+      const { html, filename } = getUploadedBlogHtml(fields);
+      const prompts = extractImagePrompts(html);
+      const canonicalPath = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)?.[1] || '';
+      const canonicalSlug = canonicalPath.split('?')[0].replace(/\/$/, '').split('/').pop();
+      const slug = safeName(fields.slug || canonicalSlug || path.basename(filename, path.extname(filename)));
+      sendJson(res, {
+        ok: true,
+        slug,
+        title: getHtmlTitle(html),
+        prompts: prompts.map(({ block, start, end, ...prompt }) => prompt),
+        seo: auditBlogSeo({ html, prompts }),
+      });
       return true;
     }
 
     if (pathname === '/api/blog.php' && req.method === 'POST') {
       const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
       if (!fields) throw new Error('Không đọc được dữ liệu form');
-      const category = safeName(String(fields.category || ''));
-      if (!blogCategories[category]) throw new Error('Danh mục bài viết chỉ được chọn Hướng dẫn hoặc Kiến thức');
-      const zipField = fields.zip || fields.file;
-      if (!zipField || !zipField.data) throw new Error('Thiếu file ZIP bài viết');
-      if (!/\.zip$/i.test(zipField.filename || '')) throw new Error('Vui lòng upload file .zip gồm HTML và ảnh');
-      const result = unpackBlogZip({ zipField, category, requestedSlug: fields.slug, imageOverrides: extractBlogImageOverrides(fields) });
+      const result = buildBlogHtmlUpload({ fields, persist: true });
+      const outDir = path.join(root, 'blog', result.category, result.slug);
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(path.join(outDir, 'index.html'), result.normalized.html);
+      upsertBlogPost({ category: result.category, slug: result.slug, meta: result.normalized.meta });
       runBuild();
-      sendJson(res, { ok: true, url: result.url, slug: result.slug, posts: listBlogPosts() });
+      sendJson(res, { ok: true, url: `/blog/${result.category}/${result.slug}/`, slug: result.slug, posts: listBlogPosts() });
       return true;
     }
 

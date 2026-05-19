@@ -381,7 +381,7 @@
     .picker-price { color: var(--green); font-size: 12px; font-weight: 900; margin-top: 5px; }
     .blog-image-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
       gap: 12px;
       margin-top: 12px;
     }
@@ -394,6 +394,7 @@
     .blog-image-card .image-box {
       border-radius: 12px;
       font-size: 12px;
+      aspect-ratio: 16 / 10;
     }
     .blog-image-name {
       margin-top: 7px;
@@ -403,6 +404,45 @@
       color: #465742;
       overflow-wrap: anywhere;
     }
+    .blog-prompt-text {
+      margin-top: 7px;
+      padding: 9px;
+      border-radius: 10px;
+      background: #f7fbf5;
+      color: #61715d;
+      font-size: 11px;
+      line-height: 1.45;
+      max-height: 94px;
+      overflow: auto;
+    }
+    .blog-seo-checks {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .blog-seo-check {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 9px 11px;
+      border-radius: 12px;
+      border: 1px solid #dde8d8;
+      background: #fff;
+      font-size: 12px;
+    }
+    .blog-seo-check.ok { background: #f2fbef; border-color: #cbe7c3; }
+    .blog-seo-check.warn { background: #fffaf0; border-color: #f3ddaa; }
+    .blog-seo-check.error { background: #fff5f5; border-color: #ffd0d0; }
+    .blog-seo-dot {
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      margin-top: 4px;
+      background: #d98221;
+    }
+    .blog-seo-check.ok .blog-seo-dot { background: var(--green); }
+    .blog-seo-check.error .blog-seo-dot { background: var(--danger); }
     .blog-image-actions {
       display: grid;
       grid-template-columns: 1fr;
@@ -482,6 +522,7 @@
     let blogImageReplacementPreviews = [];
     let blogPreviewLoading = false;
     let blogPreviewError = '';
+    let blogSeoChecks = [];
     let blogSaving = false;
     const app = document.getElementById('app');
 
@@ -894,34 +935,36 @@
         ['kien-thuc', 'Kiến thức'],
       ];
       const fileName = blogZipFile ? blogZipFile.name : '';
-      const slugPreview = blogSlug || (fileName ? slugifyVi(fileName.replace(/\.zip$/i, '')) : '');
+      const slugPreview = blogSlug || (fileName ? slugifyVi(fileName.replace(/\.html?$/i, '')) : '');
+      const missingImages = missingBlogPromptImages();
       return `
         <h2>Bài viết blog</h2>
-        <p class="muted">Upload 1 file ZIP gồm file HTML và thư mục ảnh. Admin sẽ tự bung ZIP, nén/copy ảnh vào <code>assets/blog</code>, chuẩn hóa canonical/meta/schema cơ bản, cập nhật danh sách blog và sitemap.</p>
+        <p class="muted">Upload 1 file HTML chuẩn SEO. Nếu bài có các khối <code>image-prompt</code>, admin sẽ tạo ô thêm ảnh tương ứng, ghép ảnh vào đúng vị trí prompt, xoá prompt nội bộ, chuẩn hoá canonical/meta/schema và cập nhật sitemap.</p>
 
         <div style="background:#f7fbf5;border:2px dashed #b2d9a8;border-radius:18px;padding:28px 24px;margin-bottom:22px">
           <h3 style="margin:0 0 18px;font-size:17px">Đăng bài viết mới</h3>
 
-          <label>Chọn file ZIP bài viết</label>
+          <label>Chọn file HTML bài viết</label>
           <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
             <label style="
               display:inline-flex;align-items:center;gap:8px;
               background:#318223;color:#fff;font-weight:900;font-size:14px;
               padding:10px 18px;border-radius:12px;cursor:pointer;margin:0
             ">
-              📦 Chọn file .zip
-              <input type="file" accept=".zip,application/zip" style="display:none" onchange="
-                handleBlogZipChange(this.files[0]);
+              📄 Chọn file .html
+              <input type="file" accept=".html,.htm,text/html" style="display:none" onchange="
+                handleBlogHtmlChange(this.files[0]);
                 this.value = '';
               " />
             </label>
             ${blogZipFile
-              ? `<span style="color:#318223;font-weight:700">✓ ${esc(blogZipFile.name)}</span><button class="danger small" onclick="clearBlogZip()">✕</button>`
+              ? `<span style="color:#318223;font-weight:700">✓ ${esc(blogZipFile.name)}</span><button class="danger small" onclick="clearBlogHtml()">✕</button>`
               : `<span class="muted" style="font-size:13px">Chưa chọn file</span>`
             }
           </div>
 
           ${blogZipFile ? blogImagePreviewHtml() : ''}
+          ${blogSeoHtml()}
 
           <div class="row" style="margin-top:14px">
             <div>
@@ -931,7 +974,7 @@
               </select>
             </div>
             <div>
-              <label>Slug bài viết <span class="muted">(có thể để tự lấy từ ZIP/canonical)</span></label>
+              <label>Slug bài viết <span class="muted">(có thể để tự lấy từ file HTML/canonical)</span></label>
               <input value="${esc(blogSlug)}" placeholder="vd: den-xong-tinh-dau-bang-nen-cach-dung-dung" oninput="blogSlug=this.value" />
             </div>
           </div>
@@ -944,11 +987,12 @@
           ` : ''}
 
           <div style="margin-top:18px">
-            <button onclick="saveBlogPost()" ${blogSaving || !apiOnline || !blogZipFile ? 'disabled' : ''}>
+            <button onclick="saveBlogPost()" ${blogSaving || blogPreviewLoading || !apiOnline || !blogZipFile || missingImages ? 'disabled' : ''}>
               ${blogSaving ? 'Đang lưu...' : '💾 Lưu local bài viết'}
             </button>
-            <button class="secondary" onclick="previewWebsite()">Preview</button>
+            <button class="secondary" onclick="previewBlogPost()" ${blogPreviewLoading || !apiOnline || !blogZipFile || missingImages ? 'disabled' : ''}>Preview bài hoàn chỉnh</button>
             ${!apiOnline ? '<span class="muted" style="font-size:13px;margin-left:10px">Chỉ lưu được khi chạy admin local bằng node</span>' : ''}
+            ${missingImages ? '<span class="muted" style="font-size:13px;margin-left:10px;color:#b45f00;font-weight:800">Cần thêm đủ ảnh cho các prompt trước khi preview/lưu.</span>' : ''}
           </div>
         </div>
 
@@ -979,17 +1023,16 @@
     }
 
     function blogImagePreviewHtml() {
-      const slotCount = 5;
       return `
         <div style="margin-top:18px">
-          <label>Ảnh trong bài viết <span class="muted">(bấm vào ô để thay ảnh trước khi lưu)</span></label>
-          ${blogPreviewLoading ? '<p class="muted" style="margin:8px 0 0">Đang đọc ảnh trong ZIP...</p>' : ''}
+          <label>Ảnh theo prompt trong bài viết <span class="muted">(upload đúng ảnh vào từng vị trí prompt)</span></label>
+          ${blogPreviewLoading ? '<p class="muted" style="margin:8px 0 0">Đang đọc prompt ảnh trong HTML...</p>' : ''}
           ${blogPreviewError ? `<p style="margin:8px 0 0;color:#b45f00;font-weight:800">${esc(blogPreviewError)}</p>` : ''}
           ${!blogPreviewLoading && blogPreviewImages.length === 0
-            ? '<p class="muted" style="margin:8px 0 0">Chưa tìm thấy ảnh nội bộ trong ZIP. Bài vẫn lưu bình thường.</p>'
+            ? '<p class="muted" style="margin:8px 0 0">Chưa tìm thấy khối <code>image-prompt</code>. Bài vẫn lưu được nếu HTML đã có ảnh hoàn chỉnh.</p>'
             : ''}
           <div class="blog-image-grid">
-            ${Array.from({ length: slotCount }).map((_, index) => blogImageSlotHtml(index)).join('')}
+            ${blogPreviewImages.map((_, index) => blogImageSlotHtml(index)).join('')}
           </div>
         </div>
       `;
@@ -998,21 +1041,54 @@
     function blogImageSlotHtml(index) {
       const image = blogPreviewImages[index] || null;
       const replacementPreview = blogImageReplacementPreviews[index] || '';
-      const preview = replacementPreview || image?.dataUrl || '';
-      const label = blogImageReplacements[index]?.name || image?.label || `Ảnh ${index + 1}`;
+      const preview = replacementPreview || '';
+      const label = blogImageReplacements[index]?.name || image?.label || `Prompt ảnh ${index + 1}`;
+      const promptText = image?.prompt || '';
+      const altText = image?.alt || '';
+      const fileHint = image?.filename || '';
       const canReplace = Boolean(image);
       return `
         <div class="blog-image-card">
           <div class="image-box" ${canReplace ? `onclick="pickBlogImageReplacement(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropBlogImageReplacement(event, ${index})"` : ''}>
-            ${preview ? `<img src="${esc(preview)}" />` : `<span>${canReplace ? '+' : ''}<br>Ảnh ${index + 1}</span>`}
+            ${preview ? `<img src="${esc(preview)}" />` : `<span>+<br>Thêm ảnh ${index + 1}</span>`}
           </div>
-          <div class="blog-image-name">${esc(label)}${replacementPreview ? '<br><span class="muted">Đã chọn ảnh thay thế</span>' : ''}</div>
+          <div class="blog-image-name">
+            ${esc(label)}
+            ${replacementPreview ? '<br><span class="muted">Đã chọn ảnh cho prompt này</span>' : '<br><span class="muted">Chưa chọn ảnh</span>'}
+            ${altText ? `<br><span class="muted">Alt: ${esc(altText)}</span>` : ''}
+            ${fileHint ? `<br><span class="muted">Tên file gợi ý: ${esc(fileHint)}</span>` : ''}
+          </div>
+          ${promptText ? `<div class="blog-prompt-text">${esc(promptText)}</div>` : ''}
           <div class="blog-image-actions">
-            <button class="secondary small" onclick="pickBlogImageReplacement(${index})" ${canReplace ? '' : 'disabled'}>Thay ảnh</button>
-            ${replacementPreview ? `<button class="danger small" onclick="clearBlogImageReplacement(${index})">Bỏ thay</button>` : ''}
+            <button class="secondary small" onclick="pickBlogImageReplacement(${index})" ${canReplace ? '' : 'disabled'}>${replacementPreview ? 'Đổi ảnh' : 'Thêm ảnh'}</button>
+            ${replacementPreview ? `<button class="danger small" onclick="clearBlogImageReplacement(${index})">Bỏ ảnh</button>` : ''}
           </div>
         </div>
       `;
+    }
+
+    function blogSeoHtml() {
+      if (!blogZipFile || blogSeoChecks.length === 0) return '';
+      return `
+        <div style="margin-top:18px">
+          <label>Kiểm tra SEO trước khi lưu</label>
+          <div class="blog-seo-checks">
+            ${blogSeoChecks.map(check => `
+              <div class="blog-seo-check ${esc(check.level || 'warn')}">
+                <span class="blog-seo-dot"></span>
+                <div>
+                  <strong>${esc(check.label || '')}</strong>
+                  <div class="muted">${esc(check.message || '')}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function missingBlogPromptImages() {
+      return blogPreviewImages.some((_, index) => !blogImageReplacements[index]);
     }
 
     function slugifyVi(text) {
@@ -1024,7 +1100,7 @@
         .replace(/^-+|-+$/g, '');
     }
 
-    function clearBlogZip() {
+    function clearBlogHtml() {
       blogZipFile = null;
       blogSlug = '';
       blogPreviewImages = [];
@@ -1032,41 +1108,48 @@
       blogImageReplacementPreviews = [];
       blogPreviewLoading = false;
       blogPreviewError = '';
+      blogSeoChecks = [];
       render();
     }
 
-    function handleBlogZipChange(file) {
+    function handleBlogHtmlChange(file) {
       blogZipFile = file || null;
       blogPreviewImages = [];
       blogImageReplacements = [];
       blogImageReplacementPreviews = [];
       blogPreviewError = '';
+      blogSeoChecks = [];
       if (blogZipFile && !blogSlug) {
-        blogSlug = slugifyVi(blogZipFile.name.replace(/\.zip$/i,''));
+        blogSlug = slugifyVi(blogZipFile.name.replace(/\.html?$/i,''));
       }
       render();
-      if (blogZipFile && apiOnline) loadBlogZipPreview();
+      if (blogZipFile && apiOnline) loadBlogHtmlPreview();
     }
 
-    async function loadBlogZipPreview() {
+    async function loadBlogHtmlPreview() {
       if (!blogZipFile) return;
       blogPreviewLoading = true;
       render();
       try {
         const form = new FormData();
-        form.append('zip', blogZipFile, blogZipFile.name);
+        if (blogCategory) form.append('category', blogCategory);
+        if (blogSlug) form.append('slug', blogSlug);
+        form.append('html', blogZipFile, blogZipFile.name);
         const res = await fetch(API_BLOG_PREVIEW, { method: 'POST', body: form });
-        const data = await readJsonResponse(res, 'API xem ảnh ZIP');
-        if (!data.ok) throw new Error(data.message || 'Không đọc được ảnh trong ZIP');
-        blogPreviewImages = Array.isArray(data.images) ? data.images.slice(0, 5) : [];
+        const data = await readJsonResponse(res, 'API đọc HTML bài viết');
+        if (!data.ok) throw new Error(data.message || 'Không đọc được prompt trong HTML');
+        blogPreviewImages = Array.isArray(data.prompts) ? data.prompts : [];
         blogImageReplacements = Array.from({ length: blogPreviewImages.length });
         blogImageReplacementPreviews = Array.from({ length: blogPreviewImages.length });
+        blogSeoChecks = Array.isArray(data.seo) ? data.seo : [];
+        if (!blogSlug && data.slug) blogSlug = data.slug;
         blogPreviewError = '';
       } catch (error) {
         blogPreviewImages = [];
+        blogSeoChecks = [];
         blogPreviewError = error.message.includes('không đúng định dạng JSON') || error.message.includes('404')
-          ? 'Server admin đang chạy bản cũ. Hãy tắt/mở lại admin local để dùng chức năng thay ảnh trong ZIP.'
-          : `Không đọc được ảnh trong ZIP: ${error.message}`;
+          ? 'Server admin đang chạy bản cũ. Hãy tắt/mở lại admin local để dùng chức năng upload HTML + prompt ảnh.'
+          : `Không đọc được HTML: ${error.message}`;
       } finally {
         blogPreviewLoading = false;
         render();
@@ -1121,20 +1204,60 @@
       } catch { setBlogPosts([]); }
     }
 
+    function buildBlogForm({ renderPreview = false } = {}) {
+      const slug = blogSlug || slugifyVi((blogZipFile?.name || '').replace(/\.html?$/i, ''));
+      const form = new FormData();
+      form.append('category', blogCategory);
+      if (slug) form.append('slug', slug);
+      if (renderPreview) form.append('render', '1');
+      form.append('html', blogZipFile, blogZipFile.name);
+      blogImageReplacements.forEach((file, index) => {
+        if (file && blogPreviewImages[index]) form.append(`blogImage${index}`, file, file.name);
+      });
+      return { form, slug };
+    }
+
+    async function previewBlogPost() {
+      if (!blogZipFile) return;
+      if (missingBlogPromptImages()) {
+        alert('Hãy thêm đủ ảnh cho các prompt trước khi preview.');
+        return;
+      }
+      const previewWindow = window.open('', '_blank');
+      if (previewWindow) {
+        previewWindow.document.write('<p style="font-family:sans-serif;padding:24px">Đang dựng preview bài viết...</p>');
+      }
+      try {
+        const { form } = buildBlogForm({ renderPreview: true });
+        const res = await fetch(API_BLOG_PREVIEW, { method: 'POST', body: form });
+        const data = await readJsonResponse(res, 'API preview bài viết');
+        if (!data.ok) throw new Error(data.message || 'Không tạo được preview bài viết');
+        blogSeoChecks = Array.isArray(data.seo) ? data.seo : blogSeoChecks;
+        if (previewWindow) {
+          previewWindow.document.open();
+          previewWindow.document.write(data.previewHtml || '');
+          previewWindow.document.close();
+        } else {
+          alert('Trình duyệt đang chặn popup preview. Hãy cho phép popup rồi bấm lại.');
+        }
+      } catch (error) {
+        if (previewWindow) previewWindow.close();
+        alert('Lỗi preview: ' + error.message);
+      } finally {
+        render();
+      }
+    }
+
     async function saveBlogPost() {
       if (!blogZipFile) return;
-      const slug = blogSlug || slugifyVi(blogZipFile.name.replace(/\.zip$/i, ''));
+      if (missingBlogPromptImages()) {
+        alert('Hãy thêm đủ ảnh cho các prompt trước khi lưu.');
+        return;
+      }
       blogSaving = true;
       render();
       try {
-        const form = new FormData();
-        form.append('category', blogCategory);
-        if (slug) form.append('slug', slug);
-        form.append('zip', blogZipFile, blogZipFile.name);
-        form.append('blogImageTargets', JSON.stringify(blogPreviewImages.map(image => image.assetUrl || '')));
-        blogImageReplacements.forEach((file, index) => {
-          if (file && blogPreviewImages[index]) form.append(`blogImage${index}`, file, file.name);
-        });
+        const { form } = buildBlogForm();
         const res = await fetch(API_BLOG, { method: 'POST', body: form });
         const data = await readJsonResponse(res, 'API Blog');
         if (!data.ok) throw new Error(data.message || 'Lưu bài viết thất bại');
@@ -1145,6 +1268,7 @@
         blogImageReplacements = [];
         blogImageReplacementPreviews = [];
         blogPreviewError = '';
+        blogSeoChecks = [];
         alert(`✅ Đã lưu local! Bài viết tại: ${publicSiteUrl(data.url)}\nSitemap và danh sách blog đã cập nhật. Bấm Preview để kiểm tra, ổn rồi bấm Push Git.`);
       } catch (error) {
         alert('Lỗi: ' + error.message);
