@@ -101,6 +101,12 @@ const safeName = (name) =>
     .replace(/^-+|-+$/g, '');
 
 const stripHtml = (value = '') => String(value).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+const normalizeText = (value = '') => String(value)
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .replace(/đ/g, 'd')
+  .trim();
 const escapeRegex = (value = '') => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const escapeHtml = (value = '') =>
   String(value)
@@ -448,6 +454,120 @@ const figureForPrompt = ({ prompt, src }) => {
     </figure>`;
 };
 
+const articleHeaderHtml = `<header class="seo-header">
+    <div class="seo-header-inner">
+    <a class="seo-logo" href="/" aria-label="Phương Lâm">
+      <img src="/assets/media/generated/embedded-001.png" alt="Phương Lâm" />
+    </a>
+    <input class="seo-menu-toggle" type="checkbox" id="seo-menu-toggle" aria-label="Mở menu" />
+    <nav class="seo-nav" aria-label="Điều hướng chính">
+      <a href="/danh-muc/nen-thom/">Nến Tealight Xông</a>
+      <a href="/danh-muc/combo/">Combo Xông Nhà</a>
+      <a href="/danh-muc/thao-moc-xong/">Thảo Mộc Xông</a>
+      <a href="/danh-muc/bep-xong/">Đèn Xông Tinh Dầu</a>
+      <a href="/danh-muc/phu-kien/">Phụ Kiện Xông</a>
+      <a href="/blog/">Hướng Dẫn</a>
+    </nav>
+    <div class="seo-actions">
+      <a class="seo-icon-link" href="/?search=open" aria-label="Tìm kiếm">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path>
+        </svg>
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+      <label class="seo-menu-btn" for="seo-menu-toggle" aria-label="Mở menu"><span class="seo-menu-icon"></span></label>
+    </div>
+    </div>
+  </header>`;
+
+const articleFooterHtml = `<footer class="seo-footer">
+    <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
+    <div>Zalo/Hotline: 077 3829 593</div>
+  </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>`;
+
+const articleShellStyle = `<style id="phuonglam-article-shell-style">
+    body { background: #fff; }
+    .article-wrap { width: min(100% - 32px, 820px); }
+    .article-breadcrumb {
+      max-width: 820px;
+      margin: 0 auto 24px;
+      color: #6e796b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .article-breadcrumb a { color: #318223; font-weight: 800; text-decoration: none; }
+    .article-breadcrumb a:hover { text-decoration: underline; }
+    .article-link-panel {
+      margin: 52px 0 0;
+      padding: 24px;
+      border: 1px solid #dde8d8;
+      border-radius: 16px;
+      background: #f7fbf5;
+    }
+    .article-link-panel h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      line-height: 1.35;
+      color: #17351a;
+    }
+    .article-link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 22px;
+    }
+    .article-link-card {
+      display: block;
+      border: 1px solid #dbe8d7;
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px 14px;
+      color: #21351f !important;
+      text-decoration: none !important;
+      font-weight: 900 !important;
+      line-height: 1.35;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .article-link-card span {
+      display: block;
+      color: #6e796b;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .article-link-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(49, 130, 35, .35);
+      box-shadow: 0 12px 24px rgba(22, 63, 22, .12);
+    }
+    .article-related-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .article-related-list a {
+      display: block;
+      color: #318223 !important;
+      font-weight: 800 !important;
+      text-decoration: none !important;
+      line-height: 1.45;
+    }
+    .article-related-list a:hover { text-decoration: underline !important; }
+    @media (max-width: 720px) {
+      .article-wrap { width: min(100% - 28px, 820px); }
+      .article-link-panel { padding: 18px; }
+      .article-link-grid { grid-template-columns: 1fr; }
+    }
+  </style>`;
+
 const articleFigureStyle = `<style id="phuonglam-article-figure-style">
     .article-figure {
       width: 100%;
@@ -481,12 +601,116 @@ const articleFigureStyle = `<style id="phuonglam-article-figure-style">
     }
   </style>`;
 
+const articleStaticRuntimeScript = `<script id="phuonglam-article-static-runtime">
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+  };
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  updateCartCount();
+})();
+</script>`;
+
 const ensureArticleFigureStyle = (html) => {
   if (!/<figure\b[^>]*class=["'][^"']*\barticle-figure\b/i.test(html)) return html;
   if (/<style\b[^>]*id=["']phuonglam-article-figure-style["'][^>]*>/i.test(html)) {
     return html.replace(/<style\b[^>]*id=["']phuonglam-article-figure-style["'][^>]*>[\s\S]*?<\/style>/i, articleFigureStyle);
   }
   return html.replace(/<\/head>/i, `${articleFigureStyle}\n</head>`);
+};
+
+const ensureArticleShellStyle = (html) => {
+  if (/<style\b[^>]*id=["']phuonglam-article-shell-style["'][^>]*>/i.test(html)) {
+    return html.replace(/<style\b[^>]*id=["']phuonglam-article-shell-style["'][^>]*>[\s\S]*?<\/style>/i, articleShellStyle);
+  }
+  return html.replace(/<\/head>/i, `${articleShellStyle}\n</head>`);
+};
+
+const ensureStaticSeoCss = (html) => {
+  if (/static-seo\.css/i.test(html)) return html;
+  return html.replace(/<\/head>/i, `  <link rel="stylesheet" href="/assets/css/static-seo.css">\n</head>`);
+};
+
+const articleRelatedBlock = ({ title, category }) => {
+  const categoryCards = [
+    { href: '/danh-muc/combo/', title: 'Combo Xông Nhà', desc: 'Bộ đầy đủ cho người mới' },
+    { href: '/danh-muc/thao-moc-xong/', title: 'Thảo Mộc Xông', desc: 'Bồ kết, vỏ bưởi, quế, sả' },
+    { href: '/danh-muc/bep-xong/', title: 'Đèn Xông Tinh Dầu', desc: 'Bếp xông và đèn xông nến' },
+  ];
+  const related = [
+    { href: '/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/', title: 'Bộ xông thảo mộc bao gồm những gì?' },
+    { href: '/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/', title: 'Hướng dẫn dùng bếp xông thảo mộc đúng cách' },
+    { href: '/blog/huong-dan-xong/vo-buoi-kho-xong-nha-phuong-lam-202605031028/', title: 'Vỏ bưởi khô xông nhà: tác dụng và cách làm' },
+  ].filter((item) => !title || !normalizeText(item.title).includes(normalizeText(title).slice(0, 26)));
+  return `<section class="article-link-panel" aria-label="Đi tiếp trong website Phương Lâm">
+        <h2>Tiếp tục khám phá tại Phương Lâm</h2>
+        <div class="article-link-grid">
+          ${categoryCards.map((card) => `<a class="article-link-card" href="${card.href}">${card.title}<span>${card.desc}</span></a>`).join('\n          ')}
+        </div>
+        <h2>Bài viết liên quan</h2>
+        <ul class="article-related-list">
+          ${related.slice(0, 3).map((item) => `<li><a href="${item.href}">${item.title} →</a></li>`).join('\n          ')}
+          <li><a href="/blog/">${category === 'kien-thuc' ? 'Xem thêm kiến thức' : 'Xem thêm hướng dẫn'} từ Phương Lâm →</a></li>
+        </ul>
+      </section>`;
+};
+
+const breadcrumbForArticle = ({ title, category }) => `<nav class="article-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Trang chủ</a> / <a href="/blog/">Hướng Dẫn</a> / <span>${escapeHtml(title || blogCategories[category] || 'Bài viết')}</span>
+    </nav>`;
+
+const articleBreadcrumbSchema = ({ title, category, canonical }) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Hướng Dẫn', item: `${siteUrl}/blog/` },
+    { '@type': 'ListItem', position: 3, name: title || blogCategories[category] || 'Bài viết', item: canonical },
+  ],
+});
+
+const ensureBlogArticleShell = ({ html, title, category }) => {
+  let nextHtml = ensureStaticSeoCss(html);
+  nextHtml = ensureArticleShellStyle(nextHtml);
+  nextHtml = nextHtml.replace(/<header\b[^>]*class=["'][^"']*\b(?:site-header|seo-header)\b[^"']*["'][^>]*>[\s\S]*?<\/header>/i, articleHeaderHtml);
+  if (!/<header\b[^>]*class=["'][^"']*\bseo-header\b/i.test(nextHtml)) {
+    nextHtml = nextHtml.replace(/<body[^>]*>/i, (match) => `${match}\n  ${articleHeaderHtml}`);
+  }
+  nextHtml = nextHtml.replace(/<div\b[^>]*class=["'][^"']*\bstatic-toast\b[^"']*["'][^>]*><\/div>\s*/gi, '');
+  nextHtml = nextHtml.replace(/<footer\b[^>]*class=["'][^"']*\b(?:site-footer|seo-footer)\b[^"']*["'][^>]*>[\s\S]*?<\/footer>\s*(?:<div\b[^>]*class=["'][^"']*\bstatic-toast\b[^"']*["'][^>]*><\/div>\s*)?/i, articleFooterHtml);
+  if (!/<footer\b[^>]*class=["'][^"']*\bseo-footer\b/i.test(nextHtml)) {
+    nextHtml = nextHtml.replace(/<\/body>/i, `  ${articleFooterHtml}\n</body>`);
+  }
+  nextHtml = nextHtml.replace(/<script\b[^>]*id=["']phuonglam-article-static-runtime["'][^>]*>[\s\S]*?<\/script>/i, '');
+  nextHtml = nextHtml.replace(/<\/body>/i, `  ${articleStaticRuntimeScript}\n</body>`);
+  const breadcrumb = breadcrumbForArticle({ title, category });
+  if (/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b/i.test(nextHtml)) {
+    nextHtml = nextHtml.replace(/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/i, breadcrumb);
+  } else {
+    nextHtml = nextHtml.replace(/<main\b[^>]*class=["'][^"']*\barticle-wrap\b[^"']*["'][^>]*>/i, (match) => `${match}\n    ${breadcrumb}`);
+  }
+  const related = articleRelatedBlock({ title, category });
+  if (/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(nextHtml)) {
+    nextHtml = nextHtml.replace(/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i, related);
+  } else {
+    nextHtml = nextHtml.replace(/<\/main>/i, `      ${related}\n  </main>`);
+  }
+  return nextHtml;
 };
 
 const setOrInsertHeadTag = (html, pattern, tag) => {
@@ -613,6 +837,8 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
     mainEntityOfPage: canonical,
   };
   html = setJsonLdByType(html, 'BlogPosting', schema);
+  html = setJsonLdByType(html, 'BreadcrumbList', articleBreadcrumbSchema({ title, category, canonical }));
+  html = ensureBlogArticleShell({ html, title, category });
   html = ensureArticleFigureStyle(html);
 
   return { html, meta: { title, description, image, url: publicUrl, tag: blogCategories[category] || 'Kiến thức' } };

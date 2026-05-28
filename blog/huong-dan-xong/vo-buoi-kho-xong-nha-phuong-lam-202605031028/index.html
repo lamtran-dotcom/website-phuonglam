@@ -119,14 +119,121 @@
     .site-footer a { color: #9aad98; }
     @media (max-width: 600px) { .article-wrap h1 { font-size: 26px; } .article-wrap h2 { font-size: 21px; } .article-wrap { padding: 24px 16px 60px; } }
   </style>
+  <link rel="stylesheet" href="/assets/css/static-seo.css">
+<style id="phuonglam-article-shell-style">
+    body { background: #fff; }
+    .article-wrap { width: min(100% - 32px, 820px); }
+    .article-breadcrumb {
+      max-width: 820px;
+      margin: 0 auto 24px;
+      color: #6e796b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .article-breadcrumb a { color: #318223; font-weight: 800; text-decoration: none; }
+    .article-breadcrumb a:hover { text-decoration: underline; }
+    .article-link-panel {
+      margin: 52px 0 0;
+      padding: 24px;
+      border: 1px solid #dde8d8;
+      border-radius: 16px;
+      background: #f7fbf5;
+    }
+    .article-link-panel h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      line-height: 1.35;
+      color: #17351a;
+    }
+    .article-link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 22px;
+    }
+    .article-link-card {
+      display: block;
+      border: 1px solid #dbe8d7;
+      border-radius: 12px;
+      background: #fff;
+      padding: 13px 14px;
+      color: #21351f !important;
+      text-decoration: none !important;
+      font-weight: 900 !important;
+      line-height: 1.35;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .article-link-card span {
+      display: block;
+      color: #6e796b;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .article-link-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(49, 130, 35, .35);
+      box-shadow: 0 12px 24px rgba(22, 63, 22, .12);
+    }
+    .article-related-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .article-related-list a {
+      display: block;
+      color: #318223 !important;
+      font-weight: 800 !important;
+      text-decoration: none !important;
+      line-height: 1.45;
+    }
+    .article-related-list a:hover { text-decoration: underline !important; }
+    @media (max-width: 720px) {
+      .article-wrap { width: min(100% - 28px, 820px); }
+      .article-link-panel { padding: 18px; }
+      .article-link-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+            <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://phuonglam.com"},{"@type":"ListItem","position":2,"name":"Hướng Dẫn","item":"https://phuonglam.com/blog/"},{"@type":"ListItem","position":3,"name":"Vỏ Bưởi Khô Xông Nhà: Tác Dụng Và Cách Làm Đơn Giản Tại Nhà","item":"https://phuonglam.com/blog/huong-dan-xong/vo-buoi-kho-xong-nha-phuong-lam-202605031028/"}]}</script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo" href="https://phuonglam.com">🕯 Phương Lâm</a>
-    <a href="https://phuonglam.com/danh-muc/thao-moc-xong/" style="font-size:14px;font-weight:600;color:#318223;">Mua ngay →</a>
+  <header class="seo-header">
+    <div class="seo-header-inner">
+    <a class="seo-logo" href="/" aria-label="Phương Lâm">
+      <img src="/assets/media/generated/embedded-001.png" alt="Phương Lâm" />
+    </a>
+    <input class="seo-menu-toggle" type="checkbox" id="seo-menu-toggle" aria-label="Mở menu" />
+    <nav class="seo-nav" aria-label="Điều hướng chính">
+      <a href="/danh-muc/nen-thom/">Nến Tealight Xông</a>
+      <a href="/danh-muc/combo/">Combo Xông Nhà</a>
+      <a href="/danh-muc/thao-moc-xong/">Thảo Mộc Xông</a>
+      <a href="/danh-muc/bep-xong/">Đèn Xông Tinh Dầu</a>
+      <a href="/danh-muc/phu-kien/">Phụ Kiện Xông</a>
+      <a href="/blog/">Hướng Dẫn</a>
+    </nav>
+    <div class="seo-actions">
+      <a class="seo-icon-link" href="/?search=open" aria-label="Tìm kiếm">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a class="seo-cart" href="/?cart=open" aria-label="Xem giỏ hàng">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 01-8 0"></path>
+        </svg>
+        <span class="seo-cart-count" data-static-cart-count hidden>0</span>
+      </a>
+      <label class="seo-menu-btn" for="seo-menu-toggle" aria-label="Mở menu"><span class="seo-menu-icon"></span></label>
+    </div>
+    </div>
   </header>
 
   <main class="article-wrap">
+    <nav class="article-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Trang chủ</a> / <a href="/blog/">Hướng Dẫn</a> / <span>Vỏ Bưởi Khô Xông Nhà: Tác Dụng Và Cách Làm Đơn Giản Tại Nhà</span>
+    </nav>
     <span class="article-badge">🌿 Nến Phương Lâm</span>
     <h1>Vỏ Bưởi Khô Xông Nhà: Tác Dụng Và Cách Làm Đơn Giản Tại Nhà</h1>
     <div class="article-meta">
@@ -136,7 +243,7 @@
     </div>
 
     <!-- ẢNH 1 — Featured 1200x675 -->
-    
+
     <figure class="section-visual">
       <img src="/assets/blog/vo-buoi-kho-xong-nha-phuong-lam-202605031028-featured-vo-buoi-kho-xong-nha.webp" alt="Vỏ bưởi khô xông nhà Nến Phương Lâm — thảo mộc tự nhiên khử mùi thanh lọc không khí">
       <figcaption>Vỏ bưởi khô xông nhà Nến Phương Lâm — thảo mộc tự nhiên khử mùi thanh lọc không khí</figcaption>
@@ -171,7 +278,7 @@
     </ul>
 
     <!-- ẢNH 2 — Body 800x600, gắn keyword phụ -->
-    
+
     <figure class="section-visual">
       <img src="/assets/blog/vo-buoi-kho-xong-nha-phuong-lam-202605031028-vo-buoi-kho-tinh-dau-limonene.webp" alt="Vỏ bưởi khô chứa tinh dầu limonene tự nhiên — tác dụng kháng khuẩn và đuổi côn trùng">
       <figcaption>Vỏ bưởi khô chứa tinh dầu limonene tự nhiên — tác dụng kháng khuẩn và đuổi côn trùng</figcaption>
@@ -212,7 +319,7 @@
     </ul>
 
     <!-- ẢNH 3 — Body 800x600, hiển thị bếp xông + nến + vỏ bưởi -->
-    
+
     <figure class="section-visual">
       <img src="/assets/blog/vo-buoi-kho-xong-nha-phuong-lam-202605031028-cach-xong-nha-vo-buoi-bep-dat-nung.webp" alt="Cách xông nhà bằng vỏ bưởi khô trên bếp xông đất nung Phương Lâm — kết hợp nến tealight không khói">
       <figcaption>Cách xông nhà bằng vỏ bưởi khô trên bếp xông đất nung Phương Lâm — kết hợp nến tealight không khói</figcaption>
@@ -231,7 +338,7 @@
     <p>Bạn có thể tham khảo bộ <a href="https://phuonglam.com/danh-muc/thao-moc-xong/">thảo mộc xông nhà Phương Lâm</a> đã được phối sẵn theo công thức để chọn loại phù hợp — hoặc xem nguyên bộ <a href="https://phuonglam.com/danh-muc/combo/">bộ xông nhà tẩy uế</a> kèm bếp đất nung.</p>
 
     <!-- ẢNH 4 — Body 800x600 -->
-    
+
     <figure class="section-visual">
       <img src="/assets/blog/vo-buoi-kho-xong-nha-phuong-lam-202605031028-vo-buoi-ket-hop-thao-moc-xong-nha.webp" alt="Kết hợp vỏ bưởi khô với sả, quế, hoa hồi, bồ kết để xông nhà hiệu quả hơn">
       <figcaption>Kết hợp vỏ bưởi khô với sả, quế, hoa hồi, bồ kết để xông nhà hiệu quả hơn</figcaption>
@@ -287,10 +394,50 @@
         <span class="cta-hotline">📞 Hotline: 077 3829 593</span>
       </div>
     </div>
+        <section class="article-link-panel" aria-label="Đi tiếp trong website Phương Lâm">
+        <h2>Tiếp tục khám phá tại Phương Lâm</h2>
+        <div class="article-link-grid">
+          <a class="article-link-card" href="/danh-muc/combo/">Combo Xông Nhà<span>Bộ đầy đủ cho người mới</span></a>
+          <a class="article-link-card" href="/danh-muc/thao-moc-xong/">Thảo Mộc Xông<span>Bồ kết, vỏ bưởi, quế, sả</span></a>
+          <a class="article-link-card" href="/danh-muc/bep-xong/">Đèn Xông Tinh Dầu<span>Bếp xông và đèn xông nến</span></a>
+        </div>
+        <h2>Bài viết liên quan</h2>
+        <ul class="article-related-list">
+          <li><a href="/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/">Bộ xông thảo mộc bao gồm những gì? →</a></li>
+          <li><a href="/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/">Hướng dẫn dùng bếp xông thảo mộc đúng cách →</a></li>
+          <li><a href="/blog/">Xem thêm hướng dẫn từ Phương Lâm →</a></li>
+        </ul>
+      </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2026 Nến Phương Lâm · <a href="https://phuonglam.com">phuonglam.com</a> · Zalo/Hotline: <a href="tel:0773829593">077 3829 593</a></p>
+  <footer class="seo-footer">
+    <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
+    <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
+  <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
+  <script id="phuonglam-article-static-runtime">
+(() => {
+  const countEl = document.querySelector('[data-static-cart-count]');
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem('phuonglam-cart') || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+  const updateCartCount = () => {
+    const count = readCart().reduce((total, item) => total + Number(item.qty || 0), 0);
+    if (countEl) {
+      countEl.textContent = String(count);
+      countEl.hidden = count <= 0;
+    }
+  };
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'phuonglam-cart') updateCartCount();
+  });
+  updateCartCount();
+})();
+</script>
 </body>
 </html>
