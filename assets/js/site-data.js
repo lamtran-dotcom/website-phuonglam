@@ -3410,6 +3410,17 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 17,
+    "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm",
+    "excerpt": "Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.",
+    "date": "27 tháng 5, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "bo-xong-thao-moc-bao-gom-nhung-gi",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/",
+    "image": "/assets/blog/bo-xong-thao-moc-bao-gom-nhung-gi-1779856667249-1-sdad.webp"
+  },
+  {
     "id": 16,
     "title": "Vỏ Bưởi Khô Xông Nhà: Tác Dụng Và Cách Làm Đơn Giản Tại Nhà",
     "excerpt": "Vỏ bưởi khô xông nhà giúp khử mùi ẩm mốc, đuổi muỗi và thanh lọc không khí tự nhiên. Hướng dẫn chi tiết cách phơi, cách xông và mẹo kết hợp thảo mộc từ…",

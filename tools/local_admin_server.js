@@ -448,6 +448,47 @@ const figureForPrompt = ({ prompt, src }) => {
     </figure>`;
 };
 
+const articleFigureStyle = `<style id="phuonglam-article-figure-style">
+    .article-figure {
+      width: 100%;
+      max-width: 760px;
+      margin: 32px auto;
+    }
+    .article-figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+      object-fit: cover;
+      border-radius: 14px;
+      background: #f7f3eb;
+      box-shadow: 0 10px 26px rgba(25, 46, 25, .12);
+    }
+    .article-figure figcaption {
+      margin-top: 10px;
+      color: #6f786b;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .article-figure {
+        margin: 24px auto;
+      }
+      .article-figure img {
+        border-radius: 12px;
+      }
+    }
+  </style>`;
+
+const ensureArticleFigureStyle = (html) => {
+  if (!/<figure\b[^>]*class=["'][^"']*\barticle-figure\b/i.test(html)) return html;
+  if (/<style\b[^>]*id=["']phuonglam-article-figure-style["'][^>]*>/i.test(html)) {
+    return html.replace(/<style\b[^>]*id=["']phuonglam-article-figure-style["'][^>]*>[\s\S]*?<\/style>/i, articleFigureStyle);
+  }
+  return html.replace(/<\/head>/i, `${articleFigureStyle}\n</head>`);
+};
+
 const setOrInsertHeadTag = (html, pattern, tag) => {
   if (pattern.test(html)) return html.replace(pattern, tag);
   return html.replace(/<\/head>/i, `  ${tag}\n</head>`);
@@ -572,6 +613,7 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
     mainEntityOfPage: canonical,
   };
   html = setJsonLdByType(html, 'BlogPosting', schema);
+  html = ensureArticleFigureStyle(html);
 
   return { html, meta: { title, description, image, url: publicUrl, tag: blogCategories[category] || 'Kiến thức' } };
 };
