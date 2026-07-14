@@ -1,81 +1,52 @@
 # phuonglam.com
 
-Website tinh cho Phuong Lam, deploy bang GitHub Pages.
+## What this project does
+This repository contains the static e-commerce website for Phuong Lam. It publishes SEO-friendly product pages, category pages, blog articles, and a local admin workflow for updating products/blog content before pushing static files to production.
 
-Muc tieu hien tai:
-- Trang chinh load nhanh: `index.html` khong chua anh base64.
-- Google doc duoc san pham: moi san pham co trang HTML rieng trong `san-pham/`.
-- De sua san pham tren may: chay admin local, save, preview, commit va push len GitHub.
+## Current status
+The project is static-first and production-oriented. The public site is generated into checked-in HTML/CSS/JS/assets, while local admin scripts help edit product data, rebuild SEO pages, and prepare deploys.
 
-## Cach sua san pham tren may
+## Quick start
+Read setup instructions in [`docs/SETUP.md`](docs/SETUP.md).
 
-1. Mo Terminal tai thu muc website.
-2. Chay server local:
+Typical local admin run:
 
 ```bash
 node tools/local_admin_server.js
 ```
 
-3. Mo admin:
+Then open:
 
 ```text
 http://127.0.0.1:8000/admin-upload.html
 ```
 
-4. Sua/them san pham, upload anh, bam `Luu local`.
-5. Preview website bang nut `Preview` hoac mo:
+## Important docs
+- `AGENTS.md`: Codex rules
+- `CONTEXT.md`: current project memory
+- `docs/ARCHITECTURE.md`: architecture
+- `docs/DECISIONS.md`: long-term decisions
+- `docs/CHANGELOG.md`: completed work
+- `docs/TASKS.md`: backlog
+- `docs/SETUP.md`: setup guide
 
-```text
-http://127.0.0.1:8000/
-```
+## Daily files
+- `admin-upload.html`: local browser admin UI
+- `data/products.json`: product catalog source of truth
+- `data/settings.json`: homepage/display settings
+- `tools/local_admin_server.js`: local admin server
+- `tools/build_static_site.js`: static SEO page builder
+- `assets/js/app.jsx`: source client UI
+- `assets/js/app.min.js`: built production client script
+- `san-pham/`: product SEO pages
+- `danh-muc/`: category SEO pages
+- `blog/`: blog/article pages
+- `sitemap.xml`: URLs for search engines
+- `robots.txt`: sitemap discovery
 
-6. Khi da on, bam `Push Git` trong admin.
-
-GitHub Pages se tu deploy sau vai phut.
-
-## Build lai SEO pages
-
-Admin local tu dong build lai sau khi save. Neu can chay tay:
-
-```bash
-node tools/build_static_site.js
-```
-
-Lenh nay se:
-- Toi uu `index.html`.
-- Tach CSS/JS ra `assets/`.
-- Build `assets/js/app.jsx` thanh `assets/js/app.min.js` de website that khong can tai Babel.
-- Tao trang san pham trong `san-pham/`.
-- Tao trang danh muc trong `danh-muc/`.
-- Update `sitemap.xml` va `robots.txt`.
-
-## File can quan tam hang ngay
-
-| Duong dan | Dung de lam gi |
-| --- | --- |
-| `admin-upload.html` | Man hinh admin sua san pham tren browser |
-| `data/products.json` | Du lieu san pham chinh |
-| `data/settings.json` | Cau hinh trang chu: san pham ban chay, anh header, anh danh muc |
-| `assets/products/` | Anh san pham dang duoc website dung |
-| `assets/products/uploads/` | Anh upload moi tu admin local |
-| `assets/blog/` | Anh bai viet SEO dang duoc website dung |
-| `blog/` | Trang bai viet SEO dang publish |
-| `assets/js/app.jsx` | Code goc de sua app chinh |
-| `assets/js/app.min.js` | File JS da build cho website that chay nhanh hon |
-| `san-pham/` | Trang SEO rieng tung san pham, generate tu products.json |
-| `danh-muc/` | Trang SEO danh muc, generate tu products.json |
-| `sitemap.xml` | File cho Google biet cac URL can index |
-| `robots.txt` | File cho Google biet sitemap nam o dau |
-| `tools/build_static_site.js` | Script build/tach file/tao SEO pages |
-| `tools/local_admin_server.js` | Server local cho admin sua du lieu |
-| `tools/vendor/babel-standalone-7.29.0.min.js` | Compiler local dung luc build, khong duoc website that tai ve |
-| `.github/workflows/compress-images.yml` | Flow GitHub tu nen anh blog khi co anh PNG/JPG moi |
-
-## Nguyen tac SEO bat buoc
-
-- Moi san pham can co URL rieng: `/san-pham/[slug]/`.
-- Moi trang san pham can co title, description, canonical va schema Product.
-- Anh khong nhung base64 trong HTML/JSON; dung file anh that trong `assets/`.
-- Cau hinh trang chu trong admin phai dong bo vao `data/settings.json` va duoc build vao `app.min.js` de GitHub Pages van chay du.
-- Sau khi them/sua san pham phai update sitemap bang build script.
-- Khong sua workflow theo cach lam Google kho doc noi dung san pham.
+## SEO rules
+- Product pages need stable URLs under `/san-pham/`.
+- Category pages need stable URLs under `/danh-muc/`.
+- Blog pages need stable URLs under `/blog/`.
+- Keep title, description, canonical, schema, internal links, and sitemap updates intact.
+- Do not embed large base64 images in HTML or JSON.
