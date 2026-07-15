@@ -44,10 +44,10 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Date: 2026-07-04
-Done: Assessed whether Instatic-style CMS features should apply to this static website.
-Files changed: `CONTEXT.md`, `docs/TASKS.md`, `docs/CHANGELOG.md`.
-New decisions: Do not replace the current static-first/local-admin architecture with Instatic now; borrow small ideas such as draft/publish status, media usage tracking, SEO validation, audit/history, and owned form submissions if needed.
+Date: 2026-07-15
+Done: Corrected the related-content section on the SEO article `cach-xong-nha-bang-thao-moc` and its reusable local-admin template.
+Files changed: `blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/index.html`, `tools/local_admin_server.js`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
+New decisions: Keep related-content blocks inside the article reading column and render related posts as responsive cards.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
@@ -55,4 +55,4 @@ New decisions: Do not replace the current static-first/local-admin architecture 
 - Instatic is early 0.0.x software, so treat it as inspiration or a sandbox experiment rather than production migration target.
 
 ## Next Suggested Task
-- Smoke test the documented local admin workflow, then consider a small Instatic-inspired improvement such as SEO publish checklist or draft status.
+- Smoke test the local admin workflow after the related-content template update.

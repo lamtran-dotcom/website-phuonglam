@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-07-15 - Keep related SEO content within the reading column
+Decision: The local admin article template inserts category and related-article links inside `.article-wrap`, using responsive card grids.
+Reason: Inserting the panel after the article closing tag expanded it to the page width and left excessive unused space.
+Impact: Current and future SEO articles retain a focused reading layout on desktop and collapse cleanly to one column on mobile.
+Status: Active
+
 ### 2026-07-02 - Use durable project memory for Codex
 Decision: Future Codex sessions must read `AGENTS.md` and `CONTEXT.md` before work, then update `CONTEXT.md` after completed tasks.
 Reason: The project has long chat history and needs reliable handoff without rereading the whole repo.

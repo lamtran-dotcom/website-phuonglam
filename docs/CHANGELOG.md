@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-15
+
+### Fixed
+- Moved the related-content block for `cach-xong-nha-bang-thao-moc` into the article reading column.
+- Updated the local admin article template so category links and related posts use compact responsive card grids.
+
 ## 2026-07-04
 
 ### Notes

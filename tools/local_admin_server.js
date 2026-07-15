@@ -504,11 +504,7 @@ const articleShellStyle = `<style id="phuonglam-article-shell-style">
     .article-breadcrumb a { color: #318223; font-weight: 800; text-decoration: none; }
     .article-breadcrumb a:hover { text-decoration: underline; }
     .article-link-panel {
-      margin: 52px 0 0;
-      padding: 24px;
-      border: 1px solid #dde8d8;
-      border-radius: 16px;
-      background: #f7fbf5;
+      margin: 48px 0 0;
     }
     .article-link-panel h2 {
       margin: 0 0 14px;
@@ -520,7 +516,7 @@ const articleShellStyle = `<style id="phuonglam-article-shell-style">
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
-      margin: 0 0 22px;
+      margin: 0 0 28px;
     }
     .article-link-card {
       display: block;
@@ -548,23 +544,36 @@ const articleShellStyle = `<style id="phuonglam-article-shell-style">
     }
     .article-related-list {
       display: grid;
-      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
     .article-related-list a {
       display: block;
+      min-height: 100%;
+      box-sizing: border-box;
+      padding: 14px;
+      border: 1px solid #dbe8d7;
+      border-radius: 12px;
+      background: #fff;
       color: #318223 !important;
       font-weight: 800 !important;
       text-decoration: none !important;
       line-height: 1.45;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
-    .article-related-list a:hover { text-decoration: underline !important; }
+    .article-related-list a:hover {
+      transform: translateY(-2px);
+      border-color: rgba(49, 130, 35, .35);
+      box-shadow: 0 12px 24px rgba(22, 63, 22, .10);
+    }
+    .article-related-list li:last-child { grid-column: 1 / -1; }
     @media (max-width: 720px) {
       .article-wrap { width: min(100% - 28px, 820px); }
-      .article-link-panel { padding: 18px; }
       .article-link-grid { grid-template-columns: 1fr; }
+      .article-related-list { grid-template-columns: 1fr; }
     }
   </style>`;
 
@@ -708,7 +717,7 @@ const ensureBlogArticleShell = ({ html, title, category }) => {
   if (/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(nextHtml)) {
     nextHtml = nextHtml.replace(/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i, related);
   } else {
-    nextHtml = nextHtml.replace(/<\/main>/i, `      ${related}\n  </main>`);
+    nextHtml = nextHtml.replace(/<\/article>(\s*<\/main>)/i, `      ${related}\n    </article>$1`);
   }
   return nextHtml;
 };
