@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-07-15 - Use a frequency-limited shipping promotion popup
+Decision: Show a compact shipping bar on public pages and a delivery promotion popup 1.2 seconds after a visitor arrives. Dismissing the popup suppresses it for seven days; its CTA scrolls to bestselling products.
+Reason: The promotion needs to be noticeable without repeatedly interrupting returning visitors.
+Impact: The shipping offer remains visible as a small bar after the popup is closed, while the full promotion uses browser storage to control frequency.
+Status: Active
+
 ### 2026-07-15 - Keep related SEO content within the reading column
 Decision: The local admin article template inserts category and related-article links inside `.article-wrap`, using responsive card grids.
 Reason: Inserting the panel after the article closing tag expanded it to the page width and left excessive unused space.

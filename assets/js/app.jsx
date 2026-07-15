@@ -43,6 +43,98 @@ const categoryUrl = (categoryId) => `/danh-muc/${categoryId}/`;
 const productUrl = (product) => product?.slug ? `/san-pham/${product.slug}/` : '#';
 const queryFlag = (key) => new URLSearchParams(window.location.search).get(key) === 'open';
 
+const SHIPPING_PROMO_DISMISS_KEY = 'phuonglam-shipping-promo-dismissed-at';
+const SHIPPING_PROMO_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+
+const ShippingPromotion = ({ setPage }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const isMobile = useIsMobile();
+
+  React.useEffect(() => {
+    let dismissedAt = 0;
+    try {
+      dismissedAt = Number(localStorage.getItem(SHIPPING_PROMO_DISMISS_KEY)) || 0;
+    } catch {}
+    if (Date.now() - dismissedAt < SHIPPING_PROMO_COOLDOWN_MS) return;
+    const timer = window.setTimeout(() => setIsOpen(true), 1200);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [isOpen]);
+
+  const close = () => {
+    safeSetLocalStorage(SHIPPING_PROMO_DISMISS_KEY, String(Date.now()));
+    setIsOpen(false);
+  };
+
+  const shopNow = () => {
+    close();
+    setPage({ name: 'home' });
+    window.setTimeout(() => {
+      document.getElementById('san-pham-ban-chay')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  };
+
+  return (
+    <>
+      <div style={shippingPromoStyles.bar} role="status">
+        <span aria-hidden="true" style={shippingPromoStyles.barIcon}>🚚</span>
+        <span><strong>Freeship nội thành TP.HCM</strong> cho đơn từ 100K <span style={shippingPromoStyles.barDivider}>·</span> Ngoại thành chỉ từ 16K</span>
+      </div>
+      {isOpen && (
+        <div style={shippingPromoStyles.overlay} onMouseDown={close} role="presentation">
+          <section
+            aria-labelledby="shipping-promo-title"
+            aria-modal="true"
+            role="dialog"
+            style={{ ...shippingPromoStyles.modal, minHeight: isMobile ? 430 : 370 }}
+            onMouseDown={event => event.stopPropagation()}
+          >
+            <img src="/assets/media/generated/shipping-promo-popup-v1.png" alt="" style={shippingPromoStyles.image} />
+            <div style={{ ...shippingPromoStyles.content, maxWidth: isMobile ? '100%' : '62%' }}>
+              <span style={shippingPromoStyles.eyebrow}>ƯU ĐÃI GIAO HÀNG</span>
+              <h2 id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 30 : 38 }}>Giao nhanh,<br />tiết kiệm phí ship</h2>
+              <div style={shippingPromoStyles.highlight}>
+                <span style={shippingPromoStyles.highlightLabel}>FREESHIP NỘI THÀNH TP.HCM</span>
+                <strong>Đơn từ 100.000đ</strong>
+              </div>
+              <p style={shippingPromoStyles.description}>Ngoại thành TP.HCM, phí giao hàng <strong>chỉ từ 16.000đ</strong>.</p>
+              <button type="button" style={shippingPromoStyles.cta} onClick={shopNow}>Mua ngay – nhận ưu đãi <span aria-hidden="true">→</span></button>
+              <p style={shippingPromoStyles.note}>Phí giao hàng thực tế có thể thay đổi tùy khu vực.</p>
+            </div>
+            <button type="button" aria-label="Đóng thông báo ưu đãi giao hàng" style={shippingPromoStyles.close} onClick={close}>×</button>
+          </section>
+        </div>
+      )}
+    </>
+  );
+};
+
+const shippingPromoStyles = {
+  bar: { minHeight: 34, background: '#285d20', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7, padding: '6px 16px', textAlign: 'center', fontSize: 12, lineHeight: 1.4, position: 'relative', zIndex: 101 },
+  barIcon: { fontSize: 15 },
+  barDivider: { color: '#b9d6ae', padding: '0 5px' },
+  overlay: { position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(18, 35, 15, .56)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 },
+  modal: { width: '100%', maxWidth: 700, overflow: 'hidden', position: 'relative', display: 'flex', alignItems: 'stretch', borderRadius: 24, background: '#fff9ef', boxShadow: '0 28px 80px rgba(0, 0, 0, .28)', animation: 'modalPop .22s ease-out' },
+  image: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', pointerEvents: 'none' },
+  content: { position: 'relative', zIndex: 1, padding: '42px 34px 30px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', background: 'linear-gradient(90deg, #fff9ef 0%, #fff9ef 64%, rgba(255,249,239,.78) 78%, rgba(255,249,239,0) 100%)' },
+  eyebrow: { display: 'inline-block', background: '#e8f2e2', color: '#285d20', borderRadius: 999, padding: '6px 11px', fontSize: 11, lineHeight: 1, fontWeight: 900, letterSpacing: '.08em' },
+  title: { margin: '13px 0 14px', color: '#194713', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-.045em' },
+  highlight: { display: 'flex', flexDirection: 'column', gap: 3, padding: '10px 13px', borderRadius: 12, background: '#285d20', color: '#fff', boxShadow: '0 10px 22px rgba(40, 93, 32, .18)' },
+  highlightLabel: { fontSize: 10, fontWeight: 900, letterSpacing: '.06em', color: '#d7f0cb' },
+  description: { margin: '13px 0 17px', color: '#4d4d47', fontSize: 14, lineHeight: 1.5 },
+  cta: { border: 'none', borderRadius: 11, padding: '13px 17px', background: '#d9682c', color: '#fff', fontSize: 14, fontWeight: 900, cursor: 'pointer', boxShadow: '0 12px 22px rgba(217, 104, 44, .22)', textTransform: 'uppercase' },
+  note: { margin: '12px 0 0', color: '#77736b', fontSize: 10.5, lineHeight: 1.4 },
+  close: { position: 'absolute', zIndex: 2, top: 12, right: 12, width: 34, height: 34, border: '1px solid rgba(25, 71, 19, .12)', borderRadius: '50%', background: 'rgba(255,255,255,.85)', color: '#285d20', fontSize: 26, lineHeight: 1, cursor: 'pointer' },
+};
+
 const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [adminLoginOpen, setAdminLoginOpen] = React.useState(false);
@@ -851,7 +943,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
       </div>
 
       {/* BESTSELLERS */}
-      <section style={{ ...hpStyles.section, background: '#fff', padding: isMobile ? '40px 0' : '64px 0' }}>
+      <section id="san-pham-ban-chay" style={{ ...hpStyles.section, background: '#fff', padding: isMobile ? '40px 0' : '64px 0' }}>
         <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '0 16px' : '0 24px' }}>
           <div style={hpStyles.sectionHead}>
             <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Sản phẩm bán chạy</h2>
@@ -4556,6 +4648,7 @@ const App = () => {
 
   return (
     <div>
+      {!isAdmin && <ShippingPromotion setPage={navigateTo} />}
       {!isAdmin && <Header page={page} setPage={navigateTo} cartCount={cartCount} />}
       {isAdmin && (
         <div style={{ background: '#f7faf6', borderBottom: '1px solid #eef3ed', padding: '0 24px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

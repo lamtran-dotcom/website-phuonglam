@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-15
-Done: Corrected the related-content section on the SEO article `cach-xong-nha-bang-thao-moc` and its reusable local-admin template.
-Files changed: `blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/index.html`, `tools/local_admin_server.js`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: Keep related-content blocks inside the article reading column and render related posts as responsive cards.
+Done: Added a shipping promotion bar and a delayed first-visit popup for HCMC shipping offers.
+Files changed: `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `assets/media/generated/shipping-promo-popup-v1.png`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
+New decisions: The popup appears after 1.2 seconds, dismisses for seven days, keeps a compact shipping bar visible, and its CTA scrolls to bestselling products.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
@@ -55,4 +55,4 @@ New decisions: Keep related-content blocks inside the article reading column and
 - Instatic is early 0.0.x software, so treat it as inspiration or a sandbox experiment rather than production migration target.
 
 ## Next Suggested Task
-- Smoke test the local admin workflow after the related-content template update.
+- Review shipping zone wording with the business, then consider making the promotion copy editable from the local admin workflow.

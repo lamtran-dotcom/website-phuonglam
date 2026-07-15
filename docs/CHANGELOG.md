@@ -2,6 +2,10 @@
 
 ## 2026-07-15
 
+### Added
+- Added a responsive HCMC shipping promotion bar and first-visit popup with a delivery illustration.
+- Added a seven-day dismissal limit and a CTA that takes visitors to bestselling products.
+
 ### Fixed
 - Moved the related-content block for `cach-xong-nha-bang-thao-moc` into the article reading column.
 - Updated the local admin article template so category links and related posts use compact responsive card grids.
