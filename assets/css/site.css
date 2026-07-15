@@ -40,6 +40,13 @@
       from { opacity: 0; transform: translateY(14px) scale(.96); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    @keyframes shippingFeePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 5px 0 rgba(161, 66, 24, .2); }
+      50% { transform: scale(1.07); box-shadow: 0 8px 18px rgba(217, 104, 44, .42); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [style*="shippingFeePulse"] { animation: none !important; }
+    }
     .fly-cart-ghost {
       position: fixed;
       z-index: 9999;

@@ -105,7 +105,7 @@ const ShippingPromotion = ({ setPage }) => {
                 <span style={shippingPromoStyles.highlightLabel}>FREESHIP NỘI THÀNH TP.HCM</span>
                 <strong>Đơn từ 100.000đ</strong>
               </div>
-              <p style={shippingPromoStyles.description}>Ngoại thành TP.HCM, phí giao hàng <strong>chỉ từ 16.000đ</strong>.</p>
+              <p style={shippingPromoStyles.description}>Ngoại thành TP.HCM, phí giao hàng <strong style={shippingPromoStyles.shippingFeeBadge}><span>CHỈ TỪ</span>16.000đ</strong>.</p>
               <button type="button" style={shippingPromoStyles.cta} onClick={shopNow}>Mua ngay – nhận ưu đãi <span aria-hidden="true">→</span></button>
               <p style={shippingPromoStyles.note}>Phí giao hàng thực tế có thể thay đổi tùy khu vực.</p>
             </div>
@@ -130,6 +130,7 @@ const shippingPromoStyles = {
   highlight: { display: 'flex', flexDirection: 'column', gap: 3, padding: '10px 13px', borderRadius: 12, background: '#285d20', color: '#fff', boxShadow: '0 10px 22px rgba(40, 93, 32, .18)' },
   highlightLabel: { fontSize: 10, fontWeight: 900, letterSpacing: '.06em', color: '#d7f0cb' },
   description: { margin: '13px 0 17px', color: '#4d4d47', fontSize: 14, lineHeight: 1.5 },
+  shippingFeeBadge: { display: 'inline-flex', alignItems: 'center', gap: 5, marginLeft: 3, padding: '4px 8px', borderRadius: 7, background: '#d9682c', color: '#fff', fontSize: 15, fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap', boxShadow: '0 5px 0 rgba(161, 66, 24, .2)', animation: 'shippingFeePulse 1.8s ease-in-out infinite' },
   cta: { border: 'none', borderRadius: 11, padding: '13px 17px', background: '#d9682c', color: '#fff', fontSize: 14, fontWeight: 900, cursor: 'pointer', boxShadow: '0 12px 22px rgba(217, 104, 44, .22)', textTransform: 'uppercase' },
   note: { margin: '12px 0 0', color: '#77736b', fontSize: 10.5, lineHeight: 1.4 },
   close: { position: 'absolute', zIndex: 2, top: 12, right: 12, width: 34, height: 34, border: '1px solid rgba(25, 71, 19, .12)', borderRadius: '50%', background: 'rgba(255,255,255,.85)', color: '#285d20', fontSize: 26, lineHeight: 1, cursor: 'pointer' },
