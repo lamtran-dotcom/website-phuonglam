@@ -10,7 +10,7 @@ const HERO_IMAGES = [
   "/assets/media/generated/embedded-007.jpg",
   "/assets/media/generated/embedded-008.jpg",
 ];
-const BAKED_HEADER_IMAGES = /*BAKED_HEADER_IMAGES*/["/assets/media/generated/embedded-002.jpg","/assets/media/generated/embedded-003.jpg","/assets/media/generated/embedded-004.jpg","/assets/media/generated/embedded-008.jpg","/assets/media/generated/embedded-005.jpg","/assets/products/uploads/1777479221546-chatgpt-image-16-31-00-29-thg-4-2026-trung-binh.webp"]/*END_BAKED_HEADER_IMAGES*/;
+const BAKED_HEADER_IMAGES = /*BAKED_HEADER_IMAGES*/["/assets/media/generated/embedded-002.jpg","/assets/media/generated/embedded-004.jpg","/assets/media/generated/embedded-008.jpg","/assets/media/generated/embedded-005.jpg","/assets/products/uploads/1784088181930-bo-xong-10cm.webp","/assets/products/uploads/1784088155555-chatgpt-image-20-39-29-29-thg-4-2026.webp"]/*END_BAKED_HEADER_IMAGES*/;
 
 const BLOG_IMAGE_MAP = {
   'huong-dan-dung-bep-xong-thao-moc': '/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp',
