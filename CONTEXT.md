@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-15
-Done: Standardized future SEO article presentation and refreshed the active `cach-xong-nha-bang-thao-moc` article with dynamic related cards and a compact CTA.
-Files changed: `tools/local_admin_server.js`, `assets/js/site-data.js`, `blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/index.html`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: Blog metadata records `coverImage`; the admin template selects up to four local-image related posts, renders 112x84 thumbnails, and keeps the related panel inside the reading column. Main figures use 16:9 and later figures use 4:3; CTA blocks use a responsive text-and-action layout.
+Done: Fixed the shipping promotion popup layout on mobile after visual testing at a 390px viewport.
+Files changed: `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `docs/CHANGELOG.md`, `CONTEXT.md`.
+New decisions: On mobile, the popup uses a compact content-first layout, a full-width CTA, a separate price-badge line, a muted product image, and a viewport-aware maximum height.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

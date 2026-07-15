@@ -14,6 +14,7 @@
 - Emphasized the outer-city `chỉ từ 16.000đ` shipping offer with a subtle animated price badge.
 - Added a raised hover and keyboard-focus treatment to the popup's “Mua ngay – nhận ưu đãi” button.
 - Added a delivery parcel with a truck icon to the popup product arrangement.
+- Fixed the popup layout on narrow phone screens: reduced height, clearer price line, full-width CTA, and lighter product backdrop.
 
 ### Fixed
 - Moved the related-content block for `cach-xong-nha-bang-thao-moc` into the article reading column.
