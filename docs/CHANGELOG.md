@@ -9,6 +9,7 @@
 ### Changed
 - Replaced the popup's generic ceramic-burner illustration with the approved real product arrangement of a terracotta burner, tealight candles, and herbal combo.
 - Emphasized the outer-city `chỉ từ 16.000đ` shipping offer with a subtle animated price badge.
+- Added a raised hover and keyboard-focus treatment to the popup's “Mua ngay – nhận ưu đãi” button.
 
 ### Fixed
 - Moved the related-content block for `cach-xong-nha-bang-thao-moc` into the article reading column.
