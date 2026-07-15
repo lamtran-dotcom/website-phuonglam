@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-15
-Done: Added a shipping promotion bar and a delayed first-visit popup for HCMC shipping offers, then replaced its generic illustration with the approved real product arrangement and emphasized the outer-city shipping price with a gentle pulse.
+Done: Added a shipping promotion bar and a delayed first-visit popup for HCMC shipping offers, then replaced its generic illustration with the approved real product arrangement, delivery parcel, and emphasized the outer-city shipping price with a gentle pulse.
 Files changed: `assets/js/app.jsx`, `assets/css/site.css`, generated `assets/js/app.min.js` and static pages, `assets/media/generated/shipping-promo-popup-v1.png`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: The popup appears after 1.2 seconds, dismisses for seven days, keeps a compact shipping bar visible, and its CTA scrolls to bestselling products. Its visual uses the real terracotta burner, tealight candles, and herbal combo references; the 16.000đ offer uses a subtle animation that respects reduced-motion preferences, while the CTA lifts with a deeper shadow on hover/focus.
+New decisions: The popup appears after 1.2 seconds, dismisses for seven days, keeps a compact shipping bar visible, and its CTA scrolls to bestselling products. Its visual uses the real terracotta burner, tealight candles, herbal combo, and a delivery parcel; the 16.000đ offer uses a subtle animation that respects reduced-motion preferences, while the CTA lifts with a deeper shadow on hover/focus.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
