@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-15
-Done: Added a shipping promotion bar and a delayed first-visit popup for HCMC shipping offers, then replaced its generic illustration with the approved real product arrangement, delivery parcel, and emphasized the outer-city shipping price with a gentle pulse.
-Files changed: `assets/js/app.jsx`, `assets/css/site.css`, generated `assets/js/app.min.js` and static pages, `assets/media/generated/shipping-promo-popup-v1.png`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: The popup appears after 1.2 seconds, dismisses for seven days, keeps a compact shipping bar visible, and its CTA scrolls to bestselling products. Its visual uses the real terracotta burner, tealight candles, herbal combo, and a delivery parcel; the 16.000đ offer uses a subtle animation that respects reduced-motion preferences, while the CTA lifts with a deeper shadow on hover/focus.
+Done: Standardized future SEO article presentation and refreshed the active `cach-xong-nha-bang-thao-moc` article with dynamic related cards and a compact CTA.
+Files changed: `tools/local_admin_server.js`, `assets/js/site-data.js`, `blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/index.html`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `CONTEXT.md`.
+New decisions: Blog metadata records `coverImage`; the admin template selects up to four local-image related posts, renders 112x84 thumbnails, and keeps the related panel inside the reading column. Main figures use 16:9 and later figures use 4:3; CTA blocks use a responsive text-and-action layout.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
@@ -55,4 +55,4 @@ New decisions: The popup appears after 1.2 seconds, dismisses for seven days, ke
 - Instatic is early 0.0.x software, so treat it as inspiration or a sandbox experiment rather than production migration target.
 
 ## Next Suggested Task
-- Review shipping zone wording with the business, then consider making the promotion copy editable from the local admin workflow.
+- Review the next freshly generated SEO article end-to-end to confirm its requested image alt text is specific rather than generic.

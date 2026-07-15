@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-07-15 - Keep SEO article chrome in the website template
+Decision: The local website admin owns the reusable article shell, cover metadata, CTA layout, category navigation, and related-content cards; generated HTML supplies the article body and semantic SEO content.
+Reason: Repeating presentation markup in AI output made individual articles inconsistent and required one-off repairs.
+Impact: Every article saved through the admin gets a focused reading width, a 16:9 lead visual, 4:3 supporting visuals, a responsive CTA, and up to four dynamically selected local-image related cards.
+Status: Active
+
 ### 2026-07-15 - Use a frequency-limited shipping promotion popup
 Decision: Show a compact shipping bar on public pages and a delivery promotion popup 1.2 seconds after a visitor arrives. Dismissing the popup suppresses it for seven days; its CTA scrolls to bestselling products.
 Reason: The promotion needs to be noticeable without repeatedly interrupting returning visitors.

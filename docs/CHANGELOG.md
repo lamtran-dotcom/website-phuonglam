@@ -7,6 +7,9 @@
 - Added a seven-day dismissal limit and a CTA that takes visitors to bestselling products.
 
 ### Changed
+- Standardized SEO article presentation: the lead image is 16:9, follow-on figures are 4:3, and CTA blocks are compact and responsive.
+- Replaced hard-coded related links with up to four dynamically selected blog cards that use local cover images, category/read-time metadata, and small 112x84 thumbnails.
+- Re-saved `cach-xong-nha-bang-thao-moc` through the local admin template so it immediately uses the new article standard.
 - Replaced the popup's generic ceramic-burner illustration with the approved real product arrangement of a terracotta burner, tealight candles, and herbal combo.
 - Emphasized the outer-city `chỉ từ 16.000đ` shipping offer with a subtle animated price badge.
 - Added a raised hover and keyboard-focus treatment to the popup's “Mua ngay – nhận ưu đãi” button.

@@ -3418,7 +3418,8 @@ const BLOG_POSTS = [
     "slug": "cach-xong-nha-bang-thao-moc",
     "tag": "Hướng dẫn",
     "url": "/blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/",
-    "image": "/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp"
+    "image": "/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp",
+    "coverImage": "/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp"
   },
   {
     "id": 17,

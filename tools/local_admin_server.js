@@ -503,32 +503,32 @@ const articleShellStyle = `<style id="phuonglam-article-shell-style">
     }
     .article-breadcrumb a { color: #318223; font-weight: 800; text-decoration: none; }
     .article-breadcrumb a:hover { text-decoration: underline; }
-    .article-link-panel {
-      margin: 48px 0 0;
-    }
+    .article-link-panel { margin: 48px 0 0; }
     .article-link-panel h2 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       font-size: 20px;
       line-height: 1.35;
       color: #17351a;
     }
+    .article-link-panel h2 + .article-link-grid { margin-top: 0; }
     .article-link-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin: 0 0 28px;
+      gap: 8px;
+      margin: 0 0 32px;
     }
     .article-link-card {
       display: block;
       border: 1px solid #dbe8d7;
-      border-radius: 12px;
-      background: #fff;
-      padding: 13px 14px;
+      border-radius: 8px;
+      background: #fbfdf9;
+      padding: 10px 12px;
       color: #21351f !important;
       text-decoration: none !important;
-      font-weight: 900 !important;
+      font-size: 13px;
+      font-weight: 800 !important;
       line-height: 1.35;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      transition: border-color .18s ease, background .18s ease;
     }
     .article-link-card span {
       display: block;
@@ -538,42 +538,117 @@ const articleShellStyle = `<style id="phuonglam-article-shell-style">
       margin-top: 4px;
     }
     .article-link-card:hover {
-      transform: translateY(-2px);
       border-color: rgba(49, 130, 35, .35);
-      box-shadow: 0 12px 24px rgba(22, 63, 22, .12);
+      background: #f2f8ef;
     }
-    .article-related-list {
+    .article-related-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+      gap: 12px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
-    .article-related-list a {
-      display: block;
-      min-height: 100%;
+    .article-related-card {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 12px;
+      min-height: 86px;
       box-sizing: border-box;
-      padding: 14px;
       border: 1px solid #dbe8d7;
-      border-radius: 12px;
+      border-radius: 8px;
       background: #fff;
-      color: #318223 !important;
-      font-weight: 800 !important;
       text-decoration: none !important;
-      line-height: 1.45;
+      overflow: hidden;
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
-    .article-related-list a:hover {
+    .article-related-card:hover {
       transform: translateY(-2px);
       border-color: rgba(49, 130, 35, .35);
       box-shadow: 0 12px 24px rgba(22, 63, 22, .10);
     }
-    .article-related-list li:last-child { grid-column: 1 / -1; }
+    .article-related-card img {
+      display: block;
+      width: 112px;
+      height: 84px;
+      object-fit: cover;
+      background: #edf3e9;
+    }
+    .article-related-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 10px 8px 0;
+    }
+    .article-related-meta {
+      color: #6e796b;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .article-related-title {
+      display: -webkit-box;
+      margin-top: 4px;
+      overflow: hidden;
+      color: #246f1f;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.35;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .article-more-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: #246f1f !important;
+      font-size: 13px;
+      font-weight: 800 !important;
+      text-decoration: none !important;
+    }
+    .article-more-link:hover { text-decoration: underline !important; }
+    article .cta-block {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "heading action"
+        "copy action";
+      align-items: center;
+      gap: 16px;
+      margin-top: 42px !important;
+      padding: 24px !important;
+      border-color: #dbe8d7 !important;
+      text-align: left !important;
+    }
+    article .cta-block h2, article .cta-block h3 {
+      grid-area: heading;
+      margin: 0 0 6px !important;
+      font-size: 20px !important;
+      line-height: 1.35 !important;
+    }
+    article .cta-block p { grid-area: copy; margin: 0 !important; }
+    article .cta-block .btn-cta {
+      grid-area: action;
+      display: inline-flex !important;
+      width: auto !important;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      margin: 0 !important;
+      padding: 10px 16px !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      white-space: nowrap;
+    }
     @media (max-width: 720px) {
       .article-wrap { width: min(100% - 28px, 820px); }
       .article-link-grid { grid-template-columns: 1fr; }
-      .article-related-list { grid-template-columns: 1fr; }
+      .article-related-grid { grid-template-columns: 1fr; }
+      article .cta-block {
+        grid-template-columns: 1fr;
+        grid-template-areas: "heading" "copy" "action";
+      }
+      article .cta-block .btn-cta { width: 100% !important; }
     }
   </style>`;
 
@@ -586,7 +661,7 @@ const articleFigureStyle = `<style id="phuonglam-article-figure-style">
     .article-figure img {
       display: block;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 4 / 3;
       height: auto;
       object-fit: cover;
       border-radius: 14px;
@@ -599,6 +674,9 @@ const articleFigureStyle = `<style id="phuonglam-article-figure-style">
       font-size: 12px;
       line-height: 1.5;
       text-align: center;
+    }
+    article > .article-figure:first-of-type img {
+      aspect-ratio: 16 / 9;
     }
     @media (max-width: 640px) {
       .article-figure {
@@ -655,27 +733,53 @@ const ensureStaticSeoCss = (html) => {
   return html.replace(/<\/head>/i, `  <link rel="stylesheet" href="/assets/css/static-seo.css">\n</head>`);
 };
 
-const articleRelatedBlock = ({ title, category }) => {
+const getLocalCoverImage = (post = {}) => {
+  const image = String(post.coverImage || post.image || '').trim();
+  return image.startsWith('/assets/') ? image : '';
+};
+
+const getRelatedBlogPosts = ({ title, category, slug, limit = 4 }) => {
+  const terms = new Set(
+    normalizeText(title)
+      .split(/[^a-z0-9]+/)
+      .filter((term) => term.length >= 4 && !['phuong', 'lam', 'huong', 'dung', 'cach', 'nhung', 'thao'].includes(term))
+  );
+  return readBlogPostsFromSiteData()
+    .filter((post) => String(post.slug) !== String(slug) && getLocalCoverImage(post))
+    .map((post, index) => {
+      const corpus = normalizeText(`${post.title || ''} ${post.excerpt || ''}`);
+      const matches = [...terms].filter((term) => corpus.includes(term)).length;
+      const sameCategory = post.url?.includes(`/blog/${category}/`) || post.tag === blogCategories[category];
+      return { post, score: (sameCategory ? 100 : 0) + (matches * 10) - index };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ post }) => post);
+};
+
+const articleRelatedBlock = ({ title, category, slug }) => {
   const categoryCards = [
     { href: '/danh-muc/combo/', title: 'Combo Xông Nhà', desc: 'Bộ đầy đủ cho người mới' },
     { href: '/danh-muc/thao-moc-xong/', title: 'Thảo Mộc Xông', desc: 'Bồ kết, vỏ bưởi, quế, sả' },
     { href: '/danh-muc/bep-xong/', title: 'Đèn Xông Tinh Dầu', desc: 'Bếp xông và đèn xông nến' },
   ];
-  const related = [
-    { href: '/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/', title: 'Bộ xông thảo mộc bao gồm những gì?' },
-    { href: '/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/', title: 'Hướng dẫn dùng bếp xông thảo mộc đúng cách' },
-    { href: '/blog/huong-dan-xong/vo-buoi-kho-xong-nha-phuong-lam-202605031028/', title: 'Vỏ bưởi khô xông nhà: tác dụng và cách làm' },
-  ].filter((item) => !title || !normalizeText(item.title).includes(normalizeText(title).slice(0, 26)));
+  const related = getRelatedBlogPosts({ title, category, slug });
   return `<section class="article-link-panel" aria-label="Đi tiếp trong website Phương Lâm">
-        <h2>Tiếp tục khám phá tại Phương Lâm</h2>
+        <h2>Khám phá thêm</h2>
         <div class="article-link-grid">
           ${categoryCards.map((card) => `<a class="article-link-card" href="${card.href}">${card.title}<span>${card.desc}</span></a>`).join('\n          ')}
         </div>
         <h2>Bài viết liên quan</h2>
-        <ul class="article-related-list">
-          ${related.slice(0, 3).map((item) => `<li><a href="${item.href}">${item.title} →</a></li>`).join('\n          ')}
-          <li><a href="/blog/">${category === 'kien-thuc' ? 'Xem thêm kiến thức' : 'Xem thêm hướng dẫn'} từ Phương Lâm →</a></li>
-        </ul>
+        <div class="article-related-grid">
+          ${related.map((post) => `<a class="article-related-card" href="${escapeHtml(post.url)}">
+            <img src="${escapeHtml(getLocalCoverImage(post))}" alt="${escapeHtml(post.title)}" loading="lazy" width="112" height="84">
+            <span class="article-related-copy">
+              <span class="article-related-meta">${escapeHtml(post.tag || 'Bài viết')} · ${escapeHtml(post.readTime || '5 phút đọc')}</span>
+              <span class="article-related-title">${escapeHtml(post.title)}</span>
+            </span>
+          </a>`).join('\n          ')}
+        </div>
+        <a class="article-more-link" href="/blog/">Xem tất cả bài viết →</a>
       </section>`;
 };
 
@@ -693,7 +797,7 @@ const articleBreadcrumbSchema = ({ title, category, canonical }) => ({
   ],
 });
 
-const ensureBlogArticleShell = ({ html, title, category }) => {
+const ensureBlogArticleShell = ({ html, title, category, slug }) => {
   let nextHtml = ensureStaticSeoCss(html);
   nextHtml = ensureArticleShellStyle(nextHtml);
   nextHtml = nextHtml.replace(/<header\b[^>]*class=["'][^"']*\b(?:site-header|seo-header)\b[^"']*["'][^>]*>[\s\S]*?<\/header>/i, articleHeaderHtml);
@@ -713,7 +817,7 @@ const ensureBlogArticleShell = ({ html, title, category }) => {
   } else {
     nextHtml = nextHtml.replace(/<main\b[^>]*class=["'][^"']*\barticle-wrap\b[^"']*["'][^>]*>/i, (match) => `${match}\n    ${breadcrumb}`);
   }
-  const related = articleRelatedBlock({ title, category });
+  const related = articleRelatedBlock({ title, category, slug });
   if (/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(nextHtml)) {
     nextHtml = nextHtml.replace(/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i, related);
   } else {
@@ -771,6 +875,7 @@ const copyBlogAsset = ({ sourcePath, slug }) => {
 };
 
 const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides = new Map(), tempDir = os.tmpdir() }) => {
+  html = String(html || '').replace(/\r\n?/g, '\n');
   const dir = htmlPath ? path.dirname(htmlPath) : root;
   const publicUrl = `/blog/${category}/${slug}/`;
   const canonical = `${siteUrl}${publicUrl}`;
@@ -815,7 +920,9 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
 
   const title = getHtmlTitle(html) || slug.replace(/-/g, ' ');
   const description = truncate(getDescription(html), 155);
-  const image = html.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1] || '';
+  const image = getMetaContent(html, 'property=og:image') ||
+    html.match(/<figure\b[^>]*class=["'][^"']*\barticle-figure\b[^"']*["'][^>]*>[\s\S]*?<img[^>]+src=["']([^"']+)["']/i)?.[1] ||
+    html.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1] || '';
   const absoluteImage = image ? (image.startsWith('/') ? `${siteUrl}${image}` : image) : '';
   const existingSchema = extractJsonLd(html, 'BlogPosting') || {};
   const publishedAt = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})$/.test(String(existingSchema.datePublished || ''))
@@ -847,7 +954,7 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
   };
   html = setJsonLdByType(html, 'BlogPosting', schema);
   html = setJsonLdByType(html, 'BreadcrumbList', articleBreadcrumbSchema({ title, category, canonical }));
-  html = ensureBlogArticleShell({ html, title, category });
+  html = ensureBlogArticleShell({ html, title, category, slug });
   html = ensureArticleFigureStyle(html);
 
   return { html, meta: { title, description, image, url: publicUrl, tag: blogCategories[category] || 'Kiến thức' } };
@@ -974,6 +1081,7 @@ const upsertBlogPost = ({ category, slug, meta }) => {
   const posts = readBlogPostsFromSiteData();
   const existing = posts.find((post) => String(post.slug) === slug);
   const ids = posts.map((post) => Number(post.id) || 0);
+  const coverImage = getLocalCoverImage({ image: meta.image }) || existing?.coverImage || existing?.image || '';
   const nextPost = {
     id: existing?.id || Math.max(0, ...ids) + 1,
     title: meta.title,
@@ -983,7 +1091,8 @@ const upsertBlogPost = ({ category, slug, meta }) => {
     slug,
     tag: blogCategories[category] || 'Kiến thức',
     url: `/blog/${category}/${slug}/`,
-    image: meta.image || existing?.image || '',
+    image: coverImage,
+    coverImage,
   };
   const nextPosts = [nextPost, ...posts.filter((post) => String(post.slug) !== slug)];
   replaceBlogPostsInSiteData(nextPosts);
