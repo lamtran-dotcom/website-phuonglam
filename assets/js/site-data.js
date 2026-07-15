@@ -3410,6 +3410,17 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 18,
+    "title": "Cách xông nhà bằng thảo mộc để khử mùi, tạo cảm giác dễ chịu",
+    "excerpt": "Cách xông nhà bằng thảo mộc đơn giản, an toàn với bếp xông và nến tealight. Xem cách chuẩn bị, thao tác và lưu ý cho không gian dễ chịu.",
+    "date": "15 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cach-xong-nha-bang-thao-moc",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/",
+    "image": "/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp"
+  },
+  {
     "id": 17,
     "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm",
     "excerpt": "Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.",
