@@ -3410,6 +3410,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 19,
+    "title": "Nến Tealight Không Mùi Dùng Cho Không Gian Nào?",
+    "excerpt": "Nến tealight không mùi dùng cho không gian nào? Xem cách chọn nến khi xông tinh dầu, thảo mộc hoặc cần ánh sáng nền ấm áp, dễ chịu.",
+    "date": "16 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "nen-tealight-khong-mui-dung-cho-khong-gian-nao",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/nen-tealight-khong-mui-dung-cho-khong-gian-nao/",
+    "image": "/assets/blog/nen-tealight-khong-mui-dung-cho-khong-gian-nao-1784208721785-1-chatgpt-image-11-00-19-18-thg-5-2026.webp",
+    "coverImage": "/assets/blog/nen-tealight-khong-mui-dung-cho-khong-gian-nao-1784208721785-1-chatgpt-image-11-00-19-18-thg-5-2026.webp"
+  },
+  {
     "id": 18,
     "title": "Cách xông nhà bằng thảo mộc để khử mùi, tạo cảm giác dễ chịu",
     "excerpt": "Cách xông nhà bằng thảo mộc đơn giản, an toàn với bếp xông và nến tealight. Xem cách chuẩn bị, thao tác và lưu ý cho không gian dễ chịu.",
