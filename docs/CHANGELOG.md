@@ -15,6 +15,7 @@
 - Added a raised hover and keyboard-focus treatment to the popup's “Mua ngay – nhận ưu đãi” button.
 - Added a delivery parcel with a truck icon to the popup product arrangement.
 - Fixed the popup layout on narrow phone screens: reduced height, clearer price line, full-width CTA, and lighter product backdrop.
+- Optimized the popup background from a 1.9 MB PNG to a preloaded 41 KB WebP for faster initial display.
 
 ### Fixed
 - Moved the related-content block for `cach-xong-nha-bang-thao-moc` into the article reading column.

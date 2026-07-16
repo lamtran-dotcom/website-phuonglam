@@ -44,10 +44,10 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Date: 2026-07-15
-Done: Fixed the shipping promotion popup layout on mobile after visual testing at a 390px viewport.
-Files changed: `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: On mobile, the popup uses a compact content-first layout, a full-width CTA, a separate price-badge line, a muted product image, and a viewport-aware maximum height.
+Date: 2026-07-16
+Done: Optimized the shipping popup image for immediate display.
+Files changed: `assets/media/generated/shipping-promo-popup-v1.webp`, `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `docs/CHANGELOG.md`, `CONTEXT.md`.
+New decisions: The popup uses a 1000px-wide WebP (41 KB versus the former 1.9 MB PNG) and preloads it when the app starts.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

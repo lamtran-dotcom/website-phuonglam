@@ -45,11 +45,17 @@ const queryFlag = (key) => new URLSearchParams(window.location.search).get(key) 
 
 const SHIPPING_PROMO_DISMISS_KEY = 'phuonglam-shipping-promo-dismissed-at';
 const SHIPPING_PROMO_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+const SHIPPING_PROMO_IMAGE = '/assets/media/generated/shipping-promo-popup-v1.webp';
 
 const ShippingPromotion = ({ setPage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [ctaHovered, setCtaHovered] = React.useState(false);
   const isMobile = useIsMobile();
+
+  React.useEffect(() => {
+    const image = new Image();
+    image.src = SHIPPING_PROMO_IMAGE;
+  }, []);
 
   React.useEffect(() => {
     let dismissedAt = 0;
@@ -103,7 +109,7 @@ const ShippingPromotion = ({ setPage }) => {
             }}
             onMouseDown={event => event.stopPropagation()}
           >
-            <img src="/assets/media/generated/shipping-promo-popup-v1.png" alt="" style={{ ...shippingPromoStyles.image, ...(isMobile ? shippingPromoStyles.imageMobile : {}) }} />
+            <img src={SHIPPING_PROMO_IMAGE} alt="" loading="eager" fetchPriority="high" decoding="async" style={{ ...shippingPromoStyles.image, ...(isMobile ? shippingPromoStyles.imageMobile : {}) }} />
             <div style={{ ...shippingPromoStyles.content, maxWidth: isMobile ? '100%' : '62%', ...(isMobile ? shippingPromoStyles.contentMobile : {}) }}>
               <span style={shippingPromoStyles.eyebrow}>ƯU ĐÃI GIAO HÀNG</span>
               <h2 id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Giao nhanh,<br />tiết kiệm phí ship</h2>
