@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-17
-Done: Fixed broken product thumbnails caused by missing responsive files and hardened the image pipeline for future uploads.
-Files changed: `tools/generate_responsive_product_images.py`, `tools/local_admin_server.js`, `tools/build_static_site.js`, `assets/js/app.jsx`, generated `assets/js/app.min.js`, responsive WebPs, static pages, and relevant docs.
-New decisions: Product uploads create 480px/720px responsive WebPs; static builds reject missing responsive product images while the client can retry the original image.
+Done: Rebased the local website commit on the latest GitHub Actions publish commit and pushed it successfully. The local publish flow now fetches/rebases before pushing; if a conflict is limited to generated static output, it keeps the remote baseline and rebuilds it from local source. Source-code conflicts still stop safely without overwrite.
+Files changed: `tools/local_admin_server.js`, `CONTEXT.md`, and `docs/CHANGELOG.md`.
+New decisions: Remote GitHub Actions commits are an expected part of the deploy flow. The local admin must synchronize with `origin/main` before every push instead of asking the operator to manually pull.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

@@ -219,6 +219,54 @@ const gitSummary = () => {
   };
 };
 
+const generatedStaticConflict = (file) => (
+  file === 'index.html'
+  || file === 'blog/index.html'
+  || file === 'sitemap.xml'
+  || file === 'robots.txt'
+  || file === 'assets/js/app.min.js'
+  || file === 'assets/js/site-data.js'
+  || /^(?:danh-muc|san-pham)\/[^/]+\/index\.html$/.test(file)
+);
+
+const rebaseGitOntoOrigin = (branch) => {
+  const fetch = runGit(['fetch', 'origin', branch]);
+  if (!fetch.ok) throw new Error(fetch.output || 'git fetch failed');
+  const rebase = runGit(['rebase', `origin/${branch}`]);
+  if (rebase.ok) return;
+
+  const conflicts = runGit(['diff', '--name-only', '--diff-filter=U']).output
+    .split('\n')
+    .map((file) => file.trim())
+    .filter(Boolean);
+  if (!conflicts.length || conflicts.some((file) => !generatedStaticConflict(file))) {
+    runGit(['rebase', '--abort']);
+    throw new Error(`${rebase.output || 'git rebase failed'}\nXung đột source cần xử lý thủ công; không tự ghi đè.`);
+  }
+
+  // These files are build output. Keep the remote baseline, then regenerate it from local source.
+  const checkout = runGit(['checkout', '--theirs', '--', ...conflicts]);
+  if (!checkout.ok) {
+    runGit(['rebase', '--abort']);
+    throw new Error(checkout.output || 'Không thể lấy bản build từ remote');
+  }
+  const addConflicts = runGit(['add', '--', ...conflicts]);
+  if (!addConflicts.ok) {
+    runGit(['rebase', '--abort']);
+    throw new Error(addConflicts.output || 'Không thể đánh dấu xung đột đã xử lý');
+  }
+  try {
+    runBuild();
+    const addBuild = runGit(['add', '-A']);
+    if (!addBuild.ok) throw new Error(addBuild.output || 'git add build output failed');
+    const continued = runGit(['-c', 'core.editor=true', 'rebase', '--continue']);
+    if (!continued.ok) throw new Error(continued.output || 'Không thể tiếp tục rebase');
+  } catch (error) {
+    runGit(['rebase', '--abort']);
+    throw error;
+  }
+};
+
 const pushGit = () => {
   runBuild();
   const before = gitSummary();
@@ -235,6 +283,7 @@ const pushGit = () => {
   if (!commit.ok && !nothingToCommit) throw new Error(commit.output || 'git commit failed');
 
   const branch = gitSummary().branch || 'main';
+  rebaseGitOntoOrigin(branch);
   const push = runGit(['push', 'origin', branch]);
   if (!push.ok) throw new Error(push.output || 'git push failed');
 

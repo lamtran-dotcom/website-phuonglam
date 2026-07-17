@@ -12,6 +12,7 @@
 
 ### Fixed
 - Fixed overlapping text in the CTA block of the newly published tealight article. CTA grid-area rules now override the article's base `!important` style, and a first-child paragraph becomes the heading only when no `h2`/`h3` precedes it.
+- Fixed local publish failures after a GitHub Actions commit. The admin now fetches/rebases before push, automatically regenerating only conflicted static build output while preserving a safe stop for source-code conflicts.
 - Fixed broken product-gallery and variant thumbnails by generating the missing responsive WebP files and validating responsive image references during builds.
 
 ## 2026-07-15
