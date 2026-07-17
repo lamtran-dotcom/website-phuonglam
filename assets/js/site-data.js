@@ -1319,7 +1319,7 @@ const PRODUCTS = [
     "shortDesc": "Dĩa lót đất nung tự nhiên dùng cho bếp xông thảo mộc, bồ kết và nến tealight. Giúp cách nhiệt, giữ vệ sinh mặt bàn và hoàn thiện bộ bếp xông mộc mạc.",
     "tag": "Sale",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
@@ -1441,8 +1441,7 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/mirrored/72eecef5.webp",
-      "/assets/products/mirrored/71ced047.webp",
-      "/assets/products/mirrored/cae1a77b.webp",
+      "/assets/products/uploads/1784261051269-image.webp",
       "/assets/products/mirrored/3f070c64.webp"
     ],
     "reviews": [],
@@ -1469,12 +1468,12 @@ const PRODUCTS = [
       },
       {
         "id": "shopee_variant_335787476783",
-        "name": "Dĩa Lót",
+        "name": "Rế lót",
         "sku": "",
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/71ced047.webp",
+        "image": "/assets/products/uploads/1784261094318-bep-xong-thao-moc-website.webp",
         "options": {}
       },
       {
