@@ -44,10 +44,10 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Date: 2026-07-16
-Done: Optimized the shipping popup image for immediate display.
-Files changed: `assets/media/generated/shipping-promo-popup-v1.webp`, `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: The popup uses a 1000px-wide WebP (41 KB versus the former 1.9 MB PNG) and preloads it when the app starts.
+Date: 2026-07-17
+Done: Added a gentle hover and keyboard-focus treatment to desktop primary navigation links.
+Files changed: `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `docs/CHANGELOG.md`, `CONTEXT.md`.
+New decisions: A hovered navigation item lifts 1px with slightly bolder green text, a pale green background, and a soft shadow.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

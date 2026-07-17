@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-17
+
+### Changed
+- Added a subtle raised hover and keyboard-focus state to desktop primary navigation links.
+
 ## 2026-07-15
 
 ### Added

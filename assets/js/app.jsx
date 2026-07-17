@@ -167,6 +167,7 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [adminLoginOpen, setAdminLoginOpen] = React.useState(false);
   const [adminPassword, setAdminPassword] = React.useState('');
+  const [hoveredNavLabel, setHoveredNavLabel] = React.useState(null);
   const logoClicksRef = React.useRef(0);
   const logoTimerRef = React.useRef(null);
   const isMobile = useIsMobile();
@@ -216,15 +217,23 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
           <nav style={headerStyles.nav}>
             {navLinks.map(l => {
               const active = page.name === l.page && (!l.cat || page.cat === l.cat);
+              const isHovered = hoveredNavLabel === l.label;
               const style = {
                 ...headerStyles.navLink,
-                color: active ? '#318223' : '#2d2d2d',
-                fontWeight: active ? '800' : '700',
+                color: active || isHovered ? '#318223' : '#2d2d2d',
+                fontWeight: active || isHovered ? '800' : '700',
+                ...(isHovered ? headerStyles.navLinkHover : {}),
+              };
+              const hoverHandlers = {
+                onMouseEnter: () => setHoveredNavLabel(l.label),
+                onMouseLeave: () => setHoveredNavLabel(null),
+                onFocus: () => setHoveredNavLabel(l.label),
+                onBlur: () => setHoveredNavLabel(null),
               };
               return l.href ? (
-                <a key={l.label} href={l.href} style={style}>{l.label}</a>
+                <a key={l.label} href={l.href} style={style} {...hoverHandlers}>{l.label}</a>
               ) : (
-                <span key={l.label} style={style} onClick={() => setPage({ name: l.page })}>{l.label}</span>
+                <span key={l.label} style={style} {...hoverHandlers} onClick={() => setPage({ name: l.page })}>{l.label}</span>
               );
             })}
           </nav>
@@ -294,7 +303,8 @@ const headerStyles = {
   logoMark: { color: '#318223', fontSize: 20 },
   logoText: { fontSize: 22, fontWeight: 700, letterSpacing: '0.5px', color: '#318223', textTransform: 'uppercase' },
   nav: { display: 'flex', gap: 16, flex: 1, justifyContent: 'center', flexWrap: 'nowrap' },
-  navLink: { fontSize: 14.5, cursor: 'pointer', transition: 'color .2s', letterSpacing: '0em', whiteSpace: 'nowrap', textDecoration: 'none' },
+  navLink: { fontSize: 14.5, cursor: 'pointer', transition: 'transform .18s ease, color .18s ease, background .18s ease, box-shadow .18s ease', letterSpacing: '0em', whiteSpace: 'nowrap', textDecoration: 'none', padding: '7px 8px', borderRadius: 9, display: 'inline-block' },
+  navLinkHover: { transform: 'translateY(-1px)', background: '#eef7ea', boxShadow: '0 4px 10px rgba(49, 130, 35, .12)' },
   actions: { display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0 },
   iconBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 8, borderRadius: 8, color: '#444', display: 'flex', alignItems: 'center' },
   cartBtn: { background: 'none', border: 'none', cursor: 'pointer', padding: 8, borderRadius: 8, color: '#444', display: 'flex', alignItems: 'center', position: 'relative' },
