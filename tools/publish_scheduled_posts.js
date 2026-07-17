@@ -4,6 +4,7 @@ const vm = require('vm');
 const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
+const scheduledHistoryPath = (siteRoot) => path.join(siteRoot, 'data', 'scheduled-blog-history.json');
 const blogCategories = {
   'huong-dan-xong': 'Hướng dẫn',
   'kien-thuc': 'Kiến thức',
@@ -71,6 +72,37 @@ const isScheduledManifest = (manifest) => (
   && !Number.isNaN(new Date(manifest.publishAt).getTime())
 );
 
+const readScheduledHistory = (siteRoot) => {
+  const filePath = scheduledHistoryPath(siteRoot);
+  if (!fs.existsSync(filePath)) return [];
+  try {
+    const history = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return Array.isArray(history) ? history : [];
+  } catch {
+    return [];
+  }
+};
+
+const recordPublishedPost = ({ siteRoot, manifest, publishedAt }) => {
+  const id = `${manifest.category}/${manifest.slug}`;
+  const entry = {
+    id,
+    category: manifest.category,
+    slug: manifest.slug,
+    title: manifest.meta?.title || manifest.title || manifest.slug,
+    url: `/blog/${manifest.category}/${manifest.slug}/`,
+    publishAt: manifest.publishAt,
+    createdAt: manifest.createdAt || '',
+    publishedAt: publishedAt.toISOString(),
+    status: 'published',
+  };
+  const history = readScheduledHistory(siteRoot).filter((item) => item?.id !== id);
+  history.unshift(entry);
+  fs.mkdirSync(path.dirname(scheduledHistoryPath(siteRoot)), { recursive: true });
+  fs.writeFileSync(scheduledHistoryPath(siteRoot), `${JSON.stringify(history.slice(0, 50), null, 2)}\n`);
+  return entry;
+};
+
 const runScheduledPublish = ({ siteRoot = root, now = new Date(), build = true } = {}) => {
   const scheduledRoot = path.join(siteRoot, 'scheduled-posts');
   const siteDataPath = path.join(siteRoot, 'assets', 'js', 'site-data.js');
@@ -97,6 +129,7 @@ const runScheduledPublish = ({ siteRoot = root, now = new Date(), build = true }
         fs.mkdirSync(publicDir, { recursive: true });
         fs.copyFileSync(articlePath, path.join(publicDir, 'index.html'));
         upsertBlogPost({ siteDataPath, manifest, now });
+        recordPublishedPost({ siteRoot, manifest, publishedAt: now });
         fs.rmSync(sourceDir, { recursive: true, force: true });
         promoted.push({ category, slug, url: `/blog/${category}/${slug}/` });
       } catch (error) {
@@ -125,6 +158,8 @@ if (require.main === module) {
 
 module.exports = {
   readBlogPosts,
+  readScheduledHistory,
+  recordPublishedPost,
   replaceBlogPosts,
   runScheduledPublish,
   upsertBlogPost,

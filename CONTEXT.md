@@ -45,9 +45,10 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-17
-Done: Rebased the local website commit on the latest GitHub Actions publish commit and pushed it successfully. The local publish flow now fetches/rebases before pushing; if a conflict is limited to generated static output, it keeps the remote baseline and rebuilds it from local source. Source-code conflicts still stop safely without overwrite.
-Files changed: `tools/local_admin_server.js`, `CONTEXT.md`, and `docs/CHANGELOG.md`.
-New decisions: Remote GitHub Actions commits are an expected part of the deploy flow. The local admin must synchronize with `origin/main` before every push instead of asking the operator to manually pull.
+Done: Added publishing observability and schedule hardening. The local admin now lists queued posts, completed-post history, and the latest GitHub Actions result; the promotion script records a bounded history after each successful publish.
+Files changed: `tools/local_admin_server.js`, `tools/publish_scheduled_posts.js`, `tools/publish_scheduled_posts.test.js`, `.github/workflows/publish-scheduled-posts.yml`, `CONTEXT.md`, and relevant `docs/` files.
+New decisions: GitHub runs at offset five-minute marks (not the busy minute zero) and never overlaps publish runs. Remote GitHub Actions commits are expected; local pushes continue to synchronize with `origin/main` first.
+Verification: The promotion regression test passed. The live admin API returned the currently queued article and the latest completed GitHub Actions job.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
@@ -55,4 +56,4 @@ New decisions: Remote GitHub Actions commits are an expected part of the deploy 
 - Instatic is early 0.0.x software, so treat it as inspiration or a sandbox experiment rather than production migration target.
 
 ## Next Suggested Task
-- Schedule one test article at least ten minutes ahead and confirm the GitHub Actions run promotes it and GitHub Pages deploys it.
+- Let the queued article publish at its selected time, then confirm the history row and public URL after GitHub Pages deploys it.

@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-07-17 - Record and expose scheduled publication state
+Decision: Maintain a bounded JSON history after a scheduled article is promoted and expose it with the remaining queue and the most recent GitHub Actions run.
+Reason: The queue directory is deleted on successful publish, so it cannot answer whether a scheduled article was actually deployed.
+Impact: The promotion script writes `data/scheduled-blog-history.json`; the local admin supplies a read-only schedule status API for Content AI Studio. GitHub workflow runs are offset from minute zero and serialized so publishing jobs do not race each other.
+Status: Active
+
 ### 2026-07-17 - Require responsive copies for product images
 Decision: Every product image served from `assets/products/uploads/` or `assets/products/mirrored/` must have 480px and 720px WebP derivatives before the static site builds.
 Reason: The storefront uses `srcset`; missing responsive candidates cause browser-visible broken-image icons even when the original image exists.

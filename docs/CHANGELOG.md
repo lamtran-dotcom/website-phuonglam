@@ -5,8 +5,10 @@
 ### Added
 - Added a non-public `scheduled-posts/` article queue, local admin endpoint, promotion script, regression test, and `Publish Scheduled Blog Posts` GitHub Actions workflow.
 - Added automatic promotion of due articles into `blog/`, including `BLOG_POSTS`, static index, sitemap, and deploy commit updates.
+- Added a bounded scheduled-publication history and a local read-only status endpoint with queue, history, and latest GitHub Actions run.
 
 ### Changed
+- Moved the scheduled GitHub Actions trigger away from minute zero and serialized runs to reduce delay/race risk.
 - Added a subtle raised hover and keyboard-focus state to desktop primary navigation links.
 - Product uploads now create 480px and 720px WebP derivatives immediately; the storefront retries the original image if a responsive candidate fails.
 

@@ -30,6 +30,7 @@ const files = {
   uploads: path.join(root, 'assets', 'products', 'uploads'),
   blogAssets: path.join(root, 'assets', 'blog'),
   scheduledPosts: path.join(root, 'scheduled-posts'),
+  scheduledBlogHistory: path.join(root, 'data', 'scheduled-blog-history.json'),
   siteData: path.join(root, 'assets', 'js', 'site-data.js'),
   build: path.join(root, 'tools', 'build_static_site.js'),
   responsiveGenerator: path.join(root, 'tools', 'generate_responsive_product_images.py'),
@@ -38,6 +39,7 @@ const files = {
 const imageExts = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']);
 
 const siteUrl = 'https://phuonglam.com';
+const githubRepo = 'lamtran-dotcom/website-phuonglam';
 const blogCategories = {
   'huong-dan-xong': 'Hướng dẫn',
   'kien-thuc': 'Kiến thức',
@@ -1381,6 +1383,81 @@ const listBlogPosts = () => {
   return posts.concat(scanned.map(({ mtimeMs, ...post }) => post));
 };
 
+const readScheduledBlogHistory = () => {
+  if (!fs.existsSync(files.scheduledBlogHistory)) return [];
+  try {
+    const history = JSON.parse(fs.readFileSync(files.scheduledBlogHistory, 'utf8'));
+    return Array.isArray(history) ? history : [];
+  } catch {
+    return [];
+  }
+};
+
+const listScheduledBlogs = () => {
+  const scheduled = [];
+  if (!fs.existsSync(files.scheduledPosts)) return scheduled;
+  for (const category of fs.readdirSync(files.scheduledPosts)) {
+    if (!blogCategories[category]) continue;
+    const categoryDir = path.join(files.scheduledPosts, category);
+    if (!fs.statSync(categoryDir).isDirectory()) continue;
+    for (const slug of fs.readdirSync(categoryDir)) {
+      const manifestPath = path.join(categoryDir, slug, 'article.json');
+      if (!fs.existsSync(manifestPath)) continue;
+      try {
+        const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+        const publishTime = new Date(manifest.publishAt).getTime();
+        if (!Number.isFinite(publishTime)) continue;
+        scheduled.push({
+          id: `${category}/${slug}`,
+          category,
+          categoryLabel: blogCategories[category],
+          slug,
+          title: manifest.meta?.title || manifest.title || slug,
+          url: `/blog/${category}/${slug}/`,
+          publishAt: manifest.publishAt,
+          createdAt: manifest.createdAt || '',
+          status: publishTime <= Date.now() ? 'due' : 'queued',
+        });
+      } catch {
+        // Ignore an incomplete queue directory; the publisher will report it as an error.
+      }
+    }
+  }
+  return scheduled.sort((a, b) => new Date(a.publishAt) - new Date(b.publishAt));
+};
+
+const getScheduledWorkflowStatus = async () => {
+  const workflowUrl = `https://github.com/${githubRepo}/actions/workflows/publish-scheduled-posts.yml`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 3500);
+  try {
+    const response = await fetch(`https://api.github.com/repos/${githubRepo}/actions/workflows/publish-scheduled-posts.yml/runs?per_page=1`, {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'phuonglam-local-admin',
+      },
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`GitHub HTTP ${response.status}`);
+    const data = await response.json();
+    const run = Array.isArray(data.workflow_runs) ? data.workflow_runs[0] : null;
+    return {
+      workflowUrl,
+      lastRun: run ? {
+        status: run.status || '',
+        conclusion: run.conclusion || '',
+        createdAt: run.created_at || '',
+        updatedAt: run.updated_at || '',
+        url: run.html_url || workflowUrl,
+      } : null,
+    };
+  } catch (error) {
+    return { workflowUrl, lastRun: null, error: error.name === 'AbortError' ? 'Không lấy được trạng thái GitHub kịp thời' : error.message };
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
 const handleApi = async (req, res, pathname) => {
   try {
     if (pathname === '/api/products.php' && req.method === 'GET') {
@@ -1449,6 +1526,18 @@ const handleApi = async (req, res, pathname) => {
 
     if (pathname === '/api/blog.php' && req.method === 'GET') {
       sendJson(res, { ok: true, posts: listBlogPosts() });
+      return true;
+    }
+
+    if (pathname === '/api/blog-schedule.php' && req.method === 'GET') {
+      const workflow = await getScheduledWorkflowStatus();
+      sendJson(res, {
+        ok: true,
+        serverNow: new Date().toISOString(),
+        queue: listScheduledBlogs(),
+        history: readScheduledBlogHistory().slice(0, 12),
+        workflow,
+      });
       return true;
     }
 

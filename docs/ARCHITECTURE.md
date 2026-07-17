@@ -26,7 +26,7 @@ Local admin tools update source data and regenerate static pages. Production hos
    - `sitemap.xml` and `robots.txt`
 4. Blog pages live under `blog/`; the admin pipeline normalizes article HTML and assets.
 5. A scheduled blog is written to non-public `scheduled-posts/<category>/<slug>/` with its normalized `index.html` and `article.json` manifest. Images remain under `assets/blog/` so the promoted page has stable public URLs.
-6. GitHub Actions runs `tools/publish_scheduled_posts.js` every five minutes. Due entries move to `blog/`, update `assets/js/site-data.js`, rebuild static pages/sitemap, then commit and push.
+6. GitHub Actions runs `tools/publish_scheduled_posts.js` at offset five-minute marks. Due entries move to `blog/`, update `assets/js/site-data.js`, rebuild static pages/sitemap, record publish history, then commit and push. The local admin exposes the queue, history, and latest workflow status to Content AI Studio.
 7. Static files are committed and pushed for production deploy.
 
 ## External Services

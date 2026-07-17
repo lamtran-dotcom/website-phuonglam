@@ -6,6 +6,7 @@
 ## Next
 - [ ] Smoke test the documented local admin workflow.
 - [x] Add a GitHub Actions-backed scheduled publish flow for SEO articles.
+- [x] Expose scheduled queue, completed history, and last GitHub job to Content AI Studio.
 - [ ] Review whether existing setup instructions need screenshots or operator notes.
 
 ## Later
