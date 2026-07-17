@@ -3409,6 +3409,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 20,
+    "title": "Nến Tealight Vỏ Nhôm Hay Vỏ Mica: Chọn Loại Nào?",
+    "excerpt": "Nến tealight vỏ nhôm hay vỏ mica phù hợp để xông tinh dầu, xông thảo mộc hay trang trí tiệc? Xem cách chọn theo từng nhu cầu sử dụng.",
+    "date": "17 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "nen-tealight-vo-nhom-hay-vo-mica",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/nen-tealight-vo-nhom-hay-vo-mica/",
+    "image": "/assets/blog/nen-tealight-vo-nhom-hay-vo-mica-1784276908830-1-chatgpt-image-15-26-23-17-thg-7-2026.webp",
+    "coverImage": "/assets/blog/nen-tealight-vo-nhom-hay-vo-mica-1784276908830-1-chatgpt-image-15-26-23-17-thg-7-2026.webp"
+  },
+  {
     "id": 19,
     "title": "Nến Tealight Không Mùi Dùng Cho Không Gian Nào?",
     "excerpt": "Nến tealight không mùi dùng cho không gian nào? Xem cách chọn nến khi xông tinh dầu, thảo mộc hoặc cần ánh sáng nền ấm áp, dễ chịu.",
