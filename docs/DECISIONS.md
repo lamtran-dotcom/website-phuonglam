@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-07-17 - Require responsive copies for product images
+Decision: Every product image served from `assets/products/uploads/` or `assets/products/mirrored/` must have 480px and 720px WebP derivatives before the static site builds.
+Reason: The storefront uses `srcset`; missing responsive candidates cause browser-visible broken-image icons even when the original image exists.
+Impact: Uploads generate both derivatives immediately, the build rejects a catalog with missing copies, and the client retries the original source as a last-resort fallback.
+Status: Active
+
 ### 2026-07-17 - Promote scheduled SEO articles with GitHub Actions
 Decision: Keep future SEO articles in `scheduled-posts/` until their explicit ISO publish time, then use a repository workflow to promote them into public `blog/` and rebuild the static site.
 Reason: Scheduling must work when the local admin/Mac is off, while public pages must remain static and SEO-complete once live.

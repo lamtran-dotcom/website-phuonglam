@@ -15,8 +15,8 @@ Local admin tools update source data and regenerate static pages. Production hos
 - SEO discovery: `sitemap.xml`, `robots.txt`, canonical tags, and structured data inside generated pages.
 
 ## Data Flow
-1. Product/catalog changes are made through the local admin UI or directly in `data/products.json`.
-2. `tools/local_admin_server.js` saves data and triggers the static build.
+1. Product/catalog changes are made through the local admin UI or directly in `data/products.json`. Product uploads create a 900px source WebP plus 480px and 720px responsive WebPs.
+2. `tools/local_admin_server.js` saves data and triggers the static build, which verifies responsive copies exist for every uploaded or mirrored product image.
 3. `tools/build_static_site.js` generates or updates:
    - homepage assets
    - category pages in `danh-muc/`

@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-17
-Done: Added cloud-backed scheduled publishing for SEO articles. The local admin stores a fully normalized article in `scheduled-posts/`; GitHub Actions checks every five minutes, promotes due posts into public `blog/`, updates `BLOG_POSTS`, rebuilds the site/sitemap, commits, and pushes without the local Mac running.
-Files changed: `tools/local_admin_server.js`, `tools/publish_scheduled_posts.js`, `tools/publish_scheduled_posts.test.js`, `.github/workflows/publish-scheduled-posts.yml`, `CONTEXT.md`, and relevant `docs/` files.
-New decisions: Schedule times are ISO timestamps supplied in Vietnam time by Content AI Studio and must be at least five minutes ahead. A queue entry is non-public until promotion; regular direct blog save/publish stays unchanged.
+Done: Fixed broken product thumbnails caused by missing responsive files and hardened the image pipeline for future uploads.
+Files changed: `tools/generate_responsive_product_images.py`, `tools/local_admin_server.js`, `tools/build_static_site.js`, `assets/js/app.jsx`, generated `assets/js/app.min.js`, responsive WebPs, static pages, and relevant docs.
+New decisions: Product uploads create 480px/720px responsive WebPs; static builds reject missing responsive product images while the client can retry the original image.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

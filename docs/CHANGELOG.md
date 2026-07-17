@@ -8,9 +8,11 @@
 
 ### Changed
 - Added a subtle raised hover and keyboard-focus state to desktop primary navigation links.
+- Product uploads now create 480px and 720px WebP derivatives immediately; the storefront retries the original image if a responsive candidate fails.
 
 ### Fixed
 - Fixed overlapping text in the CTA block of the newly published tealight article. CTA grid-area rules now override the article's base `!important` style, and a first-child paragraph becomes the heading only when no `h2`/`h3` precedes it.
+- Fixed broken product-gallery and variant thumbnails by generating the missing responsive WebP files and validating responsive image references during builds.
 
 ## 2026-07-15
 

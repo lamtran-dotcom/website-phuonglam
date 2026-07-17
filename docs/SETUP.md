@@ -66,6 +66,7 @@ There is no formal test suite documented yet. Use targeted checks:
 ```bash
 node -c tools/local_admin_server.js
 node -c tools/build_static_site.js
+python3 tools/generate_responsive_product_images.py --check
 node --test tools/publish_scheduled_posts.test.js
 git diff --check
 ```

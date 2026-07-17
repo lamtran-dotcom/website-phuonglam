@@ -32,6 +32,7 @@ const files = {
   scheduledPosts: path.join(root, 'scheduled-posts'),
   siteData: path.join(root, 'assets', 'js', 'site-data.js'),
   build: path.join(root, 'tools', 'build_static_site.js'),
+  responsiveGenerator: path.join(root, 'tools', 'generate_responsive_product_images.py'),
 };
 
 const imageExts = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']);
@@ -171,6 +172,19 @@ print(os.path.getsize(dst))
     return inputPath;
   }
   return outputPath;
+};
+
+const generateResponsiveImages = (publicPath) => {
+  const result = spawnSync('python3', [files.responsiveGenerator, '--image', publicPath], {
+    cwd: root,
+    encoding: 'utf8',
+    timeout: 30000,
+  });
+  if (result.status !== 0) {
+    console.warn('generateResponsiveImages failed:', result.stderr || result.stdout);
+    return false;
+  }
+  return true;
 };
 
 const runBuild = () => {
@@ -1378,7 +1392,9 @@ const handleApi = async (req, res, pathname) => {
       // Nén + resize về max 900px, output .webp
       const finalPath = compressImage(tempPath);
       const finalFilename = path.basename(finalPath);
-      sendJson(res, { ok: true, url: `/assets/products/uploads/${finalFilename}` });
+      const publicPath = `/assets/products/uploads/${finalFilename}`;
+      generateResponsiveImages(publicPath);
+      sendJson(res, { ok: true, url: publicPath });
       return true;
     }
 

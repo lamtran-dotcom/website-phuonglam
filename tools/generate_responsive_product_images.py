@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
 from PIL import Image
@@ -34,16 +35,22 @@ def output_path(public_path: str, width: int) -> Path:
     return OUTPUT_DIR / f"{stem}-{width}.webp"
 
 
-def resize_image(public_path: str) -> list[Path]:
+def responsive_paths(public_path: str) -> list[Path]:
+    return [output_path(public_path, width) for width in WIDTHS]
+
+
+def resize_image(public_path: str, only_missing: bool = False) -> list[Path]:
     src = source_path(public_path)
     if not src.exists():
-      return []
+        return []
 
     written = []
     with Image.open(src) as image:
         image = image.convert("RGB")
         for width in WIDTHS:
             target = output_path(public_path, width)
+            if only_missing and target.exists():
+                continue
             ratio = width / image.width
             height = max(1, round(image.height * ratio))
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -54,24 +61,48 @@ def resize_image(public_path: str) -> list[Path]:
 
 
 def main() -> int:
-    products = json.loads(PRODUCTS_PATH.read_text(encoding="utf-8"))
-    images = sorted(set(walk_images(products)))
+    parser = argparse.ArgumentParser(description="Generate responsive product images.")
+    parser.add_argument("--image", action="append", dest="images", help="Public product-image path to process. May be repeated.")
+    parser.add_argument("--only-missing", action="store_true", help="Create only missing responsive files.")
+    parser.add_argument("--check", action="store_true", help="Report missing source or responsive files without writing.")
+    args = parser.parse_args()
+
+    if args.images:
+        images = sorted(set(args.images))
+    else:
+        products = json.loads(PRODUCTS_PATH.read_text(encoding="utf-8"))
+        images = sorted(set(walk_images(products)))
+
+    missing_sources = [public_path for public_path in images if not source_path(public_path).exists()]
+    missing_responsive = [
+        str(target.relative_to(ROOT))
+        for public_path in images
+        if source_path(public_path).exists()
+        for target in responsive_paths(public_path)
+        if not target.exists()
+    ]
+    if args.check:
+        print(json.dumps({
+            "sourceImages": len(images),
+            "missingSources": missing_sources,
+            "missingResponsive": missing_responsive,
+            "outputDir": str(OUTPUT_DIR.relative_to(ROOT)),
+        }, ensure_ascii=False, indent=2))
+        return 1 if missing_sources or missing_responsive else 0
+
     written = []
-    missing = []
     for public_path in images:
-        result = resize_image(public_path)
+        result = resize_image(public_path, only_missing=args.only_missing)
         if result:
             written.extend(result)
-        else:
-            missing.append(public_path)
 
     print(json.dumps({
         "sourceImages": len(images),
         "written": len(written),
-        "missing": missing,
+        "missingSources": missing_sources,
         "outputDir": str(OUTPUT_DIR.relative_to(ROOT)),
     }, ensure_ascii=False, indent=2))
-    return 1 if missing else 0
+    return 1 if missing_sources else 0
 
 
 if __name__ == "__main__":

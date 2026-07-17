@@ -15,6 +15,7 @@ const paths = {
   babelStandalone: path.join(root, 'tools', 'vendor', 'babel-standalone-7.29.0.min.js'),
   generatedMediaDir: path.join(root, 'assets', 'media', 'generated'),
   generatedProductDir: path.join(root, 'assets', 'products', 'generated'),
+  responsiveProductDir: path.join(root, 'assets', 'products', 'responsive'),
   productPagesDir: path.join(root, 'san-pham'),
   categoryPagesDir: path.join(root, 'danh-muc'),
 };
@@ -324,8 +325,46 @@ const responsiveImageAttrs = (src, sizes) => {
   const fileName = pathOnly.split('/').pop() || '';
   const baseName = fileName.replace(/\.[^.]+$/, '');
   if (!baseName) return '';
-  const srcset = `/assets/products/responsive/${baseName}-480.webp 480w, /assets/products/responsive/${baseName}-720.webp 720w, ${src} 900w`;
+  const candidates = [480, 720]
+    .filter((width) => fs.existsSync(path.join(paths.responsiveProductDir, `${baseName}-${width}.webp`)))
+    .map((width) => `/assets/products/responsive/${baseName}-${width}.webp ${width}w`);
+  if (!candidates.length) return '';
+  const srcset = [...candidates, `${src} 900w`].join(', ');
   return ` srcset="${escapeHtml(srcset)}" sizes="${escapeHtml(sizes)}"`;
+};
+
+const collectResponsiveProductImages = (value, images = new Set()) => {
+  if (Array.isArray(value)) {
+    value.forEach((item) => collectResponsiveProductImages(item, images));
+  } else if (value && typeof value === 'object') {
+    Object.values(value).forEach((item) => collectResponsiveProductImages(item, images));
+  } else if (typeof value === 'string') {
+    const publicPath = value.split('?', 1)[0];
+    if (publicPath.startsWith('/assets/products/mirrored/') || publicPath.startsWith('/assets/products/uploads/')) {
+      images.add(publicPath);
+    }
+  }
+  return images;
+};
+
+const verifyResponsiveProductImages = (products) => {
+  const missing = [];
+  for (const publicPath of collectResponsiveProductImages(products)) {
+    const fileName = publicPath.split('/').pop() || '';
+    const baseName = fileName.replace(/\.[^.]+$/, '');
+    const original = path.join(root, publicPath.slice(1));
+    if (!fs.existsSync(original)) {
+      missing.push(publicPath);
+      continue;
+    }
+    for (const width of [480, 720]) {
+      const responsive = path.join(paths.responsiveProductDir, `${baseName}-${width}.webp`);
+      if (!fs.existsSync(responsive)) missing.push(`/assets/products/responsive/${baseName}-${width}.webp`);
+    }
+  }
+  if (missing.length) {
+    throw new Error(`Missing responsive product images:\n${missing.join('\n')}`);
+  }
 };
 
 const absoluteUrl = (url) => {
@@ -1484,6 +1523,7 @@ const main = () => {
   ensureDir(paths.jsDir);
   const initialData = externalizeIndex();
   const products = updateProductsJson();
+  verifyResponsiveProductImages(products);
   replaceSiteDataProducts(products);
   bakeProductsIntoApp(products);
   const settings = ensureSettingsJson();

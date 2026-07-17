@@ -345,7 +345,18 @@ const ImgPlaceholder = ({ label, w = '100%', h = 220, bg = '#e8ede8', style = {}
     const responsiveAttrs = getResponsiveImageAttrs(src, responsiveSizes || '(max-width: 767px) 100vw, 480px');
     return (
       <div style={{ width: w, height: aspectRatio ? 'auto' : h, aspectRatio: aspectRatio || undefined, overflow: 'hidden', flexShrink: 0, ...style }}>
-        <img src={src} {...responsiveAttrs} alt={label} loading={imageLoading} fetchPriority={imageFetchPriority || undefined} decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; e.target.parentNode.style.background=bg; }} />
+        <img src={src} {...responsiveAttrs} alt={label} loading={imageLoading} fetchPriority={imageFetchPriority || undefined} decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => {
+          const image = e.currentTarget;
+          if (!image.dataset.originalFallback && image.getAttribute('srcset')) {
+            image.dataset.originalFallback = 'true';
+            image.removeAttribute('srcset');
+            image.removeAttribute('sizes');
+            image.src = image.getAttribute('src') || src;
+            return;
+          }
+          image.style.display = 'none';
+          image.parentNode.style.background = bg;
+        }} />
       </div>
     );
   }
