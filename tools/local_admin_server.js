@@ -29,6 +29,7 @@ const files = {
   settings: path.join(root, 'data', 'settings.json'),
   uploads: path.join(root, 'assets', 'products', 'uploads'),
   blogAssets: path.join(root, 'assets', 'blog'),
+  scheduledPosts: path.join(root, 'scheduled-posts'),
   siteData: path.join(root, 'assets', 'js', 'site-data.js'),
   build: path.join(root, 'tools', 'build_static_site.js'),
 };
@@ -621,14 +622,24 @@ const articleShellStyle = `<style id="phuonglam-article-shell-style">
       text-align: left !important;
     }
     article .cta-block h2, article .cta-block h3 {
-      grid-area: heading;
+      grid-area: heading !important;
       margin: 0 0 6px !important;
       font-size: 20px !important;
       line-height: 1.35 !important;
     }
-    article .cta-block p { grid-area: copy; margin: 0 !important; }
+    article .cta-block > p {
+      grid-area: copy !important;
+      margin: 0 !important;
+    }
+    article .cta-block > p:first-child {
+      grid-area: heading !important;
+      margin: 0 0 6px !important;
+      font-size: 20px !important;
+      font-weight: 800 !important;
+      line-height: 1.35 !important;
+    }
     article .cta-block .btn-cta {
-      grid-area: action;
+      grid-area: action !important;
       display: inline-flex !important;
       width: auto !important;
       min-height: 44px;
@@ -1098,6 +1109,34 @@ const upsertBlogPost = ({ category, slug, meta }) => {
   replaceBlogPostsInSiteData(nextPosts);
 };
 
+const normalizeScheduledPublishAt = (value) => {
+  const parsed = new Date(String(value || ''));
+  if (Number.isNaN(parsed.getTime())) throw new Error('Thời gian hẹn đăng không hợp lệ');
+  if (parsed.getTime() < Date.now() + (5 * 60 * 1000)) {
+    throw new Error('Hãy hẹn đăng muộn hơn ít nhất 5 phút để GitHub Actions kịp xử lý');
+  }
+  return parsed.toISOString();
+};
+
+const writeScheduledBlog = ({ result, publishAt }) => {
+  const scheduledAt = normalizeScheduledPublishAt(publishAt);
+  const outDir = path.join(files.scheduledPosts, result.category, result.slug);
+  fs.rmSync(outDir, { recursive: true, force: true });
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'index.html'), result.normalized.html);
+  const manifest = {
+    version: 1,
+    category: result.category,
+    slug: result.slug,
+    publishAt: scheduledAt,
+    createdAt: new Date().toISOString(),
+    title: result.normalized.meta.title,
+    meta: result.normalized.meta,
+  };
+  fs.writeFileSync(path.join(outDir, 'article.json'), `${JSON.stringify(manifest, null, 2)}\n`);
+  return manifest;
+};
+
 const removeBlogPostFromSiteData = (slug) => {
   const posts = readBlogPostsFromSiteData();
   replaceBlogPostsInSiteData(posts.filter((post) => String(post.slug) !== slug));
@@ -1388,6 +1427,22 @@ const handleApi = async (req, res, pathname) => {
       upsertBlogPost({ category: result.category, slug: result.slug, meta: result.normalized.meta });
       runBuild();
       sendJson(res, { ok: true, url: `/blog/${result.category}/${result.slug}/`, slug: result.slug, posts: listBlogPosts() });
+      return true;
+    }
+
+    if (pathname === '/api/blog-schedule.php' && req.method === 'POST') {
+      const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
+      if (!fields) throw new Error('Không đọc được dữ liệu form');
+      const result = buildBlogHtmlUpload({ fields, persist: true });
+      const scheduled = writeScheduledBlog({ result, publishAt: fields.publishAt });
+      sendJson(res, {
+        ok: true,
+        scheduleId: `${result.category}/${result.slug}`,
+        url: `/blog/${result.category}/${result.slug}/`,
+        slug: result.slug,
+        title: scheduled.title,
+        publishAt: scheduled.publishAt,
+      });
       return true;
     }
 

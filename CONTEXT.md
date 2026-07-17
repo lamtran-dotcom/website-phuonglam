@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-07-17
-Done: Added a gentle hover and keyboard-focus treatment to desktop primary navigation links.
-Files changed: `assets/js/app.jsx`, generated `assets/js/app.min.js` and static pages, `docs/CHANGELOG.md`, `CONTEXT.md`.
-New decisions: A hovered navigation item lifts 1px with slightly bolder green text, a pale green background, and a soft shadow.
+Done: Added cloud-backed scheduled publishing for SEO articles. The local admin stores a fully normalized article in `scheduled-posts/`; GitHub Actions checks every five minutes, promotes due posts into public `blog/`, updates `BLOG_POSTS`, rebuilds the site/sitemap, commits, and pushes without the local Mac running.
+Files changed: `tools/local_admin_server.js`, `tools/publish_scheduled_posts.js`, `tools/publish_scheduled_posts.test.js`, `.github/workflows/publish-scheduled-posts.yml`, `CONTEXT.md`, and relevant `docs/` files.
+New decisions: Schedule times are ISO timestamps supplied in Vietnam time by Content AI Studio and must be at least five minutes ahead. A queue entry is non-public until promotion; regular direct blog save/publish stays unchanged.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
@@ -55,4 +55,4 @@ New decisions: A hovered navigation item lifts 1px with slightly bolder green te
 - Instatic is early 0.0.x software, so treat it as inspiration or a sandbox experiment rather than production migration target.
 
 ## Next Suggested Task
-- Review the next freshly generated SEO article end-to-end to confirm its requested image alt text is specific rather than generic.
+- Schedule one test article at least ten minutes ahead and confirm the GitHub Actions run promotes it and GitHub Pages deploys it.

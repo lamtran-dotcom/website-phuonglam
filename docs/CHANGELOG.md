@@ -2,8 +2,15 @@
 
 ## 2026-07-17
 
+### Added
+- Added a non-public `scheduled-posts/` article queue, local admin endpoint, promotion script, regression test, and `Publish Scheduled Blog Posts` GitHub Actions workflow.
+- Added automatic promotion of due articles into `blog/`, including `BLOG_POSTS`, static index, sitemap, and deploy commit updates.
+
 ### Changed
 - Added a subtle raised hover and keyboard-focus state to desktop primary navigation links.
+
+### Fixed
+- Fixed overlapping text in the CTA block of the newly published tealight article. CTA grid-area rules now override the article's base `!important` style, and a first-child paragraph becomes the heading only when no `h2`/`h3` precedes it.
 
 ## 2026-07-15
 

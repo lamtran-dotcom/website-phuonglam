@@ -25,13 +25,16 @@ Local admin tools update source data and regenerate static pages. Production hos
    - `assets/js/app.min.js`
    - `sitemap.xml` and `robots.txt`
 4. Blog pages live under `blog/`; the admin pipeline normalizes article HTML and assets.
-5. Static files are committed and pushed for production deploy.
+5. A scheduled blog is written to non-public `scheduled-posts/<category>/<slug>/` with its normalized `index.html` and `article.json` manifest. Images remain under `assets/blog/` so the promoted page has stable public URLs.
+6. GitHub Actions runs `tools/publish_scheduled_posts.js` every five minutes. Due entries move to `blog/`, update `assets/js/site-data.js`, rebuild static pages/sitemap, then commit and push.
+7. Static files are committed and pushed for production deploy.
 
 ## External Services
 - GitHub repository and GitHub Pages-style static deployment.
 - Domain DNS for `phuonglam.com`.
 - Optional CDN/static hosting such as Cloudflare Pages.
 - Optional Google Search Console / Merchant Center integrations outside this repo.
+- GitHub Actions for cloud promotion of scheduled SEO articles.
 
 ## Important Constraints
 - Do not commit secrets or local environment files.

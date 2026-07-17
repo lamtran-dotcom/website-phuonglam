@@ -5,6 +5,7 @@
 
 ## Next
 - [ ] Smoke test the documented local admin workflow.
+- [x] Add a GitHub Actions-backed scheduled publish flow for SEO articles.
 - [ ] Review whether existing setup instructions need screenshots or operator notes.
 
 ## Later

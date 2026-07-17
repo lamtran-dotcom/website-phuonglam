@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-07-17 - Promote scheduled SEO articles with GitHub Actions
+Decision: Keep future SEO articles in `scheduled-posts/` until their explicit ISO publish time, then use a repository workflow to promote them into public `blog/` and rebuild the static site.
+Reason: Scheduling must work when the local admin/Mac is off, while public pages must remain static and SEO-complete once live.
+Impact: The queue is committed at scheduling time; the workflow runs every five minutes with repository write permission, writes `BLOG_POSTS`, updates generated pages/sitemap, commits the result, and deploys through the existing Git-based hosting flow. The requested time is Vietnam time from the operator UI, but actual delivery can be a few minutes late.
+Status: Active
+
 ### 2026-07-15 - Keep SEO article chrome in the website template
 Decision: The local website admin owns the reusable article shell, cover metadata, CTA layout, category navigation, and related-content cards; generated HTML supplies the article body and semantic SEO content.
 Reason: Repeating presentation markup in AI output made individual articles inconsistent and required one-off repairs.

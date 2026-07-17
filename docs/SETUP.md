@@ -66,6 +66,7 @@ There is no formal test suite documented yet. Use targeted checks:
 ```bash
 node -c tools/local_admin_server.js
 node -c tools/build_static_site.js
+node --test tools/publish_scheduled_posts.test.js
 git diff --check
 ```
 
@@ -90,3 +91,4 @@ After `codegraph init`, future Codex tasks should use CodeGraph first to inspect
 - Hosting may be GitHub Pages-style static hosting, Cloudflare Pages, or an Nginx VPS.
 - After push, allow a few minutes for the hosting platform to deploy.
 - Keep `sitemap.xml`, `robots.txt`, canonical URLs, and structured data correct after SEO changes.
+- For scheduled SEO posts, Content AI Studio pushes a queue entry to `scheduled-posts/`. The `Publish Scheduled Blog Posts` GitHub Actions workflow checks every five minutes on the default branch, so the Mac does not need to remain on. GitHub may execute a few minutes after the requested time; use a schedule at least five minutes in the future.
