@@ -3409,6 +3409,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 21,
+    "title": "Cách Dùng Nến Tealight An Toàn Trong Nhà: 8 Lưu Ý",
+    "excerpt": "Cách dùng nến tealight an toàn với 8 lưu ý thực hành: đặt nến, thông gió, cách tắt và dùng nến trong đèn xông đúng cách tại nhà.",
+    "date": "17 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cach-dung-nen-tealight-an-toan",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cach-dung-nen-tealight-an-toan/",
+    "image": "/assets/blog/cach-dung-nen-tealight-an-toan-1784287708404-1-chatgpt-image-18-21-45-17-thg-7-2026.webp",
+    "coverImage": "/assets/blog/cach-dung-nen-tealight-an-toan-1784287708404-1-chatgpt-image-18-21-45-17-thg-7-2026.webp"
+  },
+  {
     "id": 20,
     "title": "Nến Tealight Vỏ Nhôm Hay Vỏ Mica: Chọn Loại Nào?",
     "excerpt": "Nến tealight vỏ nhôm hay vỏ mica phù hợp để xông tinh dầu, xông thảo mộc hay trang trí tiệc? Xem cách chọn theo từng nhu cầu sử dụng.",
