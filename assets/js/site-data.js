@@ -1175,7 +1175,7 @@ const PRODUCTS = [
     "shortDesc": "Chuyên dùng cho đốt nến xông, an toàn tiện lợi",
     "tag": "Nổi bật",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [

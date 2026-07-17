@@ -1180,7 +1180,7 @@
     "usage": "HƯỚNG DẪN SỬ DỤNG HỘT QUẸT GAS ĐẦU DÀI\n\n✔ Cách dùng:\nMở đầu bật lửa, hướng đầu lửa vào tim nến hoặc vị trí cần châm rồi bấm đánh lửa. Giữ khoảng cách vừa đủ, không để tay quá gần ngọn lửa.\n\n✔ Sau khi dùng:\nTắt lửa hoàn toàn, chờ đầu bật lửa nguội rồi thu gọn và cất lại.\n\n✔ Lưu ý an toàn:\nKhông dùng gần xăng dầu, cồn hoặc vật dễ cháy. Không để bật lửa dưới nắng nóng, gần bếp lửa hoặc nơi nhiệt độ cao. Để xa tầm tay trẻ em.",
     "tag": "Nổi bật",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
