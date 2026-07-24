@@ -3409,6 +3409,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 22,
+    "title": "Trang Trí Bàn Tiệc Bằng Nến Tealight: Cách Chọn Số Lượng",
+    "excerpt": "Trang trí bàn tiệc bằng nến tealight đẹp, đủ sáng và gọn gàng với cách tính số lượng nến cho bàn ăn, bàn gallery, lối đi và lưu ý an toàn.",
+    "date": "24 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "trang-tri-ban-tiec-bang-nen-tealight",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/trang-tri-ban-tiec-bang-nen-tealight/",
+    "image": "/assets/blog/trang-tri-ban-tiec-bang-nen-tealight-1784299350220-1-chatgpt-image-21-38-21-17-thg-7-2026.webp",
+    "coverImage": "/assets/blog/trang-tri-ban-tiec-bang-nen-tealight-1784299350220-1-chatgpt-image-21-38-21-17-thg-7-2026.webp"
+  },
+  {
     "id": 21,
     "title": "Cách Dùng Nến Tealight An Toàn Trong Nhà: 8 Lưu Ý",
     "excerpt": "Cách dùng nến tealight an toàn với 8 lưu ý thực hành: đặt nến, thông gió, cách tắt và dùng nến trong đèn xông đúng cách tại nhà.",
