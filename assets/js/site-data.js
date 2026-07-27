@@ -3410,15 +3410,15 @@ const PRODUCTS = [
 const BLOG_POSTS = [
   {
     "id": 22,
-    "title": "Trang Trí Bàn Tiệc Bằng Nến Tealight: Cách Chọn Số Lượng",
-    "excerpt": "Trang trí bàn tiệc bằng nến tealight đẹp, đủ sáng và gọn gàng với cách tính số lượng nến cho bàn ăn, bàn gallery, lối đi và lưu ý an toàn.",
-    "date": "24 tháng 7, 2026",
+    "title": "Cách bảo quản nến tealight không bị bụi, mềm hoặc móp",
+    "excerpt": "Cách bảo quản nến tealight sạch, tránh bụi, mềm và móp vỏ. Xem hướng dẫn cất nến không mùi trong thời tiết nóng từ Phương Lâm.",
+    "date": "27 tháng 7, 2026",
     "readTime": "3 phút đọc",
-    "slug": "trang-tri-ban-tiec-bang-nen-tealight",
+    "slug": "cach-bao-quan-nen-tealight",
     "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/trang-tri-ban-tiec-bang-nen-tealight/",
-    "image": "/assets/blog/trang-tri-ban-tiec-bang-nen-tealight-1784299350220-1-chatgpt-image-21-38-21-17-thg-7-2026.webp",
-    "coverImage": "/assets/blog/trang-tri-ban-tiec-bang-nen-tealight-1784299350220-1-chatgpt-image-21-38-21-17-thg-7-2026.webp"
+    "url": "/blog/huong-dan-xong/cach-bao-quan-nen-tealight/",
+    "image": "/assets/blog/cach-bao-quan-nen-tealight-1785121248772-1-chatgpt-image-09-57-34-27-thg-7-2026.webp",
+    "coverImage": "/assets/blog/cach-bao-quan-nen-tealight-1785121248772-1-chatgpt-image-09-57-34-27-thg-7-2026.webp"
   },
   {
     "id": 21,
