@@ -3409,6 +3409,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 23,
+    "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
+    "excerpt": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu? Xem cách định lượng theo bếp, diện tích phòng và xử lý khi mùi xông quá nồng, cháy khét.",
+    "date": "10 tháng 8, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cho-bao-nhieu-thao-moc-vao-bep-nieu",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cho-bao-nhieu-thao-moc-vao-bep-nieu/",
+    "image": "/assets/blog/cho-bao-nhieu-thao-moc-vao-bep-nieu-1786331158307-1-chatgpt-image-10-02-57-10-thg-8-2026.webp",
+    "coverImage": "/assets/blog/cho-bao-nhieu-thao-moc-vao-bep-nieu-1786331158307-1-chatgpt-image-10-02-57-10-thg-8-2026.webp"
+  },
+  {
     "id": 22,
     "title": "Cách bảo quản nến tealight không bị bụi, mềm hoặc móp",
     "excerpt": "Cách bảo quản nến tealight sạch, tránh bụi, mềm và móp vỏ. Xem hướng dẫn cất nến không mùi trong thời tiết nóng từ Phương Lâm.",

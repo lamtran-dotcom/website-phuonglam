@@ -44,11 +44,10 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Date: 2026-07-17
-Done: Added publishing observability and schedule hardening. The local admin now lists queued posts, completed-post history, and the latest GitHub Actions result; the promotion script records a bounded history after each successful publish.
-Files changed: `tools/local_admin_server.js`, `tools/publish_scheduled_posts.js`, `tools/publish_scheduled_posts.test.js`, `.github/workflows/publish-scheduled-posts.yml`, `CONTEXT.md`, and relevant `docs/` files.
-New decisions: GitHub runs at offset five-minute marks (not the busy minute zero) and never overlaps publish runs. Remote GitHub Actions commits are expected; local pushes continue to synchronize with `origin/main` first.
-Verification: The promotion regression test passed. The live admin API returned the currently queued article and the latest completed GitHub Actions job.
+Date: 2026-08-04
+Done: Verified the checkout-to-Telegram order-notification route using one clearly labelled `TEST — KHÔNG XỬ LÝ` order.
+Files changed: `CONTEXT.md` only.
+Verification: The Cloudflare order webhook accepted the test POST and returned HTTP 200 with `{\"ok\":true}`. CORS from `https://phuonglam.com` permits JSON POST requests. The Worker implementation and Telegram delivery logs are remote and not kept in this repository.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-04
+
+### Verified
+- Confirmed the checkout order webhook accepts the production JSON payload and returns success; one clearly labelled `TEST — KHÔNG XỬ LÝ` notification was sent to verify the Telegram notification route.
+
 ## 2026-07-17
 
 ### Added
