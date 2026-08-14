@@ -3409,6 +3409,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 24,
+    "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
+    "excerpt": "Bộ xông nhà cho người mới cần những gì? Xem checklist bếp niêu, nến tealight, thảo mộc và phụ kiện để chuẩn bị xông nhà lần đầu gọn gàng.",
+    "date": "14 tháng 8, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu/",
+    "image": "/assets/blog/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu-1786333259796-1-chatgpt-image-10-36-01-10-thg-8-2026.webp",
+    "coverImage": "/assets/blog/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu-1786333259796-1-chatgpt-image-10-36-01-10-thg-8-2026.webp"
+  },
+  {
     "id": 23,
     "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
     "excerpt": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu? Xem cách định lượng theo bếp, diện tích phòng và xử lý khi mùi xông quá nồng, cháy khét.",
