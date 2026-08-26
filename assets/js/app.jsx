@@ -93,7 +93,7 @@ const ShippingPromotion = ({ setPage }) => {
     <>
       <div style={shippingPromoStyles.bar} role="status">
         <span aria-hidden="true" style={shippingPromoStyles.barIcon}>🚚</span>
-        <span><strong>Freeship nội thành TP.HCM</strong> cho đơn từ 100K <span style={shippingPromoStyles.barDivider}>·</span> Ngoại thành chỉ từ 16K</span>
+        <span><strong>Freeship toàn quốc</strong> <span style={shippingPromoStyles.barDivider}>·</span> Giá website tốt hơn giá sàn</span>
       </div>
       {isOpen && (
         <div style={shippingPromoStyles.overlay} onMouseDown={close} role="presentation">
@@ -111,13 +111,23 @@ const ShippingPromotion = ({ setPage }) => {
           >
             <img src={SHIPPING_PROMO_IMAGE} alt="" loading="eager" fetchPriority="high" decoding="async" style={{ ...shippingPromoStyles.image, ...(isMobile ? shippingPromoStyles.imageMobile : {}) }} />
             <div style={{ ...shippingPromoStyles.content, maxWidth: isMobile ? '100%' : '62%', ...(isMobile ? shippingPromoStyles.contentMobile : {}) }}>
-              <span style={shippingPromoStyles.eyebrow}>ƯU ĐÃI GIAO HÀNG</span>
-              <h2 id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Giao nhanh,<br />tiết kiệm phí ship</h2>
+              <span style={shippingPromoStyles.eyebrow}>ƯU ĐÃI TOÀN QUỐC</span>
+              <h2 id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Freeship toàn quốc,<br />giá web tốt hơn sàn</h2>
               <div style={shippingPromoStyles.highlight}>
-                <span style={shippingPromoStyles.highlightLabel}>FREESHIP NỘI THÀNH TP.HCM</span>
-                <strong>Đơn từ 100.000đ</strong>
+                <span style={shippingPromoStyles.highlightLabel}>FREESHIP TOÀN QUỐC</span>
+                <strong>Đặt hàng online, nhận ưu đãi</strong>
               </div>
-              <p style={{ ...shippingPromoStyles.description, ...(isMobile ? shippingPromoStyles.descriptionMobile : {}) }}>Ngoại thành TP.HCM, phí giao hàng{isMobile && <br />} <strong style={{ ...shippingPromoStyles.shippingFeeBadge, ...(isMobile ? shippingPromoStyles.shippingFeeBadgeMobile : {}) }}><span>CHỈ TỪ</span>16.000đ</strong>.</p>
+              <div style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
+                <div style={shippingPromoStyles.priceRow}>
+                  <span>Giá sàn sau mã</span>
+                  <strong style={shippingPromoStyles.marketPrice}>250.000đ</strong>
+                </div>
+                <div style={shippingPromoStyles.priceRow}>
+                  <span>Giá website chỉ còn</span>
+                  <strong style={shippingPromoStyles.websitePrice}>200.000đ</strong>
+                </div>
+                <div style={shippingPromoStyles.saving}>Tiết kiệm 50.000đ</div>
+              </div>
               <button
                 type="button"
                 style={{ ...shippingPromoStyles.cta, ...(isMobile ? shippingPromoStyles.ctaMobile : {}), ...(ctaHovered ? shippingPromoStyles.ctaHover : {}) }}
@@ -127,7 +137,7 @@ const ShippingPromotion = ({ setPage }) => {
                 onFocus={() => setCtaHovered(true)}
                 onBlur={() => setCtaHovered(false)}
               >Mua ngay – nhận ưu đãi <span aria-hidden="true">→</span></button>
-              <p style={{ ...shippingPromoStyles.note, ...(isMobile ? shippingPromoStyles.noteMobile : {}) }}>Phí giao hàng thực tế có thể thay đổi tùy khu vực.</p>
+              <p style={{ ...shippingPromoStyles.note, ...(isMobile ? shippingPromoStyles.noteMobile : {}) }}>Mức giá thực tế áp dụng theo từng sản phẩm và phân loại.</p>
             </div>
             <button type="button" aria-label="Đóng thông báo ưu đãi giao hàng" style={shippingPromoStyles.close} onClick={close}>×</button>
           </section>
@@ -151,10 +161,12 @@ const shippingPromoStyles = {
   title: { margin: '13px 0 14px', color: '#194713', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-.045em' },
   highlight: { display: 'flex', flexDirection: 'column', gap: 3, padding: '10px 13px', borderRadius: 12, background: '#285d20', color: '#fff', boxShadow: '0 10px 22px rgba(40, 93, 32, .18)' },
   highlightLabel: { fontSize: 10, fontWeight: 900, letterSpacing: '.06em', color: '#d7f0cb' },
-  description: { margin: '13px 0 17px', color: '#4d4d47', fontSize: 14, lineHeight: 1.5 },
-  descriptionMobile: { margin: '12px 0 15px', fontSize: 13.5, lineHeight: 1.4 },
-  shippingFeeBadge: { display: 'inline-flex', alignItems: 'center', gap: 5, marginLeft: 3, padding: '4px 8px', borderRadius: 7, background: '#d9682c', color: '#fff', fontSize: 15, fontWeight: 900, lineHeight: 1, whiteSpace: 'nowrap', boxShadow: '0 5px 0 rgba(161, 66, 24, .2)', animation: 'shippingFeePulse 1.8s ease-in-out infinite' },
-  shippingFeeBadgeMobile: { marginLeft: 0, marginTop: 5, fontSize: 14 },
+  priceCompare: { width: '100%', maxWidth: 330, margin: '13px 0 17px', padding: '10px 13px', borderRadius: 12, background: 'rgba(255,255,255,.72)', border: '1px solid #e7d9c2', boxSizing: 'border-box' },
+  priceCompareMobile: { margin: '12px 0 15px', padding: '9px 11px' },
+  priceRow: { display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, color: '#5a564e', fontSize: 13, lineHeight: 1.55 },
+  marketPrice: { color: '#77736b', textDecoration: 'line-through', fontWeight: 700, whiteSpace: 'nowrap' },
+  websitePrice: { color: '#285d20', fontSize: 18, fontWeight: 900, whiteSpace: 'nowrap' },
+  saving: { marginTop: 6, color: '#d9682c', fontSize: 14, fontWeight: 900 },
   cta: { border: 'none', borderRadius: 11, padding: '13px 17px', background: '#d9682c', color: '#fff', fontSize: 14, fontWeight: 900, cursor: 'pointer', boxShadow: '0 5px 0 #a9441d, 0 12px 22px rgba(217, 104, 44, .22)', textTransform: 'uppercase', transition: 'transform .18s ease, background .18s ease, box-shadow .18s ease' },
   ctaMobile: { width: '100%', padding: '13px 12px', fontSize: 14, textAlign: 'center' },
   ctaHover: { transform: 'translateY(-3px)', background: '#e97838', boxShadow: '0 8px 0 #a9441d, 0 17px 26px rgba(217, 104, 44, .34)' },

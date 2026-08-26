@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-26
+
+### Changed
+- Updated the shipping promotion popup and site-wide promo bar to lead with nationwide free shipping and a price comparison example: marketplace 250.000đ after voucher versus website 200.000đ, saving 50.000đ.
+- Replaced the old HCMC/16.000đ popup copy with a per-product/per-variant price note.
+
+### Notes
+- Checkout shipping calculation remains unchanged until the exact nationwide free-shipping conditions are confirmed.
+
 ## 2026-08-04
 
 ### Verified

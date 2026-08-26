@@ -44,10 +44,10 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Date: 2026-08-04
-Done: Verified the checkout-to-Telegram order-notification route using one clearly labelled `TEST — KHÔNG XỬ LÝ` order.
-Files changed: `CONTEXT.md` only.
-Verification: The Cloudflare order webhook accepted the test POST and returned HTTP 200 with `{\"ok\":true}`. CORS from `https://phuonglam.com` permits JSON POST requests. The Worker implementation and Telegram delivery logs are remote and not kept in this repository.
+Date: 2026-08-26
+Done: Updated the shipping promotion popup copy to present nationwide free shipping and a clear price comparison example with 50.000đ savings (250.000đ on marketplace after voucher → 200.000đ on the website).
+Files changed: `assets/js/app.jsx`, `assets/js/app.min.js`, generated static pages, `sitemap.xml`, and this memory file.
+Verification: `node tools/build_static_site.js` completed successfully and the new popup strings are present in the minified production bundle. Checkout shipping calculation was intentionally not changed; the nationwide free-shipping rule still needs a separate business-condition decision before implementation.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.
