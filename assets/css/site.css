@@ -40,12 +40,131 @@
       from { opacity: 0; transform: translateY(14px) scale(.96); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    @keyframes shippingPromoOverlay {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes shippingPromoModal {
+      from { opacity: 0; transform: translateY(18px) scale(.965); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes shippingPromoReveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shippingPromoImageDrift {
+      from { transform: scale(1); }
+      to { transform: scale(1.035) translate3d(-.6%, -.4%, 0); }
+    }
+    @keyframes shippingPromoSmoke {
+      0% { opacity: 0; transform: translate3d(0, 16px, 0) scale(.82); }
+      28% { opacity: .28; }
+      100% { opacity: 0; transform: translate3d(-18px, -58px, 0) scale(1.22); }
+    }
+    @keyframes shippingPromoCandleGlow {
+      0%, 100% { opacity: .18; transform: scale(.88); }
+      45% { opacity: .42; transform: scale(1.08); }
+      72% { opacity: .25; transform: scale(.96); }
+    }
+    @keyframes shippingPromoSheen {
+      0%, 58% { transform: translateX(-160%) skewX(-18deg); }
+      76%, 100% { transform: translateX(330%) skewX(-18deg); }
+    }
+    @keyframes shippingPromoSavingPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+    }
+    .shipping-promo-overlay { animation: shippingPromoOverlay .24s ease both; }
+    .shipping-promo-modal { animation: shippingPromoModal .34s cubic-bezier(.2,.8,.2,1) both; }
+    .shipping-promo-image {
+      transform-origin: right center;
+      animation: shippingPromoImageDrift 9s ease-in-out .2s infinite alternate;
+      will-change: transform;
+    }
+    .shipping-promo-smoke {
+      position: absolute;
+      z-index: 1;
+      width: 100px;
+      height: 72px;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(13px);
+      background: radial-gradient(ellipse at center, rgba(255,255,255,.42), rgba(255,255,255,0) 72%);
+      animation: shippingPromoSmoke 6.4s ease-in-out infinite;
+      will-change: transform, opacity;
+    }
+    .shipping-promo-smoke-one { right: 43%; top: 20%; animation-delay: .9s; }
+    .shipping-promo-smoke-two { right: 37%; top: 13%; width: 78px; height: 58px; animation-delay: 3.3s; }
+    .shipping-promo-candle-glow {
+      position: absolute;
+      z-index: 1;
+      right: 47%;
+      top: 45%;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,193,76,.48) 0%, rgba(255,130,36,.2) 35%, rgba(255,130,36,0) 72%);
+      mix-blend-mode: screen;
+      animation: shippingPromoCandleGlow 1.7s ease-in-out infinite;
+      will-change: transform, opacity;
+    }
+    .shipping-promo-eyebrow,
+    .shipping-promo-title,
+    .shipping-promo-highlight,
+    .shipping-promo-price-compare,
+    .shipping-promo-cta,
+    .shipping-promo-note {
+      animation: shippingPromoReveal .42s cubic-bezier(.2,.8,.2,1) both;
+      will-change: transform, opacity;
+    }
+    .shipping-promo-title { animation-delay: .06s; }
+    .shipping-promo-highlight { animation-delay: .12s; position: relative; overflow: hidden; }
+    .shipping-promo-price-compare { animation-delay: .18s; }
+    .shipping-promo-cta { animation-delay: .24s; }
+    .shipping-promo-note { animation-delay: .3s; }
+    .shipping-promo-highlight::after {
+      content: '';
+      position: absolute;
+      inset: -20% auto -20% -42%;
+      width: 32%;
+      background: linear-gradient(105deg, transparent, rgba(255,255,255,.28), transparent);
+      transform: skewX(-18deg);
+      pointer-events: none;
+      animation: shippingPromoSheen 4.8s ease-in-out .8s infinite;
+    }
+    .shipping-promo-highlight > *,
+    .shipping-promo-saving { position: relative; z-index: 1; }
+    .shipping-promo-saving {
+      animation: shippingPromoSavingPulse 2.6s ease-in-out 1s infinite;
+      transform-origin: left center;
+    }
+    .shipping-promo-close { animation: shippingPromoReveal .35s ease .16s both; }
     @keyframes shippingFeePulse {
       0%, 100% { transform: scale(1); box-shadow: 0 5px 0 rgba(161, 66, 24, .2); }
       50% { transform: scale(1.07); box-shadow: 0 8px 18px rgba(217, 104, 44, .42); }
     }
     @media (prefers-reduced-motion: reduce) {
+      .shipping-promo-overlay,
+      .shipping-promo-modal,
+      .shipping-promo-image,
+      .shipping-promo-smoke,
+      .shipping-promo-candle-glow,
+      .shipping-promo-eyebrow,
+      .shipping-promo-title,
+      .shipping-promo-highlight,
+      .shipping-promo-price-compare,
+      .shipping-promo-cta,
+      .shipping-promo-note,
+      .shipping-promo-close,
+      .shipping-promo-saving,
       [style*="shippingFeePulse"] { animation: none !important; }
+      .shipping-promo-smoke { display: none; }
+    }
+    @media (max-width: 767px) {
+      .shipping-promo-image { animation-duration: 12s; }
+      .shipping-promo-smoke { opacity: .7; transform: scale(.8); }
+      .shipping-promo-candle-glow { right: 31%; top: 62%; width: 58px; height: 58px; opacity: .25; }
     }
     .fly-cart-ghost {
       position: fixed;

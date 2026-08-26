@@ -45,9 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-08-26
-Done: Updated the shipping promotion popup copy to present nationwide free shipping and a clear price comparison example with 50.000đ savings (250.000đ on marketplace after voucher → 200.000đ on the website).
-Files changed: `assets/js/app.jsx`, `assets/js/app.min.js`, generated static pages, `sitemap.xml`, and this memory file.
-Verification: `node tools/build_static_site.js` completed successfully and the new popup strings are present in the minified production bundle. Checkout shipping calculation was intentionally not changed; the nationwide free-shipping rule still needs a separate business-condition decision before implementation.
+Done: Added lightweight popup motion: staged content reveal, slow product-image drift, soft candle glow, subtle smoke, highlight sheen, and a saving-value pulse. Reduced-motion preferences disable the decorative animations.
+Files changed: `assets/js/app.jsx`, `assets/css/site.css`, `assets/js/app.min.js`, generated static pages, and this memory file.
+Verification: `node tools/build_static_site.js` completed successfully and `git diff --check` passed. The production bundle includes the popup effect classes; the stylesheet includes the animation keyframes and reduced-motion fallback. Checkout shipping calculation remains unchanged.
 
 ## Open Issues
 - Keep `CONTEXT.md` concise as future work accumulates.

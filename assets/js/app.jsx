@@ -96,8 +96,9 @@ const ShippingPromotion = ({ setPage }) => {
         <span><strong>Freeship toàn quốc</strong> <span style={shippingPromoStyles.barDivider}>·</span> Giá website tốt hơn giá sàn</span>
       </div>
       {isOpen && (
-        <div style={shippingPromoStyles.overlay} onMouseDown={close} role="presentation">
+        <div className="shipping-promo-overlay" style={shippingPromoStyles.overlay} onMouseDown={close} role="presentation">
           <section
+            className="shipping-promo-modal"
             aria-labelledby="shipping-promo-title"
             aria-modal="true"
             role="dialog"
@@ -109,15 +110,18 @@ const ShippingPromotion = ({ setPage }) => {
             }}
             onMouseDown={event => event.stopPropagation()}
           >
-            <img src={SHIPPING_PROMO_IMAGE} alt="" loading="eager" fetchPriority="high" decoding="async" style={{ ...shippingPromoStyles.image, ...(isMobile ? shippingPromoStyles.imageMobile : {}) }} />
-            <div style={{ ...shippingPromoStyles.content, maxWidth: isMobile ? '100%' : '62%', ...(isMobile ? shippingPromoStyles.contentMobile : {}) }}>
-              <span style={shippingPromoStyles.eyebrow}>ƯU ĐÃI TOÀN QUỐC</span>
-              <h2 id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Freeship toàn quốc,<br />giá web tốt hơn sàn</h2>
-              <div style={shippingPromoStyles.highlight}>
+            <img className="shipping-promo-image" src={SHIPPING_PROMO_IMAGE} alt="" loading="eager" fetchPriority="high" decoding="async" style={{ ...shippingPromoStyles.image, ...(isMobile ? shippingPromoStyles.imageMobile : {}) }} />
+            <span className="shipping-promo-smoke shipping-promo-smoke-one" aria-hidden="true"></span>
+            <span className="shipping-promo-smoke shipping-promo-smoke-two" aria-hidden="true"></span>
+            <span className="shipping-promo-candle-glow" aria-hidden="true"></span>
+            <div className="shipping-promo-content" style={{ ...shippingPromoStyles.content, maxWidth: isMobile ? '100%' : '62%', ...(isMobile ? shippingPromoStyles.contentMobile : {}) }}>
+              <span className="shipping-promo-eyebrow" style={shippingPromoStyles.eyebrow}>ƯU ĐÃI TOÀN QUỐC</span>
+              <h2 className="shipping-promo-title" id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Freeship toàn quốc,<br />giá web tốt hơn sàn</h2>
+              <div className="shipping-promo-highlight" style={shippingPromoStyles.highlight}>
                 <span style={shippingPromoStyles.highlightLabel}>FREESHIP TOÀN QUỐC</span>
                 <strong>Đặt hàng online, nhận ưu đãi</strong>
               </div>
-              <div style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
+              <div className="shipping-promo-price-compare" style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
                 <div style={shippingPromoStyles.priceRow}>
                   <span>Giá sàn sau mã</span>
                   <strong style={shippingPromoStyles.marketPrice}>250.000đ</strong>
@@ -126,9 +130,10 @@ const ShippingPromotion = ({ setPage }) => {
                   <span>Giá website chỉ còn</span>
                   <strong style={shippingPromoStyles.websitePrice}>200.000đ</strong>
                 </div>
-                <div style={shippingPromoStyles.saving}>Tiết kiệm 50.000đ</div>
+                <div className="shipping-promo-saving" style={shippingPromoStyles.saving}>Tiết kiệm 50.000đ</div>
               </div>
               <button
+                className="shipping-promo-cta"
                 type="button"
                 style={{ ...shippingPromoStyles.cta, ...(isMobile ? shippingPromoStyles.ctaMobile : {}), ...(ctaHovered ? shippingPromoStyles.ctaHover : {}) }}
                 onClick={shopNow}
@@ -137,9 +142,9 @@ const ShippingPromotion = ({ setPage }) => {
                 onFocus={() => setCtaHovered(true)}
                 onBlur={() => setCtaHovered(false)}
               >Mua ngay – nhận ưu đãi <span aria-hidden="true">→</span></button>
-              <p style={{ ...shippingPromoStyles.note, ...(isMobile ? shippingPromoStyles.noteMobile : {}) }}>Mức giá thực tế áp dụng theo từng sản phẩm và phân loại.</p>
+              <p className="shipping-promo-note" style={{ ...shippingPromoStyles.note, ...(isMobile ? shippingPromoStyles.noteMobile : {}) }}>Mức giá thực tế áp dụng theo từng sản phẩm và phân loại.</p>
             </div>
-            <button type="button" aria-label="Đóng thông báo ưu đãi giao hàng" style={shippingPromoStyles.close} onClick={close}>×</button>
+            <button className="shipping-promo-close" type="button" aria-label="Đóng thông báo ưu đãi giao hàng" style={shippingPromoStyles.close} onClick={close}>×</button>
           </section>
         </div>
       )}
@@ -152,7 +157,7 @@ const shippingPromoStyles = {
   barIcon: { fontSize: 15 },
   barDivider: { color: '#b9d6ae', padding: '0 5px' },
   overlay: { position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(18, 35, 15, .56)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18 },
-  modal: { width: '100%', maxWidth: 700, overflow: 'hidden', position: 'relative', display: 'flex', alignItems: 'stretch', borderRadius: 24, background: '#fff9ef', boxShadow: '0 28px 80px rgba(0, 0, 0, .28)', animation: 'modalPop .22s ease-out' },
+  modal: { width: '100%', maxWidth: 700, overflow: 'hidden', position: 'relative', display: 'flex', alignItems: 'stretch', borderRadius: 24, background: '#fff9ef', boxShadow: '0 28px 80px rgba(0, 0, 0, .28)', animation: 'shippingPromoModal .34s cubic-bezier(.2,.8,.2,1) both' },
   image: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'right center', pointerEvents: 'none' },
   imageMobile: { objectPosition: 'right bottom', opacity: .19 },
   content: { position: 'relative', zIndex: 1, padding: '42px 34px 30px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', background: 'linear-gradient(90deg, #fff9ef 0%, #fff9ef 64%, rgba(255,249,239,.78) 78%, rgba(255,249,239,0) 100%)' },
