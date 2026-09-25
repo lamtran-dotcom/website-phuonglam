@@ -1153,9 +1153,46 @@ const renderProductPage = ({ product, categoryName }) => {
   });
 };
 
+// Keep existing category URLs; tailor content to the products and search intent.
+const categorySeoContent = {
+  'nen-thom': {
+    title: 'Nến tealight 2h, 4h, 8h dùng xông & trang trí | Phương Lâm',
+    heading: 'Nến tealight dùng xông tinh dầu, thảo mộc và trang trí',
+    description: 'Chọn nến tealight 2h, 4h, 8h tại Phương Lâm: loại không mùi hoặc hương lài, nhiều quy cách đóng gói. Xem giá từng phân loại và cách chọn nến xông.',
+    sections: [
+      ['Chọn nến xông theo nhu cầu', 'Khi dùng đèn xông tinh dầu hoặc bếp xông thảo mộc, bạn có thể chọn nến không mùi để tránh trộn thêm hương nến. Nếu muốn có hương từ nến, hãy xem phân loại hương lài. Kiểm tra kích thước nến và hướng dẫn của dụng cụ xông trước khi chọn.'],
+      ['Nến tealight 2h, 4h hay 8h?', 'Danh mục có các loại nến mang quy cách 2 giờ, 4 giờ và 8 giờ. Chọn theo thời gian sử dụng dự kiến, số viên và loại vỏ ghi trên trang sản phẩm. Thời gian cháy thực tế còn phụ thuộc điều kiện sử dụng; không cần đốt hết một viên trong một lần.'],
+      ['Kiểm tra phân loại trước khi đặt', 'Giá và số viên thay đổi theo phân loại. Mở sản phẩm, chọn loại nến và quy cách đóng gói để xem giá tương ứng. Đặt nến trên bề mặt chịu nhiệt, tránh vật dễ cháy và không để nến đang cháy mà không có người trông coi.'],
+    ],
+    links: [
+      ['/blog/kien-thuc/phan-biet-nen-tealight-2h-4h-8h/', 'Phân biệt nến tealight 2h, 4h và 8h'],
+      ['/blog/huong-dan-xong/cach-dung-nen-tealight-an-toan/', 'Cách dùng nến tealight an toàn'],
+      ['/danh-muc/bep-xong/', 'Chọn đèn xông tinh dầu dùng nến'],
+    ],
+  },
+  'bep-xong': {
+    title: 'Bếp xông, đèn xông tinh dầu dùng nến | Phương Lâm',
+    heading: 'Bếp xông và đèn xông tinh dầu dùng nến',
+    description: 'Tìm bếp xông, đèn xông tinh dầu dùng nến tại Phương Lâm. Xem mẫu, giá và hướng dẫn chọn dụng cụ phù hợp với tinh dầu hoặc thảo mộc xông nhà.',
+    sections: [
+      ['Chọn dụng cụ theo nguyên liệu xông', 'Đèn xông tinh dầu và bếp xông thảo mộc có cách dùng khác nhau. Hãy xem mô tả từng sản phẩm để xác định dụng cụ phù hợp với tinh dầu hay thảo mộc khô. Không cho nguyên liệu vào bếp chỉ dựa trên hình dáng bên ngoài.'],
+      ['Mua đèn riêng hay bộ xông nhà?', 'Nếu đã có nến và nguyên liệu, bạn có thể chọn dụng cụ riêng phù hợp. Nếu mới bắt đầu, xem danh mục combo xông nhà và kiểm tra danh sách món đi kèm của từng phân loại trước khi mua. Nến, thảo mộc và phụ kiện không mặc nhiên đi kèm mọi mẫu đèn.'],
+      ['Xem hướng dẫn trước khi sử dụng', 'Tham khảo hướng dẫn dùng bếp xông và hướng dẫn riêng của sản phẩm. Đặt dụng cụ chắc chắn trên bề mặt chịu nhiệt, giữ khoảng cách với vật dễ cháy và đợi bếp nguội trước khi di chuyển hoặc vệ sinh.'],
+    ],
+    links: [
+      ['/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/', 'Hướng dẫn dùng bếp xông thảo mộc'],
+      ['/danh-muc/combo/', 'Xem bộ và combo xông nhà'],
+      ['/danh-muc/nen-thom/', 'Chọn nến tealight cho dụng cụ xông'],
+      ['/danh-muc/thao-moc-xong/', 'Xem thảo mộc xông nhà'],
+    ],
+  },
+};
+
 const renderCategoryPage = ({ categoryId, categoryName, products, categories }) => {
   const categoryUrl = `${siteUrl}/danh-muc/${categoryId}/`;
-  const description = `${categoryName} Phương Lâm: sản phẩm chọn lọc, phù hợp cho thư giãn, xông hương và chăm sóc không gian sống tự nhiên.`;
+  const seo = categorySeoContent[categoryId];
+  const description = seo?.description || `${categoryName} Phương Lâm: sản phẩm chọn lọc, phù hợp cho thư giãn, xông hương và chăm sóc không gian sống tự nhiên.`;
+  const guide = seo ? `<section class="content" aria-label="Hướng dẫn chọn sản phẩm">${seo.sections.map(([heading, text]) => `<h2>${escapeHtml(heading)}</h2><p>${escapeHtml(text)}</p>`).join('')}<h2>Tham khảo thêm</h2><ul>${seo.links.map(([url, label]) => `<li><a href="${escapeHtml(url)}">${escapeHtml(label)}</a></li>`).join('')}</ul></section>` : '';
   const categoryLinks = categories.map((category) => `<a class="category-side-link${category.id === categoryId ? ' is-active' : ''}" href="/danh-muc/${escapeHtml(category.id)}/">${escapeHtml(category.name)}</a>`).join('\n        ');
   const cards = products.map((product, index) => {
     const image = firstImage(product);
@@ -1174,7 +1211,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products, categories }) 
 
   const body = `<main class="seo-main category-main">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Trang chủ</a> / ${escapeHtml(categoryName)}</nav>
-    <h1>${escapeHtml(categoryName)} Phương Lâm</h1>
+    <h1>${escapeHtml(seo?.heading || `${categoryName} Phương Lâm`)}</h1>
     <p class="category-intro">${escapeHtml(description)}</p>
     <div class="category-layout">
       <aside class="category-sidebar" aria-label="Danh mục sản phẩm">
@@ -1185,10 +1222,11 @@ const renderCategoryPage = ({ categoryId, categoryName, products, categories }) 
         <div class="grid category-grid" aria-label="Danh sách sản phẩm">${cards}</div>
       </section>
     </div>
+${guide}
   </main>`;
 
   return pageShell({
-    title: `${categoryName} Phương Lâm | Sản phẩm tự nhiên`,
+    title: seo?.title || `${categoryName} Phương Lâm | Sản phẩm tự nhiên`,
     description,
     canonical: categoryUrl,
     image: firstImage(products[0] || {}),
