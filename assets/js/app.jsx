@@ -967,9 +967,9 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         <div style={{ ...hpStyles.heroContent, maxWidth: isMobile ? '100%' : 720, width: '100%' }}>
           <div style={{ ...hpStyles.heroBadge, fontSize: isMobile ? 10 : 13, padding: isMobile ? '5px 10px' : '7px 14px', marginBottom: isMobile ? 12 : 16 }}>🌿 Tự nhiên · Thuần khiết · An toàn</div>
           <h1 style={{ ...hpStyles.heroTitle, fontSize: isMobile ? 26 : 43, marginBottom: isMobile ? 12 : 16, maxWidth: isMobile ? '100%' : 720 }}>
-            Sống xanh mỗi ngày, <span style={{ color: '#318223' }}>Dịu nhẹ</span> từ thảo mộc tự nhiên
+            Nến tealight, nến ly &amp; <span style={{ color: '#318223' }}>thảo mộc xông nhà</span> Phương Lâm
           </h1>
-          <p style={{ ...hpStyles.heroSub, fontSize: isMobile ? 13 : 18, marginBottom: isMobile ? 18 : 24, maxWidth: isMobile ? '100%' : 620 }}>Sản phẩm thảo mộc và nến thơm tự nhiên 100%, không hóa chất — chăm sóc không gian sống của bạn.</p>
+          <p style={{ ...hpStyles.heroSub, fontSize: isMobile ? 13 : 18, marginBottom: isMobile ? 18 : 24, maxWidth: isMobile ? '100%' : 620 }}>Khám phá nến tealight, nến ly, thảo mộc xông nhà và bếp xông tại Phương Lâm. Xem sản phẩm, chọn phân loại và tham khảo hướng dẫn sử dụng.</p>
           <div style={{ ...hpStyles.heroBtns, flexDirection: isMobile ? 'column' : 'row' }}>
             <a href={categoryUrl('nen-thom')} style={{ ...hpStyles.heroCta, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }}>Xem sản phẩm</a>
             <a href={categoryUrl('combo')} style={{ ...hpStyles.heroSecondary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }}>Xem combo ưu đãi</a>

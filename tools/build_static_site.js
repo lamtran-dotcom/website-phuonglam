@@ -1332,7 +1332,50 @@ Sitemap: ${siteUrl}/sitemap.xml
 `);
 };
 
+const homeTitle = 'Phương Lâm | Nến tealight, nến ly & thảo mộc xông nhà';
+const homeDescription = 'Khám phá nến tealight, nến ly, thảo mộc xông nhà và bếp xông tại Phương Lâm. Xem sản phẩm, chọn phân loại và tham khảo hướng dẫn sử dụng.';
+
+// Visible initial content is replaced by React when the storefront mounts.
+// Generate from the same catalog/settings so admin rebuilds keep links current.
+const writeHomeContent = ({ products, categories, blogPosts, settings }) => {
+  const visible = products.filter(product => product.hidden !== true && product.hidden !== 'true');
+  const featured = settings.featuredIds.length
+    ? settings.featuredIds.map(id => visible.find(product => String(product.id) === String(id))).filter(Boolean).slice(0, 6)
+    : visible.filter(product => product.tag === 'Bán chạy' || product.tag === 'Nổi bật').slice(0, 6);
+  const categoryLinks = categories.map(category => `<a href="/danh-muc/${escapeHtml(category.id)}/">${escapeHtml(category.name)}</a>`).join('\n');
+  const cards = featured.map(product => `<a class="home-static-card" href="/san-pham/${escapeHtml(product.slug)}/">
+    <img src="${escapeHtml(firstImage(product))}"${responsiveImageAttrs(firstImage(product), '(max-width: 767px) 45vw, 300px')} alt="${escapeHtml(product.name)}" width="300" height="300" loading="lazy" />
+    <h3>${escapeHtml(product.name)}</h3>
+  </a>`).join('\n');
+  const posts = blogPosts.filter(post => post.url).slice(0, 6).map(post => `<li><a href="${escapeHtml(post.url)}">${escapeHtml(post.title)}</a></li>`).join('\n');
+  const content = `<div id="root"><!-- HOME_STATIC_START -->
+  <div class="home-static">
+    <header><a href="/" aria-label="Phương Lâm - Trang chủ">Phương Lâm</a><a href="/blog/">Hướng dẫn &amp; kiến thức</a></header>
+    <main>
+      <section class="home-static-hero">
+        <h1>Nến tealight, nến ly &amp; <span>thảo mộc xông nhà</span> Phương Lâm</h1>
+        <p>${escapeHtml(homeDescription)}</p>
+        <nav aria-label="Khám phá sản phẩm"><a href="/danh-muc/nen-thom/">Xem sản phẩm</a><a href="/danh-muc/combo/">Xem combo ưu đãi</a></nav>
+      </section>
+      <section><h2>Sản phẩm bán chạy</h2><div class="home-static-grid">${cards}</div></section>
+      <section><h2>Danh mục sản phẩm</h2><nav class="home-static-categories" aria-label="Danh mục sản phẩm">${categoryLinks}</nav></section>
+      <section><h2>Bài viết mới nhất</h2><ul>${posts}</ul></section>
+    </main>
+  </div>
+  <!-- HOME_STATIC_END --></div>`;
+  let html = fs.readFileSync(paths.index, 'utf8');
+  const rootPattern = /<div id="root">(?:<!-- HOME_STATIC_START -->[\s\S]*?<!-- HOME_STATIC_END -->)?<\/div>/;
+  if (!rootPattern.test(html)) throw new Error('Homepage root marker missing; refusing to overwrite unexpected markup.');
+  html = html.replace(rootPattern, () => content);
+  fs.writeFileSync(paths.index, html);
+};
+
 const updateIndexHead = (html) => {
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(homeTitle)}</title>`)
+    .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapeHtml(homeDescription)}" />`)
+    .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapeHtml(homeTitle)}" />`)
+    .replace(/<meta property="og:description" content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${escapeHtml(homeDescription)}" />`);
+
   if (!html.includes('rel="canonical"')) {
     html = html.replace('</title>', `</title>\n  <link rel="canonical" href="${siteUrl}/" />`);
   }
@@ -1528,6 +1571,7 @@ const main = () => {
   bakeProductsIntoApp(products);
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
+  writeHomeContent({ products, categories: initialData.categories, blogPosts: initialData.blogPosts, settings });
   compileAppJs();
   optimizeIndexRuntime();
   bustIndexCache();
