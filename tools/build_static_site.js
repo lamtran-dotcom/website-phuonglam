@@ -728,11 +728,6 @@ const organizationSchema = () => ({
       '@type': 'WebSite',
       name: 'Phương Lâm',
       url: siteUrl,
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${siteUrl}/?q={search_term_string}`,
-        'query-input': 'required name=search_term_string',
-      },
     },
   ],
 });
@@ -1425,8 +1420,12 @@ const updateIndexHead = (html) => {
 `;
     html = html.replace('</head>', `${og}</head>`);
   }
-  if (!html.includes('application/ld+json')) {
-    html = html.replace('</head>', `  <script type="application/ld+json">${jsonForHtml(organizationSchema())}</script>\n</head>`);
+  const organizationMarkup = `<script type="application/ld+json">${jsonForHtml(organizationSchema())}</script>`;
+  const organizationScript = /<script type="application\/ld\+json">[\s\S]*?<\/script>/;
+  if (organizationScript.test(html)) {
+    html = html.replace(organizationScript, organizationMarkup);
+  } else {
+    html = html.replace('</head>', `  ${organizationMarkup}\n</head>`);
   }
   return html;
 };
