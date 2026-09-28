@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-09-28 — Express delivery promotion timing
+- Updated the promotion copy to say express delivery is within 1 hour in inner TP.HCM.
+
 ## 2026-09-28 — Checkout shipping detail
 - Hid the free-shipping threshold and calculated overweight amount from customer-facing order details.
 - Kept the existing weight thresholds and shipping fee calculation unchanged.

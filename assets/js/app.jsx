@@ -119,7 +119,7 @@ const ShippingPromotion = ({ setPage }) => {
               <div className="shipping-promo-highlight" style={shippingPromoStyles.highlight}>
                 <span style={shippingPromoStyles.highlightLabel}>VẬN CHUYỂN</span>
                 <strong>Freeship toàn quốc</strong>
-                <strong>Giao hỏa tốc từ 1 đến 4h trong nội thành TP.HCM</strong>
+                <strong>Giao hỏa tốc trong 1 giờ tại nội thành TP.HCM</strong>
               </div>
               <div className="shipping-promo-price-compare" style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
                 <div style={shippingPromoStyles.priceRow}>
