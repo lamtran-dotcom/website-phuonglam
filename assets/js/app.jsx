@@ -51,8 +51,6 @@ const ShippingPromotion = ({ setPage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [ctaHovered, setCtaHovered] = React.useState(false);
   const isMobile = useIsMobile();
-  const freeShipTerms = `Giao thường miễn phí cho đơn đến ${formatWeight(SHIPPING_RULES.freeWeightLimit.outside_hcm)} (đến ${formatWeight(SHIPPING_RULES.freeWeightLimit.in_hcm)} tại TP.HCM); đơn quá cân có phụ phí, hỏa tốc tính riêng.`;
-
   React.useEffect(() => {
     const image = new Image();
     image.src = SHIPPING_PROMO_IMAGE;
@@ -119,8 +117,9 @@ const ShippingPromotion = ({ setPage }) => {
               <span className="shipping-promo-eyebrow" style={shippingPromoStyles.eyebrow}>ƯU ĐÃI TOÀN QUỐC</span>
               <h2 className="shipping-promo-title" id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Ưu đãi giao thường,<br />giá web tốt hơn sàn</h2>
               <div className="shipping-promo-highlight" style={shippingPromoStyles.highlight}>
-                <span style={shippingPromoStyles.highlightLabel}>MIỄN PHÍ THEO ĐIỀU KIỆN</span>
-                <strong>{freeShipTerms}</strong>
+                <span style={shippingPromoStyles.highlightLabel}>VẬN CHUYỂN</span>
+                <strong>Freeship toàn quốc</strong>
+                <strong>Giao hỏa tốc từ 1 đến 4h trong nội thành TP.HCM</strong>
               </div>
               <div className="shipping-promo-price-compare" style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
                 <div style={shippingPromoStyles.priceRow}>

@@ -93,3 +93,7 @@
 - Clarify standard-shipping weight thresholds and express/overweight fees in the promotion; refine CTA motion with reduced-motion support.
 - Release built React bundle and all affected static product pages. Admin editor improvements remain local because admin is intentionally local-only.
 - Local checks: product variant → checkout (70,000đ selected variant), manual address entry and out-of-area candle-cup notice; promotion terms display 3kg outside HCMC and 5kg in HCMC. No order was submitted.
+
+## 2026-09-28 — Shipping popup copy
+- Replaced the conditional weight/fee paragraph in the promotion popup with “Freeship toàn quốc” and “Giao hỏa tốc từ 1 đến 4h trong nội thành TP.HCM”.
+- Rebuilt the React bundle and versioned the homepage script URL so browsers load the new copy. Previewed the popup locally.

@@ -1,6 +1,7 @@
 # Tasks
 
 ## Now
+- [x] Shorten shipping popup copy and deploy: “Freeship toàn quốc” plus HCMC express delivery in 1–4 hours (2026-09-28).
 - [ ] Keep `CONTEXT.md` updated after the next task.
 
 ## Next
