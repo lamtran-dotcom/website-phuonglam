@@ -8,6 +8,12 @@
 - Added a subtle lift and shadow to the Add to Cart and Buy Now buttons across all product detail pages.
 - Added pressed and keyboard-focus states, plus a reduced-motion fallback; bumped the shared CSS cache key on all 41 product pages.
 
+## 2026-09-28 — Homepage refresh
+- Replaced the list-style homepage heading with “Thắp chút ấm áp. Ươm hương an yên.” and a warm cream/green hero, with one configured image visible on mobile and desktop.
+- Moved category discovery ahead of featured products, used 4/2-column category and product grids, added a combo entry point, and reduced homepage guides to three.
+- Replaced broad trust/safety assertions with accurate catalog groups and aligned the main product CTA with the category section.
+- Synced the React experience, static first render, build template, metadata, stylesheet and minified bundle. Kept generated product/category pages and sitemap unchanged in the release.
+
 ## 2026-08-26
 
 ### Changed

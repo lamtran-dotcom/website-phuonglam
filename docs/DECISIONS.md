@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-09-28 - Use a calm, category-first homepage
+Decision: Use “Thắp chút ấm áp. Ươm hương an yên.” as the homepage slogan, show one configurable hero image on all screen sizes, and lead visitors from product categories to featured products and guides.
+Reason: The product family spans both candles and herbal burners, and the shorter line gives the brand a clearer, warmer introduction.
+Impact: Keep the homepage responsive and static-readable; direct the main CTA to categories and avoid broad safety or quality promises without specific evidence.
+Status: Active
+
 ### 2026-07-17 - Record and expose scheduled publication state
 Decision: Maintain a bounded JSON history after a scheduled article is promoted and expose it with the remaining queue and the most recent GitHub Actions run.
 Reason: The queue directory is deleted on successful publish, so it cannot answer whether a scheduled article was actually deployed.

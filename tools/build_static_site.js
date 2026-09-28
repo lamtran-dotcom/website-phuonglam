@@ -1665,7 +1665,8 @@ Sitemap: ${siteUrl}/sitemap.xml
 };
 
 const homeTitle = 'Phương Lâm | Nến tealight, nến ly & thảo mộc xông nhà';
-const homeDescription = 'Khám phá nến tealight, nến ly, thảo mộc xông nhà và bếp xông tại Phương Lâm. Xem sản phẩm, chọn phân loại và tham khảo hướng dẫn sử dụng.';
+const homeDescription = 'Khám phá nến tealight, nến ly, thảo mộc xông nhà và bộ xông tại Phương Lâm. Tìm hiểu phân loại sản phẩm và hướng dẫn sử dụng.';
+const homeHeroDescription = 'Từ ánh nến dịu ấm đến hương thảo mộc mộc mạc — cùng Phương Lâm chăm chút từng góc nhà. Khám phá nến tealight, nến ly, thảo mộc và bộ xông phù hợp với bạn.';
 
 // Visible initial content is replaced by React when the storefront mounts.
 // Generate from the same catalog/settings so admin rebuilds keep links current.
@@ -1674,24 +1675,46 @@ const writeHomeContent = ({ products, categories, blogPosts, settings }) => {
   const featured = settings.featuredIds.length
     ? settings.featuredIds.map(id => visible.find(product => String(product.id) === String(id))).filter(Boolean).slice(0, 6)
     : visible.filter(product => product.tag === 'Bán chạy' || product.tag === 'Nổi bật').slice(0, 6);
-  const categoryLinks = categories.map(category => `<a href="/danh-muc/${escapeHtml(category.id)}/">${escapeHtml(category.name)}</a>`).join('\n');
+  const heroImage = settings.headerImages?.[0] || '/assets/media/generated/embedded-002.jpg';
+  const comboImage = settings.categoryImages?.combo || firstImage(visible.find(product => product.categoryId === 'combo') || {});
+  const categoryLinks = categories.map(category => {
+    const image = settings.categoryImages?.[category.id] || '';
+    return `<a href="/danh-muc/${escapeHtml(category.id)}/">
+      ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 45vw, 280px')} alt="${escapeHtml(category.name)}" loading="lazy" />` : ''}
+      <span>${escapeHtml(category.name)}</span>
+      ${category.from ? `<small>${escapeHtml(category.from)}</small>` : ''}
+    </a>`;
+  }).join('\n');
   const cards = featured.map(product => `<a class="home-static-card" href="/san-pham/${escapeHtml(product.slug)}/">
     <img src="${escapeHtml(firstImage(product))}"${responsiveImageAttrs(firstImage(product), '(max-width: 767px) 45vw, 300px')} alt="${escapeHtml(product.name)}" width="300" height="300" loading="lazy" />
     <h3>${escapeHtml(product.name)}</h3>
   </a>`).join('\n');
-  const posts = blogPosts.filter(post => post.url).slice(0, 6).map(post => `<li><a href="${escapeHtml(post.url)}">${escapeHtml(post.title)}</a></li>`).join('\n');
+  const posts = blogPosts.filter(post => post.url).slice(0, 3).map(post => `<a class="home-static-guide" href="${escapeHtml(post.url)}">
+    <h3>${escapeHtml(post.title)}</h3>
+    <p>${escapeHtml(post.excerpt || '')}</p>
+    <span>Đọc hướng dẫn →</span>
+  </a>`).join('\n');
   const content = `<div id="root"><!-- HOME_STATIC_START -->
   <div class="home-static">
     <header><a href="/" aria-label="Phương Lâm - Trang chủ">Phương Lâm</a><a href="/blog/">Hướng dẫn &amp; kiến thức</a></header>
     <main>
       <section class="home-static-hero">
-        <h1>Nến tealight, nến ly &amp; <span>thảo mộc xông nhà</span> Phương Lâm</h1>
-        <p>${escapeHtml(homeDescription)}</p>
-        <nav aria-label="Khám phá sản phẩm"><a href="/danh-muc/nen-thom/">Xem sản phẩm</a><a href="/danh-muc/combo/">Xem combo ưu đãi</a></nav>
+        <div class="home-static-hero-copy">
+          <p class="home-static-kicker">Nến &amp; thảo mộc Phương Lâm</p>
+          <h1>Thắp chút ấm áp.<br /><span>Ươm hương an yên.</span></h1>
+          <p class="home-static-hero-description">${escapeHtml(homeHeroDescription)}</p>
+          <nav aria-label="Khám phá sản phẩm"><a class="home-static-primary" href="#danh-muc-san-pham">Khám phá sản phẩm</a><a class="home-static-secondary" href="/danh-muc/combo/">Xem bộ xông</a></nav>
+        </div>
+        <img class="home-static-hero-image" src="${escapeHtml(heroImage)}"${responsiveImageAttrs(heroImage, '(max-width: 767px) 100vw, 560px')} alt="Nến, bếp xông và thảo mộc Phương Lâm" width="900" height="900" loading="eager" fetchpriority="high" />
       </section>
-      <section><h2>Sản phẩm bán chạy</h2><div class="home-static-grid">${cards}</div></section>
-      <section><h2>Danh mục sản phẩm</h2><nav class="home-static-categories" aria-label="Danh mục sản phẩm">${categoryLinks}</nav></section>
-      <section><h2>Bài viết mới nhất</h2><ul>${posts}</ul></section>
+      <div class="home-static-trust" aria-label="Khám phá cửa hàng"><span>🕯️ Nến &amp; thảo mộc</span><span>🔥 Bếp xông &amp; phụ kiện</span><span>🎁 Combo nhiều lựa chọn</span><span>📖 Bài viết hướng dẫn</span></div>
+      <section class="home-static-section" id="danh-muc-san-pham"><div class="home-static-section-head"><h2>Danh mục sản phẩm</h2><p>Nến, bếp xông, thảo mộc và phụ kiện theo nhu cầu</p></div><nav class="home-static-categories" aria-label="Danh mục sản phẩm">${categoryLinks}</nav></section>
+      <section class="home-static-section"><div class="home-static-section-head"><h2>Sản phẩm nổi bật</h2><p>Những lựa chọn được giới thiệu từ danh mục Phương Lâm</p></div><div class="home-static-grid">${cards}</div><p class="home-static-more"><a href="#danh-muc-san-pham">Xem các danh mục →</a></p></section>
+      <section class="home-static-combo">
+        <img src="${escapeHtml(comboImage)}"${responsiveImageAttrs(comboImage, '(max-width: 767px) 100vw, 520px')} alt="Bộ xông nhà Phương Lâm" width="720" height="540" loading="lazy" />
+        <div><p class="home-static-kicker">Bộ xông nhà</p><h2>Bắt đầu với một bộ xông</h2><p>Khám phá các bộ xông và lựa chọn phân loại trên từng sản phẩm. Bạn có thể xem thông tin và giá hiện hành trước khi chọn.</p><a class="home-static-primary" href="/danh-muc/combo/">Khám phá các bộ xông</a></div>
+      </section>
+      <section class="home-static-section"><div class="home-static-section-head"><h2>Hướng dẫn chọn và sử dụng</h2><p>Thông tin về nến và thảo mộc xông nhà</p></div><div class="home-static-guides">${posts}</div><p class="home-static-more"><a href="/blog/">Xem tất cả hướng dẫn →</a></p></section>
     </main>
   </div>
   <!-- HOME_STATIC_END --></div>`;

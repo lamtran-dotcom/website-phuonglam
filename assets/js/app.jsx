@@ -860,7 +860,6 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
   })();
   const activeHeroImages = (Array.isArray(headerImages) && headerImages.length > 0) ? headerImages : HERO_IMAGES;
   const isMobile = useIsMobile();
-  const [slideIdx, setSlideIdx] = React.useState(0);
   const [homeSearch, setHomeSearch] = React.useState('');
   const [homeSearchOpen, setHomeSearchOpen] = React.useState(() => queryFlag('search'));
   const [homeSearchHover, setHomeSearchHover] = React.useState(false);
@@ -876,11 +875,6 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         }),
       ].filter((product, index, list) => list.findIndex(item => item.id === product.id) === index).slice(0, 3)
     : [];
-  React.useEffect(() => {
-    const t = setInterval(() => setSlideIdx(i => (i + 1) % activeHeroImages.length), 3000);
-    return () => clearInterval(t);
-  }, [activeHeroImages.length]);
-
   React.useEffect(() => {
     const handleOutside = (event) => {
       if (homeSearchRef.current && !homeSearchRef.current.contains(event.target)) {
@@ -964,43 +958,32 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
       </section>
 
       {/* HERO */}
-      <section style={{ ...hpStyles.hero, gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1.08fr) minmax(408px, 504px)', padding: isMobile ? '26px 18px 20px' : '50px 24px', gap: isMobile ? 20 : 36 }}>
-        <div style={{ ...hpStyles.heroContent, maxWidth: isMobile ? '100%' : 720, width: '100%' }}>
-          <div style={{ ...hpStyles.heroBadge, fontSize: isMobile ? 10 : 13, padding: isMobile ? '5px 10px' : '7px 14px', marginBottom: isMobile ? 12 : 16 }}>🌿 Tự nhiên · Thuần khiết · An toàn</div>
-          <h1 style={{ ...hpStyles.heroTitle, fontSize: isMobile ? 26 : 43, marginBottom: isMobile ? 12 : 16, maxWidth: isMobile ? '100%' : 720 }}>
-            Nến tealight, nến ly &amp; <span style={{ color: '#318223' }}>thảo mộc xông nhà</span> Phương Lâm
+      <section style={{ ...hpStyles.hero, gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(280px, .9fr)', padding: isMobile ? '24px 18px 18px' : '44px', gap: isMobile ? 18 : 36, background: '#fbf8f0', borderRadius: isMobile ? 20 : 28, boxSizing: 'border-box', overflow: 'hidden' }}>
+        <div style={{ ...hpStyles.heroContent, maxWidth: isMobile ? '100%' : 620, width: '100%' }}>
+          <div style={{ ...hpStyles.heroBadge, fontSize: isMobile ? 11 : 13, padding: isMobile ? '6px 11px' : '7px 14px', marginBottom: isMobile ? 14 : 18 }}>Nến &amp; thảo mộc Phương Lâm</div>
+          <h1 style={{ ...hpStyles.heroTitle, fontSize: isMobile ? 30 : 52, lineHeight: 1.12, marginBottom: isMobile ? 14 : 18, maxWidth: isMobile ? '100%' : 600, letterSpacing: '-1.5px' }}>
+            Thắp chút ấm áp.<br /><span style={{ color: '#318223' }}>Ươm hương an yên.</span>
           </h1>
-          <p style={{ ...hpStyles.heroSub, fontSize: isMobile ? 13 : 18, marginBottom: isMobile ? 18 : 24, maxWidth: isMobile ? '100%' : 620 }}>Khám phá nến tealight, nến ly, thảo mộc xông nhà và bếp xông tại Phương Lâm. Xem sản phẩm, chọn phân loại và tham khảo hướng dẫn sử dụng.</p>
+          <p style={{ ...hpStyles.heroSub, fontSize: isMobile ? 15 : 17, marginBottom: isMobile ? 18 : 24, maxWidth: isMobile ? '100%' : 540 }}>Từ ánh nến dịu ấm đến hương thảo mộc mộc mạc — cùng Phương Lâm chăm chút từng góc nhà. Khám phá nến tealight, nến ly, thảo mộc và bộ xông phù hợp với bạn.</p>
           <div style={{ ...hpStyles.heroBtns, flexDirection: isMobile ? 'column' : 'row' }}>
-            <a href={categoryUrl('nen-thom')} style={{ ...hpStyles.heroCta, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }}>Xem sản phẩm</a>
-            <a href={categoryUrl('combo')} style={{ ...hpStyles.heroSecondary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '12px 18px' : '12px 24px', fontSize: isMobile ? 14 : 14 }}>Xem combo ưu đãi</a>
+            <a href="#danh-muc-san-pham" style={{ ...hpStyles.heroCta, width: isMobile ? '100%' : 'auto', padding: isMobile ? '13px 18px' : '13px 24px', fontSize: 14 }}>Khám phá sản phẩm</a>
+            <a href={categoryUrl('combo')} style={{ ...hpStyles.heroSecondary, width: isMobile ? '100%' : 'auto', padding: isMobile ? '13px 18px' : '13px 24px', fontSize: 14 }}>Xem bộ xông</a>
           </div>
         </div>
-        {!isMobile && (
-          <div style={{ ...hpStyles.heroImageFrame, width: '100%', maxWidth: 648, justifySelf: 'end' }}>
-            <div style={{ ...hpStyles.heroImage, overflow: 'hidden', borderRadius: 18, position: 'relative', width: '100%', aspectRatio: '1 / 1' }}>
-            <div style={{ display: 'flex', width: `${activeHeroImages.length * 100}%`, transform: `translateX(-${slideIdx * (100 / activeHeroImages.length)}%)`, transition: 'transform 0.7s cubic-bezier(0.4,0,0.2,1)', height: '100%' }}>
-              {activeHeroImages.map((src, i) => (
-                <img key={i} src={src} alt="Phương Lâm" loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : 'auto'} decoding="async" style={{ width: `${100 / activeHeroImages.length}%`, height: '100%', objectFit: 'cover', flexShrink: 0 }} />
-              ))}
-            </div>
-            <div style={{ position: 'absolute', bottom: 14, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 6 }}>
-              {activeHeroImages.map((_, i) => (
-                <div key={i} onClick={() => setSlideIdx(i)} style={{ width: i === slideIdx ? 22 : 7, height: 7, borderRadius: 4, background: i === slideIdx ? '#fff' : 'rgba(255,255,255,0.55)', cursor: 'pointer', transition: 'all 0.3s' }} />
-              ))}
-            </div>
+        <div style={{ ...hpStyles.heroImageFrame, width: '100%', maxWidth: 560, justifySelf: 'end', boxSizing: 'border-box', padding: isMobile ? 8 : 12, order: isMobile ? 2 : 0 }}>
+          <div style={{ ...hpStyles.heroImage, overflow: 'hidden', borderRadius: isMobile ? 14 : 20, position: 'relative', width: '100%', aspectRatio: isMobile ? '16 / 10' : '1 / 1' }}>
+            <img src={activeHeroImages[0] || HERO_IMAGES[0]} alt="Nến, bếp xông và thảo mộc Phương Lâm" loading="eager" fetchPriority="high" decoding="async" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
-          </div>
-        )}
+        </div>
       </section>
 
       {/* TRUST BAR */}
       <div style={{ ...hpStyles.trustBar, display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? '12px 16px' : '0 28px', padding: isMobile ? '16px 20px' : '20px 24px', justifyItems: 'center', maxWidth: 1320, margin: '0 auto', boxSizing: 'border-box' }}>
         {[
-          { icon: '🚚', text: 'Giao hàng toàn quốc' },
-          { icon: '✅', text: 'Kiểm tra trước khi nhận' },
-          { icon: '🔄', text: 'Đổi trả trong 7 ngày' },
-          { icon: '🌿', text: '100% tự nhiên' },
+          { icon: '🕯️', text: 'Nến & thảo mộc' },
+          { icon: '🔥', text: 'Bếp xông & phụ kiện' },
+          { icon: '🎁', text: 'Combo nhiều lựa chọn' },
+          { icon: '📖', text: 'Bài viết hướng dẫn' },
         ].map(t => (
           <div key={t.text} style={hpStyles.trustItem}>
             <span style={hpStyles.trustIcon}>{t.icon}</span>
@@ -1009,39 +992,13 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         ))}
       </div>
 
-      {/* BESTSELLERS */}
-      <section id="san-pham-ban-chay" style={{ ...hpStyles.section, background: '#fff', padding: isMobile ? '40px 0' : '64px 0' }}>
-        <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '0 16px' : '0 24px' }}>
-          <div style={hpStyles.sectionHead}>
-            <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Sản phẩm bán chạy</h2>
-            <p style={hpStyles.sectionSub}>Được khách hàng tin dùng và đánh giá cao nhất</p>
-          </div>
-          <div
-            style={{
-              ...hpStyles.bestsellerGrid,
-              gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(6, minmax(0, 1fr))',
-              gap: isMobile ? 12 : 14,
-            }}
-          >
-            {bestsellers.map(p => (
-              <ProductCard key={p.id} product={p} setPage={setPage} addToCart={addToCart} productImages={productImages} imagePriority={true} />
-            ))}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 32 }}>
-            <a href={categoryUrl('nen-thom')} style={hpStyles.viewAllBtn}>
-              Xem tất cả sản phẩm →
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* CATEGORIES */}
-      <section style={{ ...hpStyles.section, background: '#f7faf6', padding: isMobile ? '40px 20px' : '64px 24px' }}>
+      <section id="danh-muc-san-pham" style={{ ...hpStyles.section, background: '#f7faf6', padding: isMobile ? '40px 16px' : '56px 24px', scrollMarginTop: 90 }}>
         <div style={hpStyles.sectionHead}>
           <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Danh mục sản phẩm</h2>
-          <p style={hpStyles.sectionSub}>Khám phá đa dạng sản phẩm chăm sóc sức khoẻ tự nhiên</p>
+          <p style={hpStyles.sectionSub}>Nến, bếp xông, thảo mộc và phụ kiện theo nhu cầu</p>
         </div>
-        <div style={{ ...hpStyles.catGrid, gridTemplateColumns: isMobile ? 'repeat(4, 1fr)' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? 8 : 16 }}>
+        <div style={{ ...hpStyles.catGrid, gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? 12 : 16 }}>
           {CATEGORIES.map(cat => (
             <a key={cat.id} href={categoryUrl(cat.id)} style={hpStyles.catCard}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(0,0,0,0.10)'; }}
@@ -1059,39 +1016,34 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         </div>
       </section>
 
-      {/* BENEFITS */}
-      <section style={{ ...hpStyles.section, padding: isMobile ? '40px 20px' : '64px 24px' }}>
-        <div style={hpStyles.sectionHead}>
-          <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32, color: '#318223' }}>
-            Tại sao chọn Phương Lâm?
-          </h2>
+      {/* BESTSELLERS */}
+      <section id="san-pham-noi-bat" style={{ ...hpStyles.section, background: '#fff', padding: isMobile ? '40px 0' : '56px 0' }}>
+        <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '0 16px' : '0 24px' }}>
+          <div style={hpStyles.sectionHead}>
+            <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Sản phẩm nổi bật</h2>
+            <p style={hpStyles.sectionSub}>Những lựa chọn được giới thiệu từ danh mục Phương Lâm</p>
+          </div>
+          <div style={{ ...hpStyles.bestsellerGrid, gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? 12 : 18 }}>
+            {bestsellers.map(p => (
+              <ProductCard key={p.id} product={p} setPage={setPage} addToCart={addToCart} productImages={productImages} imagePriority={true} />
+            ))}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28 }}>
+            <a href="#danh-muc-san-pham" style={hpStyles.viewAllBtn}>Xem các danh mục →</a>
+          </div>
         </div>
-        <div style={{ ...hpStyles.benefitGrid, gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: isMobile ? 12 : 24 }}>
-          {[
-            { icon: '🌱', title: 'Nguyên liệu tự nhiên 100%', desc: 'Tất cả sản phẩm được làm từ nguyên liệu thiên nhiên, không hóa chất độc hại, an toàn cho cả gia đình.' },
-            { icon: '🔬', title: 'Kiểm định chất lượng', desc: 'Mỗi lô hàng đều được kiểm tra nghiêm ngặt trước khi đến tay khách hàng.' },
-            { icon: '📦', title: 'Đóng gói cẩn thận', desc: 'Hộp quà sang trọng, phù hợp làm quà tặng cho người thân và bạn bè.' },
-            { icon: '🤝', title: 'Hỗ trợ tận tâm', desc: 'Đội ngũ tư vấn sẵn sàng hỗ trợ từ 8:00 – 20:00 mỗi ngày.' },
-          ].map(b => (
-            <div
-              key={b.title}
-              style={hpStyles.benefitCard}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'translateY(-10px)';
-                e.currentTarget.style.boxShadow = '0 18px 40px rgba(49,130,35,0.16)';
-                e.currentTarget.style.borderColor = '#cfe5ca';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.04)';
-                e.currentTarget.style.borderColor = '#f0f0f0';
-              }}
-            >
-              <div style={hpStyles.benefitIcon}>{b.icon}</div>
-              <div style={hpStyles.benefitTitle}>{b.title}</div>
-              <div style={hpStyles.benefitDesc}>{b.desc}</div>
-            </div>
-          ))}
+      </section>
+
+      {/* COMBO */}
+      <section style={{ ...hpStyles.section, padding: isMobile ? '24px 16px 40px' : '24px 24px 56px' }}>
+        <div style={{ ...hpStyles.comboFeature, gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, .9fr) minmax(0, 1.1fr)', gap: isMobile ? 18 : 48, padding: isMobile ? 18 : 36 }}>
+          <ImgPlaceholder label="Bộ xông nhà Phương Lâm" bg="#efe8d8" aspectRatio={isMobile ? '16 / 10' : '4 / 3'} src={categoryImages.combo || null} style={{ width: '100%', borderRadius: 16, overflow: 'hidden' }} />
+          <div>
+            <div style={{ ...hpStyles.heroBadge, marginBottom: 14 }}>Bộ xông nhà</div>
+            <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 25 : 34, marginBottom: 12 }}>Bắt đầu với một bộ xông</h2>
+            <p style={{ ...hpStyles.heroSub, fontSize: 15, maxWidth: 540, marginBottom: 20 }}>Khám phá các bộ xông và lựa chọn phân loại trên từng sản phẩm. Bạn có thể xem thông tin và giá hiện hành trước khi chọn.</p>
+            <a href={categoryUrl('combo')} style={{ ...hpStyles.heroCta, padding: '12px 20px', fontSize: 14 }}>Khám phá các bộ xông</a>
+          </div>
         </div>
       </section>
 
@@ -1100,10 +1052,10 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '0 16px' : '0 24px' }}>
           <div style={hpStyles.sectionHead}>
             <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Bài viết mới nhất</h2>
-            <p style={hpStyles.sectionSub}>Kiến thức về sức khoẻ và chăm sóc không gian sống</p>
+            <p style={hpStyles.sectionSub}>Hướng dẫn chọn và sử dụng nến, thảo mộc xông nhà</p>
           </div>
           <div style={{ ...hpStyles.blogGrid, gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
-            {BLOG_POSTS.slice(0, 6).map(post => (
+            {BLOG_POSTS.filter(post => post.url).slice(0, 3).map(post => (
               <a key={post.id} href={post.url || '#'}
                 style={{ ...hpStyles.blogCard, display: 'block', textDecoration: 'none', color: 'inherit' }}
                 onClick={e => { if (!post.url) { e.preventDefault(); setPage({ name: 'blog-post', slug: post.slug }); } }}
@@ -1125,6 +1077,9 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
                 </div>
               </a>
             ))}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 24 }}>
+            <a href="/blog/" style={hpStyles.viewAllBtn}>Xem tất cả hướng dẫn →</a>
           </div>
         </div>
       </section>
@@ -1152,8 +1107,9 @@ const hpStyles = {
   heroBtns: { display: 'flex', gap: 12, flexWrap: 'wrap' },
   heroCta: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#318223', color: '#fff', border: 'none', padding: '14px 28px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.02em', textDecoration: 'none', boxSizing: 'border-box' },
   heroSecondary: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#318223', border: '1.5px solid #318223', padding: '14px 28px', borderRadius: 10, fontSize: 15, fontWeight: 600, cursor: 'pointer', textDecoration: 'none', boxSizing: 'border-box' },
-  heroImageFrame: { background: '#f6f3e8', borderRadius: 28, padding: 18, boxShadow: '0 18px 44px rgba(35, 58, 27, 0.06)' },
+  heroImageFrame: { background: '#efe7d8', borderRadius: 24, padding: 12, boxShadow: '0 16px 38px rgba(70, 56, 35, 0.08)' },
   heroImage: { background: '#fff8ec' },
+  comboFeature: { maxWidth: 1272, margin: '0 auto', display: 'grid', alignItems: 'center', background: '#fbf8f0', borderRadius: 24, boxSizing: 'border-box' },
   trustBar: { background: '#f7faf6', borderTop: '1px solid #eef3ed', borderBottom: '1px solid #eef3ed', padding: '20px 24px', display: 'flex', justifyContent: 'center', gap: 48, flexWrap: 'wrap' },
   trustItem: { display: 'flex', alignItems: 'center', gap: 10 },
   trustIcon: { fontSize: 20 },

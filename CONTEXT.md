@@ -44,6 +44,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Homepage refresh — 2026-09-28: replaced the list-style hero with “Thắp chút ấm áp. Ươm hương an yên.”, warm cream/green styling and one configurable hero image visible on desktop and mobile. Reordered the homepage to lead with category discovery; use responsive category/product grids; added a combo entry point and reduced guides to three. Removed broad homepage safety/quality claims. Synchronized React, static initial HTML, build template, metadata, CSS and minified bundle while keeping product/category pages and sitemap unchanged. Details: `docs/HOMEPAGE-UPGRADE-PROPOSAL.md`.
+
 Date: 2026-09-28
 Published product SEO/content and reading upgrades for all 25 visible products in commit `2331db0a52d832ee59ea5d9b73eff8807199f9be`; verified the Pages build and all 27 public product/CSS/storefront responses.
 Current release adds Buy Now to checkout on static product pages, clearer address entry, the configured candle-cup delivery check, checkout receipt/autofill/mobile layout, and shipping-promotion terms/styles. Commit `63fb9a05` is live: GitHub Pages succeeded; all 41 existing product-page URLs and the CSS, site-data.js and React bundle match release files byte-for-byte. Live browser confirmed promotion copy/modal, Buy Now preserves selected variant/price and opens checkout, address entry updates shipping, and candle cups show an outside-HCMC warning. Test cart was emptied; no order submitted. Local admin editor tabs/search/filters/SEO preview/sticky save controls are synced to `admin-upload.html`; admin remains local-only.
