@@ -290,15 +290,206 @@ const getProductGalleryImages = (product) => {
   ]);
 };
 
-const renderStaticParagraphs = (text) => {
-  const normalized = String(text || '').replace(/\r\n/g, '\n').trim();
-  if (!normalized) return '';
-  return normalized
-    .split(/\n{2,}/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean)
-    .map((paragraph) => `<p>${paragraph.split('\n').map((line) => escapeHtml(line)).join('<br>')}</p>`)
-    .join('\n      ');
+const renderStaticInlineMarkdown = (text) => escapeHtml(text).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+const renderStaticParagraphs = (text, productName = '') => {
+  const lines = String(text || '').replace(/\r\n/g, '\n').trim().split('\n');
+  if (!lines.length || !lines.some((line) => line.trim())) return '';
+  const output = [];
+  let paragraph = [];
+  let bullets = [];
+  let numbered = [];
+  let skippedTitle = false;
+  let skippedLeadTitle = false;
+  const flushParagraph = () => {
+    if (paragraph.length) output.push(`<p>${paragraph.map(renderStaticInlineMarkdown).join('<br>')}</p>`);
+    paragraph = [];
+  };
+  const flushLists = () => {
+    if (bullets.length) output.push(`<ul>${bullets.map((item) => `<li>${renderStaticInlineMarkdown(item)}</li>`).join('')}</ul>`);
+    if (numbered.length) output.push(`<ol>${numbered.map((item) => `<li>${renderStaticInlineMarkdown(item)}</li>`).join('')}</ol>`);
+    bullets = [];
+    numbered = [];
+  };
+  lines.forEach((rawLine) => {
+    const line = rawLine.trim();
+    if (!line) { flushParagraph(); flushLists(); return; }
+    if (/^-{3,}$/.test(line)) { flushParagraph(); flushLists(); return; }
+    const heading = line.match(/^(#{1,6})\s+(.+)$/);
+    if (heading) {
+      flushParagraph(); flushLists();
+      if (heading[1] === '#' && !skippedTitle) { skippedTitle = true; return; }
+      if (heading[2].trim().toLowerCase() === 'mô tả sản phẩm') return;
+      const tag = heading[1].length === 1 ? 'h2' : 'h3';
+      output.push(`<${tag}>${renderStaticInlineMarkdown(heading[2])}</${tag}>`);
+      return;
+    }
+    const leadTitle = stripHtml(line).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi');
+    const isLegacyLeadTitle = line.length <= 120
+      && line === line.toLocaleUpperCase('vi')
+      && !/[.!?:]$/.test(line);
+    if (!skippedLeadTitle && (leadTitle === stripHtml(productName).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi') || leadTitle === 'mô tả sản phẩm' || isLegacyLeadTitle)) {
+      skippedLeadTitle = true;
+      return;
+    }
+    skippedLeadTitle = true;
+    const labeledHeading = line.match(/^(?:✔|✅|📍|⚠️|📝|🔥|✨)\s*(.{2,70}):$/);
+    if (labeledHeading) {
+      flushParagraph(); flushLists();
+      output.push(`<h3>${renderStaticInlineMarkdown(labeledHeading[1])}</h3>`);
+      return;
+    }
+    if (line.startsWith('>')) {
+      flushParagraph(); flushLists();
+      output.push(`<blockquote>${renderStaticInlineMarkdown(line.replace(/^>\s?/, ''))}</blockquote>`);
+      return;
+    }
+    const bullet = line.match(/^[-*•👉]\s+(.+)$/);
+    const ordered = line.match(/^\d+[.)]\s+(.+)$/);
+    if (bullet) { flushParagraph(); if (numbered.length) flushLists(); bullets.push(bullet[1]); return; }
+    if (ordered) { flushParagraph(); if (bullets.length) flushLists(); numbered.push(ordered[1]); return; }
+    if (bullets.length || numbered.length) flushLists();
+    paragraph.push(line);
+  });
+  flushParagraph();
+  flushLists();
+  return output.join('\n      ');
+};
+
+const classifyProductContentHeading = (heading, sourceType) => {
+  const normalized = stripHtml(heading).replace(/[📝📍⚠️✅✔️🔥✨🏺🫙🕯️🌿]/gu, '').trim().toLocaleLowerCase('vi');
+  if (/lưu ý.*bảo quản|bảo quản.*lưu ý/.test(normalized)) return 'notes';
+  if (/bảo quản/.test(normalized)) return 'storage';
+  if (/lưu ý|an toàn|cảnh báo/.test(normalized)) return 'caution';
+  if (/cách dùng|cách sử dụng|hướng dẫn|các bước|nấu nước|dùng với|xông khô/.test(normalized)) return 'usage';
+  if (/thông số|thành phần|bộ gồm|bộ sản phẩm|trọn bộ|chi tiết sản phẩm|quy cách/.test(normalized)) return 'specs';
+  if (/bảo hành|đổi trả|cam kết/.test(normalized)) return 'description';
+  return sourceType === 'usage' ? 'usage' : 'description';
+};
+
+const normalizeStaticUsageSteps = (text) => {
+  const lines = String(text || '').replace(/\r\n/g, '\n').split('\n');
+  const output = [];
+  let step = null;
+  let stepNumber = 0;
+  const flushStep = () => {
+    if (!step) return;
+    stepNumber += 1;
+    const detail = step.detail.join(' ').replace(/\s+/g, ' ').trim();
+    output.push(`${stepNumber}. **${step.title}**${detail ? ` — ${detail}` : ''}`);
+    step = null;
+  };
+  for (const line of lines) {
+    const match = line.trim().match(/^\*\*Bước\s*\d+\s*[—–:-]\s*(.+?)\*\*\s*$/iu);
+    if (match) {
+      flushStep();
+      step = { title: match[1].trim(), detail: [] };
+      continue;
+    }
+    if (step && (/^\s*(?:#{1,6}\s|>|(?:✔|✅|📍|⚠️|📝|🔥|✨)\s*[^\n]*:)/u.test(line))) flushStep();
+    if (step) step.detail.push(line.trim());
+    else output.push(line);
+  }
+  flushStep();
+  return output.join('\n');
+};
+
+const splitProductContent = (text, sourceType = 'description', productName = '') => {
+  const lines = String(text || '').replace(/\r\n/g, '\n').trim().split('\n');
+  const blocks = [];
+  let heading = '';
+  let content = [];
+  let skippedTitle = false;
+  let skippedLeadTitle = false;
+  const flush = () => {
+    const body = content.join('\n').trim();
+    const normalizedHeading = stripHtml(heading).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi');
+    const normalizedProductName = stripHtml(productName).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi');
+    if (body && normalizedHeading !== 'mô tả sản phẩm' && normalizedHeading !== normalizedProductName) {
+      blocks.push({ heading, body, type: heading ? classifyProductContentHeading(heading, sourceType) : sourceType });
+    }
+    content = [];
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    const inlineCaution = line.match(/^(?:>\s*)?(?:⚠️\s*)?\*\*((?:Lưu ý|Cảnh báo|An toàn)[^*]{0,70})\*\*[:：]?\s*(.*)$/iu);
+    if (inlineCaution) {
+      flush();
+      heading = inlineCaution[1].trim();
+      content = [inlineCaution[2].trim()];
+      continue;
+    }
+    const markdownHeading = line.match(/^(#{1,6})\s+(.+)$/);
+    const labelHeading = line.match(/^(?:✔|✅|📍|⚠️|📝|🔥|✨)?\s*(.{2,70}):$/u);
+    const nextHeading = markdownHeading?.[2] || labelHeading?.[1];
+    if (nextHeading) {
+      flush();
+      if (markdownHeading?.[1] === '#' && !skippedTitle) {
+        skippedTitle = true;
+        heading = '';
+        continue;
+      }
+      const normalized = stripHtml(nextHeading).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi');
+      const normalizedProductName = stripHtml(productName).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi');
+      if (normalized === 'mô tả sản phẩm' || normalized === normalizedProductName) {
+        heading = '';
+        skippedLeadTitle = true;
+        continue;
+      }
+      heading = nextHeading.trim();
+      continue;
+    }
+    const legacyTitle = line.length <= 120
+      && line === line.toLocaleUpperCase('vi')
+      && !/[.!?:]$/.test(line);
+    if (!skippedLeadTitle && (legacyTitle || line.toLocaleLowerCase('vi') === 'mô tả sản phẩm')) {
+      skippedLeadTitle = true;
+      continue;
+    }
+    skippedLeadTitle = true;
+    content.push(rawLine);
+  }
+  flush();
+  return blocks;
+};
+
+const renderProductContentBlock = (block, productName, allowSpecTable = false) => {
+  const sourceBody = block.type === 'usage' ? normalizeStaticUsageSteps(block.body) : block.body;
+  const lines = sourceBody.split('\n');
+  const rows = [];
+  const remaining = [];
+  if (allowSpecTable) {
+    for (const line of lines) {
+      const match = line.trim().match(/^(?:[-*•]\s*)?\*\*([^*]{2,80})\*\*\s*(?:[—–-]\s*|\s+)(.+)$/u);
+      if (match && !match[1].trim().endsWith(':')) rows.push(`<tr><th scope="row">${renderStaticInlineMarkdown(match[1].trim())}</th><td>${renderStaticInlineMarkdown(match[2].trim())}</td></tr>`);
+      else remaining.push(line);
+    }
+  }
+  const heading = block.heading ? `<h3>${renderStaticInlineMarkdown(block.heading)}</h3>` : '';
+  const table = rows.length >= 2
+    ? `<div class="product-spec-table-wrap"><table class="product-spec-table" aria-label="Thông tin chi tiết sản phẩm"><tbody>${rows.join('')}</tbody></table></div>`
+    : '';
+  const body = renderStaticParagraphs(rows.length >= 2 ? remaining.join('\n') : sourceBody, productName);
+  return `${heading}${body}${table}`;
+};
+
+const renderProductContentSection = ({ id, title, blocks, productName, className = '' }) => {
+  if (!blocks.length) return '';
+  const normalizedTitle = stripHtml(title).trim().toLocaleLowerCase('vi');
+  const content = blocks.map((block) => {
+    const normalizedHeading = stripHtml(block.heading).replace(/[:.!]+$/, '').trim().toLocaleLowerCase('vi');
+    const visibleBlock = normalizedHeading === normalizedTitle ? { ...block, heading: '' } : block;
+    return renderProductContentBlock(visibleBlock, productName, block.type === 'specs');
+  }).join('\n');
+  if (!content.trim()) return '';
+  if (className === 'product-caution-section') {
+    return `<aside class="content product-content-section product-callout product-callout-warning" id="${id}" aria-labelledby="${id}-title"><h2 id="${id}-title">${title}</h2>${content}</aside>`;
+  }
+  if (className === 'product-notes-section') {
+    return `<aside class="content product-content-section product-callout product-callout-note" id="${id}" aria-labelledby="${id}-title"><h2 id="${id}-title">${title}</h2>${content}</aside>`;
+  }
+  return `<section class="content product-content-section ${className}" id="${id}"><h2>${title}</h2>${content}</section>`;
 };
 
 const getStaticOptionImage = (product, variants, groupName, value) => {
@@ -313,7 +504,7 @@ const renderStaticVariantPill = ({ value, image = '', attrs = '' }) => {
   const thumb = image
     ? `\n          <img class="variant-pill-thumb" src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 24px, 28px')} alt="" loading="lazy" />`
     : '';
-  return `<button class="variant-pill" type="button" data-option-value="${escapeHtml(value)}"${attrs}>${thumb}
+  return `<button class="variant-pill" type="button" aria-pressed="false" data-option-value="${escapeHtml(value)}"${attrs}>${thumb}
           <span class="variant-pill-text">${escapeHtml(value)}</span>
         </button>`;
 };
@@ -441,6 +632,12 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .summary, .content { color: #334833; font-size: 17px; overflow-wrap: anywhere; }
 .summary-box { line-height: 1.6; }
 .content p { margin: 0 0 14px; }
+.content h2, .content h3 { color: var(--seo-text); line-height: 1.35; margin: 24px 0 10px; }
+.content h2 { font-size: 22px; }
+.content h3 { font-size: 18px; }
+.content ul, .content ol { margin: 0 0 18px; padding-left: 24px; }
+.content li { margin: 0 0 8px; padding-left: 3px; }
+.content blockquote { margin: 12px 0 18px; padding: 12px 16px; border-left: 3px solid #8ab77e; border-radius: 0 8px 8px 0; background: var(--seo-bg); color: #4c6248; }
 .meta-list { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 14px; background: var(--seo-bg); margin: 22px 0; }
 .cta { display: inline-flex; align-items: center; justify-content: center; background: var(--seo-primary); color: #fff; text-decoration: none; border-radius: 10px; padding: 14px 20px; font-weight: 800; margin-top: 10px; }
 .buy-box { display: grid; gap: 12px; padding: 18px; border: 1px solid var(--seo-border); border-radius: 16px; background: #fff; box-shadow: 0 12px 30px rgba(22, 63, 22, .08); margin-top: 18px; }
@@ -534,6 +731,48 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
   .blog-hero { padding: 30px 18px; border-radius: 18px; }
   .blog-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .seo-footer { align-items: flex-start; flex-direction: column; margin-top: 34px; }
+}
+.product-content-shell { width: 100%; max-width: 840px; margin: 36px auto 0; }
+.product-reading-column { min-width: 0; max-width: 780px; margin: 0 auto; }
+.product-content-nav { display: flex; gap: 8px; overflow-x: auto; margin: 0 0 28px; padding: 0 0 12px; border-bottom: 1px solid #e5ece2; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.product-content-nav a { flex: 0 0 auto; color: #2f7f25; font-size: 14px; font-weight: 700; text-decoration: none; padding: 9px 13px; border: 1px solid #dce8d8; border-radius: 999px; white-space: nowrap; }
+.product-content-nav a:hover, .product-content-nav a:focus-visible { background: #f2f7ef; text-decoration: underline; outline-color: #318223; }
+.product-content-section { margin: 0 0 34px; scroll-margin-top: 140px; }
+.product-content-section h2 { margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid #edf1ea; font-size: 26px; line-height: 1.3; }
+.product-content-section h3 { margin: 24px 0 10px; font-size: 19px; line-height: 1.4; }
+.product-content-section p, .product-content-section li { font-size: 17px; line-height: 1.72; }
+.product-content-section p { margin-bottom: 14px; }
+.product-content-section ul, .product-content-section ol { margin: 0 0 18px; padding-left: 24px; }
+.product-spec-table-wrap { max-width: 100%; margin: 14px 0 22px; overflow-x: auto; border: 1px solid #e4ebdf; border-radius: 12px; }
+.product-spec-table { width: 100%; border-collapse: collapse; font-size: 16px; line-height: 1.6; }
+.product-spec-table th, .product-spec-table td { padding: 12px 14px; border-bottom: 1px solid #e9eee6; text-align: left; vertical-align: top; }
+.product-spec-table tr:last-child th, .product-spec-table tr:last-child td { border-bottom: 0; }
+.product-spec-table th { width: 31%; background: #f7faf5; color: #344934; font-weight: 750; }
+.product-usage-section ol { list-style: none; counter-reset: product-step; padding: 0; }
+.product-usage-section ol li { position: relative; min-height: 40px; margin: 0 0 12px; padding: 9px 12px 9px 48px; border: 1px solid #e6eee2; border-radius: 10px; background: #fbfcfa; counter-increment: product-step; }
+.product-usage-section ol li::before { position: absolute; top: 7px; left: 10px; display: grid; width: 26px; height: 26px; place-items: center; border-radius: 50%; background: #eaf5e7; color: #2f7f25; content: counter(product-step); font-size: 14px; font-weight: 800; }
+.product-callout-warning { padding: 18px 20px; border: 1px solid #f0dfbd; border-left: 4px solid #d4a34e; border-radius: 12px; background: #fffaf0; }
+.product-callout-warning h2 { border-bottom-color: #f4e8d1; }
+.product-callout-note { padding: 18px 20px; border: 1px solid #e2ecdc; border-left: 4px solid #8ab77e; border-radius: 12px; background: #f7faf5; }
+.product-callout-note h2 { border-bottom-color: #e7eee3; }
+.product-storage-section { padding: 18px 20px; border: 1px solid #e2ecdc; border-radius: 12px; background: #f7faf5; }
+.product-storage-section h2 { border-bottom-color: #e7eee3; }
+.related-products { padding-top: 10px; border-top: 1px solid #edf1ea; }
+.related-products ul { padding-left: 22px; }
+.related-products li { margin: 8px 0; }
+.price-prefix { font-size: .56em; font-weight: 650; vertical-align: .18em; }
+@media (max-width: 767px) {
+  .product-content-shell { max-width: 100%; margin-top: 28px; }
+  .product-content-nav { gap: 7px; margin-bottom: 22px; }
+  .product-content-nav a { padding: 8px 11px; font-size: 14px; }
+  .product-content-section { margin-bottom: 28px; scroll-margin-top: 116px; }
+  .product-content-section h2 { margin-bottom: 13px; font-size: 23px; }
+  .product-content-section h3 { margin-top: 21px; font-size: 18px; }
+  .product-content-section p, .product-content-section li { font-size: 16px; line-height: 1.7; }
+  .product-spec-table { font-size: 15px; }
+  .product-spec-table th, .product-spec-table td { padding: 10px 11px; }
+  .product-spec-table th { width: 36%; }
+  .product-callout-warning, .product-storage-section { padding: 15px 14px; }
 }
 `;
   fs.writeFileSync(path.join(paths.cssDir, 'static-seo.css'), css);
@@ -887,6 +1126,8 @@ const renderStaticBuyScript = (product) => {
   const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
+  const currentPriceEl = document.querySelector('.price-current');
+  const pricePrefixEl = document.querySelector('.price-prefix');
   const thumbButtons = [...document.querySelectorAll('[data-thumb-src]')];
   const money = (value) => Number(value || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   const responsiveAttrs = (src) => {
@@ -904,7 +1145,9 @@ const renderStaticBuyScript = (product) => {
   const getActiveValue = (container) => container?.querySelector('.variant-pill.is-active')?.dataset.optionValue || '';
   const setActiveValue = (container, value) => {
     [...(container?.querySelectorAll('.variant-pill') || [])].forEach((button) => {
-      button.classList.toggle('is-active', button.dataset.optionValue === value);
+      const active = button.dataset.optionValue === value;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-pressed', String(active));
     });
   };
   const getSelectedOptions = () => Object.fromEntries(optionPillGroups.map((item) => [item.dataset.optionName, getActiveValue(item)]).filter(([, value]) => value));
@@ -1027,15 +1270,25 @@ const renderStaticBuyScript = (product) => {
   };
   const updatePrice = () => {
     const variant = getVariant();
-    const price = variant ? variant.price : product.price;
-    const original = variant ? variant.originalPrice : product.originalPrice;
-    if (priceEl) priceEl.firstChild.textContent = money(price);
+    const selectionComplete = isSelectionComplete();
+    const price = variant ? variant.price : (defaultVariant?.price ?? product.price);
+    const original = variant ? variant.originalPrice : (defaultVariant?.originalPrice ?? product.originalPrice);
+    if (currentPriceEl) currentPriceEl.textContent = money(price);
+    if (pricePrefixEl) pricePrefixEl.textContent = selectionComplete ? '' : 'Giá từ ';
     if (originalEl) {
       originalEl.textContent = original ? money(original) : '';
       originalEl.hidden = !original;
     }
     if (variant) updateMainImage(variant);
-    if (purchasePanel) purchasePanel.hidden = !isSelectionComplete();
+    if (purchasePanel) purchasePanel.hidden = !selectionComplete;
+    if (statusEl) {
+      const nextGroup = optionGroups.find((group, index) => !getActiveValue(optionPillGroups[index]));
+      statusEl.textContent = selectionComplete
+        ? ''
+        : nextGroup
+          ? 'Chọn ' + nextGroup.name + ' để xem giá và tiếp tục.'
+          : 'Vui lòng chọn phân loại để xem giá và tiếp tục.';
+    }
   };
   form.querySelectorAll('[data-qty-step]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -1096,12 +1349,45 @@ const renderStaticBuyScript = (product) => {
 </script>`;
 };
 
-const renderProductPage = ({ product, categoryName }) => {
+const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
   const image = firstImage(product);
   const galleryImages = getProductGalleryImages(product);
   const productUrl = `${siteUrl}/san-pham/${product.slug}/`;
-  const description = truncate(product.shortDesc || product.description || product.name);
+  const metaSource = product.seoDescription || product.shortDesc || product.description || product.name;
+  const description = truncate(stripHtml(metaSource).replace(/\s+/g, ' '));
   const priceInfo = getStaticPriceInfo(product);
+  const cleanTitle = String(product.name || '').replace(/\s*(?:[|–—-]\s*Phương Lâm|\s+(?:I\s+)?Phương Lâm)\s*$/i, '').trim();
+  const pageTitle = product.seoTitle || `${truncate(cleanTitle || product.name, 55)} | Phương Lâm`;
+  const summary = stripHtml(product.shortDesc || '').replace(/\s+/g, ' ');
+  const related = relatedProducts.filter((item) => item.id !== product.id).slice(0, 3);
+  const contentBlocks = [
+    ...splitProductContent(product.description || product.shortDesc || product.name, 'description', product.name),
+    ...splitProductContent(product.usage, 'usage', product.name),
+  ];
+  const contentGroups = {
+    description: contentBlocks.filter((block) => block.type === 'description'),
+    specs: contentBlocks.filter((block) => block.type === 'specs'),
+    usage: contentBlocks.filter((block) => block.type === 'usage'),
+    caution: contentBlocks.filter((block) => block.type === 'caution'),
+    notes: contentBlocks.filter((block) => block.type === 'notes'),
+    storage: contentBlocks.filter((block) => block.type === 'storage'),
+  };
+  const productContent = [
+    renderProductContentSection({ id: 'product-description', title: 'Thông tin sản phẩm', blocks: contentGroups.description, productName: product.name, className: 'product-info-section' }),
+    renderProductContentSection({ id: 'product-specifications', title: 'Thông tin chi tiết', blocks: contentGroups.specs, productName: product.name, className: 'product-specs-section' }),
+    renderProductContentSection({ id: 'product-usage', title: 'Cách dùng', blocks: contentGroups.usage, productName: product.name, className: 'product-usage-section' }),
+    renderProductContentSection({ id: 'product-cautions', title: 'Lưu ý an toàn', blocks: contentGroups.caution, productName: product.name, className: 'product-caution-section' }),
+    renderProductContentSection({ id: 'product-notes', title: 'Lưu ý và bảo quản', blocks: contentGroups.notes, productName: product.name, className: 'product-notes-section' }),
+    renderProductContentSection({ id: 'product-storage', title: 'Bảo quản', blocks: contentGroups.storage, productName: product.name, className: 'product-storage-section' }),
+  ].filter(Boolean);
+  const contentNavItems = [
+    ['product-description', 'Giới thiệu', contentGroups.description.length > 0],
+    ['product-specifications', 'Thông tin chi tiết', contentGroups.specs.length > 0],
+    ['product-usage', 'Cách dùng', contentGroups.usage.length > 0],
+    ['product-cautions', 'Lưu ý an toàn', contentGroups.caution.length > 0],
+    ['product-notes', 'Lưu ý & bảo quản', contentGroups.notes.length > 0],
+    ['product-storage', 'Bảo quản', contentGroups.storage.length > 0],
+  ].filter(([, , visible]) => visible);
   const thumbs = galleryImages.length > 1 ? `<div class="product-thumbs-wrap">
             <button class="thumb-arrow prev" type="button" data-thumb-scroll="-1" aria-label="Xem ảnh trước">‹</button>
             <div class="product-thumbs" data-thumbs-track aria-label="Ảnh sản phẩm">
@@ -1125,27 +1411,31 @@ const renderProductPage = ({ product, categoryName }) => {
       <div>
         <p class="product-kicker">${escapeHtml(categoryName)}</p>
         <h1>${escapeHtml(product.name)}</h1>
-        <div class="price" data-buy-price>${formatVnd(priceInfo.price)}${priceInfo.originalPrice ? `<span class="original-price" data-buy-original>${formatVnd(priceInfo.originalPrice)}</span>` : '<span class="original-price" data-buy-original hidden></span>'}</div>
-        ${product.shortDesc ? `<div class="meta-list summary-box">${escapeHtml(product.shortDesc)}</div>` : ''}
+        <div class="price" data-buy-price>${priceInfo.hasVariants ? '<span class="price-prefix">Giá từ </span>' : ''}<span class="price-current">${formatVnd(priceInfo.price)}</span>${priceInfo.originalPrice ? `<span class="original-price" data-buy-original>${formatVnd(priceInfo.originalPrice)}</span>` : '<span class="original-price" data-buy-original hidden></span>'}</div>
+        ${summary ? `<p class="meta-list summary-box">${escapeHtml(summary)}</p>` : ''}
         ${renderStaticBuyBox(product)}
       </div>
     </article>
-    <section class="content">
-      <h2>Mô tả sản phẩm</h2>
-      ${renderStaticParagraphs(product.description || product.shortDesc || product.name)}
-      ${product.usage ? `<h2>Cách dùng và lưu ý</h2>${renderStaticParagraphs(product.usage)}` : ''}
-    </section>
+    <div class="product-content-shell">
+      <nav class="product-content-nav" aria-label="Nội dung sản phẩm">
+        ${contentNavItems.map(([id, label]) => `<a href="#${id}">${label}</a>`).join('\n        ')}
+      </nav>
+      <div class="product-reading-column">
+        ${productContent.join('\n        ')}
+        ${related.length ? `<section class="content related-products" aria-labelledby="related-products-title"><h2 id="related-products-title">Sản phẩm cùng danh mục</h2><ul>${related.map((item) => `<li><a href="/san-pham/${escapeHtml(item.slug)}/">${escapeHtml(item.name)}</a></li>`).join('')}</ul></section>` : ''}
+      </div>
+    </div>
   </main>`;
 
   return pageShell({
-    title: `${product.name} | Phương Lâm`,
+    title: pageTitle,
     description,
     canonical: productUrl,
     image,
     schema: productSchema({ product, categoryName, url: productUrl, image }),
     body,
     scripts: renderStaticBuyScript(product),
-  });
+  }).replace(/^[ \t]+$/gm, '');
 };
 
 // Keep existing category URLs; tailor content to the products and search intent.
@@ -1199,7 +1489,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products, categories }) 
       ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 50vw, 210px')} alt="${escapeHtml(product.name)}"${imagePriority} />` : ''}
       <div class="card-body">
         <p class="card-title">${escapeHtml(product.name)}</p>
-        <div class="card-price">${formatVnd(priceInfo.price)}</div>
+        <div class="card-price">${priceInfo.hasVariants ? 'Từ ' : ''}${formatVnd(priceInfo.price)}</div>
       </div>
     </a>`;
   }).join('\n');
@@ -1288,6 +1578,7 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
       renderProductPage({
         product,
         categoryName: categoryNameById.get(product.categoryId) || product.categoryId,
+        relatedProducts: products.filter((item) => !item.hidden && item.categoryId === product.categoryId),
       })
     );
   }
@@ -1617,4 +1908,32 @@ const main = () => {
   console.log(`Optimized index, extracted assets, and generated ${products.length} product pages.`);
 };
 
-main();
+const buildProductPagesOnly = () => {
+  const products = JSON.parse(fs.readFileSync(paths.products, 'utf8'));
+  writeStaticCss();
+  replaceSiteDataProducts(products);
+  bakeProductsIntoApp(products);
+  compileAppJs();
+  const siteDataPath = path.join(paths.jsDir, 'site-data.js');
+  const categories = fs.existsSync(siteDataPath)
+    ? extractInitialData(fs.readFileSync(siteDataPath, 'utf8')).categories
+    : [];
+  const categoryNameById = new Map(categories.map((category) => [category.id, category.name]));
+  for (const [id, name] of Object.entries(categoryFallback)) {
+    if (!categoryNameById.has(id)) categoryNameById.set(id, name);
+  }
+  const visibleProducts = products.filter((product) => product.hidden !== true && product.hidden !== 'true');
+  for (const product of visibleProducts) {
+    const dir = path.join(paths.productPagesDir, product.slug);
+    ensureDir(dir);
+    fs.writeFileSync(path.join(dir, 'index.html'), renderProductPage({
+      product,
+      categoryName: categoryNameById.get(product.categoryId) || product.categoryId,
+      relatedProducts: visibleProducts.filter((item) => item.categoryId === product.categoryId),
+    }));
+  }
+  console.log(`Generated ${visibleProducts.length} visible product detail pages.`);
+};
+
+if (process.argv.includes('--product-pages-only')) buildProductPagesOnly();
+else main();

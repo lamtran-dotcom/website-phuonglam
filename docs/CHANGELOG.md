@@ -78,3 +78,9 @@
 ### Notes
 - Source code was not refactored as part of this initialization.
 - `.codegraph/` is local generated state and is ignored by git.
+
+## 2026-09-28 — Product detail release
+- Publish the local SEO/content and readability upgrade for all 25 visible products using a clean checkout of current origin/main.
+- Add content navigation, constrained reading width, semantic lists/tables, caution and storage panels, related links and refined metadata.
+- Fix undefined cheapestVariant browser reference; verify variant selection and add-to-cart. Preserve existing buy-now routing.
+- Product-only build, all-page markup/script checks and browser interaction checks passed.

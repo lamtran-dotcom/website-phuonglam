@@ -44,15 +44,15 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Date: 2026-08-26
-Done: Added lightweight popup motion: staged content reveal, slow product-image drift, soft candle glow, subtle smoke, highlight sheen, and a saving-value pulse. Reduced-motion preferences disable the decorative animations.
-Files changed: `assets/js/app.jsx`, `assets/css/site.css`, `assets/js/app.min.js`, generated static pages, and this memory file.
-Verification: `node tools/build_static_site.js` completed successfully and `git diff --check` passed. The production bundle includes the popup effect classes; the stylesheet includes the animation keyframes and reduced-motion fallback. Checkout shipping calculation remains unchanged.
+Date: 2026-09-28
+Prepared product-page release from origin/main, preserving the latest homepage schema fix. Updated content for 25 visible products, semantic description sections, navigation, readable column, specification tables where applicable, separate caution/storage callouts, metadata and related links. Fixed variant-price fallback in generated browser script. Product-only build leaves hidden pages, categories, homepage and admin unchanged.
+Files: data/products.json, tools/build_static_site.js, assets/css/static-seo.css, assets/js/site-data.js, 25 visible product pages.
+Verification: product-only build, syntax/JSON-LD/anchor/H1 checks across all 25 pages, diff whitespace check, browser variant selection (70,000 VND for white/50 tealights), add-to-cart and mobile styles passed. No checkout order submitted.
+Release: user explicitly authorized publishing to phuonglam.com; push to main and verify GitHub Pages and public content.
 
 ## Open Issues
-- Keep `CONTEXT.md` concise as future work accumulates.
-- Review old generated product/category/blog HTML only when a task directly requires it.
-- Instatic is early 0.0.x software, so treat it as inspiration or a sandbox experiment rather than production migration target.
+- Legacy product claims and specifications still need seller verification; do not invent facts.
+- Unrelated local admin/homepage changes remain in the original workspace and are not included in this release.
 
 ## Next Suggested Task
-- Let the queued article publish at its selected time, then confirm the history row and public URL after GitHub Pages deploys it.
+- Verify production deployment and record the release result in the original workspace memory.
