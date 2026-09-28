@@ -55,6 +55,8 @@ Candle-cup delivery update — 2026-09-28: removed the HCMC-only checkout gate a
 
 Product-page purchase buttons — 2026-09-28: added a subtle raised hover/shadow effect, pressed state, keyboard focus ring, and reduced-motion fallback to the shared static product-page CSS. Updated the stylesheet cache key on all 41 product detail pages.
 
+Checkout display — 2026-09-28: removed the customer-visible free-shipping threshold and amount above that threshold from the shipping breakdown. The internal weight limits and shipping fee calculations remain unchanged.
+
 ## Open Issues
 - Admin image upload/draft restoration and divergent-remote flows need additional manual verification. See `docs/ADMIN-PRODUCT-REVIEW.md` in the local workspace.
 - Verify current HCMC delivery coverage with the shop/provider.

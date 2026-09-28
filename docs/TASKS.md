@@ -1,6 +1,7 @@
 # Tasks
 
 ## Now
+- [x] Hide the free-shipping threshold and overweight calculation from customer-facing checkout; retain shipping logic (2026-09-28).
 - [x] Remove the HCMC-only order restriction for candle cups, keep express local to inner HCMC, and update both product descriptions for nationwide delivery (2026-09-28).
 - [x] Shorten shipping popup copy and deploy: “Freeship toàn quốc” plus HCMC express delivery in 1–4 hours (2026-09-28).
 - [x] Add hover elevation/shadow to product detail purchase buttons and update the shared CSS on all 41 product pages (2026-09-28).

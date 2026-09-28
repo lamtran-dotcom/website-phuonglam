@@ -2727,10 +2727,6 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
             </div>
             <div style={coStyles.shippingBreakdown}>
               <div style={coStyles.shippingBreakRow}><span>Cân nặng</span><span>{formatWeight(shippingInfo.weight)}</span></div>
-              <div style={coStyles.shippingBreakRow}><span>Ngưỡng miễn phí</span><span>{formatWeight(shippingInfo.freeWeightLimit || 3000)}</span></div>
-              {shippingInfo.overweight > 0 && (
-                <div style={coStyles.shippingBreakRow}><span>Cân vượt ngưỡng</span><span>{formatWeight(shippingInfo.overweight)}</span></div>
-              )}
               <div style={coStyles.shippingBreakRow}><span>Phí cơ bản</span><span>{shippingInfo.baseShippingFee === 0 ? 'Miễn phí' : `${shippingInfo.baseShippingFee.toLocaleString('vi-VN')}đ`}</span></div>
               {shippingInfo.urgentShippingFee > 0 && (
                 <div style={coStyles.shippingBreakRow}><span>Phụ phí hỏa tốc</span><span>{shippingInfo.urgentShippingFee.toLocaleString('vi-VN')}đ</span></div>

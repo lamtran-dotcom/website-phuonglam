@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-28 — Checkout shipping detail
+- Hid the free-shipping threshold and calculated overweight amount from customer-facing order details.
+- Kept the existing weight thresholds and shipping fee calculation unchanged.
+
 ## 2026-09-28 — Product purchase button hover
 - Added a subtle lift and shadow to the Add to Cart and Buy Now buttons across all product detail pages.
 - Added pressed and keyboard-focus states, plus a reduced-motion fallback; bumped the shared CSS cache key on all 41 product pages.
