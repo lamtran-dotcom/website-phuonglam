@@ -3,7 +3,8 @@
 ## Now
 - [x] Remove the HCMC-only order restriction for candle cups, keep express local to inner HCMC, and update both product descriptions for nationwide delivery (2026-09-28).
 - [x] Shorten shipping popup copy and deploy: “Freeship toàn quốc” plus HCMC express delivery in 1–4 hours (2026-09-28).
-- [ ] Keep `CONTEXT.md` updated after the next task.
+- [x] Add hover elevation/shadow to product detail purchase buttons and update the shared CSS on all 41 product pages (2026-09-28).
+- [x] Keep `CONTEXT.md` updated after the next task.
 
 ## Next
 - [x] Publish checkout and shipping-promotion updates (`63fb9a0`, 2026-09-28): GitHub Pages succeeded; all 41 product-page URLs and 3 shared assets match. Live browser verified promotion, Buy Now/variant retention, manual address and candle-cup coverage warning. No order submitted.

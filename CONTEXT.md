@@ -53,6 +53,8 @@ Popup copy update — 2026-09-28: shortened the shipping panel to “Freeship to
 
 Candle-cup delivery update — 2026-09-28: removed the HCMC-only checkout gate and the special district requirement for nến ly. Standard delivery can proceed to any entered province/address; express remains limited to inner TP.HCM. Both candle-cup detail pages now state nationwide delivery. Local checkout reached order review for a test Hanoi address without a district; no order was sent.
 
+Product-page purchase buttons — 2026-09-28: added a subtle raised hover/shadow effect, pressed state, keyboard focus ring, and reduced-motion fallback to the shared static product-page CSS. Updated the stylesheet cache key on all 41 product detail pages.
+
 ## Open Issues
 - Admin image upload/draft restoration and divergent-remote flows need additional manual verification. See `docs/ADMIN-PRODUCT-REVIEW.md` in the local workspace.
 - Verify current HCMC delivery coverage with the shop/provider.
