@@ -1,6 +1,7 @@
 # Tasks
 
 ## Now
+- [x] Remove the HCMC-only order restriction for candle cups, keep express local to inner HCMC, and update both product descriptions for nationwide delivery (2026-09-28).
 - [x] Shorten shipping popup copy and deploy: “Freeship toàn quốc” plus HCMC express delivery in 1–4 hours (2026-09-28).
 - [ ] Keep `CONTEXT.md` updated after the next task.
 

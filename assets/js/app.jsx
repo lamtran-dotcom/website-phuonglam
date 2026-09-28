@@ -2203,13 +2203,6 @@ const OLD_ADDRESS_OPTIONS = {
   },
 };
 
-const HCMC_URBAN_DISTRICTS = new Set([
-  'Quận 1', 'Quận 3', 'Quận 4', 'Quận 5', 'Quận 6', 'Quận 7', 'Quận 8',
-  'Quận 10', 'Quận 11', 'Quận 12', 'Quận Bình Tân', 'Quận Bình Thạnh',
-  'Quận Gò Vấp', 'Quận Phú Nhuận', 'Quận Tân Bình', 'Quận Tân Phú',
-  'Thành phố Thủ Đức',
-]);
-
 const normalizeAddressText = (value) => (value || '')
   .toLowerCase()
   .normalize('NFD')
@@ -2432,16 +2425,11 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const hasCandleCup = cart.some(item => item.categoryId === 'nen-ly');
   const isHcmAddress = isHoChiMinhCity(form.city);
-  const hasSelectedCity = Boolean(form.city.trim());
-  const hasSelectedDistrict = Boolean(form.district.trim());
-  const isOutsideHcmForCandle = hasCandleCup && hasSelectedCity && !isHcmAddress;
-  const isOutsideUrbanHcmForCandle = hasCandleCup && isHcmAddress && (!hasSelectedDistrict || !HCMC_URBAN_DISTRICTS.has(form.district));
-  const isCandleDeliveryBlocked = isOutsideHcmForCandle || isOutsideUrbanHcmForCandle;
   const canUseExpress = isHcmAddress;
   const selectedDeliveryMethod = deliveryMethod;
   const deliveryMethodLabel = selectedDeliveryMethod === 'express' ? 'Hỏa tốc' : 'Giao thường';
   const deliveryNote = selectedDeliveryMethod === 'express'
-    ? 'Hỏa tốc: nhận trong 4 tiếng, chỉ áp dụng cho khu vực TP.HCM.'
+    ? 'Hỏa tốc: dự kiến 1–4 giờ, áp dụng cho địa chỉ nội thành TP.HCM.'
     : getStandardDeliveryNote(form.city);
   const shippingInfo = calculateShipping(cart, {
     city: form.city,
@@ -2462,7 +2450,6 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     if (!form.name.trim()) e.name = 'Vui lòng nhập họ tên';
     if (!form.phone.trim() || !/^0\d{9}$/.test(form.phone.trim())) e.phone = 'Số điện thoại không hợp lệ';
     if (!form.city.trim()) e.city = 'Vui lòng chọn tỉnh/thành phố';
-    if (hasCandleCup && !form.district.trim()) e.district = 'Vui lòng nhập quận/huyện để xác nhận khu vực giao nến ly';
     if (!form.ward.trim()) e.ward = 'Vui lòng chọn phường/xã';
     if (!form.address.trim()) e.address = 'Vui lòng nhập địa chỉ';
     setErrors(e);
@@ -2470,7 +2457,6 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   };
 
   const handleSubmit = () => {
-    if (isCandleDeliveryBlocked) return;
     setOrderError('');
     if (validate()) setStep(2);
   };
@@ -2657,7 +2643,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
             <CheckoutField id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901234567" type="tel" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={cityOptions} placeholder="Gõ tỉnh/thành phố để chọn" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
-            <CheckoutSuggestField id="district" label={hasCandleCup ? 'Quận/Huyện *' : 'Quận/Huyện (nếu có)'} options={districtOptions} placeholder={form.city ? 'Gõ quận/huyện nếu địa chỉ có cấp này' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
+            <CheckoutSuggestField id="district" label="Quận/Huyện (nếu có)" options={districtOptions} placeholder={form.city ? 'Gõ quận/huyện nếu địa chỉ có cấp này' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
             <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Gõ phường/xã theo địa chỉ hiện tại' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutField id="address" label="Địa chỉ *" placeholder="Số nhà, tên đường..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <div style={coStyles.field}>
@@ -2688,14 +2674,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
               <div style={coStyles.shippingNote}>{deliveryNote}</div>
             </div>
             <CheckoutField id="note" label="Ghi chú (tùy chọn)" placeholder="Ghi chú thêm cho người giao hàng..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            {isCandleDeliveryBlocked && (
-              <div style={coStyles.deliveryBlock}>
-                Nến ly hiện chỉ giao trong các quận nội thành TP.HCM đã xác nhận. Hãy nhập quận/khu vực theo danh sách gợi ý; nếu địa chỉ mới chưa có trong danh sách, vui lòng liên hệ shop để xác nhận trước khi đặt.
-              </div>
-            )}
-            {!isCandleDeliveryBlocked && (
-              <button style={coStyles.primaryBtn} onClick={handleSubmit}>Xem lại đơn hàng →</button>
-            )}
+            <button style={coStyles.primaryBtn} onClick={handleSubmit}>Xem lại đơn hàng →</button>
           </div>
         )}
 
@@ -2778,7 +2757,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
           </div>
           {hasCandleCup && (
             <div style={coStyles.candleDeliveryNote}>
-              Lưu ý: Đối với sản phẩm nến ly Chúng tôi hỗ trợ giao hỏa tốc trong nội thành hcm
+              Nến ly giao toàn quốc. Hỏa tốc 1–4 giờ áp dụng tại nội thành TP.HCM.
             </div>
           )}
         </div>
@@ -2824,7 +2803,6 @@ const coStyles = {
   payMethod: { borderTop: '1px solid #f0f0f0', paddingTop: 20 },
   payOption: { display: 'flex', alignItems: 'center', gap: 10, fontSize: 14, color: '#333', cursor: 'pointer' },
   summary: { background: '#fff', border: '1px solid #f0f0f0', borderRadius: 14, padding: '24px', position: 'sticky', top: 80 },
-  deliveryBlock: { background: '#fff4e8', border: '1px solid #f2c799', borderRadius: 10, padding: '12px 14px', color: '#8a4a10', fontSize: 13, lineHeight: 1.6, fontWeight: 600, marginTop: 4 },
   candleDeliveryNote: { marginTop: 12, background: '#f2faf0', border: '1px solid #d8ead4', borderRadius: 12, padding: '12px 14px', color: '#318223', fontSize: 13, lineHeight: 1.6, fontWeight: 700 },
   summaryItem: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 },
   summaryItemLeft: {},

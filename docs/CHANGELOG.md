@@ -97,3 +97,8 @@
 ## 2026-09-28 — Shipping popup copy
 - Replaced the conditional weight/fee paragraph in the promotion popup with “Freeship toàn quốc” and “Giao hỏa tốc từ 1 đến 4h trong nội thành TP.HCM”.
 - Rebuilt the React bundle and versioned the homepage script URL so browsers load the new copy. Previewed the popup locally.
+
+## 2026-09-28 — Candle-cup delivery coverage
+- Removed the HCMC-only checkout block and made district optional for nến ly. Standard delivery now accepts nationwide addresses; express remains limited to inner TP.HCM.
+- Updated both candle-cup source descriptions and static product pages to say they ship nationwide.
+- Local checkout for a Hanoi address advanced to order review without a district; no order was submitted.

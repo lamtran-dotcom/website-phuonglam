@@ -51,6 +51,8 @@ Local checkout QA: selected variant/price retained into checkout; manual address
 
 Popup copy update — 2026-09-28: shortened the shipping panel to “Freeship toàn quốc” and “Giao hỏa tốc từ 1 đến 4h trong nội thành TP.HCM”. React source/bundle and homepage script cache version updated; local desktop preview confirms the shorter copy fits cleanly.
 
+Candle-cup delivery update — 2026-09-28: removed the HCMC-only checkout gate and the special district requirement for nến ly. Standard delivery can proceed to any entered province/address; express remains limited to inner TP.HCM. Both candle-cup detail pages now state nationwide delivery. Local checkout reached order review for a test Hanoi address without a district; no order was sent.
+
 ## Open Issues
 - Admin image upload/draft restoration and divergent-remote flows need additional manual verification. See `docs/ADMIN-PRODUCT-REVIEW.md` in the local workspace.
 - Verify current HCMC delivery coverage with the shop/provider.
