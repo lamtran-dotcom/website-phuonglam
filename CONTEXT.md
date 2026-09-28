@@ -46,7 +46,7 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 ## Latest Completed Task
 Date: 2026-09-28
 Published product SEO/content and reading upgrades for all 25 visible products in commit `2331db0a52d832ee59ea5d9b73eff8807199f9be`; verified the Pages build and all 27 public product/CSS/storefront responses.
-Current release adds Buy Now to checkout on static product pages, clearer address entry, the configured candle-cup delivery check, checkout receipt/autofill/mobile layout, and shipping-promotion terms/styles. The admin editor is being improved in the original local checkout only; do not publish its local server/API because admin remains local-only.
+Current release adds Buy Now to checkout on static product pages, clearer address entry, the configured candle-cup delivery check, checkout receipt/autofill/mobile layout, and shipping-promotion terms/styles. Commit `63fb9a05` is live: GitHub Pages succeeded; all 41 existing product-page URLs and the CSS, site-data.js and React bundle match release files byte-for-byte. Live browser confirmed promotion copy/modal, Buy Now preserves selected variant/price and opens checkout, address entry updates shipping, and candle cups show an outside-HCMC warning. Test cart was emptied; no order submitted. Local admin editor tabs/search/filters/SEO preview/sticky save controls are synced to `admin-upload.html`; admin remains local-only.
 Local checkout QA: selected variant/price retained into checkout; manual address entry and out-of-area candle-cup notice displayed; promotion states 3kg standard shipping outside HCMC and 5kg in HCMC. No order was submitted. Verify HCMC coverage with the shop/provider before expanding it.
 
 ## Open Issues

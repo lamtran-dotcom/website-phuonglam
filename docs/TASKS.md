@@ -4,7 +4,7 @@
 - [ ] Keep `CONTEXT.md` updated after the next task.
 
 ## Next
-- [x] Publish checkout and shipping-promotion updates: static Buy Now opens checkout; current address input and configured candle-cup region check; checkout receipt/autofill/mobile steps; explicit weight thresholds. Local flow verified, no order submitted (2026-09-28).
+- [x] Publish checkout and shipping-promotion updates (`63fb9a0`, 2026-09-28): GitHub Pages succeeded; all 41 product-page URLs and 3 shared assets match. Live browser verified promotion, Buy Now/variant retention, manual address and candle-cup coverage warning. No order submitted.
 - [ ] Confirm HCMC candle-cup coverage with the fulfillment provider before changing supported areas.
 - [ ] Smoke test the documented local admin workflow.
 - [x] Add a GitHub Actions-backed scheduled publish flow for SEO articles.
