@@ -84,3 +84,12 @@
 - Add content navigation, constrained reading width, semantic lists/tables, caution and storage panels, related links and refined metadata.
 - Fix undefined cheapestVariant browser reference; verify variant selection and add-to-cart. Preserve existing buy-now routing.
 - Product-only build, all-page markup/script checks and browser interaction checks passed.
+
+
+## 2026-09-28 — Checkout and storefront update
+- Send “Mua ngay” on static product pages to checkout while retaining the selected variant and quantity.
+- Let customers enter current province/district/ward names, keep district optional for unrestricted products, and retain the configured inner-HCMC delivery gate for candle cups.
+- Add a checkout order summary/receipt when the existing order endpoint responds successfully, checkout autofill hints, and a compact mobile step indicator. Keep the shipping promotion out of checkout.
+- Clarify standard-shipping weight thresholds and express/overweight fees in the promotion; refine CTA motion with reduced-motion support.
+- Release built React bundle and all affected static product pages. Admin editor improvements remain local because admin is intentionally local-only.
+- Local checks: product variant → checkout (70,000đ selected variant), manual address entry and out-of-area candle-cup notice; promotion terms display 3kg outside HCMC and 5kg in HCMC. No order was submitted.

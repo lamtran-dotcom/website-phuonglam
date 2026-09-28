@@ -1343,7 +1343,7 @@ const renderStaticBuyScript = (product) => {
     addSelectedToCart();
   });
   buyNowButton?.addEventListener('click', () => {
-    if (addSelectedToCart()) window.location.href = '/?cart=open';
+    if (addSelectedToCart()) window.location.href = '/?checkout=open';
   });
 })();
 </script>`;
@@ -1695,7 +1695,12 @@ const writeHomeContent = ({ products, categories, blogPosts, settings }) => {
 };
 
 const updateIndexHead = (html) => {
-  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(homeTitle)}</title>`)
+  const cacheVersion = `?v=${assetVersion}`;
+  html = html
+    .replace(/(href="\/assets\/css\/site\.css)(?:\?v=[^"]*)?"/, `$1${cacheVersion}"`)
+    .replace(/(src="\/assets\/js\/site-data\.js)(?:\?v=[^"]*)?"/, `$1${cacheVersion}"`)
+    .replace(/(src="\/assets\/js\/app\.min\.js)(?:\?v=[^"]*)?"/, `$1${cacheVersion}"`)
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(homeTitle)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapeHtml(homeDescription)}" />`)
     .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapeHtml(homeTitle)}" />`)
     .replace(/<meta property="og:description" content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${escapeHtml(homeDescription)}" />`);

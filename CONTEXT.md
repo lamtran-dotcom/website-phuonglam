@@ -45,14 +45,17 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Latest Completed Task
 Date: 2026-09-28
-Prepared product-page release from origin/main, preserving the latest homepage schema fix. Updated content for 25 visible products, semantic description sections, navigation, readable column, specification tables where applicable, separate caution/storage callouts, metadata and related links. Fixed variant-price fallback in generated browser script. Product-only build leaves hidden pages, categories, homepage and admin unchanged.
-Files: data/products.json, tools/build_static_site.js, assets/css/static-seo.css, assets/js/site-data.js, 25 visible product pages.
-Verification: product-only build, syntax/JSON-LD/anchor/H1 checks across all 25 pages, diff whitespace check, browser variant selection (70,000 VND for white/50 tealights), add-to-cart and mobile styles passed. No checkout order submitted.
-Release: user explicitly authorized publishing to phuonglam.com; push to main and verify GitHub Pages and public content.
+Published product SEO/content and reading upgrades for all 25 visible products in commit `2331db0a52d832ee59ea5d9b73eff8807199f9be`; verified the Pages build and all 27 public product/CSS/storefront responses.
+Current release adds Buy Now to checkout on static product pages, clearer address entry, the configured candle-cup delivery check, checkout receipt/autofill/mobile layout, and shipping-promotion terms/styles. The admin editor is being improved in the original local checkout only; do not publish its local server/API because admin remains local-only.
+Local checkout QA: selected variant/price retained into checkout; manual address entry and out-of-area candle-cup notice displayed; promotion states 3kg standard shipping outside HCMC and 5kg in HCMC. No order was submitted. Verify HCMC coverage with the shop/provider before expanding it.
 
 ## Open Issues
-- Legacy product claims and specifications still need seller verification; do not invent facts.
-- Unrelated local admin/homepage changes remain in the original workspace and are not included in this release.
+- Admin image upload/draft restoration and divergent-remote flows need additional manual verification. See `docs/ADMIN-PRODUCT-REVIEW.md` in the local workspace.
+- Verify current HCMC delivery coverage with the shop/provider.
+- Legacy product claims/specifications need seller confirmation.
+- Search Console summary remains on its Sep 21 snapshot; check after Google refreshes.
+- Instatic is early 0.0.x software; keep it as inspiration rather than a production migration target.
 
 ## Next Suggested Task
-- Verify production deployment and record the release result in the original workspace memory.
+- Confirm HCMC delivery rules with the fulfillment provider and finish local admin upload/draft browser checks.
+- Recheck Search Console and compare full 28-day performance windows after reports refresh.

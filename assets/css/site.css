@@ -74,6 +74,19 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.035); }
     }
+    @keyframes shippingPromoCtaAttention {
+      0%, 68%, 100% { transform: translateY(0); filter: brightness(1); }
+      74% { transform: translateY(-2px); filter: brightness(1.06); }
+      80% { transform: translateY(0); filter: brightness(1); }
+    }
+    @keyframes shippingPromoCtaShine {
+      0%, 62% { transform: translateX(-170%) skewX(-18deg); }
+      78%, 100% { transform: translateX(340%) skewX(-18deg); }
+    }
+    @keyframes shippingPromoCtaArrow {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
     .shipping-promo-overlay { animation: shippingPromoOverlay .24s ease both; }
     .shipping-promo-modal { animation: shippingPromoModal .34s cubic-bezier(.2,.8,.2,1) both; }
     .shipping-promo-image {
@@ -139,6 +152,34 @@
       animation: shippingPromoSavingPulse 2.6s ease-in-out 1s infinite;
       transform-origin: left center;
     }
+    .shipping-promo-cta {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      animation: shippingPromoCtaAttention 3.8s ease-in-out 1.1s infinite;
+      will-change: transform, filter;
+    }
+    .shipping-promo-cta::after {
+      content: '';
+      position: absolute;
+      inset: -30% auto -30% -34%;
+      z-index: 0;
+      width: 24%;
+      background: linear-gradient(105deg, transparent, rgba(255,255,255,.34), transparent);
+      transform: skewX(-18deg);
+      pointer-events: none;
+      animation: shippingPromoCtaShine 4.6s ease-in-out 1.8s infinite;
+    }
+    .shipping-promo-cta-label,
+    .shipping-promo-cta-arrow { position: relative; z-index: 1; }
+    .shipping-promo-cta-arrow {
+      display: inline-block;
+      animation: shippingPromoCtaArrow 1.8s ease-in-out 1.4s infinite;
+    }
+    .shipping-promo-cta:focus-visible {
+      outline: 3px solid rgba(49, 130, 35, .42);
+      outline-offset: 3px;
+    }
     .shipping-promo-close { animation: shippingPromoReveal .35s ease .16s both; }
     @keyframes shippingFeePulse {
       0%, 100% { transform: scale(1); box-shadow: 0 5px 0 rgba(161, 66, 24, .2); }
@@ -158,6 +199,8 @@
       .shipping-promo-note,
       .shipping-promo-close,
       .shipping-promo-saving,
+      .shipping-promo-cta-arrow,
+      .shipping-promo-cta::after,
       [style*="shippingFeePulse"] { animation: none !important; }
       .shipping-promo-smoke { display: none; }
     }

@@ -4,6 +4,8 @@
 - [ ] Keep `CONTEXT.md` updated after the next task.
 
 ## Next
+- [x] Publish checkout and shipping-promotion updates: static Buy Now opens checkout; current address input and configured candle-cup region check; checkout receipt/autofill/mobile steps; explicit weight thresholds. Local flow verified, no order submitted (2026-09-28).
+- [ ] Confirm HCMC candle-cup coverage with the fulfillment provider before changing supported areas.
 - [ ] Smoke test the documented local admin workflow.
 - [x] Add a GitHub Actions-backed scheduled publish flow for SEO articles.
 - [x] Expose scheduled queue, completed history, and last GitHub job to Content AI Studio.

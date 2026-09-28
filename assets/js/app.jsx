@@ -51,6 +51,7 @@ const ShippingPromotion = ({ setPage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [ctaHovered, setCtaHovered] = React.useState(false);
   const isMobile = useIsMobile();
+  const freeShipTerms = `Giao thường miễn phí cho đơn đến ${formatWeight(SHIPPING_RULES.freeWeightLimit.outside_hcm)} (đến ${formatWeight(SHIPPING_RULES.freeWeightLimit.in_hcm)} tại TP.HCM); đơn quá cân có phụ phí, hỏa tốc tính riêng.`;
 
   React.useEffect(() => {
     const image = new Image();
@@ -93,7 +94,7 @@ const ShippingPromotion = ({ setPage }) => {
     <>
       <div style={shippingPromoStyles.bar} role="status">
         <span aria-hidden="true" style={shippingPromoStyles.barIcon}>🚚</span>
-        <span><strong>Freeship toàn quốc</strong> <span style={shippingPromoStyles.barDivider}>·</span> Giá website tốt hơn giá sàn</span>
+        <span><strong>Ưu đãi phí giao toàn quốc</strong> <span style={shippingPromoStyles.barDivider}>·</span> Giá website tốt hơn giá sàn</span>
       </div>
       {isOpen && (
         <div className="shipping-promo-overlay" style={shippingPromoStyles.overlay} onMouseDown={close} role="presentation">
@@ -116,10 +117,10 @@ const ShippingPromotion = ({ setPage }) => {
             <span className="shipping-promo-candle-glow" aria-hidden="true"></span>
             <div className="shipping-promo-content" style={{ ...shippingPromoStyles.content, maxWidth: isMobile ? '100%' : '62%', ...(isMobile ? shippingPromoStyles.contentMobile : {}) }}>
               <span className="shipping-promo-eyebrow" style={shippingPromoStyles.eyebrow}>ƯU ĐÃI TOÀN QUỐC</span>
-              <h2 className="shipping-promo-title" id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Freeship toàn quốc,<br />giá web tốt hơn sàn</h2>
+              <h2 className="shipping-promo-title" id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Ưu đãi giao thường,<br />giá web tốt hơn sàn</h2>
               <div className="shipping-promo-highlight" style={shippingPromoStyles.highlight}>
-                <span style={shippingPromoStyles.highlightLabel}>FREESHIP TOÀN QUỐC</span>
-                <strong>Đặt hàng online, nhận ưu đãi</strong>
+                <span style={shippingPromoStyles.highlightLabel}>MIỄN PHÍ THEO ĐIỀU KIỆN</span>
+                <strong>{freeShipTerms}</strong>
               </div>
               <div className="shipping-promo-price-compare" style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
                 <div style={shippingPromoStyles.priceRow}>
@@ -141,7 +142,7 @@ const ShippingPromotion = ({ setPage }) => {
                 onMouseLeave={() => setCtaHovered(false)}
                 onFocus={() => setCtaHovered(true)}
                 onBlur={() => setCtaHovered(false)}
-              >Mua ngay – nhận ưu đãi <span aria-hidden="true">→</span></button>
+              ><span className="shipping-promo-cta-label">Mua ngay – nhận ưu đãi</span> <span className="shipping-promo-cta-arrow" aria-hidden="true">→</span></button>
               <p className="shipping-promo-note" style={{ ...shippingPromoStyles.note, ...(isMobile ? shippingPromoStyles.noteMobile : {}) }}>Mức giá thực tế áp dụng theo từng sản phẩm và phân loại.</p>
             </div>
             <button className="shipping-promo-close" type="button" aria-label="Đóng thông báo ưu đãi giao hàng" style={shippingPromoStyles.close} onClick={close}>×</button>
@@ -750,6 +751,7 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
       <div style={{ ...pcStyles.info, ...(compact ? pcStyles.infoCompact : {}) }}>
         <a href={href} title={product.name} style={{ ...pcStyles.name, ...(compact ? pcStyles.nameCompact : {}) }} onClick={handleProductLinkFallback}>{displayName}</a>
         <div style={{ ...pcStyles.priceRow, ...(compact ? pcStyles.priceRowCompact : {}) }}>
+          {priceInfo.hasVariants && <span style={{ fontSize: 12, fontWeight: 600, color: '#657263' }}>Từ </span>}
           <span style={{ ...pcStyles.price, ...(compact ? pcStyles.priceCompact : {}) }}>{priceInfo.price.toLocaleString('vi-VN')}đ</span>
           {priceInfo.originalPrice && (
             <span style={{ ...pcStyles.origPrice, ...(compact ? pcStyles.origPriceCompact : {}) }}>{priceInfo.originalPrice.toLocaleString('vi-VN')}đ</span>
@@ -1352,58 +1354,63 @@ const cpStyles = {
 
 
 
+const renderInlineMarkdown = (text) => String(text).split(/(\*\*[^*]+\*\*)/g).map((part, index) => (
+  part.startsWith('**') && part.endsWith('**')
+    ? <strong key={index}>{part.slice(2, -2)}</strong>
+    : part
+));
+
 const renderStructuredText = (text) => {
   const lines = String(text || '').split(/\r?\n/);
   const content = [];
   let bullets = [];
-
-  const flushBullets = () => {
-    if (!bullets.length) return;
-    const bulletItems = bullets;
-    bullets = [];
-    content.push(
-      <ul key={`list-${content.length}`} style={ppStyles.structuredList}>
-        {bulletItems.map((item, index) => (
-          <li key={`${item}-${index}`} style={ppStyles.structuredListItem}>{item}</li>
-        ))}
-      </ul>
-    );
+  let numbered = [];
+  let skippedTitle = false;
+  const flushLists = () => {
+    if (bullets.length) {
+      content.push(<ul key={`ul-${content.length}`} style={ppStyles.structuredList}>{bullets.map((item, index) => <li key={index} style={ppStyles.structuredListItem}>{renderInlineMarkdown(item)}</li>)}</ul>);
+      bullets = [];
+    }
+    if (numbered.length) {
+      content.push(<ol key={`ol-${content.length}`} style={ppStyles.structuredList}>{numbered.map((item, index) => <li key={index} style={ppStyles.structuredListItem}>{renderInlineMarkdown(item)}</li>)}</ol>);
+      numbered = [];
+    }
   };
-
   lines.forEach((rawLine, index) => {
     const line = rawLine.trim();
-    if (!line) {
-      flushBullets();
-      content.push(<div key={`space-${index}`} style={ppStyles.structuredSpace} />);
+    if (!line || /^-{3,}$/.test(line)) {
+      flushLists();
+      if (!line) content.push(<div key={`space-${index}`} style={ppStyles.structuredSpace} />);
       return;
     }
-
-    if (/^[✔✅📍]\s*/.test(line)) {
-      flushBullets();
-      content.push(<h3 key={`heading-${index}`} style={ppStyles.structuredHeading}>{line}</h3>);
+    const markdownHeading = line.match(/^#{1,6}\s+(.+)$/);
+    if (markdownHeading || /^[✔✅📍]\s*/.test(line)) {
+      flushLists();
+      if (markdownHeading && markdownHeading[0].startsWith('# ') && !skippedTitle) { skippedTitle = true; return; }
+      const heading = markdownHeading ? markdownHeading[1] : line;
+      content.push(<h3 key={`heading-${index}`} style={ppStyles.structuredHeading}>{renderInlineMarkdown(heading)}</h3>);
       return;
     }
-
-    const bulletMatch = line.match(/^([-•👉]\s*|\d+\.\s+)(.+)$/);
-    if (bulletMatch) {
-      bullets.push(bulletMatch[2].trim());
+    if (line.startsWith('>')) {
+      flushLists();
+      content.push(<blockquote key={`quote-${index}`} style={ppStyles.structuredQuote}>{renderInlineMarkdown(line.replace(/^>\s?/, ''))}</blockquote>);
       return;
     }
-
-    flushBullets();
-    const isHeading = line.length <= 80 && (
+    const bulletMatch = line.match(/^[-*•👉]\s+(.+)$/);
+    const numberMatch = line.match(/^\d+[.)]\s+(.+)$/);
+    if (bulletMatch) { if (numbered.length) flushLists(); bullets.push(bulletMatch[1]); return; }
+    if (numberMatch) { if (bullets.length) flushLists(); numbered.push(numberMatch[1]); return; }
+    flushLists();
+    const isLegacyHeading = line.length <= 80 && (
       line === line.toUpperCase() ||
       /^(Tổng quan|Điểm nổi bật|Ứng dụng|Thông tin|Từ khóa|Hướng dẫn|Bảo quản|Cam kết|Lưu ý|Xuất xứ)/i.test(line)
     );
-
-    content.push(isHeading ? (
-      <h3 key={`heading-${index}`} style={ppStyles.structuredHeading}>{line}</h3>
-    ) : (
-      <p key={`paragraph-${index}`} style={ppStyles.structuredParagraph}>{line}</p>
-    ));
+    const isStepHeading = /^\*\*Bước\s+\d+/i.test(line);
+    content.push(isLegacyHeading || isStepHeading
+      ? <h3 key={`heading-${index}`} style={ppStyles.structuredHeading}>{renderInlineMarkdown(line)}</h3>
+      : <p key={`paragraph-${index}`} style={ppStyles.structuredParagraph}>{renderInlineMarkdown(line)}</p>);
   });
-
-  flushBullets();
+  flushLists();
   return <div style={ppStyles.structuredText}>{content}</div>;
 };
 
@@ -1521,6 +1528,11 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
     setTimeout(() => setAddedMsg(false), 2000);
   };
 
+  const handleBuyNow = (event) => {
+    handleAddToCart(event);
+    setPage({ name: 'checkout' });
+  };
+
   const discount = currentOriginalPrice
     ? Math.round((1 - currentPrice / currentOriginalPrice) * 100)
     : null;
@@ -1605,7 +1617,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: 1440, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px', overflowX: 'hidden', boxSizing: 'border-box' }}>
+    <div style={{ width: '100%', maxWidth: 1440, margin: '0 auto', padding: isMobile ? '16px 16px 104px' : '32px 24px', overflowX: 'hidden', boxSizing: 'border-box' }}>
       {/* Breadcrumb */}
       <div style={ppStyles.breadcrumb}>
         <a href="/" style={ppStyles.breadLink}>Trang chủ</a>
@@ -1713,6 +1725,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
                           className="product-variant-btn"
                           title={value}
                           aria-label={`${group.name}: ${value}`}
+                          aria-pressed={active}
                           disabled={!available}
                           style={{
                             ...(isColor ? ppStyles.colorBtn : ppStyles.variantBtn),
@@ -1774,6 +1787,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
                     <button
                       key={variant.id}
                       className="product-variant-btn"
+                      aria-pressed={Boolean(active)}
                       style={{ ...ppStyles.variantBtn, ...(isMobile ? ppStyles.variantBtnMobile : {}), ...(active ? ppStyles.variantBtnActive : {}) }}
                       onClick={() => setSelectedVariantId(variant.id)}
                     >
@@ -1810,7 +1824,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
             <button className="product-action-btn" style={{ ...ppStyles.addBtn, ...(addedMsg ? ppStyles.addBtnAdded : {}) }} onClick={handleAddToCart}>
               {addedMsg ? '✓ Đã thêm vào giỏ!' : '🛒 Thêm vào giỏ hàng'}
             </button>
-            <button className="product-action-btn" style={ppStyles.buyNowBtn} onClick={(e) => { handleAddToCart(e); setTimeout(() => setPage({ name: 'cart' }), 360); }}>
+            <button className="product-action-btn" style={ppStyles.buyNowBtn} onClick={handleBuyNow}>
               Mua ngay
             </button>
           </div>
@@ -1873,6 +1887,17 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
           </div>
         </div>
       )}
+      {isMobile && (
+        <div style={ppStyles.mobileBuyDock}>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ fontSize: 11, color: '#687564', lineHeight: 1.3 }}>Giá hiện tại</div>
+            <strong style={{ color: '#318223', fontSize: 16, whiteSpace: 'nowrap' }}>{currentPrice.toLocaleString('vi-VN')}đ</strong>
+          </div>
+          <button className="product-action-btn" style={{ ...ppStyles.buyNowBtn, flex: '1 1 auto', padding: '12px 16px', margin: 0 }} onClick={handleBuyNow}>
+            Mua ngay
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -1927,6 +1952,7 @@ const ppStyles = {
   qtyBtn: { width: 40, height: 40, background: '#f7f7f5', border: 'none', fontSize: 18, cursor: 'pointer', color: '#333', fontWeight: 500 },
   qtyNum: { width: 44, textAlign: 'center', fontSize: 15, fontWeight: 700 },
   actions: { display: 'flex', gap: 12, marginBottom: 20 },
+  mobileBuyDock: { position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 99, display: 'flex', alignItems: 'center', gap: 14, padding: '10px 16px calc(10px + env(safe-area-inset-bottom, 0px))', borderTop: '1px solid #e8eee5', background: 'rgba(255,255,255,.97)', boxShadow: '0 -8px 24px rgba(20,45,18,.12)', boxSizing: 'border-box' },
   addBtn: { flex: 1, background: '#fff', color: '#318223', border: '2px solid #318223', padding: '14px 20px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', transition: 'transform .2s, box-shadow .2s, background .2s, color .2s' },
   addBtnAdded: { background: '#eaf4e9', color: '#2a6e1e' },
   buyNowBtn: { flex: 1, background: '#318223', color: '#fff', border: '2px solid #318223', padding: '14px 20px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', transition: 'transform .2s, box-shadow .2s, background .2s' },
@@ -1947,6 +1973,7 @@ const ppStyles = {
   structuredParagraph: { fontSize: 15, color: '#5f5f5f', lineHeight: 1.9, margin: '0 0 14px' },
   structuredList: { margin: '0 0 18px 20px', padding: 0, color: '#555', lineHeight: 1.85 },
   structuredListItem: { marginBottom: 8, paddingLeft: 4 },
+  structuredQuote: { margin: '12px 0 18px', padding: '12px 16px', borderLeft: '3px solid #8ab77e', background: '#f7faf6', color: '#4c6248', borderRadius: '0 8px 8px 0' },
   structuredSpace: { height: 10 },
   review: { borderBottom: '1px solid #f5f5f5', paddingBottom: 16, marginBottom: 16 },
   reviewHeader: { display: 'flex', gap: 12, alignItems: 'center', marginBottom: 6 },
@@ -2401,6 +2428,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   const [errors, setErrors] = React.useState({});
   const [orderSending, setOrderSending] = React.useState(false);
   const [orderError, setOrderError] = React.useState('');
+  const [orderReceipt, setOrderReceipt] = React.useState(null);
 
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const hasCandleCup = cart.some(item => item.categoryId === 'nen-ly');
@@ -2408,7 +2436,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   const hasSelectedCity = Boolean(form.city.trim());
   const hasSelectedDistrict = Boolean(form.district.trim());
   const isOutsideHcmForCandle = hasCandleCup && hasSelectedCity && !isHcmAddress;
-  const isOutsideUrbanHcmForCandle = hasCandleCup && isHcmAddress && hasSelectedDistrict && !HCMC_URBAN_DISTRICTS.has(form.district);
+  const isOutsideUrbanHcmForCandle = hasCandleCup && isHcmAddress && (!hasSelectedDistrict || !HCMC_URBAN_DISTRICTS.has(form.district));
   const isCandleDeliveryBlocked = isOutsideHcmForCandle || isOutsideUrbanHcmForCandle;
   const canUseExpress = isHcmAddress;
   const selectedDeliveryMethod = deliveryMethod;
@@ -2435,7 +2463,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     if (!form.name.trim()) e.name = 'Vui lòng nhập họ tên';
     if (!form.phone.trim() || !/^0\d{9}$/.test(form.phone.trim())) e.phone = 'Số điện thoại không hợp lệ';
     if (!form.city.trim()) e.city = 'Vui lòng chọn tỉnh/thành phố';
-    if (!form.district.trim()) e.district = 'Vui lòng chọn quận/huyện';
+    if (hasCandleCup && !form.district.trim()) e.district = 'Vui lòng nhập quận/huyện để xác nhận khu vực giao nến ly';
     if (!form.ward.trim()) e.ward = 'Vui lòng chọn phường/xã';
     if (!form.address.trim()) e.address = 'Vui lòng nhập địa chỉ';
     setErrors(e);
@@ -2492,6 +2520,13 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
       if (!response.ok || result.ok === false) {
         throw new Error(result.error || 'Không gửi được đơn hàng');
       }
+      setOrderReceipt({
+        reference: result.orderId || result.order?.id || result.id || '',
+        items: cart.map(item => ({ ...item })),
+        subtotal,
+        shipping,
+        total,
+      });
       setCart([]);
       setStep(3);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2505,9 +2540,9 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 
   const fullAddress = [form.address, form.ward, form.district, form.city].filter(Boolean).join(', ');
   const cityOptions = PROVINCE_OPTIONS;
-  const districtOptions = form.city ? Object.keys(OLD_ADDRESS_OPTIONS[form.city] || { 'Quận/Huyện theo địa chỉ cũ': [] }) : [];
-  const wardOptions = form.city && form.district
-    ? ((OLD_ADDRESS_OPTIONS[form.city] || {})[form.district] || ['Phường/Xã theo địa chỉ cũ'])
+  const districtOptions = form.city ? Object.keys(OLD_ADDRESS_OPTIONS[form.city] || {}) : [];
+  const wardOptions = form.city
+    ? ((OLD_ADDRESS_OPTIONS[form.city] || {})[form.district] || [])
     : [];
 
   const Field = ({ id, label, placeholder, type = 'text', multiline = false }) => (
@@ -2516,11 +2551,14 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
       {multiline
         ? <textarea style={{ ...coStyles.input, height: 80, resize: 'vertical', borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
             placeholder={placeholder}
+            autoComplete={id === 'address' ? 'street-address' : 'off'}
             value={form[id]}
             onChange={e => { setForm(f => ({ ...f, [id]: e.target.value })); setErrors(er => ({ ...er, [id]: '' })); }}
           />
         : <input style={{ ...coStyles.input, borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
             type={type} placeholder={placeholder}
+            inputMode={id === 'phone' ? 'tel' : undefined}
+            autoComplete={id === 'name' ? 'name' : id === 'phone' ? 'tel' : 'off'}
             value={form[id]}
             onChange={e => { setForm(f => ({ ...f, [id]: e.target.value })); setErrors(er => ({ ...er, [id]: '' })); }}
           />
@@ -2549,6 +2587,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         ref={inputRef}
         style={{ ...coStyles.input, background: disabled ? '#f7f7f5' : '#fff', borderColor: errors[id] ? '#e84848' : '#e8e8e8', cursor: disabled ? 'not-allowed' : 'pointer' }}
         type="text"
+        autoComplete={id === 'city' ? 'address-level1' : id === 'district' ? 'address-level2' : id === 'ward' ? 'address-level3' : 'off'}
         list={listId}
         defaultValue={form[id] || ''}
         disabled={disabled}
@@ -2575,6 +2614,22 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
       <p style={{ color: '#888', fontSize: 13, marginBottom: 32 }}>
         Chúng tôi sẽ liên hệ xác nhận qua số <strong>{form.phone}</strong> trong vòng 30 phút.
       </p>
+      {orderReceipt && (
+        <div style={{ textAlign: 'left', background: '#f7faf6', borderRadius: 12, padding: '16px 18px', marginBottom: 24 }}>
+          {orderReceipt.reference && <div style={{ fontWeight: 700, color: '#318223', marginBottom: 12 }}>Mã đơn: {orderReceipt.reference}</div>}
+          {orderReceipt.items.map(item => (
+            <div key={getCartItemKey(item)} style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginBottom: 8, fontSize: 13 }}>
+              <span>{item.name}{item.selectedVariant?.name ? ` · ${item.selectedVariant.name}` : ''} × {item.qty}</span>
+              <strong>{(item.price * item.qty).toLocaleString('vi-VN')}đ</strong>
+            </div>
+          ))}
+          <div style={{ borderTop: '1px solid #e4ebe1', marginTop: 12, paddingTop: 12, fontWeight: 700 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}><span>Tạm tính</span><span>{orderReceipt.subtotal.toLocaleString('vi-VN')}đ</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}><span>Vận chuyển</span><span>{orderReceipt.shipping === 0 ? 'Miễn phí' : `${orderReceipt.shipping.toLocaleString('vi-VN')}đ`}</span></div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#318223' }}><span>Tổng cộng</span><span>{orderReceipt.total.toLocaleString('vi-VN')}đ</span></div>
+          </div>
+        </div>
+      )}
       <div style={coStyles.successActions}>
         <button style={coStyles.primaryBtn} onClick={() => setPage({ name: 'home' })}>Tiếp tục mua sắm</button>
       </div>
@@ -2584,12 +2639,12 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px' }}>
       {/* Steps */}
-      <div style={coStyles.steps}>
+      <div style={{ ...coStyles.steps, ...(isMobile ? coStyles.stepsMobile : {}) }}>
         {['Thông tin', 'Xác nhận', 'Hoàn tất'].map((s, i) => (
-          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ ...coStyles.stepDot, background: step > i ? '#318223' : step === i + 1 ? '#318223' : '#e0e0e0', color: step >= i + 1 ? '#fff' : '#aaa' }}>{step > i + 1 ? '✓' : i + 1}</div>
-            <span style={{ fontSize: 13, fontWeight: step === i + 1 ? 700 : 400, color: step === i + 1 ? '#1a1a1a' : '#aaa' }}>{s}</span>
-            {i < 2 && <div style={coStyles.stepLine} />}
+          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 4 : 8, minWidth: 0 }}>
+            <div style={{ ...coStyles.stepDot, ...(isMobile ? coStyles.stepDotMobile : {}), background: step > i ? '#318223' : step === i + 1 ? '#318223' : '#e0e0e0', color: step >= i + 1 ? '#fff' : '#aaa' }}>{step > i + 1 ? '✓' : i + 1}</div>
+            <span style={{ fontSize: isMobile ? 11 : 13, whiteSpace: 'nowrap', fontWeight: step === i + 1 ? 700 : 400, color: step === i + 1 ? '#1a1a1a' : '#aaa' }}>{s}</span>
+            {i < 2 && <div style={{ ...coStyles.stepLine, ...(isMobile ? coStyles.stepLineMobile : {}) }} />}
           </div>
         ))}
       </div>
@@ -2599,12 +2654,12 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         {step === 1 && (
           <div style={coStyles.formCard}>
             <h2 style={coStyles.cardTitle}>Thông tin giao hàng</h2>
-            <div style={coStyles.formHint}>Lưu ý: Nhập theo địa chỉ cũ</div>
+            <div style={coStyles.formHint}>Có thể chọn gợi ý hoặc tự nhập theo địa chỉ hiện tại. Danh sách gợi ý có thể chưa bao phủ mọi khu vực.</div>
             <CheckoutField id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901234567" type="tel" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={cityOptions} placeholder="Gõ tỉnh/thành phố để chọn" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
-            <CheckoutSuggestField id="district" label="Quận/Huyện *" options={districtOptions} placeholder={form.city ? 'Gõ quận/huyện để chọn' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
-            <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.district ? 'Gõ phường/xã để chọn' : 'Chọn quận/huyện trước'} disabled={!form.district} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+            <CheckoutSuggestField id="district" label={hasCandleCup ? 'Quận/Huyện *' : 'Quận/Huyện (nếu có)'} options={districtOptions} placeholder={form.city ? 'Gõ quận/huyện nếu địa chỉ có cấp này' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
+            <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Gõ phường/xã theo địa chỉ hiện tại' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutField id="address" label="Địa chỉ *" placeholder="Số nhà, tên đường..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <div style={coStyles.field}>
               <label style={coStyles.label}>Vận chuyển *</label>
@@ -2636,7 +2691,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
             <CheckoutField id="note" label="Ghi chú (tùy chọn)" placeholder="Ghi chú thêm cho người giao hàng..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             {isCandleDeliveryBlocked && (
               <div style={coStyles.deliveryBlock}>
-                Sản phẩm nến ly hiện chỉ hỗ trợ giao hỏa tốc trong nội thành TP.HCM. Khu vực bạn chọn chưa thể đặt sản phẩm này.
+                Nến ly hiện chỉ giao trong các quận nội thành TP.HCM đã xác nhận. Hãy nhập quận/khu vực theo danh sách gợi ý; nếu địa chỉ mới chưa có trong danh sách, vui lòng liên hệ shop để xác nhận trước khi đặt.
               </div>
             )}
             {!isCandleDeliveryBlocked && (
@@ -2734,9 +2789,12 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 };
 
 const coStyles = {
-  steps: { display: 'flex', alignItems: 'center', gap: 0, marginBottom: 36, justifyContent: 'center' },
+  steps: { display: 'flex', alignItems: 'center', gap: 0, marginBottom: 36, justifyContent: 'center', width: '100%', boxSizing: 'border-box' },
+  stepsMobile: { justifyContent: 'space-between', gap: 2, marginBottom: 24, overflow: 'hidden' },
   stepDot: { width: 28, height: 28, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700 },
+  stepDotMobile: { width: 24, height: 24, minWidth: 24, fontSize: 11 },
   stepLine: { width: 60, height: 1, background: '#e0e0e0', margin: '0 8px' },
+  stepLineMobile: { width: 16, minWidth: 16, margin: '0 2px' },
   layout: { display: 'grid', gridTemplateColumns: '1fr 360px', gap: 28, alignItems: 'start' },
   formCard: { background: '#fff', border: '1px solid #f0f0f0', borderRadius: 14, padding: '28px 28px 24px' },
   cardTitle: { fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginBottom: 20 },
@@ -4542,6 +4600,7 @@ const App = () => {
   const [page, setPage] = React.useState(() => {
     try {
       if (IS_PREVIEW_REFRESH) return { name: 'home' };
+      if (queryFlag('checkout')) return { name: 'checkout' };
       if (queryFlag('cart')) return { name: 'cart' };
       if (queryFlag('search')) return { name: 'home' };
       if (window.history.state?.page) return window.history.state.page;
@@ -4714,7 +4773,7 @@ const App = () => {
 
   return (
     <div>
-      {!isAdmin && <ShippingPromotion setPage={navigateTo} />}
+      {!isAdmin && page.name !== 'checkout' && <ShippingPromotion setPage={navigateTo} />}
       {!isAdmin && <Header page={page} setPage={navigateTo} cartCount={cartCount} />}
       {isAdmin && (
         <div style={{ background: '#f7faf6', borderBottom: '1px solid #eef3ed', padding: '0 24px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
