@@ -668,10 +668,10 @@
       "/assets/products/uploads/1777435820024-image.webp",
       "/assets/products/uploads/1777455636813-chatgpt-image-16-12-04-29-thg-4-2026.webp",
       "/assets/products/uploads/1777455528964-chatgpt-image-16-31-23-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777435605298-nen-tealight-khong-khoi-xong-tinh-dau-202604280600-nen-tealight-khong-khoi-chay-sach.webp",
       "/assets/products/uploads/1777435857424-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777435866129-nen-tealight-ban-tho-gia-dinh.webp",
-      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
+      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
+      "/assets/products/uploads/1791376424822-image.webp"
     ],
     "reviews": [
       {
@@ -711,7 +711,7 @@
         "price": 70000,
         "originalPrice": 90000,
         "weight": 700,
-        "image": "/assets/products/uploads/1777346987165-10.webp",
+        "image": "/assets/products/uploads/1791376121094-qwey.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "50 Viên 4h"
@@ -737,7 +737,7 @@
         "price": 32000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791376296007-vi-4h-vang.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -750,7 +750,7 @@
         "price": 70000,
         "originalPrice": 90000,
         "weight": 700,
-        "image": "/assets/products/uploads/1777435902832-8.webp",
+        "image": "/assets/products/uploads/1791376105634-qwet.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "50 Viên 4h"
@@ -776,7 +776,7 @@
         "price": 32000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791376307634-vi-4h-do.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -789,7 +789,7 @@
         "price": 70000,
         "originalPrice": 90000,
         "weight": 700,
-        "image": "/assets/products/uploads/1777435920684-11.webp",
+        "image": "/assets/products/uploads/1791376074975-qeqt.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "50 Viên 4h"
@@ -802,7 +802,7 @@
         "price": 130000,
         "originalPrice": 180000,
         "weight": 1300,
-        "image": "/assets/products/generated/product-003.jpg",
+        "image": "/assets/products/uploads/1791376327010-15.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "Hộp 100 Viên 4h"
@@ -845,11 +845,11 @@
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777468243866-chatgpt-image-19-49-49-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777468246032-chatgpt-image-19-55-37-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777468250542-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
+      "/assets/products/uploads/1791377316179-image.webp",
       "/assets/products/uploads/1777468252141-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777468254549-nen-tealight-ban-tho-gia-dinh.webp",
-      "/assets/products/uploads/1777468258852-luu-y-an-toan-bep-xong-thao-moc.webp"
+      "/assets/products/uploads/1777468258852-luu-y-an-toan-bep-xong-thao-moc.webp",
+      "/assets/products/uploads/1791377261728-chatgpt-image-10-05-40-18-thg-5-2026.webp"
     ],
     "reviews": [
       {
@@ -876,7 +876,7 @@
         "price": 28000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791377163583-10.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "2 Vỉ 2h = 20 viên"
@@ -889,7 +889,7 @@
         "price": 55000,
         "originalPrice": 80000,
         "weight": 700,
-        "image": "",
+        "image": "/assets/products/uploads/1791377078398-qeqwe.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "50 Viên 2h"
@@ -902,7 +902,7 @@
         "price": 99000,
         "originalPrice": 150000,
         "weight": 1300,
-        "image": "",
+        "image": "/assets/products/uploads/1791377096390-chatgpt-image-18-38-32-23-thg-5-2026.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "Hộp 100 Viên 2h"
@@ -915,7 +915,7 @@
         "price": 28000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791377150670-vi-2h-vang.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "2 Vỉ 2h = 20 viên"
@@ -928,7 +928,7 @@
         "price": 55000,
         "originalPrice": 80000,
         "weight": 700,
-        "image": "",
+        "image": "/assets/products/uploads/1791377120400-wer.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "50 Viên 2h"
@@ -941,7 +941,7 @@
         "price": 99000,
         "originalPrice": 150000,
         "weight": 1300,
-        "image": "",
+        "image": "/assets/products/uploads/1791377102710-chatgpt-image-18-44-10-23-thg-5-2026.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "Hộp 100 Viên 2h"
@@ -954,7 +954,7 @@
         "price": 28000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791377157521-vi-2h-do.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "2 Vỉ 2h = 20 viên"
@@ -967,7 +967,7 @@
         "price": 55000,
         "originalPrice": 80000,
         "weight": 700,
-        "image": "",
+        "image": "/assets/products/uploads/1791377115190-qwe.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "50 Viên 2h"
@@ -980,7 +980,7 @@
         "price": 99000,
         "originalPrice": 150000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1791377108104-chatgpt-image-18-42-53-23-thg-5-2026.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "Hộp 100 Viên 2h"

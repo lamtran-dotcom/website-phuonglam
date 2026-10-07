@@ -671,10 +671,10 @@ const PRODUCTS = [
       "/assets/products/uploads/1777435820024-image.webp",
       "/assets/products/uploads/1777455636813-chatgpt-image-16-12-04-29-thg-4-2026.webp",
       "/assets/products/uploads/1777455528964-chatgpt-image-16-31-23-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777435605298-nen-tealight-khong-khoi-xong-tinh-dau-202604280600-nen-tealight-khong-khoi-chay-sach.webp",
       "/assets/products/uploads/1777435857424-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777435866129-nen-tealight-ban-tho-gia-dinh.webp",
-      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
+      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
+      "/assets/products/uploads/1791376424822-image.webp"
     ],
     "reviews": [
       {
@@ -714,7 +714,7 @@ const PRODUCTS = [
         "price": 70000,
         "originalPrice": 90000,
         "weight": 700,
-        "image": "/assets/products/uploads/1777346987165-10.webp",
+        "image": "/assets/products/uploads/1791376121094-qwey.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "50 Viên 4h"
@@ -740,7 +740,7 @@ const PRODUCTS = [
         "price": 32000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791376296007-vi-4h-vang.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -753,7 +753,7 @@ const PRODUCTS = [
         "price": 70000,
         "originalPrice": 90000,
         "weight": 700,
-        "image": "/assets/products/uploads/1777435902832-8.webp",
+        "image": "/assets/products/uploads/1791376105634-qwet.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "50 Viên 4h"
@@ -779,7 +779,7 @@ const PRODUCTS = [
         "price": 32000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791376307634-vi-4h-do.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "2 Vỉ 4h = 20 viên"
@@ -792,7 +792,7 @@ const PRODUCTS = [
         "price": 70000,
         "originalPrice": 90000,
         "weight": 700,
-        "image": "/assets/products/uploads/1777435920684-11.webp",
+        "image": "/assets/products/uploads/1791376074975-qeqt.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "50 Viên 4h"
@@ -805,7 +805,7 @@ const PRODUCTS = [
         "price": 130000,
         "originalPrice": 180000,
         "weight": 1300,
-        "image": "/assets/products/generated/product-003.jpg",
+        "image": "/assets/products/uploads/1791376327010-15.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "Hộp 100 Viên 4h"
@@ -846,11 +846,11 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/uploads/1777468243866-chatgpt-image-19-49-49-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777468246032-chatgpt-image-19-55-37-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777468250542-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
+      "/assets/products/uploads/1791377316179-image.webp",
       "/assets/products/uploads/1777468252141-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777468254549-nen-tealight-ban-tho-gia-dinh.webp",
-      "/assets/products/uploads/1777468258852-luu-y-an-toan-bep-xong-thao-moc.webp"
+      "/assets/products/uploads/1777468258852-luu-y-an-toan-bep-xong-thao-moc.webp",
+      "/assets/products/uploads/1791377261728-chatgpt-image-10-05-40-18-thg-5-2026.webp"
     ],
     "reviews": [
       {
@@ -877,7 +877,7 @@ const PRODUCTS = [
         "price": 28000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791377163583-10.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "2 Vỉ 2h = 20 viên"
@@ -890,7 +890,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": 80000,
         "weight": 700,
-        "image": "",
+        "image": "/assets/products/uploads/1791377078398-qeqwe.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "50 Viên 2h"
@@ -903,7 +903,7 @@ const PRODUCTS = [
         "price": 99000,
         "originalPrice": 150000,
         "weight": 1300,
-        "image": "",
+        "image": "/assets/products/uploads/1791377096390-chatgpt-image-18-38-32-23-thg-5-2026.webp",
         "options": {
           "Màu": "Trắng",
           "Số lượng": "Hộp 100 Viên 2h"
@@ -916,7 +916,7 @@ const PRODUCTS = [
         "price": 28000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791377150670-vi-2h-vang.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "2 Vỉ 2h = 20 viên"
@@ -929,7 +929,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": 80000,
         "weight": 700,
-        "image": "",
+        "image": "/assets/products/uploads/1791377120400-wer.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "50 Viên 2h"
@@ -942,7 +942,7 @@ const PRODUCTS = [
         "price": 99000,
         "originalPrice": 150000,
         "weight": 1300,
-        "image": "",
+        "image": "/assets/products/uploads/1791377102710-chatgpt-image-18-44-10-23-thg-5-2026.webp",
         "options": {
           "Màu": "Vàng",
           "Số lượng": "Hộp 100 Viên 2h"
@@ -955,7 +955,7 @@ const PRODUCTS = [
         "price": 28000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "",
+        "image": "/assets/products/uploads/1791377157521-vi-2h-do.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "2 Vỉ 2h = 20 viên"
@@ -968,7 +968,7 @@ const PRODUCTS = [
         "price": 55000,
         "originalPrice": 80000,
         "weight": 700,
-        "image": "",
+        "image": "/assets/products/uploads/1791377115190-qwe.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "50 Viên 2h"
@@ -981,7 +981,7 @@ const PRODUCTS = [
         "price": 99000,
         "originalPrice": 150000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1791377108104-chatgpt-image-18-42-53-23-thg-5-2026.webp",
         "options": {
           "Màu": "Đỏ",
           "Số lượng": "Hộp 100 Viên 2h"
@@ -3423,7 +3423,7 @@ const PRODUCTS = [
     "hidden": false,
     "optionGroups": [
       {
-        "name": "Phân loại",
+        "name": "PHÂN LOẠI",
         "values": [
           "Túi thơm hoa hồi🔥",
           "Túi thơm hạt cà phê🔥",
@@ -3438,7 +3438,7 @@ const PRODUCTS = [
       }
     ],
     "optionImages": {
-      "Phân loại": {
+      "PHÂN LOẠI": {
         "Túi thơm xá xị🔥": "/assets/products/mirrored/1b9465fecc41.webp",
         "Túi thơm ngọc am🔥": "/assets/products/mirrored/a75d25964b80.webp",
         "Túi thơm hoa hồi🔥": "/assets/products/mirrored/eeeb7142d423.webp",
@@ -3471,7 +3471,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/eeeb7142d423.webp",
         "options": {
-          "Phân loại": "Túi thơm hoa hồi🔥"
+          "PHÂN LOẠI": "Túi thơm hoa hồi🔥"
         }
       },
       {
@@ -3483,7 +3483,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/bc6cb6cd14fc.webp",
         "options": {
-          "Phân loại": "Túi thơm hạt cà phê🔥"
+          "PHÂN LOẠI": "Túi thơm hạt cà phê🔥"
         }
       },
       {
@@ -3495,7 +3495,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/a75d25964b80.webp",
         "options": {
-          "Phân loại": "Túi thơm ngọc am🔥"
+          "PHÂN LOẠI": "Túi thơm ngọc am🔥"
         }
       },
       {
@@ -3507,7 +3507,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/d72ac491ff76.webp",
         "options": {
-          "Phân loại": "Hạt cà phê thay thế"
+          "PHÂN LOẠI": "Hạt cà phê thay thế"
         }
       },
       {
@@ -3519,7 +3519,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/fcc9ec4ce015.webp",
         "options": {
-          "Phân loại": "Ngọc am thay thế"
+          "PHÂN LOẠI": "Ngọc am thay thế"
         }
       },
       {
@@ -3531,7 +3531,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/f8324fd965b6.webp",
         "options": {
-          "Phân loại": "Xá xị thay thế"
+          "PHÂN LOẠI": "Xá xị thay thế"
         }
       },
       {
@@ -3543,7 +3543,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/1b9465fecc41.webp",
         "options": {
-          "Phân loại": "Túi thơm xá xị🔥"
+          "PHÂN LOẠI": "Túi thơm xá xị🔥"
         }
       },
       {
@@ -3555,7 +3555,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/6f19f1ebfbbc.webp",
         "options": {
-          "Phân loại": "2 Thanh Gỗ Treo🔥"
+          "PHÂN LOẠI": "2 Thanh Gỗ Treo🔥"
         }
       },
       {
@@ -3567,7 +3567,7 @@ const PRODUCTS = [
         "weight": null,
         "image": "/assets/products/mirrored/3dfb95263707.webp",
         "options": {
-          "Phân loại": "Hoa đại hồi thay thế"
+          "PHÂN LOẠI": "Hoa đại hồi thay thế"
         }
       }
     ]
