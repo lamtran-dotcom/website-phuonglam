@@ -44,6 +44,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Shopee product import — 2026-10-07: added Shopee item `54367578815` to `data/products.json` and the `thao-moc-xong` category. Imported description, 8 gallery images, 9 variant images/options/SKUs and VND prices from the supplied exports; ignored MY prices and stock. Added optimized local image assets and generated product/category/sitemap output. Build succeeded; live publication pending.
+
 Homepage refresh — 2026-09-28: replaced the list-style hero with “Thắp chút ấm áp. Ươm hương an yên.”, warm cream/green styling and one configurable hero image visible on desktop and mobile. Reordered the homepage to lead with category discovery; use responsive category/product grids; added a combo entry point and reduced guides to three. Removed broad homepage safety/quality claims. Synchronized React, static initial HTML, build template, metadata, CSS and minified bundle while keeping product/category pages and sitemap unchanged. Details: `docs/HOMEPAGE-UPGRADE-PROPOSAL.md`.
 
 Date: 2026-09-28
@@ -67,5 +69,6 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - Instatic is early 0.0.x software; keep it as inspiration rather than a production migration target.
 
 ## Next Suggested Task
+- Finish and verify publication of Shopee item `54367578815`.
 - Confirm HCMC delivery rules with the fulfillment provider and finish local admin upload/draft browser checks.
 - Recheck Search Console and compare full 28-day performance windows after reports refresh.

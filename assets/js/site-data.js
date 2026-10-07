@@ -3404,6 +3404,171 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem"
+  },
+  {
+    "id": "shopee_54367578815",
+    "sku": "",
+    "categoryId": "thao-moc-xong",
+    "name": "Túi Thơm Treo Xe, Treo Phòng, Tủ Quần Áo PHUONGLAM – Ngọc Am, Xá Xị Đỏ, Hoa Đại Hồi, Cà Phê Rang",
+    "slug": "tui-thom-treo-xe-treo-phong-tu-quan-ao-phuonglam-ngoc-am-xa-xi-do-hoa-dai-hoi-ca-phe-rang",
+    "price": 32000,
+    "originalPrice": null,
+    "shortDesc": "Túi thơm dùng treo xe ô tô, phòng ngủ, tủ quần áo, tủ giày, phòng làm việc... giúp không gian có mùi hương nhẹ nhàng, dễ chịu.",
+    "seoTitle": "",
+    "seoDescription": "",
+    "tag": "",
+    "weight": null,
+    "hidden": false,
+    "optionGroups": [
+      {
+        "name": "Phân loại",
+        "values": [
+          "Túi thơm hoa hồi🔥",
+          "Túi thơm hạt cà phê🔥",
+          "Túi thơm ngọc am🔥",
+          "Hạt cà phê thay thế",
+          "Ngọc am thay thế",
+          "Xá xị thay thế",
+          "Túi thơm xá xị🔥",
+          "2 Thanh Gỗ Treo🔥",
+          "Hoa đại hồi thay thế"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Phân loại": {
+        "Túi thơm xá xị🔥": "/assets/products/mirrored/1b9465fecc41.webp",
+        "Túi thơm ngọc am🔥": "/assets/products/mirrored/a75d25964b80.webp",
+        "Túi thơm hoa hồi🔥": "/assets/products/mirrored/eeeb7142d423.webp",
+        "Túi thơm hạt cà phê🔥": "/assets/products/mirrored/bc6cb6cd14fc.webp",
+        "2 Thanh Gỗ Treo🔥": "/assets/products/mirrored/6f19f1ebfbbc.webp",
+        "Xá xị thay thế": "/assets/products/mirrored/f8324fd965b6.webp",
+        "Ngọc am thay thế": "/assets/products/mirrored/fcc9ec4ce015.webp",
+        "Hoa đại hồi thay thế": "/assets/products/mirrored/3dfb95263707.webp",
+        "Hạt cà phê thay thế": "/assets/products/mirrored/d72ac491ff76.webp"
+      }
+    },
+    "images": [
+      "/assets/products/mirrored/a9132335caa7.webp",
+      "/assets/products/mirrored/b272b04e9c23.webp",
+      "/assets/products/mirrored/98b14de57344.webp",
+      "/assets/products/mirrored/186777c7d5cd.webp",
+      "/assets/products/mirrored/9ea6ace4d46e.webp",
+      "/assets/products/mirrored/3efa66f186f6.webp",
+      "/assets/products/mirrored/bb60e3de852c.webp",
+      "/assets/products/mirrored/840a260c5918.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "361488526196",
+        "name": "Túi thơm hoa hồi🔥",
+        "sku": "720860_tui_thom_hoa_hoi",
+        "price": 55000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/eeeb7142d423.webp",
+        "options": {
+          "Phân loại": "Túi thơm hoa hồi🔥"
+        }
+      },
+      {
+        "id": "361488526197",
+        "name": "Túi thơm hạt cà phê🔥",
+        "sku": "720860_tui_thom_hat_ca_phe",
+        "price": 62000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/bc6cb6cd14fc.webp",
+        "options": {
+          "Phân loại": "Túi thơm hạt cà phê🔥"
+        }
+      },
+      {
+        "id": "361488526195",
+        "name": "Túi thơm ngọc am🔥",
+        "sku": "720860_tui_thom_ngoc_am",
+        "price": 49000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/a75d25964b80.webp",
+        "options": {
+          "Phân loại": "Túi thơm ngọc am🔥"
+        }
+      },
+      {
+        "id": "361488526201",
+        "name": "Hạt cà phê thay thế",
+        "sku": "720860_hat_ca_phe_thay_the",
+        "price": 49000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/d72ac491ff76.webp",
+        "options": {
+          "Phân loại": "Hạt cà phê thay thế"
+        }
+      },
+      {
+        "id": "361488526199",
+        "name": "Ngọc am thay thế",
+        "sku": "720860_ngoc_am_thay_the",
+        "price": 32000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/fcc9ec4ce015.webp",
+        "options": {
+          "Phân loại": "Ngọc am thay thế"
+        }
+      },
+      {
+        "id": "361488526198",
+        "name": "Xá xị thay thế",
+        "sku": "720860_xa_xi_thay_the",
+        "price": 32000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/f8324fd965b6.webp",
+        "options": {
+          "Phân loại": "Xá xị thay thế"
+        }
+      },
+      {
+        "id": "361488526194",
+        "name": "Túi thơm xá xị🔥",
+        "sku": "720860_tui_thom_xa_xi",
+        "price": 49000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/1b9465fecc41.webp",
+        "options": {
+          "Phân loại": "Túi thơm xá xị🔥"
+        }
+      },
+      {
+        "id": "326512681886",
+        "name": "2 Thanh Gỗ Treo🔥",
+        "sku": "720860_2_thanh_go_treo",
+        "price": 32000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/6f19f1ebfbbc.webp",
+        "options": {
+          "Phân loại": "2 Thanh Gỗ Treo🔥"
+        }
+      },
+      {
+        "id": "361488526200",
+        "name": "Hoa đại hồi thay thế",
+        "sku": "720860_hoa_dai_hoi_thay_the",
+        "price": 38000,
+        "originalPrice": null,
+        "weight": null,
+        "image": "/assets/products/mirrored/3dfb95263707.webp",
+        "options": {
+          "Phân loại": "Hoa đại hồi thay thế"
+        }
+      }
+    ]
   }
 ];
 

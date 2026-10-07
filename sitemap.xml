@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://phuonglam.com/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-10-07</lastmod>
   </url>
   <url>
     <loc>https://phuonglam.com/blog/</loc>
@@ -102,7 +102,7 @@
   </url>
   <url>
     <loc>https://phuonglam.com/danh-muc/thao-moc-xong/</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-10-07</lastmod>
   </url>
   <url>
     <loc>https://phuonglam.com/san-pham/bac-ha-kho-xong-nha-thanh-loc-khong-khi-xua-con-trung/</loc>
@@ -267,5 +267,9 @@
   <url>
     <loc>https://phuonglam.com/san-pham/vo-que-kho-yen-bai-xong-thao-moc-khu-mui-thom-am/</loc>
     <lastmod>2026-08-26</lastmod>
+  </url>
+  <url>
+    <loc>https://phuonglam.com/san-pham/tui-thom-treo-xe-treo-phong-tu-quan-ao-phuonglam-ngoc-am-xa-xi-do-hoa-dai-hoi-ca-phe-rang/</loc>
+    <lastmod>2026-10-07</lastmod>
   </url>
 </urlset>

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-07 — Import Shopee product 54367578815
+- Added the product to the Thảo mộc xông category using the supplied Shopee basic-info, media and sales exports.
+- Imported the product description, 8 gallery images, 9 variants and VND prices; left inventory out and optimized images into local responsive WebP assets.
+- Generated the static product page and updated the category listing and sitemap.
+
 ## 2026-09-28 — Express delivery promotion timing
 - Updated the promotion copy to say express delivery is within 1 hour in inner TP.HCM.
 
