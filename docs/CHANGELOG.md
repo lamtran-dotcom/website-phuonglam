@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-07 — Add Túi thơm and Gỗ thơm categories
+- Added both categories immediately after Thảo Mộc Xông in the shared category navigation.
+- Generated static destinations with an empty-category message and added both URLs to the sitemap.
+- Kept existing products in their current categories.
+
 ## 2026-10-07 — Import Shopee product 54367578815
 - Added the product to the Thảo mộc xông category using the supplied Shopee basic-info, media and sales exports.
 - Imported the product description, 8 gallery images, 9 variants and VND prices; left inventory out and optimized images into local responsive WebP assets.

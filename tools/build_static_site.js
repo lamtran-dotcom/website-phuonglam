@@ -693,6 +693,7 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .card-title { font-weight: 800; line-height: 1.4; margin: 0 0 8px; font-size: 15px; }
 .card-price { color: var(--seo-primary); font-weight: 900; }
 .category-intro { max-width: 780px; color: var(--seo-muted); font-size: 17px; }
+.category-empty { grid-column: 1 / -1; color: var(--seo-muted); padding: 20px 0; }
 .blog-hero { border-radius: 24px; padding: 42px 34px; background: linear-gradient(135deg,#2e7d32,#43a047); color: #fff; text-align: center; margin-bottom: 28px; }
 .blog-hero h1 { color: #fff; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin-bottom: 12px; }
 .blog-hero p { max-width: 680px; margin: 0 auto; opacity: .9; font-size: 16px; line-height: 1.65; }
@@ -1512,7 +1513,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products, categories }) 
         ${categoryLinks}
       </aside>
       <section class="category-content">
-        <div class="grid category-grid" aria-label="Danh sách sản phẩm">${cards}</div>
+        <div class="grid category-grid" aria-label="Danh sách sản phẩm">${cards || '<p class="category-empty">Sản phẩm trong danh mục này đang được cập nhật.</p>'}</div>
       </section>
     </div>
 ${guide}
@@ -1600,17 +1601,17 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
   }
 
   const visibleCategories = [...categoryNameById.entries()]
-    .filter(([id]) => byCategory.has(id))
     .map(([id, name]) => ({ id, name }));
 
-  for (const [categoryId, list] of byCategory.entries()) {
+  for (const { id: categoryId, name: categoryName } of visibleCategories) {
+    const list = byCategory.get(categoryId) || [];
     const dir = path.join(paths.categoryPagesDir, categoryId);
     ensureDir(dir);
     fs.writeFileSync(
       path.join(dir, 'index.html'),
       renderCategoryPage({
         categoryId,
-        categoryName: categoryNameById.get(categoryId) || categoryId,
+        categoryName,
         products: list,
         categories: visibleCategories,
       })
@@ -1618,12 +1619,15 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
   }
 };
 
-const writeSitemapAndRobots = ({ products, blogPosts = [] }) => {
+const writeSitemapAndRobots = ({ products, categories = [], blogPosts = [] }) => {
   const urls = new Set([`${siteUrl}/`, `${siteUrl}/blog/`]);
   const categoryIds = new Set();
   for (const product of products) {
     urls.add(`${siteUrl}/san-pham/${product.slug}/`);
     if (product.categoryId) categoryIds.add(product.categoryId);
+  }
+  for (const category of categories) {
+    if (category.id) categoryIds.add(category.id);
   }
   for (const id of categoryIds) urls.add(`${siteUrl}/danh-muc/${id}/`);
   // BLOG_POSTS with explicit url field
@@ -1940,7 +1944,7 @@ const main = () => {
   optimizeIndexRuntime();
   bustIndexCache();
   writeSeoPages({ products, categories: initialData.categories, blogPosts: initialData.blogPosts });
-  writeSitemapAndRobots({ products, blogPosts: initialData.blogPosts });
+  writeSitemapAndRobots({ products, categories: initialData.categories, blogPosts: initialData.blogPosts });
   console.log(`Optimized index, extracted assets, and generated ${products.length} product pages.`);
 };
 

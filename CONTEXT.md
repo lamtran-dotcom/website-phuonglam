@@ -44,6 +44,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Catalog subcategories — 2026-10-07: added `Túi thơm` and `Gỗ thơm` immediately after `Thảo Mộc Xông` in the shared category list. Static pages now exist for both empty categories with a clear update message; category pages and sitemap include them. Existing Shopee product remains assigned to `thao-moc-xong`.
+
 Shopee product import — 2026-10-07: added Shopee item `54367578815` to `data/products.json` and the `thao-moc-xong` category. Imported description, 8 gallery images, 9 variant images/options/SKUs and VND prices from the supplied exports; ignored MY prices and stock. Added optimized local image assets and generated product/category/sitemap output. Published in commit `7f4c9c7`; verified live product and category pages return HTTP 200.
 
 Homepage refresh — 2026-09-28: replaced the list-style hero with “Thắp chút ấm áp. Ươm hương an yên.”, warm cream/green styling and one configurable hero image visible on desktop and mobile. Reordered the homepage to lead with category discovery; use responsive category/product grids; added a combo entry point and reduced guides to three. Removed broad homepage safety/quality claims. Synchronized React, static initial HTML, build template, metadata, CSS and minified bundle while keeping product/category pages and sitemap unchanged. Details: `docs/HOMEPAGE-UPGRADE-PROPOSAL.md`.
