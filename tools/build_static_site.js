@@ -827,13 +827,22 @@ const renderStaticRuntimeScript = () => `<script>
 })();
 </script>`;
 
-const pageShell = ({ title, description, canonical, image, schema, body, scripts = '' }) => `<!DOCTYPE html>
+// Hidden products keep their page so existing links and indexed URLs do not 404, but they
+// should drop out of search results and the sitemap.
+const isHiddenProduct = (product) => product.hidden === true || product.hidden === 'true';
+
+const productSitemapUrls = (products) => products
+  .filter((product) => !isHiddenProduct(product))
+  .map((product) => `${siteUrl}/san-pham/${product.slug}/`);
+
+const pageShell = ({ title, description, canonical, image, schema, body, scripts = '', robots = '' }) => `<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}" />
+  ${robots ? `<meta name="robots" content="${escapeHtml(robots)}" />` : ''}
   <link rel="canonical" href="${escapeHtml(canonical)}" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="${escapeHtml(title)}" />
@@ -1437,6 +1446,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
   </main>`;
 
   return pageShell({
+    robots: isHiddenProduct(product) ? 'noindex, follow' : '',
     title: pageTitle,
     description,
     canonical: productUrl,
@@ -1587,14 +1597,14 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
       renderProductPage({
         product,
         categoryName: categoryNameById.get(product.categoryId) || product.categoryId,
-        relatedProducts: products.filter((item) => !item.hidden && item.categoryId === product.categoryId),
+        relatedProducts: products.filter((item) => !isHiddenProduct(item) && item.categoryId === product.categoryId),
       })
     );
   }
 
   const byCategory = new Map();
   for (const product of products) {
-    if (product.hidden) continue;
+    if (isHiddenProduct(product)) continue;
     const list = byCategory.get(product.categoryId) || [];
     list.push(product);
     byCategory.set(product.categoryId, list);
@@ -1622,8 +1632,8 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
 const writeSitemapAndRobots = ({ products, categories = [], blogPosts = [] }) => {
   const urls = new Set([`${siteUrl}/`, `${siteUrl}/blog/`]);
   const categoryIds = new Set();
+  for (const url of productSitemapUrls(products)) urls.add(url);
   for (const product of products) {
-    urls.add(`${siteUrl}/san-pham/${product.slug}/`);
     if (product.categoryId) categoryIds.add(product.categoryId);
   }
   for (const category of categories) {
@@ -1962,8 +1972,8 @@ const buildProductPagesOnly = () => {
   for (const [id, name] of Object.entries(categoryFallback)) {
     if (!categoryNameById.has(id)) categoryNameById.set(id, name);
   }
-  const visibleProducts = products.filter((product) => product.hidden !== true && product.hidden !== 'true');
-  for (const product of visibleProducts) {
+  const visibleProducts = products.filter((product) => !isHiddenProduct(product));
+  for (const product of products) {
     const dir = path.join(paths.productPagesDir, product.slug);
     ensureDir(dir);
     fs.writeFileSync(path.join(dir, 'index.html'), renderProductPage({
@@ -1972,8 +1982,12 @@ const buildProductPagesOnly = () => {
       relatedProducts: visibleProducts.filter((item) => item.categoryId === product.categoryId),
     }));
   }
-  console.log(`Generated ${visibleProducts.length} visible product detail pages.`);
+  console.log(`Generated ${products.length} product detail pages (${products.length - visibleProducts.length} hidden, noindex).`);
 };
 
-if (process.argv.includes('--product-pages-only')) buildProductPagesOnly();
-else main();
+if (require.main === module) {
+  if (process.argv.includes('--product-pages-only')) buildProductPagesOnly();
+  else main();
+}
+
+module.exports = { isHiddenProduct, productSitemapUrls, renderProductPage };
