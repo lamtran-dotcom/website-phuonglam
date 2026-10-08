@@ -1114,7 +1114,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
           <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Danh mục sản phẩm</h2>
           <p style={hpStyles.sectionSub}>Nến, bếp xông, thảo mộc và phụ kiện theo nhu cầu</p>
         </div>
-        <div style={{ ...hpStyles.catGrid, gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? 12 : 16 }}>
+        <div style={{ ...hpStyles.catGrid, gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(5, minmax(0, 1fr))', gap: isMobile ? 12 : 14 }}>
           {CATEGORIES.map(cat => (
             <a key={cat.id} href={categoryUrl(cat.id)} style={hpStyles.catCard}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 32px rgba(0,0,0,0.10)'; }}
@@ -1124,7 +1124,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
                 <ImgPlaceholder label={cat.name} bg="#f0f5ef" aspectRatio="1 / 1" style={{ borderRadius: 10, width: '100%' }} src={categoryImages[cat.id] || null} />
               </div>
               <div style={{ ...hpStyles.catInfo, padding: isMobile ? '7px 8px 8px' : '10px 12px 12px' }}>
-                <div style={{ ...hpStyles.catName, fontSize: isMobile ? 15 : 20 }}>{cat.name}</div>
+                <div style={{ ...hpStyles.catName, fontSize: isMobile ? 15 : 17 }}>{cat.name}</div>
                 <div style={{ ...hpStyles.catFrom, fontSize: isMobile ? 9 : 11 }}>{cat.from}</div>
               </div>
             </a>
