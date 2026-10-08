@@ -97,11 +97,22 @@ const sendJson = (res, data, status = 200) => {
   });
 };
 
-const readBody = (req) =>
+// Blog saves carry several images in one multipart body; product uploads carry one.
+const MAX_BODY_BYTES = 60 * 1024 * 1024;
+
+const readBody = (req, maxBytes = MAX_BODY_BYTES) =>
   new Promise((resolve, reject) => {
     const chunks = [];
-    req.on('data', (chunk) => chunks.push(chunk));
-    req.on('end', () => resolve(Buffer.concat(chunks)));
+    let size = 0;
+    req.on('data', (chunk) => {
+      size += chunk.length;
+      // Keep draining without buffering so the client still receives a clear 413.
+      if (size <= maxBytes) chunks.push(chunk);
+    });
+    req.on('end', () => {
+      if (size > maxBytes) reject(new Error(`Dữ liệu gửi lên quá lớn (giới hạn ${Math.round(maxBytes / 1024 / 1024)} MB).`));
+      else resolve(Buffer.concat(chunks));
+    });
     req.on('error', reject);
   });
 
@@ -121,6 +132,18 @@ const pruneProductBackups = (backupDir, keep = MAX_PRODUCT_BACKUPS) => {
   for (const name of backups.slice(0, Math.max(0, backups.length - keep))) {
     fs.rmSync(path.join(backupDir, name), { force: true });
   }
+};
+
+const MAX_IMAGE_BYTES = 25 * 1024 * 1024;
+
+// Only real raster images may land in the public uploads folder; if compression fails the
+// original file is kept as-is, so its extension and bytes must already be safe to serve.
+const detectImageExtension = (data) => {
+  if (data.length >= 3 && data[0] === 0xff && data[1] === 0xd8 && data[2] === 0xff) return '.jpg';
+  if (data.length >= 8 && data.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return '.png';
+  if (data.length >= 6 && /^GIF8[79]a$/.test(data.subarray(0, 6).toString('latin1'))) return '.gif';
+  if (data.length >= 12 && data.subarray(0, 4).toString('latin1') === 'RIFF' && data.subarray(8, 12).toString('latin1') === 'WEBP') return '.webp';
+  return null;
 };
 
 const safeName = (name) =>
@@ -1917,8 +1940,10 @@ const handleApi = async (req, res, pathname) => {
     if (pathname === '/api/upload.php' && req.method === 'POST') {
       const image = parseMultipartImage(req.headers['content-type'] || '', await readBody(req));
       if (!image) throw new Error('No image uploaded');
+      if (image.data.length > MAX_IMAGE_BYTES) throw new Error('Ảnh quá lớn (tối đa 25 MB).');
+      const origExt = detectImageExtension(image.data);
+      if (!origExt) throw new Error('Chỉ nhận ảnh JPG, PNG, WebP hoặc GIF.');
       fs.mkdirSync(files.uploads, { recursive: true });
-      const origExt = path.extname(image.filename).toLowerCase() || '.jpg';
       const base = safeName(path.basename(image.filename, path.extname(image.filename)));
       // Luôn lưu tạm với tên gốc, sau đó nén → đổi thành .webp
       const tempFilename = `${Date.now()}-${base}${origExt}`;
@@ -2066,7 +2091,7 @@ const handleApi = async (req, res, pathname) => {
       return true;
     }
   } catch (error) {
-    sendJson(res, { ok: false, message: error.message }, 500);
+    sendJson(res, { ok: false, message: error.message }, /quá lớn/.test(error.message) ? 413 : 500);
     return true;
   }
 
@@ -2150,4 +2175,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
 
-module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS, pruneProductBackups };
+module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups };

@@ -125,3 +125,34 @@ test('product backups are capped to the newest 30 and pending journals are kept'
   assert.ok(!left.includes('products-2026-10-08T00-00-04-000Z.json'));
   assert.ok(left.includes('pending-product-changes.json'));
 });
+
+function multipartImage(filename, data) {
+  const boundary = '----phuonglamtest';
+  const head = Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="image"; filename="${filename}"\r\nContent-Type: application/octet-stream\r\n\r\n`);
+  const tail = Buffer.from(`\r\n--${boundary}--\r\n`);
+  return { body: Buffer.concat([head, data, tail]), contentType: `multipart/form-data; boundary=${boundary}` };
+}
+
+test('uploads must be real raster images; disguised HTML/SVG is refused and nothing is written', async t => {
+  const { root, server, detectImageExtension } = fixture(t);
+  assert.equal(detectImageExtension(Buffer.from([0xff, 0xd8, 0xff, 0xe0])), '.jpg');
+  assert.equal(detectImageExtension(Buffer.from('RIFF0000WEBPVP8 ', 'latin1')), '.webp');
+  assert.equal(detectImageExtension(Buffer.from('<svg onload=alert(1)>')), null);
+  const port = await listen(server);
+  for (const [filename, data] of [['x.html', Buffer.from('<script>alert(1)</script>')], ['logo.svg', Buffer.from('<svg/>')], ['fake.jpg', Buffer.from('<html>')]]) {
+    const { body, contentType } = multipartImage(filename, data);
+    const res = await request(port, { method: 'POST', path: '/api/upload.php', body, headers: { Host: `127.0.0.1:${port}`, 'Content-Type': contentType } });
+    assert.equal(res.status, 500);
+    assert.match(res.body, /Chỉ nhận ảnh/);
+  }
+  assert.equal(fs.existsSync(path.join(root, 'assets/products/uploads')), false);
+});
+
+test('oversized request bodies are rejected with 413 and the server stays up', async t => {
+  const { server } = fixture(t);
+  const port = await listen(server);
+  const big = Buffer.alloc(61 * 1024 * 1024, 0x20);
+  const res = await request(port, { method: 'POST', path: '/api/git.php', body: big, headers: { Host: `127.0.0.1:${port}`, 'Content-Type': 'application/json' } });
+  assert.equal(res.status, 413);
+  assert.equal((await request(port, { path: '/' })).status, 200);
+});
