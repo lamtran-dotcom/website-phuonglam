@@ -590,7 +590,7 @@
     "name": "Bếp xông thảo mộc đất nung bán lẻ",
     "price": 100000,
     "originalPrice": null,
-    "shortDesc": "Bếp xông bán lẻ. Phụ kiện, nến và thảo mộc không nằm trong bộ nếu không được ghi rõ ở phân loại.",
+    "shortDesc": "Bếp xông lẻ chỉ có bếp + nắp. Phụ kiện, nến và thảo mộc không nằm trong bộ nếu không được ghi rõ ở phân loại.",
     "description": "## Công dụng\nBếp đất nung dùng để làm nóng thảo mộc khô theo cách sử dụng của bếp xông. Sản phẩm có lựa chọn kích thước khoảng 13 cm và 16 cm; một số phân loại có thể gồm thêm phụ kiện hoặc nguyên liệu. Kiểm tra tên và thành phần phân loại trước khi đặt. Nếu chọn bếp lẻ, bộ hàng chỉ gồm bếp như mô tả phân loại.\n\n## Cách sử dụng\nĐặt bếp trên bề mặt phẳng, chịu nhiệt. Dùng nến và lượng thảo mộc phù hợp với kích thước bếp. Hạn chế ngọn lửa quá lớn; làm theo hướng dẫn đi kèm từng mẫu.\n\n## Vệ sinh và bảo quản\nChờ bếp nguội hoàn toàn rồi mới lau sạch. Để nơi khô ráo, tránh va đập mạnh vì đất nung có thể sứt hoặc vỡ.",
     "usage": "## Cách dùng\nĐặt bếp trên bề mặt phẳng và chịu nhiệt. Cho lượng thảo mộc vừa phải lên mặt bếp, đặt nến vào đúng vị trí rồi thắp. Điều chỉnh việc sử dụng theo hướng dẫn của mẫu bếp và giữ khu vực thông thoáng.\n\n## Lưu ý an toàn\nTheo dõi bếp trong suốt thời gian nến cháy. Tránh đặt gần vật dễ cháy. Không chạm, di chuyển hoặc lau bếp khi còn nóng; chờ nguội hoàn toàn rồi mới vệ sinh.",
     "tag": "Nổi bật",
@@ -599,10 +599,11 @@
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/8049c44e.webp",
-      "/assets/products/mirrored/e889ad36.webp",
-      "/assets/products/uploads/1777472272766-1777471993642-11ba7642-instagram-square-1080x1080.webp",
-      "/assets/products/uploads/1777472291130-chatgpt-image-20-58-14-29-thg-4-2026.webp"
+      "/assets/products/uploads/1791428815270-chatgpt-image-20-06-12-11-thg-5-2026.webp",
+      "/assets/products/uploads/1791428881848-sds.webp",
+      "/assets/products/uploads/1791428804512-chatgpt-image-19-51-43-11-thg-5-2026.webp",
+      "/assets/products/uploads/1791428821515-chatgpt-image-20-00-18-11-thg-5-2026.webp",
+      "/assets/products/uploads/1791428838240-chatgpt-image-21-10-21-11-thg-5-2026.webp"
     ],
     "reviews": [],
     "variants": [
@@ -610,20 +611,20 @@
         "id": "shopee_17395821074__shopee_variant_194717189919",
         "name": "Bếp Xông 13cm (Lẻ)",
         "sku": "",
-        "price": 65000,
+        "price": 70000,
         "originalPrice": 90000,
         "weight": 1300,
-        "image": "/assets/products/mirrored/57b57d56.webp",
+        "image": "/assets/products/uploads/1791428912426-chatgpt-image-20-06-12-11-thg-5-2026.webp",
         "options": {}
       },
       {
         "id": "shopee_17395821074__shopee_variant_194717189920",
         "name": "Bếp xông 16cm (Lẻ)",
         "sku": "",
-        "price": 75000,
+        "price": 85000,
         "originalPrice": 100000,
         "weight": 1300,
-        "image": "/assets/products/mirrored/7cfe1bfc.webp",
+        "image": "/assets/products/uploads/1791428915512-chatgpt-image-20-06-12-11-thg-5-2026.webp",
         "options": {}
       }
     ],

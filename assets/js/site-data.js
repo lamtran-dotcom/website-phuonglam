@@ -597,17 +597,18 @@ const PRODUCTS = [
     "name": "Bếp xông thảo mộc đất nung bán lẻ",
     "price": 100000,
     "originalPrice": null,
-    "shortDesc": "Bếp xông bán lẻ. Phụ kiện, nến và thảo mộc không nằm trong bộ nếu không được ghi rõ ở phân loại.",
+    "shortDesc": "Bếp xông lẻ chỉ có bếp + nắp. Phụ kiện, nến và thảo mộc không nằm trong bộ nếu không được ghi rõ ở phân loại.",
     "tag": "Nổi bật",
     "weight": 1300,
     "hidden": false,
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/8049c44e.webp",
-      "/assets/products/mirrored/e889ad36.webp",
-      "/assets/products/uploads/1777472272766-1777471993642-11ba7642-instagram-square-1080x1080.webp",
-      "/assets/products/uploads/1777472291130-chatgpt-image-20-58-14-29-thg-4-2026.webp"
+      "/assets/products/uploads/1791428815270-chatgpt-image-20-06-12-11-thg-5-2026.webp",
+      "/assets/products/uploads/1791428881848-sds.webp",
+      "/assets/products/uploads/1791428804512-chatgpt-image-19-51-43-11-thg-5-2026.webp",
+      "/assets/products/uploads/1791428821515-chatgpt-image-20-00-18-11-thg-5-2026.webp",
+      "/assets/products/uploads/1791428838240-chatgpt-image-21-10-21-11-thg-5-2026.webp"
     ],
     "reviews": [],
     "variants": [
@@ -615,20 +616,20 @@ const PRODUCTS = [
         "id": "shopee_17395821074__shopee_variant_194717189919",
         "name": "Bếp Xông 13cm (Lẻ)",
         "sku": "",
-        "price": 65000,
+        "price": 70000,
         "originalPrice": 90000,
         "weight": 1300,
-        "image": "/assets/products/mirrored/57b57d56.webp",
+        "image": "/assets/products/uploads/1791428912426-chatgpt-image-20-06-12-11-thg-5-2026.webp",
         "options": {}
       },
       {
         "id": "shopee_17395821074__shopee_variant_194717189920",
         "name": "Bếp xông 16cm (Lẻ)",
         "sku": "",
-        "price": 75000,
+        "price": 85000,
         "originalPrice": 100000,
         "weight": 1300,
-        "image": "/assets/products/mirrored/7cfe1bfc.webp",
+        "image": "/assets/products/uploads/1791428915512-chatgpt-image-20-06-12-11-thg-5-2026.webp",
         "options": {}
       }
     ],
