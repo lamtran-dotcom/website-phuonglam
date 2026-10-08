@@ -4,6 +4,17 @@ const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const vm = require('vm');
+const crypto = require('crypto');
+const {
+  createImageOnlyChanges,
+  mergePendingAdminSettings,
+  mergePendingBlogPosts,
+  mergePendingProductChanges,
+  recordAdminFileChanges,
+  recordAdminSettingsChanges,
+  recordBlogPostChanges,
+  recordProductChanges,
+} = require('./admin_product_push');
 
 const root = path.resolve(__dirname, '..');
 const port = Number(process.env.PORT || 8000);
@@ -199,11 +210,142 @@ const runBuild = () => {
   }
 };
 
+const getProductsBytes = () => fs.existsSync(files.products)
+  ? fs.readFileSync(files.products)
+  : Buffer.from('[]\n');
+
+const getProductsRevision = (bytes = getProductsBytes()) => crypto.createHash('sha256').update(bytes).digest('hex');
+
+const validateProducts = (products, existingById = new Map()) => {
+  const errors = [];
+  const productIds = new Set();
+  const productSkus = new Set();
+  const slugs = new Set();
+  products.forEach((product, index) => {
+    if (!product || typeof product !== 'object' || Array.isArray(product)) {
+      errors.push(`Sản phẩm ${index + 1}: dữ liệu không hợp lệ.`);
+      return;
+    }
+    const label = String(product?.name || `Sản phẩm ${index + 1}`).trim();
+    const id = String(product?.id || '').trim();
+    if (!id) errors.push(`${label}: thiếu ID.`);
+    else if (productIds.has(id)) errors.push(`${label}: ID sản phẩm bị trùng.`);
+    productIds.add(id);
+    const slug = String(product?.slug || '').trim();
+    if (slug && slugs.has(slug)) errors.push(`${label}: URL sản phẩm bị trùng.`);
+    if (slug) slugs.add(slug);
+    const sku = String(product?.sku || '').trim();
+    if (sku && productSkus.has(sku)) errors.push(`${label}: SKU sản phẩm bị trùng.`);
+    if (sku) productSkus.add(sku);
+    if (!String(product?.name || '').trim()) errors.push(`Sản phẩm ${index + 1}: cần nhập tên.`);
+    if (!String(product?.categoryId || '').trim()) errors.push(`${label}: cần chọn danh mục.`);
+    if (product.price == null || String(product.price).trim() === '' || !Number.isFinite(Number(product.price)) || Number(product.price) < 0 || (!product.hidden && Number(product.price) === 0)) errors.push(`${label}: giá bán không hợp lệ.`);
+    if (product?.originalPrice != null && (!Number.isFinite(Number(product.originalPrice)) || Number(product.originalPrice) < 0)) errors.push(`${label}: giá gốc không hợp lệ.`);
+    if (product?.weight != null && (!Number.isFinite(Number(product.weight)) || Number(product.weight) < 0)) errors.push(`${label}: khối lượng không hợp lệ.`);
+    if (!Array.isArray(product?.images) || product.images.length > 9) errors.push(`${label}: danh sách ảnh phải có tối đa 9 ảnh.`);
+    if (!Array.isArray(product?.variants)) {
+      errors.push(`${label}: dữ liệu phân loại không hợp lệ.`);
+      return;
+    }
+    const variantIds = new Set();
+    product.variants.forEach((variant, variantIndex) => {
+      if (!variant || typeof variant !== 'object' || Array.isArray(variant)) {
+        errors.push(`${label}: dữ liệu phân loại ${variantIndex + 1} không hợp lệ.`);
+        return;
+      }
+      const variantLabel = String(variant?.name || `phân loại ${variantIndex + 1}`).trim();
+      const variantId = String(variant?.id || '').trim();
+      if (!variantId) errors.push(`${label}: ${variantLabel} thiếu ID.`);
+      else if (variantIds.has(variantId)) errors.push(`${label}: ID phân loại bị trùng.`);
+      variantIds.add(variantId);
+      if (!String(variant?.name || '').trim()) errors.push(`${label}: cần đặt tên cho phân loại ${variantIndex + 1}.`);
+      if (variant.price == null || String(variant.price).trim() === '' || !Number.isFinite(Number(variant.price)) || Number(variant.price) < 0 || (!product.hidden && Number(variant.price) === 0)) errors.push(`${label}: giá ${variantLabel} không hợp lệ.`);
+      if (variant?.originalPrice != null && (!Number.isFinite(Number(variant.originalPrice)) || Number(variant.originalPrice) < 0)) errors.push(`${label}: giá gốc của ${variantLabel} không hợp lệ.`);
+      if (variant?.weight != null && (!Number.isFinite(Number(variant.weight)) || Number(variant.weight) < 0)) errors.push(`${label}: khối lượng của ${variantLabel} không hợp lệ.`);
+    });
+  });
+
+  if (errors.length) return errors;
+  const variantSkuOwners = new Map();
+  products.forEach((product) => (product.variants || []).forEach((variant) => {
+    const sku = String(variant.sku || '').trim();
+    if (!sku) return;
+    const key = `${product.id}|${variant.id}`;
+    const owners = variantSkuOwners.get(sku) || [];
+    owners.push({ key, label: `${product.name} / ${variant.name}` });
+    variantSkuOwners.set(sku, owners);
+  }));
+  for (const [sku, owners] of variantSkuOwners) {
+    if (owners.length < 2) continue;
+    const changedOwner = owners.find(({ key }) => {
+      const splitAt = key.indexOf('|');
+      const productId = key.slice(0, splitAt);
+      const variantId = key.slice(splitAt + 1);
+      const previous = existingById.get(productId)?.variants?.find((variant) => String(variant.id) === variantId);
+      return !previous || String(previous.sku || '').trim() !== sku;
+    });
+    if (changedOwner) errors.push(`${changedOwner.label}: SKU phân loại “${sku}” đã được dùng ở phân loại khác.`);
+  }
+  return errors;
+};
+
+const saveProductsWithBackup = (products) => {
+  const previousBytes = getProductsBytes();
+  const previousProducts = JSON.parse(previousBytes.toString('utf8'));
+  const backupDir = path.join(root, '.admin-backups');
+  fs.mkdirSync(backupDir, { recursive: true });
+  const backupPath = path.join(backupDir, `products-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
+  fs.writeFileSync(backupPath, previousBytes);
+  const pendingPath = path.join(backupDir, 'pending-product-changes.json');
+  const previousPendingBytes = fs.existsSync(pendingPath) ? fs.readFileSync(pendingPath) : null;
+
+  const tempPath = `${files.products}.${process.pid}.${Date.now()}.tmp`;
+  fs.writeFileSync(tempPath, JSON.stringify(products, null, 2) + '\n');
+  fs.renameSync(tempPath, files.products);
+  try {
+    runBuild();
+    const pending = recordProductChanges(
+      previousPendingBytes ? JSON.parse(previousPendingBytes.toString('utf8')) : null,
+      previousProducts,
+      products,
+    );
+    const pendingTempPath = `${pendingPath}.${process.pid}.tmp`;
+    if (Object.keys(pending.products).length) {
+      fs.writeFileSync(pendingTempPath, `${JSON.stringify(pending, null, 2)}\n`);
+      fs.renameSync(pendingTempPath, pendingPath);
+    } else {
+      fs.rmSync(pendingPath, { force: true });
+    }
+  } catch (error) {
+    const restorePath = `${files.products}.${process.pid}.restore.tmp`;
+    fs.writeFileSync(restorePath, previousBytes);
+    fs.renameSync(restorePath, files.products);
+    if (previousPendingBytes) fs.writeFileSync(pendingPath, previousPendingBytes);
+    else fs.rmSync(pendingPath, { force: true });
+    try {
+      runBuild();
+    } catch (restoreError) {
+      throw new Error(`${error.message}\nĐã khôi phục data/products.json nhưng build khôi phục cũng lỗi: ${restoreError.message}. Bản sao lưu: ${backupPath}`);
+    }
+    throw new Error(`${error.message}\nĐã khôi phục dữ liệu sản phẩm trước khi lưu. Bản sao lưu: ${backupPath}`);
+  }
+  return { products: JSON.parse(fs.readFileSync(files.products, 'utf8')), revision: getProductsRevision() };
+};
+
 const runGit = (args) => {
   const result = spawnSync('git', args, {
     cwd: root,
     encoding: 'utf8',
   });
+  return {
+    ok: result.status === 0,
+    status: result.status,
+    output: [result.stdout, result.stderr].filter(Boolean).join('\n').trim(),
+  };
+};
+
+const runGitAt = (cwd, args) => {
+  const result = spawnSync('git', args, { cwd, encoding: 'utf8' });
   return {
     ok: result.status === 0,
     status: result.status,
@@ -259,7 +401,7 @@ const rebaseGitOntoOrigin = (branch) => {
   }
   try {
     runBuild();
-    const addBuild = runGit(['add', '-A']);
+    const addBuild = runGit(['add', '-A', '--', ...conflicts]);
     if (!addBuild.ok) throw new Error(addBuild.output || 'git add build output failed');
     const continued = runGit(['-c', 'core.editor=true', 'rebase', '--continue']);
     if (!continued.ok) throw new Error(continued.output || 'Không thể tiếp tục rebase');
@@ -270,14 +412,66 @@ const rebaseGitOntoOrigin = (branch) => {
 };
 
 const pushGit = () => {
-  runBuild();
-  const before = gitSummary();
-  if (!before.hasChanges) {
-    return { ...before, pushed: false, message: 'Không có thay đổi mới để push.' };
+  const pendingPath = path.join(root, '.admin-backups', 'pending-product-changes.json');
+  const settingsPendingPath = path.join(root, '.admin-backups', 'pending-admin-settings.json');
+  const contentPendingPath = path.join(root, '.admin-backups', 'pending-admin-content.json');
+  const contentPending = fs.existsSync(contentPendingPath)
+    ? JSON.parse(fs.readFileSync(contentPendingPath, 'utf8'))
+    : null;
+  const settingsPending = fs.existsSync(settingsPendingPath)
+    ? JSON.parse(fs.readFileSync(settingsPendingPath, 'utf8'))
+    : null;
+  if (fs.existsSync(pendingPath)) {
+    const pending = JSON.parse(fs.readFileSync(pendingPath, 'utf8'));
+    if (Object.keys(pending.products || {}).length) return pushPendingProductChanges(pending, pendingPath, settingsPending, settingsPendingPath, contentPending, contentPendingPath);
   }
 
-  const add = runGit(['add', '-A']);
+  if (Object.keys(settingsPending?.fields || {}).length || Object.keys(contentPending?.files || {}).length || Object.keys(contentPending?.posts || {}).length) {
+    return pushPendingProductChanges({ version: 1, products: {} }, null, settingsPending, settingsPendingPath, contentPending, contentPendingPath);
+  }
+
+  const currentBranch = gitSummary().branch || 'main';
+  const fetch = runGit(['fetch', 'origin', currentBranch]);
+  if (fetch.ok) {
+    const remoteCatalog = runGit(['show', `origin/${currentBranch}:data/products.json`]);
+    if (remoteCatalog.ok) {
+      const localProducts = JSON.parse(getProductsBytes().toString('utf8'));
+      const pendingImages = createImageOnlyChanges(JSON.parse(remoteCatalog.output), localProducts);
+      if (Object.keys(pendingImages.products).length) {
+        fs.mkdirSync(path.dirname(pendingPath), { recursive: true });
+        const pendingTempPath = `${pendingPath}.${process.pid}.tmp`;
+        fs.writeFileSync(pendingTempPath, `${JSON.stringify(pendingImages, null, 2)}\n`);
+        fs.renameSync(pendingTempPath, pendingPath);
+        return pushPendingProductChanges(pendingImages, pendingPath, settingsPending, settingsPendingPath, contentPending, contentPendingPath);
+      }
+    }
+  }
+
+  const stagedBeforePush = runGit(['diff', '--cached', '--quiet']);
+  if (!stagedBeforePush.ok) {
+    throw new Error('Đang có thay đổi được stage sẵn. Hãy xử lý các thay đổi đó trước khi dùng Push Git từ admin.');
+  }
+  const publishPaths = [
+    '.gitignore', 'admin-upload.html', 'tools/local_admin_server.js',
+    'index.html', 'data/products.json', 'data/settings.json', 'sitemap.xml', 'robots.txt',
+    'assets/js/site-data.js', 'assets/js/app.min.js', 'assets/css/static-seo.css',
+    'assets/products/uploads', 'assets/products/responsive', 'assets/products/generated',
+    'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts', 'data/scheduled-blog-history.json',
+  ];
+  const changes = runGit(['diff', '--name-only', '-z']);
+  if (!changes.ok) throw new Error(changes.output || 'Không đọc được thay đổi Git.');
+  const outside = changes.output.split('\0').filter(Boolean).filter(file => !publishPaths.some(allowed => file === allowed || file.startsWith(`${allowed}/`)));
+  if (outside.length) throw new Error(`Có thay đổi ngoài phạm vi admin; hãy xử lý trước khi Push Git: ${outside.join(', ')}`);
+  runBuild();
+  // Optional upload directories may not exist yet; tracked deletions still need staging.
+  const existingPaths = publishPaths.filter(file => fs.existsSync(path.join(root, file)) || runGit(['ls-files', '--', file]).output);
+  const add = runGit(['add', '-A', '--', ...existingPaths]);
   if (!add.ok) throw new Error(add.output || 'git add failed');
+  const stagedChanges = runGit(['diff', '--cached', '--name-only']);
+  if (!stagedChanges.ok) throw new Error(stagedChanges.output || 'Không thể đọc danh sách file xuất bản.');
+  if (!stagedChanges.output) {
+    return { ...gitSummary(), pushed: false, message: 'Không có thay đổi sản phẩm để xuất bản.' };
+  }
 
   const message = `Update website ${new Date().toISOString().slice(0, 10)}`;
   const commit = runGit(['commit', '-m', message]);
@@ -298,6 +492,139 @@ const pushGit = () => {
   };
 };
 
+const pushPendingProductChanges = (pending, pendingPath, settingsPending = null, settingsPendingPath = null, contentPending = null, contentPendingPath = null) => {
+  const branch = gitSummary().branch || 'main';
+  const fetch = runGit(['fetch', 'origin', branch]);
+  if (!fetch.ok) throw new Error(fetch.output || 'Không tải được phiên bản mới nhất từ GitHub.');
+
+  const worktreeRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-admin-push-'));
+  let worktreeAdded = false;
+  try {
+    const addWorktree = runGit(['worktree', 'add', '--detach', worktreeRoot, `origin/${branch}`]);
+    if (!addWorktree.ok) throw new Error(addWorktree.output || 'Không tạo được bản làm việc an toàn để xuất bản.');
+    worktreeAdded = true;
+
+    const productsPath = path.join(worktreeRoot, 'data', 'products.json');
+    let mergedProducts = { products: JSON.parse(fs.readFileSync(productsPath, 'utf8')), changedProductIds: [], newImagePaths: [] };
+    if (Object.keys(pending.products || {}).length) {
+      mergedProducts = mergePendingProductChanges(mergedProducts.products, pending);
+      fs.writeFileSync(productsPath, `${JSON.stringify(mergedProducts.products, null, 2)}\n`);
+    }
+
+    let mergedSettings = { changed: false, newImagePaths: [] };
+    if (Object.keys(settingsPending?.fields || {}).length) {
+      const settingsPath = path.join(worktreeRoot, 'data', 'settings.json');
+      const remoteSettings = fs.existsSync(settingsPath) ? JSON.parse(fs.readFileSync(settingsPath, 'utf8')) : {};
+      mergedSettings = mergePendingAdminSettings(remoteSettings, settingsPending);
+      fs.writeFileSync(settingsPath, `${JSON.stringify(mergedSettings.settings, null, 2)}\n`);
+    }
+
+    let mergedBlogPosts = { changedSlugs: [] };
+    if (Object.keys(contentPending?.posts || {}).length) {
+      const siteDataPath = path.join(worktreeRoot, 'assets', 'js', 'site-data.js');
+      const remoteBlogPosts = readBlogPostsFromSiteData(siteDataPath);
+      mergedBlogPosts = mergePendingBlogPosts(remoteBlogPosts, { version: 1, posts: contentPending.posts });
+      replaceBlogPostsInSiteData(mergedBlogPosts.posts, siteDataPath);
+    }
+
+    const contentPaths = [];
+    for (const [relativePath, change] of Object.entries(contentPending?.files || {})) {
+      const normalizedPath = path.posix.normalize(relativePath);
+      const allowed = /^blog\/(?:kien-thuc|huong-dan-xong)\/[a-z0-9-]+\/index\.html$/.test(normalizedPath)
+        || /^assets\/blog\/[a-zA-Z0-9._/-]+$/.test(normalizedPath)
+        || /^scheduled-posts\/(?:kien-thuc|huong-dan-xong)\/[a-z0-9-]+\/(?:index\.html|article\.json)$/.test(normalizedPath);
+      if (!allowed || normalizedPath.includes('..')) throw new Error(`Đường dẫn nội dung bài viết không hợp lệ: ${relativePath}`);
+      const remotePath = path.join(worktreeRoot, ...normalizedPath.split('/'));
+      const remoteHash = fs.existsSync(remotePath) ? crypto.createHash('sha256').update(fs.readFileSync(remotePath)).digest('hex') : null;
+      if (remoteHash === change.afterHash) continue;
+      if (remoteHash !== change.beforeHash) throw new Error(`Nội dung ${normalizedPath} đã được thay đổi trên web; tải lại bài viết rồi lưu lại.`);
+      const localPath = path.join(root, ...normalizedPath.split('/'));
+      if (change.afterHash === null) fs.rmSync(remotePath, { force: true });
+      else {
+        if (!fs.existsSync(localPath) || crypto.createHash('sha256').update(fs.readFileSync(localPath)).digest('hex') !== change.afterHash) {
+          throw new Error(`Không tìm thấy nội dung bài viết đã lưu: ${normalizedPath}`);
+        }
+        fs.mkdirSync(path.dirname(remotePath), { recursive: true });
+        fs.copyFileSync(localPath, remotePath);
+      }
+      contentPaths.push(normalizedPath);
+    }
+
+    for (const publicPath of [...mergedProducts.newImagePaths, ...mergedSettings.newImagePaths]) {
+      const relativePath = publicPath.split(/[?#]/, 1)[0].replace(/^\//, '');
+      const sourcePath = path.resolve(root, relativePath);
+      const targetPath = path.resolve(worktreeRoot, relativePath);
+      const sourceRoot = path.resolve(root, 'assets', 'products') + path.sep;
+      const targetRoot = path.resolve(worktreeRoot, 'assets', 'products') + path.sep;
+      if (!sourcePath.startsWith(sourceRoot) || !targetPath.startsWith(targetRoot)) {
+        throw new Error(`Đường dẫn ảnh sản phẩm không hợp lệ: ${publicPath}`);
+      }
+      if (!fs.existsSync(sourcePath) && fs.existsSync(targetPath)) continue;
+      if (!fs.existsSync(sourcePath) || !fs.statSync(sourcePath).isFile()) {
+        throw new Error(`Thiếu ảnh mới trong máy: ${publicPath}. Hãy tải lại ảnh trong admin rồi lưu sản phẩm.`);
+      }
+      fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+      fs.copyFileSync(sourcePath, targetPath);
+    }
+
+    const responsiveGenerator = path.join(worktreeRoot, 'tools', 'generate_responsive_product_images.py');
+    if (fs.existsSync(responsiveGenerator)) {
+      const generated = spawnSync('python3', [responsiveGenerator, '--only-missing'], {
+        cwd: worktreeRoot,
+        encoding: 'utf8',
+      });
+      if (generated.status !== 0) throw new Error(generated.stderr || generated.stdout || 'Không tạo được ảnh sản phẩm responsive.');
+    }
+    const buildResult = spawnSync(process.execPath, [path.join(worktreeRoot, 'tools', 'build_static_site.js')], {
+      cwd: worktreeRoot,
+      encoding: 'utf8',
+    });
+    if (buildResult.status !== 0) throw new Error(buildResult.stderr || buildResult.stdout || 'Build website thất bại.');
+
+    const publishPaths = [
+      'data/products.json', 'data/settings.json', 'assets/products/uploads', 'assets/products/mirrored',
+      'assets/products/responsive', 'assets/products/generated', 'assets/js/site-data.js', 'assets/js/app.min.js',
+      'index.html', 'sitemap.xml', 'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts',
+    ];
+    const existingPaths = publishPaths.filter((file) => (
+      fs.existsSync(path.join(worktreeRoot, file)) || runGitAt(worktreeRoot, ['ls-files', '--', file]).output
+    ));
+    const stage = runGitAt(worktreeRoot, ['add', '-A', '--', ...existingPaths]);
+    if (!stage.ok) throw new Error(stage.output || 'Không stage được nội dung sản phẩm.');
+    const staged = runGitAt(worktreeRoot, ['diff', '--cached', '--name-only']);
+    if (!staged.ok) throw new Error(staged.output || 'Không đọc được danh sách file sản phẩm.');
+    if (!staged.output) {
+      if (pendingPath) fs.rmSync(pendingPath, { force: true });
+      if (settingsPendingPath) fs.rmSync(settingsPendingPath, { force: true });
+      if (contentPendingPath) fs.rmSync(contentPendingPath, { force: true });
+      return { ...gitSummary(), pushed: false, message: 'Nội dung admin đã giống phiên bản trên website.' };
+    }
+
+    const commit = runGitAt(worktreeRoot, ['commit', '-m', `Update website from admin ${new Date().toISOString().slice(0, 10)}`]);
+    if (!commit.ok) throw new Error(commit.output || 'Không commit được thay đổi admin.');
+    const push = runGitAt(worktreeRoot, ['push', 'origin', `HEAD:refs/heads/${branch}`]);
+    if (!push.ok) throw new Error(`${push.output || 'git push failed'}\nKhông có thay đổi nào khác trong máy bị đưa vào lần push này.`);
+
+    if (pendingPath) fs.rmSync(pendingPath, { force: true });
+    if (settingsPendingPath) fs.rmSync(settingsPendingPath, { force: true });
+    if (contentPendingPath) fs.rmSync(contentPendingPath, { force: true });
+    return {
+      ...gitSummary(),
+      pushed: true,
+      message: `Đã cập nhật nội dung admin lên website chính (${branch}).`,
+      commit: commit.output,
+      push: push.output,
+      products: mergedProducts.changedProductIds,
+      settings: mergedSettings.changed,
+      blogPosts: mergedBlogPosts.changedSlugs,
+      blogFiles: contentPaths,
+    };
+  } finally {
+    if (worktreeAdded) runGit(['worktree', 'remove', '--force', worktreeRoot]);
+    fs.rmSync(worktreeRoot, { recursive: true, force: true });
+  }
+};
+
 const loadSettings = () => {
   if (!fs.existsSync(files.settings)) {
     return { featuredIds: [], headerImages: [], categoryImages: {} };
@@ -308,6 +635,45 @@ const loadSettings = () => {
 const saveSettings = (settings) => {
   fs.mkdirSync(path.dirname(files.settings), { recursive: true });
   fs.writeFileSync(files.settings, JSON.stringify(normalizeSettings(settings), null, 2) + '\n');
+};
+
+const savePendingSettings = (beforeSettings, afterSettings) => {
+  const pendingPath = path.join(root, '.admin-backups', 'pending-admin-settings.json');
+  const existing = fs.existsSync(pendingPath) ? JSON.parse(fs.readFileSync(pendingPath, 'utf8')) : null;
+  const pending = recordAdminSettingsChanges(existing, beforeSettings, afterSettings);
+  if (Object.keys(pending.fields).length) {
+    fs.mkdirSync(path.dirname(pendingPath), { recursive: true });
+    const tempPath = `${pendingPath}.${process.pid}.tmp`;
+    fs.writeFileSync(tempPath, `${JSON.stringify(pending, null, 2)}\n`);
+    fs.renameSync(tempPath, pendingPath);
+  } else {
+    fs.rmSync(pendingPath, { force: true });
+  }
+};
+
+const snapshotBlogAssets = () => new Map(walkFiles(files.blogAssets).map(file => [path.relative(root, file).split(path.sep).join('/'), fs.readFileSync(file)]));
+
+const savePendingBlogChanges = ({ beforePosts, afterPosts, beforeFiles, paths = [] }) => {
+  const pendingPath = path.join(root, '.admin-backups', 'pending-admin-content.json');
+  const existing = fs.existsSync(pendingPath) ? JSON.parse(fs.readFileSync(pendingPath, 'utf8')) : null;
+  let pending = recordBlogPostChanges(existing, beforePosts, afterPosts);
+  const afterFiles = new Map();
+  for (const relativePath of paths) {
+    const fullPath = path.join(root, ...relativePath.split('/'));
+    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) afterFiles.set(relativePath, fs.readFileSync(fullPath));
+  }
+  const fileChanges = [...new Set([...beforeFiles.keys(), ...afterFiles.keys(), ...paths])].map(relativePath => ({
+    path: relativePath,
+    before: beforeFiles.has(relativePath) ? beforeFiles.get(relativePath) : null,
+    after: afterFiles.has(relativePath) ? afterFiles.get(relativePath) : null,
+  }));
+  pending = recordAdminFileChanges(pending, fileChanges);
+  if (Object.keys(pending.posts || {}).length || Object.keys(pending.files || {}).length) {
+    fs.mkdirSync(path.dirname(pendingPath), { recursive: true });
+    const tempPath = `${pendingPath}.${process.pid}.tmp`;
+    fs.writeFileSync(tempPath, `${JSON.stringify(pending, null, 2)}\n`);
+    fs.renameSync(tempPath, pendingPath);
+  } else fs.rmSync(pendingPath, { force: true });
 };
 
 const parseMultipartImage = (contentType, body) => {
@@ -1119,18 +1485,18 @@ const buildBlogHtmlUpload = ({ fields, persist }) => {
   }
 };
 
-const readBlogPostsFromSiteData = () => {
-  if (!fs.existsSync(files.siteData)) return [];
-  const source = fs.readFileSync(files.siteData, 'utf8');
+const readBlogPostsFromSiteData = (siteDataPath = files.siteData) => {
+  if (!fs.existsSync(siteDataPath)) return [];
+  const source = fs.readFileSync(siteDataPath, 'utf8');
   const context = { window: {} };
   vm.createContext(context);
   vm.runInContext(source, context);
   return Array.isArray(context.window.BLOG_POSTS) ? context.window.BLOG_POSTS : [];
 };
 
-const replaceBlogPostsInSiteData = (posts) => {
-  if (!fs.existsSync(files.siteData)) return;
-  let source = fs.readFileSync(files.siteData, 'utf8');
+const replaceBlogPostsInSiteData = (posts, siteDataPath = files.siteData) => {
+  if (!fs.existsSync(siteDataPath)) return;
+  let source = fs.readFileSync(siteDataPath, 'utf8');
   const startMarker = 'const BLOG_POSTS = [';
   const startIdx = source.indexOf(startMarker);
   if (startIdx === -1) return;
@@ -1150,7 +1516,7 @@ const replaceBlogPostsInSiteData = (posts) => {
   if (endIdx === -1) return;
   const block = `const BLOG_POSTS = ${JSON.stringify(posts, null, 2)};`;
   source = source.slice(0, startIdx) + block + source.slice(endIdx);
-  fs.writeFileSync(files.siteData, source);
+  fs.writeFileSync(siteDataPath, source);
 };
 
 const upsertBlogPost = ({ category, slug, meta }) => {
@@ -1461,16 +1827,34 @@ const getScheduledWorkflowStatus = async () => {
 const handleApi = async (req, res, pathname) => {
   try {
     if (pathname === '/api/products.php' && req.method === 'GET') {
-      sendJson(res, { ok: true, products: JSON.parse(fs.readFileSync(files.products, 'utf8')) });
+      const bytes = getProductsBytes();
+      sendJson(res, { ok: true, products: JSON.parse(bytes.toString('utf8')), revision: getProductsRevision(bytes) });
       return true;
     }
 
     if (pathname === '/api/products.php' && req.method === 'POST') {
       const body = JSON.parse((await readBody(req)).toString('utf8'));
-      if (!Array.isArray(body.products)) throw new Error('Missing products array');
-      fs.writeFileSync(files.products, JSON.stringify(body.products, null, 2) + '\n');
-      runBuild();
-      sendJson(res, { ok: true, products: JSON.parse(fs.readFileSync(files.products, 'utf8')) });
+      if (!Array.isArray(body?.products) || !body.revision) {
+        sendJson(res, { ok: false, message: 'Thiếu danh sách sản phẩm hoặc phiên bản dữ liệu. Hãy tải lại admin.' }, 400);
+        return true;
+      }
+      const currentBytes = getProductsBytes();
+      if (body.revision !== getProductsRevision(currentBytes)) {
+        sendJson(res, { ok: false, conflict: true, message: 'Danh sách sản phẩm đã được thay đổi ở nơi khác. Hãy tải lại dữ liệu trước khi lưu để tránh ghi đè.' }, 409);
+        return true;
+      }
+      const existingById = new Map(JSON.parse(currentBytes.toString('utf8')).map((product) => [String(product.id), product]));
+      const products = body.products.map((product) => {
+        const previous = existingById.get(String(product?.id));
+        return !product?.slug && previous?.slug ? { ...product, slug: previous.slug } : product;
+      });
+      const validationErrors = validateProducts(products, existingById);
+      if (validationErrors.length) {
+        sendJson(res, { ok: false, message: `Không lưu được:\n• ${validationErrors.slice(0, 12).join('\n• ')}` }, 400);
+        return true;
+      }
+      const saved = saveProductsWithBackup(products);
+      sendJson(res, { ok: true, ...saved });
       return true;
     }
 
@@ -1481,7 +1865,9 @@ const handleApi = async (req, res, pathname) => {
 
     if (pathname === '/api/settings.php' && req.method === 'POST') {
       const body = JSON.parse((await readBody(req)).toString('utf8'));
+      const beforeSettings = loadSettings();
       saveSettings(body.settings || {});
+      savePendingSettings(beforeSettings, loadSettings());
       runBuild();
       sendJson(res, { ok: true, settings: loadSettings() });
       return true;
@@ -1574,11 +1960,23 @@ const handleApi = async (req, res, pathname) => {
     if (pathname === '/api/blog.php' && req.method === 'POST') {
       const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
       if (!fields) throw new Error('Không đọc được dữ liệu form');
+      const beforePosts = readBlogPostsFromSiteData();
+      const beforeFiles = snapshotBlogAssets();
       const result = buildBlogHtmlUpload({ fields, persist: true });
       const outDir = path.join(root, 'blog', result.category, result.slug);
+      const relativePage = `blog/${result.category}/${result.slug}/index.html`;
+      const pagePath = path.join(root, ...relativePage.split('/'));
+      if (fs.existsSync(pagePath)) beforeFiles.set(relativePage, fs.readFileSync(pagePath));
       fs.mkdirSync(outDir, { recursive: true });
       fs.writeFileSync(path.join(outDir, 'index.html'), result.normalized.html);
       upsertBlogPost({ category: result.category, slug: result.slug, meta: result.normalized.meta });
+      const afterAssets = snapshotBlogAssets();
+      savePendingBlogChanges({
+        beforePosts,
+        afterPosts: readBlogPostsFromSiteData(),
+        beforeFiles,
+        paths: [...new Set([...beforeFiles.keys(), ...afterAssets.keys(), relativePage])],
+      });
       runBuild();
       sendJson(res, { ok: true, url: `/blog/${result.category}/${result.slug}/`, slug: result.slug, posts: listBlogPosts() });
       return true;
@@ -1587,8 +1985,26 @@ const handleApi = async (req, res, pathname) => {
     if (pathname === '/api/blog-schedule.php' && req.method === 'POST') {
       const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
       if (!fields) throw new Error('Không đọc được dữ liệu form');
+      const beforePosts = readBlogPostsFromSiteData();
+      const beforeFiles = snapshotBlogAssets();
       const result = buildBlogHtmlUpload({ fields, persist: true });
+      const schedulePrefix = `scheduled-posts/${result.category}/${result.slug}`;
+      for (const filename of ['index.html', 'article.json']) {
+        const relativePath = `${schedulePrefix}/${filename}`;
+        const existingPath = path.join(root, ...relativePath.split('/'));
+        if (fs.existsSync(existingPath)) beforeFiles.set(relativePath, fs.readFileSync(existingPath));
+      }
       const scheduled = writeScheduledBlog({ result, publishAt: fields.publishAt });
+      const afterAssets = snapshotBlogAssets();
+      savePendingBlogChanges({
+        beforePosts,
+        afterPosts: readBlogPostsFromSiteData(),
+        beforeFiles,
+        paths: [...new Set([
+          ...beforeFiles.keys(), ...afterAssets.keys(),
+          `${schedulePrefix}/index.html`, `${schedulePrefix}/article.json`,
+        ])],
+      });
       sendJson(res, {
         ok: true,
         scheduleId: `${result.category}/${result.slug}`,
@@ -1605,11 +2021,23 @@ const handleApi = async (req, res, pathname) => {
       const category = safeName(String(body.category || ''));
       const slug = safeName(String(body.slug || ''));
       if (!category || !slug) throw new Error('Thiếu category hoặc slug');
+      const beforePosts = readBlogPostsFromSiteData();
+      const beforeFiles = snapshotBlogAssets();
       const dir = path.join(root, 'blog', category, slug);
+      const relativePage = `blog/${category}/${slug}/index.html`;
+      const pagePath = path.join(root, ...relativePage.split('/'));
+      if (fs.existsSync(pagePath)) beforeFiles.set(relativePage, fs.readFileSync(pagePath));
       if (fs.existsSync(dir)) {
         fs.rmSync(dir, { recursive: true, force: true });
       }
       removeBlogPostFromSiteData(slug);
+      const afterAssets = snapshotBlogAssets();
+      savePendingBlogChanges({
+        beforePosts,
+        afterPosts: readBlogPostsFromSiteData(),
+        beforeFiles,
+        paths: [...new Set([...beforeFiles.keys(), ...afterAssets.keys(), relativePage])],
+      });
       runBuild();
       sendJson(res, { ok: true, posts: listBlogPosts() });
       return true;
@@ -1647,7 +2075,9 @@ const server = http.createServer(async (req, res) => {
   serveStatic(req, res, pathname);
 });
 
-server.listen(port, '127.0.0.1', () => {
+if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Website: http://127.0.0.1:${port}/`);
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
+
+module.exports = { server, validateProducts, pushGit };

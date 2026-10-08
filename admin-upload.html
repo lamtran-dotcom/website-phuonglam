@@ -24,7 +24,7 @@
     }
 
     .wrap { max-width: 1440px; margin: 0 auto; padding: 28px; }
-    .topbar { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 22px; }
+    .topbar { position: sticky; top: 0; z-index: 20; display: flex; justify-content: space-between; gap: 16px; align-items: center; margin: -8px 0 18px; padding: 10px 0; background: rgba(249,253,247,.96); backdrop-filter: blur(14px); }
     h1 { margin: 0; font-size: 34px; letter-spacing: -.03em; }
     .sub { color: var(--muted); margin-top: 6px; }
     .panel {
@@ -35,9 +35,9 @@
     }
 
     .login { max-width: 480px; margin: 80px auto; padding: 28px; }
-    .grid { display: grid; grid-template-columns: 360px 1fr; gap: 22px; align-items: start; }
-    .side { padding: 18px; position: sticky; top: 18px; max-height: calc(100vh - 36px); overflow: auto; }
-    .editor { padding: 22px; }
+    .grid { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 20px; align-items: start; }
+    .side { padding: 16px; position: sticky; top: 94px; max-height: calc(100vh - 112px); overflow: auto; }
+    .editor { padding: 22px; min-width: 0; }
 
     input, textarea, select, button {
       font: inherit;
@@ -107,6 +107,27 @@
     }
     .product-item.active { background: var(--soft); border-color: var(--line); }
     .product-item.is-hidden { opacity: .58; background: #fbfbfb; }
+    .product-item { align-items: center; transition: background .16s ease, border-color .16s ease; }
+    .product-item:hover { background: #f7fbf5; border-color: var(--line); }
+    .product-item .name { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+    .product-list-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) 130px; gap: 8px; margin: 10px 0; }
+    .product-list-count { margin: 8px 2px; font-size: 12px; color: var(--muted); }
+    .product-editor-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+    .product-editor-heading h2 { margin: 0; }
+    .product-editor-summary { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+    .product-editor-summary span { border: 1px solid var(--line); border-radius: 999px; background: #f8fbf6; padding: 5px 9px; font-size: 12px; color: #53634f; }
+    .product-section-tabs { position: sticky; top: 88px; z-index: 10; display: flex; gap: 7px; overflow-x: auto; margin: 0 -6px 20px; padding: 8px 6px 12px; background: rgba(255,255,255,.96); border-bottom: 1px solid #edf1ea; }
+    .product-section-tab { flex: 0 0 auto; padding: 9px 13px; color: #53634f; background: #f7faf5; border: 1px solid var(--line); border-radius: 999px; box-shadow: none; font-size: 13px; }
+    .product-section-tab[aria-selected="true"] { color: #fff; background: var(--green); border-color: var(--green); }
+    .product-edit-section[hidden] { display: none !important; }
+    .product-edit-section > h2:first-child { margin-top: 4px; }
+    .editor-hint { margin: 6px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .seo-preview-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfa; margin-top: 16px; }
+    .seo-preview-title { color: #1a0dab; font-size: 18px; margin: 4px 0; }
+    .seo-preview-url { color: #188038; font-size: 12px; }
+    .seo-preview-description { color: #4d5156; font-size: 13px; line-height: 1.5; }
+    .editor-save-dock { position: sticky; bottom: 10px; z-index: 9; display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 24px -8px -8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.97); box-shadow: 0 -8px 26px rgba(38,91,30,.09); }
+    .editor-save-dock span { color: var(--muted); font-size: 13px; }
     .hidden-badge {
       display: inline-flex;
       align-items: center;
@@ -463,12 +484,62 @@
     @media (max-width: 900px) {
       .wrap { padding: 16px; }
       .topbar, .grid { display: block; }
-      .side { position: static; max-height: none; margin-bottom: 16px; }
+      .side { position: static; max-height: 350px; margin-bottom: 16px; }
       .row, .row3, .images, .variant-grid, .card-grid { grid-template-columns: 1fr; }
       .option-group-grid { grid-template-columns: 1fr; }
       .config-images, .config-card-grid, .featured-slots, .picker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 28px; }
+      .editor { padding: 16px; }
+      .product-section-tabs { top: 0; margin-top: 10px; }
+      .product-list-toolbar { grid-template-columns: 1fr; }
+      .topbar { position: static; align-items: flex-start; flex-direction: column; }
+      .topbar > .actions { width: 100%; }
+      .editor-save-dock { bottom: 6px; }
     }
+
+    /* Product workspace: compact catalog and marketplace-style selling editor. */
+    .grid { grid-template-columns: 280px minmax(0, 1fr); }
+    .wrap { max-width: 1720px; }
+    .grid .panel { border-radius: 10px; box-shadow: 0 2px 8px #23351c08; }
+    .grid input, .grid textarea, .grid select, .grid button { border-radius: 5px; }
+    .grid input, .grid select { padding: 10px 12px; }
+    .grid .editor { background: #f6f7f8; padding: 20px; }
+    .product-edit-section { background: white; border: 1px solid #e5e7e9; border-radius: 8px; padding: 24px; }
+    .product-edit-section h2 { font-size: 23px; }
+    .product-section-tabs { top: 100px; padding: 0; gap: 0; margin: 0 0 20px; border-radius: 6px; }
+    .product-section-tab { background: white; border: 0; border-bottom: 3px solid transparent; padding: 17px 16px; font-size: 14px; }
+    .product-section-tab[aria-selected="true"] { background: white; color: var(--green); border-color: var(--green); }
+    .product-list-toolbar { grid-template-columns: 1fr; }
+    .product-item { border-radius: 6px; padding: 10px 6px; border-bottom: 1px solid #eee; font-size: 13px; }
+    .product-item .muted { font-size: 11px; margin-top: 6px; }
+    .product-images { grid-template-columns: repeat(auto-fill, minmax(80px, 106px)); margin: 18px 0 24px; }
+    .product-images .image-box { border-radius: 5px; border-width: 1px; }
+    .cover-label { position: absolute; bottom: 0; width: 100%; background: #285d26cc; color: white; font-size: 11px; padding: 4px !important; }
+    .sales-group { background: #f6f7f8; border: 0; border-radius: 6px; padding: 20px; }
+    .sales-group .option-group-grid { grid-template-columns: minmax(0,1fr) auto; }
+    .sales-group .option-group-grid > div:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+    .sales-group .option-value-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+    .sales-group .option-value-pill { background: white; border: 1px solid #ddd; border-radius: 5px; min-width: 0; }
+    .sales-group .option-value-pill input { width: 100%; min-width: 0; }
+    .sales-toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 20px 0 12px; }
+    .sales-toolbar h3 { margin: 0 auto 0 0; }
+    .bulk-prices { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)) auto; gap: 10px; background: #f6f7f8; padding: 14px; margin: 14px 0 20px; border-radius: 6px; align-items: end; }
+    .bulk-prices label { font-size: 12px; margin: 0 0 6px; }
+    .sales-table-wrap { overflow: auto; border: 1px solid #e1e4e6; border-radius: 6px; }
+    .sales-table { width: 100%; min-width: 880px; border-collapse: collapse; table-layout: fixed; }
+    .sales-table th { background: #f6f7f8; color: #555; padding: 15px 12px; font-size: 13px; font-weight: 600; text-align: left; }
+    .sales-table td { padding: 16px 12px; border: 1px solid #e6e8ea; vertical-align: top; }
+    .sales-table th:first-child { width: 31%; }
+    .sales-table th:last-child { width: 70px; }
+    .sales-table input { font-size: 13px; }
+    .sales-table .variant-identity { display: flex; gap: 10px; align-items: start; }
+    .sales-table .variant-identity > div:last-child { min-width: 0; flex: 1; }
+    .sales-table .variant-img { width: 58px; height: 58px; flex-shrink: 0; border-radius: 5px; }
+    .sales-table label { font-size: 11px; margin: 8px 0 4px; }
+    .sales-table select { font-size: 12px; }
+    .sales-empty { text-align: center; padding: 35px; border: 1px dashed #ddd; border-radius: 6px; }
+    @media(max-width: 1100px) { .grid { grid-template-columns: 240px minmax(0,1fr); } .bulk-prices { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+    @media(max-width: 760px) { .grid { grid-template-columns: 1fr; } .grid .side { position: static; max-height: 340px; } .grid .editor, .product-edit-section { padding: 14px; } .sales-group .option-value-list, .bulk-prices { grid-template-columns: 1fr; } .product-editor-heading { flex-direction: column; } .product-section-tabs { top: 0; } .editor-save-dock { flex-wrap: wrap; } }
   </style>
 </head>
 <body>
@@ -486,12 +557,15 @@
     const API_BLOG_PREVIEW = 'api/blog-preview.php';
     const PUBLIC_SITE_URL = 'https://phuonglam.com';
     const PASS_KEY = 'phuonglam_admin_password';
+    const PRODUCT_DRAFT_KEY = 'phuonglam_admin_product_draft_v1';
     const CATEGORY_ALIASES = { 'tinh-dau': 'bep-xong' };
     const normalizeCategoryId = value => CATEGORY_ALIASES[String(value || '')] || String(value || 'nen-thom');
     const CATEGORIES = [
       ['nen-thom', 'Nến Xông'],
       ['combo', 'Combo Xông Nhà'],
       ['thao-moc-xong', 'Thảo Mộc Xông'],
+      ['tui-thom', 'Túi thơm'],
+      ['go-thom', 'Gỗ thơm'],
       ['bep-xong', 'Đèn Xông Tinh Dầu'],
       ['nen-tru', 'Nến Trụ'],
       ['nu-tram', 'Nụ Trầm'],
@@ -502,13 +576,22 @@
 
     let password = localStorage.getItem(PASS_KEY) || '';
     let products = [];
+    let productRevision = '';
+    let productDraftDirty = false;
+    let productDraftTimer = null;
+    let productDraftStorageFailed = false;
+    let originalProductSnapshots = {};
+    let pendingUploads = 0;
+    const numericInputErrors = new Map();
     let settings = { featuredIds: [], headerImages: [], categoryImages: {} };
     let orders = [];
     let selectedId = null;
     let variantEditorColor = '';
     let listSearch = '';
     let listCategory = '';
+    let listVisibility = 'all';
     let activeTab = 'products';
+    let productEditorSection = 'details';
     let featuredPickerIndex = null;
     let featuredPickerSearch = '';
     let saving = false;
@@ -597,6 +680,65 @@
     };
     const selectedProduct = () => products.find(product => String(product.id) === String(selectedId));
 
+    function updateDraftStatus() {
+      const status = document.getElementById('productDraftStatus');
+      if (!status) return;
+      status.textContent = pendingUploads
+        ? `Đang tải ${pendingUploads} ảnh; hãy chờ tải xong rồi mới lưu.`
+        : productDraftDirty
+          ? productDraftStorageFailed
+            ? 'Có thay đổi chưa lưu; trình duyệt không giữ được bản nháp tự động. Hãy lưu trước khi rời trang.'
+            : 'Có thay đổi sản phẩm chưa lưu. Bản nháp đang được giữ trên trình duyệt này.'
+          : '';
+      status.style.color = productDraftStorageFailed ? '#b45f00' : '#8a5b00';
+    }
+
+    function writeProductDraft() {
+      try {
+        localStorage.setItem(PRODUCT_DRAFT_KEY, JSON.stringify({
+          revision: productRevision,
+          savedAt: new Date().toISOString(),
+          products,
+          numericInputErrors: [...numericInputErrors.entries()],
+        }));
+        productDraftStorageFailed = false;
+      } catch (error) {
+        productDraftStorageFailed = true;
+        console.warn('Không thể lưu bản nháp sản phẩm trên trình duyệt.', error);
+      }
+      updateDraftStatus();
+    }
+
+    function scheduleProductDraftSave() {
+      productDraftDirty = true;
+      clearTimeout(productDraftTimer);
+      productDraftTimer = setTimeout(writeProductDraft, 350);
+      updateDraftStatus();
+    }
+
+    function restoreProductDraft(serverProducts, revision) {
+      let draft;
+      try {
+        draft = JSON.parse(localStorage.getItem(PRODUCT_DRAFT_KEY) || 'null');
+      } catch {
+        localStorage.removeItem(PRODUCT_DRAFT_KEY);
+        return serverProducts;
+      }
+      if (!Array.isArray(draft?.products)) return serverProducts;
+      const changedBase = draft.revision && revision && draft.revision !== revision;
+      const message = changedBase
+        ? 'Bản nháp được tạo từ dữ liệu cũ hơn. Khôi phục sẽ thay danh sách hiện tại trong admin bằng bản nháp trên máy này. Tiếp tục?'
+        : 'Có bản nháp sản phẩm chưa lưu từ phiên trước. Khôi phục bản nháp?';
+      if (!confirm(message)) {
+        localStorage.removeItem(PRODUCT_DRAFT_KEY);
+        return serverProducts;
+      }
+      productDraftDirty = true;
+      numericInputErrors.clear();
+      (Array.isArray(draft.numericInputErrors) ? draft.numericInputErrors : []).forEach(([key, message]) => numericInputErrors.set(key, message));
+      return draft.products.map(normalizeProduct);
+    }
+
     async function readJsonResponse(response, label) {
       const text = await response.text();
       try {
@@ -612,6 +754,7 @@
     function normalizeProduct(product) {
       const normalized = {
         id: product.id || id(),
+        slug: product.slug || '',
         sku: product.sku || '',
         categoryId: normalizeCategoryId(product.categoryId),
         name: product.name || '',
@@ -620,6 +763,8 @@
         shortDesc: product.shortDesc || '',
         description: product.description || '',
         usage: product.usage || '',
+        seoTitle: product.seoTitle || '',
+        seoDescription: product.seoDescription || '',
         tag: product.tag || '',
         weight: parseNumberInput(product.weight),
         hidden: isHidden(product),
@@ -667,7 +812,10 @@
         if (!productData.ok) throw new Error(productData.message || 'Không tải được dữ liệu sản phẩm.');
         if (!settingData.ok) throw new Error(settingData.message || 'Không tải được cài đặt website.');
         apiOnline = true;
-        products = (productData.products || []).map(normalizeProduct);
+        productRevision = productData.revision || '';
+        const serverProducts = (productData.products || []).map(normalizeProduct);
+        originalProductSnapshots = Object.fromEntries(serverProducts.map(product => [String(product.id), JSON.stringify(product)]));
+        products = restoreProductDraft(serverProducts, productRevision);
         settings = normalizeSettings(settingData.settings || {});
         orders = Array.isArray(orderData.orders) ? orderData.orders : [];
         setBlogPosts(blogData.ok ? (blogData.posts || []) : []);
@@ -679,6 +827,7 @@
           const localData = await localRes.json();
           const localProducts = Array.isArray(localData) ? localData : (localData.products || []);
           apiOnline = false;
+          productRevision = '';
           products = localProducts.map(normalizeProduct);
           settings = normalizeSettings({});
           orders = [];
@@ -731,12 +880,13 @@
           <div>
             <h1>Quản lý website</h1>
             <div class="sub">Sản phẩm, phân loại, ảnh, bán chạy, header, danh mục và đơn hàng.</div>
+            <div id="productDraftStatus" class="sub" role="status" aria-live="polite" style="font-weight:900">${pendingUploads ? `Đang tải ${pendingUploads} ảnh; hãy chờ tải xong rồi mới lưu.` : productDraftDirty ? productDraftStorageFailed ? 'Có thay đổi chưa lưu; trình duyệt không giữ được bản nháp tự động. Hãy lưu trước khi rời trang.' : 'Có thay đổi sản phẩm chưa lưu. Bản nháp đang được giữ trên trình duyệt này.' : ''}</div>
             ${!apiOnline ? '<div class="sub" style="color:#d98221;font-weight:900">Đang ở chế độ preview local: xem được dữ liệu nhưng không lưu/upload trực tiếp. Lên host có PHP thì sẽ lưu được.</div>' : ''}
           </div>
           <div class="actions">
-            <button onclick="saveAll()" ${saving || !apiOnline ? 'disabled' : ''}>${apiOnline ? 'Lưu local' : 'Preview local'}</button>
+            <button onclick="saveAll()" ${saving || !apiOnline || pendingUploads ? 'disabled' : ''}>${apiOnline ? 'Lưu local' : 'Preview local'}</button>
             <button class="secondary" onclick="previewWebsite()">Preview</button>
-            <button class="secondary" onclick="pushGit()" ${saving || !apiOnline ? 'disabled' : ''}>Push Git</button>
+            <button class="secondary" onclick="pushGit()" ${saving || !apiOnline || pendingUploads ? 'disabled' : ''}>Push Git</button>
           </div>
         </div>
 
@@ -757,8 +907,15 @@
             <div class="actions" style="margin-bottom:12px">
               <button onclick="addProduct()">+ Thêm sản phẩm</button>
             </div>
-            <input id="search" placeholder="Tìm sản phẩm..." value="${esc(listSearch)}" oninput="listSearch = this.value; renderProductList()" />
-            <select id="catFilter" style="margin-top:10px" onchange="listCategory = this.value; renderProductList()">
+            <div class="product-list-toolbar">
+              <input id="search" placeholder="Tìm theo tên hoặc SKU..." aria-label="Tìm sản phẩm theo tên hoặc SKU" value="${esc(listSearch)}" oninput="listSearch = this.value; renderProductList()" />
+              <select id="visibilityFilter" aria-label="Lọc trạng thái sản phẩm" onchange="listVisibility = this.value; renderProductList()">
+                <option value="all" ${listVisibility === 'all' ? 'selected' : ''}>Tất cả</option>
+                <option value="visible" ${listVisibility === 'visible' ? 'selected' : ''}>Đang hiển thị</option>
+                <option value="hidden" ${listVisibility === 'hidden' ? 'selected' : ''}>Đang ẩn</option>
+              </select>
+            </div>
+            <select id="catFilter" aria-label="Lọc danh mục" onchange="listCategory = this.value; renderProductList()">
               <option value="">Tất cả danh mục</option>
               ${CATEGORIES.map(([value, label]) => `<option value="${value}" ${listCategory === value ? 'selected' : ''}>${label}</option>`).join('')}
             </select>
@@ -773,6 +930,8 @@
         ${featuredPickerIndex !== null ? featuredPickerHtml() : ''}
       `;
       if (activeTab === 'products') renderProductList();
+      app.inert = saving;
+      app.setAttribute('aria-busy', String(saving));
     }
 
     function renderKeepScroll() {
@@ -786,14 +945,15 @@
     function renderProductList() {
       const list = document.getElementById('productList');
       if (!list) return;
-      const q = listSearch.toLowerCase();
+      const q = normalizeText(listSearch);
       const cat = listCategory;
       const filtered = products.filter(product => {
-        const matchesText = !q || [product.name, product.sku].join(' ').toLowerCase().includes(q);
+        const matchesText = !q || normalizeText([product.name, product.sku, product.categoryId].join(' ')).includes(q);
         const matchesCat = !cat || product.categoryId === cat;
-        return matchesText && matchesCat;
+        const matchesVisibility = listVisibility === 'all' || (listVisibility === 'hidden' ? isHidden(product) : !isHidden(product));
+        return matchesText && matchesCat && matchesVisibility;
       });
-      list.innerHTML = filtered.map(product => {
+      list.innerHTML = `<div class="product-list-count">${filtered.length} / ${products.length} sản phẩm</div>` + (filtered.map(product => {
         const img = firstImage(product);
         const hidden = isHidden(product);
         return `
@@ -802,11 +962,11 @@
             <div>
               <div class="name">${esc(product.name || 'Chưa đặt tên')}${hidden ? '<span class="hidden-badge">Ẩn</span>' : ''}</div>
               <div class="price">${fmt(product.price)}</div>
-              <div class="muted">${esc(product.sku || '')}</div>
+              <div class="muted">${esc(product.sku || '')} · ${(product.variants || []).length} phân loại</div>
             </div>
           </div>
-        `;
-      }).join('') || '<div class="empty">Không có sản phẩm phù hợp.</div>';
+      `;
+      }).join('') || '<div class="empty">Không có sản phẩm phù hợp. Thử từ khóa hoặc bộ lọc khác.</div>');
     }
 
     function adminTabHtml() {
@@ -901,7 +1061,7 @@
             const src = imgs[index] || '';
             return `
               <div class="image-box config-image-box" onclick="pickHeaderImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropHeaderImage(event, ${index})">
-                ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeHeaderImage(${index})">Xoá</button>` : `<span>+<br>Header ${index + 1}</span>`}
+                ${src ? `<img src="${esc(src)}" />${index === 0 ? '<span class="cover-label">Ảnh bìa</span>' : ''} <button class="remove-img" onclick="event.stopPropagation(); removeHeaderImage(${index})">Xoá</button>` : `<span>+<br>Header ${index + 1}</span>`}
               </div>
             `;
           }).join('')}
@@ -919,7 +1079,7 @@
             return `
               <div class="mini-card config-mini">
                 <div class="image-box config-image-box" onclick="pickCategoryImage('${catId}')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropCategoryImage(event, '${catId}')">
-                  ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeCategoryImage('${catId}')">Xoá</button>` : `<span>+<br>${esc(label)}</span>`}
+                  ${src ? `<img src="${esc(src)}" /><button class="remove-img" onclick="event.stopPropagation(); removeCategoryImage('${catId}')">Xoá</button>` : `<span>+<br>${esc(label)}</span>`}
                 </div>
                 <div class="name" style="margin-top:8px">${esc(label)}</div>
               </div>
@@ -1336,71 +1496,144 @@
 
     function editorHtml(product) {
       return `
-        <div class="actions" style="justify-content:space-between">
-          <div class="actions">
-            <button class="${isHidden(product) ? 'secondary' : 'danger'}" onclick="toggleHidden()">${isHidden(product) ? 'Hiện sản phẩm' : 'Ẩn sản phẩm'}</button>
-            <button class="secondary" onclick="duplicateProduct()">Nhân bản</button>
-            <button class="danger" onclick="deleteProduct()">Xoá sản phẩm</button>
+        <div class="product-editor-heading">
+          <div>
+            <h2>${esc(product.name || 'Sản phẩm mới')}</h2>
+            <div class="product-editor-summary">
+              <span>${esc(CATEGORIES.find(([id]) => id === product.categoryId)?.[1] || 'Chưa chọn danh mục')}</span>
+              <span>${(product.variants || []).length} phân loại</span>
+              <span>${(product.images || []).filter(Boolean).length}/9 ảnh</span>
+              <span>${isHidden(product) ? 'Đang ẩn' : 'Đang hiển thị'}</span>
+              ${product.slug ? `<span>URL: /san-pham/${esc(product.slug)}/</span>` : '<span>URL sẽ tạo khi lưu</span>'}
+            </div>
           </div>
-          <strong>ID: ${esc(product.id)} ${isHidden(product) ? '<span class="hidden-badge">Đang ẩn</span>' : ''}</strong>
+          <strong class="muted">ID ${esc(product.id)}</strong>
         </div>
-        ${isHidden(product) ? '<p class="status" style="color:#8a5b00;background:#fff8e8;border-radius:12px;padding:10px 12px">Sản phẩm này đang ẩn khỏi trang khách xem. Bấm “Hiện sản phẩm” rồi “Lưu lên website” để mở lại.</p>' : ''}
+        <div class="actions" style="margin-bottom:14px">
+          <button class="${isHidden(product) ? 'secondary' : 'danger'} small" onclick="toggleHidden()">${isHidden(product) ? 'Hiện sản phẩm' : 'Ẩn sản phẩm'}</button>
+          <button class="secondary small" onclick="duplicateProduct()">Nhân bản</button>
+          <button class="danger small" onclick="deleteProduct()">Xoá sản phẩm</button>
+        </div>
+        ${isHidden(product) ? '<p class="status" style="color:#8a5b00;background:#fff8e8;border-radius:12px;padding:10px 12px">Sản phẩm đang ẩn khỏi danh sách cửa hàng. Lưu thay đổi để cập nhật.</p>' : ''}
 
-        <div class="row">
-          <div><label>Tên sản phẩm *</label><input value="${esc(product.name)}" oninput="updateField('name', this.value)" /></div>
-          <div><label>Danh mục *</label><select onchange="updateField('categoryId', this.value)">${CATEGORIES.map(([value, label]) => `<option value="${value}" ${product.categoryId === value ? 'selected' : ''}>${label}</option>`).join('')}</select></div>
-        </div>
-        <div class="row3">
-          <div><label>Giá bán *</label><input ${numberInputAttrs} value="${esc(product.price)}" oninput="updateField('price', this.value)" /></div>
-          <div><label>Giá gốc</label><input ${numberInputAttrs} value="${esc(product.originalPrice ?? '')}" oninput="updateField('originalPrice', this.value)" /></div>
-          <div><label>Gram</label><input ${numberInputAttrs} value="${esc(product.weight ?? '')}" oninput="updateField('weight', this.value)" /></div>
-        </div>
-        <div class="row3">
-          <div><label>SKU</label><input value="${esc(product.sku)}" oninput="updateField('sku', this.value)" /></div>
-          <div><label>Nhãn</label><select onchange="updateField('tag', this.value)">${PRODUCT_TAGS.map(tag => `<option value="${esc(tag)}" ${(product.tag || '') === tag ? 'selected' : ''}>${tag || 'Không gắn nhãn'}</option>`).join('')}</select></div>
-          <div><label>Trạng thái sản phẩm</label><select onchange="updateField('hidden', this.value)"><option value="" ${!isHidden(product) ? 'selected' : ''}>Đang hiện trên website</option><option value="true" ${isHidden(product) ? 'selected' : ''}>Đang ẩn khỏi khách</option></select></div>
-        </div>
-
-        <label>Mô tả ngắn</label>
-        <textarea oninput="updateField('shortDesc', this.value)">${esc(product.shortDesc)}</textarea>
-        <label>Mô tả chi tiết</label>
-        <textarea oninput="updateField('description', this.value)">${esc(product.description)}</textarea>
-        <label>Hướng dẫn sử dụng</label>
-        <textarea oninput="updateField('usage', this.value)">${esc(product.usage)}</textarea>
-
-        <h2>Ảnh sản phẩm <span class="muted">(tối đa 9 ảnh)</span></h2>
-        <div class="images product-images">
-          ${Array.from({ length: 9 }).map((_, index) => imageBox(product, index)).join('')}
+        <div class="product-section-tabs" role="tablist" aria-label="Các phần chỉnh sửa sản phẩm">
+          ${[
+            ['details', 'Thông tin cơ bản'],
+            ['content', 'Mô tả'],
+                        ['variants', 'Thông tin bán hàng'],
+            ['shipping', 'Vận chuyển'],
+            ['seo', 'SEO']
+          ].map(([key, label]) => `<button type="button" role="tab" class="product-section-tab" aria-selected="${productEditorSection === key}" onclick="setProductEditorSection('${key}')">${label}</button>`).join('')}
         </div>
 
-        <h2>Nhóm tuỳ chọn</h2>
-        <p class="muted">Dùng khi một sản phẩm có nhiều lớp chọn, ví dụ: Màu rồi tới Số lượng.</p>
-        <button class="secondary" onclick="addOptionGroup()">+ Thêm nhóm tuỳ chọn</button>
-        <div style="display:grid;gap:10px;margin-top:10px">
-          ${(product.optionGroups || []).map((group, index) => optionGroupHtml(group, index)).join('') || '<p class="muted">Chưa có nhóm tuỳ chọn. Sản phẩm sẽ dùng phân loại 1 tầng như cũ.</p>'}
-        </div>
+        <section class="product-edit-section" role="tabpanel" ${productEditorSection !== 'details' ? 'hidden' : ''}>
+          <h2>Thông tin cơ bản</h2>
+          <p class="editor-hint">Tên và danh mục giúp khách nhận diện sản phẩm. URL hiện tại được giữ nguyên khi đổi tên.</p>
+          <label>Hình ảnh sản phẩm <span class="muted">· ${(product.images || []).filter(Boolean).length}/9</span></label>
+          <p class="editor-hint">Bấm hoặc kéo thả để tải ảnh. Ảnh đầu tiên là ảnh bìa.</p>
+          <div class="images product-images">${Array.from({ length: 9 }).map((_, index) => imageBox(product, index)).join('')}</div>
+          <div class="row">
+            <div><label>Tên sản phẩm *</label><input value="${esc(product.name)}" oninput="updateField('name', this.value)" /></div>
+            <div><label>Danh mục *</label><select onchange="updateField('categoryId', this.value)">${CATEGORIES.map(([value, label]) => `<option value="${value}" ${product.categoryId === value ? 'selected' : ''}>${label}</option>`).join('')}</select></div>
+          </div>
+          <div class="row3">
+            <div><label>SKU</label><input value="${esc(product.sku)}" oninput="updateField('sku', this.value)" /></div>
+            <div><label>Nhãn</label><select onchange="updateField('tag', this.value)">${PRODUCT_TAGS.map(tag => `<option value="${esc(tag)}" ${(product.tag || '') === tag ? 'selected' : ''}>${tag || 'Không gắn nhãn'}</option>`).join('')}</select></div>
+            <div><label>Trạng thái</label><select onchange="updateField('hidden', this.value)"><option value="" ${!isHidden(product) ? 'selected' : ''}>Đang hiển thị trên website</option><option value="true" ${isHidden(product) ? 'selected' : ''}>Ẩn khỏi danh sách</option></select></div>
+          </div>
+        </section>
 
-        <h2>Phân loại sản phẩm</h2>
-        ${variantEditorHtml(product)}
+        <section class="product-edit-section" role="tabpanel" ${productEditorSection !== 'content' ? 'hidden' : ''}>
+          <h2>Mô tả sản phẩm</h2>
+          <p class="editor-hint">Chia đoạn bằng một dòng trống. Ghi rõ dữ kiện đã xác nhận; không tự thêm cam kết, công dụng hoặc thông số.</p>
+          <label>Mô tả ngắn</label>
+          <textarea oninput="updateField('shortDesc', this.value)">${esc(product.shortDesc)}</textarea>
+          <label>Mô tả chi tiết</label>
+          <textarea style="min-height:360px" oninput="updateField('description', this.value)">${esc(product.description)}</textarea>
+          <label>Cách dùng và lưu ý</label>
+          <textarea style="min-height:180px" oninput="updateField('usage', this.value)">${esc(product.usage)}</textarea>
+        </section>
+
+        <section class="product-edit-section" role="tabpanel" ${productEditorSection !== 'variants' ? 'hidden' : ''}>
+          <h2>Thông tin bán hàng</h2>
+          <p class="editor-hint">Thiết lập giá chung, sau đó thêm phân loại nếu sản phẩm có nhiều lựa chọn.</p>
+          <div class="row">
+            <div><label>Giá bán chung (₫) *</label><input ${numberInputAttrs} value="${esc(product.price)}" oninput="updateField('price', this.value)" /></div>
+            <div><label>Giá gốc chung (₫)</label><input ${numberInputAttrs} value="${esc(product.originalPrice ?? '')}" oninput="updateField('originalPrice', this.value)" /></div>
+          </div>
+          <h3>Phân loại hàng</h3>
+          ${(product.optionGroups || []).map((group, index) => optionGroupHtml(group, index)).join('')}
+          <button class="secondary" style="margin-top:14px;border-style:dashed" onclick="addOptionGroup()">+ Thêm nhóm phân loại</button>
+          <p class="editor-hint">Ví dụ: Màu sắc, Quy cách. Điền các tùy chọn rồi bấm “Tạo tổ hợp còn thiếu”; giá và ảnh đã nhập được giữ nguyên.</p>
+          ${variantEditorHtml(product)}
+          <p class="editor-hint">Kho hàng: website hiện chưa quản lý số lượng tồn theo phân loại. Có thể dùng nhãn “Hết hàng” ở Thông tin cơ bản.</p>
+        </section>
+        <section class="product-edit-section" role="tabpanel" ${productEditorSection !== 'shipping' ? 'hidden' : ''}>
+          <h2>Vận chuyển</h2>
+          <label>Khối lượng chung sau đóng gói (gram)</label>
+          <input style="max-width:320px" ${numberInputAttrs} value="${esc(product.weight ?? '')}" oninput="updateField('weight', this.value)" />
+          <p class="editor-hint">Khối lượng riêng của từng phân loại được nhập trong bảng Thông tin bán hàng. Để trống để dùng khối lượng chung.</p>
+          <button class="secondary" onclick="setProductEditorSection('variants')">Đi đến bảng phân loại</button>
+        </section>
+
+        <section class="product-edit-section" role="tabpanel" ${productEditorSection !== 'seo' ? 'hidden' : ''}>
+          <h2>Hiển thị trên Google</h2>
+          <p class="editor-hint">Để trống để trang tự dùng tên và mô tả sản phẩm. URL sản phẩm không đổi khi chỉnh tiêu đề.</p>
+          <label>Tiêu đề SEO <span class="muted">(khuyến nghị tối đa 60 ký tự)</span></label>
+          <input id="seoTitleInput" value="${esc(product.seoTitle || '')}" oninput="updateField('seoTitle', this.value); updateSeoPreview()" placeholder="${esc(product.name || '')} | Phương Lâm" />
+          <label>Mô tả SEO <span class="muted">(khuyến nghị 120–160 ký tự)</span></label>
+          <textarea id="seoDescriptionInput" style="min-height:100px" oninput="updateField('seoDescription', this.value); updateSeoPreview()" placeholder="Tóm tắt sản phẩm rõ ràng, đúng thông tin đã xác nhận.">${esc(product.seoDescription || '')}</textarea>
+          <div class="seo-preview-card" aria-live="polite">
+            <div class="seo-preview-url">phuonglam.com/san-pham/${esc(product.slug || 'duong-dan-san-pham')}/</div>
+            <div id="seoPreviewTitle" class="seo-preview-title">${esc(product.seoTitle || `${product.name || 'Sản phẩm'} | Phương Lâm`)}</div>
+            <div id="seoPreviewDescription" class="seo-preview-description">${esc(product.seoDescription || product.shortDesc || '')}</div>
+          </div>
+        </section>
+
+        <div class="editor-save-dock">
+          <span>${productDraftDirty ? 'Có chỉnh sửa chưa lưu' : 'Đã lưu vào trình duyệt'}</span>
+          <button type="button" class="secondary" onclick="previewCurrentProduct()">Xem bản đã lưu</button>
+          <button type="button" onclick="saveAll()" ${saving || !apiOnline || pendingUploads ? 'disabled' : ''}>Lưu thay đổi</button>
+        </div>
       `;
+    }
+
+    function setProductEditorSection(section) {
+      productEditorSection = section;
+      renderKeepScroll();
+    }
+
+    function updateSeoPreview() {
+      const product = selectedProduct();
+      if (!product) return;
+      const title = document.getElementById('seoPreviewTitle');
+      const description = document.getElementById('seoPreviewDescription');
+      if (title) title.textContent = product.seoTitle || `${product.name || 'Sản phẩm'} | Phương Lâm`;
+      if (description) description.textContent = product.seoDescription || product.shortDesc || '';
+    }
+
+    function previewCurrentProduct() {
+      const product = selectedProduct();
+      if (!product?.slug) { alert('Sản phẩm chưa có URL. Hãy lưu trước để tạo URL rồi xem.'); return; }
+      window.open(`/san-pham/${encodeURIComponent(product.slug)}/?preview=${Date.now()}`, '_blank', 'noopener');
     }
 
     function imageBox(product, index) {
       const src = product.images[index] || '';
       return `
         <div class="image-box" onclick="pickProductImage(${index})" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="dropProductImage(event, ${index})">
-          ${src ? `<img src="${esc(src)}" /> <button class="remove-img" onclick="event.stopPropagation(); removeProductImage(${index})">Xoá</button>` : `<span>+<br>Ảnh ${index + 1}</span>`}
+          ${src ? `<img src="${esc(src)}" />${index === 0 ? '<span class="cover-label">Ảnh bìa</span>' : ''} <button class="remove-img" onclick="event.stopPropagation(); removeProductImage(${index})">Xoá</button>` : `<span>+<br>Ảnh ${index + 1}</span>`}
         </div>
       `;
     }
 
     function optionGroupHtml(group, index) {
       return `
-        <div class="variant">
+        <div class="variant sales-group">
           <div class="option-group-grid">
-            <div><label>Tên nhóm</label><input value="${esc(group.name || '')}" oninput="updateOptionGroup(${index}, 'name', this.value)" placeholder="Màu" /></div>
+            <div><label>Nhóm phân loại ${index + 1}</label><input value="${esc(group.name || '')}" oninput="updateOptionGroup(${index}, 'name', this.value)" placeholder="Màu" /></div>
             <div>
-              <label>Giá trị</label>
+              <label>Tùy chọn</label>
               <div class="option-value-list">
                 ${(group.values || []).map((value, valueIndex) => optionValueHtml(index, value, valueIndex)).join('')}
                 <button class="option-value-add" onclick="addOptionValue(${index})" title="Thêm giá trị">+</button>
@@ -1451,28 +1684,71 @@
     }
 
     function variantEditorHtml(product) {
-      const colorGroup = getColorGroup(product);
-      const quantityGroup = getQuantityGroup(product);
-      if (!colorGroup || !quantityGroup) {
-        return `
-          <p class="muted">Mỗi dòng là một biến thể bán được.</p>
-          <button class="secondary" onclick="addVariant()">+ Thêm phân loại</button>
-          <div>
-            ${(product.variants || []).map((variant, index) => variantHtml(product, variant, index)).join('')}
-          </div>
-        `;
-      }
-      const colors = colorGroup.values || [];
-      if (!colors.includes(variantEditorColor)) variantEditorColor = colors[0] || '';
+      const variants = product.variants || [];
+      const groups = (product.optionGroups || []).filter(group => group.name && group.values?.length);
       return `
-        <p class="muted">Chọn màu trước, sau đó quản lý ảnh/giá/SKU cho từng số lượng của màu đó.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 16px">
-          ${colors.map(color => colorPickerButton(color)).join('')}
+        <div class="sales-toolbar"><h3>Danh sách phân loại hàng <span class="muted">(${variants.length})</span></h3>
+          ${groups.length ? '<button class="secondary small" onclick="generateMissingVariants()">Tạo tổ hợp còn thiếu</button>' : ''}
+          <button class="secondary small" onclick="addVariant()">+ Thêm phân loại</button>
         </div>
-        <div style="display:grid;gap:12px">
-          ${(quantityGroup.values || []).map(quantity => groupedVariantRow(product, colorGroup, variantEditorColor, quantityGroup, quantity)).join('')}
-        </div>
+        ${variants.length ? `
+          <div class="bulk-prices">
+            <div><label for="bulkPrice">Giá bán (₫)</label><input id="bulkPrice" ${numberInputAttrs} placeholder="Nhập giá bán" /></div>
+            <div><label for="bulkOriginalPrice">Giá gốc (₫)</label><input id="bulkOriginalPrice" ${numberInputAttrs} placeholder="Nhập giá gốc" /></div>
+            <div><label for="bulkWeight">Khối lượng (gram)</label><input id="bulkWeight" ${numberInputAttrs} placeholder="Nhập khối lượng" /></div>
+            <button onclick="applyVariantBulk()">Áp dụng tất cả</button>
+          </div>
+          <p class="editor-hint">Chỉ áp dụng các ô đã điền. Giá bán là giá khách trả; giá gốc là giá trước giảm.</p>
+          <div class="sales-table-wrap" tabindex="0" aria-label="Bảng phân loại, cuộn ngang để xem đủ cột"><table class="sales-table">
+            <thead><tr><th scope="col">Phân loại / Hình ảnh</th><th scope="col">Giá bán (₫) *</th><th scope="col">Giá gốc (₫)</th><th scope="col">SKU phân loại</th><th scope="col">Gram</th><th scope="col">Xóa</th></tr></thead>
+            <tbody>${variants.map((variant, index) => `<tr>
+              <td><div class="variant-identity">${variantImageBox(variant, index)}<div>
+                <input aria-label="Tên phân loại ${index + 1}" value="${esc(variant.name)}" placeholder="Tên phân loại" oninput="updateVariant(${index}, 'name', this.value)" />
+                ${groups.map(group => optionInputHtml(group, variant, index)).join('')}
+              </div></div></td>
+              ${['price', 'originalPrice', 'sku', 'weight'].map((field, column) => `<td><input aria-label="${['Giá bán', 'Giá gốc', 'SKU', 'Khối lượng'][column]} phân loại ${index + 1}" ${field !== 'sku' ? numberInputAttrs : ''} value="${esc(variant[field] ?? '')}" oninput="updateVariant(${index}, '${field}', this.value)" /></td>`).join('')}
+              <td><button class="danger small" aria-label="Xóa phân loại ${index + 1}" onclick="removeVariant(${index})">×</button></td>
+            </tr>`).join('')}</tbody>
+          </table></div>` : '<div class="sales-empty"><strong>Chưa có phân loại</strong><p class="editor-hint">Sản phẩm dùng giá chung. Thêm phân loại để thiết lập giá và ảnh riêng cho từng lựa chọn.</p></div>'}
       `;
+    }
+
+    function applyVariantBulk() {
+      const fields = { price: 'bulkPrice', originalPrice: 'bulkOriginalPrice', weight: 'bulkWeight' };
+      const values = {};
+      for (const [field, inputId] of Object.entries(fields)) {
+        const raw = document.getElementById(inputId).value.trim();
+        if (!raw) continue;
+        const value = parseNumberInput(raw);
+        if (value === null || value < 0) { alert('Hãy nhập giá và khối lượng là số không âm.'); return; }
+        values[field] = raw;
+      }
+      if (!Object.keys(values).length) { alert('Điền ít nhất một giá trị để áp dụng.'); return; }
+      (selectedProduct()?.variants || []).forEach((variant, index) => {
+        Object.entries(values).forEach(([field, value]) => updateVariant(index, field, value));
+      });
+      renderKeepScroll();
+    }
+
+    function generateMissingVariants() {
+      const product = selectedProduct();
+      const groups = product?.optionGroups || [];
+      if (!groups.length || groups.some(group => !group.name.trim() || !group.values?.length || group.values.some(value => !value.trim()))) {
+        alert('Điền tên nhóm và tất cả tùy chọn trước khi tạo phân loại.'); return;
+      }
+      if (new Set(groups.map(group => group.name.trim())).size !== groups.length || groups.some(group => new Set(group.values.map(value => value.trim())).size !== group.values.length)) {
+        alert('Tên nhóm và các tùy chọn trong cùng nhóm không được trùng nhau.'); return;
+      }
+      const count = groups.reduce((total, group) => total * group.values.length, 1);
+      if (count > 200) { alert('Tối đa 200 tổ hợp mỗi lần. Hãy giảm số tùy chọn.'); return; }
+      const combinations = groups.reduce((rows, group) => rows.flatMap(row => group.values.map(value => ({ ...row, [group.name]: value }))), [{}]);
+      updateSelected(current => {
+        current.variants = current.variants || [];
+        combinations.forEach(options => {
+          if (current.variants.some(variant => groups.every(group => variant.options?.[group.name] === options[group.name]))) return;
+          current.variants.push({ id: id(), name: Object.values(options).join(' / '), sku: '', price: current.price || 0, originalPrice: current.originalPrice ?? null, weight: current.weight ?? null, image: '', options });
+        });
+      }, true);
     }
 
     function colorPickerButton(color) {
@@ -1555,6 +1831,7 @@
     function selectProduct(productId) {
       selectedId = productId;
       variantEditorColor = '';
+      productEditorSection = 'details';
       render();
     }
 
@@ -1562,7 +1839,24 @@
       const product = selectedProduct();
       if (!product) return;
       mutator(product);
+      scheduleProductDraftSave();
       if (shouldRender) renderKeepScroll();
+    }
+
+    function updateProductById(productId, mutator, shouldRender = false) {
+      const product = products.find(item => String(item.id) === String(productId));
+      if (!product) return false;
+      mutator(product);
+      scheduleProductDraftSave();
+      if (shouldRender) renderKeepScroll();
+      return true;
+    }
+
+    function updateVariantById(productId, variantId, mutator, shouldRender = false) {
+      return updateProductById(productId, product => {
+        const variant = product.variants?.find(item => String(item.id) === String(variantId));
+        if (variant) mutator(product, variant);
+      }, shouldRender);
     }
 
     function updateField(field, value) {
@@ -1570,7 +1864,11 @@
         if (field === 'hidden') {
           product.hidden = value === 'true';
         } else if (['price', 'originalPrice', 'weight'].includes(field)) {
-          product[field] = field === 'price' ? (parseNumberInput(value) || 0) : parseNumberInput(value);
+          const parsed = parseNumberInput(value);
+          const key = `product:${product.id}:${field}`;
+          if (String(value).trim() && parsed === null) numericInputErrors.set(key, `${product.name || 'Sản phẩm'}: ${field === 'price' ? 'giá bán' : field === 'originalPrice' ? 'giá gốc' : 'khối lượng'} không phải số hợp lệ.`);
+          else numericInputErrors.delete(key);
+          product[field] = field === 'price' ? (parsed || 0) : parsed;
         } else {
           product[field] = value;
         }
@@ -1585,11 +1883,13 @@
         categoryId: listCategory || 'nen-thom',
         name: 'Sản phẩm mới',
         price: 0,
+        hidden: true,
         images: [],
         variants: []
       });
       products.unshift(product);
       selectedId = product.id;
+      scheduleProductDraftSave();
       render();
     }
 
@@ -1599,8 +1899,13 @@
       const copy = normalizeProduct(JSON.parse(JSON.stringify(product)));
       copy.id = id();
       copy.name = copy.name + ' - bản sao';
+      copy.slug = '';
+      copy.sku = '';
+      copy.hidden = true;
+      copy.variants = copy.variants.map(variant => ({ ...variant, id: id(), sku: '' }));
       products.unshift(copy);
       selectedId = copy.id;
+      scheduleProductDraftSave();
       render();
     }
 
@@ -1608,7 +1913,11 @@
       const product = selectedProduct();
       if (!product || !confirm('Xoá sản phẩm này?')) return;
       products = products.filter(item => String(item.id) !== String(product.id));
+      for (const key of numericInputErrors.keys()) {
+        if (key.startsWith(`product:${product.id}:`) || key.startsWith(`variant:${product.id}:`)) numericInputErrors.delete(key);
+      }
       selectedId = products[0]?.id || null;
+      scheduleProductDraftSave();
       render();
     }
 
@@ -1716,6 +2025,14 @@
     }
 
     function removeOptionValue(groupIndex, valueIndex) {
+      const product = selectedProduct();
+      const group = product?.optionGroups?.[groupIndex];
+      const removedValue = group?.values?.[valueIndex];
+      const assignedVariants = (product?.variants || []).filter(variant => variant.options?.[group?.name] === removedValue);
+      if (assignedVariants.length) {
+        alert(`Có ${assignedVariants.length} phân loại đang dùng “${removedValue}”. Hãy đổi giá trị của các phân loại đó trước khi xóa.`);
+        return;
+      }
       updateSelected(product => {
         const group = product.optionGroups?.[groupIndex];
         if (!group || !Array.isArray(group.values)) return;
@@ -1743,7 +2060,11 @@
         const variant = product.variants[index];
         if (!variant) return;
         if (['price', 'originalPrice', 'weight'].includes(field)) {
-          variant[field] = field === 'price' ? (parseNumberInput(value) || 0) : parseNumberInput(value);
+          const parsed = parseNumberInput(value);
+          const key = `variant:${product.id}:${variant.id}:${field}`;
+          if (String(value).trim() && parsed === null) numericInputErrors.set(key, `${product.name || 'Sản phẩm'} / ${variant.name || 'phân loại'}: ${field === 'price' ? 'giá bán' : field === 'originalPrice' ? 'giá gốc' : 'khối lượng'} không phải số hợp lệ.`);
+          else numericInputErrors.delete(key);
+          variant[field] = field === 'price' ? (parsed || 0) : parsed;
         } else {
           variant[field] = value;
         }
@@ -1761,7 +2082,14 @@
     }
 
     function removeVariant(index) {
+      const product = selectedProduct();
+      const variantId = product?.variants?.[index]?.id;
       updateSelected(product => product.variants.splice(index, 1), true);
+      if (product && variantId) {
+        for (const key of numericInputErrors.keys()) {
+          if (key.startsWith(`variant:${product.id}:${variantId}:`)) numericInputErrors.delete(key);
+        }
+      }
     }
 
     function canvasToBlob(canvas, type, quality) {
@@ -1800,14 +2128,23 @@
     async function uploadFile(file) {
       if (!apiOnline) throw new Error('Chế độ mở file tĩnh không upload ảnh trực tiếp được. Hãy chạy node tools/local_admin_server.js rồi mở admin qua http://127.0.0.1:8000/admin-upload.html.');
       if (!file) return '';
-      const optimizedFile = await optimizeImageFile(file);
-      const form = new FormData();
-      form.append('password', password);
-      form.append('image', optimizedFile);
-      const res = await fetch(API_UPLOAD, { method: 'POST', body: form });
-      const data = await readJsonResponse(res, 'API upload ảnh');
-      if (!data.ok) throw new Error(data.message || 'Upload ảnh thất bại.');
-      return data.url;
+      pendingUploads += 1;
+      updateDraftStatus();
+      render();
+      try {
+        const optimizedFile = await optimizeImageFile(file);
+        const form = new FormData();
+        form.append('password', password);
+        form.append('image', optimizedFile);
+        const res = await fetch(API_UPLOAD, { method: 'POST', body: form });
+        const data = await readJsonResponse(res, 'API upload ảnh');
+        if (!data.ok) throw new Error(data.message || 'Upload ảnh thất bại.');
+        return data.url;
+      } finally {
+        pendingUploads = Math.max(0, pendingUploads - 1);
+        render();
+        updateDraftStatus();
+      }
     }
 
     function chooseFile(callback) {
@@ -1847,11 +2184,12 @@
     }
 
     async function dropProductImage(event, index) {
+      const productId = selectedProduct()?.id;
       const file = getDroppedImage(event);
-      if (!file) return;
+      if (!file || !productId) return;
       try {
         const url = await uploadFile(file);
-        updateSelected(product => {
+        updateProductById(productId, product => {
           product.images = product.images || [];
           product.images[index] = url;
         }, true);
@@ -1861,12 +2199,14 @@
     }
 
     async function dropVariantImage(event, index) {
+      const product = selectedProduct();
+      const variantId = product?.variants?.[index]?.id;
       const file = getDroppedImage(event);
-      if (!file) return;
+      if (!file || !product || !variantId) return;
       try {
         const url = await uploadFile(file);
-        updateSelected(product => {
-          product.variants[index].image = url;
+        updateVariantById(product.id, variantId, (_product, variant) => {
+          variant.image = url;
         }, true);
       } catch (error) {
         alert(error.message);
@@ -1886,21 +2226,27 @@
     }
 
     function pickProductImage(index) {
-      chooseFile(url => updateSelected(product => {
+      const productId = selectedProduct()?.id;
+      if (!productId) return;
+      chooseFile(url => updateProductById(productId, product => {
         product.images = product.images || [];
         product.images[index] = url;
       }, true));
     }
 
     function removeProductImage(index) {
+      if (pendingUploads) { alert('Hãy chờ tải ảnh xong trước khi xóa ảnh.'); return; }
       updateSelected(product => {
         product.images.splice(index, 1);
       }, true);
     }
 
     function pickVariantImage(index) {
-      chooseFile(url => updateSelected(product => {
-        product.variants[index].image = url;
+      const product = selectedProduct();
+      const variantId = product?.variants?.[index]?.id;
+      if (!product || !variantId) return;
+      chooseFile(url => updateVariantById(product.id, variantId, (_product, variant) => {
+        variant.image = url;
       }, true));
     }
 
@@ -2044,22 +2390,138 @@
       }
     }
 
+    function productSaveErrors() {
+      const errors = [];
+      numericInputErrors.forEach(message => errors.push(message));
+      const productIds = new Set();
+      const productSkus = new Set();
+      const variantSkuOwners = new Map();
+      const originalVariantSkus = {};
+      const allowedCategories = new Set(CATEGORIES.map(([value]) => value));
+      Object.entries(originalProductSnapshots).forEach(([productId, snapshot]) => {
+        try {
+          const originalProduct = JSON.parse(snapshot);
+          (originalProduct.variants || []).forEach(variant => {
+            originalVariantSkus[`${productId}|${variant.id}`] = String(variant.sku || '').trim();
+          });
+        } catch {}
+      });
+      products.forEach((product, index) => {
+        const name = String(product.name || '').trim();
+        const label = name || `Sản phẩm ${index + 1}`;
+        const productId = String(product.id || '').trim();
+        if (!productId) errors.push(`${label}: thiếu ID sản phẩm.`);
+        else if (productIds.has(productId)) errors.push(`${label}: ID sản phẩm bị trùng.`);
+        productIds.add(productId);
+        if (!name) errors.push(`Sản phẩm ${index + 1}: hãy nhập tên.`);
+        if (!allowedCategories.has(product.categoryId)) errors.push(`${label}: hãy chọn danh mục hợp lệ.`);
+        if (!Number.isFinite(Number(product.price)) || Number(product.price) < 0 || (!isHidden(product) && Number(product.price) <= 0)) errors.push(`${label}: giá bán phải lớn hơn 0 với sản phẩm đang hiện.`);
+        if (product.originalPrice != null && (!Number.isFinite(Number(product.originalPrice)) || Number(product.originalPrice) < 0)) errors.push(`${label}: giá gốc không hợp lệ.`);
+        if (product.weight != null && (!Number.isFinite(Number(product.weight)) || Number(product.weight) < 0)) errors.push(`${label}: khối lượng không hợp lệ.`);
+        const productSku = String(product.sku || '').trim();
+        if (productSku && productSkus.has(productSku)) errors.push(`${label}: SKU sản phẩm bị trùng.`);
+        if (productSku) productSkus.add(productSku);
+        if (!Array.isArray(product.images) || product.images.length > 9) errors.push(`${label}: chỉ được có tối đa 9 ảnh.`);
+
+        const variants = Array.isArray(product.variants) ? product.variants : [];
+        const variantIds = new Set();
+        variants.forEach((variant, variantIndex) => {
+          const variantName = String(variant.name || '').trim();
+          const variantId = String(variant.id || '').trim();
+          if (!variantId) errors.push(`${label}: phân loại ${variantIndex + 1} thiếu ID.`);
+          else if (variantIds.has(variantId)) errors.push(`${label}: ID phân loại bị trùng.`);
+          variantIds.add(variantId);
+          if (!variantName) errors.push(`${label}: hãy đặt tên cho phân loại ${variantIndex + 1}.`);
+          if (!Number.isFinite(Number(variant.price)) || Number(variant.price) < 0 || (!isHidden(product) && Number(variant.price) <= 0)) errors.push(`${label}: giá phân loại “${variantName || variantIndex + 1}” phải lớn hơn 0 với sản phẩm đang hiện.`);
+          if (variant.originalPrice != null && (!Number.isFinite(Number(variant.originalPrice)) || Number(variant.originalPrice) < 0)) errors.push(`${label}: giá gốc phân loại “${variantName}” không hợp lệ.`);
+          if (variant.weight != null && (!Number.isFinite(Number(variant.weight)) || Number(variant.weight) < 0)) errors.push(`${label}: khối lượng phân loại “${variantName}” không hợp lệ.`);
+          const variantSku = String(variant.sku || '').trim();
+          if (variantSku) {
+            const owners = variantSkuOwners.get(variantSku) || [];
+            owners.push({ key: `${productId}|${variantId}`, label: `${label} / ${variantName}` });
+            variantSkuOwners.set(variantSku, owners);
+          }
+        });
+
+        const changed = !originalProductSnapshots[productId] || originalProductSnapshots[productId] !== JSON.stringify(product);
+        if (changed) {
+          const groups = Array.isArray(product.optionGroups) ? product.optionGroups : [];
+          let originalProduct;
+          try {
+            originalProduct = JSON.parse(originalProductSnapshots[productId] || 'null');
+          } catch {
+            originalProduct = null;
+          }
+          const originalGroups = Array.isArray(originalProduct?.optionGroups) ? originalProduct.optionGroups : [];
+          const allowedLegacyReferences = new Set();
+          (originalProduct?.variants || []).forEach(originalVariant => {
+            originalGroups.forEach(originalGroup => {
+              const value = originalVariant.options?.[originalGroup.name];
+              if (value && !(originalGroup.values || []).includes(value)) {
+                allowedLegacyReferences.add(JSON.stringify([String(originalVariant.id), originalGroup.name, value]));
+              }
+            });
+          });
+          const groupNames = new Set();
+          groups.forEach(group => {
+            const groupName = String(group.name || '').trim();
+            const values = (group.values || []).map(value => String(value || '').trim());
+            if (!groupName) errors.push(`${label}: nhóm tùy chọn thiếu tên.`);
+            if (groupNames.has(groupName)) errors.push(`${label}: tên nhóm “${groupName}” bị trùng.`);
+            groupNames.add(groupName);
+            if (new Set(values).size !== values.length) errors.push(`${label}: có giá trị phân loại bị trùng trong nhóm “${groupName}”.`);
+          });
+          variants.forEach(variant => {
+            groups.forEach(group => {
+              const selectedValue = variant.options?.[group.name];
+              const reference = JSON.stringify([String(variant.id), group.name, selectedValue]);
+              if (selectedValue && !(group.values || []).includes(selectedValue) && !allowedLegacyReferences.has(reference)) {
+                errors.push(`${label}: phân loại “${variant.name}” đang tham chiếu giá trị không còn trong nhóm “${group.name}”.`);
+              }
+            });
+          });
+        }
+      });
+      for (const [sku, owners] of variantSkuOwners) {
+        if (owners.length < 2) continue;
+        const changedOwner = owners.find(({ key }) => !Object.prototype.hasOwnProperty.call(originalVariantSkus, key) || originalVariantSkus[key] !== sku);
+        if (changedOwner) errors.push(`${changedOwner.label}: SKU phân loại “${sku}” đã được dùng ở phân loại khác.`);
+      }
+      return [...new Set(errors)];
+    }
+
     async function saveProducts() {
       if (!apiOnline) throw new Error('Chế độ mở file tĩnh không lưu trực tiếp được. Hãy chạy node tools/local_admin_server.js rồi mở admin qua http://127.0.0.1:8000/admin-upload.html.');
+      if (pendingUploads) throw new Error('Hãy chờ tải ảnh xong trước khi lưu sản phẩm.');
+      const errors = productSaveErrors();
+      if (errors.length) throw new Error(`Cần sửa các mục sau trước khi lưu:\n• ${errors.slice(0, 12).join('\n• ')}`);
+      const submittedProducts = JSON.stringify(products);
       const res = await fetch(API_PRODUCTS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Admin-Password': password
         },
-        body: JSON.stringify({ products: products.map(normalizeProduct) })
+        body: JSON.stringify({ products: products.map(normalizeProduct), revision: productRevision })
       });
       const data = await readJsonResponse(res, 'API sản phẩm');
       if (!data.ok) throw new Error(data.message || 'Lưu thất bại.');
-      products = (data.products || []).map(normalizeProduct);
+      const savedProducts = (data.products || []).map(normalizeProduct);
+      productRevision = data.revision || productRevision;
+      originalProductSnapshots = Object.fromEntries(savedProducts.map(product => [String(product.id), JSON.stringify(product)]));
+      if (JSON.stringify(products) !== submittedProducts) {
+        writeProductDraft();
+        throw new Error('Đã lưu phiên bản trước. Có chỉnh sửa mới trong lúc lưu; hãy kiểm tra và bấm Lưu local lần nữa.');
+      }
+      products = savedProducts;
+      productDraftDirty = false;
+      clearTimeout(productDraftTimer);
+      numericInputErrors.clear();
+      localStorage.removeItem(PRODUCT_DRAFT_KEY);
     }
 
     async function saveAll() {
+      if (saving) return;
       saving = true;
       render();
       try {
@@ -2079,11 +2541,12 @@
     }
 
     async function pushGit() {
+      if (saving) return;
       if (!apiOnline) {
         alert('Push Git chỉ dùng được khi chạy admin bằng node tools/local_admin_server.js.');
         return;
       }
-      const ok = confirm('Push Git sẽ commit toàn bộ thay đổi local và đẩy lên GitHub. GitHub Pages có thể deploy website chính sau vài phút. Tiếp tục?');
+      const ok = confirm('Push Git sẽ commit trang admin, server admin và các file dữ liệu/ảnh/trang sản phẩm liên quan rồi đẩy lên GitHub. Thay đổi được stage sẵn sẽ khiến thao tác bị dừng để tránh gộp nhầm. Tiếp tục?');
       if (!ok) return;
       saving = true;
       render();
@@ -2105,6 +2568,13 @@
         render();
       }
     }
+
+    window.addEventListener('beforeunload', event => {
+      if (!productDraftDirty && !pendingUploads && !saving) return;
+      if (productDraftDirty) writeProductDraft();
+      event.preventDefault();
+      event.returnValue = '';
+    });
 
     if (!password) renderLogin();
     else loadProducts();
