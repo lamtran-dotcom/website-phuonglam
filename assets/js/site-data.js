@@ -1712,10 +1712,10 @@ const PRODUCTS = [
     "id": "shopee_26007254880",
     "sku": "SP-26007254880",
     "categoryId": "thao-moc-xong",
-    "name": "Thảo mộc khô xông nhà nhiều loại",
+    "name": "Thảo mộc khô xông nhà nhiều loại tự chọn",
     "price": 25000,
     "originalPrice": null,
-    "shortDesc": "Thảo mộc khô nhiều loại để dùng theo hình thức ghi ở từng phân loại. Xem thành phần và hướng dẫn trước khi đặt.",
+    "shortDesc": "Thảo mộc khô nhiều loại tự chọn",
     "tag": "Bán chạy",
     "weight": 200,
     "hidden": false,
@@ -1723,9 +1723,12 @@ const PRODUCTS = [
     "optionImages": {},
     "images": [
       "/assets/products/mirrored/1621efcd.webp",
-      "/assets/products/uploads/1777469632817-bep-xong-thao-moc-san-pham-chinh.webp",
-      "/assets/products/uploads/1777469641086-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
-      "/assets/products/uploads/1777469642912-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp"
+      "/assets/products/uploads/1791429201367-chatgpt-image-18-45-16-10-thg-8-2026.webp",
+      "/assets/products/uploads/1791429204596-chatgpt-image-19-23-34-12-thg-8-2026.webp",
+      "/assets/products/uploads/1791429208130-chatgpt-image-18-56-22-12-thg-8-2026.webp",
+      "/assets/products/uploads/1791429216246-chatgpt-image-10-38-44-13-thg-8-2026.webp",
+      "/assets/products/uploads/1791429218633-chatgpt-image-10-31-41-13-thg-8-2026.webp",
+      "/assets/products/uploads/1791429224067-chatgpt-image-19-14-43-12-thg-8-2026.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1736,7 +1739,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 55000,
         "weight": 200,
-        "image": "/assets/products/mirrored/0eb610e6.webp",
+        "image": "/assets/products/uploads/1791429259061-chatgpt-image-19-35-57-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1746,7 +1749,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/44f5db92.webp",
+        "image": "/assets/products/uploads/1791429265462-chatgpt-image-19-07-44-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1756,7 +1759,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/2e6d5918.webp",
+        "image": "/assets/products/uploads/1791429269025-chatgpt-image-18-46-49-10-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1766,7 +1769,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/ae946cc0.webp",
+        "image": "/assets/products/uploads/1791429274029-chatgpt-image-19-23-34-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1776,7 +1779,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 24000,
         "weight": 200,
-        "image": "/assets/products/mirrored/50cf46f0.webp",
+        "image": "/assets/products/uploads/1791429282193-chatgpt-image-10-27-03-13-thg-8-2026-2.webp",
         "options": {}
       },
       {
@@ -1786,7 +1789,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 45000,
         "weight": 200,
-        "image": "/assets/products/mirrored/95a4b745.webp",
+        "image": "/assets/products/uploads/1791429290080-chatgpt-image-10-33-52-13-thg-8-2026-2.webp",
         "options": {}
       },
       {
@@ -1796,7 +1799,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 40000,
         "weight": 200,
-        "image": "/assets/products/mirrored/26da0749.webp",
+        "image": "/assets/products/uploads/1791429299592-chatgpt-image-19-21-58-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1806,7 +1809,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 25000,
         "weight": 200,
-        "image": "/assets/products/mirrored/baf27518.webp",
+        "image": "/assets/products/uploads/1791429310418-chatgpt-image-10-30-08-13-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1816,7 +1819,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 25000,
         "weight": 200,
-        "image": "/assets/products/mirrored/384f418c.webp",
+        "image": "/assets/products/uploads/1791429318094-chatgpt-image-10-31-41-13-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1826,7 +1829,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "/assets/products/mirrored/8b89e6d8.webp",
+        "image": "/assets/products/uploads/1791429324560-chatgpt-image-18-56-22-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1836,7 +1839,7 @@ const PRODUCTS = [
         "price": 35000,
         "originalPrice": 55000,
         "weight": 200,
-        "image": "/assets/products/mirrored/e8a9b246.webp",
+        "image": "/assets/products/uploads/1791429331755-chatgpt-image-10-36-39-13-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1846,7 +1849,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/759a6203.webp",
+        "image": "/assets/products/uploads/1791429336067-chatgpt-image-10-23-15-13-thg-8-2026-3.webp",
         "options": {}
       },
       {
@@ -1856,7 +1859,7 @@ const PRODUCTS = [
         "price": 30000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "/assets/products/mirrored/28252371.webp",
+        "image": "/assets/products/uploads/1791429343922-chatgpt-image-19-14-43-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1866,7 +1869,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/58680219.webp",
+        "image": "/assets/products/uploads/1791429351554-chatgpt-image-19-14-43-12-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1876,7 +1879,7 @@ const PRODUCTS = [
         "price": 20000,
         "originalPrice": 25000,
         "weight": 200,
-        "image": "/assets/products/mirrored/9b9fc9e0.webp",
+        "image": "",
         "options": {}
       },
       {
@@ -1886,7 +1889,7 @@ const PRODUCTS = [
         "price": 15000,
         "originalPrice": 23000,
         "weight": 200,
-        "image": "/assets/products/uploads/1777469331358-chon-thao-moc-2.webp",
+        "image": "/assets/products/uploads/1791429408809-chatgpt-image-10-47-56-13-thg-8-2026.webp",
         "options": {}
       }
     ],
