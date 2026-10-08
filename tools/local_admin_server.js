@@ -454,7 +454,7 @@ const pushGit = () => {
   const publishPaths = [
     '.gitignore', 'admin-upload.html', 'tools/local_admin_server.js',
     'index.html', 'data/products.json', 'data/settings.json', 'sitemap.xml', 'robots.txt',
-    'assets/js/site-data.js', 'assets/js/app.min.js', 'assets/css/static-seo.css',
+    'assets/js/site-data.js', 'assets/js/app.jsx', 'assets/js/app.min.js', 'assets/css/static-seo.css',
     'assets/products/uploads', 'assets/products/responsive', 'assets/products/generated',
     'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts', 'data/scheduled-blog-history.json',
   ];
@@ -491,6 +491,15 @@ const pushGit = () => {
     push: push.output,
   };
 };
+
+// The build re-bakes settings/catalog into app.jsx as well as app.min.js; publishing only
+// the bundle leaves app.jsx stale on origin, and the next compile from source regresses it.
+const ISOLATED_PUBLISH_PATHS = [
+  'data/products.json', 'data/settings.json', 'assets/products/uploads', 'assets/products/mirrored',
+  'assets/products/responsive', 'assets/products/generated', 'assets/js/site-data.js',
+  'assets/js/app.jsx', 'assets/js/app.min.js',
+  'index.html', 'sitemap.xml', 'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts',
+];
 
 const pushPendingProductChanges = (pending, pendingPath, settingsPending = null, settingsPendingPath = null, contentPending = null, contentPendingPath = null) => {
   const branch = gitSummary().branch || 'main';
@@ -581,12 +590,7 @@ const pushPendingProductChanges = (pending, pendingPath, settingsPending = null,
     });
     if (buildResult.status !== 0) throw new Error(buildResult.stderr || buildResult.stdout || 'Build website thất bại.');
 
-    const publishPaths = [
-      'data/products.json', 'data/settings.json', 'assets/products/uploads', 'assets/products/mirrored',
-      'assets/products/responsive', 'assets/products/generated', 'assets/js/site-data.js', 'assets/js/app.min.js',
-      'index.html', 'sitemap.xml', 'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts',
-    ];
-    const existingPaths = publishPaths.filter((file) => (
+    const existingPaths = ISOLATED_PUBLISH_PATHS.filter((file) => (
       fs.existsSync(path.join(worktreeRoot, file)) || runGitAt(worktreeRoot, ['ls-files', '--', file]).output
     ));
     const stage = runGitAt(worktreeRoot, ['add', '-A', '--', ...existingPaths]);
@@ -2080,4 +2084,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
 
-module.exports = { server, validateProducts, pushGit };
+module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS };
