@@ -111,3 +111,17 @@ test('cross-site writes are blocked while same-origin and server-to-server calls
   assert.notEqual(serverToServer.status, 403);
   assert.match(serverToServer.body, /Unsupported git action/);
 });
+
+test('product backups are capped to the newest 30 and pending journals are kept', t => {
+  const { root, pruneProductBackups } = fixture(t);
+  const dir = path.join(root, '.admin-backups');
+  fs.mkdirSync(dir);
+  for (let i = 0; i < 35; i += 1) fs.writeFileSync(path.join(dir, `products-2026-10-08T00-00-${String(i).padStart(2, '0')}-000Z.json`), '[]');
+  fs.writeFileSync(path.join(dir, 'pending-product-changes.json'), '{}');
+  pruneProductBackups(dir);
+  const left = fs.readdirSync(dir).sort();
+  assert.equal(left.filter(name => name.startsWith('products-')).length, 30);
+  assert.ok(left.includes('products-2026-10-08T00-00-34-000Z.json'));
+  assert.ok(!left.includes('products-2026-10-08T00-00-04-000Z.json'));
+  assert.ok(left.includes('pending-product-changes.json'));
+});

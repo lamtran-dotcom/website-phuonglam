@@ -112,6 +112,17 @@ const writeFileAtomic = (filePath, data) => {
   fs.renameSync(tempPath, filePath);
 };
 
+const MAX_PRODUCT_BACKUPS = 30;
+
+const pruneProductBackups = (backupDir, keep = MAX_PRODUCT_BACKUPS) => {
+  const backups = fs.readdirSync(backupDir)
+    .filter((name) => /^products-.*\.json$/.test(name))
+    .sort();
+  for (const name of backups.slice(0, Math.max(0, backups.length - keep))) {
+    fs.rmSync(path.join(backupDir, name), { force: true });
+  }
+};
+
 const safeName = (name) =>
   String(name || 'upload')
     .normalize('NFD')
@@ -303,6 +314,7 @@ const saveProductsWithBackup = (products) => {
   fs.mkdirSync(backupDir, { recursive: true });
   const backupPath = path.join(backupDir, `products-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
   fs.writeFileSync(backupPath, previousBytes);
+  pruneProductBackups(backupDir);
   const pendingPath = path.join(backupDir, 'pending-product-changes.json');
   const previousPendingBytes = fs.existsSync(pendingPath) ? fs.readFileSync(pendingPath) : null;
 
@@ -2138,4 +2150,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
 
-module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS };
+module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS, pruneProductBackups };
