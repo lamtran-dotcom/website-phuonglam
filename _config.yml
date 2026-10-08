@@ -1,0 +1,14 @@
+# GitHub Pages builds this repository with Jekyll. Files here are copied as-is; this file
+# only keeps internal working files out of the public site. They stay in the repository.
+exclude:
+  - AGENTS.md
+  - CONTEXT.md
+  - README.md
+  - bao_cao_kiem_tra_tong_hop.md
+  - Mo Admin Phuong Lam.command
+  - admin-upload.html
+  - data/
+  - docs/
+  - reports/
+  - tools/
+  - scheduled-posts/
