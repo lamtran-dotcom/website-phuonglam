@@ -327,6 +327,16 @@ const validateProducts = (products, existingById = new Map()) => {
     });
     if (changedOwner) errors.push(`${changedOwner.label}: SKU phân loại “${sku}” đã được dùng ở phân loại khác.`);
   }
+  // Two visible products with the same name produce duplicate titles/descriptions that
+  // search engines treat as duplicate pages.
+  const visibleByName = new Map();
+  products.forEach((product) => {
+    if (product.hidden === true || product.hidden === 'true') return;
+    const key = String(product.name || '').trim().toLocaleLowerCase('vi');
+    if (!key) return;
+    if (visibleByName.has(key)) errors.push(`${product.name}: trùng tên với một sản phẩm đang hiện khác; hãy đổi tên hoặc ẩn một sản phẩm.`);
+    else visibleByName.set(key, product.id);
+  });
   return errors;
 };
 

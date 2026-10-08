@@ -1896,9 +1896,17 @@
     function duplicateProduct() {
       const product = selectedProduct();
       if (!product) return;
+      // The URL is generated from the name on first save and then kept, so ask for the
+      // final name now instead of saving "… - bản sao" into the permanent URL.
+      const name = prompt('Tên cho sản phẩm mới (đường dẫn URL sẽ tạo từ tên này và giữ cố định):', product.name);
+      if (name === null) return;
+      if (!name.trim() || name.trim().toLocaleLowerCase('vi') === String(product.name || '').trim().toLocaleLowerCase('vi')) {
+        alert('Hãy đặt tên khác với sản phẩm gốc để tránh trùng trang trên Google.');
+        return;
+      }
       const copy = normalizeProduct(JSON.parse(JSON.stringify(product)));
       copy.id = id();
-      copy.name = copy.name + ' - bản sao';
+      copy.name = name.trim();
       copy.slug = '';
       copy.sku = '';
       copy.hidden = true;
@@ -1911,7 +1919,7 @@
 
     function deleteProduct() {
       const product = selectedProduct();
-      if (!product || !confirm('Xoá sản phẩm này?')) return;
+      if (!product || !confirm('Xoá sản phẩm này? Trang sản phẩm sẽ bị gỡ và link cũ (Google, khách đã lưu) sẽ báo lỗi 404.\nNếu chỉ tạm ngưng bán, hãy bấm "Ẩn sản phẩm" thay vì xoá.')) return;
       products = products.filter(item => String(item.id) !== String(product.id));
       for (const key of numericInputErrors.keys()) {
         if (key.startsWith(`product:${product.id}:`) || key.startsWith(`variant:${product.id}:`)) numericInputErrors.delete(key);
@@ -2487,6 +2495,14 @@
         const changedOwner = owners.find(({ key }) => !Object.prototype.hasOwnProperty.call(originalVariantSkus, key) || originalVariantSkus[key] !== sku);
         if (changedOwner) errors.push(`${changedOwner.label}: SKU phân loại “${sku}” đã được dùng ở phân loại khác.`);
       }
+      const visibleNames = new Set();
+      products.forEach(product => {
+        if (isHidden(product)) return;
+        const key = String(product.name || '').trim().toLocaleLowerCase('vi');
+        if (!key) return;
+        if (visibleNames.has(key)) errors.push(`${product.name}: trùng tên với một sản phẩm đang hiện khác; hãy đổi tên hoặc ẩn một sản phẩm.`);
+        visibleNames.add(key);
+      });
       return [...new Set(errors)];
     }
 

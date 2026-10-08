@@ -167,3 +167,20 @@ test('static file serving cannot escape into a sibling directory sharing the roo
   const res = await request(port, { path: `/..%2F${path.basename(sibling)}%2Fx.txt` });
   assert.notEqual(res.body, 'secret');
 });
+
+test('visible products may not share a name, hidden duplicates are allowed, current catalog passes', t => {
+  const { validateProducts } = fixture(t);
+  const base = { categoryId: 'nen-thom', price: 1000, images: [], variants: [] };
+  const errors = validateProducts([
+    { ...base, id: 'a', name: 'Nến thơm Lài' },
+    { ...base, id: 'b', name: '  nến thơm lài ' },
+  ]);
+  assert.ok(errors.some(message => /trùng tên/.test(message)));
+  assert.deepEqual(validateProducts([
+    { ...base, id: 'a', name: 'Nến thơm Lài' },
+    { ...base, id: 'b', name: 'Nến thơm Lài', hidden: true },
+  ]), []);
+  const catalog = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'products.json'), 'utf8'));
+  const existingById = new Map(catalog.map(product => [String(product.id), product]));
+  assert.deepEqual(validateProducts(catalog, existingById), []);
+});

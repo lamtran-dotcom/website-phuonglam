@@ -82,7 +82,7 @@ function browser() {
   const script = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(match => match[1]).join('\n');
   const storage = new Map();
   const app = { innerHTML: '', setAttribute() {} };
-  const context = vm.createContext({ console, setTimeout, clearTimeout, URL, alert() {}, confirm: () => true,
+  const context = vm.createContext({ console, setTimeout, clearTimeout, URL, alert() {}, confirm: () => true, prompt: () => null,
     localStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value), removeItem: key => storage.delete(key) },
     document: { getElementById: id => id === 'app' ? app : null }, window: { addEventListener() {} },
   });
@@ -101,7 +101,14 @@ test('frontend preserves slugs, duplicates as hidden with fresh IDs and restores
   run('writeProductDraft()');
   assert.ok(storage.has('phuonglam_admin_product_draft_v1'));
   assert.equal(run("restoreProductDraft([], 'r1')[0].name"), 'Tên mới');
-  run('duplicateProduct()');
+  const count = run('products.length');
+  run('prompt = () => null; duplicateProduct()');
+  assert.equal(run('products.length'), count, 'cancelling the name prompt must not duplicate');
+  run('prompt = () => products[0].name; duplicateProduct()');
+  assert.equal(run('products.length'), count, 'reusing the original name must not duplicate');
+  run("prompt = () => 'Túi thơm treo xe mẫu 2'; duplicateProduct()");
+  assert.equal(run('selectedProduct().name'), 'Túi thơm treo xe mẫu 2');
+  assert.doesNotMatch(run('selectedProduct().name'), /bản sao/);
   assert.equal(run('selectedProduct().hidden'), true);
   assert.equal(run('selectedProduct().slug'), '');
   assert.equal(run('selectedProduct().sku'), '');
