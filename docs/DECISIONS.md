@@ -2,6 +2,24 @@
 
 ## Decision Log
 
+### 2026-10-08 - Hide internal files from GitHub Pages with Jekyll exclude
+Decision: `_config.yml` lists repository paths that must not be served (project memory, docs, tools, data, reports, scheduled posts, admin UI, launcher). Files stay in git.
+Reason: GitHub Pages served every committed file, exposing internal notes, admin code and unpublished scheduled posts.
+Impact: New internal folders must be added to the exclude list. The public site must not fetch anything under `data/`.
+Status: Active
+
+### 2026-10-08 - Hidden products stay published but noindex
+Decision: Products with `hidden: true` keep their static page with `noindex, follow` and are left out of the sitemap and listings.
+Reason: Avoid 404s for URLs that may already be indexed or shared while removing them from search.
+Impact: Deleting a product (not hiding) is the only way to remove its URL.
+Status: Active
+
+### 2026-10-08 - No credentials in the public bundle; in-app admin is localhost-only
+Decision: The storefront bundle contains no password. The React in-app admin and logo 5-click entry only work on loopback hosts.
+Reason: A hard-coded admin password was readable in app.min.js.
+Impact: Product management is done through the local admin (`admin-upload.html` via `tools/local_admin_server.js`).
+Status: Active
+
 ### 2026-10-08 - Guard the local admin against browser-originated cross-site requests
 Decision: The admin server only answers requests whose Host is a loopback name, and rejects non-GET requests whose Origin is not the admin itself or whose Sec-Fetch-Site is cross-site/same-site. Requests without Origin (server-to-server, curl, Content AI Studio) are allowed.
 Reason: Binding to 127.0.0.1 does not stop pages open in the operator's browser from posting to it or DNS-rebinding into it; the admin can publish to production.

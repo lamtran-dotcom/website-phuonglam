@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-08 — Audit follow-up (approved P2 set)
+- `_config.yml` excludes internal docs, tools, data, reports, scheduled posts, admin UI and the `.command` launcher from GitHub Pages; verified 404 live.
+- Hidden products keep their page with `noindex, follow` and are omitted from the sitemap; both build modes agree.
+- Admin: atomic settings/site-data writes, newest-30 product backups, 60 MB body / 25 MB image limits with magic-byte checks, stricter static path check, duplicate asks for a new name, visible products cannot share a name, delete warns about 404.
+- Build: content-hash `?v=` (rebuilds are no-ops), hero preload from settings, only first six bestseller images eager.
+- Storefront: removed the hard-coded admin password; in-app admin only on localhost; slim cart items.
+- Candle category image resized to 900 px (778 KB → 127 KB).
+
 ## 2026-10-08 — Audit fixes (branch audit/2026-10, unpushed)
 - Re-ran the normal build so `app.min.js` again contains every bestseller and category image from `data/settings.json`.
 - Committed the local admin server, product push helper, admin UI and their tests, which had never been tracked.

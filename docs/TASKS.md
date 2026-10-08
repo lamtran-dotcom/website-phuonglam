@@ -1,11 +1,15 @@
 # Tasks
 
 ## Now
-- [ ] Review and push branch `audit/2026-10` (P0 bundle fix should go live first).
-- [ ] Decide: hidden products (4) still get indexable pages and sitemap URLs — noindex/remove from sitemap or keep.
-- [ ] Decide with seller: visible duplicate product "… - bản sao" (`p_1791429972397_g7kgf`).
-- [ ] Decide: hide internal files (docs, CONTEXT/AGENTS, tools, reports, data backups, `.command`, admin UI) from GitHub Pages, e.g. Jekyll `_config.yml` `exclude`.
-- [ ] Approve or reject P2/P3 items A1–A13, N1–N4 in `docs/AUDIT-2026-10.md`.
+- [x] Review and push branch `audit/2026-10` (2026-10-08).
+- [x] Hidden products: noindex + removed from sitemap, pages kept (2026-10-08).
+- [ ] Decide with seller: "- bản sao" product `p_1791429972397_g7kgf` sits in Thảo mộc xông and bestsellers while the original `shopee_54367578815` is in Túi thơm; rename, hide, or support multiple categories.
+- [x] Hide internal files from GitHub Pages via `_config.yml` (2026-10-08).
+- [x] Apply approved P2 items A1–A10 (2026-10-08).
+- [ ] **Owner: change the password that was hard-coded in app.jsx wherever it is used.**
+- [ ] Update the Desktop checkout to origin/main before running the admin again (it still runs the old admin).
+- [ ] Optional: delete unused `assets/media/generated/shipping-promo-popup-v1.png` (2 MB) and `embedded-020.jpg`.
+- [ ] Review the order Worker re-validates prices (A12).
 - [ ] Seller to supply unique SKUs for `shopee_22080262041` variants.
 - [x] Update the express-delivery promotion to promise delivery within 1 hour in inner TP.HCM (2026-09-28).
 - [x] Hide the free-shipping threshold and overweight calculation from customer-facing checkout; retain shipping logic (2026-09-28).
