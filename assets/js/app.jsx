@@ -737,7 +737,7 @@ const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact 
         {(() => {
           const responsiveAttrs = getResponsiveImageAttrs(displayImage, '(max-width: 767px) 50vw, (max-width: 1200px) 25vw, 220px');
           return displayImage
-            ? <img src={displayImage} {...responsiveAttrs} alt={product.name} loading={imagePriority ? 'eager' : 'lazy'} fetchPriority={imagePriority ? 'high' : 'auto'} decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; }} />
+            ? <img src={displayImage} {...responsiveAttrs} alt={product.name} loading={imagePriority ? 'eager' : 'lazy'} fetchPriority="auto" decoding="async" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} onError={e => { e.target.style.display='none'; }} />
             : <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundImage: 'repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(0,0,0,0.03) 8px,rgba(0,0,0,0.03) 16px)' }}><span style={{ fontFamily: 'monospace', fontSize: 11, color: '#888', textAlign: 'center', padding: '0 12px' }}>{product.name}</span></div>;
         })()}
         {product.tag && (
@@ -1107,8 +1107,8 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
             <p style={hpStyles.sectionSub}>Được khách hàng tin dùng và đánh giá cao nhất</p>
           </div>
           <BestsellerCarousel isMobile={isMobile}>
-            {bestsellers.map(p => (
-              <ProductCard key={p.id} product={p} setPage={setPage} addToCart={addToCart} productImages={productImages} imagePriority={true} />
+            {bestsellers.map((p, index) => (
+              <ProductCard key={p.id} product={p} setPage={setPage} addToCart={addToCart} productImages={productImages} imagePriority={index < 6} />
             ))}
           </BestsellerCarousel>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28 }}>
