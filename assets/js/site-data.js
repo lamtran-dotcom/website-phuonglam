@@ -324,10 +324,8 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/8fdaba5f.webp",
-      "/assets/products/mirrored/fb836c44.webp",
-      "/assets/products/mirrored/07621c27.webp",
-      "/assets/products/mirrored/e889ad36.webp",
+      "/assets/products/uploads/1791428424591-image.webp",
+      "/assets/products/uploads/1791428490629-sds.webp",
       "/assets/products/mirrored/285e6501.webp",
       "/assets/products/mirrored/e69cf290.webp",
       "/assets/products/mirrored/ecdbb39a.webp",
