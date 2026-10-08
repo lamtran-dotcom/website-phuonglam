@@ -55,3 +55,59 @@ test('malformed percent-encoding returns 400 and the server keeps serving', asyn
   assert.equal(home.status, 200);
   assert.equal(home.body, 'home');
 });
+
+test('requests addressed to a non-loopback Host are refused (DNS rebinding)', async t => {
+  const { server } = fixture(t);
+  const port = await listen(server);
+  const rebinding = await request(port, { path: '/api/settings.php', headers: { Host: `attacker.example:${port}` } });
+  assert.equal(rebinding.status, 421);
+  for (const host of [`127.0.0.1:${port}`, `localhost:${port}`]) {
+    assert.equal((await request(port, { path: '/api/settings.php', headers: { Host: host } })).status, 200);
+  }
+});
+
+test('cross-site writes are blocked while same-origin and server-to-server calls still work', async t => {
+  const { root, server } = fixture(t);
+  const port = await listen(server);
+  const host = `127.0.0.1:${port}`;
+  const settings = JSON.stringify({ featuredIds: ['x'], headerImages: [], categoryImages: {} });
+  const before = fs.readFileSync(path.join(root, 'data/settings.json'), 'utf8');
+
+  const evilOrigin = await request(port, {
+    method: 'POST', path: '/api/settings.php', body: settings,
+    headers: { Host: host, Origin: 'https://evil.example', 'Content-Type': 'text/plain' },
+  });
+  assert.equal(evilOrigin.status, 403);
+  const evilFetchSite = await request(port, {
+    method: 'POST', path: '/api/git.php', body: '{"action":"push"}',
+    headers: { Host: host, 'Sec-Fetch-Site': 'cross-site', 'Content-Type': 'text/plain' },
+  });
+  assert.equal(evilFetchSite.status, 403);
+  const nullOrigin = await request(port, {
+    method: 'POST', path: '/api/settings.php', body: settings,
+    headers: { Host: host, Origin: 'null', 'Content-Type': 'text/plain' },
+  });
+  assert.equal(nullOrigin.status, 403);
+  const otherLocalPort = await request(port, {
+    method: 'POST', path: '/api/settings.php', body: settings,
+    headers: { Host: host, Origin: 'http://127.0.0.1:3999', 'Content-Type': 'text/plain' },
+  });
+  assert.equal(otherLocalPort.status, 403);
+  assert.equal(fs.readFileSync(path.join(root, 'data/settings.json'), 'utf8'), before);
+
+  // GET from another origin is not a write and must keep working for preview <base> URLs.
+  assert.equal((await request(port, { path: '/api/settings.php', headers: { Host: host, Origin: 'http://127.0.0.1:3999' } })).status, 200);
+
+  const sameOrigin = await request(port, {
+    method: 'POST', path: '/api/git.php', body: '{"action":"noop"}',
+    headers: { Host: host, Origin: `http://${host}`, 'Sec-Fetch-Site': 'same-origin', 'Content-Type': 'application/json' },
+  });
+  assert.notEqual(sameOrigin.status, 403);
+  assert.match(sameOrigin.body, /Unsupported git action/);
+  const serverToServer = await request(port, {
+    method: 'POST', path: '/api/git.php', body: '{"action":"noop"}',
+    headers: { Host: host, 'Content-Type': 'application/json' },
+  });
+  assert.notEqual(serverToServer.status, 403);
+  assert.match(serverToServer.body, /Unsupported git action/);
+});

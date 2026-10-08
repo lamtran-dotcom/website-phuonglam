@@ -2080,8 +2080,43 @@ const serveStatic = (req, res, pathname) => {
   fs.createReadStream(filePath).pipe(res);
 };
 
+// The admin only listens on loopback, but browsers can still reach it from any page the
+// operator has open (CSRF via text/plain or multipart POSTs) or via DNS rebinding.
+const LOOPBACK_HOSTNAMES = new Set(['127.0.0.1', 'localhost', '[::1]']);
+
+const isLoopbackHost = (host) => {
+  try {
+    return LOOPBACK_HOSTNAMES.has(new URL(`http://${host}`).hostname);
+  } catch {
+    return false;
+  }
+};
+
+const isCrossSiteWrite = (req) => {
+  if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return false;
+  const fetchSite = req.headers['sec-fetch-site'];
+  if (fetchSite && fetchSite !== 'same-origin' && fetchSite !== 'none') return true;
+  const origin = req.headers.origin;
+  // Server-to-server callers such as Content AI Studio send no Origin header.
+  if (!origin) return false;
+  try {
+    const parsed = new URL(origin);
+    return !(LOOPBACK_HOSTNAMES.has(parsed.hostname) && parsed.host === req.headers.host);
+  } catch {
+    return true;
+  }
+};
+
 const server = http.createServer(async (req, res) => {
   try {
+    if (!isLoopbackHost(req.headers.host)) {
+      send(res, 421, 'Misdirected request');
+      return;
+    }
+    if (isCrossSiteWrite(req)) {
+      sendJson(res, { ok: false, message: 'Yêu cầu từ trang web khác bị chặn.' }, 403);
+      return;
+    }
     const pathname = new URL(req.url, 'http://127.0.0.1').pathname;
     if (await handleApi(req, res, pathname)) return;
     serveStatic(req, res, pathname);
