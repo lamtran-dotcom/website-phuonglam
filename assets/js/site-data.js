@@ -2911,7 +2911,7 @@ const PRODUCTS = [
     "seoDescription": "",
     "tag": "Bán chạy",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "PHÂN LOẠI",
