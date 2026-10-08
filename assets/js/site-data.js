@@ -2134,11 +2134,10 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/9f75d6ef.webp",
-      "/assets/products/mirrored/2e6d5918.webp",
+      "/assets/products/uploads/1791429488943-chatgpt-image-18-45-16-10-thg-8-2026.webp",
+      "/assets/products/uploads/1791429491274-chatgpt-image-18-46-49-10-thg-8-2026.webp",
       "/assets/products/mirrored/87aa2505.webp",
-      "/assets/products/uploads/1777469612987-bo-ket-xong-nha-phuong-lam-202604280416-featured-bo-ket-xong-nha-phuong-lam.webp",
-      "/assets/products/uploads/1777469619221-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp"
+      "/assets/products/uploads/1777469612987-bo-ket-xong-nha-phuong-lam-202604280416-featured-bo-ket-xong-nha-phuong-lam.webp"
     ],
     "reviews": [],
     "variants": [
@@ -2149,7 +2148,7 @@ const PRODUCTS = [
         "price": 45000,
         "originalPrice": 55000,
         "weight": 300,
-        "image": "/assets/products/mirrored/2e6d5918.webp",
+        "image": "/assets/products/uploads/1791429513920-chatgpt-image-18-46-49-10-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -2159,7 +2158,7 @@ const PRODUCTS = [
         "price": 119000,
         "originalPrice": 150000,
         "weight": 600,
-        "image": "/assets/products/mirrored/2e6d5918.webp",
+        "image": "/assets/products/uploads/1791429516612-chatgpt-image-18-46-49-10-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -2169,7 +2168,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "/assets/products/mirrored/2e6d5918.webp",
+        "image": "/assets/products/uploads/1791429518720-chatgpt-image-18-46-49-10-thg-8-2026.webp",
         "options": {}
       }
     ],
