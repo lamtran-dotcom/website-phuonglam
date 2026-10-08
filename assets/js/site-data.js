@@ -55,12 +55,12 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
-      "/assets/products/uploads/sp-55553449576-cover-720.jpg",
-      "/assets/products/mirrored/0b84f8cd.webp",
-      "/assets/products/mirrored/fad014be.webp",
-      "/assets/products/mirrored/ef26e671.webp",
-      "/assets/products/mirrored/94dfd037.webp",
-      "/assets/products/mirrored/f2321967.webp"
+      "/assets/products/uploads/1791427812326-13-2.webp",
+      "/assets/products/uploads/1791427842592-chatgpt-image-10-17-48-7-thg-8-2026.webp",
+      "/assets/products/uploads/1791427889550-gemini-generated-image-mrvqjsmrvqjsmrvq.webp",
+      "/assets/products/uploads/1791427893648-gemini-generated-image-ktoo6rktoo6rktoo.webp",
+      "/assets/products/uploads/1791427902021-chatgpt-image-20-59-27-18-thg-5-2026.webp",
+      "/assets/products/uploads/1791428229019-chatgpt-image-10-21-41-7-thg-8-2026.webp"
     ],
     "reviews": [],
     "variants": [
