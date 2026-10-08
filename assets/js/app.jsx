@@ -851,15 +851,120 @@ const footerStyles = {
 
 
 
+const BestsellerCarousel = ({ isMobile, children }) => {
+  const items = React.Children.toArray(children);
+  const trackRef = React.useRef(null);
+  const pausedRef = React.useRef(false);
+  const dragRef = React.useRef({ down: false, moved: false, startX: 0, startLeft: 0 });
+  const [overflow, setOverflow] = React.useState(false);
+  const gap = isMobile ? 12 : 14;
+  const cardBasis = isMobile ? '150px' : `calc((100% - ${gap * 5}px) / 6)`;
+
+  const step = React.useCallback((dir) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const first = el.firstElementChild;
+    const cardStep = (first ? first.getBoundingClientRect().width : 150) + gap;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
+    if (dir > 0 && atEnd) el.scrollTo({ left: 0, behavior: 'smooth' });
+    else el.scrollBy({ left: dir * cardStep * (isMobile ? 1 : 2), behavior: 'smooth' });
+  }, [gap, isMobile]);
+
+  React.useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return undefined;
+    const check = () => setOverflow(el.scrollWidth > el.clientWidth + 4);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [items.length, isMobile]);
+
+  React.useEffect(() => {
+    if (!overflow) return undefined;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const t = setInterval(() => { if (!pausedRef.current) step(1); }, 3500);
+    return () => clearInterval(t);
+  }, [overflow, step]);
+
+  const onMouseDown = (e) => {
+    const el = trackRef.current;
+    dragRef.current = { down: true, moved: false, startX: e.pageX, startLeft: el.scrollLeft };
+    el.style.scrollSnapType = 'none';
+    el.style.cursor = 'grabbing';
+  };
+  const onMouseMove = (e) => {
+    const d = dragRef.current;
+    if (!d.down) return;
+    const dx = e.pageX - d.startX;
+    if (Math.abs(dx) > 5) d.moved = true;
+    trackRef.current.scrollLeft = d.startLeft - dx;
+  };
+  const endDrag = () => {
+    const el = trackRef.current;
+    if (!dragRef.current.down || !el) return;
+    dragRef.current.down = false;
+    el.style.scrollSnapType = 'x proximity';
+    el.style.cursor = overflow ? 'grab' : 'default';
+  };
+  const swallowClickAfterDrag = (e) => {
+    if (dragRef.current.moved) { e.preventDefault(); e.stopPropagation(); dragRef.current.moved = false; }
+  };
+
+  const arrowStyle = (side) => ({
+    position: 'absolute', top: '38%', [side]: -18, width: 36, height: 36, borderRadius: '50%',
+    border: '1px solid #dfe8dc', background: '#fff', color: '#318223', fontSize: 18, fontWeight: 700,
+    cursor: 'pointer', boxShadow: '0 2px 10px rgba(0,0,0,0.12)', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0,
+  });
+
+  return (
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; endDrag(); }}
+      onTouchStart={() => { pausedRef.current = true; }}
+      onTouchEnd={() => { setTimeout(() => { pausedRef.current = false; }, 4000); }}
+    >
+      <style>{'.bestseller-track::-webkit-scrollbar{display:none}'}</style>
+      {overflow && !isMobile && (
+        <button type="button" aria-label="Sản phẩm trước" style={arrowStyle('left')} onClick={() => step(-1)}>‹</button>
+      )}
+      <div
+        ref={trackRef}
+        className="bestseller-track"
+        onMouseDown={isMobile ? undefined : onMouseDown}
+        onMouseMove={isMobile ? undefined : onMouseMove}
+        onMouseUp={isMobile ? undefined : endDrag}
+        onClickCapture={swallowClickAfterDrag}
+        onDragStart={(e) => e.preventDefault()}
+        style={{
+          display: 'flex', gap, overflowX: 'auto', scrollSnapType: 'x proximity', scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch', padding: '4px 2px 12px', alignItems: 'stretch',
+          justifyContent: overflow ? 'flex-start' : 'center', cursor: overflow && !isMobile ? 'grab' : 'default',
+        }}
+      >
+        {items.map((item, i) => (
+          <div key={item.key || i} style={{ flex: `0 0 ${cardBasis}`, minWidth: 0, scrollSnapAlign: 'start', display: 'flex' }}>
+            <div style={{ width: '100%' }}>{item}</div>
+          </div>
+        ))}
+      </div>
+      {overflow && !isMobile && (
+        <button type="button" aria-label="Sản phẩm tiếp theo" style={arrowStyle('right')} onClick={() => step(1)}>›</button>
+      )}
+    </div>
+  );
+};
+
 const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, categoryImages = {}, headerImages = null }) => {
   const allVisibleProducts = getVisibleProducts(window.PRODUCTS_LIVE || PRODUCTS);
   const bestsellers = (() => {
     const all = allVisibleProducts;
-    if (featuredIds && featuredIds.length > 0) return featuredIds.map(id => all.find(p => String(p.id) === String(id))).filter(Boolean).slice(0, 6);
-    return all.filter(p => p.tag === 'Bán chạy' || p.tag === 'Nổi bật').slice(0, 6);
+    if (featuredIds && featuredIds.length > 0) return featuredIds.map(id => all.find(p => String(p.id) === String(id))).filter(Boolean).slice(0, 12);
+    return all.filter(p => p.tag === 'Bán chạy' || p.tag === 'Nổi bật').slice(0, 12);
   })();
   const activeHeroImages = (Array.isArray(headerImages) && headerImages.length > 0) ? headerImages : HERO_IMAGES;
   const isMobile = useIsMobile();
+  const [slideIdx, setSlideIdx] = React.useState(0);
   const [homeSearch, setHomeSearch] = React.useState('');
   const [homeSearchOpen, setHomeSearchOpen] = React.useState(() => queryFlag('search'));
   const [homeSearchHover, setHomeSearchHover] = React.useState(false);
@@ -875,6 +980,12 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         }),
       ].filter((product, index, list) => list.findIndex(item => item.id === product.id) === index).slice(0, 3)
     : [];
+  React.useEffect(() => {
+    if (activeHeroImages.length < 2) return undefined;
+    const t = setInterval(() => setSlideIdx(i => (i + 1) % activeHeroImages.length), 3000);
+    return () => clearInterval(t);
+  }, [activeHeroImages.length]);
+
   React.useEffect(() => {
     const handleOutside = (event) => {
       if (homeSearchRef.current && !homeSearchRef.current.contains(event.target)) {
@@ -972,7 +1083,36 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
         </div>
         <div style={{ ...hpStyles.heroImageFrame, width: '100%', maxWidth: 560, justifySelf: 'end', boxSizing: 'border-box', padding: isMobile ? 8 : 12, order: isMobile ? 2 : 0 }}>
           <div style={{ ...hpStyles.heroImage, overflow: 'hidden', borderRadius: isMobile ? 14 : 20, position: 'relative', width: '100%', aspectRatio: isMobile ? '16 / 10' : '1 / 1' }}>
-            <img src={activeHeroImages[0] || HERO_IMAGES[0]} alt="Nến, bếp xông và thảo mộc Phương Lâm" loading="eager" fetchPriority="high" decoding="async" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div style={{ display: 'flex', width: `${activeHeroImages.length * 100}%`, transform: `translateX(-${slideIdx * (100 / activeHeroImages.length)}%)`, transition: 'transform 0.7s cubic-bezier(0.4,0,0.2,1)', height: '100%' }}>
+              {activeHeroImages.map((src, i) => (
+                <img key={i} src={src} alt="Nến, bếp xông và thảo mộc Phương Lâm" loading={i === 0 ? 'eager' : 'lazy'} fetchPriority={i === 0 ? 'high' : 'auto'} decoding="async" style={{ display: 'block', width: `${100 / activeHeroImages.length}%`, height: '100%', objectFit: 'cover', flexShrink: 0 }} />
+              ))}
+            </div>
+          </div>
+          {activeHeroImages.length > 1 && (
+            <div role="tablist" aria-label="Chọn ảnh header" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginTop: 12 }}>
+              {activeHeroImages.map((_, i) => (
+                <button key={i} type="button" role="tab" aria-selected={i === slideIdx} aria-label={`Ảnh ${i + 1}`} onClick={() => setSlideIdx(i)} style={{ width: i === slideIdx ? 26 : 9, height: 9, borderRadius: 5, border: 'none', padding: 0, background: i === slideIdx ? '#318223' : '#c9d6c5', cursor: 'pointer', transition: 'all 0.3s' }} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* BESTSELLERS */}
+      <section id="san-pham-ban-chay" style={{ ...hpStyles.section, background: '#fff', padding: isMobile ? '40px 0' : '56px 0' }}>
+        <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '0 16px' : '0 24px' }}>
+          <div style={hpStyles.sectionHead}>
+            <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Sản phẩm bán chạy</h2>
+            <p style={hpStyles.sectionSub}>Được khách hàng tin dùng và đánh giá cao nhất</p>
+          </div>
+          <BestsellerCarousel isMobile={isMobile}>
+            {bestsellers.map(p => (
+              <ProductCard key={p.id} product={p} setPage={setPage} addToCart={addToCart} productImages={productImages} imagePriority={true} />
+            ))}
+          </BestsellerCarousel>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28 }}>
+            <a href="#danh-muc-san-pham" style={hpStyles.viewAllBtn}>Xem các danh mục →</a>
           </div>
         </div>
       </section>
@@ -1013,24 +1153,6 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
               </div>
             </a>
           ))}
-        </div>
-      </section>
-
-      {/* BESTSELLERS */}
-      <section id="san-pham-noi-bat" style={{ ...hpStyles.section, background: '#fff', padding: isMobile ? '40px 0' : '56px 0' }}>
-        <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '0 16px' : '0 24px' }}>
-          <div style={hpStyles.sectionHead}>
-            <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 24 : 32 }}>Sản phẩm nổi bật</h2>
-            <p style={hpStyles.sectionSub}>Những lựa chọn được giới thiệu từ danh mục Phương Lâm</p>
-          </div>
-          <div style={{ ...hpStyles.bestsellerGrid, gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4, minmax(0, 1fr))', gap: isMobile ? 12 : 18 }}>
-            {bestsellers.map(p => (
-              <ProductCard key={p.id} product={p} setPage={setPage} addToCart={addToCart} productImages={productImages} imagePriority={true} />
-            ))}
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 28 }}>
-            <a href="#danh-muc-san-pham" style={hpStyles.viewAllBtn}>Xem các danh mục →</a>
-          </div>
         </div>
       </section>
 
