@@ -1135,7 +1135,7 @@ const HomePage = ({ setPage, addToCart, productImages = {}, featuredIds = null, 
       {/* COMBO */}
       <section style={{ ...hpStyles.section, padding: isMobile ? '24px 16px 40px' : '24px 24px 56px' }}>
         <div style={{ ...hpStyles.comboFeature, gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, .9fr) minmax(0, 1.1fr)', gap: isMobile ? 18 : 48, padding: isMobile ? 18 : 36 }}>
-          <ImgPlaceholder label="Bộ xông nhà Phương Lâm" bg="#efe8d8" aspectRatio={isMobile ? '16 / 10' : '4 / 3'} src={categoryImages.combo || null} style={{ width: '100%', borderRadius: 16, overflow: 'hidden' }} />
+          <ImgPlaceholder label="Bộ xông nhà Phương Lâm" bg="#efe8d8" aspectRatio="1 / 1" src={categoryImages.combo || null} style={{ width: '100%', borderRadius: 16, overflow: 'hidden' }} />
           <div>
             <div style={{ ...hpStyles.heroBadge, marginBottom: 14 }}>Bộ xông nhà</div>
             <h2 style={{ ...hpStyles.sectionTitle, fontSize: isMobile ? 25 : 34, marginBottom: 12 }}>Bắt đầu với một bộ xông</h2>
