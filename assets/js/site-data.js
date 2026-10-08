@@ -1722,7 +1722,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/1621efcd.webp",
+      "/assets/products/uploads/1791429666934-chatgpt-image-18-52-30-10-thg-8-2026.webp",
       "/assets/products/uploads/1791429201367-chatgpt-image-18-45-16-10-thg-8-2026.webp",
       "/assets/products/uploads/1791429204596-chatgpt-image-19-23-34-12-thg-8-2026.webp",
       "/assets/products/uploads/1791429208130-chatgpt-image-18-56-22-12-thg-8-2026.webp",
@@ -2128,7 +2128,7 @@ const PRODUCTS = [
     "price": 32000,
     "originalPrice": null,
     "shortDesc": "Bồ kết khô dùng để gội đầu hoặc xông theo hướng dẫn phù hợp. Chọn quy cách đóng gói tại phần phân loại.",
-    "tag": "",
+    "tag": "Bán chạy",
     "weight": 200,
     "hidden": false,
     "optionGroups": [],
@@ -2745,7 +2745,7 @@ const PRODUCTS = [
     "shortDesc": "Túi thơm dùng treo xe ô tô, phòng ngủ, tủ quần áo, tủ giày, phòng làm việc... giúp không gian có mùi hương nhẹ nhàng, dễ chịu.",
     "seoTitle": "",
     "seoDescription": "",
-    "tag": "",
+    "tag": "Bán chạy",
     "weight": null,
     "hidden": false,
     "optionGroups": [
