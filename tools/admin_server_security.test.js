@@ -46,3 +46,12 @@ test('isolated Push Git publishes app.jsx so baked settings never lag the bundle
   const legacyList = source.slice(source.indexOf("'.gitignore', 'admin-upload.html'"), source.indexOf("const changes = runGit(['diff', '--name-only', '-z'])"));
   assert.match(legacyList, /'assets\/js\/app\.jsx'/);
 });
+
+test('malformed percent-encoding returns 400 and the server keeps serving', async t => {
+  const { server } = fixture(t);
+  const port = await listen(server);
+  assert.equal((await request(port, { path: '/%E0%A4%A' })).status, 400);
+  const home = await request(port, { path: '/' });
+  assert.equal(home.status, 200);
+  assert.equal(home.body, 'home');
+});

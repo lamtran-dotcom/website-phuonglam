@@ -2056,7 +2056,14 @@ const handleApi = async (req, res, pathname) => {
 
 const serveStatic = (req, res, pathname) => {
   const requestPath = pathname === '/' ? '/index.html' : pathname;
-  let filePath = path.normalize(path.join(root, decodeURIComponent(requestPath)));
+  let decodedPath;
+  try {
+    decodedPath = decodeURIComponent(requestPath);
+  } catch {
+    send(res, 400, 'Bad request');
+    return;
+  }
+  let filePath = path.normalize(path.join(root, decodedPath));
   if (!filePath.startsWith(root)) {
     send(res, 403, 'Forbidden');
     return;
@@ -2074,9 +2081,14 @@ const serveStatic = (req, res, pathname) => {
 };
 
 const server = http.createServer(async (req, res) => {
-  const pathname = new URL(req.url, `http://${req.headers.host}`).pathname;
-  if (await handleApi(req, res, pathname)) return;
-  serveStatic(req, res, pathname);
+  try {
+    const pathname = new URL(req.url, 'http://127.0.0.1').pathname;
+    if (await handleApi(req, res, pathname)) return;
+    serveStatic(req, res, pathname);
+  } catch (error) {
+    if (!res.headersSent) sendJson(res, { ok: false, message: error.message }, 500);
+    else res.end();
+  }
 });
 
 if (require.main === module) server.listen(port, '127.0.0.1', () => {
