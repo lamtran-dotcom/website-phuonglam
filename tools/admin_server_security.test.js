@@ -156,3 +156,14 @@ test('oversized request bodies are rejected with 413 and the server stays up', a
   assert.equal(res.status, 413);
   assert.equal((await request(port, { path: '/' })).status, 200);
 });
+
+test('static file serving cannot escape into a sibling directory sharing the root prefix', async t => {
+  const { root, server } = fixture(t);
+  const sibling = `${root}-secret`;
+  fs.mkdirSync(sibling);
+  fs.writeFileSync(path.join(sibling, 'x.txt'), 'secret');
+  t.after(() => fs.rmSync(sibling, { recursive: true, force: true }));
+  const port = await listen(server);
+  const res = await request(port, { path: `/..%2F${path.basename(sibling)}%2Fx.txt` });
+  assert.notEqual(res.body, 'secret');
+});

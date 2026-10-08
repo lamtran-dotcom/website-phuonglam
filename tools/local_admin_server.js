@@ -2108,7 +2108,7 @@ const serveStatic = (req, res, pathname) => {
     return;
   }
   let filePath = path.normalize(path.join(root, decodedPath));
-  if (!filePath.startsWith(root)) {
+  if (filePath !== root && !filePath.startsWith(root + path.sep)) {
     send(res, 403, 'Forbidden');
     return;
   }
