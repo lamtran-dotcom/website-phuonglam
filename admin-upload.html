@@ -556,7 +556,6 @@
     const API_BLOG = 'api/blog.php';
     const API_BLOG_PREVIEW = 'api/blog-preview.php';
     const PUBLIC_SITE_URL = 'https://phuonglam.com';
-    const PASS_KEY = 'phuonglam_admin_password';
     const PRODUCT_DRAFT_KEY = 'phuonglam_admin_product_draft_v1';
     const CATEGORY_ALIASES = { 'tinh-dau': 'bep-xong' };
     const normalizeCategoryId = value => CATEGORY_ALIASES[String(value || '')] || String(value || 'nen-thom');
@@ -574,7 +573,6 @@
     ];
     const PRODUCT_TAGS = ['', 'Bán chạy', 'Mới', 'Nổi bật', 'Sale', 'Hết hàng'];
 
-    let password = localStorage.getItem(PASS_KEY) || '';
     let products = [];
     let productRevision = '';
     let productDraftDirty = false;
@@ -802,7 +800,7 @@
         const [productRes, settingRes, orderRes, blogRes] = await Promise.all([
           fetch(API_PRODUCTS, { cache: 'no-store' }),
           fetch(API_SETTINGS, { cache: 'no-store' }),
-          fetch(API_ORDERS, { cache: 'no-store', headers: { 'X-Admin-Password': password } }).catch(() => null),
+          fetch(API_ORDERS, { cache: 'no-store' }).catch(() => null),
           fetch(API_BLOG, { cache: 'no-store' }).catch(() => null)
         ]);
         const productData = await readJsonResponse(productRes, 'API sản phẩm');
@@ -850,27 +848,6 @@
         headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
         categoryImages
       };
-    }
-
-    function renderLogin() {
-      app.innerHTML = `
-        <div class="panel login">
-          <h1>Phương Lâm Admin</h1>
-          <p class="sub">Nhập mật khẩu admin để thêm/sửa sản phẩm trực tiếp trên host.</p>
-          <label>Mật khẩu admin</label>
-          <input id="password" type="password" value="${esc(password)}" placeholder="Nhập mật khẩu" />
-          <div class="actions" style="margin-top:16px">
-            <button onclick="login()">Đăng nhập</button>
-            <a href="index.html"><button class="secondary">Về trang chủ</button></a>
-          </div>
-        </div>
-      `;
-    }
-
-    function login() {
-      password = document.getElementById('password').value.trim();
-      localStorage.setItem(PASS_KEY, password);
-      loadProducts();
     }
 
     function render() {
@@ -2142,7 +2119,6 @@
       try {
         const optimizedFile = await optimizeImageFile(file);
         const form = new FormData();
-        form.append('password', password);
         form.append('image', optimizedFile);
         const res = await fetch(API_UPLOAD, { method: 'POST', body: form });
         const data = await readJsonResponse(res, 'API upload ảnh');
@@ -2368,8 +2344,7 @@
       const res = await fetch(API_SETTINGS, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Password': password
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ settings: normalizeSettings(settings) })
       });
@@ -2384,8 +2359,7 @@
         const res = await fetch(API_ORDERS, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'X-Admin-Password': password
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({ action: 'updateStatus', id: orderId, status })
         });
@@ -2515,8 +2489,7 @@
       const res = await fetch(API_PRODUCTS, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Password': password
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ products: products.map(normalizeProduct), revision: productRevision })
       });
@@ -2592,8 +2565,7 @@
       event.returnValue = '';
     });
 
-    if (!password) renderLogin();
-    else loadProducts();
+    loadProducts();
   </script>
 </body>
 </html>

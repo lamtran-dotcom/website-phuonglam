@@ -21,3 +21,10 @@ test('storefront cart items are built from a field allow-list', () => {
   assert.match(body, /cartProductFields\(product\)/);
   assert.doesNotMatch(body, /\.\.\.product\b/);
 });
+
+test('admin has no password gate: the local server never verified one', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'admin-upload.html'), 'utf8');
+  assert.doesNotMatch(html, /X-Admin-Password|phuonglam_admin_password|renderLogin|form\.append\('password'/);
+  const source = read('app.jsx');
+  assert.doesNotMatch(source, /adminLoginOpen|handleAdminLogin|phuonglam_admin_password/);
+});

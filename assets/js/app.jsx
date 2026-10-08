@@ -182,8 +182,6 @@ const shippingPromoStyles = {
 
 const Header = ({ page, setPage, cartCount, setCartCount }) => {
   const [menuOpen, setMenuOpen] = React.useState(false);
-  const [adminLoginOpen, setAdminLoginOpen] = React.useState(false);
-  const [adminPassword, setAdminPassword] = React.useState('');
   const [hoveredNavLabel, setHoveredNavLabel] = React.useState(null);
   const logoClicksRef = React.useRef(0);
   const logoTimerRef = React.useRef(null);
@@ -203,22 +201,13 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
     clearTimeout(logoTimerRef.current);
     if (logoClicksRef.current >= 5) {
       logoClicksRef.current = 0;
-      setAdminPassword('');
-      setAdminLoginOpen(true);
+      setPage({ name: 'admin' });
       return;
     }
     logoTimerRef.current = setTimeout(() => {
       logoClicksRef.current = 0;
       setPage({ name: 'home' });
     }, 600);
-  };
-
-  const handleAdminLogin = (event) => {
-    event.preventDefault();
-    const value = adminPassword.trim();
-    if (!value) return;
-    localStorage.setItem('phuonglam_admin_password', value);
-    window.location.href = 'admin-upload.html';
   };
 
   return (
@@ -289,25 +278,6 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
         </div>
       )}
 
-      {adminLoginOpen && (
-        <div style={headerStyles.adminOverlay} onClick={() => setAdminLoginOpen(false)}>
-          <form style={headerStyles.adminModal} onSubmit={handleAdminLogin} onClick={e => e.stopPropagation()}>
-            <div style={headerStyles.adminIcon}>🔐</div>
-            <h2 style={headerStyles.adminTitle}>Đăng nhập admin</h2>
-            <p style={headerStyles.adminDesc}>Nhập mật khẩu quản trị để mở trang cập nhật sản phẩm.</p>
-            <input
-              type="password"
-              value={adminPassword}
-              onChange={e => setAdminPassword(e.target.value)}
-              autoFocus
-              placeholder="Mật khẩu admin"
-              style={headerStyles.adminInput}
-            />
-            <button type="submit" style={headerStyles.adminSubmit}>Vào trang admin</button>
-            <button type="button" style={headerStyles.adminCancel} onClick={() => setAdminLoginOpen(false)}>Hủy</button>
-          </form>
-        </div>
-      )}
     </header>
   );
 };
@@ -330,14 +300,6 @@ const headerStyles = {
   hamburger: { display: 'block', width: 20, height: 2, background: '#333', borderRadius: 2 },
   mobileMenu: { padding: '12px 24px 16px', display: 'flex', flexDirection: 'column', gap: 4, borderTop: '1px solid #f0f0f0' },
   mobileLink: { padding: '10px 0', fontSize: 15, fontWeight: 700, cursor: 'pointer', borderBottom: '1px solid #f5f5f5', color: '#333', textDecoration: 'none' },
-  adminOverlay: { position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(18, 32, 17, .42)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 },
-  adminModal: { width: '100%', maxWidth: 420, background: '#fff', border: '1px solid #e3efde', borderRadius: 24, boxShadow: '0 28px 80px rgba(28, 73, 22, .24)', padding: '30px 28px 24px', textAlign: 'center', animation: 'modalPop .18s ease-out' },
-  adminIcon: { width: 62, height: 62, borderRadius: '50%', background: '#edf8e9', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 14px', fontSize: 28 },
-  adminTitle: { margin: 0, fontSize: 28, color: '#1f1f1f', letterSpacing: '-0.03em' },
-  adminDesc: { margin: '8px 0 20px', color: '#777', fontSize: 14, lineHeight: 1.6 },
-  adminInput: { width: '100%', border: '1.5px solid #dbe8d7', borderRadius: 14, padding: '14px 16px', fontSize: 16, outline: 'none', textAlign: 'center', boxSizing: 'border-box', marginBottom: 12 },
-  adminSubmit: { width: '100%', border: 'none', borderRadius: 14, padding: '14px 18px', background: '#318223', color: '#fff', fontSize: 16, fontWeight: 900, cursor: 'pointer', boxShadow: '0 14px 28px rgba(49, 130, 35, .2)' },
-  adminCancel: { width: '100%', marginTop: 10, border: '1px solid #e3e3e3', borderRadius: 14, padding: '12px 18px', background: '#fff', color: '#777', fontSize: 14, fontWeight: 800, cursor: 'pointer' },
 };
 
 
@@ -4053,49 +4015,7 @@ const CategoryImageEditor = ({ categoryImages = {}, setCategoryImages }) => {
 };
 
 const AdminPage = ({ setPage, productImages = {}, setProductImages, productOverrides = {}, setProductOverrides, featuredIds, setFeaturedIds, setExtraProducts, categoryImages = {}, setCategoryImages, headerImages = null, setHeaderImages }) => {
-  const [authed, setAuthed] = React.useState(() => IS_LOCAL_HOST && sessionStorage.getItem('phuonglam-admin') === '1');
-  const [pwInput, setPwInput] = React.useState('');
-  const [pwError, setPwError] = React.useState(false);
   const [exportStatus, setExportStatus] = React.useState('');
-
-  const handleLogin = () => {
-    if (IS_LOCAL_HOST) {
-      sessionStorage.setItem('phuonglam-admin', '1');
-      setAuthed(true);
-      setPwError(false);
-    } else {
-      setPwError(true);
-      setPwInput('');
-    }
-  };
-
-  if (!authed) return (
-    <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ background: '#fff', border: '1px solid #f0f0f0', borderRadius: 16, padding: '40px 36px', width: 360, boxShadow: '0 8px 32px rgba(0,0,0,0.08)', textAlign: 'center' }}>
-        <div style={{ fontSize: 32, marginBottom: 12 }}>🔐</div>
-        <div style={{ fontSize: 20, fontWeight: 800, color: '#1a1a1a', marginBottom: 6 }}>Đăng nhập Admin</div>
-        <div style={{ fontSize: 13, color: '#aaa', marginBottom: 28 }}>Chỉ dành cho quản trị viên</div>
-        <input
-          style={{ width: '100%', border: pwError ? '1.5px solid #e84848' : '1.5px solid #e0e0e0', borderRadius: 10, padding: '12px 14px', fontSize: 14, outline: 'none', marginBottom: 8, boxSizing: 'border-box', textAlign: 'center', letterSpacing: 4 }}
-          type="password"
-          placeholder="Nhập mật khẩu"
-          value={pwInput}
-          onChange={e => { setPwInput(e.target.value); setPwError(false); }}
-          onKeyDown={e => e.key === 'Enter' && handleLogin()}
-          autoFocus
-        />
-        {pwError && <div style={{ fontSize: 12, color: '#e84848', marginBottom: 10 }}>Mật khẩu không đúng, thử lại!</div>}
-        <button
-          style={{ width: '100%', background: '#318223', color: '#fff', border: 'none', padding: '13px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 8 }}
-          onClick={handleLogin}>
-          Đăng nhập
-        </button>
-        <button style={{ marginTop: 14, background: 'none', border: 'none', color: '#aaa', fontSize: 13, cursor: 'pointer' }} onClick={() => setPage({ name: 'home' })}>
-          ← Về trang chủ
-        </button>
-      </div>
-    </div>
-  );
 
   const [orders, setOrders] = React.useState(SAMPLE_ORDERS);
   const [filterStatus, setFilterStatus] = React.useState('All');
