@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
+const crypto = require('crypto');
 
 const root = path.resolve(__dirname, '..');
 const siteUrl = 'https://phuonglam.com';
-const assetVersion = Date.now();
 
 const paths = {
   index: path.join(root, 'index.html'),
@@ -835,20 +835,28 @@ const productSitemapUrls = (products) => products
   .filter((product) => !isHiddenProduct(product))
   .map((product) => `${siteUrl}/san-pham/${product.slug}/`);
 
+// Cache-bust by content so an unchanged asset keeps the same URL and rebuilding does not
+// rewrite every page.
+const contentVersion = (filePath) => (fs.existsSync(filePath)
+  ? crypto.createHash('sha1').update(fs.readFileSync(filePath)).digest('hex').slice(0, 10)
+  : '0');
+
+const staticCssVersion = () => contentVersion(path.join(paths.cssDir, 'static-seo.css'));
+
 const pageShell = ({ title, description, canonical, image, schema, body, scripts = '', robots = '' }) => `<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(title)}</title>
-  <meta name="description" content="${escapeHtml(description)}" />
-  ${robots ? `<meta name="robots" content="${escapeHtml(robots)}" />` : ''}
+  <meta name="description" content="${escapeHtml(description)}" />${robots ? `
+  <meta name="robots" content="${escapeHtml(robots)}" />` : ''}
   <link rel="canonical" href="${escapeHtml(canonical)}" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="${escapeHtml(title)}" />
   <meta property="og:description" content="${escapeHtml(description)}" />
   ${image ? `<meta property="og:image" content="${escapeHtml(absoluteUrl(image))}" />` : ''}
-  <link rel="stylesheet" href="/assets/css/static-seo.css?v=${assetVersion}" />
+  <link rel="stylesheet" href="/assets/css/static-seo.css?v=${staticCssVersion()}" />
   <script type="application/ld+json">${jsonForHtml(schema)}</script>
 </head>
 <body>
@@ -1740,11 +1748,8 @@ const writeHomeContent = ({ products, categories, blogPosts, settings }) => {
 };
 
 const updateIndexHead = (html) => {
-  const cacheVersion = `?v=${assetVersion}`;
   html = html
-    .replace(/(href="\/assets\/css\/site\.css)(?:\?v=[^"]*)?"/, `$1${cacheVersion}"`)
-    .replace(/(src="\/assets\/js\/site-data\.js)(?:\?v=[^"]*)?"/, `$1${cacheVersion}"`)
-    .replace(/(src="\/assets\/js\/app\.min\.js)(?:\?v=[^"]*)?"/, `$1${cacheVersion}"`)
+    .replace(/(href="\/assets\/css\/site\.css)(?:\?v=[^"]*)?"/, `$1?v=${contentVersion(path.join(paths.cssDir, 'site.css'))}"`)
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(homeTitle)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${escapeHtml(homeDescription)}" />`)
     .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${escapeHtml(homeTitle)}" />`)
@@ -1890,12 +1895,13 @@ const updateProductsJson = () => {
 const bustIndexCache = () => {
   const indexPath = paths.index;
   let html = fs.readFileSync(indexPath, 'utf8');
-  const v = Date.now();
-  // Update ?v= on site-data.js and app.min.js for cache-busting
-  html = html.replace(
-    /(<script\b[^>]*\bsrc="\/assets\/js\/(?:site-data|app\.min)\.js)(?:\?v=\d+)?("[^>]*><\/script>)/g,
-    `$1?v=${v}$2`
-  );
+  // Runs after site-data.js, app.min.js and site.css are final for this build.
+  html = html
+    .replace(
+      /(<script\b[^>]*\bsrc="\/assets\/js\/(site-data|app\.min)\.js)(?:\?v=[^"]*)?("[^>]*><\/script>)/g,
+      (match, prefix, name, suffix) => `${prefix}?v=${contentVersion(path.join(paths.jsDir, `${name}.js`))}${suffix}`
+    )
+    .replace(/(href="\/assets\/css\/site\.css)(?:\?v=[^"]*)?"/, `$1?v=${contentVersion(path.join(paths.cssDir, 'site.css'))}"`);
   fs.writeFileSync(indexPath, html);
 };
 
@@ -1990,4 +1996,4 @@ if (require.main === module) {
   else main();
 }
 
-module.exports = { isHiddenProduct, productSitemapUrls, renderProductPage };
+module.exports = { contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage };

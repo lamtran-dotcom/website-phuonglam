@@ -22,3 +22,19 @@ test('hidden products keep a page but are noindex and left out of the sitemap', 
   assert.match(hiddenHtml, /<link rel="canonical" href="https:\/\/phuonglam\.com\/san-pham\/an-bool\/" \/>/);
   assert.doesNotMatch(renderProductPage({ product: visible, categoryName: 'Nến thơm' }), /name="robots"/);
 });
+
+test('asset versions come from file content, so unchanged assets keep their URL', () => {
+  const fs = require('node:fs');
+  const os = require('node:os');
+  const path = require('node:path');
+  const { contentVersion } = require('./build_static_site');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-version-'));
+  const file = path.join(dir, 'a.css');
+  fs.writeFileSync(file, 'body{}');
+  const first = contentVersion(file);
+  assert.match(first, /^[0-9a-f]{10}$/);
+  assert.equal(contentVersion(file), first);
+  fs.writeFileSync(file, 'body{color:red}');
+  assert.notEqual(contentVersion(file), first);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
