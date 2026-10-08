@@ -105,6 +105,13 @@ const readBody = (req) =>
     req.on('error', reject);
   });
 
+// Write to a sibling temp file and rename, so a crash mid-write never leaves truncated JSON/JS.
+const writeFileAtomic = (filePath, data) => {
+  const tempPath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
+  fs.writeFileSync(tempPath, data);
+  fs.renameSync(tempPath, filePath);
+};
+
 const safeName = (name) =>
   String(name || 'upload')
     .normalize('NFD')
@@ -320,7 +327,7 @@ const saveProductsWithBackup = (products) => {
     const restorePath = `${files.products}.${process.pid}.restore.tmp`;
     fs.writeFileSync(restorePath, previousBytes);
     fs.renameSync(restorePath, files.products);
-    if (previousPendingBytes) fs.writeFileSync(pendingPath, previousPendingBytes);
+    if (previousPendingBytes) writeFileAtomic(pendingPath, previousPendingBytes);
     else fs.rmSync(pendingPath, { force: true });
     try {
       runBuild();
@@ -638,7 +645,7 @@ const loadSettings = () => {
 
 const saveSettings = (settings) => {
   fs.mkdirSync(path.dirname(files.settings), { recursive: true });
-  fs.writeFileSync(files.settings, JSON.stringify(normalizeSettings(settings), null, 2) + '\n');
+  writeFileAtomic(files.settings, JSON.stringify(normalizeSettings(settings), null, 2) + '\n');
 };
 
 const savePendingSettings = (beforeSettings, afterSettings) => {
@@ -1520,7 +1527,7 @@ const replaceBlogPostsInSiteData = (posts, siteDataPath = files.siteData) => {
   if (endIdx === -1) return;
   const block = `const BLOG_POSTS = ${JSON.stringify(posts, null, 2)};`;
   source = source.slice(0, startIdx) + block + source.slice(endIdx);
-  fs.writeFileSync(siteDataPath, source);
+  writeFileAtomic(siteDataPath, source);
 };
 
 const upsertBlogPost = ({ category, slug, meta }) => {
