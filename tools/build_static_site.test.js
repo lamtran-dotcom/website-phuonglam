@@ -38,3 +38,10 @@ test('asset versions come from file content, so unchanged assets keep their URL'
   assert.notEqual(contentVersion(file), first);
   fs.rmSync(dir, { recursive: true, force: true });
 });
+
+test('static product pages store a slim cart item instead of the whole product', () => {
+  const html = renderProductPage({ product: product({ description: 'x'.repeat(5000) }), categoryName: 'Nến thơm' });
+  const script = html.slice(html.indexOf('const cartBase'));
+  assert.ok(script.length > 0, 'cart script missing');
+  assert.doesNotMatch(script.slice(0, script.indexOf('const readCart')), /\.\.\.product\b/);
+});

@@ -347,10 +347,22 @@
     ? optionGroups.every((group, index) => getActiveValue(optionPillGroups[index]))
     : (!variants.length || !!variantPills?.querySelector('.variant-pill.is-active'));
   const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
+  // Keep cart entries small: only the fields the cart, shipping rules and checkout read.
+  const cartBase = {
+    id: product.id,
+    slug: product.slug,
+    sku: product.sku,
+    name: product.name,
+    categoryId: product.categoryId,
+    price: product.price,
+    originalPrice: product.originalPrice,
+    weight: product.weight,
+    images: Array.isArray(product.images) ? product.images.slice(0, 1) : [],
+  };
   const buildItem = (variant) => {
-    if (!variant) return { ...product, cartKey: String(product.id) };
+    if (!variant) return { ...cartBase, cartKey: String(product.id) };
     return {
-      ...product,
+      ...cartBase,
       sku: variant.sku || product.sku,
       price: Number(variant.price) || Number(product.price) || 0,
       originalPrice: variant.originalPrice || product.originalPrice || null,

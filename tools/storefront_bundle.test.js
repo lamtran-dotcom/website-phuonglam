@@ -13,3 +13,11 @@ test('public storefront bundle ships no admin password and gates the in-app admi
     assert.match(source, /IS_LOCAL_HOST/, `${file} lacks the localhost gate`);
   }
 });
+
+test('storefront cart items are built from a field allow-list', () => {
+  const source = read('app.jsx');
+  const start = source.indexOf('const buildCartItem');
+  const body = source.slice(start, source.indexOf('\n};', start));
+  assert.match(body, /cartProductFields\(product\)/);
+  assert.doesNotMatch(body, /\.\.\.product\b/);
+});

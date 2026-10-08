@@ -655,12 +655,26 @@ const getShortProductName = (name, maxWords = 6) => {
   return `${words.slice(0, maxWords).join(' ')}...`;
 };
 
+// Cart items live in localStorage and are sent with orders, so keep only what the cart,
+// shipping rules and checkout read instead of the full product (descriptions run to KBs).
+const cartProductFields = (product) => ({
+  id: product.id,
+  slug: product.slug,
+  sku: product.sku,
+  name: product.name,
+  categoryId: product.categoryId,
+  price: product.price,
+  originalPrice: product.originalPrice,
+  weight: product.weight,
+  images: [getProductDisplayImage(product)].filter(Boolean),
+});
+
 const buildCartItem = (product, variant = null) => {
   const variants = normalizeProductVariants(product);
   const selectedVariant = variant || (variants.length ? variants.reduce((best, item) => item.price < best.price ? item : best, variants[0]) : null);
-  if (!selectedVariant) return { ...product, cartKey: String(product.id) };
+  if (!selectedVariant) return { ...cartProductFields(product), cartKey: String(product.id) };
   return {
-    ...product,
+    ...cartProductFields(product),
     sku: selectedVariant.sku || product.sku,
     price: selectedVariant.price,
     originalPrice: selectedVariant.originalPrice,
