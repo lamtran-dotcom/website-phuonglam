@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-08 — Audit fixes (branch audit/2026-10, unpushed)
+- Re-ran the normal build so `app.min.js` again contains every bestseller and category image from `data/settings.json`.
+- Committed the local admin server, product push helper, admin UI and their tests, which had never been tracked.
+- Admin Push Git publishes `assets/js/app.jsx` alongside the bundle so baked data cannot drift.
+- Local admin refuses non-loopback Host headers and cross-site write requests; malformed URLs return 400.
+- Added `tools/admin_server_security.test.js`; wrote `docs/AUDIT-2026-10.md`.
+
 ## 2026-10-07 — Add Túi thơm and Gỗ thơm categories
 - Added both categories immediately after Thảo Mộc Xông in the shared category navigation.
 - Generated static destinations with an empty-category message and added both URLs to the sitemap.

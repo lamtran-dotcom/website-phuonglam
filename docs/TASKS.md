@@ -1,6 +1,12 @@
 # Tasks
 
 ## Now
+- [ ] Review and push branch `audit/2026-10` (P0 bundle fix should go live first).
+- [ ] Decide: hidden products (4) still get indexable pages and sitemap URLs — noindex/remove from sitemap or keep.
+- [ ] Decide with seller: visible duplicate product "… - bản sao" (`p_1791429972397_g7kgf`).
+- [ ] Decide: hide internal files (docs, CONTEXT/AGENTS, tools, reports, data backups, `.command`, admin UI) from GitHub Pages, e.g. Jekyll `_config.yml` `exclude`.
+- [ ] Approve or reject P2/P3 items A1–A13, N1–N4 in `docs/AUDIT-2026-10.md`.
+- [ ] Seller to supply unique SKUs for `shopee_22080262041` variants.
 - [x] Update the express-delivery promotion to promise delivery within 1 hour in inner TP.HCM (2026-09-28).
 - [x] Hide the free-shipping threshold and overweight calculation from customer-facing checkout; retain shipping logic (2026-09-28).
 - [x] Remove the HCMC-only order restriction for candle cups, keep express local to inner HCMC, and update both product descriptions for nationwide delivery (2026-09-28).

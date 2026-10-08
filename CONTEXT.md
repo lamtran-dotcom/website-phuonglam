@@ -44,6 +44,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Audit 2026-10 — 2026-10-08, branch `audit/2026-10` (worktree `/Users/lamtran/worktrees/phuonglam-audit`), **not pushed**. Report: `docs/AUDIT-2026-10.md` (keep it off the public site until the exposure item E is resolved). Fixed: re-baked bundle after `d5c32d8` dropped a bestseller and two category images (P0); committed the admin tooling that existed only in the Desktop checkout; Push Git now also publishes `assets/js/app.jsx`; admin rejects non-loopback Host and cross-site writes; malformed URLs return 400 instead of killing the server. 24/24 tests pass. Waiting on owner: hidden products still generate indexable pages, the "- bản sao" duplicate product, internal files public on phuonglam.com, and P2/P3 list. The Desktop checkout is 32 commits behind origin with stale `app.jsx`/admin edits; do not push from it.
+
 Catalog subcategories — 2026-10-07: added `Túi thơm` and `Gỗ thơm` immediately after `Thảo Mộc Xông` in the shared category list. Static pages now exist for both empty categories with a clear update message; category pages and sitemap include them. Existing Shopee product remains assigned to `thao-moc-xong`.
 
 Shopee product import — 2026-10-07: added Shopee item `54367578815` to `data/products.json` and the `thao-moc-xong` category. Imported description, 8 gallery images, 9 variant images/options/SKUs and VND prices from the supplied exports; ignored MY prices and stock. Added optimized local image assets and generated product/category/sitemap output. Published in commit `7f4c9c7`; verified live product and category pages return HTTP 200.

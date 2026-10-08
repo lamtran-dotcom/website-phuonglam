@@ -2,6 +2,18 @@
 
 ## Decision Log
 
+### 2026-10-08 - Guard the local admin against browser-originated cross-site requests
+Decision: The admin server only answers requests whose Host is a loopback name, and rejects non-GET requests whose Origin is not the admin itself or whose Sec-Fetch-Site is cross-site/same-site. Requests without Origin (server-to-server, curl, Content AI Studio) are allowed.
+Reason: Binding to 127.0.0.1 does not stop pages open in the operator's browser from posting to it or DNS-rebinding into it; the admin can publish to production.
+Impact: Another local web app that wants to write to the admin must call it server-side rather than from browser JavaScript.
+Status: Active
+
+### 2026-10-08 - Publish app.jsx together with app.min.js
+Decision: Every admin publish path that stages `assets/js/app.min.js` also stages `assets/js/app.jsx`.
+Reason: The build bakes catalog/settings into both; leaving the source stale on origin caused a live regression when the bundle was recompiled from source.
+Impact: `app.jsx` diffs in admin commits are expected and limited to the BAKED_* blocks.
+Status: Active
+
 ### 2026-09-28 - Use a calm, category-first homepage
 Decision: Use “Thắp chút ấm áp. Ươm hương an yên.” as the homepage slogan, show one configurable hero image on all screen sizes, and lead visitors from product categories to featured products and guides.
 Reason: The product family spans both candles and herbal burners, and the shorter line gives the brand a clearer, warmer introduction.
