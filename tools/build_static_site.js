@@ -1905,7 +1905,7 @@ const bustIndexCache = () => {
   fs.writeFileSync(indexPath, html);
 };
 
-const optimizeIndexRuntime = () => {
+const optimizeIndexRuntime = (settings = {}) => {
   const indexPath = paths.index;
   let html = fs.readFileSync(indexPath, 'utf8');
 
@@ -1932,9 +1932,12 @@ const optimizeIndexRuntime = () => {
     '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />',
     '<meta name="theme-color" content="#318223" />',
     '<meta property="og:image" content="https://phuonglam.com/assets/media/generated/embedded-002.jpg" />',
-    '<link rel="preload" as="image" href="/assets/media/generated/embedded-002.jpg" fetchpriority="high" />',
-    '<link rel="preload" as="image" href="/assets/products/uploads/1777435799447-chatgpt-image-14-52-27-22-thg-4-2026.webp" fetchpriority="high" />',
   ];
+  // Preload only the first header slide, which is the LCP image; earlier builds hard-coded
+  // images that later stopped appearing above the fold.
+  const heroImage = settings.headerImages?.[0] || '/assets/media/generated/embedded-002.jpg';
+  html = html.replace(/\n?[ \t]*<link rel="preload" as="image"[^>]*>/g, '');
+  html = html.replace('</head>', `  <link rel="preload" as="image" href="${escapeHtml(heroImage)}" fetchpriority="high" />\n</head>`);
   for (const link of preloadLinks) {
     const marker = link.match(/(?:href|property|name)="([^"]+)"/)?.[1];
     if (marker && !html.includes(marker)) {
@@ -1957,7 +1960,7 @@ const main = () => {
   bakeSettingsIntoApp(settings);
   writeHomeContent({ products, categories: initialData.categories, blogPosts: initialData.blogPosts, settings });
   compileAppJs();
-  optimizeIndexRuntime();
+  optimizeIndexRuntime(settings);
   bustIndexCache();
   writeSeoPages({ products, categories: initialData.categories, blogPosts: initialData.blogPosts });
   writeSitemapAndRobots({ products, categories: initialData.categories, blogPosts: initialData.blogPosts });
