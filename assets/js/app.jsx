@@ -199,7 +199,7 @@ const Header = ({ page, setPage, cartCount, setCartCount }) => {
   ];
 
   const handleLogoClick = () => {
-    logoClicksRef.current += 1;
+    if (IS_LOCAL_HOST) logoClicksRef.current += 1;
     clearTimeout(logoTimerRef.current);
     if (logoClicksRef.current >= 5) {
       logoClicksRef.current = 0;
@@ -3562,7 +3562,9 @@ const peStyles = {
   input: { width: '100%', border: '1.5px solid #e0e0e0', borderRadius: 8, padding: '9px 12px', fontSize: 13, outline: 'none', color: '#1a1a1a', fontFamily: 'inherit', boxSizing: 'border-box', resize: 'vertical' },
 };
 
-const ADMIN_PASSWORD = 'Lam29081998';
+// The in-app admin only edits this browser's localStorage and is meant for local use; never
+// ship a password in the public bundle.
+const IS_LOCAL_HOST = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
 
 
 const CategoryAdmin = ({ productImages, setProductImages, productOverrides, setProductOverrides }) => {
@@ -4037,13 +4039,13 @@ const CategoryImageEditor = ({ categoryImages = {}, setCategoryImages }) => {
 };
 
 const AdminPage = ({ setPage, productImages = {}, setProductImages, productOverrides = {}, setProductOverrides, featuredIds, setFeaturedIds, setExtraProducts, categoryImages = {}, setCategoryImages, headerImages = null, setHeaderImages }) => {
-  const [authed, setAuthed] = React.useState(() => sessionStorage.getItem('phuonglam-admin') === '1');
+  const [authed, setAuthed] = React.useState(() => IS_LOCAL_HOST && sessionStorage.getItem('phuonglam-admin') === '1');
   const [pwInput, setPwInput] = React.useState('');
   const [pwError, setPwError] = React.useState(false);
   const [exportStatus, setExportStatus] = React.useState('');
 
   const handleLogin = () => {
-    if (pwInput === ADMIN_PASSWORD) {
+    if (IS_LOCAL_HOST) {
       sessionStorage.setItem('phuonglam-admin', '1');
       setAuthed(true);
       setPwError(false);
@@ -4754,7 +4756,7 @@ const App = () => {
   };
 
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
-  const isAdmin = page.name === 'admin';
+  const isAdmin = page.name === 'admin' && IS_LOCAL_HOST;
 
   React.useEffect(() => {
     if (!window.history.state?.page) {
@@ -4815,7 +4817,8 @@ const App = () => {
       case 'product':  return <ProductPage productId={page.id} setPage={navigateTo} goBack={goBack} addToCart={addToCart} productImages={productImages} />;
       case 'cart':     return <CartPage cart={cart} setCart={setCart} setPage={navigateTo} productImages={productImages} />;
       case 'checkout': return <CheckoutPage cart={cart} setCart={setCart} setPage={navigateTo} />;
-      case 'admin':    return <AdminPage setPage={navigateTo} productImages={productImages} setProductImages={setProductImages} productOverrides={productOverrides} setProductOverrides={setProductOverrides} featuredIds={featuredIds} setFeaturedIds={setFeaturedIds} setExtraProducts={setExtraProducts} categoryImages={categoryImages} setCategoryImages={setCategoryImages} headerImages={headerImages} setHeaderImages={setHeaderImages} />;
+      case 'admin':    if (!IS_LOCAL_HOST) return <HomePage setPage={navigateTo} addToCart={addToCart} productImages={productImages} featuredIds={effectiveFeaturedIds} categoryImages={effectiveCategoryImages} headerImages={effectiveHeaderImages} />;
+                       return <AdminPage setPage={navigateTo} productImages={productImages} setProductImages={setProductImages} productOverrides={productOverrides} setProductOverrides={setProductOverrides} featuredIds={featuredIds} setFeaturedIds={setFeaturedIds} setExtraProducts={setExtraProducts} categoryImages={categoryImages} setCategoryImages={setCategoryImages} headerImages={headerImages} setHeaderImages={setHeaderImages} />;
       case 'blog':     return <BlogPage setPage={navigateTo} />;
       case 'blog-post': return <BlogPostPage slug={page.slug} setPage={navigateTo} goBack={goBack} />;
       default:         return <HomePage setPage={navigateTo} addToCart={addToCart} productImages={productImages} featuredIds={effectiveFeaturedIds} categoryImages={effectiveCategoryImages} headerImages={effectiveHeaderImages} />;
