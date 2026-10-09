@@ -1181,32 +1181,6 @@ const PRODUCTS = [
     "seoDescription": ""
   },
   {
-    "id": 7,
-    "sku": "PL-003",
-    "categoryId": "phu-kien",
-    "name": "Hột quẹt gas thắp nến đầu dài an có thể thu gọn tiện lợi I Phương Lâm",
-    "price": 25000,
-    "originalPrice": 40000,
-    "shortDesc": "Chuyên dùng cho đốt nến xông, an toàn tiện lợi",
-    "tag": "Nổi bật",
-    "weight": 200,
-    "hidden": true,
-    "optionGroups": [],
-    "optionImages": {},
-    "images": [
-      "/assets/products/uploads/1777451754260-shop-1-phu-kien.webp",
-      "/assets/products/uploads/1777455572843-chatgpt-image-16-30-11-29-thg-4-2026-trung-binh.webp",
-      "/assets/products/uploads/1777455577721-chatgpt-image-16-27-42-29-thg-4-2026-trung-binh.webp",
-      "/assets/products/uploads/1777455579445-chatgpt-image-16-26-39-29-thg-4-2026-trung-binh.webp",
-      "/assets/products/uploads/1777455581435-chatgpt-image-16-25-05-29-thg-4-2026-trung-binh.webp"
-    ],
-    "reviews": [],
-    "variants": [],
-    "slug": "hot-quet-gas-thap-nen-dau-dai-an-co-the-thu-gon-tien-loi-i-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
-  },
-  {
     "id": "shopee_57653126590",
     "sku": "SP-57653126590",
     "categoryId": "thao-moc-xong",
@@ -1327,28 +1301,6 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
-  },
-  {
-    "id": "shopee_56102764086",
-    "sku": "470519_mod470519",
-    "categoryId": "phu-kien",
-    "name": "Dĩa lót bếp xông đất nung cách nhiệt giữ sạch mặt bàn",
-    "price": 25000,
-    "originalPrice": 30000,
-    "shortDesc": "Dĩa lót đất nung tự nhiên dùng cho bếp xông thảo mộc, bồ kết và nến tealight. Giúp cách nhiệt, giữ vệ sinh mặt bàn và hoàn thiện bộ bếp xông mộc mạc.",
-    "tag": "Sale",
-    "weight": 200,
-    "hidden": true,
-    "optionGroups": [],
-    "optionImages": {},
-    "images": [
-      "/assets/products/mirrored/d3e9edf3.webp"
-    ],
-    "reviews": [],
-    "variants": [],
-    "slug": "dia-lot-bep-xong-dat-nung-cach-nhiet-giu-sach-mat-ban",
     "seoTitle": "",
     "seoDescription": ""
   },
@@ -2037,77 +1989,6 @@ const PRODUCTS = [
     "seoDescription": ""
   },
   {
-    "id": "shopee_23980156399",
-    "sku": "SP-23980156399",
-    "categoryId": "bep-xong",
-    "name": "Đèn xông tinh dầu hình hươu gốm sứ trang trí sang trọng",
-    "price": 165000,
-    "originalPrice": null,
-    "shortDesc": "Đèn xông con HƯƠU chất liệu bằng SẮT được sơn tĩnh điện sang trọng hiện đại, chén đựng nước to bằng gốm sứ.",
-    "tag": "",
-    "weight": 800,
-    "hidden": true,
-    "optionGroups": [],
-    "optionImages": {},
-    "images": [
-      "/assets/products/mirrored/c239e398.webp",
-      "/assets/products/mirrored/a5c14901.webp",
-      "/assets/products/mirrored/b2fdd4ff.webp",
-      "/assets/products/mirrored/4a55cdc0.webp",
-      "/assets/products/mirrored/6aa1760c.webp",
-      "/assets/products/mirrored/7297a93b.webp",
-      "/assets/products/mirrored/69f982b6.webp",
-      "/assets/products/mirrored/708c79bc.webp",
-      "/assets/products/mirrored/a8c2381b.webp"
-    ],
-    "reviews": [],
-    "variants": [
-      {
-        "id": "shopee_variant_88783509950",
-        "name": "CHÂN ĐEN + CHÉN",
-        "sku": "",
-        "price": 165000,
-        "originalPrice": null,
-        "weight": 800,
-        "image": "/assets/products/mirrored/8c2abda8.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_88783509951",
-        "name": "CHÂN TRẮNG + CHÉN",
-        "sku": "",
-        "price": 165000,
-        "originalPrice": null,
-        "weight": 800,
-        "image": "/assets/products/mirrored/95f2a5a8.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_88783509952",
-        "name": "CON VOI SEN",
-        "sku": "",
-        "price": 165000,
-        "originalPrice": null,
-        "weight": 800,
-        "image": "/assets/products/mirrored/2dabb7a9.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_88783509949",
-        "name": "CHÂN VÀNG + CHÉN",
-        "sku": "",
-        "price": 165000,
-        "originalPrice": null,
-        "weight": 800,
-        "image": "/assets/products/mirrored/41b03c17.webp",
-        "options": {}
-      }
-    ],
-    "slug": "den-xong-tinh-dau-hinh-huou-gom-su-trang-tri-sang-trong",
-    "seoTitle": "",
-    "seoDescription": ""
-  },
-  {
     "id": "shopee_23752423694",
     "sku": "SP-23752423694",
     "categoryId": "bep-xong",
@@ -2634,49 +2515,6 @@ const PRODUCTS = [
       }
     ],
     "slug": "vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi",
-    "seoTitle": "",
-    "seoDescription": ""
-  },
-  {
-    "id": "shopee_6228169441",
-    "sku": "SP-6228169441",
-    "categoryId": "nen-thom",
-    "name": "Nến tealight 8 giờ trang trí không khói tạo không gian ấm",
-    "price": 8000,
-    "originalPrice": null,
-    "shortDesc": "Chất liệu: Mica chống nhiệt, sáp cọ, hoặc vỏ nhôm.",
-    "tag": "",
-    "weight": 30,
-    "hidden": true,
-    "optionGroups": [],
-    "optionImages": {},
-    "images": [
-      "/assets/products/mirrored/76c35d8e.webp"
-    ],
-    "reviews": [],
-    "variants": [
-      {
-        "id": "shopee_variant_178225553056",
-        "name": "Nến Dùng Trang Trí",
-        "sku": "",
-        "price": 10000,
-        "originalPrice": null,
-        "weight": 30,
-        "image": "/assets/products/mirrored/2c2867bb.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_178225553057",
-        "name": "Nến Dùng Xông & Bếp",
-        "sku": "",
-        "price": 8000,
-        "originalPrice": null,
-        "weight": 30,
-        "image": "/assets/products/mirrored/ec8d7948.webp",
-        "options": {}
-      }
-    ],
-    "slug": "nen-tealight-8-gio-trang-tri-khong-khoi-tao-khong-gian-am",
     "seoTitle": "",
     "seoDescription": ""
   },
