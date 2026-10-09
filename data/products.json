@@ -1910,108 +1910,6 @@
     "seoDescription": ""
   },
   {
-    "id": "shopee_24604156053",
-    "sku": "SP-24604156053",
-    "categoryId": "bep-xong",
-    "name": "Tinh dầu thơm phòng dùng cho đèn xông",
-    "price": 60000,
-    "originalPrice": null,
-    "shortDesc": "Tinh dầu thơm phòng dùng với đèn xông hoặc máy khuếch tán tương thích. Xem mùi hương, dung tích và hướng dẫn theo phân loại.",
-    "description": "## Thông tin sản phẩm\nTinh dầu thơm phòng có các lựa chọn mùi như gỗ đàn hương, hoa lê, Coco, hương quế và thông theo tên phân loại. Dung tích sản phẩm được ghi là 10 ml. Mùi cảm nhận có thể khác nhau tùy không gian và sở thích.\n\n## Cách sử dụng\nDùng với đèn xông hoặc máy khuếch tán tương thích, theo hướng dẫn của thiết bị và nhãn sản phẩm. Bắt đầu với lượng nhỏ; không đổ trực tiếp vào thiết bị nếu nhà sản xuất thiết bị không hướng dẫn cách dùng đó.\n\n## Lưu ý và bảo quản\nKhông uống. Tránh để sản phẩm tiếp xúc với mắt và da; để xa trẻ nhỏ. Đậy nắp sau khi dùng, bảo quản nơi khô mát và tránh ánh nắng trực tiếp. Chỉ dùng ngoài da hoặc cho bồn tắm nếu nhãn sản phẩm hướng dẫn rõ.",
-    "usage": "## Cách dùng với thiết bị khuếch tán\nĐọc hướng dẫn của thiết bị và nhãn tinh dầu. Dùng lượng nhỏ theo khuyến nghị của thiết bị; không để máy hoặc đèn xông hoạt động khi không có người theo dõi.\n\n## Lưu ý\nKhông uống; tránh tiếp xúc với mắt và da. Để xa trẻ nhỏ và vật nuôi. Ngừng sử dụng nếu xuất hiện kích ứng hoặc khó chịu; làm theo thông tin an toàn trên nhãn sản phẩm.\n\n## Bảo quản\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
-    "tag": "",
-    "weight": 200,
-    "hidden": true,
-    "optionGroups": [],
-    "optionImages": {},
-    "images": [
-      "/assets/products/mirrored/5a254a10.webp",
-      "/assets/products/mirrored/c8b1c450.webp",
-      "/assets/products/mirrored/f2c600ca.webp",
-      "/assets/products/mirrored/dc290562.webp",
-      "/assets/products/mirrored/24f9a207.webp",
-      "/assets/products/mirrored/9dc9ce24.webp",
-      "/assets/products/mirrored/954776e6.webp",
-      "/assets/products/mirrored/226cace9.webp"
-    ],
-    "reviews": [],
-    "variants": [
-      {
-        "id": "shopee_variant_440296119911",
-        "name": "Gỗ Đàn Hương",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/3f689f12.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_440296119912",
-        "name": "Hoa Lê Anh",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/7c02b18f.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_250211429868",
-        "name": "Khánh Sạn Hilton🔥",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/356f1263.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_360296129288",
-        "name": "Resort ( Sheraton )",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/9502482d.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_440296119908",
-        "name": "Coco (Ngọt Ngào)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/9dc9ce24.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_440296119909",
-        "name": "Ấm Áp (Quế & Thông)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/954776e6.webp",
-        "options": {}
-      },
-      {
-        "id": "shopee_variant_440296119910",
-        "name": "Trà Trắng (Mùi Sang)",
-        "sku": "",
-        "price": 60000,
-        "originalPrice": null,
-        "weight": 200,
-        "image": "/assets/products/mirrored/cfbf70de.webp",
-        "options": {}
-      }
-    ],
-    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap",
-    "seoTitle": "",
-    "seoDescription": ""
-  },
-  {
     "id": "shopee_23752423694",
     "sku": "SP-23752423694",
     "categoryId": "bep-xong",
@@ -3113,5 +3011,901 @@
         }
       }
     ]
+  },
+  {
+    "id": "shopee_56102764086",
+    "sku": "SP-56102764086",
+    "categoryId": "phu-kien",
+    "name": "Rế lót bếp xông thảo mộc đan thủ công – Phương Lâm",
+    "price": 24000,
+    "originalPrice": 40000,
+    "shortDesc": "Rế lót đan thủ công từ sợi tự nhiên, đặt dưới bếp xông thảo mộc hoặc bếp xông tinh dầu để bếp đứng chắc và gọn gàng.",
+    "description": "RẾ LÓT BẾP XÔNG PHƯƠNG LÂM – ĐAN THỦ CÔNG\n\n✔ Tổng quan sản phẩm:\nRế lót bếp là phụ kiện dùng kèm bếp xông thảo mộc, bếp xông tinh dầu hoặc bếp đun nến, giúp bộ bếp gọn gàng và mộc mạc hơn.\n\n✔ Điểm nổi bật:\n- Đặt dưới bếp xông giúp bếp đứng chắc, đáy bếp không đặt trực tiếp lên mặt bàn.\n- Hỗ trợ hứng vụn thảo mộc, tro hoặc bụi rơi vãi trong lúc xông.\n- Đan thủ công từ sợi tự nhiên, màu nâu vàng mộc.\n- Phù hợp trang trí phòng khách, phòng ngủ, góc thiền hoặc bàn thờ.\n\n✔ Thông tin sản phẩm:\n- Chất liệu: sợi tự nhiên đan thủ công\n- Màu sắc: nâu vàng\n- Kích thước: Rế 10-13cm; Rế 16cm\n- Xuất xứ: Việt Nam\n\n✔ Lưu ý quan trọng:\n- Sản phẩm chỉ gồm rế lót bếp, không kèm bếp xông, nến và thảo mộc. Hình ảnh chỉ minh họa cách sử dụng.\n- Đan thủ công từ chất liệu tự nhiên nên màu sắc và đường đan có thể chênh nhẹ giữa các sản phẩm.\n- Bảo quản nơi khô ráo, thoáng khí.",
+    "usage": "",
+    "seoTitle": "Rế lót bếp xông thảo mộc đan thủ công | Phương Lâm",
+    "seoDescription": "Rế lót bếp xông Phương Lâm đan thủ công từ sợi tự nhiên, đặt dưới bếp xông thảo mộc, bếp xông tinh dầu. Có 2 kích thước: 10-13cm và 16cm.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "SIZE",
+        "values": [
+          "Rế 10-13cm",
+          "Rế 16cm"
+        ]
+      }
+    ],
+    "optionImages": {
+      "SIZE": {
+        "Rế 10-13cm": "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp",
+        "Rế 16cm": "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_386131497296",
+        "name": "Rế 10-13cm",
+        "sku": "635173_re_10_13cm",
+        "price": 24000,
+        "originalPrice": 40000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp",
+        "options": {
+          "SIZE": "Rế 10-13cm"
+        }
+      },
+      {
+        "id": "shopee_variant_386131497297",
+        "name": "Rế 16cm",
+        "sku": "635173_re_16cm",
+        "price": 27000,
+        "originalPrice": 45000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp",
+        "options": {
+          "SIZE": "Rế 16cm"
+        }
+      }
+    ],
+    "slug": "re-lot-bep-xong-thao-moc-dan-thu-cong-phuong-lam"
+  },
+  {
+    "id": "shopee_53859220256",
+    "sku": "SP-53859220256",
+    "categoryId": "thao-moc-xong",
+    "name": "Lá dứa khô tự nhiên 100g – Phương Lâm",
+    "price": 33000,
+    "originalPrice": 55000,
+    "shortDesc": "Lá dứa khô dạng lá cắt, gói 100g, hương thơm dịu nhẹ; dùng để xông nhà, nấu nước hoặc làm nguyên liệu nấu ăn.",
+    "description": "LÁ DỨA KHÔ TỰ NHIÊN 100G – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nLá dứa khô dạng lá cắt, giữ hương thơm dịu nhẹ, dùng để xông nhà hoặc làm nguyên liệu nấu ăn.\n\n✔ Thông tin sản phẩm:\n- Thành phần: 100% lá dứa khô\n- Khối lượng: 100g\n- Dạng: lá cắt khô\n\n✔ Công dụng:\n- Xông nhà cho không gian thơm dịu, dễ chịu.\n- Nấu nước lá dứa.\n- Làm nguyên liệu nấu chè, bánh, món ăn.\n- Kết hợp cùng các loại thảo mộc khác khi xông.\n\n✔ Hướng dẫn sử dụng:\n- Xông: dùng một nắm nhỏ, đun với nước hoặc cho vào bếp xông.\n- Nấu nước: rửa sơ, đun sôi 5–10 phút.\n- Làm bánh: ngâm mềm trước khi dùng.\n\n✔ Bảo quản:\nNơi khô ráo, thoáng mát, tránh ẩm. Không dùng khi có dấu hiệu ẩm mốc.\n\n✔ Lưu ý quan trọng:\nLà sản phẩm thảo mộc tự nhiên nên màu sắc có thể thay đổi nhẹ.",
+    "usage": "",
+    "seoTitle": "Lá dứa khô tự nhiên 100g xông nhà | Phương Lâm",
+    "seoDescription": "Lá dứa khô 100% lá dứa, gói 100g, hương thơm dịu nhẹ. Dùng xông nhà, nấu nước hoặc làm nguyên liệu nấu ăn. Xem hướng dẫn sử dụng và bảo quản.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [],
+    "optionImages": {},
+    "images": [
+      "/assets/products/uploads/1791518804158-shopee-vn-11134207-81ztc-mru3e3z89mv900.webp",
+      "/assets/products/uploads/1791518805032-shopee-vn-11134207-81ztc-mru3e5jma32954.webp",
+      "/assets/products/uploads/1791518805971-shopee-vn-11134207-81ztc-mrsqpdzmq8lja0.webp",
+      "/assets/products/uploads/1791518806741-shopee-vn-11134207-81ztc-mrsqp0wa8dfq70.webp",
+      "/assets/products/uploads/1791518807692-shopee-vn-11134207-81ztc-mnazm74o66tk75.webp",
+      "/assets/products/uploads/1791518808447-shopee-vn-11134207-81ztc-mnazn33ab2mgd6.webp",
+      "/assets/products/uploads/1791518809450-shopee-vn-11134207-81ztc-mndsbiv96igy8a.webp",
+      "/assets/products/uploads/1791518810563-shopee-vn-11134207-81ztc-mndsbn3pjy1486.webp",
+      "/assets/products/uploads/1791518811639-shopee-vn-11134207-81ztc-mndsc29a9mh05b.webp"
+    ],
+    "reviews": [],
+    "variants": [],
+    "slug": "la-dua-kho-tu-nhien-100g-phuong-lam"
+  },
+  {
+    "id": "shopee_50267690045",
+    "sku": "SP-50267690045",
+    "categoryId": "go-thom",
+    "name": "Gỗ xá xị đỏ dăm bào xông nhà – Phương Lâm",
+    "price": 19200,
+    "originalPrice": 32000,
+    "shortDesc": "Gỗ xá xị đỏ tự nhiên dạng dăm bào, hương gỗ ấm ngọt dịu; dùng với bếp xông để làm thơm và giảm cảm giác mùi ẩm, mùi bí trong phòng.",
+    "description": "GỖ XÁ XỊ ĐỎ DĂM BÀO – DÙNG XÔNG NHÀ, LÀM THƠM KHÔNG GIAN\n\n✔ Tổng quan sản phẩm:\nGỗ xá xị đỏ tự nhiên dạng dăm, miếng nhỏ, mang hương gỗ ấm áp, ngọt dịu và mộc mạc. Dùng với bếp xông gỗ hoặc bếp xông thảo mộc cho phòng khách, phòng ngủ, phòng làm việc, cửa hàng.\n\n✔ Điểm nổi bật:\n- Gỗ xá xị đỏ tự nhiên dạng dăm bào, miếng nhỏ.\n- Hương gỗ ấm ngọt, dịu nhẹ, thoang thoảng, không quá nồng.\n- Hỗ trợ giảm cảm giác mùi ẩm, mùi bí trong phòng.\n- Dùng được với nhiều loại bếp xông gốm, bếp xông thảo mộc.\n- Có thể dùng làm nguyên liệu cho túi thơm hoặc trang trí hương gỗ.\n\n✔ Hướng dẫn sử dụng:\nCho một lượng gỗ vừa đủ lên khay bếp xông, đặt nến hoặc dùng nguồn nhiệt phù hợp theo thiết kế của bếp. Khi được làm nóng, hương gỗ tỏa dần ra. Tăng hoặc giảm lượng gỗ tùy diện tích phòng.\n\n✔ Lưu ý quan trọng:\n- Gỗ tự nhiên nên màu sắc, hình dáng, kích thước và độ đậm của hương có thể khác nhau giữa các lô.\n- Không đặt bếp xông gần vật dễ cháy, tránh xa tầm tay trẻ nhỏ và vật nuôi.\n- Không để bếp xông hoạt động khi không có người trông coi.\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Gỗ xá xị đỏ dăm bào xông nhà | Phương Lâm",
+    "seoDescription": "Gỗ xá xị đỏ tự nhiên dạng dăm bào, hương gỗ ấm ngọt dịu. Dùng với bếp xông để làm thơm, giảm cảm giác mùi ẩm bí. Có gói 50g, 100g và túi treo.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "PHÂN LOẠI",
+        "values": [
+          "Gỗ Xá Xị 50g",
+          "Gỗ Xá Xị 100g",
+          "Túi Treo Thơm🔥",
+          "Gói thay thế",
+          "2 Thanh Gỗ Treo🔥"
+        ]
+      }
+    ],
+    "optionImages": {
+      "PHÂN LOẠI": {
+        "Gỗ Xá Xị 50g": "/assets/products/uploads/1791518818721-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "Gỗ Xá Xị 100g": "/assets/products/uploads/1791518819674-shopee-vn-11134207-81ztc-msy5c1151nuo83.webp",
+        "Túi Treo Thơm🔥": "/assets/products/uploads/1791518820489-shopee-vn-11134207-81ztc-msw6wb383cw24f.webp",
+        "Gói thay thế": "/assets/products/uploads/1791518821443-shopee-vn-11134207-81ztc-msvediv6e1add7.webp",
+        "2 Thanh Gỗ Treo🔥": "/assets/products/uploads/1791518822341-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518812525-shopee-vn-11134207-81ztc-msvevl9zsbggff.webp",
+      "/assets/products/uploads/1791518813463-shopee-vn-11134207-81ztc-msy53b7j8nih7e.webp",
+      "/assets/products/uploads/1791518814365-shopee-vn-11134207-81ztc-msve8k188jd2ff.webp",
+      "/assets/products/uploads/1791518815180-shopee-vn-11134207-81ztc-msw6pzvdrh1m01.webp",
+      "/assets/products/uploads/1791518816072-shopee-vn-11134207-81ztc-msw6q43cm7lt2e.webp",
+      "/assets/products/uploads/1791518816978-shopee-vn-11134207-81ztc-msw6rayfpwjr24.webp",
+      "/assets/products/uploads/1791518817896-shopee-vn-11134207-81ztc-msw6q9c1lzi918.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_331496897599",
+        "name": "Gỗ Xá Xị 50g",
+        "sku": "720861_go_xa_xi_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518818721-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "options": {
+          "PHÂN LOẠI": "Gỗ Xá Xị 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_331496897600",
+        "name": "Gỗ Xá Xị 100g",
+        "sku": "720861_go_xa_xi_100g",
+        "price": 59400,
+        "originalPrice": 99000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518819674-shopee-vn-11134207-81ztc-msy5c1151nuo83.webp",
+        "options": {
+          "PHÂN LOẠI": "Gỗ Xá Xị 100g"
+        }
+      },
+      {
+        "id": "shopee_variant_331496897601",
+        "name": "Túi Treo Thơm🔥",
+        "sku": "720861_tui_treo_thom",
+        "price": 37200,
+        "originalPrice": 62000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518820489-shopee-vn-11134207-81ztc-msw6wb383cw24f.webp",
+        "options": {
+          "PHÂN LOẠI": "Túi Treo Thơm🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_331496897602",
+        "name": "Gói thay thế",
+        "sku": "720861_goi_thay_the",
+        "price": 19200,
+        "originalPrice": 32000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518821443-shopee-vn-11134207-81ztc-msvediv6e1add7.webp",
+        "options": {
+          "PHÂN LOẠI": "Gói thay thế"
+        }
+      },
+      {
+        "id": "shopee_variant_396512673503",
+        "name": "2 Thanh Gỗ Treo🔥",
+        "sku": "720861_2_thanh_go_treo",
+        "price": 19200,
+        "originalPrice": 32000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518822341-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "options": {
+          "PHÂN LOẠI": "2 Thanh Gỗ Treo🔥"
+        }
+      }
+    ],
+    "slug": "go-xa-xi-do-dam-bao-xong-nha-phuong-lam"
+  },
+  {
+    "id": "shopee_48864137960",
+    "sku": "SP-48864137960",
+    "categoryId": "go-thom",
+    "name": "Thanh gỗ Palo Santo tự nhiên 10cm – Phương Lâm",
+    "price": 21000,
+    "originalPrice": 35000,
+    "shortDesc": "Thanh gỗ Palo Santo tự nhiên dài 10cm, đốt đầu thanh để gỗ âm ỉ tỏa hương gỗ dịu nhẹ; có thêm lựa chọn khay đốt gỗ và gỗ băm xông.",
+    "description": "THANH GỖ PALO SANTO TỰ NHIÊN – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nThanh gỗ Palo Santo tự nhiên dài 10cm, hương gỗ dịu nhẹ. Chỉ cần đốt đầu thanh gỗ, thổi tắt ngọn lửa để gỗ âm ỉ tỏa khói thơm.\n\n✔ Điểm nổi bật:\n- 100% gỗ Palo Santo tự nhiên.\n- Hương gỗ nhẹ nhàng, dễ chịu.\n- Dễ sử dụng: đốt đầu thanh gỗ.\n- Không tẩm hương liệu.\n- Phù hợp phòng khách, phòng ngủ, phòng làm việc, góc đọc sách, thiền, yoga.\n\n✔ Hướng dẫn sử dụng:\n- Đốt đầu thanh gỗ khoảng 20–30 giây đến khi cháy.\n- Thổi tắt ngọn lửa, để gỗ âm ỉ tỏa hương.\n- Có thể di chuyển thanh gỗ quanh không gian hoặc đặt trên đế chịu nhiệt.\n- Sau khi dùng, đặt lên đế chịu nhiệt và để gỗ tự tắt hẳn.\n- Mỗi thanh có thể dùng nhiều lần, tùy thời gian đốt mỗi lần.\n\n✔ Thông tin sản phẩm:\n- Thanh gỗ dài 10cm\n- Có lựa chọn khay đốt gỗ (Niêu hoặc Trắng), gỗ băm xá xị, gỗ băm ngọc am và gỗ treo xá xị\n\n✔ Lưu ý quan trọng:\n- Không để gần vật liệu dễ cháy.\n- Không để trẻ em tự sử dụng.\n- Không chạm trực tiếp vào đầu gỗ đang cháy.\n- Sử dụng trên bề mặt chịu nhiệt và tắt hoàn toàn sau khi dùng.\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Thanh gỗ Palo Santo tự nhiên 10cm | Phương Lâm",
+    "seoDescription": "Thanh gỗ Palo Santo tự nhiên dài 10cm, đốt đầu thanh để gỗ âm ỉ tỏa hương dịu nhẹ. Có khay đốt gỗ và gỗ băm xông. Xem phân loại và giá.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "Phân loại",
+        "values": [
+          "Gỗ băm xá xị 50g",
+          "Gỗ băm ngọc am 50g",
+          "Khay đốt gỗ Niêu",
+          "Khay đốt gỗ Trắng",
+          "6 - 10gram / 10cm",
+          "Gỗ Treo Xá Xị🔥",
+          "3 - 4,5gram / 10cm"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Phân loại": {
+        "Gỗ băm xá xị 50g": "/assets/products/uploads/1791518837219-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "Gỗ băm ngọc am 50g": "/assets/products/uploads/1791518838062-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
+        "Khay đốt gỗ Niêu": "/assets/products/uploads/1791518838873-shopee-vn-11134207-81ztc-mrpwgddorrif2a.webp",
+        "Khay đốt gỗ Trắng": "/assets/products/uploads/1791518839673-shopee-vn-11134207-81ztc-mrpwcwb3mm1460.webp",
+        "6 - 10gram / 10cm": "/assets/products/uploads/1791518840393-shopee-vn-11134207-81ztc-mtdmap9vc8aud3.webp",
+        "Gỗ Treo Xá Xị🔥": "/assets/products/uploads/1791518841140-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "3 - 4,5gram / 10cm": "/assets/products/uploads/1791518841935-shopee-vn-11134207-81ztc-mtdmar89xslc80.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518830327-shopee-vn-11134207-81ztc-mqq70acr2fwtc0.webp",
+      "/assets/products/uploads/1791518831492-shopee-vn-11134207-81ztc-mqq7cupclwjm77.webp",
+      "/assets/products/uploads/1791518832375-shopee-vn-11134207-81ztc-mqq7ahd4ncow77.webp",
+      "/assets/products/uploads/1791518833237-shopee-vn-11134207-81ztc-mqq71q1jsw0e6d.webp",
+      "/assets/products/uploads/1791518834007-shopee-vn-11134207-81ztc-mtdma8w5znr9c8.webp",
+      "/assets/products/uploads/1791518834792-shopee-vn-11134207-81ztc-mqq73462usy5ef.webp",
+      "/assets/products/uploads/1791518835608-shopee-vn-11134207-81ztc-mqq739gv5kw144.webp",
+      "/assets/products/uploads/1791518836450-shopee-vn-11134207-81ztc-mqq73e4zt9fle9.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_436496699602",
+        "name": "Gỗ băm xá xị 50g",
+        "sku": "720865_go_bam_xa_xi_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518837219-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "options": {
+          "Phân loại": "Gỗ băm xá xị 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_436496699601",
+        "name": "Gỗ băm ngọc am 50g",
+        "sku": "720865_go_bam_ngoc_am_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518838062-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
+        "options": {
+          "Phân loại": "Gỗ băm ngọc am 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_341347354051",
+        "name": "Khay đốt gỗ Niêu",
+        "sku": "720865_khay_dot_go_nieu",
+        "price": 72000,
+        "originalPrice": 120000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518838873-shopee-vn-11134207-81ztc-mrpwgddorrif2a.webp",
+        "options": {
+          "Phân loại": "Khay đốt gỗ Niêu"
+        }
+      },
+      {
+        "id": "shopee_variant_341347354052",
+        "name": "Khay đốt gỗ Trắng",
+        "sku": "720865_khay_dot_go_trang",
+        "price": 72000,
+        "originalPrice": 120000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518839673-shopee-vn-11134207-81ztc-mrpwcwb3mm1460.webp",
+        "options": {
+          "Phân loại": "Khay đốt gỗ Trắng"
+        }
+      },
+      {
+        "id": "shopee_variant_341347354050",
+        "name": "6 - 10gram / 10cm",
+        "sku": "720865_6_10gram_10cm",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518840393-shopee-vn-11134207-81ztc-mtdmap9vc8aud3.webp",
+        "options": {
+          "Phân loại": "6 - 10gram / 10cm"
+        }
+      },
+      {
+        "id": "shopee_variant_436514229437",
+        "name": "Gỗ Treo Xá Xị🔥",
+        "sku": "",
+        "price": 21000,
+        "originalPrice": 35000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518841140-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "options": {
+          "Phân loại": "Gỗ Treo Xá Xị🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_341347354049",
+        "name": "3 - 4,5gram / 10cm",
+        "sku": "720865_3_4d5gram_10cm",
+        "price": 30000,
+        "originalPrice": 50000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518841935-shopee-vn-11134207-81ztc-mtdmar89xslc80.webp",
+        "options": {
+          "Phân loại": "3 - 4,5gram / 10cm"
+        }
+      }
+    ],
+    "slug": "thanh-go-palo-santo-tu-nhien-10cm-phuong-lam"
+  },
+  {
+    "id": "shopee_47417886680",
+    "sku": "SP-47417886680",
+    "categoryId": "go-thom",
+    "name": "Thanh gỗ xá xị đỏ 10cm để bàn, treo phòng – Phương Lâm",
+    "price": 19200,
+    "originalPrice": 32000,
+    "shortDesc": "Bộ 2 thanh gỗ xá xị đỏ dài khoảng 10cm, có lỗ và dây để treo hoặc đặt bàn; hương gỗ dịu nhẹ, không cần đốt hay dùng điện.",
+    "description": "THANH GỖ XÁ XỊ ĐỎ TỰ NHIÊN 10CM – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nThanh gỗ xá xị đỏ có hương gỗ đặc trưng, ấm nhẹ và dễ chịu. Dùng đặt bàn, treo phòng, treo tủ quần áo, nhà tắm hoặc các không gian nhỏ, vừa tạo hương nhẹ vừa làm vật trang trí mộc mạc.\n\n✔ Điểm nổi bật:\n- Mỗi bộ gồm 2 thanh gỗ dài khoảng 10cm, khoan lỗ và buộc dây để treo hoặc đặt trên bàn, kệ.\n- Gỗ xá xị đỏ tự nhiên, vân gỗ đẹp.\n- Hương gỗ dịu nhẹ, không quá nồng.\n- Không cần đốt hay dùng điện.\n- Phù hợp phòng ngủ, bàn làm việc, tủ đồ, nhà tắm.\n\n✔ Hướng dẫn sử dụng:\nĐặt hoặc treo tại vị trí mong muốn. Nên dùng trong không gian nhỏ hoặc tương đối kín để cảm nhận mùi hương rõ hơn.\n\n✔ Lưu ý quan trọng:\n- Gỗ tự nhiên nên màu sắc, vân gỗ và hình dáng từng thanh có thể chênh nhẹ; độ đậm của hương cũng thay đổi theo từng thanh và môi trường sử dụng.\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Thanh gỗ xá xị đỏ 10cm để bàn, treo tủ | Phương Lâm",
+    "seoDescription": "Bộ 2 thanh gỗ xá xị đỏ tự nhiên dài khoảng 10cm, hương gỗ dịu nhẹ, có dây treo. Đặt bàn hoặc treo tủ, phòng, nhà tắm. Không cần đốt hay dùng điện.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "PHÂN LOẠI",
+        "values": [
+          "Gỗ Xá Xị 50g",
+          "Gỗ Xá Xị 100g",
+          "Gói thay thế",
+          "2 Thanh Gỗ Treo🔥",
+          "Túi Treo Thơm🔥"
+        ]
+      }
+    ],
+    "optionImages": {
+      "PHÂN LOẠI": {
+        "Gỗ Xá Xị 50g": "/assets/products/uploads/1791518846988-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "Gỗ Xá Xị 100g": "/assets/products/uploads/1791518847878-shopee-vn-11134207-81ztc-msy5c1151nuo83.webp",
+        "Gói thay thế": "/assets/products/uploads/1791518848725-shopee-vn-11134207-81ztc-msvediv6e1add7.webp",
+        "2 Thanh Gỗ Treo🔥": "/assets/products/uploads/1791518849576-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "Túi Treo Thơm🔥": "/assets/products/uploads/1791518850379-shopee-vn-11134207-81ztc-msw6wb383cw24f.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518842671-shopee-vn-11134207-81ztc-mt5at8jw8d1k87.webp",
+      "/assets/products/uploads/1791518843527-shopee-vn-11134207-81ztc-mt5atawlbtoocd.webp",
+      "/assets/products/uploads/1791518844477-shopee-vn-11134207-81ztc-mt5atdvek1s182.webp",
+      "/assets/products/uploads/1791518845304-shopee-vn-11134207-81ztc-mt65yojihm2y74.webp",
+      "/assets/products/uploads/1791518846258-shopee-vn-11134207-81ztc-mt65z6lrvkeh17.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_356512672788",
+        "name": "Gỗ Xá Xị 50g",
+        "sku": "720862_go_xa_xi_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518846988-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "options": {
+          "PHÂN LOẠI": "Gỗ Xá Xị 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_356512672789",
+        "name": "Gỗ Xá Xị 100g",
+        "sku": "720862_go_xa_xi_100g",
+        "price": 72000,
+        "originalPrice": 120000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518847878-shopee-vn-11134207-81ztc-msy5c1151nuo83.webp",
+        "options": {
+          "PHÂN LOẠI": "Gỗ Xá Xị 100g"
+        }
+      },
+      {
+        "id": "shopee_variant_356512672790",
+        "name": "Gói thay thế",
+        "sku": "720862_goi_thay_the",
+        "price": 19200,
+        "originalPrice": 32000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518848725-shopee-vn-11134207-81ztc-msvediv6e1add7.webp",
+        "options": {
+          "PHÂN LOẠI": "Gói thay thế"
+        }
+      },
+      {
+        "id": "shopee_variant_356512672786",
+        "name": "2 Thanh Gỗ Treo🔥",
+        "sku": "720862_2_thanh_go_treo",
+        "price": 21000,
+        "originalPrice": 35000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518849576-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "options": {
+          "PHÂN LOẠI": "2 Thanh Gỗ Treo🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_356512672787",
+        "name": "Túi Treo Thơm🔥",
+        "sku": "720862_tui_treo_thom",
+        "price": 29400,
+        "originalPrice": 49000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518850379-shopee-vn-11134207-81ztc-msw6wb383cw24f.webp",
+        "options": {
+          "PHÂN LOẠI": "Túi Treo Thơm🔥"
+        }
+      }
+    ],
+    "slug": "thanh-go-xa-xi-do-10cm-de-ban-treo-phong-phuong-lam"
+  },
+  {
+    "id": "shopee_46517698279",
+    "sku": "SP-46517698279",
+    "categoryId": "go-thom",
+    "name": "Gỗ ngọc am (hoàng đàn) dăm gỗ xông nhà – Phương Lâm",
+    "price": 19200,
+    "originalPrice": 32000,
+    "shortDesc": "Gỗ ngọc am (hoàng đàn) dạng dăm, miếng nhỏ dùng với bếp xông; hương gỗ ấm dịu, thanh nhẹ, làm thơm không gian.",
+    "description": "GỖ NGỌC AM (HOÀNG ĐÀN) – HƯƠNG GỖ TỰ NHIÊN ẤM DỊU\n\n✔ Tổng quan sản phẩm:\nGỗ ngọc am dạng dăm, miếng nhỏ, dùng với bếp xông để tạo hương gỗ tự nhiên trong không gian. Khi được làm nóng, gỗ tỏa mùi ấm dịu, thanh nhẹ, thoang thoảng.\n\n✔ Điểm nổi bật:\n- Xông nhà, tạo hương thơm tự nhiên.\n- Hỗ trợ giảm các mùi khó chịu trong phòng.\n- Phù hợp phòng khách, phòng ngủ, phòng làm việc, cửa hàng.\n- Dùng được với các loại bếp xông phù hợp.\n- Hương gỗ tự nhiên: ấm dịu, thanh sạch, không quá nồng.\n\n✔ Hướng dẫn sử dụng:\nCho một lượng nhỏ dăm gỗ vào khay bếp xông, làm nóng từ từ. Khi gỗ bắt đầu tỏa hương, điều chỉnh lượng gỗ theo diện tích phòng và sở thích. Có thể thêm gỗ mới khi hương giảm.\n\n✔ Lưu ý quan trọng:\n- Gỗ tự nhiên nên màu sắc, kích thước và vân gỗ giữa các mẻ có thể khác nhau nhẹ; mùi hương thiên nhiên thường nhẹ và thoang thoảng.\n- Khi dùng bếp xông có lửa hoặc nhiệt, đặt ở nơi chắc chắn, thông thoáng, tránh xa trẻ nhỏ và vật dễ cháy.\n- Vui lòng chọn đúng phân loại trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Gỗ ngọc am (hoàng đàn) xông nhà dùng bếp xông | Phương Lâm",
+    "seoDescription": "Gỗ ngọc am (hoàng đàn) dạng dăm nhỏ dùng với bếp xông, hương gỗ ấm dịu, thanh nhẹ. Làm thơm phòng khách, phòng ngủ. Có gói 50g, 100g và túi treo.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "PHÂN LOẠI",
+        "values": [
+          "Gói thay thế",
+          "Gỗ Ngọc am 50g🔥",
+          "Gỗ Ngọc am 100g🔥",
+          "Túi Treo Thơm"
+        ]
+      }
+    ],
+    "optionImages": {
+      "PHÂN LOẠI": {
+        "Gói thay thế": "/assets/products/uploads/1791518857327-shopee-vn-11134207-81ztc-msvedmswehhl05.webp",
+        "Gỗ Ngọc am 50g🔥": "/assets/products/uploads/1791518858174-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
+        "Gỗ Ngọc am 100g🔥": "/assets/products/uploads/1791518859006-shopee-vn-11134207-81ztc-msy3ot0nt5hg82.webp",
+        "Túi Treo Thơm": "/assets/products/uploads/1791518859864-shopee-vn-11134207-81ztc-msw6vv84ngne1d.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518851172-shopee-vn-11134207-81ztc-msy3ijquaxvud9.webp",
+      "/assets/products/uploads/1791518851997-shopee-vn-11134207-81ztc-msw6rayfpwjr24.webp",
+      "/assets/products/uploads/1791518852950-shopee-vn-11134207-81ztc-msw6q43cm7lt2e.webp",
+      "/assets/products/uploads/1791518853801-shopee-vn-11134207-81ztc-msw6pzvdrh1m01.webp",
+      "/assets/products/uploads/1791518854675-shopee-vn-11134207-81ztc-msw6q6b67htsc8.webp",
+      "/assets/products/uploads/1791518855514-shopee-vn-11134207-81ztc-msw6q9c1lzi918.webp",
+      "/assets/products/uploads/1791518856421-shopee-vn-11134207-81ztc-msy3jevtbmko11.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_401496769490",
+        "name": "Gói thay thế",
+        "sku": "720863_goi_thay_the",
+        "price": 19200,
+        "originalPrice": 32000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518857327-shopee-vn-11134207-81ztc-msvedmswehhl05.webp",
+        "options": {
+          "PHÂN LOẠI": "Gói thay thế"
+        }
+      },
+      {
+        "id": "shopee_variant_401496769487",
+        "name": "Gỗ Ngọc am 50g🔥",
+        "sku": "720863_go_ngoc_am_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518858174-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
+        "options": {
+          "PHÂN LOẠI": "Gỗ Ngọc am 50g🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_401496769488",
+        "name": "Gỗ Ngọc am 100g🔥",
+        "sku": "720863_go_ngoc_am_100g",
+        "price": 59400,
+        "originalPrice": 99000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518859006-shopee-vn-11134207-81ztc-msy3ot0nt5hg82.webp",
+        "options": {
+          "PHÂN LOẠI": "Gỗ Ngọc am 100g🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_401496769489",
+        "name": "Túi Treo Thơm",
+        "sku": "720863_tui_treo_thom",
+        "price": 29400,
+        "originalPrice": 49000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518859864-shopee-vn-11134207-81ztc-msw6vv84ngne1d.webp",
+        "options": {
+          "PHÂN LOẠI": "Túi Treo Thơm"
+        }
+      }
+    ],
+    "slug": "go-ngoc-am-hoang-dan-dam-go-xong-nha-phuong-lam"
+  },
+  {
+    "id": "shopee_25659397266",
+    "sku": "SP-25659397266",
+    "categoryId": "thao-moc-xong",
+    "name": "Lá khuynh diệp khô xông nhà – Phương Lâm",
+    "price": 19200,
+    "originalPrice": 32000,
+    "shortDesc": "Lá khuynh diệp (bạch đàn) khô 100%, đóng túi zip 50g, 100g, 200g; dùng với bếp xông thảo mộc, có thể kết hợp bồ kết, vỏ bưởi, quế, hoa hồi.",
+    "description": "LÁ KHUYNH DIỆP KHÔ XÔNG NHÀ – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nLá khuynh diệp khô dùng với bếp xông thảo mộc, có thể kết hợp cùng các thảo mộc khác như bồ kết, vỏ bưởi, quế, hoa hồi.\n\n✔ Thông tin sản phẩm:\n- Thành phần: 100% lá bạch đàn (khuynh diệp) khô\n- Quy cách: túi zip 50g, 100g, 200g\n- Xuất xứ: Yên Bái, Việt Nam\n\n✔ Hướng dẫn sử dụng:\nCho lá khô lên mặt bếp xông (có thể kèm hoa hồi, bồ kết, vỏ bưởi… để thêm hương), đốt 1–3 viên nến tròn bên dưới.\n\n✔ Bảo quản:\nNơi khô thoáng, tránh ánh nắng trực tiếp.\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng quy cách trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Lá khuynh diệp khô xông nhà 50g, 100g, 200g | Phương Lâm",
+    "seoDescription": "Lá khuynh diệp (bạch đàn) khô 100%, túi zip 50g, 100g, 200g. Dùng với bếp xông thảo mộc, kết hợp bồ kết, vỏ bưởi, quế, hoa hồi. Xuất xứ Yên Bái.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "Quy Cách",
+        "values": [
+          "100g Lá Khuynh Diệp",
+          "200g Lá Khuynh Diệp",
+          "50g Lá Khuynh Diệp"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Quy Cách": {
+        "100g Lá Khuynh Diệp": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
+        "200g Lá Khuynh Diệp": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
+        "50g Lá Khuynh Diệp": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518860804-shopee-vn-11134207-81ztc-mrsqltq3k9hd39.webp",
+      "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
+      "/assets/products/uploads/1791518862628-shopee-vn-11134207-820l4-me81yjdhmxhhe4.webp",
+      "/assets/products/uploads/1791518863494-shopee-vn-11134207-820l4-me81slwur4zme9.webp",
+      "/assets/products/uploads/1791518864420-shopee-vn-11134207-820l4-me9j8ye3b9j9ba.webp",
+      "/assets/products/uploads/1791518865292-shopee-vn-11134207-820l4-me9jlzvew5xcc9.webp",
+      "/assets/products/uploads/1791518866034-shopee-vn-11134207-7r98o-lqos9xwinp3mb6.webp",
+      "/assets/products/uploads/1791518866841-shopee-vn-11134207-7r98o-lqos9xwip3o2ef.webp",
+      "/assets/products/uploads/1791518867566-shopee-vn-11134207-7r98o-lqos9xwiqi8i60.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_187280785913",
+        "name": "100g Lá Khuynh Diệp",
+        "sku": "470546_100g_la_khuynh_diep",
+        "price": 24000,
+        "originalPrice": 40000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
+        "options": {
+          "Quy Cách": "100g Lá Khuynh Diệp"
+        }
+      },
+      {
+        "id": "shopee_variant_187280785914",
+        "name": "200g Lá Khuynh Diệp",
+        "sku": "470546_200g_la_khuynh_diep",
+        "price": 45000,
+        "originalPrice": 75000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
+        "options": {
+          "Quy Cách": "200g Lá Khuynh Diệp"
+        }
+      },
+      {
+        "id": "shopee_variant_187280785912",
+        "name": "50g Lá Khuynh Diệp",
+        "sku": "470546_50g_la_khuynh_diep",
+        "price": 19200,
+        "originalPrice": 32000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
+        "options": {
+          "Quy Cách": "50g Lá Khuynh Diệp"
+        }
+      }
+    ],
+    "slug": "la-khuynh-diep-kho-xong-nha-phuong-lam"
+  },
+  {
+    "id": "shopee_25314272283",
+    "sku": "SP-25314272283",
+    "categoryId": "thao-moc-xong",
+    "name": "Hoa đại hồi khô xông nhà, nấu ăn – Phương Lâm",
+    "price": 15000,
+    "originalPrice": 25000,
+    "shortDesc": "Hoa hồi khô dùng với bếp xông thảo mộc để làm thơm nhà, cũng có thể dùng làm gia vị nấu ăn như nước dùng phở, món kho.",
+    "description": "HOA ĐẠI HỒI KHÔ – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nHoa hồi khô dùng xông thảo mộc để làm thơm nhà, có thể kết hợp với các loại thảo mộc khác. Hoa hồi cũng là gia vị quen thuộc trong nhiều món ăn.\n\n✔ Công dụng:\n- Xông thảo mộc, làm thơm nhà, có thể kết hợp cùng bồ kết, vỏ bưởi, quế.\n- Làm gia vị cho nước dùng phở, bò kho, các món kho, món xào.\n\n✔ Hướng dẫn sử dụng:\n- Xông thảo mộc: cho hoa hồi lên mặt bếp xông (có thể kèm bồ kết, vỏ bưởi, quế… để thêm hương), đốt 1–3 viên nến tròn bên dưới.\n- Nấu ăn: dùng như gia vị cho nước dùng phở, món kho theo khẩu vị.\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng quy cách hoặc túi treo trước khi đặt hàng.\n- Bảo quản nơi khô ráo, thoáng mát.",
+    "usage": "",
+    "seoTitle": "Hoa đại hồi khô xông nhà, nấu ăn | Phương Lâm",
+    "seoDescription": "Hoa đại hồi khô dùng với bếp xông thảo mộc để làm thơm nhà, hoặc làm gia vị nấu phở, món kho. Có túi 10g, 50g, 100g và túi treo hoa hồi.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "Phân Loại",
+        "values": [
+          "Túi 50g",
+          "Túi 100g",
+          "Túi Treo Hoa Hồi🔥",
+          "Túi 10g"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Phân Loại": {
+        "Túi 50g": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
+        "Túi 100g": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
+        "Túi Treo Hoa Hồi🔥": "/assets/products/uploads/1791518875555-shopee-vn-11134207-81ztc-msw6vyjhvbba88.webp",
+        "Túi 10g": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518868375-shopee-vn-11134207-81ztc-mrsqjuw5dpmq8b.webp",
+      "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
+      "/assets/products/uploads/1791518870062-shopee-vn-11134207-820l4-me83ehkpjklg65.webp",
+      "/assets/products/uploads/1791518870837-shopee-vn-11134207-820l4-me81slwur4zme9.webp",
+      "/assets/products/uploads/1791518871816-shopee-vn-11134207-820l4-me9j97x7xdza26.webp",
+      "/assets/products/uploads/1791518872506-shopee-vn-11134201-81ztc-mrfif1h6x1jg01.webp",
+      "/assets/products/uploads/1791518873159-shopee-vn-11134207-7r98o-lry9gjnkn6isf8.webp",
+      "/assets/products/uploads/1791518873949-shopee-vn-11134207-7r98o-lry9gjnkol38f6.webp",
+      "/assets/products/uploads/1791518874722-shopee-vn-11134207-7r98o-lryao6hbktcpbd.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_168071517048",
+        "name": "Túi 50g",
+        "sku": "720856_tui_50g",
+        "price": 27000,
+        "originalPrice": 45000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
+        "options": {
+          "Phân Loại": "Túi 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_168071517049",
+        "name": "Túi 100g",
+        "sku": "720856_tui_100g",
+        "price": 45000,
+        "originalPrice": 75000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
+        "options": {
+          "Phân Loại": "Túi 100g"
+        }
+      },
+      {
+        "id": "shopee_variant_336512708854",
+        "name": "Túi Treo Hoa Hồi🔥",
+        "sku": "720856_tui_treo_hoa_hoi",
+        "price": 33000,
+        "originalPrice": 55000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518875555-shopee-vn-11134207-81ztc-msw6vyjhvbba88.webp",
+        "options": {
+          "Phân Loại": "Túi Treo Hoa Hồi🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_168071517047",
+        "name": "Túi 10g",
+        "sku": "720856_tui_10g",
+        "price": 15000,
+        "originalPrice": 25000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
+        "options": {
+          "Phân Loại": "Túi 10g"
+        }
+      }
+    ],
+    "slug": "hoa-dai-hoi-kho-xong-nha-nau-an-phuong-lam"
+  },
+  {
+    "id": "shopee_25158793608",
+    "sku": "SP-25158793608",
+    "categoryId": "thao-moc-xong",
+    "name": "Lát cam vàng sấy khô xông nhà, pha trà – Phương Lâm",
+    "price": 15000,
+    "originalPrice": 25000,
+    "shortDesc": "Lát cam vàng sấy khô 100%, đặt lên bếp xông cùng thảo mộc để xông nhà, hoặc dùng pha trà, trang trí; có túi 20g, 50g, 100g.",
+    "description": "LÁT CAM VÀNG SẤY KHÔ – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nCam vàng cắt lát sấy khô, dùng đặt lên bếp xông cùng thảo mộc, pha trà hoặc trang trí.\n\n✔ Thông tin sản phẩm:\n- Thành phần: 100% cam cắt lát sấy khô\n- Quy cách: túi zipper 20g, 50g, 100g (10 lát đẹp khoảng 30g)\n- Xuất xứ: Việt Nam\n\n✔ Hướng dẫn sử dụng:\n- Xông nhà: đặt lát cam cùng các thảo mộc khác lên bếp xông, đốt 1 viên nến bên dưới.\n- Pha trà: dùng nước ấm khoảng 70–80°C; không dùng nước quá nóng để trà không bị đắng.\n- Trang trí: dùng lát cam đẹp để trang trí cây thông, hộp quà, nến thơm.\n\n✔ Bảo quản:\nNơi khô ráo, thoáng mát.\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng quy cách trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Lát cam vàng sấy khô xông nhà, pha trà | Phương Lâm",
+    "seoDescription": "Lát cam vàng sấy khô 100%, túi 20g, 50g, 100g. Đặt lên bếp xông cùng thảo mộc để xông nhà, hoặc pha trà, trang trí. Xuất xứ Việt Nam.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "PHÂN LOẠI",
+        "values": [
+          "50g Lát Cam Khô",
+          "20g Lát Cam Khô",
+          "100g Lát Cam Khô"
+        ]
+      }
+    ],
+    "optionImages": {
+      "PHÂN LOẠI": {
+        "50g Lát Cam Khô": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
+        "20g Lát Cam Khô": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
+        "100g Lát Cam Khô": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518876384-shopee-vn-11134207-81ztc-mru3c8l1r9xea7.webp",
+      "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
+      "/assets/products/uploads/1791518878110-shopee-vn-11134207-81ztc-mrsqpdzmq8lja0.webp",
+      "/assets/products/uploads/1791518878916-shopee-vn-11134207-81ztc-mrsqp0wa8dfq70.webp",
+      "/assets/products/uploads/1791518879824-shopee-vn-11134201-81ztc-mrfggpaguux237.webp",
+      "/assets/products/uploads/1791518880572-shopee-vn-11134207-7r98o-lqko3xgn93qv8f.webp",
+      "/assets/products/uploads/1791518881690-shopee-vn-11134207-7r98o-lqko3xgnbwvr43.webp",
+      "/assets/products/uploads/1791518882543-shopee-vn-11134207-7r98o-lqko3xgnaibb79.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_214875378542",
+        "name": "50g Lát Cam Khô",
+        "sku": "470545_50g_lat_cam_kho",
+        "price": 27000,
+        "originalPrice": 45000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
+        "options": {
+          "PHÂN LOẠI": "50g Lát Cam Khô"
+        }
+      },
+      {
+        "id": "shopee_variant_214875378543",
+        "name": "20g Lát Cam Khô",
+        "sku": "470545_20g_lat_cam_kho",
+        "price": 15000,
+        "originalPrice": 25000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
+        "options": {
+          "PHÂN LOẠI": "20g Lát Cam Khô"
+        }
+      },
+      {
+        "id": "shopee_variant_214875378541",
+        "name": "100g Lát Cam Khô",
+        "sku": "470545_100g_lat_cam_kho",
+        "price": 45000,
+        "originalPrice": 75000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
+        "options": {
+          "PHÂN LOẠI": "100g Lát Cam Khô"
+        }
+      }
+    ],
+    "slug": "lat-cam-vang-say-kho-xong-nha-pha-tra-phuong-lam"
+  },
+  {
+    "id": "shopee_24656264608",
+    "sku": "SP-24656264608",
+    "categoryId": "thao-moc-xong",
+    "name": "Lá nguyệt quế khô xông nhà, làm gia vị – Phương Lâm",
+    "price": 39000,
+    "originalPrice": 65000,
+    "shortDesc": "Lá nguyệt quế (bay leaves) khô 100%, túi zip 50g, 100g, 200g; dùng xông nhà cùng bồ kết, vỏ bưởi hoặc làm gia vị món ăn.",
+    "description": "LÁ NGUYỆT QUẾ KHÔ – PHƯƠNG LÂM\n\n✔ Tổng quan sản phẩm:\nLá nguyệt quế khô dùng để xông nhà, có thể kết hợp cùng bồ kết, vỏ bưởi, và cũng dùng được làm gia vị cho món ăn.\n\n✔ Thông tin sản phẩm:\n- Thành phần: 100% lá nguyệt quế khô\n- Quy cách: túi zip 50g, 100g, 200g\n- Xuất xứ: Việt Nam\n\n✔ Công dụng:\n- Đốt xông thơm nhà.\n- Làm gia vị cho các món ăn.\n\n✔ Bảo quản:\nNơi khô thoáng, tránh ánh nắng trực tiếp.\n\n✔ Lưu ý quan trọng:\n- Vui lòng chọn đúng quy cách trước khi đặt hàng.",
+    "usage": "",
+    "seoTitle": "Lá nguyệt quế khô xông nhà, làm gia vị | Phương Lâm",
+    "seoDescription": "Lá nguyệt quế (bay leaves) khô 100%, túi zip 50g, 100g, 200g. Dùng xông nhà cùng bồ kết, vỏ bưởi hoặc làm gia vị món ăn. Xuất xứ Việt Nam.",
+    "tag": "",
+    "weight": null,
+    "hidden": true,
+    "optionGroups": [
+      {
+        "name": "Phân Loại",
+        "values": [
+          "100g Lá Khô",
+          "200g Lá Khô",
+          "50g Lá Khô"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Phân Loại": {
+        "100g Lá Khô": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
+        "200g Lá Khô": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
+        "50g Lá Khô": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791518883416-shopee-vn-11134207-81ztc-mrsr4n773sw130.webp",
+      "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
+      "/assets/products/uploads/1791518885105-shopee-vn-11134207-81ztc-mrsqpdzmq8lja0.webp",
+      "/assets/products/uploads/1791518885896-shopee-vn-11134207-81ztc-mrsqp0wa8dfq70.webp",
+      "/assets/products/uploads/1791518886801-shopee-vn-11134207-820l4-me81u0q9jx8m9e.webp",
+      "/assets/products/uploads/1791518888120-shopee-vn-11134207-7r98o-lx6xye72tck914.webp",
+      "/assets/products/uploads/1791518889105-shopee-vn-11134207-7r98o-lx6xye72qjfde4.webp",
+      "/assets/products/uploads/1791518889901-shopee-vn-11134207-7r98o-lx6xye72rxzte0.webp",
+      "/assets/products/uploads/1791518890691-shopee-vn-11134207-7r98o-lx6xye72ur4p68.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_246121016936",
+        "name": "100g Lá Khô",
+        "sku": "470547_100g_la_kho",
+        "price": 54000,
+        "originalPrice": 90000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
+        "options": {
+          "Phân Loại": "100g Lá Khô"
+        }
+      },
+      {
+        "id": "shopee_variant_246121016937",
+        "name": "200g Lá Khô",
+        "sku": "470547_200g_la_kho",
+        "price": 102000,
+        "originalPrice": 170000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
+        "options": {
+          "Phân Loại": "200g Lá Khô"
+        }
+      },
+      {
+        "id": "shopee_variant_250485627812",
+        "name": "50g Lá Khô",
+        "sku": "470547_50g_la_kho",
+        "price": 39000,
+        "originalPrice": 65000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
+        "options": {
+          "Phân Loại": "50g Lá Khô"
+        }
+      }
+    ],
+    "slug": "la-nguyet-que-kho-xong-nha-lam-gia-vi-phuong-lam"
   }
 ]
