@@ -3907,5 +3907,107 @@
       }
     ],
     "slug": "la-nguyet-que-kho-xong-nha-lam-gia-vi-phuong-lam"
+  },
+  {
+    "id": "shopee_24604156053",
+    "sku": "SP-24604156053",
+    "categoryId": "bep-xong",
+    "name": "Tinh dầu thơm phòng dùng cho đèn xông",
+    "price": 60000,
+    "originalPrice": null,
+    "shortDesc": "Tinh dầu thơm phòng dùng với đèn xông hoặc máy khuếch tán tương thích. Xem mùi hương, dung tích và hướng dẫn theo phân loại.",
+    "description": "## Thông tin sản phẩm\nTinh dầu thơm phòng có các lựa chọn mùi như gỗ đàn hương, hoa lê, Coco, hương quế và thông theo tên phân loại. Dung tích sản phẩm được ghi là 10 ml. Mùi cảm nhận có thể khác nhau tùy không gian và sở thích.\n\n## Cách sử dụng\nDùng với đèn xông hoặc máy khuếch tán tương thích, theo hướng dẫn của thiết bị và nhãn sản phẩm. Bắt đầu với lượng nhỏ; không đổ trực tiếp vào thiết bị nếu nhà sản xuất thiết bị không hướng dẫn cách dùng đó.\n\n## Lưu ý và bảo quản\nKhông uống. Tránh để sản phẩm tiếp xúc với mắt và da; để xa trẻ nhỏ. Đậy nắp sau khi dùng, bảo quản nơi khô mát và tránh ánh nắng trực tiếp. Chỉ dùng ngoài da hoặc cho bồn tắm nếu nhãn sản phẩm hướng dẫn rõ.",
+    "usage": "## Cách dùng với thiết bị khuếch tán\nĐọc hướng dẫn của thiết bị và nhãn tinh dầu. Dùng lượng nhỏ theo khuyến nghị của thiết bị; không để máy hoặc đèn xông hoạt động khi không có người theo dõi.\n\n## Lưu ý\nKhông uống; tránh tiếp xúc với mắt và da. Để xa trẻ nhỏ và vật nuôi. Ngừng sử dụng nếu xuất hiện kích ứng hoặc khó chịu; làm theo thông tin an toàn trên nhãn sản phẩm.\n\n## Bảo quản\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
+    "tag": "",
+    "weight": 200,
+    "hidden": false,
+    "optionGroups": [],
+    "optionImages": {},
+    "images": [
+      "/assets/products/mirrored/5a254a10.webp",
+      "/assets/products/mirrored/c8b1c450.webp",
+      "/assets/products/mirrored/f2c600ca.webp",
+      "/assets/products/mirrored/dc290562.webp",
+      "/assets/products/mirrored/24f9a207.webp",
+      "/assets/products/mirrored/9dc9ce24.webp",
+      "/assets/products/mirrored/954776e6.webp",
+      "/assets/products/mirrored/226cace9.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_440296119911",
+        "name": "Gỗ Đàn Hương",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/3f689f12.webp",
+        "options": {}
+      },
+      {
+        "id": "shopee_variant_440296119912",
+        "name": "Hoa Lê Anh",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/7c02b18f.webp",
+        "options": {}
+      },
+      {
+        "id": "shopee_variant_250211429868",
+        "name": "Khánh Sạn Hilton🔥",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/356f1263.webp",
+        "options": {}
+      },
+      {
+        "id": "shopee_variant_360296129288",
+        "name": "Resort ( Sheraton )",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/9502482d.webp",
+        "options": {}
+      },
+      {
+        "id": "shopee_variant_440296119908",
+        "name": "Coco (Ngọt Ngào)",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/9dc9ce24.webp",
+        "options": {}
+      },
+      {
+        "id": "shopee_variant_440296119909",
+        "name": "Ấm Áp (Quế & Thông)",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/954776e6.webp",
+        "options": {}
+      },
+      {
+        "id": "shopee_variant_440296119910",
+        "name": "Trà Trắng (Mùi Sang)",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": null,
+        "weight": 200,
+        "image": "/assets/products/mirrored/cfbf70de.webp",
+        "options": {}
+      }
+    ],
+    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap",
+    "seoTitle": "",
+    "seoDescription": ""
   }
 ]
