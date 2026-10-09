@@ -4071,6 +4071,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 25,
+    "title": "Cách chọn nến tealight 4 giờ không khói cho bếp xông",
+    "excerpt": "Nến tealight 4 giờ không khói giúp bạn xông thảo mộc thuận tiện hơn. Tìm hiểu cách chọn theo bếp, kiểm tra thời lượng và dùng đúng cách cho người mới.",
+    "date": "9 tháng 10, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cach-chon-nen-tealight-4-gio-khong-khoi",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cach-chon-nen-tealight-4-gio-khong-khoi/",
+    "image": "/assets/blog/cach-chon-nen-tealight-4-gio-khong-khoi-1791540190592-1-nen-tealight-4-gio-khong-khoi-chua-chay-dat-canh-bep-xong-th.webp",
+    "coverImage": "/assets/blog/cach-chon-nen-tealight-4-gio-khong-khoi-1791540190592-1-nen-tealight-4-gio-khong-khoi-chua-chay-dat-canh-bep-xong-th.webp"
+  },
+  {
     "id": 24,
     "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
     "excerpt": "Bộ xông nhà cho người mới cần những gì? Xem checklist bếp niêu, nến tealight, thảo mộc và phụ kiện để chuẩn bị xông nhà lần đầu gọn gàng.",
