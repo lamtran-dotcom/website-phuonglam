@@ -273,7 +273,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "bo-bep-xong-cao-cap-xong-thao-xong-nha-thu-gian-day-du"
+    "slug": "bo-bep-xong-cao-cap-xong-thao-xong-nha-thu-gian-day-du",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_28991652145",
@@ -543,7 +545,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "bo-xong-nha-tay-ue-thao-moc-khu-mui-thu-hut-may-man"
+    "slug": "bo-xong-nha-tay-ue-thao-moc-khu-mui-thu-hut-may-man",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "p_1777474804043_1b5kn",
@@ -588,7 +592,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "bo-xong-nha-trai-nghiem-tiet-kiem-chi-phi-i-phuong-lam"
+    "slug": "bo-xong-nha-trai-nghiem-tiet-kiem-chi-phi-i-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_17395821074",
@@ -633,7 +639,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "bep-xong-le-xong-thao-moc-bo-ket-khu-mui-thom-nha"
+    "slug": "bep-xong-le-xong-thao-moc-bo-ket-khu-mui-thom-nha",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": 1,
@@ -811,7 +819,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-mai"
+    "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-mai",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "p_1777468148980_4ztop",
@@ -987,7 +997,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "nen-tealight-2-gio-dot-den-xong-tinh-dau-trang-tri-tiec-i-phuong-lam"
+    "slug": "nen-tealight-2-gio-dot-den-xong-tinh-dau-trang-tri-tiec-i-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "p_1777435996053_fbofd",
@@ -1164,7 +1176,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-tron"
+    "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-tron",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": 7,
@@ -1188,7 +1202,9 @@ const PRODUCTS = [
     ],
     "reviews": [],
     "variants": [],
-    "slug": "hot-quet-gas-thap-nen-dau-dai-an-co-the-thu-gon-tien-loi-i-phuong-lam"
+    "slug": "hot-quet-gas-thap-nen-dau-dai-an-co-the-thu-gon-tien-loi-i-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_57653126590",
@@ -1241,7 +1257,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "que-thanh-xuat-khau-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien"
+    "slug": "que-thanh-xuat-khau-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_57058955812",
@@ -1308,7 +1326,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam"
+    "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_56102764086",
@@ -1328,7 +1348,9 @@ const PRODUCTS = [
     ],
     "reviews": [],
     "variants": [],
-    "slug": "dia-lot-bep-xong-dat-nung-cach-nhiet-giu-sach-mat-ban"
+    "slug": "dia-lot-bep-xong-dat-nung-cach-nhiet-giu-sach-mat-ban",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_54450013830",
@@ -1384,7 +1406,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nen-tru-trang-72h-trang-tri-ban-tiec-chay-em-khong-khoi"
+    "slug": "nen-tru-trang-72h-trang-tri-ban-tiec-chay-em-khong-khoi",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_48452789252",
@@ -1400,11 +1424,13 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/981d6659.webp"
+      "/assets/products/uploads/1791516822646-chatgpt-image-18-20-21-10-thg-8-2026.webp"
     ],
     "reviews": [],
     "variants": [],
-    "slug": "ly-dung-nen-dat-nung-dung-bep-xong-an-toan-tien-cam"
+    "slug": "ly-dung-nen-dat-nung-dung-bep-xong-an-toan-tien-cam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_41330081336",
@@ -1420,9 +1446,12 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/72eecef5.webp",
+      "/assets/products/uploads/1791516212794-chatgpt-image-18-29-21-10-thg-8-2026.webp",
       "/assets/products/uploads/1784261051269-image.webp",
-      "/assets/products/mirrored/3f070c64.webp"
+      "/assets/products/mirrored/3f070c64.webp",
+      "/assets/products/uploads/1791516216549-chatgpt-image-18-32-00-10-thg-8-2026.webp",
+      "/assets/products/uploads/1791516220559-chatgpt-image-18-32-04-10-thg-8-2026.webp",
+      "/assets/products/uploads/1791516233992-chatgpt-image-18-20-21-10-thg-8-2026.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1433,7 +1462,7 @@ const PRODUCTS = [
         "price": 22000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/mirrored/cae1a77b.webp",
+        "image": "/assets/products/uploads/1791516204058-chatgpt-image-18-32-04-10-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1443,7 +1472,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 35000,
         "weight": 200,
-        "image": "/assets/products/mirrored/3f070c64.webp",
+        "image": "/assets/products/uploads/1791516229285-chatgpt-image-18-20-21-10-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1453,7 +1482,7 @@ const PRODUCTS = [
         "price": 25000,
         "originalPrice": 30000,
         "weight": 200,
-        "image": "/assets/products/uploads/1784261094318-bep-xong-thao-moc-website.webp",
+        "image": "/assets/products/uploads/1791516195397-chatgpt-image-18-32-00-10-thg-8-2026.webp",
         "options": {}
       },
       {
@@ -1463,11 +1492,13 @@ const PRODUCTS = [
         "price": 20000,
         "originalPrice": 34000,
         "weight": 200,
-        "image": "/assets/products/mirrored/cae1a77b.webp",
+        "image": "/assets/products/uploads/1791516206627-chatgpt-image-18-32-04-10-thg-8-2026.webp",
         "options": {}
       }
     ],
-    "slug": "bo-phu-kien-xong-nha-dat-nung-dung-bep-nieu-tien-loi"
+    "slug": "bo-phu-kien-xong-nha-dat-nung-dung-bep-nieu-tien-loi",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_40170692234",
@@ -1516,7 +1547,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nu-tram-huong-tu-nhien-xong-nha-thien-dinh-thom-diu"
+    "slug": "nu-tram-huong-tu-nhien-xong-nha-thien-dinh-thom-diu",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_29011454025",
@@ -1598,7 +1631,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "nen-tealight-4-gio-huong-lai-trang-tri-tiec-khong-khoi-l-phuong-lam"
+    "slug": "nen-tealight-4-gio-huong-lai-trang-tri-tiec-khong-khoi-l-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_28422178672",
@@ -1614,7 +1649,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/cae1a77b.webp"
+      "/assets/products/uploads/1791516880954-chatgpt-image-18-32-04-10-thg-8-2026.webp"
     ],
     "reviews": [],
     "variants": [
@@ -1639,7 +1674,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nap-bep-nieu-xong-thao-moc-dat-nung-chiunhiet"
+    "slug": "nap-bep-nieu-xong-thao-moc-dat-nung-chiunhiet",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_28251842874",
@@ -1706,7 +1743,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nen-tealight-8-gio-vo-nhom-xong-thao-moc-tinh-dau-l-phuong-lam"
+    "slug": "nen-tealight-8-gio-vo-nhom-xong-thao-moc-tinh-dau-l-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_26007254880",
@@ -1893,7 +1932,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "thao-moc-xong-nha-tu-nhien-tay-ue-khu-mui-xua-con-trung-nhieu-loai-tu-chon"
+    "slug": "thao-moc-xong-nha-tu-nhien-tay-ue-khu-mui-xua-con-trung-nhieu-loai-tu-chon",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_24604156053",
@@ -1991,7 +2032,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap"
+    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_23980156399",
@@ -2060,7 +2103,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "den-xong-tinh-dau-hinh-huou-gom-su-trang-tri-sang-trong"
+    "slug": "den-xong-tinh-dau-hinh-huou-gom-su-trang-tri-sang-trong",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_23752423694",
@@ -2118,7 +2163,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "de-dung-nen-tealight-dung-xong-tinh-dau-thao-moc"
+    "slug": "de-dung-nen-tealight-dung-xong-tinh-dau-thao-moc",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_22361508205",
@@ -2172,7 +2219,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "bo-ket-kho-goi-dau-xong-nha-khu-mui-thom-tu-nhien"
+    "slug": "bo-ket-kho-goi-dau-xong-nha-khu-mui-thom-tu-nhien",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_22353875434",
@@ -2276,7 +2325,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "combo-thao-moc-xong-nha-phuong-lam-thanh-tay-xua-con-trung"
+    "slug": "combo-thao-moc-xong-nha-phuong-lam-thanh-tay-xua-con-trung",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_22080262041",
@@ -2430,7 +2481,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "den-xong-tinh-dau-dot-nen-trang-tri-phong-ngu-sang-trong"
+    "slug": "den-xong-tinh-dau-dot-nen-trang-tri-phong-ngu-sang-trong",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_19636361517",
@@ -2580,7 +2633,9 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi"
+    "slug": "vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_6228169441",
@@ -2621,7 +2676,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nen-tealight-8-gio-trang-tri-khong-khoi-tao-khong-gian-am"
+    "slug": "nen-tealight-8-gio-trang-tri-khong-khoi-tao-khong-gian-am",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_6203380691",
@@ -2677,7 +2734,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nen-ly-72h-no-lon-tho-cung-khong-khoi-phuong-lam"
+    "slug": "nen-ly-72h-no-lon-tho-cung-khong-khoi-phuong-lam",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_4903385000",
@@ -2731,7 +2790,9 @@ const PRODUCTS = [
         "options": {}
       }
     ],
-    "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem"
+    "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem",
+    "seoTitle": "",
+    "seoDescription": ""
   },
   {
     "id": "shopee_54367578815",
