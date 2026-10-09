@@ -2426,13 +2426,13 @@ const PRODUCTS = [
     "price": 195000,
     "originalPrice": null,
     "shortDesc": "Nến ly nơ lớn dùng cho thờ cúng và trang trí. Hộp gồm 6 ly theo mô tả; thời gian cháy tùy điều kiện sử dụng.",
-    "tag": "",
+    "tag": "Mới",
     "weight": 1000,
     "hidden": false,
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/eeb163d3.webp",
+      "/assets/products/uploads/1791535376696-chatgpt-image-16-33-52-19-thg-7-2026.webp",
       "/assets/products/mirrored/9719b9db.webp",
       "/assets/products/mirrored/db423a79.webp",
       "/assets/products/mirrored/f63537e2.webp",
@@ -2981,9 +2981,9 @@ const PRODUCTS = [
     "shortDesc": "Rế lót đan thủ công từ sợi tự nhiên, đặt dưới bếp xông thảo mộc hoặc bếp xông tinh dầu để bếp đứng chắc và gọn gàng.",
     "seoTitle": "Rế lót bếp xông thảo mộc đan thủ công | Phương Lâm",
     "seoDescription": "Rế lót bếp xông Phương Lâm đan thủ công từ sợi tự nhiên, đặt dưới bếp xông thảo mộc, bếp xông tinh dầu. Có 2 kích thước: 10-13cm và 16cm.",
-    "tag": "",
+    "tag": "Nổi bật",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "SIZE",
@@ -3071,9 +3071,9 @@ const PRODUCTS = [
     "shortDesc": "Gỗ xá xị đỏ tự nhiên dạng dăm bào, hương gỗ ấm ngọt dịu; dùng với bếp xông để làm thơm và giảm cảm giác mùi ẩm, mùi bí trong phòng.",
     "seoTitle": "Gỗ xá xị đỏ dăm bào xông nhà | Phương Lâm",
     "seoDescription": "Gỗ xá xị đỏ tự nhiên dạng dăm bào, hương gỗ ấm ngọt dịu. Dùng với bếp xông để làm thơm, giảm cảm giác mùi ẩm bí. Có gói 50g, 100g và túi treo.",
-    "tag": "",
+    "tag": "Mới",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "PHÂN LOẠI",
@@ -3112,7 +3112,7 @@ const PRODUCTS = [
         "sku": "720861_go_xa_xi_50g",
         "price": 41400,
         "originalPrice": 69000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518818721-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
         "options": {
           "PHÂN LOẠI": "Gỗ Xá Xị 50g"
@@ -3124,7 +3124,7 @@ const PRODUCTS = [
         "sku": "720861_go_xa_xi_100g",
         "price": 59400,
         "originalPrice": 99000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518819674-shopee-vn-11134207-81ztc-msy5c1151nuo83.webp",
         "options": {
           "PHÂN LOẠI": "Gỗ Xá Xị 100g"
@@ -3136,7 +3136,7 @@ const PRODUCTS = [
         "sku": "720861_tui_treo_thom",
         "price": 37200,
         "originalPrice": 62000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518820489-shopee-vn-11134207-81ztc-msw6wb383cw24f.webp",
         "options": {
           "PHÂN LOẠI": "Túi Treo Thơm🔥"
@@ -3148,7 +3148,7 @@ const PRODUCTS = [
         "sku": "720861_goi_thay_the",
         "price": 19200,
         "originalPrice": 32000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518821443-shopee-vn-11134207-81ztc-msvediv6e1add7.webp",
         "options": {
           "PHÂN LOẠI": "Gói thay thế"
@@ -3160,7 +3160,7 @@ const PRODUCTS = [
         "sku": "720861_2_thanh_go_treo",
         "price": 19200,
         "originalPrice": 32000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518822341-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
         "options": {
           "PHÂN LOẠI": "2 Thanh Gỗ Treo🔥"
@@ -3179,31 +3179,29 @@ const PRODUCTS = [
     "shortDesc": "Thanh gỗ Palo Santo tự nhiên dài 10cm, đốt đầu thanh để gỗ âm ỉ tỏa hương gỗ dịu nhẹ; có thêm lựa chọn khay đốt gỗ và gỗ băm xông.",
     "seoTitle": "Thanh gỗ Palo Santo tự nhiên 10cm | Phương Lâm",
     "seoDescription": "Thanh gỗ Palo Santo tự nhiên dài 10cm, đốt đầu thanh để gỗ âm ỉ tỏa hương dịu nhẹ. Có khay đốt gỗ và gỗ băm xông. Xem phân loại và giá.",
-    "tag": "",
+    "tag": "Nổi bật",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "Phân loại",
         "values": [
-          "Gỗ băm xá xị 50g",
-          "Gỗ băm ngọc am 50g",
-          "Khay đốt gỗ Niêu",
-          "Khay đốt gỗ Trắng",
           "6 - 10gram / 10cm",
-          "Gỗ Treo Xá Xị🔥",
           "3 - 4,5gram / 10cm"
+        ]
+      },
+      {
+        "name": "Số Lượng",
+        "values": [
+          "1 Cây",
+          "2 Cây",
+          "5 cây tặng 1"
         ]
       }
     ],
     "optionImages": {
       "Phân loại": {
-        "Gỗ băm xá xị 50g": "/assets/products/uploads/1791518837219-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
-        "Gỗ băm ngọc am 50g": "/assets/products/uploads/1791518838062-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
-        "Khay đốt gỗ Niêu": "/assets/products/uploads/1791518838873-shopee-vn-11134207-81ztc-mrpwgddorrif2a.webp",
-        "Khay đốt gỗ Trắng": "/assets/products/uploads/1791518839673-shopee-vn-11134207-81ztc-mrpwcwb3mm1460.webp",
         "6 - 10gram / 10cm": "/assets/products/uploads/1791518840393-shopee-vn-11134207-81ztc-mtdmap9vc8aud3.webp",
-        "Gỗ Treo Xá Xị🔥": "/assets/products/uploads/1791518841140-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
         "3 - 4,5gram / 10cm": "/assets/products/uploads/1791518841935-shopee-vn-11134207-81ztc-mtdmar89xslc80.webp"
       }
     },
@@ -3220,75 +3218,16 @@ const PRODUCTS = [
     "reviews": [],
     "variants": [
       {
-        "id": "shopee_variant_436496699602",
-        "name": "Gỗ băm xá xị 50g",
-        "sku": "720865_go_bam_xa_xi_50g",
-        "price": 41400,
-        "originalPrice": 69000,
-        "weight": null,
-        "image": "/assets/products/uploads/1791518837219-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
-        "options": {
-          "Phân loại": "Gỗ băm xá xị 50g"
-        }
-      },
-      {
-        "id": "shopee_variant_436496699601",
-        "name": "Gỗ băm ngọc am 50g",
-        "sku": "720865_go_bam_ngoc_am_50g",
-        "price": 41400,
-        "originalPrice": 69000,
-        "weight": null,
-        "image": "/assets/products/uploads/1791518838062-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
-        "options": {
-          "Phân loại": "Gỗ băm ngọc am 50g"
-        }
-      },
-      {
-        "id": "shopee_variant_341347354051",
-        "name": "Khay đốt gỗ Niêu",
-        "sku": "720865_khay_dot_go_nieu",
-        "price": 72000,
-        "originalPrice": 120000,
-        "weight": null,
-        "image": "/assets/products/uploads/1791518838873-shopee-vn-11134207-81ztc-mrpwgddorrif2a.webp",
-        "options": {
-          "Phân loại": "Khay đốt gỗ Niêu"
-        }
-      },
-      {
-        "id": "shopee_variant_341347354052",
-        "name": "Khay đốt gỗ Trắng",
-        "sku": "720865_khay_dot_go_trang",
-        "price": 72000,
-        "originalPrice": 120000,
-        "weight": null,
-        "image": "/assets/products/uploads/1791518839673-shopee-vn-11134207-81ztc-mrpwcwb3mm1460.webp",
-        "options": {
-          "Phân loại": "Khay đốt gỗ Trắng"
-        }
-      },
-      {
         "id": "shopee_variant_341347354050",
         "name": "6 - 10gram / 10cm",
         "sku": "720865_6_10gram_10cm",
         "price": 36000,
         "originalPrice": 60000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518840393-shopee-vn-11134207-81ztc-mtdmap9vc8aud3.webp",
         "options": {
-          "Phân loại": "6 - 10gram / 10cm"
-        }
-      },
-      {
-        "id": "shopee_variant_436514229437",
-        "name": "Gỗ Treo Xá Xị🔥",
-        "sku": "",
-        "price": 21000,
-        "originalPrice": 35000,
-        "weight": null,
-        "image": "/assets/products/uploads/1791518841140-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
-        "options": {
-          "Phân loại": "Gỗ Treo Xá Xị🔥"
+          "Phân loại": "6 - 10gram / 10cm",
+          "Số Lượng": "1 Cây"
         }
       },
       {
@@ -3297,10 +3236,63 @@ const PRODUCTS = [
         "sku": "720865_3_4d5gram_10cm",
         "price": 30000,
         "originalPrice": 50000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518841935-shopee-vn-11134207-81ztc-mtdmar89xslc80.webp",
         "options": {
-          "Phân loại": "3 - 4,5gram / 10cm"
+          "Phân loại": "3 - 4,5gram / 10cm",
+          "Số Lượng": "1 Cây"
+        }
+      },
+      {
+        "id": "p_1791535619569_8vu9u",
+        "name": "6 - 10gram / 10cm / 2 Cây",
+        "sku": "",
+        "price": 60000,
+        "originalPrice": 90000,
+        "weight": 100,
+        "image": "/assets/products/uploads/1791535661722-chatgpt-image-15-43-53-21-thg-9-2026.webp",
+        "options": {
+          "Phân loại": "6 - 10gram / 10cm",
+          "Số Lượng": "2 Cây"
+        }
+      },
+      {
+        "id": "p_1791535619569_pgikz",
+        "name": "6 - 10gram / 10cm / 5 cây tặng 1",
+        "sku": "",
+        "price": 149000,
+        "originalPrice": 200000,
+        "weight": 100,
+        "image": "/assets/products/uploads/1791535673753-chatgpt-image-15-43-53-21-thg-9-2026.webp",
+        "options": {
+          "Phân loại": "6 - 10gram / 10cm",
+          "Số Lượng": "5 cây tặng 1"
+        }
+      },
+      {
+        "id": "p_1791535619569_dw7c1",
+        "name": "3 - 4,5gram / 10cm / 2 Cây",
+        "sku": "",
+        "price": 55000,
+        "originalPrice": 70000,
+        "weight": 100,
+        "image": "/assets/products/uploads/1791535678335-chatgpt-image-15-43-53-21-thg-9-2026.webp",
+        "options": {
+          "Phân loại": "3 - 4,5gram / 10cm",
+          "Số Lượng": "2 Cây"
+        }
+      },
+      {
+        "id": "p_1791535619569_5zkny",
+        "name": "3 - 4,5gram / 10cm / 5 cây tặng 1",
+        "sku": "",
+        "price": 135000,
+        "originalPrice": 160000,
+        "weight": 100,
+        "image": "/assets/products/uploads/1791535681124-chatgpt-image-15-43-53-21-thg-9-2026.webp",
+        "options": {
+          "Phân loại": "3 - 4,5gram / 10cm",
+          "Số Lượng": "5 cây tặng 1"
         }
       }
     ],
@@ -3775,9 +3767,9 @@ const PRODUCTS = [
     "shortDesc": "Lá nguyệt quế (bay leaves) khô 100%, túi zip 50g, 100g, 200g; dùng xông nhà cùng bồ kết, vỏ bưởi hoặc làm gia vị món ăn.",
     "seoTitle": "Lá nguyệt quế khô xông nhà, làm gia vị | Phương Lâm",
     "seoDescription": "Lá nguyệt quế (bay leaves) khô 100%, túi zip 50g, 100g, 200g. Dùng xông nhà cùng bồ kết, vỏ bưởi hoặc làm gia vị món ăn. Xuất xứ Việt Nam.",
-    "tag": "",
+    "tag": "Mới",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "Phân Loại",
@@ -3814,7 +3806,7 @@ const PRODUCTS = [
         "sku": "470547_100g_la_kho",
         "price": 54000,
         "originalPrice": 90000,
-        "weight": null,
+        "weight": 100,
         "image": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
         "options": {
           "Phân Loại": "100g Lá Khô"
@@ -3826,7 +3818,7 @@ const PRODUCTS = [
         "sku": "470547_200g_la_kho",
         "price": 102000,
         "originalPrice": 170000,
-        "weight": null,
+        "weight": 200,
         "image": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
         "options": {
           "Phân Loại": "200g Lá Khô"
@@ -3838,7 +3830,7 @@ const PRODUCTS = [
         "sku": "470547_50g_la_kho",
         "price": 39000,
         "originalPrice": 65000,
-        "weight": null,
+        "weight": 50,
         "image": "/assets/products/uploads/1791518884334-shopee-vn-11134207-81ztc-mrsr4l793m68ba.webp",
         "options": {
           "Phân Loại": "50g Lá Khô"
@@ -3846,6 +3838,213 @@ const PRODUCTS = [
       }
     ],
     "slug": "la-nguyet-que-kho-xong-nha-lam-gia-vi-phuong-lam"
+  },
+  {
+    "id": "shopee_24604156053",
+    "slug": "tinh-dau-thom-phong-khach-san-khu-mui-thu-gian-cao-cap",
+    "sku": "SP-24604156053",
+    "categoryId": "bep-xong",
+    "name": "Tinh dầu thơm phòng hương khách sạn 10ml, 12 mùi – Phương Lâm",
+    "price": 36000,
+    "originalPrice": 60000,
+    "shortDesc": "Tinh dầu thơm phòng chai 10ml với 12 mùi hương theo phong cách khách sạn và resort; nhỏ vào đèn xông hoặc máy khuếch tán.",
+    "seoTitle": "Tinh dầu thơm phòng khách sạn 10ml, 12 mùi | Phương Lâm",
+    "seoDescription": "Tinh dầu thơm phòng 10ml hương khách sạn, 12 mùi: Hilton, Sheraton, Coco, Holiday, oải hương, gỗ đàn hương… Nhỏ vào đèn xông hoặc máy khuếch tán. Xem giá.",
+    "tag": "Bán chạy",
+    "weight": 200,
+    "hidden": false,
+    "optionGroups": [
+      {
+        "name": "Mùi Hương",
+        "values": [
+          "Sả🔥",
+          "Khách sạn Sheraton",
+          "Holiday🔥",
+          "Khánh Sạn Hilton🔥",
+          "Trà Trắng(Mùi Sang)🔥",
+          "Coco (Ngọt Ngào)",
+          "Mộc Tê Trà Đào",
+          "Oải Hương",
+          "B Girl ( Hoa Hồng )",
+          "Xô Thơm & Muối Biển🔥",
+          "Gỗ Đàn Hương",
+          "Hoa Lê Anh"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Mùi Hương": {
+        "Sả🔥": "/assets/products/uploads/1791535181500-shopee-vn-11134207-81ztc-mtp9ddo3rojr4f.webp",
+        "Khách sạn Sheraton": "/assets/products/uploads/1791535182464-shopee-vn-11134207-81ztc-mlc575gudslf5a.webp",
+        "Holiday🔥": "/assets/products/uploads/1791535183257-shopee-vn-11134207-81ztc-mtp9atlreg3sba.webp",
+        "Khánh Sạn Hilton🔥": "/assets/products/uploads/1791535184186-shopee-vn-11134207-81ztc-mtp9ail1sjr711.webp",
+        "Trà Trắng(Mùi Sang)🔥": "/assets/products/uploads/1791535185250-shopee-vn-11134207-81ztc-mtp9aqr8g9hmbe.webp",
+        "Coco (Ngọt Ngào)": "/assets/products/uploads/1791535179093-shopee-vn-11134207-820l4-mi8mwfaorh8m35.webp",
+        "Mộc Tê Trà Đào": "/assets/products/uploads/1791535186092-shopee-vn-11134207-81ztc-mtjc773j44qv19.webp",
+        "Oải Hương": "/assets/products/uploads/1791535187028-shopee-vn-11134207-81ztc-mtp9dpu2kphfc1.webp",
+        "B Girl ( Hoa Hồng )": "/assets/products/uploads/1791535187949-shopee-vn-11134207-81ztc-mlc53qh26adgec.webp",
+        "Xô Thơm & Muối Biển🔥": "/assets/products/uploads/1791535188768-shopee-vn-11134207-81ztc-mtp9dmtvvdage2.webp",
+        "Gỗ Đàn Hương": "/assets/products/uploads/1791535189708-shopee-vn-11134207-81ztc-mlc51x9162o8f7.webp",
+        "Hoa Lê Anh": "/assets/products/uploads/1791535190529-shopee-vn-11134207-81ztc-mtjc3y0zs93cc0.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791535174232-shopee-vn-11134207-81ztc-mtjcfh2rp81tfb.webp",
+      "/assets/products/uploads/1791535175326-shopee-vn-11134207-820l4-mhj8g7l5cmwy87.webp",
+      "/assets/products/uploads/1791535176210-shopee-vn-11134207-820l4-mi8n6t5hrsw179.webp",
+      "/assets/products/uploads/1791535177306-shopee-vn-11134207-820l4-mhj8g9usos1wc8.webp",
+      "/assets/products/uploads/1791535178313-shopee-vn-11134207-81ztc-mlc57xq4l4w836.webp",
+      "/assets/products/uploads/1791535179093-shopee-vn-11134207-820l4-mi8mwfaorh8m35.webp",
+      "/assets/products/uploads/1791535179932-shopee-vn-11134207-820l4-mi8mwbkw4qo75f.webp",
+      "/assets/products/uploads/1791535180704-shopee-vn-11134207-820l4-mi8mwgus31u034.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_401559511963",
+        "name": "Sả🔥",
+        "sku": "",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535181500-shopee-vn-11134207-81ztc-mtp9ddo3rojr4f.webp",
+        "options": {
+          "Mùi Hương": "Sả🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_360296129288",
+        "name": "Khách sạn Sheraton",
+        "sku": "537671_resort_sheraton",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535182464-shopee-vn-11134207-81ztc-mlc575gudslf5a.webp",
+        "options": {
+          "Mùi Hương": "Khách sạn Sheraton"
+        }
+      },
+      {
+        "id": "shopee_variant_440296119909",
+        "name": "Holiday🔥",
+        "sku": "537671_am_ap_que_thong",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535183257-shopee-vn-11134207-81ztc-mtp9atlreg3sba.webp",
+        "options": {
+          "Mùi Hương": "Holiday🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_250211429868",
+        "name": "Khánh Sạn Hilton🔥",
+        "sku": "537671_khanh_san_hilton",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535184186-shopee-vn-11134207-81ztc-mtp9ail1sjr711.webp",
+        "options": {
+          "Mùi Hương": "Khánh Sạn Hilton🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_440296119910",
+        "name": "Trà Trắng(Mùi Sang)🔥",
+        "sku": "537671_tra_trang_mui_sang",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535185250-shopee-vn-11134207-81ztc-mtp9aqr8g9hmbe.webp",
+        "options": {
+          "Mùi Hương": "Trà Trắng(Mùi Sang)🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_440296119908",
+        "name": "Coco (Ngọt Ngào)",
+        "sku": "537671_coco_ngot_ngao",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535179093-shopee-vn-11134207-820l4-mi8mwfaorh8m35.webp",
+        "options": {
+          "Mùi Hương": "Coco (Ngọt Ngào)"
+        }
+      },
+      {
+        "id": "shopee_variant_361547868181",
+        "name": "Mộc Tê Trà Đào",
+        "sku": "",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535186092-shopee-vn-11134207-81ztc-mtjc773j44qv19.webp",
+        "options": {
+          "Mùi Hương": "Mộc Tê Trà Đào"
+        }
+      },
+      {
+        "id": "shopee_variant_401559511964",
+        "name": "Oải Hương",
+        "sku": "",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535187028-shopee-vn-11134207-81ztc-mtp9dpu2kphfc1.webp",
+        "options": {
+          "Mùi Hương": "Oải Hương"
+        }
+      },
+      {
+        "id": "shopee_variant_440296119912",
+        "name": "B Girl ( Hoa Hồng )",
+        "sku": "537671_hoa_le_anh",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535187949-shopee-vn-11134207-81ztc-mlc53qh26adgec.webp",
+        "options": {
+          "Mùi Hương": "B Girl ( Hoa Hồng )"
+        }
+      },
+      {
+        "id": "shopee_variant_401559511962",
+        "name": "Xô Thơm & Muối Biển🔥",
+        "sku": "",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535188768-shopee-vn-11134207-81ztc-mtp9dmtvvdage2.webp",
+        "options": {
+          "Mùi Hương": "Xô Thơm & Muối Biển🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_440296119911",
+        "name": "Gỗ Đàn Hương",
+        "sku": "537671_go_dan_huong",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535189708-shopee-vn-11134207-81ztc-mlc51x9162o8f7.webp",
+        "options": {
+          "Mùi Hương": "Gỗ Đàn Hương"
+        }
+      },
+      {
+        "id": "shopee_variant_421547859583",
+        "name": "Hoa Lê Anh",
+        "sku": "",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": 200,
+        "image": "/assets/products/uploads/1791535190529-shopee-vn-11134207-81ztc-mtjc3y0zs93cc0.webp",
+        "options": {
+          "Mùi Hương": "Hoa Lê Anh"
+        }
+      }
+    ]
   }
 ];
 
