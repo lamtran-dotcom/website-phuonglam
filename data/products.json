@@ -1921,7 +1921,7 @@
     "usage": "## Cách dùng với thiết bị khuếch tán\nĐọc hướng dẫn của thiết bị và nhãn tinh dầu. Dùng lượng nhỏ theo khuyến nghị của thiết bị; không để máy hoặc đèn xông hoạt động khi không có người theo dõi.\n\n## Lưu ý\nKhông uống; tránh tiếp xúc với mắt và da. Để xa trẻ nhỏ và vật nuôi. Ngừng sử dụng nếu xuất hiện kích ứng hoặc khó chịu; làm theo thông tin an toàn trên nhãn sản phẩm.\n\n## Bảo quản\nĐậy kín nắp sau khi dùng, để nơi mát và tránh ánh nắng trực tiếp.",
     "tag": "",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [

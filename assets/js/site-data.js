@@ -1898,7 +1898,7 @@ const PRODUCTS = [
     "shortDesc": "Tinh dầu thơm phòng dùng với đèn xông hoặc máy khuếch tán tương thích. Xem mùi hương, dung tích và hướng dẫn theo phân loại.",
     "tag": "",
     "weight": 200,
-    "hidden": false,
+    "hidden": true,
     "optionGroups": [],
     "optionImages": {},
     "images": [
