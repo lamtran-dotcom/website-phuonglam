@@ -2490,7 +2490,7 @@ const PRODUCTS = [
     "optionGroups": [],
     "optionImages": {},
     "images": [
-      "/assets/products/mirrored/d268b77b.webp",
+      "/assets/products/uploads/1791536300504-chatgpt-image-16-35-44-19-thg-7-2026.webp",
       "/assets/products/mirrored/5dccccf3.webp",
       "/assets/products/mirrored/eeaa83a2.webp",
       "/assets/products/mirrored/fc1c4310.webp"
@@ -2503,7 +2503,7 @@ const PRODUCTS = [
         "sku": "",
         "price": 230000,
         "originalPrice": 320000,
-        "weight": 1000,
+        "weight": 2000,
         "image": "",
         "options": {}
       },
@@ -2513,7 +2513,7 @@ const PRODUCTS = [
         "sku": "",
         "price": 230000,
         "originalPrice": 320000,
-        "weight": 1000,
+        "weight": 2000,
         "image": "",
         "options": {}
       },
@@ -2523,7 +2523,7 @@ const PRODUCTS = [
         "sku": "",
         "price": 230000,
         "originalPrice": 320000,
-        "weight": 1000,
+        "weight": 2000,
         "image": "",
         "options": {}
       }
