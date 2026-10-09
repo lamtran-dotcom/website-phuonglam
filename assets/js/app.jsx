@@ -688,6 +688,18 @@ const animateAddToCart = (sourceEl, imageSrc) => {
   }, 720);
 };
 
+// Only reviews with a stated source count; template placeholders without one are ignored.
+const REVIEW_SOURCES = ['Shopee', 'Zalo', 'Facebook', 'Google', 'Website'];
+const getGenuineReviews = (product) => (Array.isArray(product?.reviews) ? product.reviews : []).map((review) => {
+  if (!review || typeof review !== 'object') return null;
+  const rating = Number(review.rating);
+  const comment = String(review.comment ?? review.text ?? '').replace(/\s+/g, ' ').trim();
+  const name = String(review.name || '').replace(/\s+/g, ' ').trim();
+  const source = REVIEW_SOURCES.find((item) => item.toLowerCase() === String(review.source || '').trim().toLowerCase());
+  if (!source || !name || comment.length < 5 || !Number.isInteger(rating) || rating < 1 || rating > 5) return null;
+  return { name, rating, comment, source, date: /^\d{4}-\d{2}-\d{2}$/.test(String(review.date || '')) ? String(review.date) : '' };
+}).filter(Boolean);
+
 const ProductCard = ({ product, setPage, addToCart, productImages = {}, compact = false, imagePriority = false }) => {
   const [hover, setHover] = React.useState(false);
   const priceInfo = getProductPriceInfo(product);
@@ -1475,7 +1487,8 @@ const renderStructuredText = (text) => {
 const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {} }) => {
   const visibleProducts = getVisibleProducts(window.PRODUCTS_LIVE || PRODUCTS);
   const product = visibleProducts.find(p => p.id === productId) || visibleProducts[0] || PRODUCTS[0];
-  const reviews = Array.isArray(product.reviews) ? product.reviews : [];
+  const reviews = getGenuineReviews(product);
+  const reviewAverage = reviews.length ? Math.round((reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length) * 10) / 10 : 0;
   const isMobile = useIsMobile();
   const [qty, setQty] = React.useState(1);
   const [activeTab, setActiveTab] = React.useState('desc');
@@ -1744,10 +1757,12 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
             {CATEGORIES.find(c => c.id === product.categoryId)?.name}
           </a>
 
-          <div style={ppStyles.ratingRow}>
-            {'★★★★★'.split('').map((s, i) => <span key={i} style={{ color: '#f5a623', fontSize: 16 }}>{s}</span>)}
-            <span style={{ fontSize: 13, color: '#888', marginLeft: 8 }}>({reviews.length} đánh giá)</span>
-          </div>
+          {reviews.length > 0 && (
+            <div style={ppStyles.ratingRow}>
+              <span style={{ color: '#f5a623', fontSize: 16 }}>{'★'.repeat(Math.round(reviewAverage))}{'☆'.repeat(5 - Math.round(reviewAverage))}</span>
+              <span style={{ fontSize: 13, color: '#888', marginLeft: 8 }}>{String(reviewAverage).replace('.', ',')} · {reviews.length} đánh giá</span>
+            </div>
+          )}
 
           <div style={ppStyles.priceRow}>
             <span style={ppStyles.price}>{currentPrice.toLocaleString('vi-VN')}đ</span>
@@ -1926,6 +1941,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
                   <div style={ppStyles.reviewHeader}>
                     <span style={ppStyles.reviewName}>{r.name}</span>
                     <span style={{ color: '#f5a623', fontSize: 13 }}>{'★'.repeat(r.rating)}</span>
+                    <span style={{ fontSize: 12, color: '#999' }}>{[r.date ? r.date.split('-').reverse().join('/') : '', `Nguồn: ${r.source}`].filter(Boolean).join(' · ')}</span>
                   </div>
                   <p style={ppStyles.reviewText}>{r.comment}</p>
                 </div>

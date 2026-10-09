@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const crypto = require('crypto');
+const { getGenuineReviews, getReviewStats } = require('./reviews');
 
 const root = path.resolve(__dirname, '..');
 const siteUrl = 'https://phuonglam.com';
@@ -777,6 +778,15 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .product-callout-note h2 { border-bottom-color: #e7eee3; }
 .product-storage-section { padding: 18px 20px; border: 1px solid #e2ecdc; border-radius: 12px; background: #f7faf5; }
 .product-storage-section h2 { border-bottom-color: #e7eee3; }
+.product-reviews { padding-top: 10px; border-top: 1px solid #edf1ea; }
+.review-summary { display: flex; align-items: center; gap: 10px; margin: 6px 0 14px; color: var(--seo-text); }
+.review-summary strong { font-size: 26px; line-height: 1; }
+.review-stars { color: #f5a623; letter-spacing: 1px; white-space: nowrap; }
+.review-item { border: 1px solid var(--seo-border); border-radius: 14px; padding: 14px 16px; margin: 10px 0; background: #fff; }
+.review-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-bottom: 6px; }
+.review-name { font-weight: 700; }
+.review-meta { color: var(--seo-muted); font-size: 13px; }
+.review-comment { margin: 0; line-height: 1.7; }
 .related-products { padding-top: 10px; border-top: 1px solid #edf1ea; }
 .related-products ul { padding-left: 22px; }
 .related-products li { margin: 8px 0; }
@@ -930,6 +940,8 @@ const breadcrumbSchema = (items) => ({
 
 const productSchema = ({ product, categoryName, url, image }) => {
   const priceInfo = getStaticPriceInfo(product);
+  const reviews = getGenuineReviews(product);
+  const stats = getReviewStats(reviews);
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -954,6 +966,16 @@ const productSchema = ({ product, categoryName, url, image }) => {
           availability: 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',
         },
+        ...(reviews.length ? {
+          aggregateRating: { '@type': 'AggregateRating', ratingValue: stats.average, reviewCount: stats.count, bestRating: 5, worstRating: 1 },
+          review: reviews.slice(0, 10).map((review) => ({
+            '@type': 'Review',
+            author: { '@type': 'Person', name: review.name },
+            reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5, worstRating: 1 },
+            reviewBody: review.comment,
+            ...(review.date ? { datePublished: review.date } : {}),
+          })),
+        } : {}),
       },
     ],
   };
@@ -1151,8 +1173,10 @@ const renderStaticBuyScript = (product) => {
     ? variants.reduce((best, variant) => (variant.price < best.price ? variant : best), variants[0])
     : null;
   const originalImage = firstImage(product);
+  // Reviews are rendered as HTML/schema only; keep them (and template placeholders) out of the script.
+  const { reviews: _reviews, ...productWithoutReviews } = product;
   const payload = {
-    ...product,
+    ...productWithoutReviews,
     variants,
   };
   return `<script>
@@ -1409,6 +1433,22 @@ const renderStaticBuyScript = (product) => {
 </script>`;
 };
 
+const renderStars = (rating) => `<span class="review-stars" role="img" aria-label="${rating} trên 5 sao">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</span>`;
+
+const formatReviewDate = (date) => (date ? date.split('-').reverse().join('/') : '');
+
+const renderReviewsSection = (reviews) => {
+  if (!reviews.length) return '';
+  const { count, average } = getReviewStats(reviews);
+  const items = reviews.map((review) => `<article class="review-item">
+          <div class="review-head"><span class="review-name">${escapeHtml(review.name)}</span>${renderStars(review.rating)}<span class="review-meta">${escapeHtml([formatReviewDate(review.date), `Nguồn: ${review.source}`].filter(Boolean).join(' · '))}</span></div>
+          <p class="review-comment">${escapeHtml(review.comment)}</p>
+        </article>`).join('\n        ');
+  return `<section class="content product-reviews" id="product-reviews" aria-labelledby="product-reviews-title"><h2 id="product-reviews-title">Đánh giá từ khách hàng</h2>
+        <div class="review-summary"><strong>${String(average).replace('.', ',')}</strong>${renderStars(Math.round(average))}<span>${count} đánh giá</span></div>
+        ${items}</section>`;
+};
+
 const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
   const image = firstImage(product);
   const galleryImages = getProductGalleryImages(product);
@@ -1440,6 +1480,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
     renderProductContentSection({ id: 'product-notes', title: 'Lưu ý và bảo quản', blocks: contentGroups.notes, productName: product.name, className: 'product-notes-section' }),
     renderProductContentSection({ id: 'product-storage', title: 'Bảo quản', blocks: contentGroups.storage, productName: product.name, className: 'product-storage-section' }),
   ].filter(Boolean);
+  const reviews = getGenuineReviews(product);
   const contentNavItems = [
     ['product-description', 'Giới thiệu', contentGroups.description.length > 0],
     ['product-specifications', 'Thông tin chi tiết', contentGroups.specs.length > 0],
@@ -1447,6 +1488,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
     ['product-cautions', 'Lưu ý an toàn', contentGroups.caution.length > 0],
     ['product-notes', 'Lưu ý & bảo quản', contentGroups.notes.length > 0],
     ['product-storage', 'Bảo quản', contentGroups.storage.length > 0],
+    ['product-reviews', 'Đánh giá', reviews.length > 0],
   ].filter(([, , visible]) => visible);
   const thumbs = galleryImages.length > 1 ? `<div class="product-thumbs-wrap">
             <button class="thumb-arrow prev" type="button" data-thumb-scroll="-1" aria-label="Xem ảnh trước">‹</button>
@@ -1482,6 +1524,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
       </nav>
       <div class="product-reading-column">
         ${productContent.join('\n        ')}
+        ${renderReviewsSection(reviews)}
         ${related.length ? `<section class="content related-products" aria-labelledby="related-products-title"><h2 id="related-products-title">Sản phẩm cùng danh mục</h2><ul>${related.map((item) => `<li><a href="/san-pham/${escapeHtml(item.slug)}/">${escapeHtml(item.name)}</a></li>`).join('')}</ul></section>` : ''}
       </div>
     </div>
