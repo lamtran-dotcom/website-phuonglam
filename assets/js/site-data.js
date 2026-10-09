@@ -3123,6 +3123,115 @@ const PRODUCTS = [
         }
       }
     ]
+  },
+  {
+    "id": "shopee_57367595064",
+    "slug": "go-xong-nha-phuong-lam-ngoc-am-xa-xi-do-palo-santo",
+    "sku": "SP-57367595064",
+    "categoryId": "go-thom",
+    "name": "Gỗ xông nhà Phương Lâm – Ngọc am, xá xị đỏ, Palo Santo",
+    "price": 19200,
+    "originalPrice": 32000,
+    "shortDesc": "Gỗ ngọc am, xá xị đỏ và Palo Santo dùng để đốt xông hoặc xông với bếp xông, giúp hương gỗ lan tỏa, làm thơm và khử mùi không gian.",
+    "seoTitle": "Gỗ xông nhà Ngọc Am, Xá Xị Đỏ, Palo Santo | Phương Lâm",
+    "seoDescription": "Gỗ xông nhà Phương Lâm gồm ngọc am, xá xị đỏ và Palo Santo. Đốt xông hoặc dùng với bếp xông để làm thơm, khử mùi phòng. Xem phân loại và giá.",
+    "tag": "Bán chạy",
+    "weight": null,
+    "hidden": false,
+    "optionGroups": [
+      {
+        "name": "Phân Loại",
+        "values": [
+          "Gỗ băm xá xị 50g",
+          "Gỗ băm ngọc am 50g",
+          "2 Thanh Gỗ Treo🔥",
+          "Thanh Gỗ Palo 10g",
+          "Thanh Gỗ Palo 4g"
+        ]
+      }
+    ],
+    "optionImages": {
+      "Phân Loại": {
+        "Gỗ băm xá xị 50g": "/assets/products/uploads/1791517946489-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "Gỗ băm ngọc am 50g": "/assets/products/uploads/1791517947332-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
+        "2 Thanh Gỗ Treo🔥": "/assets/products/uploads/1791517948127-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "Thanh Gỗ Palo 10g": "/assets/products/uploads/1791517949259-shopee-vn-11134207-81ztc-mtdmap9vc8aud3.webp",
+        "Thanh Gỗ Palo 4g": "/assets/products/uploads/1791517950234-shopee-vn-11134207-81ztc-mtdmar89xslc80.webp"
+      }
+    },
+    "images": [
+      "/assets/products/uploads/1791517938697-shopee-vn-11134207-81ztc-msvef7wekdmx33.webp",
+      "/assets/products/uploads/1791517939681-shopee-vn-11134207-81ztc-msw6q6b67htsc8.webp",
+      "/assets/products/uploads/1791517940555-shopee-vn-11134207-81ztc-msw6rayfpwjr24.webp",
+      "/assets/products/uploads/1791517941409-shopee-vn-11134207-81ztc-msw6q9c1lzi918.webp",
+      "/assets/products/uploads/1791517942292-shopee-vn-11134207-81ztc-msveazpfdurq33.webp",
+      "/assets/products/uploads/1791517943195-shopee-vn-11134207-81ztc-msw6pzvdrh1m01.webp",
+      "/assets/products/uploads/1791517944032-shopee-vn-11134207-81ztc-msw6q43cm7lt2e.webp",
+      "/assets/products/uploads/1791517945713-shopee-vn-11134207-81ztc-mtdma8w5znr9c8.webp"
+    ],
+    "reviews": [],
+    "variants": [
+      {
+        "id": "shopee_variant_401488979745",
+        "name": "Gỗ băm xá xị 50g",
+        "sku": "720859_go_bam_xa_xi_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791517946489-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
+        "options": {
+          "Phân Loại": "Gỗ băm xá xị 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_401488979746",
+        "name": "Gỗ băm ngọc am 50g",
+        "sku": "720859_go_bam_ngoc_am_50g",
+        "price": 41400,
+        "originalPrice": 69000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791517947332-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
+        "options": {
+          "Phân Loại": "Gỗ băm ngọc am 50g"
+        }
+      },
+      {
+        "id": "shopee_variant_406512678476",
+        "name": "2 Thanh Gỗ Treo🔥",
+        "sku": "720859_2_thanh_go_treo",
+        "price": 19200,
+        "originalPrice": 32000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791517948127-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
+        "options": {
+          "Phân Loại": "2 Thanh Gỗ Treo🔥"
+        }
+      },
+      {
+        "id": "shopee_variant_401488979743",
+        "name": "Thanh Gỗ Palo 10g",
+        "sku": "720859_thanh_go_palo_10g",
+        "price": 36000,
+        "originalPrice": 60000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791517949259-shopee-vn-11134207-81ztc-mtdmap9vc8aud3.webp",
+        "options": {
+          "Phân Loại": "Thanh Gỗ Palo 10g"
+        }
+      },
+      {
+        "id": "shopee_variant_401488979744",
+        "name": "Thanh Gỗ Palo 4g",
+        "sku": "720859_thanh_go_palo_4g",
+        "price": 30000,
+        "originalPrice": 50000,
+        "weight": null,
+        "image": "/assets/products/uploads/1791517950234-shopee-vn-11134207-81ztc-mtdmar89xslc80.webp",
+        "options": {
+          "Phân Loại": "Thanh Gỗ Palo 4g"
+        }
+      }
+    ]
   }
 ];
 
