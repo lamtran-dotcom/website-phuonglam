@@ -801,7 +801,7 @@ const Footer = ({ setPage }) => {
       </div>
       <div style={footerStyles.col}>
         <div style={footerStyles.colTitle}>Liên hệ</div>
-        <div style={footerStyles.contact}>📍 173/5/19 Khuông Việt, P. Tân Phú, TP. Hồ Chí Minh</div>
+        <div style={footerStyles.contact}>📍 Phường Tân Phú, TP. Hồ Chí Minh</div>
         <div style={footerStyles.contact}>📞 077 3829 593</div>
         <div style={footerStyles.contact}>🕐 8:00 – 20:00 mỗi ngày</div>
       </div>
