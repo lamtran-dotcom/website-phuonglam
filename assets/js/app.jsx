@@ -791,8 +791,12 @@ const Footer = ({ setPage }) => {
       </div>
       <div style={footerStyles.col}>
         <div style={footerStyles.colTitle}>Hỗ trợ</div>
-        {['Chính sách đổi trả', 'Chính sách vận chuyển', 'Hướng dẫn mua hàng', 'Liên hệ'].map(t => (
-          <div key={t} style={footerStyles.link}>{t}</div>
+        {[
+          { label: 'Chính sách đổi trả', href: '/chinh-sach-doi-tra/' },
+          { label: 'Chính sách vận chuyển', href: '/chinh-sach-van-chuyen/' },
+          { label: 'Liên hệ', href: '/lien-he/' },
+        ].map(item => (
+          <a key={item.label} href={item.href} style={footerStyles.link}>{item.label}</a>
         ))}
       </div>
       <div style={footerStyles.col}>

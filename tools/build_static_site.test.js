@@ -45,3 +45,22 @@ test('static product pages store a slim cart item instead of the whole product',
   assert.ok(script.length > 0, 'cart script missing');
   assert.doesNotMatch(script.slice(0, script.indexOf('const readCart')), /\.\.\.product\b/);
 });
+
+test('policy and contact pages carry only confirmed facts and are listed for the sitemap', () => {
+  const { INFO_PAGES, infoPageUrls, renderInfoPage } = require('./build_static_site');
+  assert.deepEqual(infoPageUrls(), [
+    'https://phuonglam.com/chinh-sach-doi-tra/',
+    'https://phuonglam.com/chinh-sach-van-chuyen/',
+    'https://phuonglam.com/lien-he/',
+  ]);
+  const html = Object.fromEntries(INFO_PAGES.map(page => [page.path, renderInfoPage(page)]));
+  assert.match(html['chinh-sach-doi-tra'], /7 ngày/);
+  assert.match(html['chinh-sach-doi-tra'], /miễn phí đổi trả/i);
+  assert.match(html['chinh-sach-van-chuyen'], /hỏa tốc trong ngày/);
+  assert.match(html['chinh-sach-van-chuyen'], /1–3 ngày/);
+  assert.match(html['lien-he'], /https:\/\/zalo\.me\/0773829593/);
+  for (const [dir, page] of Object.entries(html)) {
+    assert.match(page, new RegExp(`<link rel="canonical" href="https://phuonglam\\.com/${dir}/" />`));
+    assert.doesNotMatch(page, /name="robots"/);
+  }
+});

@@ -509,6 +509,7 @@ const pushGit = () => {
     'assets/js/site-data.js', 'assets/js/app.jsx', 'assets/js/app.min.js', 'assets/css/static-seo.css',
     'assets/products/uploads', 'assets/products/responsive', 'assets/products/generated',
     'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts', 'data/scheduled-blog-history.json',
+    'chinh-sach-doi-tra', 'chinh-sach-van-chuyen', 'lien-he',
   ];
   const changes = runGit(['diff', '--name-only', '-z']);
   if (!changes.ok) throw new Error(changes.output || 'Không đọc được thay đổi Git.');
@@ -551,6 +552,7 @@ const ISOLATED_PUBLISH_PATHS = [
   'assets/products/responsive', 'assets/products/generated', 'assets/js/site-data.js',
   'assets/js/app.jsx', 'assets/js/app.min.js',
   'index.html', 'sitemap.xml', 'san-pham', 'danh-muc', 'blog', 'assets/blog', 'scheduled-posts',
+  'chinh-sach-doi-tra', 'chinh-sach-van-chuyen', 'lien-he',
 ];
 
 const pushPendingProductChanges = (pending, pendingPath, settingsPending = null, settingsPendingPath = null, contentPending = null, contentPendingPath = null) => {

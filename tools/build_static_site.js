@@ -694,6 +694,17 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .card-price { color: var(--seo-primary); font-weight: 900; }
 .category-intro { max-width: 780px; color: var(--seo-muted); font-size: 17px; }
 .category-empty { grid-column: 1 / -1; color: var(--seo-muted); padding: 20px 0; }
+.info-page { max-width: 820px; margin: 0 auto; padding: 8px 0 20px; }
+.info-page h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0 0 12px; color: var(--seo-text); }
+.info-page .info-lead { font-size: 17px; line-height: 1.7; color: var(--seo-muted); margin: 0 0 26px; }
+.info-page h2 { font-size: 21px; margin: 28px 0 10px; color: var(--seo-text); }
+.info-page p, .info-page li { font-size: 16px; line-height: 1.75; color: var(--seo-text); }
+.info-page ul { padding-left: 22px; margin: 8px 0 14px; }
+.info-page a { color: var(--seo-primary); font-weight: 600; }
+.info-page .info-box { background: var(--seo-bg); border: 1px solid var(--seo-border); border-radius: 14px; padding: 16px 18px; margin: 16px 0; }
+.seo-footer-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.seo-footer-links a { color: var(--seo-muted); text-decoration: none; }
+.seo-footer-links a:hover { color: var(--seo-primary); text-decoration: underline; }
 .blog-hero { border-radius: 24px; padding: 42px 34px; background: linear-gradient(135deg,#2e7d32,#43a047); color: #fff; text-align: center; margin-bottom: 28px; }
 .blog-hero h1 { color: #fff; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin-bottom: 12px; }
 .blog-hero p { max-width: 680px; margin: 0 auto; opacity: .9; font-size: 16px; line-height: 1.65; }
@@ -893,6 +904,11 @@ const pageShell = ({ title, description, canonical, image, schema, body, scripts
   ${body}
   <footer class="seo-footer">
     <div>Phương Lâm - Nến thơm, nến tealight và thảo mộc xông tự nhiên.</div>
+    <nav class="seo-footer-links" aria-label="Hỗ trợ khách hàng">
+      <a href="/chinh-sach-doi-tra/">Chính sách đổi trả</a>
+      <a href="/chinh-sach-van-chuyen/">Chính sách vận chuyển</a>
+      <a href="/lien-he/">Liên hệ</a>
+    </nav>
     <div>Zalo/Hotline: 077 3829 593</div>
   </footer>
   <div class="static-toast" data-static-toast role="status" aria-live="polite"></div>
@@ -1598,12 +1614,100 @@ const renderBlogIndexPage = ({ blogPosts = [] }) => {
   });
 };
 
+const ZALO_PHONE = '077 3829 593';
+const ZALO_URL = 'https://zalo.me/0773829593';
+
+// Plain policy/contact pages. Content states only what the owner confirmed; anything not
+// confirmed (conditions, fees) is deferred to customer service instead of being invented.
+const INFO_PAGES = [
+  {
+    path: 'chinh-sach-doi-tra',
+    title: 'Chính sách đổi trả 7 ngày | Phương Lâm',
+    breadcrumb: 'Chính sách đổi trả',
+    description: 'Phương Lâm hỗ trợ đổi trả trong 7 ngày kể từ khi nhận hàng, miễn phí đổi trả; hàng hư hỏng, bể vỡ được đổi sản phẩm mới nhanh chóng.',
+    h1: 'Chính sách đổi trả',
+    lead: 'Phương Lâm hỗ trợ đổi trả trong vòng 7 ngày kể từ khi bạn nhận hàng.',
+    sections: [
+      { h2: 'Thời gian đổi trả', html: '<p>Trong vòng <strong>7 ngày</strong> kể từ ngày bạn nhận được hàng.</p>' },
+      { h2: 'Miễn phí đổi trả', html: '<p>Phương Lâm <strong>miễn phí đổi trả</strong> trong 7 ngày nếu bạn không còn nhu cầu sử dụng hoặc muốn đổi ý.</p>' },
+      { h2: 'Hàng hư hỏng, bể vỡ', html: '<p>Nếu sản phẩm bị hư hỏng hoặc bể vỡ, Phương Lâm sẽ <strong>đổi sản phẩm mới nhanh chóng</strong>.</p>' },
+      { h2: 'Cách yêu cầu đổi trả', html: `<p>Nhắn Zalo chăm sóc khách hàng <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a>. Bộ phận CSKH trả lời và tiếp nhận thông tin nhanh chóng, đồng thời hướng dẫn cụ thể cho từng trường hợp.</p>` },
+    ],
+  },
+  {
+    path: 'chinh-sach-van-chuyen',
+    title: 'Chính sách vận chuyển | Phương Lâm',
+    breadcrumb: 'Chính sách vận chuyển',
+    description: 'Phương Lâm giao hỏa tốc trong ngày tại TP.HCM, giao 1–3 ngày với ngoại thành TP.HCM. Phí vận chuyển hiển thị ở bước thanh toán.',
+    h1: 'Chính sách vận chuyển',
+    lead: 'Phương Lâm giao hàng nhanh tại TP.HCM và hỗ trợ giao hàng toàn quốc.',
+    sections: [
+      { h2: 'Giao hàng tại TP.HCM', html: '<ul><li><strong>Nội thành TP.HCM:</strong> giao hỏa tốc trong ngày.</li><li><strong>Ngoại thành TP.HCM:</strong> giao từ 1–3 ngày.</li></ul>' },
+      { h2: 'Các tỉnh thành khác', html: `<p>Phương Lâm giao hàng toàn quốc. Thời gian giao tùy khu vực; bạn có thể hỏi nhanh qua Zalo <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a>.</p>` },
+      { h2: 'Phí vận chuyển', html: '<p>Phí vận chuyển được tính và hiển thị ở bước thanh toán. Các ưu đãi vận chuyển đang áp dụng được thông báo trên website.</p>' },
+      { h2: 'Hàng bể vỡ khi vận chuyển', html: '<p>Nếu sản phẩm bị hư hỏng hoặc bể vỡ trong quá trình giao, Phương Lâm đổi sản phẩm mới theo <a href="/chinh-sach-doi-tra/">chính sách đổi trả</a>.</p>' },
+    ],
+  },
+  {
+    path: 'lien-he',
+    title: 'Liên hệ Phương Lâm | Zalo CSKH 077 3829 593',
+    breadcrumb: 'Liên hệ',
+    description: 'Liên hệ Phương Lâm qua Zalo CSKH 077 3829 593 để được tư vấn và tiếp nhận thông tin nhanh chóng. Cửa hàng tại Quận 11, TP. Hồ Chí Minh.',
+    h1: 'Liên hệ Phương Lâm',
+    lead: 'Cần tư vấn chọn sản phẩm hoặc hỗ trợ đơn hàng? Nhắn Zalo để được trả lời nhanh.',
+    schemaType: 'ContactPage',
+    sections: [
+      { h2: 'Chăm sóc khách hàng', html: `<div class="info-box"><p><strong>Zalo CSKH:</strong> <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a><br><strong>Điện thoại:</strong> <a href="tel:+84773829593">${ZALO_PHONE}</a></p><p>Zalo CSKH trả lời và tiếp nhận thông tin nhanh chóng.</p></div>` },
+      { h2: 'Cửa hàng', html: '<p>Quận 11, TP. Hồ Chí Minh<br>Giờ làm việc: 8:00 – 20:00 mỗi ngày</p>' },
+      { h2: 'Mạng xã hội', html: '<ul><li><a href="https://www.facebook.com/nenphuonglam" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/nen.phuonglam/" rel="noopener">Instagram</a></li></ul>' },
+      { h2: 'Xem thêm', html: '<p><a href="/chinh-sach-doi-tra/">Chính sách đổi trả</a> · <a href="/chinh-sach-van-chuyen/">Chính sách vận chuyển</a></p>' },
+    ],
+  },
+];
+
+const infoPageUrls = () => INFO_PAGES.map((page) => `${siteUrl}/${page.path}/`);
+
+const renderInfoPage = (page) => {
+  const url = `${siteUrl}/${page.path}/`;
+  const body = `<main class="seo-main">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Trang chủ</a> / ${escapeHtml(page.breadcrumb)}</nav>
+    <article class="info-page">
+      <h1>${escapeHtml(page.h1)}</h1>
+      <p class="info-lead">${escapeHtml(page.lead)}</p>
+      ${page.sections.map((section) => `<section><h2>${escapeHtml(section.h2)}</h2>${section.html}</section>`).join('\n      ')}
+    </article>
+  </main>`;
+  return pageShell({
+    title: page.title,
+    description: page.description,
+    canonical: url,
+    image: '/assets/media/generated/embedded-001.png',
+    schema: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        breadcrumbSchema([{ name: 'Trang chủ', url: siteUrl }, { name: page.breadcrumb, url }]),
+        { '@type': page.schemaType || 'WebPage', name: page.h1, url, inLanguage: 'vi' },
+      ],
+    },
+    body,
+  });
+};
+
+const writeInfoPages = () => {
+  for (const page of INFO_PAGES) {
+    const dir = path.join(root, page.path);
+    ensureDir(dir);
+    fs.writeFileSync(path.join(dir, 'index.html'), renderInfoPage(page));
+  }
+};
+
 const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
   resetDir(paths.productPagesDir);
   resetDir(paths.categoryPagesDir);
   writeStaticCss();
   ensureDir(path.join(root, 'blog'));
   fs.writeFileSync(path.join(root, 'blog', 'index.html'), renderBlogIndexPage({ blogPosts }));
+  writeInfoPages();
   const categoryNameById = new Map(categories.map((category) => [category.id, category.name]));
   for (const [id, name] of Object.entries(categoryFallback)) {
     if (!categoryNameById.has(id)) categoryNameById.set(id, name);
@@ -1650,7 +1754,7 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
 };
 
 const writeSitemapAndRobots = ({ products, categories = [], blogPosts = [] }) => {
-  const urls = new Set([`${siteUrl}/`, `${siteUrl}/blog/`]);
+  const urls = new Set([`${siteUrl}/`, `${siteUrl}/blog/`, ...infoPageUrls()]);
   const categoryIds = new Set();
   for (const url of productSitemapUrls(products)) urls.add(url);
   for (const product of products) {
@@ -2011,4 +2115,4 @@ if (require.main === module) {
   else main();
 }
 
-module.exports = { contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage };
+module.exports = { contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage };

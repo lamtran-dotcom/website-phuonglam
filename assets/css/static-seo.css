@@ -126,6 +126,17 @@ h2 { font-size: clamp(22px, 3vw, 32px); line-height: 1.18; margin: 36px 0 12px; 
 .card-price { color: var(--seo-primary); font-weight: 900; }
 .category-intro { max-width: 780px; color: var(--seo-muted); font-size: 17px; }
 .category-empty { grid-column: 1 / -1; color: var(--seo-muted); padding: 20px 0; }
+.info-page { max-width: 820px; margin: 0 auto; padding: 8px 0 20px; }
+.info-page h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0 0 12px; color: var(--seo-text); }
+.info-page .info-lead { font-size: 17px; line-height: 1.7; color: var(--seo-muted); margin: 0 0 26px; }
+.info-page h2 { font-size: 21px; margin: 28px 0 10px; color: var(--seo-text); }
+.info-page p, .info-page li { font-size: 16px; line-height: 1.75; color: var(--seo-text); }
+.info-page ul { padding-left: 22px; margin: 8px 0 14px; }
+.info-page a { color: var(--seo-primary); font-weight: 600; }
+.info-page .info-box { background: var(--seo-bg); border: 1px solid var(--seo-border); border-radius: 14px; padding: 16px 18px; margin: 16px 0; }
+.seo-footer-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.seo-footer-links a { color: var(--seo-muted); text-decoration: none; }
+.seo-footer-links a:hover { color: var(--seo-primary); text-decoration: underline; }
 .blog-hero { border-radius: 24px; padding: 42px 34px; background: linear-gradient(135deg,#2e7d32,#43a047); color: #fff; text-align: center; margin-bottom: 28px; }
 .blog-hero h1 { color: #fff; font-size: clamp(28px, 4vw, 42px); line-height: 1.12; margin-bottom: 12px; }
 .blog-hero p { max-width: 680px; margin: 0 auto; opacity: .9; font-size: 16px; line-height: 1.65; }
