@@ -1488,6 +1488,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
   const visibleProducts = getVisibleProducts(window.PRODUCTS_LIVE || PRODUCTS);
   const product = visibleProducts.find(p => p.id === productId) || visibleProducts[0] || PRODUCTS[0];
   const reviews = getGenuineReviews(product);
+  const reviewStars = (avg => Math.min(5, Math.floor(avg) + (avg - Math.floor(avg) >= 0.75 ? 1 : 0)))(reviews.length ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length : 0);
   const reviewAverage = reviews.length ? Math.round((reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length) * 10) / 10 : 0;
   const isMobile = useIsMobile();
   const [qty, setQty] = React.useState(1);
@@ -1759,7 +1760,7 @@ const ProductPage = ({ productId, setPage, goBack, addToCart, productImages = {}
 
           {reviews.length > 0 && (
             <div style={ppStyles.ratingRow}>
-              <span style={{ color: '#f5a623', fontSize: 16 }}>{'★'.repeat(Math.round(reviewAverage))}{'☆'.repeat(5 - Math.round(reviewAverage))}</span>
+              <span style={{ color: '#f5a623', fontSize: 16 }}>{'★'.repeat(reviewStars)}{'☆'.repeat(5 - reviewStars)}</span>
               <span style={{ fontSize: 13, color: '#888', marginLeft: 8 }}>{String(reviewAverage).replace('.', ',')} · {reviews.length} đánh giá</span>
             </div>
           )}

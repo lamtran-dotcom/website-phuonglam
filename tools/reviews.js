@@ -25,7 +25,10 @@ const getReviewStats = (reviews) => {
   return { count: reviews.length, average: Math.round((total / reviews.length) * 10) / 10 };
 };
 
+// Stars shown for an average: 4,5 is not rounded up to 5; 4,75 and above is.
+const starsForAverage = (average) => Math.min(5, Math.floor(average) + (average - Math.floor(average) >= 0.75 ? 1 : 0));
+
 // Names are shown as given; flag anything that looks like an unmasked phone number.
 const looksLikeUnmaskedPhone = (name) => /\d{7,}/.test(String(name || '').replace(/[\s.-]/g, ''));
 
-module.exports = { REVIEW_SOURCES, normalizeReview, getGenuineReviews, getReviewStats, looksLikeUnmaskedPhone };
+module.exports = { REVIEW_SOURCES, normalizeReview, getGenuineReviews, getReviewStats, starsForAverage, looksLikeUnmaskedPhone };

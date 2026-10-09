@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const crypto = require('crypto');
-const { getGenuineReviews, getReviewStats } = require('./reviews');
+const { getGenuineReviews, getReviewStats, starsForAverage } = require('./reviews');
 
 const root = path.resolve(__dirname, '..');
 const siteUrl = 'https://phuonglam.com';
@@ -1445,7 +1445,7 @@ const renderReviewsSection = (reviews) => {
           <p class="review-comment">${escapeHtml(review.comment)}</p>
         </article>`).join('\n        ');
   return `<section class="content product-reviews" id="product-reviews" aria-labelledby="product-reviews-title"><h2 id="product-reviews-title">Đánh giá từ khách hàng</h2>
-        <div class="review-summary"><strong>${String(average).replace('.', ',')}</strong>${renderStars(Math.round(average))}<span>${count} đánh giá</span></div>
+        <div class="review-summary"><strong>${String(average).replace('.', ',')}</strong>${renderStars(starsForAverage(average))}<span>${count} đánh giá</span></div>
         ${items}</section>`;
 };
 

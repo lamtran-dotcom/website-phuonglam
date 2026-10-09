@@ -1,6 +1,6 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
-const { normalizeReview, getGenuineReviews, getReviewStats } = require('./reviews');
+const { normalizeReview, getGenuineReviews, getReviewStats, starsForAverage } = require('./reviews');
 const { applyReviews } = require('./add_reviews');
 const { renderProductPage } = require('./build_static_site');
 
@@ -17,6 +17,10 @@ test('reviews without a stated source or with invalid fields are never shown', (
   assert.deepEqual(normalizeReview({ ...real, source: 'shopee' }), { name: '077***329', rating: 5, comment: 'Sản phẩm tốt, giao hàng nhanh', source: 'Shopee', date: '2026-10-01' });
   assert.equal(getGenuineReviews(product([placeholder, real])).length, 1);
   assert.deepEqual(getReviewStats([{ rating: 5 }, { rating: 4 }]), { count: 2, average: 4.5 });
+});
+
+test('star display never rounds an average up past what customers gave', () => {
+  assert.deepEqual([4.5, 4.7, 4.8, 5, 3.2].map(starsForAverage), [4, 4, 5, 5, 3]);
 });
 
 test('product page shows the reviews section and Google rating data only for genuine reviews', () => {
