@@ -3010,7 +3010,7 @@ const PRODUCTS = [
         "sku": "635173_re_10_13cm",
         "price": 24000,
         "originalPrice": 40000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp",
         "options": {
           "SIZE": "Rế 10-13cm"
@@ -3022,7 +3022,7 @@ const PRODUCTS = [
         "sku": "635173_re_16cm",
         "price": 27000,
         "originalPrice": 45000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp",
         "options": {
           "SIZE": "Rế 16cm"
@@ -3041,9 +3041,9 @@ const PRODUCTS = [
     "shortDesc": "Lá dứa khô dạng lá cắt, gói 100g, hương thơm dịu nhẹ; dùng để xông nhà, nấu nước hoặc làm nguyên liệu nấu ăn.",
     "seoTitle": "Lá dứa khô tự nhiên 100g xông nhà | Phương Lâm",
     "seoDescription": "Lá dứa khô 100% lá dứa, gói 100g, hương thơm dịu nhẹ. Dùng xông nhà, nấu nước hoặc làm nguyên liệu nấu ăn. Xem hướng dẫn sử dụng và bảo quản.",
-    "tag": "",
+    "tag": "Sale",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [],
     "optionImages": {},
     "images": [
@@ -3308,9 +3308,9 @@ const PRODUCTS = [
     "shortDesc": "Bộ 2 thanh gỗ xá xị đỏ dài khoảng 10cm, có lỗ và dây để treo hoặc đặt bàn; hương gỗ dịu nhẹ, không cần đốt hay dùng điện.",
     "seoTitle": "Thanh gỗ xá xị đỏ 10cm để bàn, treo tủ | Phương Lâm",
     "seoDescription": "Bộ 2 thanh gỗ xá xị đỏ tự nhiên dài khoảng 10cm, hương gỗ dịu nhẹ, có dây treo. Đặt bàn hoặc treo tủ, phòng, nhà tắm. Không cần đốt hay dùng điện.",
-    "tag": "",
+    "tag": "Nổi bật",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "PHÂN LOẠI",
@@ -3347,7 +3347,7 @@ const PRODUCTS = [
         "sku": "720862_go_xa_xi_50g",
         "price": 41400,
         "originalPrice": 69000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518846988-shopee-vn-11134207-81ztc-msw6z0zlq77t4b.webp",
         "options": {
           "PHÂN LOẠI": "Gỗ Xá Xị 50g"
@@ -3359,7 +3359,7 @@ const PRODUCTS = [
         "sku": "720862_go_xa_xi_100g",
         "price": 72000,
         "originalPrice": 120000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518847878-shopee-vn-11134207-81ztc-msy5c1151nuo83.webp",
         "options": {
           "PHÂN LOẠI": "Gỗ Xá Xị 100g"
@@ -3371,7 +3371,7 @@ const PRODUCTS = [
         "sku": "720862_goi_thay_the",
         "price": 19200,
         "originalPrice": 32000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518848725-shopee-vn-11134207-81ztc-msvediv6e1add7.webp",
         "options": {
           "PHÂN LOẠI": "Gói thay thế"
@@ -3383,7 +3383,7 @@ const PRODUCTS = [
         "sku": "720862_2_thanh_go_treo",
         "price": 21000,
         "originalPrice": 35000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518849576-shopee-vn-11134207-81ztc-mt65yl3e23gh71.webp",
         "options": {
           "PHÂN LOẠI": "2 Thanh Gỗ Treo🔥"
@@ -3395,7 +3395,7 @@ const PRODUCTS = [
         "sku": "720862_tui_treo_thom",
         "price": 29400,
         "originalPrice": 49000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518850379-shopee-vn-11134207-81ztc-msw6wb383cw24f.webp",
         "options": {
           "PHÂN LOẠI": "Túi Treo Thơm🔥"
@@ -3414,9 +3414,9 @@ const PRODUCTS = [
     "shortDesc": "Gỗ ngọc am (hoàng đàn) dạng dăm, miếng nhỏ dùng với bếp xông; hương gỗ ấm dịu, thanh nhẹ, làm thơm không gian.",
     "seoTitle": "Gỗ ngọc am (hoàng đàn) xông nhà dùng bếp xông | Phương Lâm",
     "seoDescription": "Gỗ ngọc am (hoàng đàn) dạng dăm nhỏ dùng với bếp xông, hương gỗ ấm dịu, thanh nhẹ. Làm thơm phòng khách, phòng ngủ. Có gói 50g, 100g và túi treo.",
-    "tag": "",
+    "tag": "Nổi bật",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "PHÂN LOẠI",
@@ -3453,7 +3453,7 @@ const PRODUCTS = [
         "sku": "720863_goi_thay_the",
         "price": 19200,
         "originalPrice": 32000,
-        "weight": null,
+        "weight": 222,
         "image": "/assets/products/uploads/1791518857327-shopee-vn-11134207-81ztc-msvedmswehhl05.webp",
         "options": {
           "PHÂN LOẠI": "Gói thay thế"
@@ -3465,7 +3465,7 @@ const PRODUCTS = [
         "sku": "720863_go_ngoc_am_50g",
         "price": 41400,
         "originalPrice": 69000,
-        "weight": null,
+        "weight": 222,
         "image": "/assets/products/uploads/1791518858174-shopee-vn-11134207-81ztc-msw6z4f7mi2w7d.webp",
         "options": {
           "PHÂN LOẠI": "Gỗ Ngọc am 50g🔥"
@@ -3477,7 +3477,7 @@ const PRODUCTS = [
         "sku": "720863_go_ngoc_am_100g",
         "price": 59400,
         "originalPrice": 99000,
-        "weight": null,
+        "weight": 222,
         "image": "/assets/products/uploads/1791518859006-shopee-vn-11134207-81ztc-msy3ot0nt5hg82.webp",
         "options": {
           "PHÂN LOẠI": "Gỗ Ngọc am 100g🔥"
@@ -3489,7 +3489,7 @@ const PRODUCTS = [
         "sku": "720863_tui_treo_thom",
         "price": 29400,
         "originalPrice": 49000,
-        "weight": null,
+        "weight": 222,
         "image": "/assets/products/uploads/1791518859864-shopee-vn-11134207-81ztc-msw6vv84ngne1d.webp",
         "options": {
           "PHÂN LOẠI": "Túi Treo Thơm"
@@ -3508,9 +3508,9 @@ const PRODUCTS = [
     "shortDesc": "Lá khuynh diệp (bạch đàn) khô 100%, đóng túi zip 50g, 100g, 200g; dùng với bếp xông thảo mộc, có thể kết hợp bồ kết, vỏ bưởi, quế, hoa hồi.",
     "seoTitle": "Lá khuynh diệp khô xông nhà 50g, 100g, 200g | Phương Lâm",
     "seoDescription": "Lá khuynh diệp (bạch đàn) khô 100%, túi zip 50g, 100g, 200g. Dùng với bếp xông thảo mộc, kết hợp bồ kết, vỏ bưởi, quế, hoa hồi. Xuất xứ Yên Bái.",
-    "tag": "",
+    "tag": "Nổi bật",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "Quy Cách",
@@ -3547,7 +3547,7 @@ const PRODUCTS = [
         "sku": "470546_100g_la_khuynh_diep",
         "price": 24000,
         "originalPrice": 40000,
-        "weight": null,
+        "weight": 200,
         "image": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
         "options": {
           "Quy Cách": "100g Lá Khuynh Diệp"
@@ -3559,7 +3559,7 @@ const PRODUCTS = [
         "sku": "470546_200g_la_khuynh_diep",
         "price": 45000,
         "originalPrice": 75000,
-        "weight": null,
+        "weight": 200,
         "image": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
         "options": {
           "Quy Cách": "200g Lá Khuynh Diệp"
@@ -3571,7 +3571,7 @@ const PRODUCTS = [
         "sku": "470546_50g_la_khuynh_diep",
         "price": 19200,
         "originalPrice": 32000,
-        "weight": null,
+        "weight": 200,
         "image": "/assets/products/uploads/1791518861739-shopee-vn-11134207-81ztc-mrsqmr799d6vd4.webp",
         "options": {
           "Quy Cách": "50g Lá Khuynh Diệp"
@@ -3590,9 +3590,9 @@ const PRODUCTS = [
     "shortDesc": "Hoa hồi khô dùng với bếp xông thảo mộc để làm thơm nhà, cũng có thể dùng làm gia vị nấu ăn như nước dùng phở, món kho.",
     "seoTitle": "Hoa đại hồi khô xông nhà, nấu ăn | Phương Lâm",
     "seoDescription": "Hoa đại hồi khô dùng với bếp xông thảo mộc để làm thơm nhà, hoặc làm gia vị nấu phở, món kho. Có túi 10g, 50g, 100g và túi treo hoa hồi.",
-    "tag": "",
+    "tag": "Bán chạy",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "Phân Loại",
@@ -3631,7 +3631,7 @@ const PRODUCTS = [
         "sku": "720856_tui_50g",
         "price": 27000,
         "originalPrice": 45000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
         "options": {
           "Phân Loại": "Túi 50g"
@@ -3643,7 +3643,7 @@ const PRODUCTS = [
         "sku": "720856_tui_100g",
         "price": 45000,
         "originalPrice": 75000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
         "options": {
           "Phân Loại": "Túi 100g"
@@ -3655,7 +3655,7 @@ const PRODUCTS = [
         "sku": "720856_tui_treo_hoa_hoi",
         "price": 33000,
         "originalPrice": 55000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518875555-shopee-vn-11134207-81ztc-msw6vyjhvbba88.webp",
         "options": {
           "Phân Loại": "Túi Treo Hoa Hồi🔥"
@@ -3667,7 +3667,7 @@ const PRODUCTS = [
         "sku": "720856_tui_10g",
         "price": 15000,
         "originalPrice": 25000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518869237-shopee-vn-11134207-81ztc-mrsqjwu308w525.webp",
         "options": {
           "Phân Loại": "Túi 10g"
@@ -3686,9 +3686,9 @@ const PRODUCTS = [
     "shortDesc": "Lát cam vàng sấy khô 100%, đặt lên bếp xông cùng thảo mộc để xông nhà, hoặc dùng pha trà, trang trí; có túi 20g, 50g, 100g.",
     "seoTitle": "Lát cam vàng sấy khô xông nhà, pha trà | Phương Lâm",
     "seoDescription": "Lát cam vàng sấy khô 100%, túi 20g, 50g, 100g. Đặt lên bếp xông cùng thảo mộc để xông nhà, hoặc pha trà, trang trí. Xuất xứ Việt Nam.",
-    "tag": "",
+    "tag": "Nổi bật",
     "weight": null,
-    "hidden": true,
+    "hidden": false,
     "optionGroups": [
       {
         "name": "PHÂN LOẠI",
@@ -3724,7 +3724,7 @@ const PRODUCTS = [
         "sku": "470545_50g_lat_cam_kho",
         "price": 27000,
         "originalPrice": 45000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
         "options": {
           "PHÂN LOẠI": "50g Lát Cam Khô"
@@ -3736,7 +3736,7 @@ const PRODUCTS = [
         "sku": "470545_20g_lat_cam_kho",
         "price": 15000,
         "originalPrice": 25000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
         "options": {
           "PHÂN LOẠI": "20g Lát Cam Khô"
@@ -3748,7 +3748,7 @@ const PRODUCTS = [
         "sku": "470545_100g_lat_cam_kho",
         "price": 45000,
         "originalPrice": 75000,
-        "weight": null,
+        "weight": 111,
         "image": "/assets/products/uploads/1791518877273-shopee-vn-11134207-81ztc-mru3cal06ww274.webp",
         "options": {
           "PHÂN LOẠI": "100g Lát Cam Khô"
