@@ -2,12 +2,12 @@ const CATEGORIES = [
   { id: 'nen-thom', name: 'Nến Xông', from: '85.000đ', icon: '🕯️' },
   { id: 'combo', name: 'Combo Xông Nhà', from: '199.000đ', icon: '🎁' },
   { id: 'thao-moc-xong', name: 'Thảo Mộc Xông', from: '45.000đ', icon: '🌿' },
-  { id: 'tui-thom', name: 'Túi thơm', from: '', icon: '🪴' },
   { id: 'go-thom', name: 'Gỗ thơm', from: '', icon: '🪵' },
-  { id: 'bep-xong', name: 'Đèn Xông Tinh Dầu', from: '120.000đ', icon: '🔥' },
-  { id: 'nen-tru', name: 'Nến Trụ', from: '55.000đ', icon: '🕯' },
-  { id: 'nu-tram', name: 'Nụ Trầm', from: '35.000đ', icon: '🌸' },
   { id: 'phu-kien', name: 'Phụ Kiện Xông', from: '25.000đ', icon: '✨' },
+  { id: 'tui-thom', name: 'Túi thơm', from: '', icon: '🪴' },
+  { id: 'bep-xong', name: 'Đèn Xông Tinh Dầu', from: '120.000đ', icon: '🔥' },
+  { id: 'nu-tram', name: 'Nụ Trầm', from: '35.000đ', icon: '🌸' },
+  { id: 'nen-tru', name: 'Nến Trụ', from: '55.000đ', icon: '🕯' },
   { id: 'nen-ly', name: 'Nến Ly', from: '65.000đ', icon: '🫙' },
 ];
 

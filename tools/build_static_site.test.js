@@ -66,3 +66,14 @@ test('policy and contact pages carry only confirmed facts and are listed for the
     assert.doesNotMatch(page, /name="robots"/);
   }
 });
+
+test('category order is fixed by the owner and shared by the site data, admin list and fallback names', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const expected = ['nen-thom', 'combo', 'thao-moc-xong', 'go-thom', 'phu-kien', 'tui-thom', 'bep-xong', 'nu-tram', 'nen-tru', 'nen-ly'];
+  const root = path.join(__dirname, '..');
+  const siteData = fs.readFileSync(path.join(root, 'assets/js/site-data.js'), 'utf8').match(/const CATEGORIES = \[([\s\S]*?)\n\];/)[1];
+  assert.deepEqual([...siteData.matchAll(/id: '([^']+)'/g)].map(m => m[1]), expected);
+  const admin = fs.readFileSync(path.join(root, 'admin-upload.html'), 'utf8').match(/const CATEGORIES = \[([\s\S]*?)\n    \];/)[1];
+  assert.deepEqual([...admin.matchAll(/\['([^']+)'/g)].map(m => m[1]), expected);
+});

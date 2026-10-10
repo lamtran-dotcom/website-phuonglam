@@ -25,10 +25,10 @@ const categoryFallback = {
   'nen-thom': 'Nến Xông',
   combo: 'Combo Xông Nhà',
   'thao-moc-xong': 'Thảo Mộc Xông',
-  'bep-xong': 'Đèn Xông Tinh Dầu',
-  'nen-tru': 'Nến Trụ',
-  'nu-tram': 'Nụ Trầm',
   'phu-kien': 'Phụ Kiện Xông',
+  'bep-xong': 'Đèn Xông Tinh Dầu',
+  'nu-tram': 'Nụ Trầm',
+  'nen-tru': 'Nến Trụ',
   'nen-ly': 'Nến Ly',
 };
 
