@@ -62,7 +62,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791427902021-chatgpt-image-20-59-27-18-thg-5-2026.webp",
       "/assets/products/uploads/1791428229019-chatgpt-image-10-21-41-7-thg-8-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_405332605549",
@@ -334,7 +333,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/9d9c0fae.webp",
       "/assets/products/mirrored/8f7a08e9.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_276593039600",
@@ -569,7 +567,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1777474990210-1777472599128-39266f4f-instagram-square-1080x1080.webp",
       "/assets/products/uploads/1777537962060-chatgpt-image-15-31-45-30-thg-4-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_194717189919",
@@ -616,7 +613,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791428821515-chatgpt-image-20-00-18-11-thg-5-2026.webp",
       "/assets/products/uploads/1791428838240-chatgpt-image-21-10-21-11-thg-5-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_17395821074__shopee_variant_194717189919",
@@ -684,21 +680,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791376424822-image.webp"
     ],
     "reviews": [
-      {
-        "name": "Nguyễn Thị Mai",
-        "rating": 5,
-        "comment": "Mùi rất dễ chịu, đốt cả buổi tối không bị ngột. Sẽ mua lại!"
-      },
-      {
-        "name": "Trần Văn Hùng",
-        "rating": 5,
-        "comment": "Sản phẩm đẹp, đóng gói cẩn thận. Hương thơm tự nhiên không hắc."
-      },
-      {
-        "name": "Lê Thu Hà",
-        "rating": 4,
-        "comment": "Rất thích, chỉ tiếc hơi nhỏ hơn mình nghĩ."
-      },
       {
         "name": "tra***196",
         "rating": 5,
@@ -882,23 +863,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1777468258852-luu-y-an-toan-bep-xong-thao-moc.webp",
       "/assets/products/uploads/1791377261728-chatgpt-image-10-05-40-18-thg-5-2026.webp"
     ],
-    "reviews": [
-      {
-        "name": "Nguyễn Thị Mai",
-        "rating": 5,
-        "comment": "Mùi rất dễ chịu, đốt cả buổi tối không bị ngột. Sẽ mua lại!"
-      },
-      {
-        "name": "Trần Văn Hùng",
-        "rating": 5,
-        "comment": "Sản phẩm đẹp, đóng gói cẩn thận. Hương thơm tự nhiên không hắc."
-      },
-      {
-        "name": "Lê Thu Hà",
-        "rating": 4,
-        "comment": "Rất thích, chỉ tiếc hơi nhỏ hơn mình nghĩ."
-      }
-    ],
     "variants": [
       {
         "id": "p_1777468148980_4ztop__pl001_trang_20v",
@@ -1061,23 +1025,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1777455472866-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777455477308-bep-xong-thao-moc-san-pham-chinh.webp"
     ],
-    "reviews": [
-      {
-        "name": "Nguyễn Thị Mai",
-        "rating": 5,
-        "comment": "Mùi rất dễ chịu, đốt cả buổi tối không bị ngột. Sẽ mua lại!"
-      },
-      {
-        "name": "Trần Văn Hùng",
-        "rating": 5,
-        "comment": "Sản phẩm đẹp, đóng gói cẩn thận. Hương thơm tự nhiên không hắc."
-      },
-      {
-        "name": "Lê Thu Hà",
-        "rating": 4,
-        "comment": "Rất thích, chỉ tiếc hơi nhỏ hơn mình nghĩ."
-      }
-    ],
     "variants": [
       {
         "id": "p_1777435996053_fbofd__pl001_trang_20v",
@@ -1219,7 +1166,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/77ad5f9a.webp",
       "/assets/products/mirrored/28252371.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_405301400469",
@@ -1278,7 +1224,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1777456967920-chatgpt-image-17-02-27-29-thg-4-2026.webp",
       "/assets/products/uploads/1777457022840-chatgpt-image-17-03-36-29-thg-4-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_277543299479",
@@ -1346,7 +1291,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/dc71bd43.webp",
       "/assets/products/mirrored/8b174002.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_405001591546",
@@ -1399,7 +1343,6 @@ const PRODUCTS = [
     "images": [
       "/assets/products/uploads/1791516822646-chatgpt-image-18-20-21-10-thg-8-2026.webp"
     ],
-    "reviews": [],
     "variants": [],
     "slug": "ly-dung-nen-dat-nung-dung-bep-xong-an-toan-tien-cam",
     "seoTitle": "Ly đựng nến đất nung có tay cầm | Phương Lâm",
@@ -1426,7 +1369,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791516220559-chatgpt-image-18-32-04-10-thg-8-2026.webp",
       "/assets/products/uploads/1791516233992-chatgpt-image-18-20-21-10-thg-8-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_335787476785",
@@ -1497,7 +1439,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/d1844a96.webp",
       "/assets/products/mirrored/3794a125.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_271689735957",
@@ -1562,7 +1503,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/47b5cf43.webp",
       "/assets/products/uploads/1777457727432-chatgpt-image-17-15-20-29-thg-4-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_185395649762",
@@ -1624,7 +1564,6 @@ const PRODUCTS = [
     "images": [
       "/assets/products/uploads/1791516880954-chatgpt-image-18-32-04-10-thg-8-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_247374495675",
@@ -1673,7 +1612,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1777462947338-chatgpt-image-18-40-43-29-thg-4-2026.webp",
       "/assets/products/uploads/1777463028222-chatgpt-image-18-43-20-29-thg-4-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "p_1777457979114_r47mk",
@@ -1742,7 +1680,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791429218633-chatgpt-image-10-31-41-13-thg-8-2026.webp",
       "/assets/products/uploads/1791429224067-chatgpt-image-19-14-43-12-thg-8-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_236618207002",
@@ -1932,7 +1869,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/47339075.webp",
       "/assets/products/mirrored/0ed3b822.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_221952128688",
@@ -1988,7 +1924,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/87aa2505.webp",
       "/assets/products/uploads/1777469612987-bo-ket-xong-nha-phuong-lam-202604280416-featured-bo-ket-xong-nha-phuong-lam.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_235832531169",
@@ -2044,7 +1979,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791429705054-sds.webp",
       "/assets/products/uploads/1791429710930-chatgpt-image-18-52-30-10-thg-8-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_238169116862",
@@ -2176,7 +2110,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/950d8fc2.webp",
       "/assets/products/mirrored/262cd1a5.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_49699073017",
@@ -2328,7 +2261,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1777466421671-chatgpt-image-19-36-10-29-thg-4-2026.webp",
       "/assets/products/uploads/1777466423224-chatgpt-image-19-39-43-29-thg-4-2026.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_181860225801",
@@ -2460,7 +2392,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/1fcc64b4.webp",
       "/assets/products/mirrored/32fa3b73.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_8641104012",
@@ -2516,7 +2447,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/eeaa83a2.webp",
       "/assets/products/mirrored/fc1c4310.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_8642375206",
@@ -2606,7 +2536,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/bb60e3de852c.webp",
       "/assets/products/mirrored/840a260c5918.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "361488526196",
@@ -2771,7 +2700,6 @@ const PRODUCTS = [
       "/assets/products/mirrored/bb60e3de852c.webp",
       "/assets/products/mirrored/840a260c5918.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "p_1791429972397_ig1u8",
@@ -2928,7 +2856,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791517944032-shopee-vn-11134207-81ztc-msw6q43cm7lt2e.webp",
       "/assets/products/uploads/1791517945713-shopee-vn-11134207-81ztc-mtdma8w5znr9c8.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_401488979745",
@@ -3023,7 +2950,6 @@ const PRODUCTS = [
     "images": [
       "/assets/products/uploads/1791518803336-shopee-vn-11134207-81ztc-mrpu02gsjqbsc2.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_386131497296",
@@ -3078,7 +3004,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518810563-shopee-vn-11134207-81ztc-mndsbn3pjy1486.webp",
       "/assets/products/uploads/1791518811639-shopee-vn-11134207-81ztc-mndsc29a9mh05b.webp"
     ],
-    "reviews": [],
     "variants": [],
     "slug": "la-dua-kho-tu-nhien-100g-phuong-lam"
   },
@@ -3125,7 +3050,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518816978-shopee-vn-11134207-81ztc-msw6rayfpwjr24.webp",
       "/assets/products/uploads/1791518817896-shopee-vn-11134207-81ztc-msw6q9c1lzi918.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_331496897599",
@@ -3236,7 +3160,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518835608-shopee-vn-11134207-81ztc-mqq739gv5kw144.webp",
       "/assets/products/uploads/1791518836450-shopee-vn-11134207-81ztc-mqq73e4zt9fle9.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_341347354050",
@@ -3360,7 +3283,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518845304-shopee-vn-11134207-81ztc-mt65yojihm2y74.webp",
       "/assets/products/uploads/1791518846258-shopee-vn-11134207-81ztc-mt65z6lrvkeh17.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_356512672788",
@@ -3466,7 +3388,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518855514-shopee-vn-11134207-81ztc-msw6q9c1lzi918.webp",
       "/assets/products/uploads/1791518856421-shopee-vn-11134207-81ztc-msy3jevtbmko11.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_401496769490",
@@ -3560,7 +3481,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518866841-shopee-vn-11134207-7r98o-lqos9xwip3o2ef.webp",
       "/assets/products/uploads/1791518867566-shopee-vn-11134207-7r98o-lqos9xwiqi8i60.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_187280785913",
@@ -3644,7 +3564,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518873949-shopee-vn-11134207-7r98o-lry9gjnkol38f6.webp",
       "/assets/products/uploads/1791518874722-shopee-vn-11134207-7r98o-lryao6hbktcpbd.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_168071517048",
@@ -3737,7 +3656,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518881690-shopee-vn-11134207-7r98o-lqko3xgnbwvr43.webp",
       "/assets/products/uploads/1791518882543-shopee-vn-11134207-7r98o-lqko3xgnaibb79.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_214875378542",
@@ -3819,7 +3737,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518889901-shopee-vn-11134207-7r98o-lx6xye72rxzte0.webp",
       "/assets/products/uploads/1791518890691-shopee-vn-11134207-7r98o-lx6xye72ur4p68.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_246121016936",
@@ -3919,7 +3836,6 @@ const PRODUCTS = [
       "/assets/products/uploads/1791535179932-shopee-vn-11134207-820l4-mi8mwbkw4qo75f.webp",
       "/assets/products/uploads/1791535180704-shopee-vn-11134207-820l4-mi8mwgus31u034.webp"
     ],
-    "reviews": [],
     "variants": [
       {
         "id": "shopee_variant_401559511963",
