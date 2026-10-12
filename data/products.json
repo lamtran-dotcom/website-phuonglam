@@ -3376,8 +3376,8 @@
     "name": "Nến ly nơ đại 120 giờ dùng thờ cúng",
     "price": 190000,
     "originalPrice": null,
-    "shortDesc": "Nến ly nơ đại thờ cúng cao 22 cm, mỗi ly cháy liên tục khoảng 5–6 ngày, không mùi, không khói. Hộp 6 ly.",
-    "description": "Nến ly nơ đại dùng thờ cúng, đốt rằm, Tết và khai trương, mỗi ly cháy liên tục khoảng 5–6 ngày. Hộp 6 ly (3 cặp), màu vàng, đỏ hoặc trắng.\n\nĐiểm nổi bật:\n- Cháy liên tục khoảng 5–6 ngày mỗi ly.\n- Không mùi, không khói.\n- Ly cao 22 cm, trang nghiêm trên bàn thờ.\n- Hộp 6 ly, đủ 3 cặp.\n\nThông số:\n- Kích thước: cao 22 cm, rộng 7 cm\n- Thời gian cháy: khoảng 5–6 ngày/ly\n- Quy cách: 6 ly/hộp (3 cặp)\n- Màu: vàng, đỏ, trắng\n\nCách dùng:\n1. Đặt ly nến trên mặt phẳng, chịu nhiệt, xa vật dễ cháy.\n2. Châm lửa ở tim nến.\n3. Khi không dùng nữa, tắt nến và chờ nguội rồi mới cất.\n\nLưu ý & bảo quản:\n- Không đặt nến gần rèm, giấy, vải thờ hoặc vật dễ cháy.\n- Không di chuyển ly khi nến đang cháy.\n- Bảo quản nơi thoáng mát, tránh bụi và ánh nắng trực tiếp.",
+    "shortDesc": "Nến ly nơ đại thờ cúng cao 22 cm, mỗi ly cháy liên tục khoảng 120 giờ (5 ngày), không mùi, không khói. Hộp 6 ly.",
+    "description": "Nến ly nơ đại dùng thờ cúng, đốt rằm, Tết và khai trương, mỗi ly cháy liên tục khoảng 120 giờ (5 ngày). Hộp 6 ly (3 cặp), chọn màu vàng, đỏ hoặc trắng.\n\nĐiểm nổi bật:\n- Cháy liên tục khoảng 120 giờ (5 ngày) mỗi ly.\n- Không mùi, không khói.\n- Ly cao 22 cm, trang nghiêm trên bàn thờ.\n- Hộp 6 ly, đủ 3 cặp.\n\nThông số:\n- Kích thước: cao 22 cm, rộng 7 cm\n- Thời gian cháy: khoảng 120 giờ (5 ngày)/ly\n- Quy cách: 6 ly/hộp (3 cặp)\n- Màu: vàng, đỏ, trắng\n\nCách dùng:\n1. Đặt ly nến trên mặt phẳng, chịu nhiệt, xa vật dễ cháy.\n2. Châm lửa ở tim nến.\n3. Khi không dùng nữa, tắt nến và chờ nguội rồi mới cất.\n\nLưu ý & bảo quản:\n- Không đặt nến gần rèm, giấy, vải thờ hoặc vật dễ cháy.\n- Không di chuyển ly khi nến đang cháy.\n- Bảo quản nơi thoáng mát, tránh bụi và ánh nắng trực tiếp.",
     "usage": "",
     "tag": "",
     "weight": 1000,
@@ -3424,12 +3424,12 @@
       }
     ],
     "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem",
-    "seoTitle": "Nến ly nơ đại thờ cúng cháy 5–6 ngày | Phương Lâm",
-    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 5–6 ngày, không mùi, không khói. Hộp 6 ly (3 cặp), màu vàng, đỏ hoặc trắng.",
+    "seoTitle": "Nến ly nơ đại thờ cúng cháy 120 giờ | Phương Lâm",
+    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 120 giờ (5 ngày), không mùi, không khói. Hộp 6 ly (3 cặp), chọn màu vàng, đỏ hoặc trắng.",
     "content": {
-      "intro": "Nến ly nơ đại dùng thờ cúng, đốt rằm, Tết và khai trương, mỗi ly cháy liên tục khoảng 5–6 ngày. Hộp 6 ly (3 cặp), màu vàng, đỏ hoặc trắng.",
+      "intro": "Nến ly nơ đại dùng thờ cúng, đốt rằm, Tết và khai trương, mỗi ly cháy liên tục khoảng 120 giờ (5 ngày). Hộp 6 ly (3 cặp), chọn màu vàng, đỏ hoặc trắng.",
       "highlights": [
-        "Cháy liên tục khoảng 5–6 ngày mỗi ly.",
+        "Cháy liên tục khoảng 120 giờ (5 ngày) mỗi ly.",
         "Không mùi, không khói.",
         "Ly cao 22 cm, trang nghiêm trên bàn thờ.",
         "Hộp 6 ly, đủ 3 cặp."
@@ -3441,7 +3441,7 @@
         },
         {
           "label": "Thời gian cháy",
-          "value": "khoảng 5–6 ngày/ly"
+          "value": "khoảng 120 giờ (5 ngày)/ly"
         },
         {
           "label": "Quy cách",

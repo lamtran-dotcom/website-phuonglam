@@ -2504,7 +2504,7 @@ const PRODUCTS = [
     "name": "Nến ly nơ đại 120 giờ dùng thờ cúng",
     "price": 190000,
     "originalPrice": null,
-    "shortDesc": "Nến ly nơ đại thờ cúng cao 22 cm, mỗi ly cháy liên tục khoảng 5–6 ngày, không mùi, không khói. Hộp 6 ly.",
+    "shortDesc": "Nến ly nơ đại thờ cúng cao 22 cm, mỗi ly cháy liên tục khoảng 120 giờ (5 ngày), không mùi, không khói. Hộp 6 ly.",
     "tag": "",
     "weight": 1000,
     "hidden": false,
@@ -2550,8 +2550,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem",
-    "seoTitle": "Nến ly nơ đại thờ cúng cháy 5–6 ngày | Phương Lâm",
-    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 5–6 ngày, không mùi, không khói. Hộp 6 ly (3 cặp), màu vàng, đỏ hoặc trắng."
+    "seoTitle": "Nến ly nơ đại thờ cúng cháy 120 giờ | Phương Lâm",
+    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 120 giờ (5 ngày), không mùi, không khói. Hộp 6 ly (3 cặp), chọn màu vàng, đỏ hoặc trắng."
   },
   {
     "id": "shopee_54367578815",
