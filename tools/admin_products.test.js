@@ -362,7 +362,7 @@ test('sales editor generates missing combinations without replacing existing var
 
 test('admin keeps structured content, regenerates the description and leaves other products untouched', () => {
   const { run } = browser();
-  assert.equal(run("'content' in normalizeProduct(products[1])"), false, 'products without content must not gain a content key');
+  assert.equal(run("'content' in normalizeProduct({ id: 'plain', name: 'Plain', price: 1 })"), false, 'products without content must not gain a content key');
   run("selectedId = products[0].id; updateContentField('intro', 'Nến viên nhỏ.'); updateContentField('highlights', 'Không khói\\n- Không mùi'); updateContentField('specs', 'Vỏ: nhôm\\nsai'); updateContentField('steps', '1. Đặt nến\\nChâm lửa'); updateContentField('care', 'Để xa trẻ em')");
   assert.deepEqual(JSON.parse(run('JSON.stringify(normalizeProduct(products[0]).content)')), { intro: 'Nến viên nhỏ.', highlights: ['Không khói', 'Không mùi'], specs: [{ label: 'Vỏ', value: 'nhôm' }], steps: ['Đặt nến', 'Châm lửa'], care: ['Để xa trẻ em'] });
   assert.match(run('products[0].description'), /^Nến viên nhỏ\.\n\nĐiểm nổi bật:\n- Không khói/);

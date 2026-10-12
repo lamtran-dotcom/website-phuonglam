@@ -19,7 +19,7 @@ const PRODUCTS = [
     "name": "Bộ bếp xông thảo mộc cao cấp Phương Lâm",
     "price": 169000,
     "originalPrice": 250000,
-    "shortDesc": "Bộ gồm bếp, đế nến, 10 viên nến 4 giờ, đĩa lót và combo thảo mộc. Đối chiếu thành phần chi tiết trước khi chọn.",
+    "shortDesc": "Bộ xông nhà 5 món: bếp niêu đất nung, dĩa lót, đế nến có tay cầm, 10 viên nến tealight 4 giờ và gói thảo mộc. Chọn bếp 13 cm hoặc 16 cm.",
     "tag": "",
     "weight": 2000,
     "hidden": false,
@@ -274,8 +274,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "bo-bep-xong-cao-cap-xong-thao-xong-nha-thu-gian-day-du",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Bộ bếp xông thảo mộc cao cấp 5 món | Phương Lâm",
+    "seoDescription": "Bộ xông nhà cao cấp 5 món: bếp niêu đất nung, dĩa lót, đế nến có tay cầm, 10 nến tealight 4 giờ và thảo mộc. Bếp 13 cm hoặc 16 cm, dùng được ngay."
   },
   {
     "id": "shopee_28991652145",
@@ -284,7 +284,7 @@ const PRODUCTS = [
     "name": "Bộ xông nhà thảo mộc Phương Lâm",
     "price": 150000,
     "originalPrice": 220000,
-    "shortDesc": "Bộ gồm bếp, 10 viên nến 4 giờ, đế nến và combo thảo mộc theo mô tả sản phẩm.",
+    "shortDesc": "Bộ xông nhà gồm bếp niêu đất nung, nến tealight, đế đựng nến và gói thảo mộc. Chọn cỡ bếp và gói thảo mộc theo phân loại.",
     "tag": "",
     "weight": 2000,
     "hidden": false,
@@ -546,8 +546,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "bo-xong-nha-tay-ue-thao-moc-khu-mui-thu-hut-may-man",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Bộ xông nhà thảo mộc bếp niêu đất nung | Phương Lâm",
+    "seoDescription": "Bộ xông nhà thảo mộc Phương Lâm gồm bếp niêu đất nung, nến tealight, đế nến và gói thảo mộc phối sẵn. Chọn bếp 13 cm hoặc 16 cm theo phân loại."
   },
   {
     "id": "p_1777474804043_1b5kn",
@@ -556,7 +556,7 @@ const PRODUCTS = [
     "name": "Bộ xông nhà trải nghiệm Phương Lâm",
     "price": 100000,
     "originalPrice": null,
-    "shortDesc": "Bộ trải nghiệm gồm bếp, 30 g thảo mộc và 1 viên nến 4 giờ theo thông tin sản phẩm.",
+    "shortDesc": "Bộ trải nghiệm gồm 1 bếp niêu đất nung, 30 g thảo mộc và 1 viên nến tealight 4 giờ. Chọn bếp 13 cm hoặc 16 cm.",
     "tag": "Nổi bật",
     "weight": 1300,
     "hidden": false,
@@ -593,8 +593,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "bo-xong-nha-trai-nghiem-tiet-kiem-chi-phi-i-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Bộ xông nhà trải nghiệm bếp niêu + thảo mộc | Phương Lâm",
+    "seoDescription": "Bộ xông nhà trải nghiệm gồm bếp niêu đất nung 13 hoặc 16 cm, 30 g thảo mộc 5 loại và 1 nến tealight 4 giờ. Phù hợp để thử xông nhà lần đầu."
   },
   {
     "id": "shopee_17395821074",
@@ -603,7 +603,7 @@ const PRODUCTS = [
     "name": "Bếp xông thảo mộc đất nung bán lẻ",
     "price": 100000,
     "originalPrice": null,
-    "shortDesc": "Bếp xông lẻ chỉ có bếp + nắp. Phụ kiện, nến và thảo mộc không nằm trong bộ nếu không được ghi rõ ở phân loại.",
+    "shortDesc": "Bếp xông đất nung bán lẻ, gồm bếp và nắp; không kèm nến và thảo mộc. Chọn cỡ 13 cm hoặc 16 cm.",
     "tag": "Nổi bật",
     "weight": 1300,
     "hidden": false,
@@ -640,8 +640,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "bep-xong-le-xong-thao-moc-bo-ket-khu-mui-thom-nha",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Bếp xông thảo mộc đất nung bán lẻ | Phương Lâm",
+    "seoDescription": "Bếp xông thảo mộc đất nung bán lẻ gồm bếp và nắp, cỡ 13 cm hoặc 16 cm. Dùng với nến tealight để làm nóng thảo mộc khô khi xông nhà."
   },
   {
     "id": 1,
@@ -650,7 +650,7 @@ const PRODUCTS = [
     "name": "Nến tealight 4 giờ loại Mai Phương Lâm",
     "price": 55000,
     "originalPrice": null,
-    "shortDesc": "Nến tealight loại Mai, thời gian cháy khoảng 4 giờ mỗi viên theo mô tả. Chọn màu và quy cách 20, 50 hoặc 100 viên.",
+    "shortDesc": "Nến tealight loại Mai, vỏ nhôm, cháy khoảng 4 giờ mỗi viên, không khói, không mùi. Chọn màu và quy cách 20, 50 hoặc 100 viên.",
     "tag": "Bán chạy",
     "weight": 200,
     "hidden": false,
@@ -841,8 +841,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-mai",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến tealight 4 giờ loại Mai không khói | Phương Lâm",
+    "seoDescription": "Nến tealight loại Mai cháy khoảng 4 giờ/viên, không khói, không mùi, vỏ nhôm. Dùng cho đèn xông tinh dầu, bếp xông thảo mộc. Chọn 20, 50 hoặc 100 viên."
   },
   {
     "id": "p_1777468148980_4ztop",
@@ -851,7 +851,7 @@ const PRODUCTS = [
     "name": "Nến tealight 2 giờ loại Mai Phương Lâm",
     "price": 55000,
     "originalPrice": null,
-    "shortDesc": "Nến tealight loại Mai dùng cho đèn xông hoặc trang trí. Thời gian cháy thực tế được mô tả khoảng 1 giờ 35–50 phút mỗi viên.",
+    "shortDesc": "Nến tealight loại Mai, vỏ nhôm, cháy thực tế khoảng 1 giờ 35–50 phút mỗi viên. Chọn màu và quy cách 20, 50 hoặc 100 viên.",
     "tag": "Nổi bật",
     "weight": 200,
     "hidden": false,
@@ -1019,8 +1019,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-2-gio-dot-den-xong-tinh-dau-trang-tri-tiec-i-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến tealight 2 giờ loại Mai vỏ nhôm | Phương Lâm",
+    "seoDescription": "Nến tealight 2 giờ loại Mai, vỏ nhôm, cháy khoảng 1 giờ 35–50 phút, ít khói. Dùng cho đèn xông, bếp xông, hâm trà. Màu trắng, vàng, đỏ; 20 đến 100 viên."
   },
   {
     "id": "p_1777435996053_fbofd",
@@ -1029,7 +1029,7 @@ const PRODUCTS = [
     "name": "Nến tealight 4 giờ loại Trơn Phương Lâm",
     "price": 55000,
     "originalPrice": null,
-    "shortDesc": "Nến tealight loại Trơn, thời gian cháy khoảng 4 giờ mỗi viên theo mô tả. Dùng cho bếp xông, đèn xông hoặc trang trí.",
+    "shortDesc": "Nến tealight loại Trơn, vỏ nhôm, cháy khoảng 4 giờ mỗi viên, không khói, không mùi. Dùng cho bếp xông, đèn xông, hâm trà hoặc trang trí.",
     "tag": "Sale",
     "weight": 200,
     "hidden": false,
@@ -1198,8 +1198,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-tron",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến tealight 4 giờ loại Trơn không khói | Phương Lâm",
+    "seoDescription": "Nến tealight loại Trơn cháy khoảng 4 giờ/viên, vỏ nhôm, không khói, không mùi. Dùng cho bếp xông, đèn tinh dầu, hâm trà. Chọn 20, 50 hoặc 100 viên."
   },
   {
     "id": "shopee_57653126590",
@@ -1208,7 +1208,7 @@ const PRODUCTS = [
     "name": "Quế thanh Yên Bái dùng nấu ăn và pha trà",
     "price": 30000,
     "originalPrice": null,
-    "shortDesc": "Quế thanh Yên Bái dạng khô, có thể dùng làm gia vị, pha trà hoặc tạo hương. Chọn quy cách đóng gói ở phần phân loại.",
+    "shortDesc": "Quế thanh Yên Bái khô, đã cạo vỏ, thơm ấm. Dùng làm gia vị, pha trà hoặc tạo hương. Túi 50 g, 100 g, 200 g.",
     "tag": "",
     "weight": 200,
     "hidden": false,
@@ -1253,8 +1253,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "que-thanh-xuat-khau-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Quế thanh Yên Bái khô, đã cạo vỏ | Phương Lâm",
+    "seoDescription": "Quế thanh Yên Bái khô nguyên thanh, đã cạo vỏ, thơm ấm. Dùng nấu phở, bò kho, pha trà quế hoặc tạo hương. Túi 50 g, 100 g, 200 g."
   },
   {
     "id": "shopee_57058955812",
@@ -1263,7 +1263,7 @@ const PRODUCTS = [
     "name": "Nến tealight 8 giờ vỏ mica",
     "price": 500000,
     "originalPrice": null,
-    "shortDesc": "Nến tealight 8 giờ, vỏ mica theo thông tin sản phẩm. Kiểm tra thiết bị tương thích và hướng dẫn sử dụng trước khi đốt.",
+    "shortDesc": "Nến tealight vỏ mica trong suốt, cháy khoảng 8 giờ mỗi viên, hợp trang trí. Chọn 5, 10, 20 hoặc 50 viên.",
     "tag": "Mới",
     "weight": 2000,
     "hidden": false,
@@ -1322,8 +1322,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến tealight vỏ mica trong suốt 8 giờ | Phương Lâm",
+    "seoDescription": "Nến tealight vỏ mica trong suốt, cháy khoảng 8 giờ/viên, ánh sáng đẹp cho trang trí bàn tiệc, phòng ngủ, spa. Chọn 5, 10, 20 hoặc 50 viên."
   },
   {
     "id": "shopee_54450013830",
@@ -1332,7 +1332,7 @@ const PRODUCTS = [
     "name": "Nến trụ trắng nhiều kích thước",
     "price": 120000,
     "originalPrice": null,
-    "shortDesc": "Nến trụ màu trắng, có các lựa chọn kích thước S, M và L. Đối chiếu thông số của từng phân loại trước khi đặt.",
+    "shortDesc": "Nến trụ trắng không khói, 3 cỡ S, M, L cháy khoảng 48–90 giờ. Dùng trang trí bàn tiệc, tiệc cưới, nhà hàng.",
     "tag": "",
     "weight": 800,
     "hidden": false,
@@ -1380,8 +1380,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tru-trang-72h-trang-tri-ban-tiec-chay-em-khong-khoi",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến trụ trắng không khói 3 cỡ S, M, L | Phương Lâm",
+    "seoDescription": "Nến trụ trắng không khói, cỡ S 7x10 cm (48 giờ), M 7x15 cm (68 giờ), L 7x20 cm (90 giờ). Trang trí bàn tiệc, tiệc cưới, nhà hàng, phòng khách."
   },
   {
     "id": "shopee_48452789252",
@@ -1390,7 +1390,7 @@ const PRODUCTS = [
     "name": "Ly đựng nến đất nung có tay cầm",
     "price": 25000,
     "originalPrice": 35000,
-    "shortDesc": "Ly đất nung đựng nến tealight có tay cầm. Sản phẩm bán riêng; bếp xông và nến không kèm theo mô tả.",
+    "shortDesc": "Ly đất nung có tay cầm để đựng nến tealight trong bếp xông. Bán lẻ 1 ly, không kèm bếp và nến.",
     "tag": "Sale",
     "weight": 200,
     "hidden": false,
@@ -1402,8 +1402,8 @@ const PRODUCTS = [
     "reviews": [],
     "variants": [],
     "slug": "ly-dung-nen-dat-nung-dung-bep-xong-an-toan-tien-cam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Ly đựng nến đất nung có tay cầm | Phương Lâm",
+    "seoDescription": "Ly đất nung có tay cầm để đặt nến tealight vào bếp xông thảo mộc, bếp bồ kết, đèn xông và lấy ra dễ dàng, hứng sáp giữ bếp sạch. Bán lẻ 1 ly."
   },
   {
     "id": "shopee_41330081336",
@@ -1412,7 +1412,7 @@ const PRODUCTS = [
     "name": "Bộ phụ kiện xông nhà đất nung",
     "price": 40000,
     "originalPrice": null,
-    "shortDesc": "Bộ phụ kiện đất nung dùng cùng bếp xông. Xem danh sách chi tiết các món có trong bộ trước khi đặt hàng.",
+    "shortDesc": "Phụ kiện thay thế cho bếp xông niêu: nắp đất nung cỡ 13 cm hoặc 16 cm, đế nến và rế lót. Bán lẻ từng món.",
     "tag": "Sale",
     "weight": 200,
     "hidden": false,
@@ -1470,8 +1470,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "bo-phu-kien-xong-nha-dat-nung-dung-bep-nieu-tien-loi",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Phụ kiện bếp xông: nắp, đế nến, rế lót | Phương Lâm",
+    "seoDescription": "Phụ kiện thay thế cho bếp xông niêu: nắp đất nung cỡ 13 cm, 16 cm, đế đựng nến và rế lót. Bán lẻ từng món theo phân loại."
   },
   {
     "id": "shopee_40170692234",
@@ -1480,7 +1480,7 @@ const PRODUCTS = [
     "name": "Nụ trầm hương dùng với lư xông hoặc thác khói",
     "price": 400000,
     "originalPrice": null,
-    "shortDesc": "Nụ trầm dùng với thác khói hoặc lư xông phù hợp. Chọn quy cách theo số lượng niêm yết và sử dụng ở nơi thông thoáng.",
+    "shortDesc": "Nụ trầm hương dùng với thác khói hoặc lư xông, mỗi nụ cháy khoảng 20–30 phút. Hũ 40 nụ hoặc 65 nụ.",
     "tag": "",
     "weight": 300,
     "hidden": false,
@@ -1521,8 +1521,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nu-tram-huong-tu-nhien-xong-nha-thien-dinh-thom-diu",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nụ trầm hương cho thác khói, lư xông | Phương Lâm",
+    "seoDescription": "Nụ trầm hương dùng với thác khói hoặc lư xông, mỗi nụ cháy khoảng 20–30 phút. Chọn hũ 40 nụ hoặc 65 nụ. Đậy kín, bảo quản nơi khô ráo."
   },
   {
     "id": "shopee_29011454025",
@@ -1531,7 +1531,7 @@ const PRODUCTS = [
     "name": "Nến tealight 4 giờ hương lài",
     "price": 60000,
     "originalPrice": null,
-    "shortDesc": "Nến tealight 4 giờ hương lài, màu vàng theo mô tả sản phẩm. Xem quy cách và số lượng tại phần phân loại.",
+    "shortDesc": "Nến tealight hương lài, vỏ nhôm, sáp cọ, cháy khoảng 4 giờ mỗi viên, không khói. Chọn 20, 50 hoặc 100 viên.",
     "tag": "Sale",
     "weight": 200,
     "hidden": false,
@@ -1605,8 +1605,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-4-gio-huong-lai-trang-tri-tiec-khong-khoi-l-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến tealight hương lài cháy 4 giờ | Phương Lâm",
+    "seoDescription": "Nến tealight hương lài cháy khoảng 4 giờ/viên, không khói, vỏ nhôm, sáp cọ. Trang trí tiệc, phòng ngủ, spa, quán cà phê. Chọn 20, 50 hoặc 100 viên."
   },
   {
     "id": "shopee_28422178672",
@@ -1615,7 +1615,7 @@ const PRODUCTS = [
     "name": "Nắp đất nung cho bếp niêu xông thảo mộc",
     "price": 25000,
     "originalPrice": null,
-    "shortDesc": "Nắp đất nung thay thế cho bếp niêu xông. Đối chiếu kích thước và kiểu bếp tương thích trước khi mua.",
+    "shortDesc": "Nắp đất nung thay thế cho bếp niêu xông thảo mộc, đường kính 13 cm hoặc 15 cm.",
     "tag": "Sale",
     "weight": 300,
     "hidden": false,
@@ -1648,8 +1648,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nap-bep-nieu-xong-thao-moc-dat-nung-chiunhiet",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nắp đất nung cho bếp niêu xông thảo mộc | Phương Lâm",
+    "seoDescription": "Nắp đất nung thay thế cho bếp niêu xông thảo mộc, đường kính 13 cm hoặc 15 cm, làm từ đất sét. Đặt thảo mộc lên nắp, đốt nến bên dưới để tỏa hương."
   },
   {
     "id": "shopee_28251842874",
@@ -1658,7 +1658,7 @@ const PRODUCTS = [
     "name": "Nến tealight 8 giờ vỏ nhôm",
     "price": 11000,
     "originalPrice": null,
-    "shortDesc": "Nến tealight 8 giờ, vỏ nhôm theo thông tin sản phẩm. Dùng với bếp xông hoặc đèn xông phù hợp.",
+    "shortDesc": "Nến tealight vỏ nhôm cháy khoảng 8 giờ mỗi viên, không khói, không mùi. Chọn 5, 10, 20 hoặc 50 viên.",
     "tag": "Sale",
     "weight": 23,
     "hidden": false,
@@ -1717,8 +1717,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-tealight-8-gio-vo-nhom-xong-thao-moc-tinh-dau-l-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến tealight 8 giờ vỏ nhôm không khói | Phương Lâm",
+    "seoDescription": "Nến tealight vỏ nhôm cháy khoảng 8 giờ/viên, không khói, không mùi, cao 2,5 cm. Dùng cho đèn xông tinh dầu, bếp xông thảo mộc, trang trí. Chọn 5–50 viên."
   },
   {
     "id": "shopee_26007254880",
@@ -1727,7 +1727,7 @@ const PRODUCTS = [
     "name": "Thảo mộc khô xông nhà nhiều loại tự chọn",
     "price": 25000,
     "originalPrice": null,
-    "shortDesc": "Thảo mộc khô nhiều loại tự chọn",
+    "shortDesc": "Thảo mộc khô xông nhà bán lẻ từng loại để tự phối: quế, bồ kết, vỏ bưởi, sả, bạc hà, oải hương, lát cam, gừng và nhiều loại khác.",
     "tag": "Bán chạy",
     "weight": 200,
     "hidden": false,
@@ -1906,8 +1906,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "thao-moc-xong-nha-tu-nhien-tay-ue-khu-mui-xua-con-trung-nhieu-loai-tu-chon",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Thảo mộc khô xông nhà mua lẻ nhiều loại | Phương Lâm",
+    "seoDescription": "Thảo mộc khô xông nhà bán lẻ từng loại: quế, bồ kết, vỏ bưởi, sả, bạc hà, oải hương, lát cam, gừng… Tự phối theo sở thích. Gói 30–100 g."
   },
   {
     "id": "shopee_23752423694",
@@ -1916,7 +1916,7 @@ const PRODUCTS = [
     "name": "Đế gốm đựng nến tealight",
     "price": 30000,
     "originalPrice": null,
-    "shortDesc": "Đế gốm đựng nến tealight dùng cùng đèn xông hoặc bếp xông phù hợp. Kiểm tra kích thước và cách lắp trước khi mua.",
+    "shortDesc": "Đế gốm có cán dài để đựng nến tealight cho đèn xông và bếp xông. Màu trắng, đen hoặc ly đựng nến niêu đất.",
     "tag": "Sale",
     "weight": 50,
     "hidden": false,
@@ -1966,8 +1966,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "de-dung-nen-tealight-dung-xong-tinh-dau-thao-moc",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Đế gốm đựng nến tealight có cán dài | Phương Lâm",
+    "seoDescription": "Đế gốm sứ trắng hoặc đen có cán dài, đựng nến tealight cho đèn xông tinh dầu và bếp xông, đặt và thay nến không chạm tay vào chỗ nóng. Dài 8,3 cm."
   },
   {
     "id": "shopee_22361508205",
@@ -1976,7 +1976,7 @@ const PRODUCTS = [
     "name": "Bồ kết khô gội đầu và xông nhà",
     "price": 32000,
     "originalPrice": null,
-    "shortDesc": "Bồ kết khô dùng để gội đầu hoặc xông theo hướng dẫn phù hợp. Chọn quy cách đóng gói tại phần phân loại.",
+    "shortDesc": "Bồ kết khô dùng nấu nước gội đầu hoặc xông với bếp xông. Túi 100 g, 200 g, 500 g.",
     "tag": "Bán chạy",
     "weight": 200,
     "hidden": false,
@@ -2022,8 +2022,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "bo-ket-kho-goi-dau-xong-nha-khu-mui-thom-tu-nhien",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Bồ kết khô gội đầu, xông nhà | Phương Lâm",
+    "seoDescription": "Bồ kết khô dùng nấu nước gội đầu hoặc xông với bếp xông thảo mộc. Túi 100 g, 200 g, 500 g. Hướng dẫn nấu nước gội và bảo quản."
   },
   {
     "id": "shopee_22353875434",
@@ -2032,7 +2032,7 @@ const PRODUCTS = [
     "name": "Combo thảo mộc khô xông nhà Phương Lâm",
     "price": 50000,
     "originalPrice": null,
-    "shortDesc": "Combo gồm các loại thảo mộc khô theo phân loại.",
+    "shortDesc": "Combo thảo mộc khô phối sẵn theo gói, dùng với bếp xông. Thành phần ghi trên bao bì từng gói.",
     "tag": "Bán chạy",
     "weight": 200,
     "hidden": false,
@@ -2128,8 +2128,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "combo-thao-moc-xong-nha-phuong-lam-thanh-tay-xua-con-trung",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Combo thảo mộc khô xông nhà phối sẵn | Phương Lâm",
+    "seoDescription": "Combo thảo mộc khô phối sẵn theo gói: thư giãn, nhà mới, khử mùi, combo 12 loại… Dùng với bếp xông để xông nhà. Thành phần ghi trên từng gói."
   },
   {
     "id": "shopee_22080262041",
@@ -2138,7 +2138,7 @@ const PRODUCTS = [
     "name": "Đèn xông tinh dầu bằng gốm dùng nến tealight",
     "price": 89000,
     "originalPrice": null,
-    "shortDesc": "Đèn xông bằng gốm, dùng với nến tealight và nước hoặc tinh dầu theo hướng dẫn. Chọn kiểu dáng và kích thước tại phân loại.",
+    "shortDesc": "Đèn xông tinh dầu gốm sứ dùng nến tealight, nhiều mẫu hoa trắng, búp sen, đài sen; có lựa chọn kèm đế trắng.",
     "tag": "Nổi bật",
     "weight": 333,
     "hidden": false,
@@ -2284,8 +2284,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "den-xong-tinh-dau-dot-nen-trang-tri-phong-ngu-sang-trong",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Đèn xông tinh dầu gốm sứ dùng nến tealight | Phương Lâm",
+    "seoDescription": "Đèn xông tinh dầu gốm sứ dùng nến tealight, mẫu hoa trắng, búp sen, đài sen, có đế trắng. Không cần điện, vừa xông tinh dầu vừa trang trí phòng."
   },
   {
     "id": "shopee_19636361517",
@@ -2294,7 +2294,7 @@ const PRODUCTS = [
     "name": "Vỉ 10 nến tealight loại 2 giờ hoặc 4 giờ",
     "price": 40000,
     "originalPrice": null,
-    "shortDesc": "Vỉ gồm 10 viên nến tealight. Chọn loại thời gian cháy 2 giờ hoặc 4 giờ theo phân loại.",
+    "shortDesc": "Hộp 10 viên nến tealight vỏ nhôm, chọn loại 2 giờ hoặc 4 giờ, trắng, trơn hoặc hương lài.",
     "tag": "Sale",
     "weight": 100,
     "hidden": false,
@@ -2436,8 +2436,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Hộp 10 nến tealight 2 giờ, 4 giờ | Phương Lâm",
+    "seoDescription": "Hộp 10 viên nến tealight vỏ nhôm, chọn loại 2 giờ hoặc 4 giờ, trắng, trơn hoặc hương lài. Dùng cho đèn xông, bếp xông, hâm trà, trang trí."
   },
   {
     "id": "shopee_6203380691",
@@ -2446,7 +2446,7 @@ const PRODUCTS = [
     "name": "Nến ly nơ lớn dùng thờ cúng",
     "price": 195000,
     "originalPrice": null,
-    "shortDesc": "Nến ly nơ lớn dùng cho thờ cúng và trang trí. Hộp gồm 6 ly theo mô tả; thời gian cháy tùy điều kiện sử dụng.",
+    "shortDesc": "Nến ly nơ lớn thờ cúng, mỗi ly cháy liên tục khoảng 3–4 ngày, không mùi, ít khói. Hộp 6 ly.",
     "tag": "Mới",
     "weight": 1000,
     "hidden": false,
@@ -2494,8 +2494,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-ly-72h-no-lon-tho-cung-khong-khoi-phuong-lam",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến ly nơ lớn thờ cúng cháy 3–4 ngày | Phương Lâm",
+    "seoDescription": "Nến ly nơ lớn thờ cúng cao 14 cm, cháy liên tục khoảng 3–4 ngày, không mùi, ít khói. Hộp 6 ly, màu vàng, đỏ hoặc trắng (Thánh Giá)."
   },
   {
     "id": "shopee_4903385000",
@@ -2504,7 +2504,7 @@ const PRODUCTS = [
     "name": "Nến ly nơ đại 120 giờ dùng thờ cúng",
     "price": 190000,
     "originalPrice": null,
-    "shortDesc": "Nến ly nơ đại dùng cho thờ cúng và trang trí. Hộp gồm 6 ly theo mô tả; đối chiếu kích thước trước khi đặt.",
+    "shortDesc": "Nến ly nơ đại thờ cúng cao 22 cm, mỗi ly cháy liên tục khoảng 5–6 ngày, không mùi, không khói. Hộp 6 ly.",
     "tag": "",
     "weight": 1000,
     "hidden": false,
@@ -2550,8 +2550,8 @@ const PRODUCTS = [
       }
     ],
     "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem",
-    "seoTitle": "",
-    "seoDescription": ""
+    "seoTitle": "Nến ly nơ đại thờ cúng cháy 5–6 ngày | Phương Lâm",
+    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 5–6 ngày, không mùi, không khói. Hộp 6 ly (3 cặp), màu vàng, đỏ hoặc trắng."
   },
   {
     "id": "shopee_54367578815",
@@ -2561,9 +2561,9 @@ const PRODUCTS = [
     "slug": "tui-thom-treo-xe-treo-phong-tu-quan-ao-phuonglam-ngoc-am-xa-xi-do-hoa-dai-hoi-ca-phe-rang",
     "price": 32000,
     "originalPrice": null,
-    "shortDesc": "Túi thơm dùng treo xe ô tô, phòng ngủ, tủ quần áo, tủ giày, phòng làm việc... giúp không gian có mùi hương nhẹ nhàng, dễ chịu.",
-    "seoTitle": "",
-    "seoDescription": "",
+    "shortDesc": "Túi thơm gỗ và thảo mộc treo xe ô tô, tủ quần áo, tủ giày; mùi ngọc am, xá xị đỏ, hoa đại hồi, cà phê rang. Có ruột thay thế.",
+    "seoTitle": "Túi thơm treo xe, tủ quần áo gỗ và thảo mộc | Phương Lâm",
+    "seoDescription": "Túi thơm gỗ và thảo mộc treo xe ô tô, tủ quần áo, tủ giày: mùi ngọc am, xá xị đỏ, hoa đại hồi, cà phê rang. Khoảng 70 g, có ruột thay thế.",
     "tag": "Bán chạy",
     "weight": null,
     "hidden": false,
@@ -2726,7 +2726,7 @@ const PRODUCTS = [
     "name": "Túi Thơm Treo Xe, Treo Phòng, Tủ Quần Áo PHUONGLAM – Ngọc Am, Xá Xị Đỏ, Hoa Đại Hồi, Cà Phê Rang - bản sao",
     "price": 32000,
     "originalPrice": null,
-    "shortDesc": "Túi thơm dùng treo xe ô tô, phòng ngủ, tủ quần áo, tủ giày, phòng làm việc... giúp không gian có mùi hương nhẹ nhàng, dễ chịu.",
+    "shortDesc": "Túi thơm gỗ và thảo mộc treo xe ô tô, tủ quần áo, tủ giày; mùi ngọc am, xá xị đỏ, hoa đại hồi, cà phê rang. Có ruột thay thế.",
     "seoTitle": "",
     "seoDescription": "",
     "tag": "Bán chạy",
@@ -2891,7 +2891,7 @@ const PRODUCTS = [
     "name": "Gỗ xông nhà Phương Lâm – Ngọc am, xá xị đỏ, Palo Santo",
     "price": 19200,
     "originalPrice": 32000,
-    "shortDesc": "Gỗ ngọc am, xá xị đỏ và Palo Santo dùng để đốt xông hoặc xông với bếp xông, giúp hương gỗ lan tỏa, làm thơm và khử mùi không gian.",
+    "shortDesc": "Gỗ ngọc am, xá xị đỏ dạng băm và thanh Palo Santo, dùng đốt xông hoặc xông với bếp để làm thơm và khử mùi phòng.",
     "seoTitle": "Gỗ xông nhà Ngọc Am, Xá Xị Đỏ, Palo Santo | Phương Lâm",
     "seoDescription": "Gỗ xông nhà Phương Lâm gồm ngọc am, xá xị đỏ và Palo Santo. Đốt xông hoặc dùng với bếp xông để làm thơm, khử mùi phòng. Xem phân loại và giá.",
     "tag": "Bán chạy",
@@ -3197,9 +3197,9 @@ const PRODUCTS = [
     "name": "Thanh gỗ Palo Santo tự nhiên 10cm – Phương Lâm",
     "price": 21000,
     "originalPrice": 35000,
-    "shortDesc": "Thanh gỗ Palo Santo tự nhiên dài 10cm, đốt đầu thanh để gỗ âm ỉ tỏa hương gỗ dịu nhẹ; có thêm lựa chọn khay đốt gỗ và gỗ băm xông.",
+    "shortDesc": "Thanh gỗ Palo Santo tự nhiên dài 10 cm, đốt đầu thanh để gỗ âm ỉ tỏa hương gỗ dịu nhẹ. Chọn loại 3–4,5 g hoặc 6–10 g.",
     "seoTitle": "Thanh gỗ Palo Santo tự nhiên 10cm | Phương Lâm",
-    "seoDescription": "Thanh gỗ Palo Santo tự nhiên dài 10cm, đốt đầu thanh để gỗ âm ỉ tỏa hương dịu nhẹ. Có khay đốt gỗ và gỗ băm xông. Xem phân loại và giá.",
+    "seoDescription": "Thanh gỗ Palo Santo tự nhiên dài 10 cm, đốt đầu thanh để gỗ âm ỉ tỏa hương dịu nhẹ, không tẩm hương liệu. Loại 3–4,5 g hoặc 6–10 g; mua 1, 2 hoặc 5 thanh.",
     "tag": "Nổi bật",
     "weight": null,
     "hidden": false,
