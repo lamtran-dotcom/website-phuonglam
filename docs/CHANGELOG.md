@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-12 — Structured product content
+- New optional `content` field (intro, highlights, specs, steps, care) rendered as fixed sections; nav labels now match the H2s; legacy description/usage is the fallback.
+- Admin "Mô tả" tab edits the structured fields and regenerates `description`; server validates the shape.
+- Rewrote all 38 visible products into the outline (146–306 words) and filled missing SEO titles/descriptions; removed product codes, shipping weight, emoji, ALL-CAPS and health/spiritual claims.
+
 ## 2026-10-08 — Audit follow-up (approved P2 set)
 - `_config.yml` excludes internal docs, tools, data, reports, scheduled posts, admin UI and the `.command` launcher from GitHub Pages; verified 404 live.
 - Hidden products keep their page with `noindex, follow` and are omitted from the sitemap; both build modes agree.

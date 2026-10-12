@@ -91,3 +91,9 @@ Decision: Use CodeGraph first for code exploration when `.codegraph/` exists, bu
 Reason: CodeGraph helps inspect source flows and impact radius; it does not replace business/project context.
 Impact: `.codegraph/` is ignored by git and documented as optional local tooling.
 Status: Active
+
+### 2026-10-12 - Product pages use one structured outline
+Decision: Product copy lives in `content` (Giới thiệu, Điểm nổi bật, Thông số, Cách dùng, Lưu ý & bảo quản); `description` is generated from it. 150–300 words, no emoji/ALL-CAPS/keyword stuffing/health or spiritual claims; specs only from seller-provided facts. SEO title ≤60 chars "Tên + đặc điểm | Phương Lâm", description 140–155 chars.
+Reason: 12 different nav variants, mismatched labels and inconsistent copy hurt readability and SEO.
+Impact: New products should be entered through the admin structured fields.
+Status: Active

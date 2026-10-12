@@ -1,6 +1,9 @@
 # Tasks
 
 ## Now
+- [x] Rewrite product pages into the structured outline + SEO fields (2026-10-12).
+- [ ] Seller to confirm: tealight mica pack sizes, tealight 2h Mai box count/SKU, Bộ phụ kiện variants, nến ly nơ đại burn time, combo thảo mộc package names.
+- [ ] Decide on the 3 hidden placeholder reviews (delete or keep hidden).
 - [x] Review and push branch `audit/2026-10` (2026-10-08).
 - [x] Hidden products: noindex + removed from sitemap, pages kept (2026-10-08).
 - [ ] Decide with seller: "- bản sao" product `p_1791429972397_g7kgf` sits in Thảo mộc xông and bestsellers while the original `shopee_54367578815` is in Túi thơm; rename, hide, or support multiple categories.
