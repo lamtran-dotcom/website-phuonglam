@@ -3,6 +3,7 @@ const path = require('path');
 const vm = require('vm');
 const crypto = require('crypto');
 const { getGenuineReviews, getReviewStats, starsForAverage } = require('./reviews');
+const { normalizeProductContent } = require('./product_content');
 
 const root = path.resolve(__dirname, '..');
 const siteUrl = 'https://phuonglam.com';
@@ -1174,7 +1175,9 @@ const renderStaticBuyScript = (product) => {
     : null;
   const originalImage = firstImage(product);
   // Reviews are rendered as HTML/schema only; keep them (and template placeholders) out of the script.
-  const { reviews: _reviews, ...productWithoutReviews } = product;
+  // Long text (description, usage, structured content) is already in the HTML; the buy
+  // script only needs ids, prices, images and variants.
+  const { reviews: _reviews, description: _description, usage: _usage, content: _content, seoDescription: _seoDescription, ...productWithoutReviews } = product;
   const payload = {
     ...productWithoutReviews,
     variants,
@@ -1433,6 +1436,29 @@ const renderStaticBuyScript = (product) => {
 </script>`;
 };
 
+// Fixed outline for products that have structured content; navigation labels equal the H2s.
+const renderStructuredSections = (content) => {
+  const items = (lines) => lines.map((line) => `<li>${escapeHtml(line)}</li>`).join('');
+  const sections = [];
+  const nav = [];
+  sections.push(`<section class="content product-content-section product-info-section" id="product-intro"><h2>Giới thiệu</h2><p>${escapeHtml(content.intro)}</p>${content.highlights.length ? `<h3>Điểm nổi bật</h3><ul>${items(content.highlights)}</ul>` : ''}</section>`);
+  nav.push(['product-intro', 'Giới thiệu']);
+  if (content.specs.length) {
+    const rows = content.specs.map((row) => `<tr><th scope="row">${escapeHtml(row.label)}</th><td>${escapeHtml(row.value)}</td></tr>`).join('');
+    sections.push(`<section class="content product-content-section product-specs-section" id="product-specs"><h2>Thông số</h2><div class="product-spec-table-wrap"><table class="product-spec-table" aria-label="Thông số sản phẩm"><tbody>${rows}</tbody></table></div></section>`);
+    nav.push(['product-specs', 'Thông số']);
+  }
+  if (content.steps.length) {
+    sections.push(`<section class="content product-content-section product-usage-section" id="product-usage"><h2>Cách dùng</h2><ol>${items(content.steps)}</ol></section>`);
+    nav.push(['product-usage', 'Cách dùng']);
+  }
+  if (content.care.length) {
+    sections.push(`<aside class="content product-content-section product-callout product-callout-warning" id="product-care" aria-labelledby="product-care-title"><h2 id="product-care-title">Lưu ý &amp; bảo quản</h2><ul>${items(content.care)}</ul></aside>`);
+    nav.push(['product-care', 'Lưu ý &amp; bảo quản']);
+  }
+  return { sections, nav };
+};
+
 const renderStars = (rating) => `<span class="review-stars" role="img" aria-label="${rating} trên 5 sao">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</span>`;
 
 const formatReviewDate = (date) => (date ? date.split('-').reverse().join('/') : '');
@@ -1481,7 +1507,9 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
     renderProductContentSection({ id: 'product-storage', title: 'Bảo quản', blocks: contentGroups.storage, productName: product.name, className: 'product-storage-section' }),
   ].filter(Boolean);
   const reviews = getGenuineReviews(product);
-  const contentNavItems = [
+  const structured = normalizeProductContent(product.content);
+  const structuredView = structured ? renderStructuredSections(structured) : null;
+  const legacyNavItems = [
     ['product-description', 'Giới thiệu', contentGroups.description.length > 0],
     ['product-specifications', 'Thông tin chi tiết', contentGroups.specs.length > 0],
     ['product-usage', 'Cách dùng', contentGroups.usage.length > 0],
@@ -1490,6 +1518,9 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
     ['product-storage', 'Bảo quản', contentGroups.storage.length > 0],
     ['product-reviews', 'Đánh giá', reviews.length > 0],
   ].filter(([, , visible]) => visible);
+  const contentNavItems = structuredView
+    ? [...structuredView.nav, ...(reviews.length ? [['product-reviews', 'Đánh giá']] : [])]
+    : legacyNavItems;
   const thumbs = galleryImages.length > 1 ? `<div class="product-thumbs-wrap">
             <button class="thumb-arrow prev" type="button" data-thumb-scroll="-1" aria-label="Xem ảnh trước">‹</button>
             <div class="product-thumbs" data-thumbs-track aria-label="Ảnh sản phẩm">
@@ -1523,7 +1554,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
         ${contentNavItems.map(([id, label]) => `<a href="#${id}">${label}</a>`).join('\n        ')}
       </nav>
       <div class="product-reading-column">
-        ${productContent.join('\n        ')}
+        ${(structuredView ? structuredView.sections : productContent).join('\n        ')}
         ${renderReviewsSection(reviews)}
         ${related.length ? `<section class="content related-products" aria-labelledby="related-products-title"><h2 id="related-products-title">Sản phẩm cùng danh mục</h2><ul>${related.map((item) => `<li><a href="/san-pham/${escapeHtml(item.slug)}/">${escapeHtml(item.name)}</a></li>`).join('')}</ul></section>` : ''}
       </div>
@@ -2036,7 +2067,7 @@ const replaceSiteDataProducts = (products) => {
 
   // Keep storefront data lean; full descriptions stay in static product pages
   // and are loaded through /api/products.php inside the local admin editor.
-  const appProducts = products.map(({ description: _description, usage: _usage, ...rest }) => rest);
+  const appProducts = products.map(({ description: _description, usage: _usage, content: _content, ...rest }) => rest);
   const newBlock = `const PRODUCTS = ${JSON.stringify(appProducts, null, 2)};`;
   source = source.slice(0, startIdx) + newBlock + source.slice(endIdx);
   fs.writeFileSync(siteDataPath, source);

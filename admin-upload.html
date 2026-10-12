@@ -122,6 +122,8 @@
     .product-edit-section[hidden] { display: none !important; }
     .product-edit-section > h2:first-child { margin-top: 4px; }
     .editor-hint { margin: 6px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .legacy-content { margin-top: 18px; border: 1px dashed var(--line); border-radius: 12px; padding: 10px 14px; }
+    .legacy-content summary { cursor: pointer; font-weight: 700; color: #555; }
     .seo-preview-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfa; margin-top: 16px; }
     .seo-preview-title { color: #1a0dab; font-size: 18px; margin: 4px 0; }
     .seo-preview-url { color: #188038; font-size: 12px; }
@@ -749,6 +751,40 @@
       }
     }
 
+    // Structured content (same rules as tools/product_content.js): when `content.intro` is set,
+    // the product page uses these fields and `description` is regenerated as plain text.
+    const contentLine = value => String(value ?? '').replace(/\s+/g, ' ').trim();
+    const contentList = value => (Array.isArray(value) ? value : String(value ?? '').split('\n'))
+      .map(line => contentLine(String(line).replace(/^\s*(?:[-*•]|\d+[.)])\s+/, '')))
+      .filter(Boolean);
+    const contentSpecs = value => (Array.isArray(value) ? value : String(value ?? '').split('\n')).map(row => {
+      if (row && typeof row === 'object' && !Array.isArray(row)) return { label: contentLine(row.label), value: contentLine(row.value) };
+      const text = contentLine(row);
+      const at = text.indexOf(':');
+      return at > 0 ? { label: contentLine(text.slice(0, at)), value: contentLine(text.slice(at + 1)) } : { label: '', value: '' };
+    }).filter(row => row.label && row.value);
+    function normalizeContent(content) {
+      if (!content || typeof content !== 'object' || Array.isArray(content)) return null;
+      return {
+        intro: String(content.intro ?? '').trim(),
+        highlights: contentList(content.highlights),
+        specs: contentSpecs(content.specs),
+        steps: contentList(content.steps),
+        care: contentList(content.care),
+      };
+    }
+    function composeDescription(content) {
+      const c = normalizeContent(content);
+      if (!c || !contentLine(c.intro)) return '';
+      return [
+        contentLine(c.intro),
+        c.highlights.length ? `Điểm nổi bật:\n${c.highlights.map(line => `- ${line}`).join('\n')}` : '',
+        c.specs.length ? `Thông số:\n${c.specs.map(row => `- ${row.label}: ${row.value}`).join('\n')}` : '',
+        c.steps.length ? `Cách dùng:\n${c.steps.map((line, index) => `${index + 1}. ${line}`).join('\n')}` : '',
+        c.care.length ? `Lưu ý & bảo quản:\n${c.care.map(line => `- ${line}`).join('\n')}` : '',
+      ].filter(Boolean).join('\n\n');
+    }
+
     function normalizeProduct(product) {
       const normalized = {
         id: product.id || id(),
@@ -780,6 +816,7 @@
           : {},
         images: Array.isArray(product.images) ? product.images.filter(Boolean).slice(0, 9) : [],
         reviews: Array.isArray(product.reviews) ? product.reviews : [],
+        ...(product.content ? { content: normalizeContent(product.content) } : {}),
         variants: Array.isArray(product.variants) ? product.variants.map(v => ({
           id: v.id || id(),
           name: v.name || '',
@@ -1525,10 +1562,25 @@
           <p class="editor-hint">Chia đoạn bằng một dòng trống. Ghi rõ dữ kiện đã xác nhận; không tự thêm cam kết, công dụng hoặc thông số.</p>
           <label>Mô tả ngắn</label>
           <textarea oninput="updateField('shortDesc', this.value)">${esc(product.shortDesc)}</textarea>
-          <label>Mô tả chi tiết</label>
-          <textarea style="min-height:360px" oninput="updateField('description', this.value)">${esc(product.description)}</textarea>
-          <label>Cách dùng và lưu ý</label>
-          <textarea style="min-height:180px" oninput="updateField('usage', this.value)">${esc(product.usage)}</textarea>
+          <h3>Nội dung theo khung</h3>
+          <p class="editor-hint">Trang sản phẩm hiển thị theo thứ tự: Giới thiệu, Thông số, Cách dùng, Lưu ý &amp; bảo quản. Khi đã có Giới thiệu, trang dùng các ô này và ô "Mô tả cũ" bên dưới được tạo lại tự động.</p>
+          <label>Giới thiệu (2–3 câu: là gì, dùng để làm gì, cho ai)</label>
+          <textarea style="min-height:90px" oninput="updateContentField('intro', this.value)">${esc(product.content?.intro || '')}</textarea>
+          <label>Điểm nổi bật (mỗi dòng một ý, 3–5 dòng)</label>
+          <textarea style="min-height:110px" oninput="updateContentField('highlights', this.value)">${esc((product.content?.highlights || []).join('\n'))}</textarea>
+          <label>Thông số (mỗi dòng dạng "Tên: Giá trị", vd "Thời gian cháy: khoảng 4 giờ")</label>
+          <textarea style="min-height:110px" oninput="updateContentField('specs', this.value)">${esc((product.content?.specs || []).map(row => `${row.label}: ${row.value}`).join('\n'))}</textarea>
+          <label>Cách dùng (mỗi dòng một bước)</label>
+          <textarea style="min-height:110px" oninput="updateContentField('steps', this.value)">${esc((product.content?.steps || []).join('\n'))}</textarea>
+          <label>Lưu ý &amp; bảo quản (mỗi dòng một ý)</label>
+          <textarea style="min-height:110px" oninput="updateContentField('care', this.value)">${esc((product.content?.care || []).join('\n'))}</textarea>
+          <details class="legacy-content"${product.content?.intro ? '' : ' open'}>
+            <summary>Mô tả cũ (chữ tự do, chỉ dùng khi chưa nhập Giới thiệu)</summary>
+            <label>Mô tả chi tiết</label>
+            <textarea style="min-height:360px" oninput="updateField('description', this.value)">${esc(product.description)}</textarea>
+            <label>Cách dùng và lưu ý</label>
+            <textarea style="min-height:180px" oninput="updateField('usage', this.value)">${esc(product.usage)}</textarea>
+          </details>
         </section>
 
         <section class="product-edit-section" role="tabpanel" ${productEditorSection !== 'variants' ? 'hidden' : ''}>
@@ -1834,6 +1886,15 @@
         const variant = product.variants?.find(item => String(item.id) === String(variantId));
         if (variant) mutator(product, variant);
       }, shouldRender);
+    }
+
+    function updateContentField(key, value) {
+      updateSelected(product => {
+        const content = normalizeContent(product.content) || { intro: '', highlights: [], specs: [], steps: [], care: [] };
+        content[key] = key === 'intro' ? String(value ?? '') : key === 'specs' ? contentSpecs(value) : contentList(value);
+        product.content = content;
+        if (contentLine(content.intro)) product.description = composeDescription(content);
+      });
     }
 
     function updateField(field, value) {

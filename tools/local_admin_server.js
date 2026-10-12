@@ -284,6 +284,16 @@ const validateProducts = (products, existingById = new Map()) => {
     if (product?.originalPrice != null && (!Number.isFinite(Number(product.originalPrice)) || Number(product.originalPrice) < 0)) errors.push(`${label}: giá gốc không hợp lệ.`);
     if (product?.weight != null && (!Number.isFinite(Number(product.weight)) || Number(product.weight) < 0)) errors.push(`${label}: khối lượng không hợp lệ.`);
     if (!Array.isArray(product?.images) || product.images.length > 9) errors.push(`${label}: danh sách ảnh phải có tối đa 9 ảnh.`);
+    if (product.content !== undefined && product.content !== null) {
+      const content = product.content;
+      const isList = (value) => value === undefined || (Array.isArray(value) && value.every((item) => typeof item === 'string'));
+      if (typeof content !== 'object' || Array.isArray(content)
+        || (content.intro !== undefined && typeof content.intro !== 'string')
+        || !isList(content.highlights) || !isList(content.steps) || !isList(content.care)
+        || (content.specs !== undefined && !(Array.isArray(content.specs) && content.specs.every((row) => row && typeof row.label === 'string' && typeof row.value === 'string')))) {
+        errors.push(`${label}: nội dung theo khung không hợp lệ.`);
+      }
+    }
     if (!Array.isArray(product?.variants)) {
       errors.push(`${label}: dữ liệu phân loại không hợp lệ.`);
       return;

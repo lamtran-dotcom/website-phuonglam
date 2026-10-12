@@ -77,3 +77,32 @@ test('category order is fixed by the owner and shared by the site data, admin li
   const admin = fs.readFileSync(path.join(root, 'admin-upload.html'), 'utf8').match(/const CATEGORIES = \[([\s\S]*?)\n    \];/)[1];
   assert.deepEqual([...admin.matchAll(/\['([^']+)'/g)].map(m => m[1]), expected);
 });
+
+test('structured content renders a fixed outline whose navigation labels equal the section titles', () => {
+  const { composeDescription, normalizeProductContent } = require('./product_content');
+  const content = {
+    intro: 'Nến viên nhỏ, cháy khoảng 4 giờ.',
+    highlights: ['Không khói', '- Không mùi'],
+    specs: ['Thời gian cháy: khoảng 4 giờ', { label: 'Vỏ', value: 'nhôm' }, 'dòng sai'],
+    steps: ['1. Đặt nến', 'Châm lửa'],
+    care: 'Không để gần vật dễ cháy\n\nBảo quản nơi khô ráo',
+  };
+  const normalized = normalizeProductContent(content);
+  assert.deepEqual(normalized.highlights, ['Không khói', 'Không mùi']);
+  assert.deepEqual(normalized.specs, [{ label: 'Thời gian cháy', value: 'khoảng 4 giờ' }, { label: 'Vỏ', value: 'nhôm' }]);
+  assert.deepEqual(normalized.steps, ['Đặt nến', 'Châm lửa']);
+  assert.equal(normalizeProductContent({ intro: '  ' }), null);
+  assert.match(composeDescription(content), /^Nến viên nhỏ[\s\S]*Thông số:\n- Thời gian cháy: khoảng 4 giờ[\s\S]*Cách dùng:\n1\. Đặt nến/);
+
+  const html = renderProductPage({ product: product({ content, description: 'MÔ TẢ CŨ KHÔNG ĐƯỢC HIỆN' }), categoryName: 'Nến' });
+  const nav = [...html.match(/<nav class="product-content-nav"[\s\S]*?<\/nav>/)[0].matchAll(/>([^<]+)<\/a>/g)].map(m => m[1]);
+  assert.deepEqual(nav, ['Giới thiệu', 'Thông số', 'Cách dùng', 'Lưu ý &amp; bảo quản']);
+  for (const title of ['Giới thiệu', 'Thông số', 'Cách dùng', 'Lưu ý &amp; bảo quản']) assert.match(html, new RegExp(`<h2[^>]*>${title}</h2>`));
+  assert.match(html, /<th scope="row">Thời gian cháy<\/th><td>khoảng 4 giờ<\/td>/);
+  const readingColumn = html.slice(html.indexOf('product-reading-column'), html.indexOf('</main>'));
+  assert.doesNotMatch(readingColumn, /MÔ TẢ CŨ KHÔNG ĐƯỢC HIỆN/);
+  assert.doesNotMatch(html.slice(html.indexOf('const product = ')), /MÔ TẢ CŨ|"content"/, 'buy script must not carry long text');
+
+  const legacy = renderProductPage({ product: product({ description: 'Mô tả tự do cũ.' }), categoryName: 'Nến' });
+  assert.match(legacy, /Mô tả tự do cũ\./);
+});

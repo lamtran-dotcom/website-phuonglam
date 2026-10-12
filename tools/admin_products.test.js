@@ -359,3 +359,20 @@ test('sales editor generates missing combinations without replacing existing var
   assert.equal(run('selectedProduct().variants.length'), 4);
   run('clearTimeout(productDraftTimer)');
 });
+
+test('admin keeps structured content, regenerates the description and leaves other products untouched', () => {
+  const { run } = browser();
+  assert.equal(run("'content' in normalizeProduct(products[1])"), false, 'products without content must not gain a content key');
+  run("selectedId = products[0].id; updateContentField('intro', 'Nến viên nhỏ.'); updateContentField('highlights', 'Không khói\\n- Không mùi'); updateContentField('specs', 'Vỏ: nhôm\\nsai'); updateContentField('steps', '1. Đặt nến\\nChâm lửa'); updateContentField('care', 'Để xa trẻ em')");
+  assert.deepEqual(JSON.parse(run('JSON.stringify(normalizeProduct(products[0]).content)')), { intro: 'Nến viên nhỏ.', highlights: ['Không khói', 'Không mùi'], specs: [{ label: 'Vỏ', value: 'nhôm' }], steps: ['Đặt nến', 'Châm lửa'], care: ['Để xa trẻ em'] });
+  assert.match(run('products[0].description'), /^Nến viên nhỏ\.\n\nĐiểm nổi bật:\n- Không khói/);
+  run('clearTimeout(productDraftTimer)');
+});
+
+test('server rejects malformed structured content', t => {
+  const { validateProducts } = fixture(t);
+  const base = { id: 'a', name: 'A', categoryId: 'nen-thom', price: 1000, images: [], variants: [] };
+  assert.deepEqual(validateProducts([{ ...base, content: { intro: 'x', highlights: ['a'], specs: [{ label: 'Vỏ', value: 'nhôm' }], steps: [], care: [] } }]), []);
+  assert.ok(validateProducts([{ ...base, content: { intro: 'x', highlights: 'not a list' } }]).some(e => /nội dung theo khung/.test(e)));
+  assert.ok(validateProducts([{ ...base, content: { intro: 'x', specs: [['Vỏ', 'nhôm']] } }]).some(e => /nội dung theo khung/.test(e)));
+});
