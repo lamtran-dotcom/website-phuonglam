@@ -2,7 +2,7 @@
 
 ## Now
 - [x] Rewrite product pages into the structured outline + SEO fields (2026-10-12).
-- [ ] Seller to confirm: tealight mica pack sizes, tealight 2h Mai box count/SKU, Bộ phụ kiện variants, nến ly nơ đại burn time, combo thảo mộc package names.
+- [x] Seller confirmed (2026-10-12): mica tealight follows its 5/10/20/50 variants; 2h Mai box is 100 viên; Bộ phụ kiện variants correct; nơ đại = 120 giờ; combo package names kept; "- bản sao" product stays as is.
 - [ ] Decide on the 3 hidden placeholder reviews (delete or keep hidden).
 - [x] Review and push branch `audit/2026-10` (2026-10-08).
 - [x] Hidden products: noindex + removed from sitemap, pages kept (2026-10-08).
