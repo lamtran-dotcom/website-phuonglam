@@ -15,13 +15,17 @@ export default {
       const order = await request.json();
       const orderId = createOrderId();
 
-      // Message 1: delivery details. <code> makes each value copy on tap in Telegram.
+      // Message 1: delivery details. <code> makes each value copy on tap in Telegram;
+      // blank lines between the copyable rows keep taps from landing on the wrong one.
       const delivery = [
         `🛒 <b>ĐƠN MỚI #${orderId}</b>`,
         "",
         `Tên: <code>${html(order.customerName)}</code>`,
+        "",
         `SĐT: <code>${html(order.phone)}</code>`,
+        "",
         `Địa chỉ: <code>${html(order.address)}</code>`,
+        "",
         `Giao: ${html(order.deliveryMethod)}`,
       ];
       if (order.note) delivery.push(`Ghi chú: ${html(order.note)}`);
