@@ -1,5 +1,49 @@
 [
   {
+    "id": "huong-dan-xong/cho-bao-nhieu-thao-moc-vao-bep-nieu",
+    "category": "huong-dan-xong",
+    "slug": "cho-bao-nhieu-thao-moc-vao-bep-nieu",
+    "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
+    "url": "/blog/huong-dan-xong/cho-bao-nhieu-thao-moc-vao-bep-nieu/",
+    "publishAt": "2026-10-13T14:55:00.000Z",
+    "createdAt": "2026-10-13T14:03:44.480Z",
+    "publishedAt": "2026-10-13T15:18:48.653Z",
+    "status": "published"
+  },
+  {
+    "id": "huong-dan-xong/cach-xong-nha-bang-thao-moc",
+    "category": "huong-dan-xong",
+    "slug": "cach-xong-nha-bang-thao-moc",
+    "title": "Cách xông nhà bằng thảo mộc để khử mùi, tạo cảm giác dễ chịu",
+    "url": "/blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/",
+    "publishAt": "2026-10-13T15:11:00.000Z",
+    "createdAt": "2026-10-13T14:03:53.230Z",
+    "publishedAt": "2026-10-13T15:18:48.653Z",
+    "status": "published"
+  },
+  {
+    "id": "huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi",
+    "category": "huong-dan-xong",
+    "slug": "bo-xong-thao-moc-bao-gom-nhung-gi",
+    "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm",
+    "url": "/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/",
+    "publishAt": "2026-10-13T14:11:00.000Z",
+    "createdAt": "2026-10-13T14:02:02.018Z",
+    "publishedAt": "2026-10-13T15:18:48.653Z",
+    "status": "published"
+  },
+  {
+    "id": "huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
+    "category": "huong-dan-xong",
+    "slug": "bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
+    "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
+    "url": "/blog/huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu/",
+    "publishAt": "2026-10-13T14:25:00.000Z",
+    "createdAt": "2026-10-13T14:02:11.089Z",
+    "publishedAt": "2026-10-13T15:18:48.653Z",
+    "status": "published"
+  },
+  {
     "id": "huong-dan-xong/dung-bep-xong-phong-nho",
     "category": "huong-dan-xong",
     "slug": "dung-bep-xong-phong-nho",
@@ -19,17 +63,6 @@
     "publishAt": "2026-10-09T10:13:00.000Z",
     "createdAt": "2026-10-09T10:03:10.928Z",
     "publishedAt": "2026-10-09T10:25:57.256Z",
-    "status": "published"
-  },
-  {
-    "id": "huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
-    "category": "huong-dan-xong",
-    "slug": "bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
-    "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
-    "url": "/blog/huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu/",
-    "publishAt": "2026-08-14T03:40:00.000Z",
-    "createdAt": "2026-08-10T03:41:00.033Z",
-    "publishedAt": "2026-08-14T04:59:21.899Z",
     "status": "published"
   },
   {

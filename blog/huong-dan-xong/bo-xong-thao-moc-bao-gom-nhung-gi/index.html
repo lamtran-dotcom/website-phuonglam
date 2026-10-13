@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm","description":"Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.","image":["https://phuonglam.com/assets/blog/bo-xong-thao-moc-bao-gom-nhung-gi-1779856667249-1-sdad.webp"],"url":"https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/","datePublished":"2026-05-27T11:37:47+07:00","dateModified":"2026-05-27T11:37:47+07:00","author":{"@type":"Organization","name":"Phương Lâm"},"publisher":{"@type":"Organization","name":"Phương Lâm"},"mainEntityOfPage":"https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/"}</script>
+      <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm","description":"Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.","image":["https://phuonglam.com/assets/blog/bo-xong-thao-moc-bao-gom-nhung-gi-1779856667249-1-sdad.webp"],"url":"https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/","datePublished":"2026-05-27T11:37:47+07:00","dateModified":"2026-10-13T21:02:02+07:00","author":{"@type":"Organization","name":"Phương Lâm"},"publisher":{"@type":"Organization","name":"Phương Lâm"},"mainEntityOfPage":"https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/"}</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -104,7 +104,7 @@
     .article-figure img {
       display: block;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 4 / 3;
       height: auto;
       object-fit: cover;
       border-radius: 14px;
@@ -117,6 +117,9 @@
       font-size: 12px;
       line-height: 1.5;
       text-align: center;
+    }
+    article > .article-figure:first-of-type img {
+      aspect-ratio: 16 / 9;
     }
     @media (max-width: 640px) {
       .article-figure {
@@ -140,36 +143,32 @@
     }
     .article-breadcrumb a { color: #318223; font-weight: 800; text-decoration: none; }
     .article-breadcrumb a:hover { text-decoration: underline; }
-    .article-link-panel {
-      margin: 52px 0 0;
-      padding: 24px;
-      border: 1px solid #dde8d8;
-      border-radius: 16px;
-      background: #f7fbf5;
-    }
+    .article-link-panel { margin: 48px 0 0; }
     .article-link-panel h2 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       font-size: 20px;
       line-height: 1.35;
       color: #17351a;
     }
+    .article-link-panel h2 + .article-link-grid { margin-top: 0; }
     .article-link-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin: 0 0 22px;
+      gap: 8px;
+      margin: 0 0 32px;
     }
     .article-link-card {
       display: block;
       border: 1px solid #dbe8d7;
-      border-radius: 12px;
-      background: #fff;
-      padding: 13px 14px;
+      border-radius: 8px;
+      background: #fbfdf9;
+      padding: 10px 12px;
       color: #21351f !important;
       text-decoration: none !important;
-      font-weight: 900 !important;
+      font-size: 13px;
+      font-weight: 800 !important;
       line-height: 1.35;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      transition: border-color .18s ease, background .18s ease;
     }
     .article-link-card span {
       display: block;
@@ -179,32 +178,130 @@
       margin-top: 4px;
     }
     .article-link-card:hover {
-      transform: translateY(-2px);
       border-color: rgba(49, 130, 35, .35);
-      box-shadow: 0 12px 24px rgba(22, 63, 22, .12);
+      background: #f2f8ef;
     }
-    .article-related-list {
+    .article-related-grid {
       display: grid;
-      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
       margin: 0;
       padding: 0;
       list-style: none;
     }
-    .article-related-list a {
+    .article-related-card {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 12px;
+      min-height: 86px;
+      box-sizing: border-box;
+      border: 1px solid #dbe8d7;
+      border-radius: 8px;
+      background: #fff;
+      text-decoration: none !important;
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .article-related-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(49, 130, 35, .35);
+      box-shadow: 0 12px 24px rgba(22, 63, 22, .10);
+    }
+    .article-related-card img {
       display: block;
-      color: #318223 !important;
+      width: 112px;
+      height: 84px;
+      object-fit: cover;
+      background: #edf3e9;
+    }
+    .article-related-copy {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8px 10px 8px 0;
+    }
+    .article-related-meta {
+      color: #6e796b;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .article-related-title {
+      display: -webkit-box;
+      margin-top: 4px;
+      overflow: hidden;
+      color: #246f1f;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.35;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .article-more-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: #246f1f !important;
+      font-size: 13px;
       font-weight: 800 !important;
       text-decoration: none !important;
-      line-height: 1.45;
     }
-    .article-related-list a:hover { text-decoration: underline !important; }
+    .article-more-link:hover { text-decoration: underline !important; }
+    article .cta-block {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "heading action"
+        "copy action";
+      align-items: center;
+      gap: 16px;
+      margin-top: 42px !important;
+      padding: 24px !important;
+      border-color: #dbe8d7 !important;
+      text-align: left !important;
+    }
+    article .cta-block h2, article .cta-block h3 {
+      grid-area: heading !important;
+      margin: 0 0 6px !important;
+      font-size: 20px !important;
+      line-height: 1.35 !important;
+    }
+    article .cta-block > p {
+      grid-area: copy !important;
+      margin: 0 !important;
+    }
+    article .cta-block > p:first-child {
+      grid-area: heading !important;
+      margin: 0 0 6px !important;
+      font-size: 20px !important;
+      font-weight: 800 !important;
+      line-height: 1.35 !important;
+    }
+    article .cta-block .btn-cta {
+      grid-area: action !important;
+      display: inline-flex !important;
+      width: auto !important;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      margin: 0 !important;
+      padding: 10px 16px !important;
+      border-radius: 8px !important;
+      font-size: 14px !important;
+      white-space: nowrap;
+    }
     @media (max-width: 720px) {
       .article-wrap { width: min(100% - 28px, 820px); }
-      .article-link-panel { padding: 18px; }
       .article-link-grid { grid-template-columns: 1fr; }
+      .article-related-grid { grid-template-columns: 1fr; }
+      article .cta-block {
+        grid-template-columns: 1fr;
+        grid-template-areas: "heading" "copy" "action";
+      }
+      article .cta-block .btn-cta { width: 100% !important; }
     }
   </style>
-            <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://phuonglam.com"},{"@type":"ListItem","position":2,"name":"Hướng Dẫn","item":"https://phuonglam.com/blog/"},{"@type":"ListItem","position":3,"name":"Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm","item":"https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/"}]}</script>
+              <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Trang chủ","item":"https://phuonglam.com"},{"@type":"ListItem","position":2,"name":"Hướng Dẫn","item":"https://phuonglam.com/blog/"},{"@type":"ListItem","position":3,"name":"Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm","item":"https://phuonglam.com/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/"}]}</script>
 </head>
 <body>
   <header class="seo-header">
@@ -265,9 +362,7 @@
         <p>
           Một <strong>bộ xông nhà thảo mộc</strong> cơ bản thường được thiết kế để người dùng có thể mở ra và dùng ngay. Thay vì chỉ mua thảo mộc khô, một bộ hoàn chỉnh cần có dụng cụ tạo nhiệt, phần nguyên liệu thơm và nguồn nhiệt phù hợp. Với các combo xông nhà của Phương Lâm, hình ảnh sản phẩm thể hiện rõ tinh thần mộc mạc: bếp xông đất nung, gói thảo mộc, nến tealight và túi/hũ đựng đi kèm.
         </p>
-        <p>
-          Về cơ bản, bạn có thể hiểu bộ xông thảo mộc gồm bốn nhóm chính:
-        </p>
+        <p>Vậy thảo mộc xông nhà gồm những gì? Tùy công thức, các nguyên liệu thường có thể gồm bồ kết, sả, quế, gừng, đại hồi, vỏ bưởi hoặc cam khô, bạc hà và nguyệt quế. Mỗi loại có mùi hương riêng; bạn có thể chọn thảo mộc phối sẵn hoặc mua từng loại để tự phối theo sở thích.</p>
         <ul>
           <li><strong>Bếp xông thảo mộc:</strong> thường là bếp đất nung hoặc dạng niêu nhỏ, dùng để đặt thảo mộc phía trên và nến bên dưới.</li>
           <li><strong>Thảo mộc xông nhà:</strong> có thể là bồ kết, vỏ bưởi, sả, quế, gừng, bạc hà, khuynh diệp, cam khô hoặc công thức phối sẵn.</li>

@@ -3987,6 +3987,54 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 23,
+    "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
+    "excerpt": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu? Xem cách định lượng theo bếp, diện tích phòng và xử lý khi mùi xông quá nồng, cháy khét.",
+    "date": "10 tháng 8, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cho-bao-nhieu-thao-moc-vao-bep-nieu",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cho-bao-nhieu-thao-moc-vao-bep-nieu/",
+    "image": "https://phuonglam.com/assets/blog/cho-bao-nhieu-thao-moc-vao-bep-nieu-1786331158307-1-chatgpt-image-10-02-57-10-thg-8-2026.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/cho-bao-nhieu-thao-moc-vao-bep-nieu-1786331158307-1-chatgpt-image-10-02-57-10-thg-8-2026.webp"
+  },
+  {
+    "id": 18,
+    "title": "Cách xông nhà bằng thảo mộc để khử mùi, tạo cảm giác dễ chịu",
+    "excerpt": "Cách xông nhà bằng thảo mộc đơn giản, an toàn với bếp xông và nến tealight. Xem cách chuẩn bị, thao tác và lưu ý cho không gian dễ chịu.",
+    "date": "15 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cach-xong-nha-bang-thao-moc",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/",
+    "image": "https://phuonglam.com/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp"
+  },
+  {
+    "id": 17,
+    "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm",
+    "excerpt": "Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.",
+    "date": "27 tháng 5, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "bo-xong-thao-moc-bao-gom-nhung-gi",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/",
+    "image": "https://phuonglam.com/assets/blog/bo-xong-thao-moc-bao-gom-nhung-gi-1779856667249-1-sdad.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/bo-xong-thao-moc-bao-gom-nhung-gi-1779856667249-1-sdad.webp"
+  },
+  {
+    "id": 24,
+    "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
+    "excerpt": "Bộ xông nhà cho người mới cần những gì? Xem checklist bếp niêu, nến tealight, thảo mộc và phụ kiện để chuẩn bị xông nhà lần đầu gọn gàng.",
+    "date": "14 tháng 8, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu/",
+    "image": "https://phuonglam.com/assets/blog/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu-1786333259796-1-chatgpt-image-10-36-01-10-thg-8-2026.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu-1786333259796-1-chatgpt-image-10-36-01-10-thg-8-2026.webp"
+  },
+  {
     "id": 26,
     "title": "Cách dùng bếp xông thảo mộc trong phòng nhỏ",
     "excerpt": "Cách dùng bếp xông thảo mộc trong phòng nhỏ: chọn chỗ thoáng, bắt đầu với lượng ít và theo dõi mùi hương. Đọc hướng dẫn để dùng phù hợp.",
@@ -4009,30 +4057,6 @@ const BLOG_POSTS = [
     "url": "/blog/huong-dan-xong/cach-chon-nen-tealight-4-gio-khong-khoi/",
     "image": "/assets/blog/cach-chon-nen-tealight-4-gio-khong-khoi-1791540190592-1-nen-tealight-4-gio-khong-khoi-chua-chay-dat-canh-bep-xong-th.webp",
     "coverImage": "/assets/blog/cach-chon-nen-tealight-4-gio-khong-khoi-1791540190592-1-nen-tealight-4-gio-khong-khoi-chua-chay-dat-canh-bep-xong-th.webp"
-  },
-  {
-    "id": 24,
-    "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
-    "excerpt": "Bộ xông nhà cho người mới cần những gì? Xem checklist bếp niêu, nến tealight, thảo mộc và phụ kiện để chuẩn bị xông nhà lần đầu gọn gàng.",
-    "date": "14 tháng 8, 2026",
-    "readTime": "3 phút đọc",
-    "slug": "bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
-    "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu/",
-    "image": "/assets/blog/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu-1786333259796-1-chatgpt-image-10-36-01-10-thg-8-2026.webp",
-    "coverImage": "/assets/blog/bo-xong-nha-cho-nguoi-moi-dung-bep-nieu-1786333259796-1-chatgpt-image-10-36-01-10-thg-8-2026.webp"
-  },
-  {
-    "id": 23,
-    "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
-    "excerpt": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu? Xem cách định lượng theo bếp, diện tích phòng và xử lý khi mùi xông quá nồng, cháy khét.",
-    "date": "10 tháng 8, 2026",
-    "readTime": "3 phút đọc",
-    "slug": "cho-bao-nhieu-thao-moc-vao-bep-nieu",
-    "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/cho-bao-nhieu-thao-moc-vao-bep-nieu/",
-    "image": "/assets/blog/cho-bao-nhieu-thao-moc-vao-bep-nieu-1786331158307-1-chatgpt-image-10-02-57-10-thg-8-2026.webp",
-    "coverImage": "/assets/blog/cho-bao-nhieu-thao-moc-vao-bep-nieu-1786331158307-1-chatgpt-image-10-02-57-10-thg-8-2026.webp"
   },
   {
     "id": 22,
@@ -4081,29 +4105,6 @@ const BLOG_POSTS = [
     "url": "/blog/huong-dan-xong/nen-tealight-khong-mui-dung-cho-khong-gian-nao/",
     "image": "/assets/blog/nen-tealight-khong-mui-dung-cho-khong-gian-nao-1784208721785-1-chatgpt-image-11-00-19-18-thg-5-2026.webp",
     "coverImage": "/assets/blog/nen-tealight-khong-mui-dung-cho-khong-gian-nao-1784208721785-1-chatgpt-image-11-00-19-18-thg-5-2026.webp"
-  },
-  {
-    "id": 18,
-    "title": "Cách xông nhà bằng thảo mộc để khử mùi, tạo cảm giác dễ chịu",
-    "excerpt": "Cách xông nhà bằng thảo mộc đơn giản, an toàn với bếp xông và nến tealight. Xem cách chuẩn bị, thao tác và lưu ý cho không gian dễ chịu.",
-    "date": "15 tháng 7, 2026",
-    "readTime": "3 phút đọc",
-    "slug": "cach-xong-nha-bang-thao-moc",
-    "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/cach-xong-nha-bang-thao-moc/",
-    "image": "/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp",
-    "coverImage": "/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp"
-  },
-  {
-    "id": 17,
-    "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm",
-    "excerpt": "Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.",
-    "date": "27 tháng 5, 2026",
-    "readTime": "3 phút đọc",
-    "slug": "bo-xong-thao-moc-bao-gom-nhung-gi",
-    "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/bo-xong-thao-moc-bao-gom-nhung-gi/",
-    "image": "/assets/blog/bo-xong-thao-moc-bao-gom-nhung-gi-1779856667249-1-sdad.webp"
   },
   {
     "id": 16,
