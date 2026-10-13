@@ -441,7 +441,7 @@ const publishBranch = () => {
   if (process.env.PHUONGLAM_PUBLISH_BRANCH) return process.env.PHUONGLAM_PUBLISH_BRANCH;
   const remoteHead = runGit(['ls-remote', '--symref', 'origin', 'HEAD']);
   const match = remoteHead.ok && remoteHead.output.match(/^ref: refs\/heads\/(\S+)\s+HEAD/m);
-  return match ? match[1] : 'main';
+  return match ? match[1] : (gitSummary().branch || 'main');
 };
 
 // After a publish, move this checkout to the published commit, but only when nothing is lost:
