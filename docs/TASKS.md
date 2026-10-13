@@ -1,16 +1,17 @@
 # Tasks
 
 ## Now
+- [ ] Decide whether to merge `feat/shopee-import` (importer tool + copy, unpushed).
 - [x] Rewrite product pages into the structured outline + SEO fields (2026-10-12).
 - [x] Seller confirmed (2026-10-12): mica tealight follows its 5/10/20/50 variants; 2h Mai box is 100 viên; Bộ phụ kiện variants correct; nơ đại = 120 giờ; combo package names kept; "- bản sao" product stays as is.
-- [ ] Decide on the 3 hidden placeholder reviews (delete or keep hidden).
+- [x] Deleted the template placeholder reviews (2026-10-12).
 - [x] Review and push branch `audit/2026-10` (2026-10-08).
 - [x] Hidden products: noindex + removed from sitemap, pages kept (2026-10-08).
-- [ ] Decide with seller: "- bản sao" product `p_1791429972397_g7kgf` sits in Thảo mộc xông and bestsellers while the original `shopee_54367578815` is in Túi thơm; rename, hide, or support multiple categories.
+- [x] Seller keeps as is (2026-10-12): "- bản sao" product `p_1791429972397_g7kgf` sits in Thảo mộc xông and bestsellers while the original `shopee_54367578815` is in Túi thơm; rename, hide, or support multiple categories.
 - [x] Hide internal files from GitHub Pages via `_config.yml` (2026-10-08).
 - [x] Apply approved P2 items A1–A10 (2026-10-08).
 - [ ] **Owner: change the password that was hard-coded in app.jsx wherever it is used.**
-- [ ] Update the Desktop checkout to origin/main before running the admin again (it still runs the old admin).
+- [x] Desktop checkout synced to origin/main (2026-10-12).
 - [ ] Optional: delete unused `assets/media/generated/shipping-promo-popup-v1.png` (2 MB) and `embedded-020.jpg`.
 - [ ] Review the order Worker re-validates prices (A12).
 - [ ] Seller to supply unique SKUs for `shopee_22080262041` variants.
