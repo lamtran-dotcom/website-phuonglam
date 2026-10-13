@@ -3987,6 +3987,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 26,
+    "title": "Cách dùng bếp xông thảo mộc trong phòng nhỏ",
+    "excerpt": "Cách dùng bếp xông thảo mộc trong phòng nhỏ: chọn chỗ thoáng, bắt đầu với lượng ít và theo dõi mùi hương. Đọc hướng dẫn để dùng phù hợp.",
+    "date": "13 tháng 10, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "dung-bep-xong-phong-nho",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/dung-bep-xong-phong-nho/",
+    "image": "/assets/blog/dung-bep-xong-phong-nho-1791620417739-1-bep-xong-thao-moc-dat-nung-va-nen-chua-chay-trong-phong-nho.webp",
+    "coverImage": "/assets/blog/dung-bep-xong-phong-nho-1791620417739-1-bep-xong-thao-moc-dat-nung-va-nen-chua-chay-trong-phong-nho.webp"
+  },
+  {
     "id": 25,
     "title": "Cách chọn nến tealight 4 giờ không khói cho bếp xông",
     "excerpt": "Nến tealight 4 giờ không khói giúp bạn xông thảo mộc thuận tiện hơn. Tìm hiểu cách chọn theo bếp, kiểm tra thời lượng và dùng đúng cách cho người mới.",
