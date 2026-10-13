@@ -2069,7 +2069,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
   };
   const removeItem = (cartKey) => setCart(prev => prev.filter(item => getCartItemKey(item) !== cartKey));
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const shippingInfo = calculateShipping(cart, { subtotal });
+  const shippingInfo = calculateShipping(cart);
   const shipping = shippingInfo.fee;
   const total = subtotal + shipping;
 
@@ -2173,7 +2173,7 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
             </span>
           </div>
           <div style={cartStyles.freeShipNote}>
-            Tạm tính theo {formatWeight(shippingInfo.weight)}. Phí cuối cùng sẽ cập nhật theo địa chỉ và hình thức giao hàng.
+            Phí vận chuyển cuối cùng cập nhật theo địa chỉ và hình thức giao ở bước đặt hàng.
           </div>
           <div style={cartStyles.divider} />
           <div style={{ ...cartStyles.summaryRow, fontWeight: 700, fontSize: 17 }}>
@@ -2285,6 +2285,48 @@ const normalizeAddressText = (value) => (value || '')
   .replace(/đ/g, 'd')
   .replace(/[^a-z0-9]/g, '');
 
+// Typed names that should resolve to a province in PROVINCE_OPTIONS.
+const PROVINCE_ALIASES = {
+  tphcm: 'TP.HCM', hcm: 'TP.HCM', hochiminh: 'TP.HCM', tphochiminh: 'TP.HCM', thanhphohochiminh: 'TP.HCM',
+  hochiminhcity: 'TP.HCM', saigon: 'TP.HCM', sg: 'TP.HCM',
+  hn: 'Hà Nội', tphanoi: 'Hà Nội', thanhphohanoi: 'Hà Nội',
+  hue: 'Thừa Thiên Huế', tphue: 'Thừa Thiên Huế', thanhphohue: 'Thừa Thiên Huế',
+  vungtau: 'Bà Rịa - Vũng Tàu', bariavungtau: 'Bà Rịa - Vũng Tàu', brvt: 'Bà Rịa - Vũng Tàu',
+  tpdanang: 'Đà Nẵng', tpcantho: 'Cần Thơ', tphaiphong: 'Hải Phòng',
+};
+
+// Returns the canonical option for typed text (accents, spacing and "Tỉnh"/"TP" prefixes ignored), or ''.
+const matchAddressOption = (value, options) => {
+  const typed = normalizeAddressText(value);
+  if (!typed) return '';
+  const stripped = typed.replace(/^(tinh|thanhpho|tp|quan|huyen|thixa|phuong|xa|thitran)/, '');
+  const exact = options.find(option => [typed, stripped].includes(normalizeAddressText(option))
+    || [typed, stripped].includes(normalizeAddressText(option).replace(/^(quan|huyen|thanhpho|thixa|phuong|xa|thitran)/, '')));
+  if (exact) return exact;
+  const alias = PROVINCE_ALIASES[typed] || PROVINCE_ALIASES[stripped];
+  return alias && options.includes(alias) ? alias : '';
+};
+
+// Accepts spaces, dots, dashes and +84/84 prefixes; returns a 0xxxxxxxxx number or the cleaned input.
+const normalizePhone = (value) => {
+  const digits = String(value || '').replace(/[^\d+]/g, '');
+  if (/^\+?84\d{9}$/.test(digits)) return `0${digits.replace(/^\+?84/, '')}`;
+  return digits.replace(/\+/g, '');
+};
+
+const CHECKOUT_PROFILE_KEY = 'phuonglam-checkout-profile';
+const CHECKOUT_PROFILE_FIELDS = ['name', 'phone', 'city', 'district', 'ward', 'address'];
+
+const loadCheckoutProfile = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CHECKOUT_PROFILE_KEY) || 'null');
+    if (!saved || typeof saved !== 'object') return {};
+    return Object.fromEntries(CHECKOUT_PROFILE_FIELDS.map(key => [key, typeof saved[key] === 'string' ? saved[key] : '']));
+  } catch {
+    return {};
+  }
+};
+
 const isHoChiMinhCity = (value) => {
   const normalized = normalizeAddressText(value);
   return ['tphcm', 'hcm', 'hochiminh', 'hochiminhcity', 'saigon'].includes(normalized);
@@ -2321,34 +2363,38 @@ const getShippingRegion = (city) => {
   return 'south';
 };
 
+// Fee settings come from data/settings.json (`shipping`, edited in the admin); the build bakes them here.
+const BAKED_SHIPPING = /*BAKED_SHIPPING*/{"hcmFreeWeight":5000,"otherFreeWeight":3000,"firstKgFee":16000,"extraKgFee":4000,"expressFee":15000,"defaultItemWeight":500}/*END_BAKED_SHIPPING*/;
 const SHIPPING_RULES = {
-  overweightFee: 16000,
-  extraStepWeight: 1000,
-  extraStepFee: 4000,
-  urgentFee: 15000,
-  freeWeightLimit: {
-    in_hcm: 5000,
-    outside_hcm: 3000,
-  },
+  hcmFreeWeight: 5000,
+  otherFreeWeight: 3000,
+  firstKgFee: 16000,
+  extraKgFee: 4000,
+  expressFee: 15000,
+  defaultItemWeight: 500,
+  ...BAKED_SHIPPING,
 };
+const SHIPPING_STEP_WEIGHT = 1000;
 
 const getCartWeight = (cart) => cart.reduce((sum, item) => {
-  const itemWeight = Number(item.weight) > 0 ? Number(item.weight) : 500;
+  const itemWeight = Number(item.weight) > 0 ? Number(item.weight) : SHIPPING_RULES.defaultItemWeight;
   return sum + itemWeight * item.qty;
 }, 0);
 
-const calculateShipping = (cart, { city = '', deliveryMethod = 'standard', subtotal = 0 } = {}) => {
+// Free up to the area's weight limit; above it, the first started kg costs firstKgFee
+// and every further started kg costs extraKgFee. Express adds a flat fee.
+const calculateShipping = (cart, { city = '', deliveryMethod = 'standard' } = {}) => {
   if (!cart.length) return { fee: 0, weight: 0, baseShippingFee: 0, urgentShippingFee: 0, area: 'outside_hcm' };
   const weight = getCartWeight(cart);
   const area = isHoChiMinhCity(city) ? 'in_hcm' : 'outside_hcm';
-  const freeWeightLimit = SHIPPING_RULES.freeWeightLimit[area];
+  const freeWeightLimit = area === 'in_hcm' ? SHIPPING_RULES.hcmFreeWeight : SHIPPING_RULES.otherFreeWeight;
   const overweight = Math.max(0, weight - freeWeightLimit);
-  const extraWeightAfterFirstKg = Math.max(0, overweight - SHIPPING_RULES.extraStepWeight);
+  const extraWeightAfterFirstKg = Math.max(0, overweight - SHIPPING_STEP_WEIGHT);
   const extraStepFee = overweight > 0
-    ? Math.ceil(extraWeightAfterFirstKg / SHIPPING_RULES.extraStepWeight) * SHIPPING_RULES.extraStepFee
+    ? Math.ceil(extraWeightAfterFirstKg / SHIPPING_STEP_WEIGHT) * SHIPPING_RULES.extraKgFee
     : 0;
-  const baseShippingFee = overweight > 0 ? SHIPPING_RULES.overweightFee + extraStepFee : 0;
-  const urgentShippingFee = deliveryMethod === 'express' ? SHIPPING_RULES.urgentFee : 0;
+  const baseShippingFee = overweight > 0 ? SHIPPING_RULES.firstKgFee + extraStepFee : 0;
+  const urgentShippingFee = deliveryMethod === 'express' ? SHIPPING_RULES.expressFee : 0;
   return {
     fee: baseShippingFee + urgentShippingFee,
     weight,
@@ -2361,12 +2407,11 @@ const calculateShipping = (cart, { city = '', deliveryMethod = 'standard', subto
   };
 };
 
-const formatWeight = (grams) => grams >= 1000
-  ? `${(grams / 1000).toLocaleString('vi-VN', { maximumFractionDigits: 1 })}kg`
-  : `${grams}g`;
 
 
-const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setErrors, type = 'text', multiline = false }) => {
+const CHECKOUT_AUTOCOMPLETE = { name: 'name', phone: 'tel', address: 'street-address', note: 'off' };
+
+const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setErrors, type = 'text', multiline = false, onCommit }) => {
   const ref = React.useRef(null);
   React.useLayoutEffect(() => {
     if (ref.current && ref.current !== document.activeElement) {
@@ -2374,29 +2419,41 @@ const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setError
     }
   });
 
+  // Sync on every change, not only on blur, so browser autofill of unfocused fields is kept.
   const syncValue = (value) => {
     setForm(f => ({ ...f, [id]: value }));
     setErrors(er => ({ ...er, [id]: '' }));
   };
+  const commitValue = (value) => {
+    const next = onCommit ? onCommit(value) : value;
+    if (ref.current && next !== value) ref.current.value = next;
+    syncValue(next);
+  };
+  const inputProps = {
+    ref,
+    id: `checkout-${id}`,
+    name: id,
+    placeholder,
+    autoComplete: CHECKOUT_AUTOCOMPLETE[id] || 'off',
+    defaultValue: form[id] || '',
+    onChange: e => syncValue(e.target.value),
+    onBlur: e => commitValue(e.target.value),
+  };
 
   return (
     <div style={coStyles.field}>
-      <label style={coStyles.label}>{label}</label>
+      <label style={coStyles.label} htmlFor={`checkout-${id}`}>{label}</label>
       {multiline
         ? <textarea
-            ref={ref}
-            style={{ ...coStyles.input, height: 80, resize: 'vertical', borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
-            placeholder={placeholder}
-            defaultValue={form[id] || ''}
-            onBlur={e => syncValue(e.target.value)}
+            {...inputProps}
+            rows={2}
+            style={{ ...coStyles.input, minHeight: 64, resize: 'vertical', borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
           />
         : <input
-            ref={ref}
+            {...inputProps}
             style={{ ...coStyles.input, borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
             type={type}
-            placeholder={placeholder}
-            defaultValue={form[id] || ''}
-            onBlur={e => syncValue(e.target.value)}
+            inputMode={type === 'tel' ? 'tel' : undefined}
           />
       }
       {errors[id] && <span style={coStyles.error}>{errors[id]}</span>}
@@ -2431,27 +2488,49 @@ const CheckoutSuggestField = ({ id, label, options, placeholder, form, setForm, 
     }
   });
 
+  // Typing updates the form immediately; dependants (district, ward) reset only when the committed value changes.
+  const committed = React.useRef(form[id] || '');
   const syncValue = (value) => {
     setQuery(value);
     setForm(f => ({ ...f, [id]: value }));
     setErrors(er => ({ ...er, [id]: '' }));
+    if (value === committed.current) return;
+    committed.current = value;
     if (onValueChange) onValueChange(value);
+  };
+  const choose = (option) => {
+    if (ref.current) ref.current.value = option;
+    syncValue(option);
+    setOpen(false);
   };
 
   return (
     <div style={coStyles.field}>
-      <label style={coStyles.label}>{label}</label>
+      <label style={coStyles.label} htmlFor={`checkout-${id}`}>{label}</label>
       <input
         ref={ref}
+        id={`checkout-${id}`}
+        name={id}
         style={{ ...coStyles.input, background: disabled ? '#f7f7f5' : '#fff', borderColor: errors[id] ? '#e84848' : '#e8e8e8', cursor: disabled ? 'not-allowed' : 'text' }}
         type="text"
         defaultValue={form[id] || ''}
         disabled={disabled}
         placeholder={placeholder}
         autoComplete="off"
+        enterKeyHint="next"
         onFocus={() => setOpen(true)}
+        onKeyDown={e => {
+          if (e.key === 'Enter' && open && query.trim() && filteredOptions.length > 0) {
+            e.preventDefault();
+            choose(filteredOptions[0]);
+          }
+        }}
         onBlur={e => {
-          syncValue(e.target.value);
+          // Snap "ha noi", "hcm", "q1"-style input to the listed spelling so region rules match.
+          const typed = e.target.value.trim();
+          const matched = matchAddressOption(typed, options);
+          if (matched && ref.current) ref.current.value = matched;
+          syncValue(matched || typed);
           setTimeout(() => setOpen(false), 120);
         }}
         onChange={e => {
@@ -2470,9 +2549,7 @@ const CheckoutSuggestField = ({ id, label, options, placeholder, form, setForm, 
               style={coStyles.suggestItem}
               onMouseDown={e => {
                 e.preventDefault();
-                if (ref.current) ref.current.value = option;
-                syncValue(option);
-                setOpen(false);
+                choose(option);
               }}
             >
               {option}
@@ -2490,7 +2567,8 @@ const CheckoutSuggestField = ({ id, label, options, placeholder, form, setForm, 
 const CheckoutPage = ({ cart, setCart, setPage }) => {
   const isMobile = useIsMobile();
   const [step, setStep] = React.useState(1); // 1=info, 2=confirm, 3=success
-  const [form, setForm] = React.useState({ name: '', phone: '', city: '', district: '', ward: '', address: '', note: '' });
+  const [form, setForm] = React.useState(() => ({ name: '', phone: '', city: '', district: '', ward: '', address: '', note: '', ...loadCheckoutProfile() }));
+  const [rememberProfile, setRememberProfile] = React.useState(true);
   const [deliveryMethod, setDeliveryMethod] = React.useState('standard');
   const [errors, setErrors] = React.useState({});
   const [orderSending, setOrderSending] = React.useState(false);
@@ -2504,12 +2582,11 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   const selectedDeliveryMethod = deliveryMethod;
   const deliveryMethodLabel = selectedDeliveryMethod === 'express' ? 'Hỏa tốc' : 'Giao thường';
   const deliveryNote = selectedDeliveryMethod === 'express'
-    ? 'Hỏa tốc: dự kiến 1–4 giờ, áp dụng cho địa chỉ nội thành TP.HCM.'
+    ? 'Hỏa tốc: giao trong 1 giờ, áp dụng cho địa chỉ nội thành TP.HCM.'
     : getStandardDeliveryNote(form.city);
   const shippingInfo = calculateShipping(cart, {
     city: form.city,
     deliveryMethod: selectedDeliveryMethod,
-    subtotal,
   });
   const shipping = shippingInfo.fee;
   const total = subtotal + shipping;
@@ -2522,13 +2599,34 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 
   const validate = () => {
     const e = {};
+    const phone = normalizePhone(form.phone);
+    const city = matchAddressOption(form.city, PROVINCE_OPTIONS);
     if (!form.name.trim()) e.name = 'Vui lòng nhập họ tên';
-    if (!form.phone.trim() || !/^0\d{9}$/.test(form.phone.trim())) e.phone = 'Số điện thoại không hợp lệ';
+    if (!/^0\d{9}$/.test(phone)) e.phone = 'Số điện thoại gồm 10 số, ví dụ 0901234567';
     if (!form.city.trim()) e.city = 'Vui lòng chọn tỉnh/thành phố';
-    if (!form.ward.trim()) e.ward = 'Vui lòng chọn phường/xã';
-    if (!form.address.trim()) e.address = 'Vui lòng nhập địa chỉ';
+    else if (!city) e.city = 'Chọn tỉnh/thành phố trong danh sách gợi ý';
+    if (!form.ward.trim()) e.ward = 'Vui lòng nhập phường/xã';
+    if (!form.address.trim()) e.address = 'Vui lòng nhập số nhà, tên đường';
+    setForm(f => ({ ...f, phone: /^0\d{9}$/.test(phone) ? phone : f.phone, city: city || f.city }));
     setErrors(e);
+    const firstError = ['name', 'phone', 'city', 'ward', 'address'].find(key => e[key]);
+    if (firstError) {
+      const field = document.getElementById(`checkout-${firstError}`);
+      if (field) {
+        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        field.focus({ preventScroll: true });
+      }
+    }
     return Object.keys(e).length === 0;
+  };
+
+  const saveCheckoutProfile = () => {
+    if (!rememberProfile) {
+      try { localStorage.removeItem(CHECKOUT_PROFILE_KEY); } catch {}
+      return;
+    }
+    const profile = Object.fromEntries(CHECKOUT_PROFILE_FIELDS.map(key => [key, String(form[key] || '').trim()]));
+    safeSetLocalStorage(CHECKOUT_PROFILE_KEY, JSON.stringify(profile));
   };
 
   const handleSubmit = () => {
@@ -2538,7 +2636,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 
   const buildOrderPayload = () => ({
     customerName: form.name.trim(),
-    phone: form.phone.trim(),
+    phone: normalizePhone(form.phone),
     address: fullAddress,
     note: form.note.trim(),
     city: form.city,
@@ -2587,6 +2685,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         shipping,
         total,
       });
+      saveCheckoutProfile();
       setCart([]);
       setStep(3);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2714,13 +2813,17 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         {step === 1 && (
           <div style={coStyles.formCard}>
             <h2 style={coStyles.cardTitle}>Thông tin giao hàng</h2>
-            <div style={coStyles.formHint}>Có thể chọn gợi ý hoặc tự nhập theo địa chỉ hiện tại. Danh sách gợi ý có thể chưa bao phủ mọi khu vực.</div>
-            <CheckoutField id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901234567" type="tel" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+            <div style={coStyles.formHint}>Gõ không dấu cũng được, ví dụ "hcm", "ha noi". Chọn gợi ý hoặc tự nhập theo địa chỉ hiện tại.</div>
+            <div style={isMobile ? undefined : coStyles.fieldPair}>
+              <CheckoutField id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+              <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901 234 567" type="tel" onCommit={value => { const phone = normalizePhone(value); return /^0\d{9}$/.test(phone) ? phone : value; }} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+            </div>
             <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={cityOptions} placeholder="Gõ tỉnh/thành phố để chọn" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
-            <CheckoutSuggestField id="district" label="Quận/Huyện (nếu có)" options={districtOptions} placeholder={form.city ? 'Gõ quận/huyện nếu địa chỉ có cấp này' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
-            <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Gõ phường/xã theo địa chỉ hiện tại' : 'Nhập tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            <CheckoutField id="address" label="Địa chỉ *" placeholder="Số nhà, tên đường..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+            <div style={isMobile ? undefined : coStyles.fieldPair}>
+              <CheckoutSuggestField id="district" label="Quận/Huyện (nếu có)" options={districtOptions} placeholder={form.city ? 'Bỏ trống nếu địa chỉ mới không có' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
+              <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Gõ phường/xã' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+            </div>
+            <CheckoutField id="address" label="Số nhà, tên đường *" placeholder="Ví dụ: 12/3 Lê Lợi" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <div style={coStyles.field}>
               <label style={coStyles.label}>Vận chuyển *</label>
               <div style={coStyles.shippingOptions}>
@@ -2739,7 +2842,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
                     onClick={() => setDeliveryMethod('express')}
                   >
                     <span style={coStyles.shippingTitle}>Hỏa tốc</span>
-                    <span style={coStyles.shippingDesc}>Nhận trong 4 tiếng</span>
+                    <span style={coStyles.shippingDesc}>Nhận trong 1 giờ · +{SHIPPING_RULES.expressFee.toLocaleString('vi-VN')}đ</span>
                   </button>
                 )}
               </div>
@@ -2749,6 +2852,10 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
               <div style={coStyles.shippingNote}>{deliveryNote}</div>
             </div>
             <CheckoutField id="note" label="Ghi chú (tùy chọn)" placeholder="Ghi chú thêm cho người giao hàng..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+            <label style={coStyles.rememberRow}>
+              <input type="checkbox" checked={rememberProfile} onChange={e => setRememberProfile(e.target.checked)} style={{ accentColor: '#318223' }} />
+              <span>Lưu thông tin trên máy này cho lần đặt sau</span>
+            </label>
             <button style={coStyles.primaryBtn} onClick={handleSubmit}>Xem lại đơn hàng →</button>
           </div>
         )}
@@ -2800,13 +2907,6 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
             <div style={coStyles.summaryDelivery}>
               <strong>{deliveryMethodLabel}</strong> · {deliveryNote}
             </div>
-            <div style={coStyles.shippingBreakdown}>
-              <div style={coStyles.shippingBreakRow}><span>Cân nặng</span><span>{formatWeight(shippingInfo.weight)}</span></div>
-              <div style={coStyles.shippingBreakRow}><span>Phí cơ bản</span><span>{shippingInfo.baseShippingFee === 0 ? 'Miễn phí' : `${shippingInfo.baseShippingFee.toLocaleString('vi-VN')}đ`}</span></div>
-              {shippingInfo.urgentShippingFee > 0 && (
-                <div style={coStyles.shippingBreakRow}><span>Phụ phí hỏa tốc</span><span>{shippingInfo.urgentShippingFee.toLocaleString('vi-VN')}đ</span></div>
-              )}
-            </div>
             <div style={coStyles.summaryDivider} />
             <div style={{ ...coStyles.summaryRow, fontWeight: 700, fontSize: 16 }}>
               <span>Tổng cộng</span>
@@ -2828,7 +2928,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
           </div>
           {hasCandleCup && (
             <div style={coStyles.candleDeliveryNote}>
-              Nến ly giao toàn quốc. Hỏa tốc 1–4 giờ áp dụng tại nội thành TP.HCM.
+              Nến ly giao toàn quốc. Hỏa tốc trong 1 giờ áp dụng tại nội thành TP.HCM.
             </div>
           )}
         </div>
@@ -2848,9 +2948,11 @@ const coStyles = {
   formCard: { background: '#fff', border: '1px solid #f0f0f0', borderRadius: 14, padding: '28px 28px 24px' },
   cardTitle: { fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginBottom: 20 },
   formHint: { marginTop: -8, marginBottom: 18, fontSize: 15, color: '#318223', fontWeight: 700 },
-  field: { marginBottom: 18, position: 'relative' },
+  field: { marginBottom: 18, position: 'relative', minWidth: 0 },
+  fieldPair: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 },
+  rememberRow: { display: 'flex', alignItems: 'center', gap: 8, margin: '-4px 0 16px', fontSize: 13, color: '#555', cursor: 'pointer' },
   label: { display: 'block', fontSize: 13, fontWeight: 600, color: '#444', marginBottom: 6 },
-  input: { width: '100%', border: '1.5px solid #e8e8e8', borderRadius: 10, padding: '11px 14px', fontSize: 14, outline: 'none', boxSizing: 'border-box', color: '#1a1a1a', fontFamily: 'inherit', transition: 'border-color .2s' },
+  input: { width: '100%', border: '1.5px solid #e8e8e8', borderRadius: 10, padding: '11px 14px', fontSize: 16, outline: 'none', boxSizing: 'border-box', color: '#1a1a1a', fontFamily: 'inherit', transition: 'border-color .2s' },
   suggestBox: { position: 'absolute', left: 0, right: 0, top: '100%', zIndex: 50, marginTop: 6, background: '#fff', border: '1px solid #dfe7dc', borderRadius: 12, boxShadow: '0 14px 35px rgba(0,0,0,0.12)', overflow: 'hidden' },
   suggestItem: { display: 'block', width: '100%', border: 'none', background: '#fff', textAlign: 'left', padding: '11px 14px', fontSize: 14, color: '#1a1a1a', cursor: 'pointer', fontFamily: 'inherit' },
   shippingOptions: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 10 },
@@ -2882,8 +2984,6 @@ const coStyles = {
   summaryDivider: { borderTop: '1px solid #f0f0f0', margin: '14px 0' },
   summaryRow: { display: 'flex', justifyContent: 'space-between', fontSize: 14, color: '#555', marginBottom: 10 },
   summaryDelivery: { marginTop: -2, marginBottom: 12, color: '#777', background: '#f7faf6', borderRadius: 8, padding: '8px 10px', fontSize: 12, lineHeight: 1.5 },
-  shippingBreakdown: { background: '#fbfbfa', border: '1px solid #eeeeea', borderRadius: 10, padding: '10px 12px', marginBottom: 12 },
-  shippingBreakRow: { display: 'flex', justifyContent: 'space-between', gap: 12, color: '#777', fontSize: 12, lineHeight: 1.6 },
   successIcon: { width: 72, height: 72, background: '#eaf4e9', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30, color: '#318223', margin: '0 auto 24px', fontWeight: 700 },
   successActions: { display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' },
 };

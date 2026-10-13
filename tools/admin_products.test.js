@@ -15,6 +15,7 @@ function fixture(t) {
   fs.mkdirSync(path.join(root, 'data'));
   fs.copyFileSync(path.join(__dirname, 'local_admin_server.js'), path.join(root, 'tools/local_admin_server.js'));
   fs.copyFileSync(path.join(__dirname, 'admin_product_push.js'), path.join(root, 'tools/admin_product_push.js'));
+  fs.copyFileSync(path.join(__dirname, 'shipping_settings.js'), path.join(root, 'tools/shipping_settings.js'));
   fs.writeFileSync(path.join(root, 'data/products.json'), JSON.stringify(catalog));
   fs.writeFileSync(path.join(root, 'tools/build_static_site.js'), `
     const fs = require('fs');

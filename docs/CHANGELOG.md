@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-13 — Checkout and weight-based shipping
+- Shipping fee rules moved into `data/settings.json` (`shipping`) with an admin "Phí ship" tab; the build bakes them into the storefront.
+- Checkout shows only the shipping amount; express states delivery within 1 hour and its surcharge.
+- Easier address entry: autofill works, unaccented names and common aliases resolve to the listed province/district/ward, phone accepts spaces and +84, errors focus the field, optional saved profile on the customer's device.
+
 ## 2026-10-12 — Structured product content
 - New optional `content` field (intro, highlights, specs, steps, care) rendered as fixed sections; nav labels now match the H2s; legacy description/usage is the fallback.
 - Admin "Mô tả" tab edits the structured fields and regenerates `description`; server validates the shape.

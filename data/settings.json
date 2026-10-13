@@ -29,5 +29,13 @@
     "nen-ly": "/assets/products/uploads/1791430890708-chatgpt-image-16-33-52-19-thg-7-2026.webp",
     "thao-moc-xong": "/assets/products/uploads/1791430906647-chatgpt-image-18-52-30-10-thg-8-2026.webp",
     "phu-kien": "/assets/products/uploads/1791536108168-chatgpt-image-18-29-21-10-thg-8-2026.webp"
+  },
+  "shipping": {
+    "hcmFreeWeight": 5000,
+    "otherFreeWeight": 3000,
+    "firstKgFee": 16000,
+    "extraKgFee": 4000,
+    "expressFee": 15000,
+    "defaultItemWeight": 500
   }
 }

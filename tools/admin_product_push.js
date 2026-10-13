@@ -277,7 +277,7 @@ const recordAdminSettingsChanges = (pending, beforeSettings, afterSettings) => {
   const next = pending?.version === 1 && pending.fields && typeof pending.fields === 'object'
     ? clone(pending)
     : { version: 1, fields: {} };
-  for (const key of ['featuredIds', 'headerImages', 'categoryImages']) {
+  for (const key of ['featuredIds', 'headerImages', 'categoryImages', 'shipping']) {
     if (isDeepStrictEqual(beforeSettings?.[key], afterSettings?.[key])) continue;
     const field = next.fields[key] || { beforePresent: has(beforeSettings, key), before: clone(beforeSettings?.[key]) };
     field.afterPresent = has(afterSettings, key);
@@ -298,7 +298,7 @@ const mergePendingAdminSettings = (remoteSettings, pending) => {
   const conflicts = [];
   let changed = false;
   for (const [key, field] of Object.entries(pending.fields)) {
-    if (!['featuredIds', 'headerImages', 'categoryImages'].includes(key)) {
+    if (!['featuredIds', 'headerImages', 'categoryImages', 'shipping'].includes(key)) {
       conflicts.push(`${key} (cài đặt không được hỗ trợ)`);
       continue;
     }

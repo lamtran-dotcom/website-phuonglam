@@ -1,6 +1,8 @@
 # Tasks
 
 ## Now
+- [x] Checkout address entry + weight-based shipping settings in admin (2026-10-13).
+- [ ] Enter variant weights for the 2 túi thơm products and Gỗ xông nhà (they use the 0.5 kg default).
 - [ ] Decide whether to merge `feat/shopee-import` (importer tool + copy, unpushed).
 - [x] Rewrite product pages into the structured outline + SEO fields (2026-10-12).
 - [x] Seller confirmed (2026-10-12): mica tealight follows its 5/10/20/50 variants; 2h Mai box is 100 viên; Bộ phụ kiện variants correct; nơ đại = 120 giờ; combo package names kept; "- bản sao" product stays as is.

@@ -15,6 +15,7 @@ const {
   recordBlogPostChanges,
   recordProductChanges,
 } = require('./admin_product_push');
+const { normalizeShippingSettings } = require('./shipping_settings');
 
 const root = path.resolve(__dirname, '..');
 const port = Number(process.env.PORT || 8000);
@@ -82,6 +83,7 @@ const normalizeSettings = (value = {}) => {
     featuredIds: Array.isArray(value.featuredIds) ? value.featuredIds.map(String).filter(Boolean) : [],
     headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
     categoryImages,
+    shipping: normalizeShippingSettings(value.shipping),
   };
 };
 

@@ -4,6 +4,7 @@ const vm = require('vm');
 const crypto = require('crypto');
 const { getGenuineReviews, getReviewStats, starsForAverage } = require('./reviews');
 const { normalizeProductContent } = require('./product_content');
+const { normalizeShippingSettings } = require('./shipping_settings');
 
 const root = path.resolve(__dirname, '..');
 const siteUrl = 'https://phuonglam.com';
@@ -1056,7 +1057,7 @@ const normalizeSettings = (value = {}) => {
   for (const [categoryId, src] of Object.entries(rawCategoryImages)) {
     if (src) categoryImages[normalizeCategoryId(categoryId)] = src;
   }
-  return { featuredIds, headerImages, categoryImages };
+  return { featuredIds, headerImages, categoryImages, shipping: normalizeShippingSettings(value.shipping) };
 };
 
 const readInlineJson = (source, marker, fallback) => {
@@ -1086,6 +1087,7 @@ const ensureSettingsJson = () => {
       featuredIds: readInlineJson(source, 'BAKED_FEATURED', []),
       headerImages: readInlineJson(source, 'BAKED_HEADER_IMAGES', []),
       categoryImages: readInlineJson(source, 'BAKED_CATEGORY_IMAGES', {}),
+      shipping: readInlineJson(source, 'BAKED_SHIPPING', {}),
     });
   }
   ensureDir(path.dirname(paths.settings));
@@ -1099,6 +1101,7 @@ const bakeSettingsIntoApp = (settings) => {
   source = writeInlineJson(source, 'BAKED_FEATURED', settings.featuredIds);
   source = writeInlineJson(source, 'BAKED_HEADER_IMAGES', settings.headerImages);
   source = writeInlineJson(source, 'BAKED_CATEGORY_IMAGES', settings.categoryImages);
+  source = writeInlineJson(source, 'BAKED_SHIPPING', settings.shipping);
   fs.writeFileSync(appPath, source);
 };
 

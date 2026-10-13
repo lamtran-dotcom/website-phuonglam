@@ -122,6 +122,11 @@
     .product-edit-section[hidden] { display: none !important; }
     .product-edit-section > h2:first-child { margin-top: 4px; }
     .editor-hint { margin: 6px 0 14px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .shipping-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin: 14px 0 18px; }
+    .shipping-field { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+    .shipping-input { display: flex; align-items: center; gap: 8px; }
+    .shipping-input input { flex: 1; min-width: 0; }
+    .shipping-input em { font-style: normal; color: #666; min-width: 22px; }
     .legacy-content { margin-top: 18px; border: 1px dashed var(--line); border-radius: 12px; padding: 10px 14px; }
     .legacy-content summary { cursor: pointer; font-weight: 700; color: #555; }
     .seo-preview-card { padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfa; margin-top: 16px; }
@@ -583,7 +588,7 @@
     let originalProductSnapshots = {};
     let pendingUploads = 0;
     const numericInputErrors = new Map();
-    let settings = { featuredIds: [], headerImages: [], categoryImages: {} };
+    let settings = { featuredIds: [], headerImages: [], categoryImages: {}, shipping: {} };
     let orders = [];
     let selectedId = null;
     let variantEditorColor = '';
@@ -883,8 +888,56 @@
       return {
         featuredIds: Array.isArray(value.featuredIds) ? value.featuredIds.map(String) : [],
         headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
-        categoryImages
+        categoryImages,
+        shipping: normalizeShipping(value.shipping)
       };
+    }
+
+    // Same defaults and limits as tools/shipping_settings.js (grams and VND).
+    const SHIPPING_FIELDS = [
+      ['hcmFreeWeight', 'Miễn phí ship TP.HCM đến', 'kg', 5000, 100000],
+      ['otherFreeWeight', 'Miễn phí ship tỉnh khác đến', 'kg', 3000, 100000],
+      ['firstKgFee', 'Phí kg đầu tiên vượt mức', 'đ', 16000, 1000000],
+      ['extraKgFee', 'Phí mỗi kg tiếp theo', 'đ', 4000, 1000000],
+      ['expressFee', 'Phụ phí hỏa tốc nội thành TP.HCM', 'đ', 15000, 1000000],
+      ['defaultItemWeight', 'Cân nặng tạm tính khi sản phẩm chưa nhập', 'kg', 500, 50000]
+    ];
+
+    function normalizeShipping(value) {
+      const source = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+      return Object.fromEntries(SHIPPING_FIELDS.map(([key, , , fallback, max]) => {
+        const number = Number(source[key]);
+        return [key, Number.isFinite(number) && number >= 0 && number <= max ? Math.round(number) : fallback];
+      }));
+    }
+
+    function updateShippingField(key, unit, rawValue) {
+      const number = Number(rawValue);
+      if (!Number.isFinite(number) || number < 0) return;
+      settings.shipping = normalizeShipping({ ...settings.shipping, [key]: unit === 'kg' ? number * 1000 : number });
+    }
+
+    function shippingHtml() {
+      const shipping = normalizeShipping(settings.shipping);
+      const example = (grams, area) => {
+        const free = area === 'hcm' ? shipping.hcmFreeWeight : shipping.otherFreeWeight;
+        const over = Math.max(0, grams - free);
+        return over > 0 ? shipping.firstKgFee + Math.ceil(Math.max(0, over - 1000) / 1000) * shipping.extraKgFee : 0;
+      };
+      return `
+        <h2>Phí ship theo cân nặng</h2>
+        <p class="muted">Đơn dưới mức miễn phí: 0đ. Vượt mức: tính phí kg đầu tiên, mỗi kg tiếp theo cộng thêm (lẻ kg làm tròn lên). Khách chỉ thấy số tiền cuối cùng. Bấm "Lưu local" rồi "Push Git" để áp dụng lên web.</p>
+        <div class="shipping-grid">
+          ${SHIPPING_FIELDS.map(([key, label, unit]) => {
+            const value = unit === 'kg' ? shipping[key] / 1000 : shipping[key];
+            return `<label class="shipping-field"><span>${esc(label)}</span><span class="shipping-input"><input type="number" min="0" step="${unit === 'kg' ? '0.1' : '1000'}" value="${value}" onchange="updateShippingField('${key}', '${unit}', this.value); render()" /><em>${unit}</em></span></label>`;
+          }).join('')}
+        </div>
+        <h3>Ví dụ</h3>
+        <ul class="muted">
+          ${[3000, 4500, 6000, 8200].map(grams => `<li>Đơn ${(grams / 1000).toLocaleString('vi-VN')}kg: TP.HCM ${fmt(example(grams, 'hcm'))}, tỉnh khác ${fmt(example(grams, 'other'))}</li>`).join('')}
+        </ul>
+      `;
     }
 
     function render() {
@@ -910,6 +963,7 @@
             ['featured', 'Bán chạy'],
             ['header', 'Ảnh header'],
             ['categories', 'Ảnh danh mục'],
+            ['shipping', 'Phí ship'],
             ['blog', 'Bài viết'],
             ['orders', 'Đơn hàng']
           ].map(([key, label]) => `<button class="${activeTab === key ? 'tab active' : 'tab'}" onclick="activeTab='${key}'; render()">${label}</button>`).join('')}
@@ -987,6 +1041,7 @@
       if (activeTab === 'featured') return featuredHtml();
       if (activeTab === 'header') return headerHtml();
       if (activeTab === 'categories') return categoryImagesHtml();
+      if (activeTab === 'shipping') return shippingHtml();
       if (activeTab === 'blog') return blogHtml();
       if (activeTab === 'orders') return ordersHtml();
       return '';

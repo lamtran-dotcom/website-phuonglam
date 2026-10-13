@@ -92,6 +92,12 @@ Reason: CodeGraph helps inspect source flows and impact radius; it does not repl
 Impact: `.codegraph/` is ignored by git and documented as optional local tooling.
 Status: Active
 
+### 2026-10-13 - Shipping fees are settings, not code
+Decision: Weight-based shipping (free up to 5 kg TP.HCM / 3 kg elsewhere, then first started kg 16.000đ + 4.000đ per further started kg, express +15.000đ) is stored in `data/settings.json` and edited in the admin. Customers see only the final amount. Checkout keeps the pre-2025 63-province list by seller choice.
+Reason: Seller wants to adjust rates without code changes and keep the fee display simple.
+Impact: The order Worker should eventually recompute fees from the same settings.
+Status: Active
+
 ### 2026-10-12 - Product pages use one structured outline
 Decision: Product copy lives in `content` (Giới thiệu, Điểm nổi bật, Thông số, Cách dùng, Lưu ý & bảo quản); `description` is generated from it. 150–300 words, no emoji/ALL-CAPS/keyword stuffing/health or spiritual claims; specs only from seller-provided facts. SEO title ≤60 chars "Tên + đặc điểm | Phương Lâm", description 140–155 chars.
 Reason: 12 different nav variants, mismatched labels and inconsistent copy hurt readability and SEO.
