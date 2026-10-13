@@ -12,3 +12,4 @@ exclude:
   - reports/
   - tools/
   - scheduled-posts/
+  - workers/
