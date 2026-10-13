@@ -3987,6 +3987,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 11,
+    "title": "Hướng Dẫn Dùng Bếp Xông Thảo Mộc Đúng Cách, An Toàn | Nến Phương Lâm",
+    "excerpt": "Bếp xông thảo mộc giúp thanh lọc không khí, khử mùi nấm mốc và thư giãn tinh thần. Hướng dẫn cách dùng đúng cách, an toàn cùng nến tealight tại Nến…",
+    "date": "26 tháng 4, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "huong-dan-dung-bep-xong-thao-moc",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/",
+    "image": "https://phuonglam.com/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp"
+  },
+  {
     "id": 23,
     "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
     "excerpt": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu? Xem cách định lượng theo bếp, diện tích phòng và xử lý khi mùi xông quá nồng, cháy khét.",
@@ -4160,17 +4172,6 @@ const BLOG_POSTS = [
     "tag": "Hướng dẫn",
     "url": "/blog/kien-thuc/den-xong-tinh-dau-bang-nen-cach-dung-dung/",
     "image": "/assets/blog/featured-den-xong-tinh-dau-phuong-lam.webp"
-  },
-  {
-    "id": 11,
-    "title": "Hướng dẫn dùng bếp xông thảo mộc đúng cách, an toàn",
-    "excerpt": "Bếp xông thảo mộc giúp thanh lọc không khí, khử mùi ẩm mốc và thư giãn tinh thần. Hướng dẫn cách dùng đúng cách cùng nến tealight và thảo mộc tự nhiên.",
-    "date": "26 tháng 4, 2026",
-    "readTime": "5 phút đọc",
-    "slug": "huong-dan-dung-bep-xong-thao-moc",
-    "tag": "Hướng dẫn",
-    "url": "/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/",
-    "image": "/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp"
   },
   {
     "id": 10,
