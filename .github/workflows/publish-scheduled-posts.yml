@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: scheduled-blog-publish
@@ -30,6 +31,7 @@ jobs:
         run: node tools/publish_scheduled_posts.js
 
       - name: Commit published posts
+        id: commit
         run: |
           if git diff --quiet; then
             echo "No scheduled post is due."
@@ -40,3 +42,11 @@ jobs:
           git add -A
           git commit -m "Publish scheduled blog posts"
           git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes made with the workflow token do not trigger other workflows, so start the deploy here.
+      - name: Deploy the website
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

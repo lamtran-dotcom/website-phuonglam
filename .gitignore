@@ -26,3 +26,5 @@ package-lock.json
 .claude/
 handoff.md
 .codegraph/
+_site/
+_site_check/

@@ -243,6 +243,8 @@ test('Push Git publishes only saved product changes from a clean remote worktree
   assert.equal(remoteGit('show', `refs/heads/${branch}:assets/products/uploads/new-product-image.webp`), 'test image bytes');
   assert.doesNotMatch(remoteGit('show', `refs/heads/${branch}:tools/build_static_site.js`), /preserve unrelated local edit/);
   assert.match(fs.readFileSync(path.join(root, 'tools', 'build_static_site.js'), 'utf8'), /preserve unrelated local edit/);
+  assert.equal(result.checkoutSync.synced, false, 'a local edit that is not on the web blocks the checkout sync');
+  assert.match(result.checkoutSync.reason, /tools\/build_static_site\.js/);
 });
 
 test('Push Git publishes saved admin settings and category images without pushing unrelated local edits', async t => {
@@ -376,4 +378,44 @@ test('server rejects malformed structured content', t => {
   assert.deepEqual(validateProducts([{ ...base, content: { intro: 'x', highlights: ['a'], specs: [{ label: 'Vỏ', value: 'nhôm' }], steps: [], care: [] } }]), []);
   assert.ok(validateProducts([{ ...base, content: { intro: 'x', highlights: 'not a list' } }]).some(e => /nội dung theo khung/.test(e)));
   assert.ok(validateProducts([{ ...base, content: { intro: 'x', specs: [['Vỏ', 'nhôm']] } }]).some(e => /nội dung theo khung/.test(e)));
+});
+
+test('admin publish targets the served branch from any local branch, then syncs a clean checkout', async t => {
+  const { root, server, pushGit, syncCheckoutToOrigin } = fixture(t);
+  const remote = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-branch-remote-'));
+  t.after(() => fs.rmSync(remote, { recursive: true, force: true }));
+  const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  const remoteGit = (...args) => execFileSync('git', ['--git-dir', remote, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  execFileSync('git', ['init', '--bare', '-q', remote]);
+  git('init', '-q'); git('config', 'user.email', 'test@example.invalid'); git('config', 'user.name', 'Test');
+  fs.writeFileSync(path.join(root, 'index.html'), catalog[0].name);
+  git('add', '.'); git('commit', '-qm', 'fixture');
+  const served = git('branch', '--show-current');
+  git('remote', 'add', 'origin', remote); git('push', '-q', '-u', 'origin', served);
+  execFileSync('git', ['--git-dir', remote, 'symbolic-ref', 'HEAD', `refs/heads/${served}`]);
+
+  // The checkout sits on a local-only branch, which used to make Push Git fail.
+  git('checkout', '-q', '-b', 'local-experiment');
+  const request = await client(server);
+  const initial = await request();
+  const edited = structuredClone(initial.products);
+  edited[0].seoTitle = 'Published from another branch';
+  assert.equal((await request({ products: edited, revision: initial.revision })).status, 200);
+  const result = pushGit();
+  assert.equal(result.pushed, true);
+  const published = JSON.parse(remoteGit('show', `refs/heads/${served}:data/products.json`))[0];
+  assert.equal(published.seoTitle, 'Published from another branch');
+  assert.equal(result.publishedCommit, remoteGit('rev-parse', `refs/heads/${served}`));
+  assert.equal(result.checkoutSync.synced, false);
+  assert.match(result.checkoutSync.reason, /local-experiment/);
+
+  // Back on the served branch, local files that equal the published ones are fast-forwarded.
+  git('checkout', '-q', served);
+  const publishedFile = file => execFileSync('git', ['--git-dir', remote, 'show', `refs/heads/${served}:${file}`]);
+  fs.writeFileSync(path.join(root, 'data/products.json'), publishedFile('data/products.json'));
+  fs.writeFileSync(path.join(root, 'index.html'), publishedFile('index.html'));
+  const sync = syncCheckoutToOrigin(served);
+  assert.deepEqual(sync, { synced: true });
+  assert.equal(git('rev-parse', 'HEAD'), remoteGit('rev-parse', `refs/heads/${served}`));
+  assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
 });

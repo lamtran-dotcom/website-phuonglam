@@ -435,6 +435,43 @@ const gitSummary = () => {
   };
 };
 
+// Admin publishes always go to the branch GitHub serves (origin's default, normally main),
+// never to whatever branch this checkout happens to be on.
+const publishBranch = () => {
+  if (process.env.PHUONGLAM_PUBLISH_BRANCH) return process.env.PHUONGLAM_PUBLISH_BRANCH;
+  const remoteHead = runGit(['ls-remote', '--symref', 'origin', 'HEAD']);
+  const match = remoteHead.ok && remoteHead.output.match(/^ref: refs\/heads\/(\S+)\s+HEAD/m);
+  return match ? match[1] : 'main';
+};
+
+// After a publish, move this checkout to the published commit, but only when nothing is lost:
+// every locally changed tracked file, and every untracked file the publish adds, must already
+// match the published version. Otherwise report why and leave the checkout untouched.
+const syncCheckoutToOrigin = (branch) => {
+  const current = gitSummary().branch;
+  if (current !== branch) return { synced: false, reason: `Thư mục website đang ở nhánh "${current || 'không rõ'}", không phải ${branch}.` };
+  const fetched = runGit(['fetch', 'origin', branch]);
+  if (!fetched.ok) return { synced: false, reason: 'Không tải được bản mới nhất từ GitHub.' };
+  const target = `origin/${branch}`;
+  const ahead = runGit(['rev-list', '--count', `${target}..HEAD`]);
+  if (!ahead.ok || ahead.output !== '0') return { synced: false, reason: 'Thư mục website có commit chưa có trên GitHub.' };
+  const matchesTarget = (file) => {
+    const published = runGit(['rev-parse', '--verify', '-q', `${target}:${file}`]);
+    if (!fs.existsSync(path.join(root, file))) return !published.ok;
+    return published.ok && runGit(['hash-object', '--', file]).output === published.output;
+  };
+  const changed = runGit(['diff', '--name-only', '-z', 'HEAD']).output.split('\0').filter(Boolean);
+  const added = runGit(['diff', '--name-only', '-z', '--diff-filter=A', 'HEAD', target]).output.split('\0').filter(Boolean)
+    .filter(file => fs.existsSync(path.join(root, file)));
+  const blockers = [...new Set([...changed, ...added])].filter(file => !matchesTarget(file));
+  if (blockers.length) {
+    return { synced: false, reason: `Có ${blockers.length} file trong máy khác bản trên web: ${blockers.slice(0, 5).join(', ')}${blockers.length > 5 ? '…' : ''}` };
+  }
+  const reset = runGit(['reset', '--hard', target]);
+  if (!reset.ok) return { synced: false, reason: reset.output || 'Không cập nhật được thư mục website.' };
+  return { synced: true };
+};
+
 const generatedStaticConflict = (file) => (
   file === 'index.html'
   || file === 'blog/index.html'
@@ -502,7 +539,10 @@ const pushGit = () => {
     return pushPendingProductChanges({ version: 1, products: {} }, null, settingsPending, settingsPendingPath, contentPending, contentPendingPath);
   }
 
-  const currentBranch = gitSummary().branch || 'main';
+  const currentBranch = publishBranch();
+  if (gitSummary().branch !== currentBranch) {
+    throw new Error(`Thư mục website đang ở nhánh "${gitSummary().branch}". Chuyển về nhánh ${currentBranch} rồi đăng lại.`);
+  }
   const fetch = runGit(['fetch', 'origin', currentBranch]);
   if (fetch.ok) {
     const remoteCatalog = runGit(['show', `origin/${currentBranch}:data/products.json`]);
@@ -551,7 +591,7 @@ const pushGit = () => {
   const nothingToCommit = /nothing to commit|no changes added/i.test(commit.output);
   if (!commit.ok && !nothingToCommit) throw new Error(commit.output || 'git commit failed');
 
-  const branch = gitSummary().branch || 'main';
+  const branch = currentBranch;
   rebaseGitOntoOrigin(branch);
   const push = runGit(['push', 'origin', branch]);
   if (!push.ok) throw new Error(push.output || 'git push failed');
@@ -559,6 +599,7 @@ const pushGit = () => {
   return {
     ...gitSummary(),
     pushed: true,
+    publishedCommit: runGit(['rev-parse', 'HEAD']).output,
     message: `Đã commit và push lên origin/${branch}.`,
     commit: commit.output,
     push: push.output,
@@ -576,7 +617,7 @@ const ISOLATED_PUBLISH_PATHS = [
 ];
 
 const pushPendingProductChanges = (pending, pendingPath, settingsPending = null, settingsPendingPath = null, contentPending = null, contentPendingPath = null) => {
-  const branch = gitSummary().branch || 'main';
+  const branch = publishBranch();
   const fetch = runGit(['fetch', 'origin', branch]);
   if (!fetch.ok) throw new Error(fetch.output || 'Không tải được phiên bản mới nhất từ GitHub.');
 
@@ -682,6 +723,7 @@ const pushPendingProductChanges = (pending, pendingPath, settingsPending = null,
     if (!commit.ok) throw new Error(commit.output || 'Không commit được thay đổi admin.');
     const push = runGitAt(worktreeRoot, ['push', 'origin', `HEAD:refs/heads/${branch}`]);
     if (!push.ok) throw new Error(`${push.output || 'git push failed'}\nKhông có thay đổi nào khác trong máy bị đưa vào lần push này.`);
+    const publishedCommit = runGitAt(worktreeRoot, ['rev-parse', 'HEAD']).output;
 
     if (pendingPath) fs.rmSync(pendingPath, { force: true });
     if (settingsPendingPath) fs.rmSync(settingsPendingPath, { force: true });
@@ -689,6 +731,8 @@ const pushPendingProductChanges = (pending, pendingPath, settingsPending = null,
     return {
       ...gitSummary(),
       pushed: true,
+      publishedCommit,
+      checkoutSync: syncCheckoutToOrigin(branch),
       message: `Đã cập nhật nội dung admin lên website chính (${branch}).`,
       commit: commit.output,
       push: push.output,
@@ -1970,6 +2014,19 @@ const handleApi = async (req, res, pathname) => {
       return true;
     }
 
+    // Compares the commit just published with build-info.json on the live site.
+    if (pathname === '/api/publish-status.php' && req.method === 'GET') {
+      const commit = String(new URL(req.url, 'http://127.0.0.1').searchParams.get('commit') || '');
+      const siteUrl = process.env.PHUONGLAM_SITE_URL || 'https://phuonglam.com';
+      let info = null;
+      try {
+        const live = await fetch(`${siteUrl}/build-info.json?t=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+        if (live.ok) info = await live.json();
+      } catch {}
+      sendJson(res, { ok: true, live: Boolean(commit && info?.commit === commit), liveCommit: info?.commit || '', builtAt: info?.builtAt || '' });
+      return true;
+    }
+
     if (pathname === '/api/git.php' && req.method === 'POST') {
       const bodyText = (await readBody(req)).toString('utf8') || '{}';
       const body = JSON.parse(bodyText);
@@ -2216,4 +2273,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
 
-module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };
+module.exports = { server, validateProducts, pushGit, syncCheckoutToOrigin, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };

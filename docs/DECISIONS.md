@@ -92,6 +92,12 @@ Reason: CodeGraph helps inspect source flows and impact radius; it does not repl
 Impact: `.codegraph/` is ignored by git and documented as optional local tooling.
 Status: Active
 
+### 2026-10-13 - GitHub Actions builds and deploys the site
+Decision: GitHub Pages deploys from the `Deploy website` workflow instead of serving the branch through Jekyll. The workflow rebuilds from source, runs all tests, then publishes; admin publishes always target `main` and sync the local checkout only when lossless.
+Reason: Publishing failed when the local checkout was on another branch or stale, and a stale local compile once regressed the bundle. A server-side build plus test gate keeps the live site consistent.
+Impact: Generated files are still committed (the build reads some of them as inputs). Workflows that push with the workflow token must dispatch `deploy-pages.yml` themselves.
+Status: Active
+
 ### 2026-10-13 - Shipping fees are settings, not code
 Decision: Weight-based shipping (free up to 5 kg TP.HCM / 3 kg elsewhere, then first started kg 16.000đ + 4.000đ per further started kg, express +15.000đ) is stored in `data/settings.json` and edited in the admin. Customers see only the final amount. Checkout keeps the pre-2025 63-province list by seller choice.
 Reason: Seller wants to adjust rates without code changes and keep the fee display simple.

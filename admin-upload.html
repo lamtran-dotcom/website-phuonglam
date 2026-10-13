@@ -600,6 +600,9 @@
     let featuredPickerIndex = null;
     let featuredPickerSearch = '';
     let saving = false;
+    // { state: 'waiting' | 'live' | 'slow', commit, note } after "Đăng lên web".
+    let publishStatus = null;
+    let publishPollTimer = null;
     let apiOnline = true;
     let blogPosts = [];
     let blogCategory = 'huong-dan-xong';
@@ -731,10 +734,14 @@
       }
       if (!Array.isArray(draft?.products)) return serverProducts;
       const changedBase = draft.revision && revision && draft.revision !== revision;
-      const message = changedBase
-        ? 'Bản nháp được tạo từ dữ liệu cũ hơn. Khôi phục sẽ thay danh sách hiện tại trong admin bằng bản nháp trên máy này. Tiếp tục?'
-        : 'Có bản nháp sản phẩm chưa lưu từ phiên trước. Khôi phục bản nháp?';
-      if (!confirm(message)) {
+      if (changedBase) {
+        // Restoring a draft made from older data would overwrite newer products, so keep it aside instead.
+        try { localStorage.setItem(`${PRODUCT_DRAFT_KEY}_old`, JSON.stringify(draft)); } catch {}
+        localStorage.removeItem(PRODUCT_DRAFT_KEY);
+        alert('Có một bản nháp cũ chưa lưu, nhưng dữ liệu sản phẩm đã thay đổi sau đó. Để không ghi đè dữ liệu mới, admin không khôi phục bản nháp này. Nếu cần sửa lại, hãy làm lại trên dữ liệu hiện tại.');
+        return serverProducts;
+      }
+      if (!confirm('Có bản nháp sản phẩm chưa lưu từ phiên trước. Khôi phục bản nháp?')) {
         localStorage.removeItem(PRODUCT_DRAFT_KEY);
         return serverProducts;
       }
@@ -926,7 +933,7 @@
       };
       return `
         <h2>Phí ship theo cân nặng</h2>
-        <p class="muted">Đơn dưới mức miễn phí: 0đ. Vượt mức: tính phí kg đầu tiên, mỗi kg tiếp theo cộng thêm (lẻ kg làm tròn lên). Khách chỉ thấy số tiền cuối cùng. Bấm "Lưu local" rồi "Push Git" để áp dụng lên web.</p>
+        <p class="muted">Đơn dưới mức miễn phí: 0đ. Vượt mức: tính phí kg đầu tiên, mỗi kg tiếp theo cộng thêm (lẻ kg làm tròn lên). Khách chỉ thấy số tiền cuối cùng. Bấm "Lưu local" rồi "Đăng lên web" để áp dụng.</p>
         <div class="shipping-grid">
           ${SHIPPING_FIELDS.map(([key, label, unit]) => {
             const value = unit === 'kg' ? shipping[key] / 1000 : shipping[key];
@@ -948,12 +955,13 @@
             <h1>Quản lý website</h1>
             <div class="sub">Sản phẩm, phân loại, ảnh, bán chạy, header, danh mục và đơn hàng.</div>
             <div id="productDraftStatus" class="sub" role="status" aria-live="polite" style="font-weight:900">${pendingUploads ? `Đang tải ${pendingUploads} ảnh; hãy chờ tải xong rồi mới lưu.` : productDraftDirty ? productDraftStorageFailed ? 'Có thay đổi chưa lưu; trình duyệt không giữ được bản nháp tự động. Hãy lưu trước khi rời trang.' : 'Có thay đổi sản phẩm chưa lưu. Bản nháp đang được giữ trên trình duyệt này.' : ''}</div>
+            ${publishStatusHtml()}
             ${!apiOnline ? '<div class="sub" style="color:#d98221;font-weight:900">Đang ở chế độ preview local: xem được dữ liệu nhưng không lưu/upload trực tiếp. Lên host có PHP thì sẽ lưu được.</div>' : ''}
           </div>
           <div class="actions">
             <button onclick="saveAll()" ${saving || !apiOnline || pendingUploads ? 'disabled' : ''}>${apiOnline ? 'Lưu local' : 'Preview local'}</button>
             <button class="secondary" onclick="previewWebsite()">Preview</button>
-            <button class="secondary" onclick="pushGit()" ${saving || !apiOnline || pendingUploads ? 'disabled' : ''}>Push Git</button>
+            <button class="secondary" onclick="pushGit()" ${saving || !apiOnline || pendingUploads ? 'disabled' : ''}>${saving ? 'Đang đăng…' : 'Đăng lên web'}</button>
           </div>
         </div>
 
@@ -1498,7 +1506,7 @@
         blogImageReplacementPreviews = [];
         blogPreviewError = '';
         blogSeoChecks = [];
-        alert(`✅ Đã lưu local! Bài viết tại: ${publicSiteUrl(data.url)}\nSitemap và danh sách blog đã cập nhật. Bấm Preview để kiểm tra, ổn rồi bấm Push Git.`);
+        alert(`✅ Đã lưu local! Bài viết tại: ${publicSiteUrl(data.url)}\nSitemap và danh sách blog đã cập nhật. Bấm Preview để kiểm tra, ổn rồi bấm Đăng lên web.`);
       } catch (error) {
         alert('Lỗi: ' + error.message);
       } finally {
@@ -2632,7 +2640,7 @@
       try {
         await saveProducts();
         await saveSettings();
-        alert('Đã lưu local và build lại trang SEO/sitemap. Bấm Preview để kiểm tra trước khi Push Git.');
+        alert('Đã lưu local và build lại trang SEO/sitemap. Bấm Preview để kiểm tra trước khi Đăng lên web.');
       } catch (error) {
         alert(error.message);
       } finally {
@@ -2648,10 +2656,10 @@
     async function pushGit() {
       if (saving) return;
       if (!apiOnline) {
-        alert('Push Git chỉ dùng được khi chạy admin bằng node tools/local_admin_server.js.');
+        alert('Đăng lên web chỉ dùng được khi chạy admin bằng node tools/local_admin_server.js.');
         return;
       }
-      const ok = confirm('Push Git sẽ commit trang admin, server admin và các file dữ liệu/ảnh/trang sản phẩm liên quan rồi đẩy lên GitHub. Thay đổi được stage sẵn sẽ khiến thao tác bị dừng để tránh gộp nhầm. Tiếp tục?');
+      const ok = confirm('Lưu các thay đổi rồi đăng lên website? GitHub sẽ build và kiểm tra trước; nếu có lỗi, website giữ nguyên bản cũ.');
       if (!ok) return;
       saving = true;
       render();
@@ -2664,14 +2672,57 @@
           body: JSON.stringify({ action: 'push' })
         });
         const data = await readJsonResponse(res, 'API Git');
-        if (!data.ok) throw new Error(data.message || 'Push Git thất bại.');
-        alert(data.git?.message || 'Đã push lên GitHub.');
+        if (!data.ok) throw new Error(data.message || 'Đăng lên web thất bại.');
+        const git = data.git || {};
+        if (git.pushed && git.publishedCommit) {
+          const note = git.checkoutSync && !git.checkoutSync.synced
+            ? `Chưa tự cập nhật thư mục website trên máy: ${git.checkoutSync.reason}`
+            : '';
+          startPublishWatch(git.publishedCommit, note);
+        } else {
+          alert(git.message || 'Không có thay đổi mới để đăng.');
+        }
       } catch (error) {
         alert(error.message);
       } finally {
         saving = false;
         render();
       }
+    }
+
+    function publishStatusHtml() {
+      if (!publishStatus) return '';
+      const text = {
+        waiting: 'Đã gửi lên GitHub. Đang build và kiểm tra, web sẽ cập nhật sau khoảng 1–3 phút…',
+        live: 'Đã lên web. Khách đã thấy bản mới.',
+        slow: 'Sau 8 phút web vẫn chưa đổi. Có thể bước build/kiểm tra trên GitHub bị lỗi (web vẫn giữ bản cũ). Mở github.com/lamtran-dotcom/website-phuonglam/actions để xem.'
+      }[publishStatus.state];
+      const color = publishStatus.state === 'live' ? '#2f7d32' : publishStatus.state === 'slow' ? '#b3261e' : '#8a5a00';
+      return `<div class="sub" role="status" aria-live="polite" style="font-weight:900;color:${color}">${esc(text)}${publishStatus.note ? `<br><span style="font-weight:600">${esc(publishStatus.note)}</span>` : ''}</div>`;
+    }
+
+    function startPublishWatch(commit, note) {
+      clearInterval(publishPollTimer);
+      const startedAt = Date.now();
+      publishStatus = { state: 'waiting', commit, note };
+      render();
+      publishPollTimer = setInterval(async () => {
+        try {
+          const res = await fetch(`api/publish-status.php?commit=${encodeURIComponent(commit)}`, { cache: 'no-store' });
+          const data = await res.json();
+          if (data.live) {
+            publishStatus = { ...publishStatus, state: 'live' };
+            clearInterval(publishPollTimer);
+            render();
+            return;
+          }
+        } catch {}
+        if (Date.now() - startedAt > 8 * 60 * 1000) {
+          publishStatus = { ...publishStatus, state: 'slow' };
+          clearInterval(publishPollTimer);
+          render();
+        }
+      }, 10000);
     }
 
     window.addEventListener('beforeunload', event => {

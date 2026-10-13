@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-13 — Build and deploy on GitHub
+- New `Deploy website` workflow: build, test, collect public files, deploy to Pages; failures keep the previous site.
+- Admin "Push Git" is now "Đăng lên web": always publishes to `main`, syncs the local checkout when safe, and shows when the site is live.
+- Admin no longer restores a product draft made from older data.
+- Scheduled-post and image-compression workflows trigger the deploy after their pushes.
+
 ## 2026-10-13 — Checkout and weight-based shipping
 - Shipping fee rules moved into `data/settings.json` (`shipping`) with an admin "Phí ship" tab; the build bakes them into the storefront.
 - Checkout shows only the shipping amount; express states delivery within 1 hour and its surcharge.

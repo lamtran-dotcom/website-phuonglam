@@ -88,8 +88,10 @@ Add `.codegraph/` to `.gitignore`; do not commit it.
 After `codegraph init`, future Codex tasks should use CodeGraph first to inspect relevant flows, symbols, callers, callees, and impact radius before broad manual file reading.
 
 ## Deploy / Production Notes
-- Static files are committed and pushed to the GitHub repository.
-- Hosting may be GitHub Pages-style static hosting, Cloudflare Pages, or an Nginx VPS.
-- After push, allow a few minutes for the hosting platform to deploy.
+- GitHub Pages is set to deploy from **GitHub Actions** (`.github/workflows/deploy-pages.yml`). Every push to `main` builds the site, runs `node --test tools/*.test.js`, collects public files with `tools/prepare_pages_artifact.js` (same exclusions as `_config.yml`) and deploys. If the build or a test fails, the live site keeps the previous version.
+- Bot pushes (scheduled posts, image compression) start the deploy with `gh workflow run deploy-pages.yml`, because pushes made with the workflow token do not trigger other workflows.
+- The deployed site includes `/build-info.json` (`commit`, `builtAt`); the admin's "Đăng lên web" polls it through `/api/publish-status.php` to show when a publish is live.
+- Admin publishes always go to origin's default branch (`main`) from a clean temporary worktree, whatever branch the local checkout is on. Afterwards the local checkout is reset to the published commit only if every local difference already matches it; otherwise the admin shows which files block the sync.
+- Rollback: re-run an older successful "Deploy website" run in GitHub Actions, or revert the commit on `main`.
 - Keep `sitemap.xml`, `robots.txt`, canonical URLs, and structured data correct after SEO changes.
 - For scheduled SEO posts, Content AI Studio pushes a queue entry to `scheduled-posts/`. The `Publish Scheduled Blog Posts` GitHub Actions workflow checks at offset five-minute marks on the default branch, so the Mac does not need to remain on. GitHub may execute a few minutes after the requested time; use a schedule at least five minutes in the future. The Content AI Studio schedule panel shows the queue, recorded publications, and a link to the latest job.
