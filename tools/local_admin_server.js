@@ -159,6 +159,14 @@ const safeName = (name) =>
     .replace(/^-+|-+$/g, '');
 
 const stripHtml = (value = '') => String(value).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+// stripHtml leaves entities encoded; titles/descriptions are escaped again on output, so decode first (avoids &amp;amp;).
+const decodeEntities = (value = '') => String(value)
+  .replace(/&nbsp;/g, ' ')
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"')
+  .replace(/&#39;/g, "'")
+  .replace(/&amp;/g, '&');
 const normalizeText = (value = '') => String(value)
   .toLowerCase()
   .normalize('NFD')
@@ -829,12 +837,20 @@ const getMetaContent = (html, selector) => {
 };
 
 const getHtmlTitle = (html) =>
-  stripHtml(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || '');
+  decodeEntities(stripHtml(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || ''));
 
-const getDescription = (html) =>
+const getTitleTag = (html) => decodeEntities(stripHtml(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || ''));
+
+const getDescription = (html) => decodeEntities(
   getMetaContent(html, 'name=description') ||
   stripHtml(html.match(/<p[^>]*class=["'][^"']*sapo[^"']*["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || '') ||
-  truncate(stripHtml(html), 155);
+  truncate(stripHtml(html), 155));
+
+// A page the admin already built (site header + related-posts panel). Re-saving it must not rewrite its title tag,
+// breadcrumb or related block, which would silently change posts that already rank.
+const hasPublishedShell = (html) =>
+  /<header\b[^>]*class=["'][^"']*\bseo-header\b/i.test(html) &&
+  /<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(html);
 
 const getTagAttr = (tag = '', attr = '') => {
   const match = tag.match(new RegExp(`\\s${escapeRegex(attr)}=["']([^"']*)["']`, 'i'));
@@ -1309,7 +1325,7 @@ const articleBreadcrumbSchema = ({ title, category, canonical }) => ({
   ],
 });
 
-const ensureBlogArticleShell = ({ html, title, category, slug }) => {
+const ensureBlogArticleShell = ({ html, title, category, slug, preserveShell = false }) => {
   let nextHtml = ensureStaticSeoCss(html);
   nextHtml = ensureArticleShellStyle(nextHtml);
   nextHtml = nextHtml.replace(/<header\b[^>]*class=["'][^"']*\b(?:site-header|seo-header)\b[^"']*["'][^>]*>[\s\S]*?<\/header>/i, articleHeaderHtml);
@@ -1325,13 +1341,13 @@ const ensureBlogArticleShell = ({ html, title, category, slug }) => {
   nextHtml = nextHtml.replace(/<\/body>/i, `  ${articleStaticRuntimeScript}\n</body>`);
   const breadcrumb = breadcrumbForArticle({ title, category });
   if (/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b/i.test(nextHtml)) {
-    nextHtml = nextHtml.replace(/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/i, breadcrumb);
+    if (!preserveShell) nextHtml = nextHtml.replace(/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/i, breadcrumb);
   } else {
     nextHtml = nextHtml.replace(/<main\b[^>]*class=["'][^"']*\barticle-wrap\b[^"']*["'][^>]*>/i, (match) => `${match}\n    ${breadcrumb}`);
   }
   const related = articleRelatedBlock({ title, category, slug });
   if (/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(nextHtml)) {
-    nextHtml = nextHtml.replace(/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i, related);
+    if (!preserveShell) nextHtml = nextHtml.replace(/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i, related);
   } else {
     nextHtml = nextHtml.replace(/<\/article>(\s*<\/main>)/i, `      ${related}\n    </article>$1`);
   }
@@ -1430,7 +1446,8 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
 
   html = html.replace(/\bhref=["']([^"']+)["']/gi, (match, href) => `href="${rewriteBlogHref(href)}"`);
 
-  const title = getHtmlTitle(html) || slug.replace(/-/g, ' ');
+  const preserveShell = hasPublishedShell(html);
+  const title = (preserveShell && getTitleTag(html)) || getHtmlTitle(html) || slug.replace(/-/g, ' ');
   const description = truncate(getDescription(html), 155);
   const image = getMetaContent(html, 'property=og:image') ||
     html.match(/<figure\b[^>]*class=["'][^"']*\barticle-figure\b[^"']*["'][^>]*>[\s\S]*?<img[^>]+src=["']([^"']+)["']/i)?.[1] ||
@@ -1466,7 +1483,7 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
   };
   html = setJsonLdByType(html, 'BlogPosting', schema);
   html = setJsonLdByType(html, 'BreadcrumbList', articleBreadcrumbSchema({ title, category, canonical }));
-  html = ensureBlogArticleShell({ html, title, category, slug });
+  html = ensureBlogArticleShell({ html, title, category, slug, preserveShell });
   html = ensureArticleFigureStyle(html);
 
   return { html, meta: { title, description, image, url: publicUrl, tag: blogCategories[category] || 'Kiến thức' } };
@@ -2199,4 +2216,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
 
-module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups };
+module.exports = { server, validateProducts, pushGit, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };
