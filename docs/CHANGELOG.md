@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-10-26 — Admin keeps its checkout in step with GitHub
+- The running admin catches up with GitHub on start and every 10 minutes (lossless only; skipped while admin changes wait to be pushed). `GET /api/git.php` returns the last result as `checkoutSync`, so tools can warn when a sync was refused and why.
+
 ## 2026-10-26 — Blog writes catch up with GitHub first
 - Saving or scheduling a blog post first fast-forwards a clean, stale checkout to GitHub (lossless only). Fixes "Nội dung scheduled-posts/... đã được thay đổi trên web" when GitHub had already published and removed an earlier queued update.
 

@@ -475,7 +475,19 @@ const syncCheckoutToOrigin = (branch) => {
 // GitHub publishes scheduled posts on its own (and removes their queue files), so this checkout
 // falls behind until pulled. Catch up before a blog write, so the change is recorded against
 // GitHub's files and not against stale local copies. Lossless only; otherwise nothing changes.
-const catchUpBeforeContentWrite = () => syncCheckoutToOrigin(publishBranch());
+let lastCheckoutSync = null;
+const catchUpBeforeContentWrite = () => {
+  lastCheckoutSync = { ...syncCheckoutToOrigin(publishBranch()), at: new Date().toISOString() };
+  return lastCheckoutSync;
+};
+
+// While the admin runs, catch up every few minutes too, so the pages and the queue served here
+// match GitHub. Skipped while admin changes wait to be pushed (their files must stay as they are).
+const PENDING_ADMIN_FILES = ['pending-product-changes.json', 'pending-admin-settings.json', 'pending-admin-content.json'];
+const backgroundCatchUp = () => {
+  if (PENDING_ADMIN_FILES.some(name => fs.existsSync(path.join(root, '.admin-backups', name)))) return null;
+  return catchUpBeforeContentWrite();
+};
 
 const generatedStaticConflict = (file) => (
   file === 'index.html'
@@ -2015,7 +2027,7 @@ const handleApi = async (req, res, pathname) => {
     }
 
     if (pathname === '/api/git.php' && req.method === 'GET') {
-      sendJson(res, { ok: true, git: gitSummary() });
+      sendJson(res, { ok: true, git: gitSummary(), checkoutSync: lastCheckoutSync });
       return true;
     }
 
@@ -2278,6 +2290,8 @@ const server = http.createServer(async (req, res) => {
 if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Website: http://127.0.0.1:${port}/`);
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
+  backgroundCatchUp();
+  setInterval(backgroundCatchUp, 10 * 60 * 1000).unref();
 });
 
-module.exports = { server, validateProducts, pushGit, syncCheckoutToOrigin, catchUpBeforeContentWrite, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };
+module.exports = { server, validateProducts, pushGit, syncCheckoutToOrigin, catchUpBeforeContentWrite, backgroundCatchUp, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };

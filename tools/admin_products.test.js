@@ -442,7 +442,33 @@ test('a stale clean checkout catches up before a blog write, so a queue file Git
   run(other, 'rm', '-q', 'scheduled-posts/huong-dan-xong/bai-a/index.html');
   run(other, 'commit', '-qm', 'Publish scheduled blog posts'); run(other, 'push', '-q');
 
-  assert.deepEqual(catchUpBeforeContentWrite(), { synced: true });
+  assert.equal(catchUpBeforeContentWrite().synced, true);
   assert.equal(fs.existsSync(queued), false);
   assert.equal(run(root, 'rev-parse', 'HEAD'), run(other, 'rev-parse', 'HEAD'));
+});
+
+test('background catch-up waits while admin changes are pending, then reports why a sync is refused', t => {
+  const { root, backgroundCatchUp } = fixture(t);
+  const remote = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-bg-remote-'));
+  t.after(() => fs.rmSync(remote, { recursive: true, force: true }));
+  const run = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  execFileSync('git', ['init', '--bare', '-q', remote]);
+  run('init', '-q'); run('config', 'user.email', 'test@example.invalid'); run('config', 'user.name', 'Test');
+  fs.writeFileSync(path.join(root, 'index.html'), 'published');
+  run('add', '.'); run('commit', '-qm', 'fixture');
+  const branch = run('branch', '--show-current');
+  run('remote', 'add', 'origin', remote); run('push', '-q', '-u', 'origin', branch);
+  execFileSync('git', ['--git-dir', remote, 'symbolic-ref', 'HEAD', `refs/heads/${branch}`]);
+
+  fs.writeFileSync(path.join(root, 'index.html'), 'edited by hand');
+  fs.mkdirSync(path.join(root, '.admin-backups'), { recursive: true });
+  fs.writeFileSync(path.join(root, '.admin-backups/pending-admin-content.json'), '{}');
+  assert.equal(backgroundCatchUp(), null);
+  assert.equal(fs.readFileSync(path.join(root, 'index.html'), 'utf8'), 'edited by hand');
+
+  fs.rmSync(path.join(root, '.admin-backups/pending-admin-content.json'));
+  const result = backgroundCatchUp();
+  assert.equal(result.synced, false);
+  assert.match(result.reason, /index\.html/);
+  assert.equal(fs.readFileSync(path.join(root, 'index.html'), 'utf8'), 'edited by hand');
 });
