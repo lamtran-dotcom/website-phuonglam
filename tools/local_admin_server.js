@@ -472,6 +472,11 @@ const syncCheckoutToOrigin = (branch) => {
   return { synced: true };
 };
 
+// GitHub publishes scheduled posts on its own (and removes their queue files), so this checkout
+// falls behind until pulled. Catch up before a blog write, so the change is recorded against
+// GitHub's files and not against stale local copies. Lossless only; otherwise nothing changes.
+const catchUpBeforeContentWrite = () => syncCheckoutToOrigin(publishBranch());
+
 const generatedStaticConflict = (file) => (
   file === 'index.html'
   || file === 'blog/index.html'
@@ -2106,6 +2111,7 @@ const handleApi = async (req, res, pathname) => {
     if (pathname === '/api/blog.php' && req.method === 'POST') {
       const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
       if (!fields) throw new Error('Không đọc được dữ liệu form');
+      catchUpBeforeContentWrite();
       const beforePosts = readBlogPostsFromSiteData();
       const beforeFiles = snapshotBlogAssets();
       const result = buildBlogHtmlUpload({ fields, persist: true });
@@ -2131,6 +2137,7 @@ const handleApi = async (req, res, pathname) => {
     if (pathname === '/api/blog-schedule.php' && req.method === 'POST') {
       const fields = parseMultipartFields(req.headers['content-type'] || '', await readBody(req));
       if (!fields) throw new Error('Không đọc được dữ liệu form');
+      catchUpBeforeContentWrite();
       const beforePosts = readBlogPostsFromSiteData();
       const beforeFiles = snapshotBlogAssets();
       const result = buildBlogHtmlUpload({ fields, persist: true });
@@ -2273,4 +2280,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   console.log(`Admin:   http://127.0.0.1:${port}/admin-upload.html`);
 });
 
-module.exports = { server, validateProducts, pushGit, syncCheckoutToOrigin, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };
+module.exports = { server, validateProducts, pushGit, syncCheckoutToOrigin, catchUpBeforeContentWrite, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };

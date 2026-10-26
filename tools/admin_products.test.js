@@ -419,3 +419,30 @@ test('admin publish targets the served branch from any local branch, then syncs 
   assert.equal(git('rev-parse', 'HEAD'), remoteGit('rev-parse', `refs/heads/${served}`));
   assert.equal(git('status', '--porcelain', '--untracked-files=no'), '');
 });
+
+test('a stale clean checkout catches up before a blog write, so a queue file GitHub removed is not a conflict', t => {
+  const { root, catchUpBeforeContentWrite } = fixture(t);
+  const remote = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-catchup-remote-'));
+  const other = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-catchup-other-'));
+  t.after(() => { fs.rmSync(remote, { recursive: true, force: true }); fs.rmSync(other, { recursive: true, force: true }); });
+  const run = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  execFileSync('git', ['init', '--bare', '-q', remote]);
+  run(root, 'init', '-q'); run(root, 'config', 'user.email', 'test@example.invalid'); run(root, 'config', 'user.name', 'Test');
+  const queued = path.join(root, 'scheduled-posts/huong-dan-xong/bai-a/index.html');
+  fs.mkdirSync(path.dirname(queued), { recursive: true });
+  fs.writeFileSync(queued, '<html>old update</html>');
+  run(root, 'add', '.'); run(root, 'commit', '-qm', 'queue an update');
+  const branch = run(root, 'branch', '--show-current');
+  run(root, 'remote', 'add', 'origin', remote); run(root, 'push', '-q', '-u', 'origin', branch);
+  execFileSync('git', ['--git-dir', remote, 'symbolic-ref', 'HEAD', `refs/heads/${branch}`]);
+
+  // GitHub's scheduled job publishes the update and removes its queue file; this checkout is not pulled.
+  run(other, 'clone', '-q', remote, '.');
+  run(other, 'config', 'user.email', 'bot@example.invalid'); run(other, 'config', 'user.name', 'Bot');
+  run(other, 'rm', '-q', 'scheduled-posts/huong-dan-xong/bai-a/index.html');
+  run(other, 'commit', '-qm', 'Publish scheduled blog posts'); run(other, 'push', '-q');
+
+  assert.deepEqual(catchUpBeforeContentWrite(), { synced: true });
+  assert.equal(fs.existsSync(queued), false);
+  assert.equal(run(root, 'rev-parse', 'HEAD'), run(other, 'rev-parse', 'HEAD'));
+});

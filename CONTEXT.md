@@ -44,6 +44,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Blog write catch-up — 2026-10-26: `POST /api/blog.php` and `/api/blog-schedule.php` call `catchUpBeforeContentWrite()` (= `syncCheckoutToOrigin(publishBranch())`) before writing, so pending changes are recorded against GitHub's files. Test in `tools/admin_products.test.js` (suite 54/54).
+
 Deploy pipeline — 2026-10-13, branch `feat/ci-pages`. GitHub Pages now deploys via `.github/workflows/deploy-pages.yml` (build → tests → `tools/prepare_pages_artifact.js` → deploy, writes `/build-info.json`). Admin button "Đăng lên web" always publishes to origin's default branch, then `syncCheckoutToOrigin` resets the Desktop checkout to the published commit only if lossless, and the UI polls `/api/publish-status.php` until the live commit matches. Stale product drafts are no longer restored (kept under `phuonglam_admin_product_draft_v1_old`). Scheduled-post and compress-images workflows dispatch the deploy after pushing. The running admin server must be restarted to pick up the new code.
 
 Blog normalizer — 2026-10-13: re-saving a page that already has the site shell (seo-header + related-posts panel) keeps its `<title>`, breadcrumb and related block; titles/descriptions are entity-decoded before escaping (no more `&amp;amp;`). New drafts are normalized as before. Tests: `tools/blog_normalize.test.js` (suite 52/52). Lets SEO Writer edit all 18 published posts safely.

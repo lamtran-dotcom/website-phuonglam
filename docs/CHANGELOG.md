@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-10-26 — Blog writes catch up with GitHub first
+- Saving or scheduling a blog post first fast-forwards a clean, stale checkout to GitHub (lossless only). Fixes "Nội dung scheduled-posts/... đã được thay đổi trên web" when GitHub had already published and removed an earlier queued update.
+
 ## 2026-10-13 — Build and deploy on GitHub
 - New `Deploy website` workflow: build, test, collect public files, deploy to Pages; failures keep the previous site.
 - Admin "Push Git" is now "Đăng lên web": always publishes to `main`, syncs the local checkout when safe, and shows when the site is live.
