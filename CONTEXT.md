@@ -32,6 +32,7 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `README.md`: human entry point for the project.
 - `docs/ARCHITECTURE.md`: system structure and data flow.
 - `docs/SETUP.md`: local run, build, deploy, and CodeGraph notes.
+- `docs/SEO-BLOG-CHECKLIST.md`: SEO rules for blog posts + AI check prompt + Claude Code fix prompt.
 - `admin-upload.html`: browser UI for local product/blog management.
 - `tools/local_admin_server.js`: local admin server and save/build endpoints.
 - `tools/build_static_site.js`: static page generation and SEO build script.
@@ -44,7 +45,9 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Blog internal links + SEO cleanup — 2026-11-09, not pushed yet. Audit of 18 live posts + 3 queued (`scheduled-posts/`):
+SEO checklist for posts — 2026-11-09: `docs/SEO-BLOG-CHECKLIST.md` holds the rule set (codes T/M/C/L/I/S/P/R, severity blocker/major/minor, [G] Google-based vs [PL] house rules, auto/site/judge), the prompt for the seller's AI checker (JSON report), and the prompt for Claude Code to fix a report (sync rules for title/description/scheduled copies, no slug/date changes, ask before content-meaning edits, no commit/push without approval).
+
+Blog internal links + SEO cleanup — 2026-11-09, live (commit `fbe9e9e`). Audit of 18 live posts + 3 queued (`scheduled-posts/`):
 - Broken links fixed: `/san-pham/nen-tealight-4-gio-phuong-lam-trang-tri-thu-gian-khong-khoi/` (404, in 13 posts + the queued bếp xông update) → `.../nen-tealight-4-gio-phuong-lam-xong-thao-moc-thu-gian-khong-khoi-khong-mui-loai-mai/`; two post links missing `/blog/<cat>/`.
 - 7 titles cut to ≤60 chars (`… | Phương Lâm`), H1 kept natural without brand; truncated/over-long descriptions (ending "…" or >155) rewritten from each post's own headings. Updated `<title>`, description, og/twitter, JSON-LD headline/description, breadcrumb, `BLOG_POSTS` title/excerpt, and the queued bếp xông `article.json` meta so the 17:10 scheduled update does not revert it.
 - Every post has a curated "Bài viết liên quan" (3 posts) and one mid-article `p.article-read-more` line (1 post + 1 product). Newer posts had no related panel because the admin only inserted it before `</article></main>`; fixed in `ensureBlogArticleShell` (falls back to the last `</article>`), test in `tools/blog_normalize.test.js`.

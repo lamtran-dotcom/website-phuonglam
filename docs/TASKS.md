@@ -4,6 +4,8 @@
 - [x] Pagination on the in-app "Hướng Dẫn" page (was capped at 6 posts) (2026-11-09).
 - [x] Newest posts first on "Hướng Dẫn" and `/blog/` (2026-11-09).
 - [x] Blog audit: broken links, titles/descriptions, related posts, guides on product/category pages (2026-11-09).
+- [x] SEO checklist + AI check prompt + Claude Code fix prompt in `docs/SEO-BLOG-CHECKLIST.md` (2026-11-09).
+- [ ] Optional: script the `auto`/`site` rules of the checklist so only `judge` rules need AI.
 - [ ] Seller: review health/feng-shui wording in older posts (bồ kết, vỏ bưởi, đèn xông).
 - [ ] After the 2 queued posts publish, add links to them from related posts (product/category pages pick them up automatically).
 - [ ] Search Console: request indexing for the 7 retitled posts after deploy.
