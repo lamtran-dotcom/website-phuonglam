@@ -3987,6 +3987,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 28,
+    "title": "Nến tealight mua ở đâu? Giá và cách chọn số lượng",
+    "excerpt": "Nến tealight mua ở đâu để đúng nhu cầu? Tham khảo giá, cách chọn thời gian cháy, số lượng và đặt nến phù hợp tại Phương Lâm.",
+    "date": "9 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "nen-tealight-mua-o-dau",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/nen-tealight-mua-o-dau/",
+    "image": "/assets/blog/nen-tealight-mua-o-dau-1794217823542-1-nen-tealight-mua-o-dau-de-dung-cung-bep-xong-dat-nung.webp",
+    "coverImage": "/assets/blog/nen-tealight-mua-o-dau-1794217823542-1-nen-tealight-mua-o-dau-de-dung-cung-bep-xong-dat-nung.webp"
+  },
+  {
     "id": 11,
     "title": "Cách dùng bếp xông thảo mộc đúng, an toàn | Phương Lâm",
     "excerpt": "Cách dùng bếp xông thảo mộc đúng và an toàn: chọn bếp, chọn nến tealight, thảo mộc phù hợp, các bước xông và lưu ý khi xông trong nhà.",
