@@ -44,6 +44,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Thank-you card landing page — 2026-11-09, draft, not committed: `cam-on/index.html` (QR target for the thank-you card). Standalone mobile page, `noindex`, not in sitemap; reads live products from `assets/js/site-data.js`, shows the IDs in `PRODUCT_IDS` (9: 6 bestsellers + đèn xông gốm + tinh dầu 10ml + bộ bếp xông cao cấp `shopee_55553449576`, added at seller's request; first row = đèn xông, tinh dầu, nến tealight 4h); option groups appear one at a time like the product page; a scrollable row of category chips under the header links to `/danh-muc/<id>/` (built from `CATEGORIES`, only categories with visible products); animated promo poster "Giá đã giảm 20% so với sàn" + per-visitor countdown (`PROMO_MINUTES` = 5 from first visit, honey-yellow poster (matches cream + green) with large amber countdown boxes, start kept in `phuonglam-camon-promo-start`, survives reload, poster hides when over, new window after `PROMO_RENEW_DAYS` = 7). Seller states web prices are already ~20% below Shopee and chose (2026-11-09) to keep the poster and 5-minute countdown as is, with no extra discount or gift; this was not verified here, and the countdown does not change any price, bottom sheet for variant + qty, writes `phuonglam-cart` in the same item shape as static product pages and opens the existing checkout via `/?checkout=open`; sticky cart bar, Zalo/call fallback. Verified in a local preview (variant → checkout subtotal correct); no order sent. Not done: seller's product list, real discount code (needs checkout + Worker), order source tag. Seller was warned that QR/web links in Shopee parcels risk Shopee off-platform penalties. Python preview cannot read ~/Desktop (macOS privacy), so previews run from a copy.
+
 Background catch-up — 2026-10-26: `backgroundCatchUp()` runs on admin start and every 10 min (skipped while `.admin-backups/pending-*.json` exist); last sync result in `GET /api/git.php` → `checkoutSync`. Hand edits left uncommitted in this checkout block the sync and are reported, never overwritten. Suite 55/55.
 
 Blog write catch-up — 2026-10-26: `POST /api/blog.php` and `/api/blog-schedule.php` call `catchUpBeforeContentWrite()` (= `syncCheckoutToOrigin(publishBranch())`) before writing, so pending changes are recorded against GitHub's files. Test in `tools/admin_products.test.js` (suite 54/54).
@@ -85,5 +87,6 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - Instatic is early 0.0.x software; keep it as inspiration rather than a production migration target.
 
 ## Next Suggested Task
+- `cam-on/`: get the seller's 4–6 products, then decide on the discount code (checkout field + Worker re-check) before printing the QR.
 - Confirm HCMC delivery rules with the fulfillment provider and finish local admin upload/draft browser checks.
 - Recheck Search Console and compare full 28-day performance windows after reports refresh.

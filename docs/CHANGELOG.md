@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-11-09 — Thank-you card landing page
+- New `cam-on/` page for the QR on the thank-you card: category chips, honey-yellow "giảm 20% so với sàn" poster with a 5-minute per-visitor countdown, 9 chosen products, pick variant and quantity, "Mua ngay" opens the existing checkout; Zalo/call fallback. `noindex`, kept out of the sitemap.
+
 ## 2026-10-26 — Admin keeps its checkout in step with GitHub
 - The running admin catches up with GitHub on start and every 10 minutes (lossless only; skipped while admin changes wait to be pushed). `GET /api/git.php` returns the last result as `checkoutSync`, so tools can warn when a sync was refused and why.
 

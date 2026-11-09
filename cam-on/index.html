@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cảm ơn bạn | Phương Lâm</title>
+<meta name="description" content="Cảm ơn bạn đã mua hàng tại Phương Lâm. Chọn món và đặt lại nhanh, thanh toán khi nhận hàng." />
+<!-- Landing page for the thank-you card QR code: not meant for search results. -->
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#318223" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #318223;
+    --green-dark: #24631a;
+    --cream: #fbf6ec;
+    --card: #ffffff;
+    --ink: #2b2a26;
+    --muted: #6f6a5f;
+    --line: #ece4d3;
+    --sale: #c0392b;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  body.has-bar { padding-bottom: 92px; }
+  body.sheet-open { overflow: hidden; }
+  a { color: inherit; }
+  button { font: inherit; cursor: pointer; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+
+  .top { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .brand { font-weight: 800; font-size: 20px; color: var(--green); text-decoration: none; letter-spacing: .2px; }
+  .top-link { font-size: 14px; color: var(--muted); text-decoration: none; }
+
+  .cats { display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 12px; padding: 2px 16px 4px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cats::-webkit-scrollbar { display: none; }
+  .cats a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--card); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .cats a:active { border-color: var(--green); color: var(--green-dark); }
+  .hero { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 16px 14px; text-align: center; }
+  .hero h1 { margin: 0 0 6px; font-size: 21px; line-height: 1.25; }
+  .hero p { margin: 0; color: var(--muted); font-size: 14px; }
+  .perks { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .perks li { background: #eef6eb; color: var(--green-dark); border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 600; }
+
+  /* Promo poster with countdown */
+  .promo { position: relative; overflow: hidden; margin-top: 12px; border-radius: 18px; padding: 18px 16px 18px; color: #4a3510; text-align: center;
+    background: linear-gradient(135deg, #fff7df 0%, #fde5a6 100%); border: 1.5px solid #f1cf7c; box-shadow: 0 10px 24px rgba(176,109,8,.16); }
+  .promo[hidden] { display: none; }
+  .promo::before { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: shine 3.2s ease-in-out infinite; }
+  .promo-badge { position: absolute; top: 10px; right: 10px; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center;
+    background: radial-gradient(circle at 35% 30%, #f2b33d, #c47f08 70%); color: #fff; font-weight: 800; font-size: 19px; transform: rotate(12deg);
+    box-shadow: 0 4px 12px rgba(176,109,8,.32); animation: wiggle 2.4s ease-in-out infinite; }
+  .promo-kicker { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #9a5d00; }
+  .promo h2 { margin: 0 64px 4px; font-size: 21px; line-height: 1.25; }
+  .promo h2 em { font-style: normal; color: #b06d08; font-size: 1.25em; }
+  .promo-sub { margin: 0 0 10px; font-size: 13px; font-weight: 600; }
+  .countdown { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .cd-unit { min-width: 92px; background: linear-gradient(180deg, #dc9a1c, #b06d08); color: #fff; border-radius: 16px; padding: 8px 6px 6px; box-shadow: 0 6px 14px rgba(176,109,8,.32); }
+  .cd-num { display: block; font-size: 48px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .cd-num.tick { animation: tick .35s ease-out; }
+  .cd-label { display: block; font-size: 12px; font-weight: 600; margin-top: 4px; opacity: .9; }
+  .cd-sep { font-size: 40px; font-weight: 800; color: #b06d08; padding-bottom: 18px; animation: blink 1s steps(1) infinite; }
+  .promo-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 34px; border-radius: 999px;
+    background: var(--green); color: #fff; font-weight: 800; font-size: 17px; text-decoration: none; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes shine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
+  @keyframes wiggle { 0%, 100% { transform: rotate(12deg) scale(1); } 50% { transform: rotate(-6deg) scale(1.08); } }
+  @keyframes tick { 0% { transform: translateY(-8px) scale(1.15); opacity: .4; } 100% { transform: none; opacity: 1; } }
+  @keyframes blink { 50% { opacity: .3; } }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(49,130,35,.55); transform: scale(1); } 50% { box-shadow: 0 0 0 10px rgba(49,130,35,0); transform: scale(1.04); } }
+  @media (prefers-reduced-motion: reduce) {
+    .promo::before, .promo-badge, .cd-num.tick, .cd-sep, .promo-cta { animation: none; }
+  }
+
+  .section-title { font-size: 18px; margin: 18px 0 10px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; text-align: left; padding: 0; color: inherit; }
+  .card img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: #f3eee2; }
+  .card-body { padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .card-name { font-size: 14px; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.9em; }
+  .price { font-weight: 800; color: var(--green-dark); font-size: 15px; }
+  .price small { font-weight: 500; color: var(--muted); font-size: 12px; }
+  .old { color: var(--muted); text-decoration: line-through; font-size: 12px; font-weight: 400; margin-left: 4px; }
+  .card-cta { margin-top: auto; background: var(--green); color: #fff; border-radius: 10px; text-align: center; padding: 9px 8px; font-weight: 700; font-size: 14px; }
+
+  .help { margin: 28px 0 8px; text-align: center; }
+  .help p { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+  .help-row { display: flex; gap: 10px; justify-content: center; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 46px; padding: 0 18px; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; border: 2px solid var(--green); }
+  .btn-solid { background: var(--green); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--green); }
+  .all-link { display: block; text-align: center; margin: 18px 0 30px; font-size: 14px; color: var(--muted); }
+
+  /* Sticky order bar */
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(0,0,0,.06); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 20; }
+  .bar[hidden] { display: none; }
+  .bar-inner { max-width: 560px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+  .bar-info { flex: 1; min-width: 0; font-size: 14px; }
+  .bar-info strong { display: block; font-size: 17px; color: var(--green-dark); }
+  .bar .btn { flex: 0 0 auto; }
+
+  /* Bottom sheet */
+  .sheet-backdrop { position: fixed; inset: 0; background: rgba(20,20,15,.45); z-index: 30; }
+  .sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 31; background: #fff; border-radius: 20px 20px 0 0; max-height: 88vh; overflow-y: auto; padding: 0 16px calc(16px + env(safe-area-inset-bottom)); }
+  .sheet[hidden], .sheet-backdrop[hidden] { display: none; }
+  .sheet-inner { max-width: 560px; margin: 0 auto; }
+  .sheet-grip { width: 44px; height: 5px; border-radius: 3px; background: #ddd; margin: 10px auto 12px; }
+  .sheet-head { display: flex; gap: 12px; align-items: flex-start; }
+  .sheet-head img { width: 96px; height: 96px; border-radius: 12px; object-fit: cover; background: #f3eee2; flex: 0 0 auto; }
+  .sheet-title { font-size: 16px; font-weight: 700; margin: 0 0 6px; }
+  .sheet-close { margin-left: auto; background: none; border: 0; font-size: 26px; line-height: 1; color: var(--muted); padding: 0 4px; }
+  .group-name { font-size: 14px; font-weight: 600; margin: 16px 0 8px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { border: 1.5px solid var(--line); background: #fff; border-radius: 10px; padding: 8px 12px; font-size: 14px; color: var(--ink); text-align: left; }
+  .pill.is-active { border-color: var(--green); background: #eef6eb; color: var(--green-dark); font-weight: 600; }
+  .pill:disabled { opacity: .35; cursor: not-allowed; }
+  .qty-row { display: flex; align-items: center; justify-content: space-between; margin: 18px 0 6px; }
+  .qty { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .qty button { width: 44px; height: 44px; background: #fff; border: 0; font-size: 20px; }
+  .qty output { min-width: 40px; text-align: center; font-weight: 700; font-size: 16px; }
+  .sheet-status { min-height: 20px; color: var(--sale); font-size: 13px; margin: 6px 0; }
+  .sheet-actions { display: grid; grid-template-columns: 1fr 1.3fr; gap: 10px; }
+  .sheet-actions .btn { width: 100%; }
+
+  .toast { position: fixed; left: 50%; bottom: 110px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 14px; z-index: 40; opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  .loading { text-align: center; color: var(--muted); padding: 30px 0; }
+
+  @media (min-width: 560px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .sheet { left: 50%; right: auto; transform: translateX(-50%); width: 560px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/">Phương Lâm</a>
+    <a class="top-link" href="/">Trang chủ</a>
+  </header>
+
+  <nav class="cats" id="cats" aria-label="Danh mục sản phẩm"></nav>
+
+  <section class="hero">
+    <h1>Cảm ơn bạn đã chọn Phương Lâm</h1>
+    <p>Muốn mua lại? Chọn món bên dưới, bấm <strong>Đặt hàng</strong> là xong.</p>
+    <ul class="perks">
+      <li>Thanh toán khi nhận hàng</li>
+      <li>Giao toàn quốc</li>
+    </ul>
+  </section>
+
+  <section class="promo" id="promo" hidden aria-label="Ưu đãi">
+    <div class="promo-badge" aria-hidden="true">-20%</div>
+    <p class="promo-kicker">Ưu đãi khách quay lại</p>
+    <h2>Giá đã giảm <em>20%</em> so với sàn</h2>
+    <p class="promo-sub">Ưu đãi kết thúc sau</p>
+    <div class="countdown" role="timer" aria-live="off">
+      <div class="cd-unit"><span class="cd-num" data-cd="m">00</span><span class="cd-label">Phút</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" data-cd="s">00</span><span class="cd-label">Giây</span></div>
+    </div>
+    <a class="promo-cta" href="#grid">Đặt ngay</a>
+  </section>
+
+  <h2 class="section-title">Khách hay mua lại</h2>
+  <div class="grid" id="grid"><p class="loading">Đang tải sản phẩm…</p></div>
+
+  <section class="help">
+    <p>Ngại điền thông tin? Nhắn hoặc gọi, shop lên đơn giúp bạn.</p>
+    <div class="help-row">
+      <a class="btn btn-solid" href="https://zalo.me/0773829593" target="_blank" rel="noopener">Nhắn Zalo</a>
+      <a class="btn btn-ghost" href="tel:+84773829593">Gọi 0773 829 593</a>
+    </div>
+  </section>
+
+  <a class="all-link" href="/">Xem tất cả sản phẩm →</a>
+</div>
+
+<div class="bar" id="bar" hidden>
+  <div class="bar-inner">
+    <div class="bar-info"><span id="bar-count">0 món</span><strong id="bar-total">0 ₫</strong></div>
+    <a class="btn btn-solid" href="/?checkout=open" id="bar-go">Đặt hàng →</a>
+  </div>
+</div>
+
+<div class="sheet-backdrop" id="backdrop" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet-inner">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <img id="sheet-img" alt="" />
+      <div>
+        <p class="sheet-title" id="sheet-title"></p>
+        <div class="price" id="sheet-price"></div>
+      </div>
+      <button class="sheet-close" id="sheet-close" aria-label="Đóng">×</button>
+    </div>
+    <div id="sheet-options"></div>
+    <div class="qty-row">
+      <span class="group-name" style="margin:0">Số lượng mua</span>
+      <div class="qty">
+        <button type="button" data-step="-1" aria-label="Giảm">−</button>
+        <output id="sheet-qty">1</output>
+        <button type="button" data-step="1" aria-label="Tăng">+</button>
+      </div>
+    </div>
+    <div class="sheet-status" id="sheet-status" role="status"></div>
+    <div class="sheet-actions">
+      <button class="btn btn-ghost" id="sheet-add" type="button">Thêm vào giỏ</button>
+      <button class="btn btn-solid" id="sheet-buy" type="button">Mua ngay</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/assets/js/site-data.js"></script>
+<script>
+(() => {
+  // Products shown on this page, in order. Swap IDs here (from data/products.json).
+  const PRODUCT_IDS = [
+    'shopee_22080262041', // Đèn xông tinh dầu bằng gốm
+    'shopee_24604156053', // Tinh dầu thơm phòng 10ml
+    '1',                  // Nến tealight 4 giờ loại Mai
+    'shopee_22353875434', // Combo thảo mộc khô xông nhà
+    'shopee_26007254880', // Thảo mộc khô xông nhà nhiều loại
+    'shopee_54367578815', // Túi thơm treo xe, treo phòng
+    'shopee_22361508205', // Bồ kết khô
+    'shopee_57367595064', // Gỗ xông nhà
+    'shopee_55553449576', // Bộ bếp xông thảo mộc cao cấp
+  ];
+  // Offer window per visitor: starts on the first visit and does not restart on reload.
+  // After it ends the poster hides; a new window opens only after PROMO_RENEW_DAYS.
+  const PROMO_MINUTES = 5;
+  const PROMO_RENEW_DAYS = 7;
+  const PROMO_KEY = 'phuonglam-camon-promo-start';
+  const CART_KEY = 'phuonglam-cart';
+  const CHECKOUT_URL = '/?checkout=open';
+
+  const all = Array.isArray(window.PRODUCTS) ? window.PRODUCTS : [];
+  const products = PRODUCT_IDS
+    .map((id) => all.find((p) => String(p.id) === id && !p.hidden))
+    .filter(Boolean);
+
+  const $ = (id) => document.getElementById(id);
+  const money = (v) => Number(v || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  const el = (tag, cls, text) => {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
+  };
+
+  // Same responsive image naming as the static product pages.
+  const setImage = (img, src, sizes) => {
+    img.src = src || '';
+    const path = (src || '').split('?')[0];
+    const base = (path.split('/').pop() || '').replace(/\.[^.]+$/, '');
+    if (base && (path.startsWith('/assets/products/mirrored/') || path.startsWith('/assets/products/uploads/'))) {
+      img.srcset = `/assets/products/responsive/${base}-480.webp 480w, /assets/products/responsive/${base}-720.webp 720w, ${src} 900w`;
+      img.sizes = sizes;
+    } else {
+      img.removeAttribute('srcset');
+    }
+  };
+
+  const variantsOf = (p) => (Array.isArray(p.variants) ? p.variants : []);
+  const groupsOf = (p) => (Array.isArray(p.optionGroups) ? p.optionGroups : []);
+  const minPrice = (p) => {
+    const prices = variantsOf(p).map((v) => Number(v.price)).filter((n) => n > 0);
+    return prices.length ? Math.min(...prices) : Number(p.price) || 0;
+  };
+
+  // Cart storage: identical item shape to the static product page "Mua ngay" button.
+  const readCart = () => {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      return Array.isArray(parsed) ? parsed : [];
+    } catch { return []; }
+  };
+  const writeCart = (cart) => {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); return true; } catch { return false; }
+  };
+  const keyOf = (item) => item.cartKey || (item.selectedVariant?.id ? item.id + '__' + item.selectedVariant.id : String(item.id));
+  const buildItem = (p, v) => {
+    const base = {
+      id: p.id, slug: p.slug, sku: p.sku, name: p.name, categoryId: p.categoryId,
+      price: p.price, originalPrice: p.originalPrice, weight: p.weight,
+      images: Array.isArray(p.images) ? p.images.slice(0, 1) : [],
+    };
+    if (!v) return { ...base, cartKey: String(p.id) };
+    return {
+      ...base,
+      sku: v.sku || p.sku,
+      price: Number(v.price) || Number(p.price) || 0,
+      originalPrice: v.originalPrice || p.originalPrice || null,
+      weight: v.weight || p.weight || null,
+      selectedVariant: { id: v.id, name: v.name, image: v.image || '' },
+      cartKey: p.id + '__' + v.id,
+    };
+  };
+
+  // ---- Promo countdown ----
+  const promo = $('promo');
+  const promoStart = (() => {
+    const now = Date.now();
+    let start = 0;
+    try { start = Number(localStorage.getItem(PROMO_KEY)) || 0; } catch {}
+    if (!start || now - start > PROMO_RENEW_DAYS * 86400000) {
+      start = now;
+      try { localStorage.setItem(PROMO_KEY, String(start)); } catch {}
+    }
+    return start;
+  })();
+  const promoEnd = promoStart + PROMO_MINUTES * 60000;
+  const cdNodes = {};
+  promo.querySelectorAll('[data-cd]').forEach((n) => { cdNodes[n.dataset.cd] = n; });
+  const pad = (n) => String(n).padStart(2, '0');
+  let promoTimer;
+  const renderCountdown = () => {
+    const left = promoEnd - Date.now();
+    if (!(left > 0)) {
+      promo.hidden = true;
+      clearInterval(promoTimer);
+      return;
+    }
+    promo.hidden = false;
+    const total = Math.floor(left / 1000);
+    const parts = { m: Math.floor(total / 60), s: total % 60 };
+    Object.entries(parts).forEach(([k, v]) => {
+      const node = cdNodes[k];
+      const text = pad(v);
+      if (!node || node.textContent === text) return;
+      node.textContent = text;
+      node.classList.remove('tick');
+      void node.offsetWidth; // restart the tick animation
+      node.classList.add('tick');
+    });
+  };
+  renderCountdown();
+  promoTimer = setInterval(renderCountdown, 1000);
+  promo.querySelector('.promo-cta').addEventListener('click', (e) => {
+    e.preventDefault();
+    $('grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ---- Category links (only categories that have visible products) ----
+  const cats = $('cats');
+  (Array.isArray(window.CATEGORIES) ? window.CATEGORIES : [])
+    .filter((c) => all.some((p) => p.categoryId === c.id && !p.hidden))
+    .forEach((c) => {
+      const a = el('a', '', `${c.icon ? c.icon + ' ' : ''}${c.name}`);
+      a.href = `/danh-muc/${c.id}/`;
+      cats.append(a);
+    });
+  if (!cats.children.length) cats.remove();
+
+  // ---- Product grid ----
+  const grid = $('grid');
+  grid.textContent = '';
+  if (!products.length) {
+    grid.append(el('p', 'loading', 'Chưa tải được sản phẩm. Bạn nhắn Zalo giúp shop nhé.'));
+  }
+  products.forEach((p, index) => {
+    const card = el('button', 'card');
+    card.type = 'button';
+    const img = el('img');
+    img.alt = p.name;
+    img.loading = index < 4 ? 'eager' : 'lazy';
+    img.decoding = 'async';
+    setImage(img, p.images?.[0], '(max-width: 560px) 50vw, 180px');
+    const body = el('div', 'card-body');
+    body.append(el('div', 'card-name', p.name));
+    const price = el('div', 'price');
+    if (variantsOf(p).length > 1) price.append(el('small', '', 'Từ '));
+    price.append(document.createTextNode(money(minPrice(p))));
+    body.append(price, el('span', 'card-cta', 'Chọn mua'));
+    card.append(img, body);
+    card.addEventListener('click', () => openSheet(p));
+    grid.append(card);
+  });
+
+  // ---- Bottom sheet ----
+  let current = null;
+  let selected = {};      // option group name -> value (multi-group products)
+  let selectedVariantId = null; // single-list products
+  let qty = 1;
+
+  const getVariant = () => {
+    if (!current) return null;
+    const variants = variantsOf(current);
+    const groups = groupsOf(current);
+    if (!variants.length) return null;
+    if (groups.length) {
+      if (!groups.every((g) => selected[g.name])) return null;
+      return variants.find((v) => groups.every((g) => v.options?.[g.name] === selected[g.name])) || null;
+    }
+    return variants.find((v) => v.id === selectedVariantId) || null;
+  };
+  const needsChoice = () => variantsOf(current).length > 0;
+
+  const renderOptions = () => {
+    const box = $('sheet-options');
+    box.textContent = '';
+    const variants = variantsOf(current);
+    const groups = groupsOf(current);
+    if (groups.length) {
+      groups.forEach((g, gi) => {
+        // Like the product page: show a group only after the earlier ones are chosen.
+        if (!groups.slice(0, gi).every((pg) => selected[pg.name])) return;
+        box.append(el('div', 'group-name', g.name));
+        const pills = el('div', 'pills');
+        (g.values || []).forEach((value) => {
+          // Hide values with no variant matching the earlier choices.
+          const possible = variants.some((v) => v.options?.[g.name] === value &&
+            groups.slice(0, gi).every((pg) => !selected[pg.name] || v.options?.[pg.name] === selected[pg.name]));
+          if (!possible) return;
+          const pill = el('button', 'pill' + (selected[g.name] === value ? ' is-active' : ''), value);
+          pill.type = 'button';
+          pill.addEventListener('click', () => {
+            selected[g.name] = value;
+            groups.slice(gi + 1).forEach((ng) => { delete selected[ng.name]; });
+            renderOptions();
+            renderPrice();
+          });
+          pills.append(pill);
+        });
+        box.append(pills);
+      });
+    } else if (variants.length) {
+      box.append(el('div', 'group-name', 'Phân loại'));
+      const pills = el('div', 'pills');
+      variants.forEach((v) => {
+        const pill = el('button', 'pill' + (selectedVariantId === v.id ? ' is-active' : ''), v.name);
+        pill.type = 'button';
+        pill.addEventListener('click', () => {
+          selectedVariantId = v.id;
+          renderOptions();
+          renderPrice();
+        });
+        pills.append(pill);
+      });
+      box.append(pills);
+    }
+  };
+
+  const renderPrice = () => {
+    const v = getVariant();
+    const box = $('sheet-price');
+    box.textContent = '';
+    if (v) {
+      box.append(document.createTextNode(money(v.price)));
+      if (v.originalPrice && v.originalPrice > v.price) box.append(el('span', 'old', money(v.originalPrice)));
+    } else if (needsChoice()) {
+      box.append(el('small', '', 'Từ '), document.createTextNode(money(minPrice(current))));
+    } else {
+      box.append(document.createTextNode(money(current.price)));
+    }
+    setImage($('sheet-img'), v?.image || current.images?.[0], '96px');
+    $('sheet-status').textContent = '';
+  };
+
+  const openSheet = (p) => {
+    current = p;
+    selected = {};
+    qty = 1;
+    const variants = variantsOf(p);
+    // Single-list products with only one choice: pre-select it.
+    selectedVariantId = !groupsOf(p).length && variants.length === 1 ? variants[0].id : null;
+    $('sheet-title').textContent = p.name;
+    $('sheet-img').alt = p.name;
+    $('sheet-qty').textContent = '1';
+    renderOptions();
+    renderPrice();
+    $('sheet').hidden = false;
+    $('backdrop').hidden = false;
+    document.body.classList.add('sheet-open');
+    $('sheet-close').focus();
+  };
+  const closeSheet = () => {
+    $('sheet').hidden = true;
+    $('backdrop').hidden = true;
+    document.body.classList.remove('sheet-open');
+  };
+
+  document.querySelectorAll('[data-step]').forEach((b) => {
+    b.addEventListener('click', () => {
+      qty = Math.max(1, Math.min(99, qty + Number(b.dataset.step)));
+      $('sheet-qty').textContent = String(qty);
+    });
+  });
+  $('sheet-close').addEventListener('click', closeSheet);
+  $('backdrop').addEventListener('click', closeSheet);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('sheet').hidden) closeSheet(); });
+
+  const addToCart = () => {
+    const v = getVariant();
+    if (needsChoice() && !v) {
+      $('sheet-status').textContent = 'Bạn chọn phân loại trước nhé.';
+      return false;
+    }
+    const item = buildItem(current, v);
+    const key = keyOf(item);
+    const cart = readCart();
+    const existing = cart.find((c) => keyOf(c) === key);
+    if (existing) existing.qty = Number(existing.qty || 0) + qty;
+    else cart.push({ ...item, qty });
+    if (!writeCart(cart)) {
+      $('sheet-status').textContent = 'Trình duyệt chặn lưu giỏ hàng. Bạn nhắn Zalo giúp shop nhé.';
+      return false;
+    }
+    renderBar();
+    return true;
+  };
+
+  $('sheet-add').addEventListener('click', () => {
+    if (!addToCart()) return;
+    closeSheet();
+    showToast('Đã thêm vào giỏ');
+  });
+  $('sheet-buy').addEventListener('click', () => {
+    if (addToCart()) window.location.href = CHECKOUT_URL;
+  });
+
+  // ---- Sticky order bar ----
+  const renderBar = () => {
+    const cart = readCart();
+    const count = cart.reduce((n, i) => n + (Number(i.qty) || 0), 0);
+    const total = cart.reduce((n, i) => n + (Number(i.price) || 0) * (Number(i.qty) || 0), 0);
+    $('bar').hidden = count === 0;
+    document.body.classList.toggle('has-bar', count > 0);
+    $('bar-count').textContent = `Giỏ hàng: ${count} món`;
+    $('bar-total').textContent = money(total);
+  };
+  window.addEventListener('storage', (e) => { if (e.key === CART_KEY) renderBar(); });
+  window.addEventListener('pageshow', renderBar);
+  renderBar();
+
+  let toastTimer;
+  const showToast = (text) => {
+    const t = $('toast');
+    t.textContent = text;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+  };
+})();
+</script>
+</body>
+</html>
