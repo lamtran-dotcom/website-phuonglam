@@ -1658,9 +1658,17 @@ ${guide}
   });
 };
 
+// Post dates look like "26 tháng 4, 2026"; newer posts first, then higher id on the same day.
+const blogPostTime = (post) => {
+  const match = String(post?.date || '').match(/(\d{1,2})\s*tháng\s*(\d{1,2}),?\s*(\d{4})/i);
+  return match ? Date.UTC(Number(match[3]), Number(match[2]) - 1, Number(match[1])) : 0;
+};
+const sortBlogPostsNewestFirst = (posts) => [...posts].sort((a, b) =>
+  (blogPostTime(b) - blogPostTime(a)) || ((Number(b.id) || 0) - (Number(a.id) || 0)));
+
 const renderBlogIndexPage = ({ blogPosts = [] }) => {
   const description = 'Hướng dẫn và kiến thức từ Phương Lâm về nến tealight, bếp xông, thảo mộc xông nhà và cách chăm sóc không gian sống tự nhiên.';
-  const posts = blogPosts.filter((post) => post.url).slice(0, 24);
+  const posts = sortBlogPostsNewestFirst(blogPosts.filter((post) => post.url)).slice(0, 24);
   const cards = posts.map((post, index) => {
     const image = post.image || '';
     const imagePriority = index < 3 ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
@@ -2198,4 +2206,4 @@ if (require.main === module) {
   else main();
 }
 
-module.exports = { contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage };
+module.exports = { contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage, sortBlogPostsNewestFirst };

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-09 — Guides page shows every post
+- The in-app "Hướng Dẫn" page listed only the first 6 posts; it now has page buttons (‹ 1 2 3 ›), 6 posts per page.
+- The in-app "Hướng Dẫn" page and `/blog/` list the newest post first (by post date).
+
 ## 2026-11-09 — Thank-you card landing page
 - New `cam-on/` page for the QR on the thank-you card: category chips, honey-yellow "giảm 20% so với sàn" poster with a 5-minute per-visitor countdown, 9 chosen products, pick variant and quantity, "Mua ngay" opens the existing checkout; Zalo/call fallback. `noindex`, kept out of the sitemap.
 

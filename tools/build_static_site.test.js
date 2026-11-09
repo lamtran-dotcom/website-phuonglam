@@ -106,3 +106,16 @@ test('structured content renders a fixed outline whose navigation labels equal t
   const legacy = renderProductPage({ product: product({ description: 'Mô tả tự do cũ.' }), categoryName: 'Nến' });
   assert.match(legacy, /Mô tả tự do cũ\./);
 });
+
+test('blog posts sort newest date first, higher id first on the same day', () => {
+  const { sortBlogPostsNewestFirst } = require('./build_static_site');
+  const posts = [
+    { id: 10, date: '25 tháng 4, 2025' },
+    { id: 20, date: '17 tháng 7, 2026' },
+    { id: 26, date: '13 tháng 10, 2026' },
+    { id: 21, date: '17 tháng 7, 2026' },
+    { id: 11, date: '26 tháng 4, 2026' },
+  ];
+  assert.deepEqual(sortBlogPostsNewestFirst(posts).map((post) => post.id), [26, 21, 20, 11, 10]);
+  assert.deepEqual(posts.map((post) => post.id), [10, 20, 26, 21, 11]);
+});

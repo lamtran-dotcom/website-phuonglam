@@ -4422,11 +4422,36 @@ const pvStyles = {
 
 
 
+// Post dates look like "26 tháng 4, 2026"; newer posts first, then higher id on the same day.
+const blogPostTime = (post) => {
+  const match = String(post?.date || '').match(/(\d{1,2})\s*tháng\s*(\d{1,2}),?\s*(\d{4})/i);
+  return match ? Date.UTC(Number(match[3]), Number(match[2]) - 1, Number(match[1])) : 0;
+};
+const sortBlogPostsNewestFirst = (posts) => [...posts].sort((a, b) =>
+  (blogPostTime(b) - blogPostTime(a)) || ((Number(b.id) || 0) - (Number(a.id) || 0)));
+
 const BlogPage = ({ setPage }) => {
   const isMobile = useIsMobile();
   const [activeTag, setActiveTag] = React.useState('Tất cả');
+  const sortedPosts = React.useMemo(() => sortBlogPostsNewestFirst(BLOG_POSTS), []);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const gridRef = React.useRef(null);
   const tags = ['Tất cả', 'Hướng dẫn', 'Kiến thức', 'Thảo mộc', 'Sức khỏe', 'Phụ kiện'];
-  const filtered = activeTag === 'Tất cả' ? BLOG_POSTS : BLOG_POSTS.filter(p => p.tag === activeTag);
+  const filtered = activeTag === 'Tất cả' ? sortedPosts : sortedPosts.filter(p => p.tag === activeTag);
+  const POSTS_PER_PAGE = 6;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / POSTS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const visiblePosts = filtered.slice((safePage - 1) * POSTS_PER_PAGE, safePage * POSTS_PER_PAGE);
+  const selectTag = (tag) => { setActiveTag(tag); setCurrentPage(1); };
+  const goToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    if (gridRef.current) gridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const pageBtnStyle = (active, disabled) => ({
+    minWidth: 40, height: 40, padding: '0 12px', borderRadius: 10, border: '1.5px solid', fontSize: 14, fontWeight: 700,
+    cursor: disabled ? 'default' : 'pointer', opacity: disabled ? 0.4 : 1,
+    background: active ? '#2e7d32' : '#fff', color: active ? '#fff' : '#555', borderColor: active ? '#2e7d32' : '#ddd',
+  });
 
   const tagColor = (tag) => {
     const map = { 'Hướng dẫn': '#2e7d32', 'Kiến thức': '#1565c0', 'Thảo mộc': '#6a3d9a', 'Sức khỏe': '#c62828', 'Phụ kiện': '#e65100' };
@@ -4445,7 +4470,7 @@ const BlogPage = ({ setPage }) => {
         {/* Tag Filter */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32, justifyContent: isMobile ? 'flex-start' : 'center' }}>
           {tags.map(tag => (
-            <button key={tag} onClick={() => setActiveTag(tag)} style={{
+            <button key={tag} onClick={() => selectTag(tag)} style={{
               padding: '8px 18px', borderRadius: 999, border: '1.5px solid', cursor: 'pointer', fontSize: 13, fontWeight: 600, transition: 'all .2s',
               background: activeTag === tag ? '#2e7d32' : '#fff',
               color: activeTag === tag ? '#fff' : '#555',
@@ -4455,8 +4480,8 @@ const BlogPage = ({ setPage }) => {
         </div>
 
         {/* Articles Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
-          {filtered.slice(0, 6).map(post => (
+        <div ref={gridRef} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24, scrollMarginTop: 90 }}>
+          {visiblePosts.map(post => (
             <article key={post.id} style={{ background: '#fff', borderRadius: 16, overflow: 'hidden', boxShadow: '0 2px 12px rgba(0,0,0,0.06)', transition: 'transform .2s, box-shadow .2s', cursor: 'pointer' }}
               onClick={() => { if (post.url) window.location.href = post.url; else setPage({ name: 'blog-post', slug: post.slug }); }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.12)'; }}
@@ -4486,6 +4511,17 @@ const BlogPage = ({ setPage }) => {
 
         {filtered.length === 0 && (
           <div style={{ textAlign: 'center', padding: '60px 0', color: '#aaa', fontSize: 15 }}>Không có bài viết nào trong danh mục này</div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <nav aria-label="Phân trang bài viết" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginTop: 32 }}>
+            <button type="button" onClick={() => safePage > 1 && goToPage(safePage - 1)} disabled={safePage === 1} style={pageBtnStyle(false, safePage === 1)} aria-label="Trang trước">‹</button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+              <button key={n} type="button" onClick={() => goToPage(n)} aria-current={n === safePage ? 'page' : undefined} style={pageBtnStyle(n === safePage, false)}>{n}</button>
+            ))}
+            <button type="button" onClick={() => safePage < totalPages && goToPage(safePage + 1)} disabled={safePage === totalPages} style={pageBtnStyle(false, safePage === totalPages)} aria-label="Trang sau">›</button>
+          </nav>
         )}
 
         {/* CTA */}
