@@ -2,7 +2,7 @@
 
 ## Now
 - [x] Draft `cam-on/` thank-you landing page with ordering via the existing checkout (2026-11-09).
-- [x] `cam-on/` products: 6 bestsellers + đèn xông gốm + tinh dầu 10ml + bộ bếp xông cao cấp (2026-11-09).
+- [x] `cam-on/` products: 6 bestsellers + đèn xông gốm + tinh dầu 10ml + bộ bếp xông cao cấp + thanh gỗ Palo Santo (2026-11-09).
 - [ ] Discount code for `cam-on/`: checkout field, settings/admin config, Worker re-checks the code and amount.
 - [ ] Tag orders that come from the thank-you card (e.g. `?src=thiep` passed into the order).
 - [ ] Print QR to `https://phuonglam.com/cam-on/` once published.
