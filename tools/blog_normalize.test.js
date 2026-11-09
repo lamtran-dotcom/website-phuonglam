@@ -50,3 +50,10 @@ test('a published page whose H1 already carries &amp; survives a second save', (
   assert.equal(titleTag(again.html), 'Đèn xông &amp; nến');
   assert.doesNotMatch(again.html, /&amp;amp;/);
 });
+
+test('a draft written as <article> without <main> still gets the related posts panel', () => {
+  const articleOnly = `<!doctype html><html lang="vi"><head><title>Bài mới</title><meta name="description" content="Mô tả bài."></head><body><article class="article-wrap"><h1>Bài mới</h1><h2>1. Một</h2><p>Nội dung.</p></article></body></html>`;
+  const { html } = normalize(articleOnly);
+  assert.match(html, /class="article-link-panel"[\s\S]*<\/article>/);
+  assert.equal((html.match(/class="article-link-panel"/g) || []).length, 1);
+});

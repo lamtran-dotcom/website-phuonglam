@@ -3988,8 +3988,8 @@ const PRODUCTS = [
 const BLOG_POSTS = [
   {
     "id": 11,
-    "title": "Hướng Dẫn Dùng Bếp Xông Thảo Mộc Đúng Cách, An Toàn | Nến Phương Lâm",
-    "excerpt": "Bếp xông thảo mộc giúp thanh lọc không khí, khử mùi nấm mốc và thư giãn tinh thần. Hướng dẫn cách dùng đúng cách, an toàn cùng nến tealight tại Nến…",
+    "title": "Cách dùng bếp xông thảo mộc đúng, an toàn | Phương Lâm",
+    "excerpt": "Cách dùng bếp xông thảo mộc đúng và an toàn: chọn bếp, chọn nến tealight, thảo mộc phù hợp, các bước xông và lưu ý khi xông trong nhà.",
     "date": "26 tháng 4, 2026",
     "readTime": "3 phút đọc",
     "slug": "huong-dan-dung-bep-xong-thao-moc",
@@ -4120,8 +4120,8 @@ const BLOG_POSTS = [
   },
   {
     "id": 16,
-    "title": "Vỏ Bưởi Khô Xông Nhà: Tác Dụng Và Cách Làm Đơn Giản Tại Nhà",
-    "excerpt": "Vỏ bưởi khô xông nhà giúp khử mùi ẩm mốc, đuổi muỗi và thanh lọc không khí tự nhiên. Hướng dẫn chi tiết cách phơi, cách xông và mẹo kết hợp thảo mộc từ…",
+    "title": "Vỏ bưởi khô xông nhà: tác dụng và cách làm | Phương Lâm",
+    "excerpt": "Vỏ bưởi khô xông nhà làm thế nào? Cách tự phơi vỏ bưởi, xông khô bằng bếp xông đất nung, xông ướt bằng nồi nước và mẹo kết hợp thảo mộc khác.",
     "date": "3 tháng 5, 2026",
     "readTime": "3 phút đọc",
     "slug": "vo-buoi-kho-xong-nha-phuong-lam-202605031028",
@@ -4131,8 +4131,8 @@ const BLOG_POSTS = [
   },
   {
     "id": 15,
-    "title": "Phụ Kiện Thắp Nến Bằng Gas: Tại Sao Nên Dùng Quẹt Gas Thay Bật Lửa? | Nến Phương Lâm",
-    "excerpt": "Phụ kiện thắp nến bằng gas giúp mồi nến ly sâu, nến tealight an toàn hơn, không bỏng tay. So sánh quẹt gas, bật lửa điện và diêm — chọn loại nào tốt nhất…",
+    "title": "Quẹt gas thắp nến: vì sao tốt hơn bật lửa? | Phương Lâm",
+    "excerpt": "Vì sao nên thắp nến bằng quẹt gas cán dài thay bật lửa? So sánh quẹt gas, bật lửa điện và diêm, cách nạp gas và bảo quản để mồi nến an toàn.",
     "date": "29 tháng 4, 2026",
     "readTime": "3 phút đọc",
     "slug": "phu-kien-thap-nen-quet-gas-202604291546",
@@ -4142,8 +4142,8 @@ const BLOG_POSTS = [
   },
   {
     "id": 14,
-    "title": "Nến Tealight Không Khói: Cách Chọn Đúng Loại 2h, 4h, 8h Cho Xông Tinh Dầu | Nến Phương Lâm",
-    "excerpt": "Nến tealight không khói là chìa khóa để xông tinh dầu đúng cách — không muội đen, không át mùi hương. Hướng dẫn phân biệt nến 2h, 4h, 8h và cách chọn…",
+    "title": "Nến tealight không khói: chọn 2h, 4h hay 8h? | Phương Lâm",
+    "excerpt": "Nến tealight không khói nên chọn loại 2h, 4h hay 8h? Phân biệt thời gian cháy, vỏ nhôm và vỏ nhựa, cách nhận biết nến tốt để xông tinh dầu.",
     "date": "28 tháng 4, 2026",
     "readTime": "3 phút đọc",
     "slug": "nen-tealight-khong-khoi-xong-tinh-dau-202604280600",
@@ -4153,8 +4153,8 @@ const BLOG_POSTS = [
   },
   {
     "id": 13,
-    "title": "Bồ Kết Xông Nhà Có Tác Dụng Gì? Cách Dùng Đúng & An Toàn | Nến Phương Lâm",
-    "excerpt": "Bồ kết xông nhà giúp khử mùi ẩm mốc, đuổi côn trùng, thanh lọc không khí và cân bằng phong thủy. Hướng dẫn cách xông nhà bằng bồ kết đúng cách, an toàn…",
+    "title": "Bồ kết xông nhà: tác dụng và cách dùng đúng | Phương Lâm",
+    "excerpt": "Bồ kết xông nhà dùng thế nào cho đúng? Cách xông bằng bếp xông và nến tealight, lượng bồ kết theo diện tích phòng và lưu ý an toàn cho cả nhà.",
     "date": "28 tháng 4, 2026",
     "readTime": "3 phút đọc",
     "slug": "bo-ket-xong-nha-phuong-lam-202604280416",
@@ -4164,8 +4164,8 @@ const BLOG_POSTS = [
   },
   {
     "id": 12,
-    "title": "Đèn xông tinh dầu bằng nến: cách dùng đúng và chọn tinh dầu phù hợp",
-    "excerpt": "Hướng dẫn cách dùng đèn xông tinh dầu bằng nến an toàn, chọn nến tealight và tinh dầu phù hợp để hương thơm lan tỏa nhẹ nhàng trong không gian sống.",
+    "title": "Đèn xông tinh dầu bằng nến: cách dùng đúng | Phương Lâm",
+    "excerpt": "Cách dùng đèn xông tinh dầu bằng nến đúng cách: chọn nến tealight phù hợp, cách dùng tinh dầu từng bước và những lưu ý an toàn khi xông trong phòng.",
     "date": "27 tháng 4, 2026",
     "readTime": "5 phút đọc",
     "slug": "den-xong-tinh-dau-bang-nen-cach-dung-dung",
@@ -4175,14 +4175,26 @@ const BLOG_POSTS = [
   },
   {
     "id": 10,
-    "title": "Phân biệt nến 2h, nến 4h, nến 8h dùng cho mục đích gì",
-    "excerpt": "Hiểu rõ sự khác nhau giữa nến tealight 2h, 4h và 8h để chọn đúng loại cho bàn thờ, xông tinh dầu, trang trí hoặc những buổi thư giãn dài.",
+    "title": "Nến tealight 2h, 4h, 8h khác nhau thế nào? | Phương Lâm",
+    "excerpt": "Nến tealight 2h, 4h, 8h khác nhau thế nào? Cách chọn theo mục đích: xông tinh dầu, bếp xông thảo mộc hay thờ cúng, kèm lưu ý dùng nến an toàn.",
     "date": "25 tháng 4, 2025",
     "readTime": "6 phút đọc",
     "slug": "phan-biet-nen-tealight-nen-2h-4h-8h",
     "tag": "Kiến thức",
     "url": "/blog/kien-thuc/phan-biet-nen-tealight-2h-4h-8h/",
     "image": "/assets/blog/nen-tealight-khong-khoi-featured.webp"
+  },
+  {
+    "id": 27,
+    "title": "Trang Trí Bàn Tiệc Bằng Nến Tealight: Cách Chọn Số Lượng",
+    "excerpt": "Trang trí bàn tiệc bằng nến tealight đẹp, đủ sáng và gọn gàng với cách tính số lượng nến cho bàn ăn, bàn gallery, lối đi và lưu ý an toàn.",
+    "date": "24 tháng 7, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "trang-tri-ban-tiec-bang-nen-tealight",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/trang-tri-ban-tiec-bang-nen-tealight/",
+    "image": "/assets/blog/trang-tri-ban-tiec-bang-nen-tealight-1784299350220-1-chatgpt-image-21-38-21-17-thg-7-2026.webp",
+    "coverImage": "/assets/blog/trang-tri-ban-tiec-bang-nen-tealight-1784299350220-1-chatgpt-image-21-38-21-17-thg-7-2026.webp"
   }
 ];
 

@@ -3,6 +3,10 @@
 ## Now
 - [x] Pagination on the in-app "Hướng Dẫn" page (was capped at 6 posts) (2026-11-09).
 - [x] Newest posts first on "Hướng Dẫn" and `/blog/` (2026-11-09).
+- [x] Blog audit: broken links, titles/descriptions, related posts, guides on product/category pages (2026-11-09).
+- [ ] Seller: review health/feng-shui wording in older posts (bồ kết, vỏ bưởi, đèn xông).
+- [ ] After the 2 queued posts publish, add links to them from related posts (product/category pages pick them up automatically).
+- [ ] Search Console: request indexing for the 7 retitled posts after deploy.
 - [ ] Generate the missing 480px responsive copies for 7 homepage product images (404 live).
 - [x] Draft `cam-on/` thank-you landing page with ordering via the existing checkout (2026-11-09).
 - [x] `cam-on/` products: 6 bestsellers + đèn xông gốm + tinh dầu 10ml + bộ bếp xông cao cấp + thanh gỗ Palo Santo (2026-11-09).

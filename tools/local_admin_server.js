@@ -1409,8 +1409,12 @@ const ensureBlogArticleShell = ({ html, title, category, slug, preserveShell = f
   const related = articleRelatedBlock({ title, category, slug });
   if (/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(nextHtml)) {
     if (!preserveShell) nextHtml = nextHtml.replace(/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i, related);
-  } else {
+  } else if (/<\/article>\s*<\/main>/i.test(nextHtml)) {
     nextHtml = nextHtml.replace(/<\/article>(\s*<\/main>)/i, `      ${related}\n    </article>$1`);
+  } else {
+    // Newer drafts use <article class="article-wrap"> with no <main> around it.
+    const end = nextHtml.lastIndexOf('</article>');
+    if (end >= 0) nextHtml = `${nextHtml.slice(0, end)}  ${related}\n  ${nextHtml.slice(end)}`;
   }
   return nextHtml;
 };

@@ -1478,7 +1478,48 @@ const renderReviewsSection = (reviews) => {
         ${items}</section>`;
 };
 
-const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
+// ---- Guide posts linked from product and category pages ----
+// Topic phrases (unaccented) per category, strongest first.
+const GUIDE_TOPICS = {
+  'nen-thom': ['nen tealight', 'nen'],
+  'nen-tru': ['nen'],
+  'nen-ly': ['nen'],
+  'thao-moc-xong': ['thao moc', 'bo ket', 'vo buoi', 'xong nha'],
+  'tui-thom': ['xong nha', 'thao moc'],
+  'go-thom': ['xong nha', 'thao moc'],
+  'nu-tram': ['xong nha'],
+  combo: ['bo xong', 'bep xong', 'bep nieu', 'thao moc'],
+  'bep-xong': ['den xong', 'tinh dau', 'bep xong'],
+  'phu-kien': ['quet gas', 'phu kien', 'bep nieu', 'an toan', 'bep xong'],
+};
+// Phrases that tie one product to one post (both must contain it).
+const GUIDE_PRODUCT_PHRASES = ['bo ket', 'vo buoi', 'den xong', 'tinh dau', 'quet gas', 'bep nieu', 'bep xong',
+  'vo nhom', 'mica', 'tiec', 'khong mui', 'khong khoi', '2 gio', '4 gio', '8 gio', 'thao moc'];
+const unaccent = (value) => String(value || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/gi, 'd').toLowerCase();
+const guideTitle = (post) => String(post.title || '').replace(/\s*\|\s*(Nến\s+)?Phương Lâm\s*$/i, '');
+
+const pickGuidePosts = ({ blogPosts = [], categoryId, text = '', limit = 3 }) => {
+  const topics = GUIDE_TOPICS[categoryId] || ['xong nha'];
+  const productText = unaccent(text).replace(/\b(\d+)\s*h\b/g, '$1 gio');
+  const scored = sortBlogPostsNewestFirst(blogPosts.filter((post) => post.url)).map((post) => {
+    const title = unaccent(guideTitle(post)).replace(/\b(\d+)\s*h\b/g, '$1 gio');
+    const excerpt = unaccent(post.excerpt).replace(/\b(\d+)\s*h\b/g, '$1 gio');
+    // A phrase in the post title counts far more than one in its excerpt.
+    const weight = (phrase, inTitle, inExcerpt) => (title.includes(phrase) ? inTitle : (excerpt.includes(phrase) ? inExcerpt : 0));
+    const topicScore = topics.reduce((sum, topic, i) => sum + (topics.length - i) * weight(topic, 20, 4), 0);
+    const productScore = GUIDE_PRODUCT_PHRASES
+      .filter((phrase) => productText.includes(phrase))
+      .reduce((sum, phrase) => sum + weight(phrase, 30, 8), 0);
+    return { post, score: topicScore + productScore };
+  });
+  return scored.filter((item) => item.score > 0).sort((a, b) => b.score - a.score).slice(0, limit).map((item) => item.post);
+};
+
+const renderGuideSection = (posts = []) => (posts.length
+  ? `<section class="content related-products related-guides" aria-labelledby="related-guides-title"><h2 id="related-guides-title">Hướng dẫn liên quan</h2><ul>${posts.map((post) => `<li><a href="${escapeHtml(post.url)}">${escapeHtml(guideTitle(post))}</a></li>`).join('')}</ul></section>`
+  : '');
+
+const renderProductPage = ({ product, categoryName, relatedProducts = [], guidePosts = [] }) => {
   const image = firstImage(product);
   const galleryImages = getProductGalleryImages(product);
   const productUrl = `${siteUrl}/san-pham/${product.slug}/`;
@@ -1560,6 +1601,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [] }) => {
         ${(structuredView ? structuredView.sections : productContent).join('\n        ')}
         ${renderReviewsSection(reviews)}
         ${related.length ? `<section class="content related-products" aria-labelledby="related-products-title"><h2 id="related-products-title">Sản phẩm cùng danh mục</h2><ul>${related.map((item) => `<li><a href="/san-pham/${escapeHtml(item.slug)}/">${escapeHtml(item.name)}</a></li>`).join('')}</ul></section>` : ''}
+        ${renderGuideSection(guidePosts)}
       </div>
     </div>
   </main>`;
@@ -1611,7 +1653,7 @@ const categorySeoContent = {
   },
 };
 
-const renderCategoryPage = ({ categoryId, categoryName, products, categories }) => {
+const renderCategoryPage = ({ categoryId, categoryName, products, categories, guidePosts = [] }) => {
   const categoryUrl = `${siteUrl}/danh-muc/${categoryId}/`;
   const seo = categorySeoContent[categoryId];
   const description = seo?.description || `${categoryName} Phương Lâm: sản phẩm chọn lọc, phù hợp cho thư giãn, xông hương và chăm sóc không gian sống tự nhiên.`;
@@ -1646,6 +1688,7 @@ const renderCategoryPage = ({ categoryId, categoryName, products, categories }) 
       </section>
     </div>
 ${guide}
+    ${renderGuideSection(guidePosts)}
   </main>`;
 
   return pageShell({
@@ -1813,6 +1856,7 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
         product,
         categoryName: categoryNameById.get(product.categoryId) || product.categoryId,
         relatedProducts: products.filter((item) => !isHiddenProduct(item) && item.categoryId === product.categoryId),
+        guidePosts: pickGuidePosts({ blogPosts, categoryId: product.categoryId, text: product.name }),
       })
     );
   }
@@ -1839,6 +1883,7 @@ const writeSeoPages = ({ products, categories, blogPosts = [] }) => {
         categoryName,
         products: list,
         categories: visibleCategories,
+        guidePosts: pickGuidePosts({ blogPosts, categoryId, text: categoryName }),
       })
     );
   }
@@ -2181,9 +2226,10 @@ const buildProductPagesOnly = () => {
   bakeProductsIntoApp(products);
   compileAppJs();
   const siteDataPath = path.join(paths.jsDir, 'site-data.js');
-  const categories = fs.existsSync(siteDataPath)
-    ? extractInitialData(fs.readFileSync(siteDataPath, 'utf8')).categories
-    : [];
+  const initialData = fs.existsSync(siteDataPath)
+    ? extractInitialData(fs.readFileSync(siteDataPath, 'utf8'))
+    : { categories: [], blogPosts: [] };
+  const { categories, blogPosts } = initialData;
   const categoryNameById = new Map(categories.map((category) => [category.id, category.name]));
   for (const [id, name] of Object.entries(categoryFallback)) {
     if (!categoryNameById.has(id)) categoryNameById.set(id, name);
@@ -2196,6 +2242,7 @@ const buildProductPagesOnly = () => {
       product,
       categoryName: categoryNameById.get(product.categoryId) || product.categoryId,
       relatedProducts: visibleProducts.filter((item) => item.categoryId === product.categoryId),
+      guidePosts: pickGuidePosts({ blogPosts, categoryId: product.categoryId, text: product.name }),
     }));
   }
   console.log(`Generated ${products.length} product detail pages (${products.length - visibleProducts.length} hidden, noindex).`);

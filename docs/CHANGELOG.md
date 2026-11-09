@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-09 — Blog internal links and titles
+- Fixed a dead product link used in 13 posts and two malformed post links.
+- Shorter titles (≤60 characters) and complete descriptions for 7 posts.
+- Every post links to 3 related posts and, mid-article, to one post and one product; product and category pages list 3 related guides.
+- New admin drafts written as `<article>` now get the related-posts panel.
+- The "Trang trí bàn tiệc" post is back in the blog list.
+
 ## 2026-11-09 — Guides page shows every post
 - The in-app "Hướng Dẫn" page listed only the first 6 posts; it now has page buttons (‹ 1 2 3 ›), 6 posts per page.
 - The in-app "Hướng Dẫn" page and `/blog/` list the newest post first (by post date).
