@@ -3990,7 +3990,7 @@ const BLOG_POSTS = [
     "id": 29,
     "title": "Xông nhà cuối năm: làm ngày nào, dùng gì? | Phương Lâm",
     "excerpt": "Xông nhà cuối năm nên làm ngày nào, dùng gì và thực hiện ra sao? Xem checklist, 2 cách xông cùng lưu ý an toàn để chuẩn bị nhà cửa đón Tết.",
-    "date": "10 tháng 11, 2026",
+    "date": "9 tháng 11, 2026",
     "readTime": "3 phút đọc",
     "slug": "xong-nha-cuoi-nam",
     "tag": "Hướng dẫn",
@@ -4019,8 +4019,8 @@ const BLOG_POSTS = [
     "slug": "huong-dan-dung-bep-xong-thao-moc",
     "tag": "Hướng dẫn",
     "url": "/blog/huong-dan-xong/huong-dan-dung-bep-xong-thao-moc/",
-    "image": "https://phuonglam.com/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp",
-    "coverImage": "https://phuonglam.com/assets/blog/featured-bep-xong-thao-moc-phuong-lam.webp"
+    "image": "https://phuonglam.com/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/cach-xong-nha-bang-thao-moc-1784102021237-1-bep-xong-thao-moc-website.webp"
   },
   {
     "id": 23,
@@ -4062,7 +4062,7 @@ const BLOG_POSTS = [
     "id": 24,
     "title": "Bộ xông nhà cho người mới cần những gì? | Phương Lâm",
     "excerpt": "Bộ xông nhà cho người mới cần những gì? Xem checklist bếp niêu, nến tealight, thảo mộc và phụ kiện để chuẩn bị xông nhà lần đầu gọn gàng.",
-    "date": "14 tháng 8, 2026",
+    "date": "10 tháng 8, 2026",
     "readTime": "3 phút đọc",
     "slug": "bo-xong-nha-cho-nguoi-moi-dung-bep-nieu",
     "tag": "Hướng dẫn",
@@ -4074,7 +4074,7 @@ const BLOG_POSTS = [
     "id": 26,
     "title": "Cách dùng bếp xông thảo mộc trong phòng nhỏ | Phương Lâm",
     "excerpt": "Cách dùng bếp xông thảo mộc trong phòng nhỏ: chọn chỗ thoáng, bắt đầu với lượng ít và theo dõi mùi hương. Đọc hướng dẫn để dùng phù hợp.",
-    "date": "13 tháng 10, 2026",
+    "date": "10 tháng 10, 2026",
     "readTime": "3 phút đọc",
     "slug": "dung-bep-xong-phong-nho",
     "tag": "Hướng dẫn",
@@ -4151,7 +4151,8 @@ const BLOG_POSTS = [
     "slug": "vo-buoi-kho-xong-nha-phuong-lam-202605031028",
     "tag": "Hướng dẫn",
     "url": "/blog/huong-dan-xong/vo-buoi-kho-xong-nha-phuong-lam-202605031028/",
-    "image": "/assets/blog/vo-buoi-kho-xong-nha-phuong-lam-202605031028-featured-vo-buoi-kho-xong-nha.webp"
+    "image": "https://phuonglam.com/assets/blog/xong-nha-cuoi-nam-1794218373533-2-thao-moc-dung-de-xong-nha-cuoi-nam-gom-vo-buoi-bo-ket-sa-va.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/xong-nha-cuoi-nam-1794218373533-2-thao-moc-dung-de-xong-nha-cuoi-nam-gom-vo-buoi-bo-ket-sa-va.webp"
   },
   {
     "id": 15,
@@ -4173,7 +4174,8 @@ const BLOG_POSTS = [
     "slug": "nen-tealight-khong-khoi-xong-tinh-dau-202604280600",
     "tag": "Hướng dẫn",
     "url": "/blog/huong-dan-xong/nen-tealight-khong-khoi-xong-tinh-dau-202604280600/",
-    "image": "/assets/blog/nen-tealight-khong-khoi-xong-tinh-dau-202604280600-featured-nen-tealight-khong-khoi-phuong-lam.webp"
+    "image": "https://phuonglam.com/assets/blog/cach-chon-nen-tealight-4-gio-khong-khoi-1791540190592-1-nen-tealight-4-gio-khong-khoi-chua-chay-dat-canh-bep-xong-th.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/cach-chon-nen-tealight-4-gio-khong-khoi-1791540190592-1-nen-tealight-4-gio-khong-khoi-chua-chay-dat-canh-bep-xong-th.webp"
   },
   {
     "id": 13,
@@ -4184,7 +4186,8 @@ const BLOG_POSTS = [
     "slug": "bo-ket-xong-nha-phuong-lam-202604280416",
     "tag": "Hướng dẫn",
     "url": "/blog/huong-dan-xong/bo-ket-xong-nha-phuong-lam-202604280416/",
-    "image": "/assets/blog/bo-ket-xong-nha-phuong-lam-202604280416-featured-bo-ket-xong-nha-phuong-lam.webp"
+    "image": "https://phuonglam.com/assets/blog/xong-nha-cuoi-nam-1794218373533-2-thao-moc-dung-de-xong-nha-cuoi-nam-gom-vo-buoi-bo-ket-sa-va.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/xong-nha-cuoi-nam-1794218373533-2-thao-moc-dung-de-xong-nha-cuoi-nam-gom-vo-buoi-bo-ket-sa-va.webp"
   },
   {
     "id": 12,
@@ -4206,13 +4209,14 @@ const BLOG_POSTS = [
     "slug": "phan-biet-nen-tealight-nen-2h-4h-8h",
     "tag": "Kiến thức",
     "url": "/blog/kien-thuc/phan-biet-nen-tealight-2h-4h-8h/",
-    "image": "/assets/blog/nen-tealight-khong-khoi-featured.webp"
+    "image": "https://phuonglam.com/assets/blog/nen-tealight-mua-o-dau-1794217823287-2-so-sanh-nen-tealight-theo-thoi-gian-chay-truoc-khi-mua.webp",
+    "coverImage": "https://phuonglam.com/assets/blog/nen-tealight-mua-o-dau-1794217823287-2-so-sanh-nen-tealight-theo-thoi-gian-chay-truoc-khi-mua.webp"
   },
   {
     "id": 27,
     "title": "Trang trí bàn tiệc bằng nến tealight | Phương Lâm",
     "excerpt": "Trang trí bàn tiệc bằng nến tealight đẹp, đủ sáng và gọn gàng với cách tính số lượng nến cho bàn ăn, bàn gallery, lối đi và lưu ý an toàn.",
-    "date": "24 tháng 7, 2026",
+    "date": "17 tháng 7, 2026",
     "readTime": "3 phút đọc",
     "slug": "trang-tri-ban-tiec-bang-nen-tealight",
     "tag": "Hướng dẫn",
