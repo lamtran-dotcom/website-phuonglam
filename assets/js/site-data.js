@@ -3987,6 +3987,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 29,
+    "title": "Xông nhà cuối năm: làm ngày nào, dùng gì và các bước đúng cách",
+    "excerpt": "Xông nhà cuối năm nên làm ngày nào, dùng gì và thực hiện ra sao? Xem checklist, 2 cách xông cùng lưu ý an toàn để chuẩn bị nhà cửa đón Tết.",
+    "date": "10 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "xong-nha-cuoi-nam",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/xong-nha-cuoi-nam/",
+    "image": "/assets/blog/xong-nha-cuoi-nam-1794218373883-1-xong-nha-cuoi-nam-voi-bep-nieu-dat-nung-nen-tealight-va-thao.webp",
+    "coverImage": "/assets/blog/xong-nha-cuoi-nam-1794218373883-1-xong-nha-cuoi-nam-voi-bep-nieu-dat-nung-nen-tealight-va-thao.webp"
+  },
+  {
     "id": 28,
     "title": "Nến tealight mua ở đâu? Giá và cách chọn số lượng",
     "excerpt": "Nến tealight mua ở đâu để đúng nhu cầu? Tham khảo giá, cách chọn thời gian cháy, số lượng và đặt nến phù hợp tại Phương Lâm.",
