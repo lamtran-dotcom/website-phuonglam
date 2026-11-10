@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-11-10 — Thảo mộc price increase
+- 9 products in Thảo Mộc Xông: every selling price +8.000đ (product and variants); crossed-out prices +15% rounded to 1.000đ. The duplicate Túi Thơm product kept its prices (seller choice).
+
 ## 2026-11-10 — SEO fixes from the checklist report
 - 20 live posts: 13 titles shortened to end with " | Phương Lâm" (30–60 chars; H1 unchanged except the bộ xông thảo mộc post, which lost its brand suffix); `BLOG_POSTS.title` synced.
 - Every BlogPosting now has `publisher.logo`; visible breadcrumb added to 12 posts; dates given time + `+07:00` (day unchanged); the vỏ bưởi post's schema (image URL, mainEntityOfPage, logo) repaired; BlogPosting added to the đèn xông tinh dầu post.
