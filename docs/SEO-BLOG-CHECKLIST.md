@@ -38,7 +38,7 @@ Cột "Cách kiểm" cho biết quy tắc đó kiểm được bằng gì:
 | T1 | blocker | Trang trả HTTP 200. Không có `<meta name="robots" content="noindex">`. Không bị `robots.txt` chặn. [G] | auto, site |
 | T2 | blocker | Có đúng 1 thẻ `<link rel="canonical">`. Thẻ dùng URL tuyệt đối `https://phuonglam.com/blog/<danh-mục>/<slug>/` (có `/` cuối) và trỏ về chính trang này. [G] | auto |
 | T3 | major | URL bài có trong `sitemap.xml`. [G] | site |
-| T4 | major | Có `<html lang="vi">`, `<meta charset="utf-8">` và `<meta name="viewport" content="width=device-width, initial-scale=1">`. [G] | auto |
+| T4 | major | Có `<html lang="vi">`, `<meta charset="utf-8">` và `<meta name="viewport" content="width=device-width, initial-scale=1">` (`initial-scale=1.0` cũng đúng, trình duyệt hiểu như nhau). [G] | auto |
 | T5 | major | Nội dung chính (tiêu đề, các mục, đoạn văn) có sẵn trong HTML, không phụ thuộc JavaScript mới hiện ra. [G] | auto |
 | T6 | minor | Slug viết thường, không dấu, nối bằng `-`, ngắn gọn, chứa từ khoá chính. **Không đổi slug của bài đã đăng.** Nếu slug chưa chuẩn thì chỉ ghi nhận, không sửa. [PL] | auto |
 
@@ -63,7 +63,7 @@ Cột "Cách kiểm" cho biết quy tắc đó kiểm được bằng gì:
 | C5 | major | Bài không tự mâu thuẫn. Ví dụ: đoạn trên nói "an toàn cho trẻ nhỏ", đoạn dưới lại dặn "không xông khi có trẻ sơ sinh". [G] | judge |
 | C6 | major | Bài về lửa, khói, nến, xông phải có mục lưu ý an toàn: thông gió, không để lửa không người trông, tránh xa trẻ em và vật dễ cháy. [PL] | judge |
 | C7 | major | Không sót rác của bản nháp: comment `<!-- PROMPT ẢNH ... -->`, `TODO`, `lorem`, ký hiệu markdown (`**`, `##`), chữ giữ chỗ `[...]`. [PL] | auto |
-| C8 | minor | Ngày đăng hiện rõ cho người đọc và khớp `datePublished`. Có tên tác giả hoặc tên shop. [G] | auto |
+| C8 | minor | Ngày đăng hiện rõ cho người đọc. Ngày hiển thị, `datePublished` và `date` trong `BLOG_POSTS` cùng chỉ một ngày. Có tên tác giả hoặc tên shop. [G] | auto, site |
 | C9 | minor | Mỗi đoạn tối đa khoảng 4 câu. Các bước làm trình bày bằng danh sách `<ol>`/`<ul>`. [PL] | auto |
 | C10 | major | Không chép nguyên đoạn từ bài khác trên site. Nội dung không mỏng, không viết ra chỉ để chứa từ khoá. [G] | site, judge |
 
@@ -83,17 +83,18 @@ Cột "Cách kiểm" cho biết quy tắc đó kiểm được bằng gì:
 | Mã | Mức | Quy tắc | Cách kiểm |
 |---|---|---|---|
 | I1 | major | Có ảnh đại diện. Ảnh rộng ít nhất 1200 px, có trong `og:image` và `image` của JSON-LD. [G] | auto |
-| I2 | major | Mọi `<img>` có `alt` mô tả đúng ảnh. Alt không rỗng, không phải tên file, không nhồi từ khoá, dài tối đa 125 ký tự. [G] | auto |
-| I3 | minor | Ảnh định dạng WebP, nằm trong `/assets/blog/`, tên file không dấu và có nghĩa. Không có ảnh base64 trong HTML. [PL] | auto |
+| I2 | major | Mọi `<img>` trong thân bài (không tính logo ở đầu trang) có `alt` mô tả đúng ảnh. Alt không rỗng, không phải tên file, không nhồi từ khoá, dài tối đa 125 ký tự. [G] | auto |
+| I3 | minor | Ảnh trong thân bài (không tính logo ở đầu trang) định dạng WebP, nằm trong `/assets/blog/`, tên file không dấu và có nghĩa. Không có ảnh base64 trong HTML. [PL] | auto |
 | I4 | minor | Ảnh đầu tiên không dùng `loading="lazy"`. Các ảnh phía dưới dùng `loading="lazy"`. Ảnh có `width`/`height` hoặc khung tỉ lệ để trang không bị nhảy. [G] (Core Web Vitals) | auto |
 
 ### S. Dữ liệu có cấu trúc (JSON-LD)
 
 | Mã | Mức | Quy tắc | Cách kiểm |
 |---|---|---|---|
-| S1 | major | Có `BlogPosting` (hoặc `Article`) là JSON hợp lệ, đủ các trường: `headline` (khớp H1), `description`, `image` (URL tuyệt đối), `datePublished` và `dateModified` (ISO 8601 có múi giờ, ví dụ `2026-11-09T10:00:00+07:00`), `author` (có `name`), `publisher` (có `name` và `logo`), `mainEntityOfPage` (= canonical). [G] | auto |
+| S1 | major | Có `BlogPosting` (hoặc `Article`) là JSON hợp lệ, đủ các trường: `headline` (khớp H1), `description`, `image` (URL tuyệt đối), `datePublished` và `dateModified` (ISO 8601 có múi giờ, ví dụ `2026-11-09T10:00:00+07:00`), `author` (có `name`), `publisher` (có `name`), `mainEntityOfPage` (= canonical). Các URL ảnh trong JSON-LD phải tồn tại. [G] | auto |
 | S2 | minor | Có `BreadcrumbList` khớp breadcrumb hiển thị: Trang chủ › Hướng Dẫn › tên bài. [G] | auto |
 | S3 | minor | Nếu có `FAQPage`, mỗi câu hỏi và câu trả lời phải xuất hiện y nguyên trên trang. Từ 2023, Google chỉ hiện kết quả FAQ cho một số trang chính phủ và y tế, nên không trông vào kết quả FAQ. [G] | auto |
+| S4 | minor | `publisher` có `logo` là URL tuyệt đối tồn tại, ví dụ `https://phuonglam.com/assets/media/generated/embedded-001.png` (1000×1000). Google không bắt buộc trường này cho Article, nhưng thêm vào giúp dữ liệu đầy đủ. [PL] | auto |
 
 ### P. Trải nghiệm trên điện thoại
 
@@ -188,6 +189,11 @@ Quy tắc khi sửa:
 - Link nội bộ chỉ trỏ tới trang có thật trong repo (san-pham/<slug>/, danh-muc/<id>/, blog/<danh-mục>/<slug>/). Không trỏ tới sản phẩm hidden. Không link tới bài còn trong scheduled-posts.
 - Không bịa thông số, giá hay công dụng. Không thêm khẳng định sức khoẻ, y tế. Nội dung tâm linh, phong thuỷ ghi rõ "theo quan niệm dân gian". Lỗi C4 hoặc C5 cần đổi ý nội dung thì đề xuất câu thay thế và HỎI tôi trước khi sửa.
 - Giữ nguyên văn phong tiếng Việt và cấu trúc, CSS, script sẵn có của bài. Sửa ít nhất có thể.
+- Ngày đăng: được thêm giờ và múi giờ cho `datePublished`/`dateModified` (ví dụ `2026-04-28` → `2026-04-28T08:00:00+07:00`), KHÔNG đổi ngày. Nếu ngày hiển thị, `datePublished` và `BLOG_POSTS.date` lệch nhau, hoặc cần thêm BlogPosting mà không chắc ngày đăng, thì ghi "cần tôi quyết" kèm các ngày tìm thấy.
+- Alt ảnh: mở xem từng ảnh rồi mới viết alt mô tả đúng ảnh đó. Câu trong "fix" của báo cáo chỉ là gợi ý, không chép nguyên văn; đếm lại ký tự của title và mô tả sau khi viết.
+- I1 (ảnh đại diện dưới 1200 px): ghi "cần tôi quyết", cần ảnh gốc mới; không phóng to ảnh cũ.
+- I3 (đổi tên hoặc định dạng file ảnh): ghi "bỏ qua", vì phải sửa mọi chỗ tham chiếu và Google mất chỉ mục ảnh cũ, lợi ích nhỏ.
+- Lỗi lặp lại ở nhiều bài do mẫu tạo bài sinh ra (publisher thiếu logo, thiếu breadcrumb hiển thị, alt dạng "Ảnh 1 · Ảnh bìa"): sửa cả mẫu trong `tools/local_admin_server.js` để bài mới không lặp lỗi, kèm test, và nói rõ trong báo cáo. Logo dùng `https://phuonglam.com/assets/media/generated/embedded-001.png`.
 - Không đụng file ngoài danh sách trên, trừ khi cần sửa lỗi gốc lặp lại ở nhiều bài. Trường hợp đó giải thích trước khi sửa.
 
 Sau khi sửa:
