@@ -1022,11 +1022,20 @@ const promptImageToUrl = ({ file, prompt, slug, persist, tempDir }) => {
   return copyBlogAsset({ sourcePath: tempPath, slug });
 };
 
-const figureForPrompt = ({ prompt, src }) => {
+// "Prompt ảnh 1" or "Ảnh 2 · Ảnh bìa" are draft labels, not a description of the picture.
+const isGenericImageLabel = (text) => /^\s*(?:prompt\s+)?ảnh\s*\d+\s*(?:[·\-–—:].*)?$/i.test(String(text || ''));
+
+const headingBefore = (html, index) => {
+  const headings = [...html.slice(0, index).matchAll(/<h([12])\b[^>]*>([\s\S]*?)<\/h\1>/gi)];
+  return decodeEntities(stripHtml(headings.at(-1)?.[2] || ''));
+};
+
+const figureForPrompt = ({ prompt, src, fallbackAlt = '' }) => {
   const isFeatured = prompt.index === 0;
-  const alt = escapeHtml(prompt.alt || `Ảnh minh họa ${prompt.index + 1}`);
+  const described = prompt.alt && !isGenericImageLabel(prompt.alt) ? prompt.alt : fallbackAlt;
+  const alt = escapeHtml(described.slice(0, 125) || `Ảnh minh họa ${prompt.index + 1}`);
   const loadingAttrs = isFeatured ? ' loading="eager" fetchpriority="high"' : ' loading="lazy"';
-  const caption = prompt.alt ? `<figcaption>${escapeHtml(prompt.alt)}</figcaption>` : '';
+  const caption = described ? `<figcaption>${escapeHtml(described)}</figcaption>` : '';
   return `<figure class="article-figure">
       <img src="${escapeHtml(src)}" alt="${alt}"${loadingAttrs}>
       ${caption}
@@ -1404,7 +1413,8 @@ const ensureBlogArticleShell = ({ html, title, category, slug, preserveShell = f
   if (/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b/i.test(nextHtml)) {
     if (!preserveShell) nextHtml = nextHtml.replace(/<nav\b[^>]*class=["'][^"']*\barticle-breadcrumb\b[^"']*["'][^>]*>[\s\S]*?<\/nav>/i, breadcrumb);
   } else {
-    nextHtml = nextHtml.replace(/<main\b[^>]*class=["'][^"']*\barticle-wrap\b[^"']*["'][^>]*>/i, (match) => `${match}\n    ${breadcrumb}`);
+    // Drafts use either <main class="article-wrap"> or <article class="article-wrap">.
+    nextHtml = nextHtml.replace(/<(main|article)\b[^>]*class=["'][^"']*\barticle-wrap\b[^"']*["'][^>]*>/i, (match) => `${match}\n    ${breadcrumb}`);
   }
   const related = articleRelatedBlock({ title, category, slug });
   if (/<section\b[^>]*class=["'][^"']*\barticle-link-panel\b/i.test(nextHtml)) {
@@ -1468,7 +1478,7 @@ const copyBlogAsset = ({ sourcePath, slug }) => {
 };
 
 const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides = new Map(), tempDir = os.tmpdir() }) => {
-  html = String(html || '').replace(/\r\n?/g, '\n');
+  html = String(html || '').replace(/\r\n?/g, '\n').replace(/<!--\s*(?:prompt\s+)?ảnh\s*\d+[\s\S]*?-->\s*/gi, '');
   const dir = htmlPath ? path.dirname(htmlPath) : root;
   const publicUrl = `/blog/${category}/${slug}/`;
   const canonical = `${siteUrl}${publicUrl}`;
@@ -1543,7 +1553,7 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
     datePublished: publishedAt,
     dateModified: vietnamIsoDateTime(),
     author: { '@type': 'Organization', name: 'Phương Lâm' },
-    publisher: { '@type': 'Organization', name: 'Phương Lâm' },
+    publisher: { '@type': 'Organization', name: 'Phương Lâm', logo: { '@type': 'ImageObject', url: `${siteUrl}/assets/media/generated/embedded-001.png` } },
     mainEntityOfPage: canonical,
   };
   html = setJsonLdByType(html, 'BlogPosting', schema);
@@ -1581,7 +1591,8 @@ const replaceImagePromptsWithFigures = ({ html, prompts, imageFiles, slug, persi
     const file = imageFiles[prompt.index];
     if (!file?.data || !file.filename) throw new Error(`Thiếu ảnh cho prompt ${prompt.index + 1}`);
     const src = promptImageToUrl({ file, prompt, slug, persist, tempDir });
-    nextHtml = nextHtml.slice(0, prompt.start) + figureForPrompt({ prompt, src }) + nextHtml.slice(prompt.end);
+    const fallbackAlt = headingBefore(nextHtml, prompt.start) || decodeEntities(stripHtml(nextHtml.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || ''));
+    nextHtml = nextHtml.slice(0, prompt.start) + figureForPrompt({ prompt, src, fallbackAlt }) + nextHtml.slice(prompt.end);
   }
   return nextHtml;
 };
@@ -1598,7 +1609,10 @@ const auditBlogSeo = ({ html, prompts = [] }) => {
   const description = getMetaContent(html, 'name=description') || getDescription(html);
   const canonical = html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)?.[1] || '';
   const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
-  const missingAlt = imageTags.filter(tag => !/\salt=["'][^"']+["']/i.test(tag)).length;
+  const missingAlt = imageTags.filter((tag) => {
+    const alt = tag.match(/\salt=["']([^"']*)["']/i)?.[1] || '';
+    return !alt || isGenericImageLabel(alt);
+  }).length;
   const schema = extractJsonLd(html, 'BlogPosting');
   const hasPromptBlocks = /class=["'][^"']*\bimage-prompt\b/i.test(html);
   const hasLocalUrl = /(?:localhost|127\.0\.0\.1|file:\/\/)/i.test(html);
@@ -1608,7 +1622,7 @@ const auditBlogSeo = ({ html, prompts = [] }) => {
     seoStatus(h1Count === 1, 'H1', h1Count === 1 ? 'Có đúng 1 H1' : `Đang có ${h1Count} H1`, h1Count ? 'warn' : 'error'),
     seoStatus(Boolean(canonical), 'Canonical', canonical || 'Thiếu canonical', 'warn'),
     seoStatus(!hasLocalUrl, 'URL public', hasLocalUrl ? 'Có link localhost/file:// cần bỏ trước khi lưu' : 'Không có URL local', 'error'),
-    seoStatus(!missingAlt, 'Alt ảnh', missingAlt ? `${missingAlt} ảnh thiếu alt` : 'Ảnh có alt đầy đủ', 'warn'),
+    seoStatus(!missingAlt, 'Alt ảnh', missingAlt ? `${missingAlt} ảnh thiếu alt hoặc alt chỉ là nhãn như "Ảnh 1"` : 'Ảnh có alt đầy đủ', 'warn'),
     seoStatus(Boolean(schema), 'Schema BlogPosting', schema ? 'Có schema bài viết' : 'Khi lưu admin sẽ tự tạo schema BlogPosting', 'warn'),
     seoStatus(prompts.length > 0 || imageTags.length > 0, 'Ảnh theo ngữ cảnh', prompts.length ? `${prompts.length} prompt ảnh cần upload` : `${imageTags.length} ảnh trong bài`, 'warn'),
     seoStatus(!hasPromptBlocks, 'Prompt nội bộ', hasPromptBlocks ? 'Prompt sẽ được thay bằng ảnh khi lưu' : 'Không còn prompt trong HTML', 'warn'),
@@ -2298,4 +2312,4 @@ if (require.main === module) server.listen(port, '127.0.0.1', () => {
   setInterval(backgroundCatchUp, 10 * 60 * 1000).unref();
 });
 
-module.exports = { server, validateProducts, pushGit, syncCheckoutToOrigin, catchUpBeforeContentWrite, backgroundCatchUp, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };
+module.exports = { buildBlogHtmlUpload, auditBlogSeo, server, validateProducts, pushGit, syncCheckoutToOrigin, catchUpBeforeContentWrite, backgroundCatchUp, ISOLATED_PUBLISH_PATHS, detectImageExtension, pruneProductBackups, normalizeBlogHtml };

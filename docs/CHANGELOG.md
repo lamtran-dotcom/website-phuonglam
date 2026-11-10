@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-10 — SEO fixes from the checklist report (not committed yet)
+- 20 live posts: 13 titles shortened to end with " | Phương Lâm" (30–60 chars; H1 unchanged except the bộ xông thảo mộc post, which lost its brand suffix); `BLOG_POSTS.title` synced.
+- Every BlogPosting now has `publisher.logo`; visible breadcrumb added to 12 posts; dates given time + `+07:00` (day unchanged); the vỏ bưởi post's schema (image URL, mainEntityOfPage, logo) repaired; BlogPosting added to the đèn xông tinh dầu post.
+- Image alt written from the pictures (12 posts, 52 images; captions follow); draft image comments removed from 4 posts; lazy loading and size/ratio fixed on old posts.
+- FAQPage JSON-LD synced to the visible Q&A in 9 posts; safety notes (ventilation, kids, no unattended flame) added to 13 posts; generic "Xem ngay" links reworded; heading levels fixed in "2h, 4h, 8h"; step lists made `<ol>`.
+- Admin template (`tools/local_admin_server.js`): new posts get publisher logo, a visible breadcrumb also for `<article class="article-wrap">`, a descriptive alt instead of "Ảnh 1 · Ảnh bìa", and drafts' `<!-- PROMPT ẢNH -->` comments are dropped; the SEO audit warns on label-only alt. Tests in `tools/blog_normalize.test.js`.
+
 ## 2026-11-09 — Blog internal links and titles
 - Fixed a dead product link used in 13 posts and two malformed post links.
 - Shorter titles (≤60 characters) and complete descriptions for 7 posts.

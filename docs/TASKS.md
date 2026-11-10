@@ -1,6 +1,9 @@
 # Tasks
 
 ## Now
+- [x] Apply the checklist report fixes to the 20 live posts (2026-11-10, uncommitted until seller approves).
+- [ ] Seller decisions on that report: C4/C5 wording (7 posts), C8 dates (7 posts), I1 featured images ≥1200 px (5 posts), phan-biet post date/BlogPosting.
+- [ ] Rerun the AI checker on the 20 posts after deploy.
 - [x] Pagination on the in-app "Hướng Dẫn" page (was capped at 6 posts) (2026-11-09).
 - [x] Newest posts first on "Hướng Dẫn" and `/blog/` (2026-11-09).
 - [x] Blog audit: broken links, titles/descriptions, related posts, guides on product/category pages (2026-11-09).

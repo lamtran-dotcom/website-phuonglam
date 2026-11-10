@@ -45,6 +45,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+SEO report fixes — 2026-11-10 (working tree only, not committed/pushed; waiting for the seller): 20 live blog posts fixed per the checklist report (titles + ` | Phương Lâm`, alt from the images, publisher logo, breadcrumbs, FAQ JSON-LD = visible Q&A, safety notes, dates with `+07:00`, draft comments, CTA link text); admin template in `tools/local_admin_server.js` now avoids the repeated errors (logo, breadcrumb for `<article>` drafts, alt fallback, comment strip) with tests; site rebuilt, all test files pass. C4/C5 wording applied 2026-11-10 with seller approval (7 posts). Left for the seller: C8 date conflicts (7 posts), I1 images <1200 px (5 posts), BlogPosting date for phan-biet (BLOG_POSTS says 2025, repo started 2026-04). Skipped: I3 (rename files), L6 `/?search=open` (header search button), den-xong intro C9, I4 where CSS already reserves the ratio. Details in `docs/CHANGELOG.md`.
+
 SEO checklist for posts — 2026-11-09: `docs/SEO-BLOG-CHECKLIST.md` holds the rule set (codes T/M/C/L/I/S/P/R, severity blocker/major/minor, [G] Google-based vs [PL] house rules, auto/site/judge), the prompt for the seller's AI checker (JSON report), and the prompt for Claude Code to fix a report (sync rules for title/description/scheduled copies, no slug/date changes, ask before content-meaning edits, no commit/push without approval).
 
 Blog internal links + SEO cleanup — 2026-11-09, live (commit `fbe9e9e`). Audit of 18 live posts + 3 queued (`scheduled-posts/`):

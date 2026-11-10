@@ -3988,7 +3988,7 @@ const PRODUCTS = [
 const BLOG_POSTS = [
   {
     "id": 29,
-    "title": "Xông nhà cuối năm: làm ngày nào, dùng gì và các bước đúng cách",
+    "title": "Xông nhà cuối năm: làm ngày nào, dùng gì? | Phương Lâm",
     "excerpt": "Xông nhà cuối năm nên làm ngày nào, dùng gì và thực hiện ra sao? Xem checklist, 2 cách xông cùng lưu ý an toàn để chuẩn bị nhà cửa đón Tết.",
     "date": "10 tháng 11, 2026",
     "readTime": "3 phút đọc",
@@ -4000,7 +4000,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 28,
-    "title": "Nến tealight mua ở đâu? Giá và cách chọn số lượng",
+    "title": "Nến tealight mua ở đâu? Giá và cách chọn | Phương Lâm",
     "excerpt": "Nến tealight mua ở đâu để đúng nhu cầu? Tham khảo giá, cách chọn thời gian cháy, số lượng và đặt nến phù hợp tại Phương Lâm.",
     "date": "9 tháng 11, 2026",
     "readTime": "3 phút đọc",
@@ -4024,7 +4024,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 23,
-    "title": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu?",
+    "title": "Cho bao nhiêu thảo mộc vào bếp niêu? | Phương Lâm",
     "excerpt": "Cho bao nhiêu thảo mộc vào bếp niêu để mùi dễ chịu? Xem cách định lượng theo bếp, diện tích phòng và xử lý khi mùi xông quá nồng, cháy khét.",
     "date": "10 tháng 8, 2026",
     "readTime": "3 phút đọc",
@@ -4036,7 +4036,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 18,
-    "title": "Cách xông nhà bằng thảo mộc để khử mùi, tạo cảm giác dễ chịu",
+    "title": "Cách xông nhà bằng thảo mộc đơn giản | Phương Lâm",
     "excerpt": "Cách xông nhà bằng thảo mộc đơn giản, an toàn với bếp xông và nến tealight. Xem cách chuẩn bị, thao tác và lưu ý cho không gian dễ chịu.",
     "date": "15 tháng 7, 2026",
     "readTime": "3 phút đọc",
@@ -4048,7 +4048,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 17,
-    "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Nến Phương Lâm",
+    "title": "Bộ Xông Thảo Mộc Bao Gồm Những Gì? | Phương Lâm",
     "excerpt": "Bộ xông thảo mộc bao gồm những gì? Tìm hiểu từng món trong combo xông nhà, cách chọn và dùng an toàn cùng Nến Phương Lâm.",
     "date": "27 tháng 5, 2026",
     "readTime": "3 phút đọc",
@@ -4060,7 +4060,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 24,
-    "title": "Bộ xông nhà cho người mới: Cần những gì để dùng bếp niêu?",
+    "title": "Bộ xông nhà cho người mới cần những gì? | Phương Lâm",
     "excerpt": "Bộ xông nhà cho người mới cần những gì? Xem checklist bếp niêu, nến tealight, thảo mộc và phụ kiện để chuẩn bị xông nhà lần đầu gọn gàng.",
     "date": "14 tháng 8, 2026",
     "readTime": "3 phút đọc",
@@ -4072,7 +4072,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 26,
-    "title": "Cách dùng bếp xông thảo mộc trong phòng nhỏ",
+    "title": "Cách dùng bếp xông thảo mộc trong phòng nhỏ | Phương Lâm",
     "excerpt": "Cách dùng bếp xông thảo mộc trong phòng nhỏ: chọn chỗ thoáng, bắt đầu với lượng ít và theo dõi mùi hương. Đọc hướng dẫn để dùng phù hợp.",
     "date": "13 tháng 10, 2026",
     "readTime": "3 phút đọc",
@@ -4084,7 +4084,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 25,
-    "title": "Cách chọn nến tealight 4 giờ không khói cho bếp xông",
+    "title": "Cách chọn nến tealight 4 giờ không khói | Phương Lâm",
     "excerpt": "Nến tealight 4 giờ không khói giúp bạn xông thảo mộc thuận tiện hơn. Tìm hiểu cách chọn theo bếp, kiểm tra thời lượng và dùng đúng cách cho người mới.",
     "date": "9 tháng 10, 2026",
     "readTime": "3 phút đọc",
@@ -4096,7 +4096,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 22,
-    "title": "Cách bảo quản nến tealight không bị bụi, mềm hoặc móp",
+    "title": "Cách bảo quản nến tealight tránh bụi và móp | Phương Lâm",
     "excerpt": "Cách bảo quản nến tealight sạch, tránh bụi, mềm và móp vỏ. Xem hướng dẫn cất nến không mùi trong thời tiết nóng từ Phương Lâm.",
     "date": "27 tháng 7, 2026",
     "readTime": "3 phút đọc",
@@ -4108,7 +4108,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 21,
-    "title": "Cách Dùng Nến Tealight An Toàn Trong Nhà: 8 Lưu Ý",
+    "title": "Cách dùng nến tealight an toàn: 8 lưu ý | Phương Lâm",
     "excerpt": "Cách dùng nến tealight an toàn với 8 lưu ý thực hành: đặt nến, thông gió, cách tắt và dùng nến trong đèn xông đúng cách tại nhà.",
     "date": "17 tháng 7, 2026",
     "readTime": "3 phút đọc",
@@ -4120,7 +4120,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 20,
-    "title": "Nến Tealight Vỏ Nhôm Hay Vỏ Mica: Chọn Loại Nào?",
+    "title": "Nến tealight vỏ nhôm hay vỏ mica? | Phương Lâm",
     "excerpt": "Nến tealight vỏ nhôm hay vỏ mica phù hợp để xông tinh dầu, xông thảo mộc hay trang trí tiệc? Xem cách chọn theo từng nhu cầu sử dụng.",
     "date": "17 tháng 7, 2026",
     "readTime": "3 phút đọc",
@@ -4132,7 +4132,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 19,
-    "title": "Nến Tealight Không Mùi Dùng Cho Không Gian Nào?",
+    "title": "Nến tealight không mùi dùng cho không gian nào? | Phương Lâm",
     "excerpt": "Nến tealight không mùi dùng cho không gian nào? Xem cách chọn nến khi xông tinh dầu, thảo mộc hoặc cần ánh sáng nền ấm áp, dễ chịu.",
     "date": "16 tháng 7, 2026",
     "readTime": "3 phút đọc",
@@ -4210,7 +4210,7 @@ const BLOG_POSTS = [
   },
   {
     "id": 27,
-    "title": "Trang Trí Bàn Tiệc Bằng Nến Tealight: Cách Chọn Số Lượng",
+    "title": "Trang trí bàn tiệc bằng nến tealight | Phương Lâm",
     "excerpt": "Trang trí bàn tiệc bằng nến tealight đẹp, đủ sáng và gọn gàng với cách tính số lượng nến cho bàn ăn, bàn gallery, lối đi và lưu ý an toàn.",
     "date": "24 tháng 7, 2026",
     "readTime": "3 phút đọc",
