@@ -1,7 +1,9 @@
 # Tasks
 
 ## Now
-- [ ] Admin v2: owner sets `ADMIN_PASSWORD` and `GITHUB_TOKEN` secrets (`docs/SETUP.md` "Admin v2"), then a real test publish (e.g. one price change) and check the live page.
+- [x] Admin v2: secrets set, login and catalog work (2026-11-11).
+- [ ] Admin v2: first real publish (e.g. one price change) and check the live page.
+- [ ] Owner: delete the GitHub token that was exposed in the chat log (keep only the newer `phuonglam-admin` token).
 - [ ] Admin v2 next: add/remove option values (regenerate variant matrix), restore-previous-version button, then move homepage settings, shipping, blog and orders off the old local admin.
 - [x] Apply the checklist report fixes to the 20 live posts, incl. dates, I1 images, C4/C5 wording (2026-11-10, pushed).
 - [ ] Optional: replace the 5 reused ≥1200 px featured images (huong-dan-dung-bep, bo-ket, vo-buoi, nen-tealight-khong-khoi, phan-biet) with dedicated originals.
