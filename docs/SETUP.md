@@ -104,7 +104,7 @@ Code: `workers/product-admin/` (design: `docs/ADMIN-V2.md`). Live at https://phu
    `cd workers/product-admin && npx wrangler login && npx wrangler deploy`
    It prints the URL, e.g. `https://phuonglam-admin.<account>.workers.dev`.
 3. **Secrets.** In `workers/product-admin`, type each value when asked (never commit them):
-   `npx wrangler secret put ADMIN_PASSWORD` (at least 12 characters; changing it signs out every device)
+   `npx wrangler secret put ADMIN_PASSWORD` (at least 4 characters, longer is safer; changing it signs out every device)
    `npx wrangler secret put GITHUB_TOKEN`
 4. Open the workers.dev URL, enter the password, edit, press **Xuất bản**. The header shows when the site is live (1–2 min).
 

@@ -127,7 +127,9 @@ test('login checks the password and sets a strict HttpOnly session cookie', asyn
 
   const limited = await login(PASSWORD, { LOGIN_LIMITER: { limit: async () => ({ success: false }) } });
   assert.equal(limited.status, 429);
-  assert.equal((await login(PASSWORD, { ADMIN_PASSWORD: 'ngan' })).status, 500);
+  const globalLimited = await login(PASSWORD, { LOGIN_GLOBAL_LIMITER: { limit: async ({ key }) => ({ success: key !== 'login:all' }) } });
+  assert.equal(globalLimited.status, 429);
+  assert.equal((await login(PASSWORD, { ADMIN_PASSWORD: '123' })).status, 500);
 });
 
 test('logout clears the session cookie', async () => {

@@ -27,3 +27,12 @@ namespace_id = "41001"
   [ratelimits.simple]
   limit = 5
   period = 60
+
+# At most 3 login attempts per minute from everyone combined (the password is a short PIN).
+[[ratelimits]]
+name = "LOGIN_GLOBAL_LIMITER"
+namespace_id = "41002"
+
+  [ratelimits.simple]
+  limit = 3
+  period = 60

@@ -42,7 +42,7 @@ Browser ──► Cloudflare Worker "phuonglam-admin"
   CI for the live site; the committed copies of generated files catch up the next
   time the old admin or a local build runs.
 
-- Login is a single owner password (secret `ADMIN_PASSWORD`, ≥12 chars). The session
+- Login is a single owner password (secret `ADMIN_PASSWORD`; owner chose a short PIN, minimum 4 chars). Guessing is slowed by 5 tries/min per IP and 3 tries/min for everyone combined; an existing session is not affected. The session
   cookie is `<expiry>.<HMAC>` keyed from the password, so changing the password signs
   every device out. Cloudflare Access was not used: its Free plan needs a payment card.
 

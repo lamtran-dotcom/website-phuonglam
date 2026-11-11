@@ -7,8 +7,8 @@
 // Actions then builds and deploys the site as for any other push.
 //
 // Env: GITHUB_TOKEN (secret, fine-grained, this repo only: contents read/write,
-// actions read), ADMIN_PASSWORD (secret, ≥12 chars), optional LOGIN_LIMITER
-// (rate-limit binding), GITHUB_REPO, GITHUB_BRANCH, SITE_URL.
+// actions read), ADMIN_PASSWORD (secret, ≥4 chars), optional LOGIN_LIMITER /
+// LOGIN_GLOBAL_LIMITER (rate-limit bindings), GITHUB_REPO, GITHUB_BRANCH, SITE_URL.
 
 const GITHUB_API = 'https://api.github.com';
 const PRODUCTS_PATH = 'data/products.json';
@@ -53,7 +53,7 @@ const base64ToBytes = (base64) => Uint8Array.from(atob(String(base64).replace(/\
 
 const SESSION_COOKIE = 'pl_admin';
 const SESSION_DAYS = 30;
-const MIN_PASSWORD_LENGTH = 12;
+const MIN_PASSWORD_LENGTH = 4; // owner chose a short PIN; LOGIN_GLOBAL_LIMITER slows guessing
 const encoder = new TextEncoder();
 
 const toHex = (buffer) => [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -104,10 +104,12 @@ const sessionCookie = (value, maxAge) => `${SESSION_COOKIE}=${value}; Path=/; Ht
 
 const login = async (request, env) => {
   const password = configuredPassword(env);
-  if (env.LOGIN_LIMITER) {
-    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-    const { success } = await env.LOGIN_LIMITER.limit({ key: `login:${ip}` });
-    if (!success) throw new HttpError(429, 'Thử sai quá nhiều lần. Đợi 1 phút rồi thử lại.');
+  // Per-IP limit, plus one shared limit for everyone so a short PIN cannot be guessed
+  // quickly from many IPs. A signed-in session is not affected by either.
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const checks = [[env.LOGIN_LIMITER, `login:${ip}`], [env.LOGIN_GLOBAL_LIMITER, 'login:all']];
+  for (const [limiter, key] of checks) {
+    if (limiter && !(await limiter.limit({ key })).success) throw new HttpError(429, 'Thử quá nhiều lần. Đợi 1 phút rồi thử lại.');
   }
   let body;
   try {
