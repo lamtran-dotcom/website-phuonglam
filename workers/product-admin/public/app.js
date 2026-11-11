@@ -589,7 +589,8 @@ const renderGroup = (view, group, gi) => `
     </div>
     <div class="vvalues">
       ${group.values.map((value, vi) => `<div class="vvalue">
-        ${gi === 0 ? `<span class="vthumb">${view.optionImages?.[group.name]?.[value] ? `<img src="${esc(imageUrl(view.optionImages[group.name][value]))}" alt="">` : ''}</span>
+        ${gi === 0 ? `<label class="vthumb" title="Bấm để tải ảnh cho ${esc(value)}">${view.optionImages?.[group.name]?.[value] ? `<img src="${esc(imageUrl(view.optionImages[group.name][value]))}" alt="">` : '<span>+</span>'}
+            <input type="file" accept="image/*" data-action="value-upload" data-group="${gi}" data-value="${esc(value)}"></label>
           ${imagePicker(view, view.optionImages?.[group.name]?.[value] || '', `data-var-image="${gi}" data-value="${esc(value)}" aria-label="Ảnh cho ${esc(value)}"`)}` : ''}
         <input data-var-value="${gi}" data-index="${vi}" value="${esc(value)}" aria-label="Lựa chọn ${vi + 1}">
         <button data-action="var-move-value" data-group="${gi}" data-index="${vi}" data-step="-1" ${vi === 0 ? 'disabled' : ''} aria-label="Lên">↑</button>
@@ -614,11 +615,16 @@ const renderVariantTable = (p, view) => {
       return `<td class="vcell">${esc(combo[g.name])}</td>`;
     }).join('');
     if (!real) {
-      return `<tr class="off">${groupCells}<td colspan="4" class="hint">Không bán</td>
+      return `<tr class="off">${groupCells}<td colspan="5" class="hint">Không bán</td>
         <td><label class="toggle"><input type="checkbox" data-var-sale="${comboAttr}"> Bán</label></td></tr>`;
     }
     const vid = esc(real.id);
     return `<tr>${groupCells}
+      <td class="vimg">
+        <label class="vimg-box" title="Bấm để tải ảnh cho phân loại này">${real.image ? `<img src="${esc(imageUrl(real.image))}" alt="">` : '<span>+ Ảnh</span>'}
+          <input type="file" accept="image/*" data-action="variant-upload" data-vid="${vid}"></label>
+        ${imagePicker(p, real.image, `data-vimage="${vid}" aria-label="Chọn ảnh có sẵn"`)}
+      </td>
       <td class="num">${moneyInput(real.price, `data-vfield="price" data-vid="${vid}" aria-label="Giá bán"`)}</td>
       <td class="num">${moneyInput(real.originalPrice, `data-vfield="originalPrice" data-vid="${vid}" aria-label="Giá gạch"`)}</td>
       <td class="num"><input inputmode="numeric" data-vfield="weight" data-vid="${vid}" value="${esc(real.weight ?? '')}" placeholder="${esc(p.weight ?? '')}" aria-label="Cân nặng"></td>
@@ -626,7 +632,7 @@ const renderVariantTable = (p, view) => {
       <td><label class="toggle"><input type="checkbox" data-var-sale="${comboAttr}" checked> Bán</label></td></tr>`;
   }).join('');
   return `<div class="scroll-x"><table class="variants">
-    <thead><tr>${groups.map((g) => `<th>${esc(g.name)}</th>`).join('')}<th>Giá bán (đ) *</th><th>Giá gạch (đ)</th><th>Cân nặng (g)</th><th>SKU</th><th></th></tr></thead>
+    <thead><tr>${groups.map((g) => `<th>${esc(g.name)}</th>`).join('')}<th>Ảnh</th><th>Giá bán (đ) *</th><th>Giá gạch (đ)</th><th>Cân nặng (g)</th><th>SKU</th><th></th></tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 };
 
@@ -660,7 +666,7 @@ const renderSales = (p) => {
       <button data-action="var-apply-all">Áp dụng cho tất cả phân loại</button>
     </div>
     ${renderVariantTable(p, view)}
-    <div class="hint">Cân nặng để trống = dùng cân nặng chung ở mục Vận chuyển. Bỏ tick "Bán" để ngừng bán tổ hợp đó.</div>
+    <div class="hint">Ảnh phân loại hiện khi khách chọn phân loại đó (bấm ô ảnh để tải lên, hoặc chọn ảnh có sẵn). Cân nặng để trống = dùng cân nặng chung ở mục Vận chuyển. Bỏ tick "Bán" để ngừng bán tổ hợp đó.</div>
     ${orphans.length ? `<div class="orphans"><b>${orphans.length} phân loại cũ không thuộc lựa chọn nào</b> (đang không hiện trên web):
       <ul>${orphans.map((v) => `<li>${esc(v.name)} · ${esc(money(v.price))}đ <button class="danger" data-action="var-remove-orphan" data-vid="${esc(v.id)}">Xoá</button></li>`).join('')}</ul></div>` : ''}
   </section>`;
@@ -1205,6 +1211,25 @@ const onVariantFieldChange = (el) => {
   renderBar();
 };
 
+// One picture for a variant row, or for a value of option group 1 (then every row with
+// that value that has no picture of its own uses it). Not added to the product gallery
+// list: the storefront already shows variant pictures when the variant is picked.
+const onVariantImageFile = async (el) => {
+  const files = [...(el.files || [])].slice(0, 1);
+  if (!files.length) return;
+  const [path] = await processImages(files);
+  if (!path) return;
+  const d = el.dataset;
+  variantOp((p) => {
+    if (d.action === 'variant-upload') {
+      const variant = p.variants.find((v) => v.id === d.vid);
+      if (variant) variant.image = path;
+    } else {
+      Variants.setValueImage(p, Number(d.group), d.value, path);
+    }
+  });
+};
+
 // Structural variant edits (group names, values, images, on/off) run on "change",
 // i.e. when the field is left or Enter is pressed, then the table is rebuilt.
 const onVariantStructureChange = (el) => {
@@ -1224,6 +1249,13 @@ const onVariantStructureChange = (el) => {
   }
   if (d.varImage !== undefined) {
     variantOp((p) => Variants.setValueImage(p, Number(d.varImage), d.value, el.value));
+    return true;
+  }
+  if (d.vimage !== undefined) {
+    variantOp((p) => {
+      const variant = p.variants.find((v) => v.id === d.vimage);
+      if (variant) variant.image = el.value;
+    });
     return true;
   }
   if (d.varSale !== undefined) {
@@ -1246,6 +1278,10 @@ document.addEventListener('change', (event) => {
     return;
   }
   if (onVariantStructureChange(el)) return;
+  if (el.dataset.action === 'variant-upload' || el.dataset.action === 'value-upload') {
+    onVariantImageFile(el);
+    return;
+  }
   if (el.dataset.action === 'header-upload' || el.dataset.action === 'cat-upload') {
     onHomeFiles(el);
     return;

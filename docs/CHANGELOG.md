@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-11-11 — Admin v2: a picture per variant
+- Variant table has an "Ảnh" column: click the box to upload (WebP 900/720/480) or pick one of the product's pictures; it is the picture shown when a customer picks that variant. Group-1 values can also get an uploaded picture (used for rows without their own).
+
 ## 2026-11-11 — Admin v2: homepage and categories tab
 - New tab "Trang chủ & danh mục": header slider images, best sellers (order, add from list, remove), categories (rename, icon, reorder, image, add new; delete only when empty).
 - Category list moved from hand-written `assets/js/site-data.js` to `data/settings.json` → `categories` (seeded with the current 10, values unchanged); the build writes it back into `CATEGORIES`, so new categories get `/danh-muc/<id>/` pages and sitemap entries. The old local admin keeps `categories` when it saves settings.

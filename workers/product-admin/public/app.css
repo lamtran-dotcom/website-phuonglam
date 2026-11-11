@@ -110,8 +110,13 @@ main { max-width: 1180px; margin: 0 auto; padding: 16px; }
 .vvalue select { width: 92px; flex: 0 0 auto; padding: 8px 4px; font-size: 12px; }
 .vvalue button { padding: 6px 8px; flex: 0 0 auto; }
 .vvalue.add input { border-style: dashed; }
-.vthumb { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 6px; background: #eee; overflow: hidden; }
+.vthumb { width: 34px; height: 34px; flex: 0 0 34px; margin: 0; border-radius: 6px; border: 1px dashed #c9c3b4; background: #fff; overflow: hidden; display: grid; place-items: center; color: var(--muted); cursor: pointer; }
 .vthumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vthumb input, .vimg-box input { display: none; }
+.variants td.vimg { white-space: nowrap; }
+.vimg-box { display: inline-grid; place-items: center; vertical-align: middle; width: 44px; height: 44px; margin: 0 4px 0 0; border-radius: 6px; border: 1px dashed #c9c3b4; background: #fff; overflow: hidden; cursor: pointer; font-size: 11px; color: var(--muted); }
+.vimg-box img { width: 100%; height: 100%; object-fit: cover; }
+.variants td.vimg select { width: 88px; min-width: 0; padding: 6px 4px; font-size: 12px; vertical-align: middle; }
 .vadd { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0 4px; }
 .variants td.vcell { font-weight: 600; background: #faf9f6; white-space: nowrap; }
 .variants tr.off td:not(.vcell) { color: var(--muted); }
