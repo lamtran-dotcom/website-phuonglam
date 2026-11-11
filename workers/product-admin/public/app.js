@@ -15,7 +15,10 @@ const state = {
   siteUrl: 'https://phuonglam.com',
   original: [],
   products: [],
-  categories: [],
+  categories: [], // same array as settings.categories
+  settingsSha: '',
+  originalSettings: null,
+  settings: null, // data/settings.json: featuredIds, headerImages, categoryImages, categories, shipping
   images: {}, // repo path -> base64 WebP, not yet published
   view: 'list',
   editId: null,
@@ -65,7 +68,8 @@ const imageUrl = (path) => {
   return /^https?:/.test(path) ? path : `${state.siteUrl}${path}`;
 };
 
-const categoryName = (id) => state.categories.find((c) => c.id === id)?.name || id || '—';
+const categoriesNow = () => state.settings?.categories || [];
+const categoryName = (id) => categoriesNow().find((c) => c.id === id)?.name || id || '—';
 
 const variantPrices = (product, field = 'price') => (product.variants || [])
   .map((v) => Number(v[field]) || 0).filter((n) => n > 0);
@@ -119,11 +123,13 @@ const api = async (path, options = {}) => {
 const saveDraft = () => {
   clearTimeout(saveDraft.timer);
   saveDraft.timer = setTimeout(() => {
-    const changed = changeList().length > 0;
+    const changed = changeCount() > 0;
     try {
       if (!changed) localStorage.removeItem(DRAFT_KEY);
       else localStorage.setItem(DRAFT_KEY, JSON.stringify({
-        productsSha: state.productsSha, products: state.products, images: state.images, savedAt: Date.now(),
+        productsSha: state.productsSha, products: state.products,
+        settingsSha: state.settingsSha, settings: state.settings,
+        images: state.images, savedAt: Date.now(),
       }));
     } catch {
       toast('Không lưu được nháp trên máy (ảnh quá lớn). Nên xuất bản sớm.');
@@ -186,28 +192,62 @@ const describeField = (field, before, after) => {
   return label;
 };
 
+const settingsChanged = () => !!state.settings && !same(state.originalSettings, state.settings);
+const productsChanged = () => changeList().length > 0;
+const changeCount = () => changeList().length + (settingsChanged() ? 1 : 0);
+
+const settingsChangeParts = () => {
+  if (!settingsChanged()) return [];
+  const a = state.originalSettings;
+  const b = state.settings;
+  return [
+    !same(a.headerImages, b.headerImages) && 'ảnh header',
+    !same(a.featuredIds, b.featuredIds) && 'sản phẩm bán chạy',
+    !same(a.categories, b.categories) && 'danh mục',
+    !same(a.categoryImages, b.categoryImages) && 'ảnh danh mục',
+  ].filter(Boolean);
+};
+
 const changeSummary = () => {
   const list = changeList();
-  const names = list.slice(0, 3).map((c) => c.product.name).join(', ');
-  return `${list.length} sản phẩm: ${names}${list.length > 3 ? '…' : ''}`;
+  const parts = [];
+  if (list.length) {
+    const names = list.slice(0, 3).map((c) => c.product.name).join(', ');
+    parts.push(`${list.length} sản phẩm: ${names}${list.length > 3 ? '…' : ''}`);
+  }
+  if (settingsChanged()) parts.push(`Trang chủ: ${settingsChangeParts().join(', ')}`);
+  return parts.join(' · ');
 };
 
 // ---------- rendering ----------
 
 const render = () => {
   if (state.view === 'edit' && findProduct(state.editId)) renderEdit();
+  else if (state.view === 'home') renderHome();
   else {
     state.view = 'list';
     renderList();
   }
+  renderTabs();
   renderBar();
 };
 
+const tabsEl = document.getElementById('tabs');
+const renderTabs = () => {
+  if (!tabsEl) return;
+  tabsEl.hidden = !state.settings;
+  const active = state.view === 'home' ? 'home' : 'list';
+  tabsEl.innerHTML = `<button class="${active === 'list' ? 'on' : ''}" data-action="tab" data-tab="list">Sản phẩm</button>
+    <button class="${active === 'home' ? 'on' : ''}" data-action="tab" data-tab="home">Trang chủ &amp; danh mục</button>`;
+};
+
 const renderBar = () => {
-  const count = changeList().length;
+  const count = changeCount();
   bar.hidden = count === 0;
   if (!count) return;
-  bar.innerHTML = `<span class="n">${count} sản phẩm có thay đổi chưa xuất bản</span>
+  const productCount = changeList().length;
+  const label = [productCount && `${productCount} sản phẩm`, settingsChanged() && 'trang chủ/danh mục'].filter(Boolean).join(' + ');
+  bar.innerHTML = `<span class="n">${label} có thay đổi chưa xuất bản</span>
     <button data-action="show-changes">Xem</button>
     <button data-action="discard-all">Huỷ tất cả</button>
     <button class="primary" data-action="publish" ${state.publishing ? 'disabled' : ''}>${state.publishing ? 'Đang xuất bản…' : 'Xuất bản'}</button>`;
@@ -240,7 +280,7 @@ const renderList = () => {
       <input type="search" id="search" placeholder="Tìm tên, SKU…" value="${esc(state.search)}">
       <select id="category">
         <option value="">Tất cả danh mục (${state.products.length})</option>
-        ${state.categories.map((c) => `<option value="${esc(c.id)}" ${c.id === state.category ? 'selected' : ''}>${esc(c.name)} (${state.products.filter((p) => p.categoryId === c.id).length})</option>`).join('')}
+        ${categoriesNow().map((c) => `<option value="${esc(c.id)}" ${c.id === state.category ? 'selected' : ''}>${esc(c.name)} (${state.products.filter((p) => p.categoryId === c.id).length})</option>`).join('')}
       </select>
       <button class="primary" data-action="add">+ Thêm sản phẩm</button>
     </div>
@@ -282,6 +322,174 @@ const renderList = () => {
     </div>`;
 };
 
+// ---------- homepage & categories (data/settings.json) ----------
+
+// New categories get their id from the name until the id is edited by hand.
+const autoCategoryIds = new WeakSet();
+const isNewCategory = (c) => !state.originalSettings.categories.some((o) => o.id === c.id) || autoCategoryIds.has(c);
+const productCount = (categoryId) => state.products.filter((p) => p.categoryId === categoryId).length;
+
+const uniqueCategoryId = (base, self) => {
+  let id = base || 'danh-muc';
+  for (let n = 2; categoriesNow().some((c) => c !== self && c.id === id); n += 1) id = `${base}-${n}`;
+  return id;
+};
+
+// Category images are keyed by id, so they follow an id change.
+const setCategoryId = (category, id) => {
+  const images = state.settings.categoryImages;
+  if (images[category.id] && category.id !== id) {
+    images[id] = images[category.id];
+    delete images[category.id];
+  }
+  category.id = id;
+};
+
+const thumb = (src) => (src ? `<img class="thumb" src="${esc(imageUrl(src))}" alt="" loading="lazy">` : '<div class="thumb"></div>');
+
+const renderHome = () => {
+  const s = state.settings;
+  const featured = s.featuredIds.map((id) => state.products.find((p) => keyOf(p) === String(id)) || { id, missing: true });
+  const pickable = state.products.filter((p) => !p.hidden && !s.featuredIds.includes(keyOf(p)));
+  app.innerHTML = `
+    <section class="card"><h2>Ảnh header chạy</h2>
+      <p class="hint">Ảnh chạy ở đầu trang chủ, ảnh thứ nhất hiện trước. Ảnh vuông 900×900 hiển thị đẹp nhất.</p>
+      <div class="images">
+        ${s.headerImages.map((src, i) => `<div class="image ${state.images[src.replace(/^\//, '')] ? 'new' : ''}">
+          ${i === 0 ? '<span class="cover">Đầu tiên</span>' : ''}
+          <img src="${esc(imageUrl(src))}" alt="" loading="lazy">
+          <div class="tools">
+            <button data-action="header-move" data-index="${i}" data-step="-1" ${i === 0 ? 'disabled' : ''} aria-label="Lên trước">◀</button>
+            <button class="danger" data-action="header-remove" data-index="${i}" aria-label="Bỏ ảnh">✕</button>
+            <button data-action="header-move" data-index="${i}" data-step="1" ${i === s.headerImages.length - 1 ? 'disabled' : ''} aria-label="Ra sau">▶</button>
+          </div></div>`).join('')}
+        <label class="upload">+ Thêm ảnh header<br><small>Tự thu nhỏ và đổi sang WebP</small><input type="file" accept="image/*" multiple data-action="header-upload"></label>
+      </div>
+    </section>
+
+    <section class="card"><h2>Sản phẩm bán chạy (${s.featuredIds.length})</h2>
+      <p class="hint">Theo thứ tự này trên trang chủ: 6 sản phẩm đầu hiện ngay, tối đa 12 khi trang tải xong. Sản phẩm đang ẩn không hiện.</p>
+      <ol class="featured">
+        ${featured.map((p, i) => `<li class="${p.missing || p.hidden ? 'muted' : ''}">
+          <span class="fnum">${i + 1}</span>
+          ${thumb(p.images?.[0] || p.variants?.find((v) => v.image)?.image)}
+          <span class="fname">${esc(p.name || `(không tìm thấy sản phẩm ${p.id})`)}${p.hidden ? ' · <b>đang ẩn</b>' : ''}</span>
+          <button data-action="featured-move" data-index="${i}" data-step="-1" ${i === 0 ? 'disabled' : ''} aria-label="Lên">↑</button>
+          <button data-action="featured-move" data-index="${i}" data-step="1" ${i === featured.length - 1 ? 'disabled' : ''} aria-label="Xuống">↓</button>
+          <button class="danger" data-action="featured-remove" data-index="${i}" aria-label="Bỏ khỏi bán chạy">✕</button>
+        </li>`).join('')}
+      </ol>
+      <select id="featured-pick" aria-label="Thêm sản phẩm bán chạy">
+        <option value="">+ Chọn sản phẩm để thêm vào bán chạy…</option>
+        ${pickable.map((p) => `<option value="${esc(keyOf(p))}">${esc(p.name)}</option>`).join('')}
+      </select>
+    </section>
+
+    <section class="card"><h2>Danh mục (${s.categories.length})</h2>
+      <p class="hint">Thứ tự ở đây là thứ tự trên menu và trang chủ. Mỗi danh mục có trang phuonglam.com/danh-muc/&lt;mã&gt;/; mã không đổi được sau khi đã xuất bản.</p>
+      <div class="cats">
+        ${s.categories.map((c, i) => {
+          const count = productCount(c.id);
+          const img = s.categoryImages[c.id] || '';
+          return `<div class="cat">
+            <div class="cat-img">${thumb(img)}
+              <label class="mini">Đổi ảnh<input type="file" accept="image/*" data-action="cat-upload" data-index="${i}"></label>
+              ${img ? `<button class="link danger" data-action="cat-image-remove" data-index="${i}">Bỏ ảnh</button>` : ''}
+            </div>
+            <div class="cat-fields">
+              <div class="cat-row">
+                <input class="cat-icon" data-cat-field="icon" data-index="${i}" value="${esc(c.icon)}" aria-label="Biểu tượng" placeholder="🕯️">
+                <input data-cat-field="name" data-index="${i}" value="${esc(c.name)}" placeholder="Tên danh mục" aria-label="Tên danh mục">
+              </div>
+              <div class="hint">${isNewCategory(c)
+                ? `Mã đường dẫn: <input class="cat-id" data-cat-field="id" data-index="${i}" value="${esc(c.id)}" aria-label="Mã đường dẫn"> · <b>mới</b>`
+                : `phuonglam.com/danh-muc/${esc(c.id)}/`} · ${count} sản phẩm</div>
+            </div>
+            <div class="cat-tools">
+              <button data-action="cat-move" data-index="${i}" data-step="-1" ${i === 0 ? 'disabled' : ''} aria-label="Lên">↑</button>
+              <button data-action="cat-move" data-index="${i}" data-step="1" ${i === s.categories.length - 1 ? 'disabled' : ''} aria-label="Xuống">↓</button>
+              <button class="danger" data-action="cat-remove" data-index="${i}" ${count ? `disabled title="Còn ${count} sản phẩm trong danh mục này"` : ''} aria-label="Xoá danh mục">✕</button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="vadd"><button data-action="cat-add">+ Thêm danh mục</button>
+        <span class="hint">Chỉ xoá được danh mục không còn sản phẩm. Chuyển sản phẩm sang danh mục khác trong trang sửa sản phẩm.</span></div>
+    </section>`;
+};
+
+const moveItem = (list, index, step) => {
+  const target = index + step;
+  if (target < 0 || target >= list.length) return;
+  [list[index], list[target]] = [list[target], list[index]];
+};
+
+const homeAction = (action, el) => {
+  const s = state.settings;
+  const i = Number(el.dataset.index);
+  const step = Number(el.dataset.step);
+  switch (action) {
+    case 'header-move': moveItem(s.headerImages, i, step); break;
+    case 'header-remove': s.headerImages.splice(i, 1); break;
+    case 'featured-move': moveItem(s.featuredIds, i, step); break;
+    case 'featured-remove': s.featuredIds.splice(i, 1); break;
+    case 'cat-move': moveItem(s.categories, i, step); break;
+    case 'cat-image-remove': delete s.categoryImages[s.categories[i].id]; break;
+    case 'cat-remove': {
+      const c = s.categories[i];
+      if (productCount(c.id) || !confirm(`Xoá danh mục "${c.name}"?`)) return true;
+      s.categories.splice(i, 1);
+      delete s.categoryImages[c.id];
+      break;
+    }
+    case 'cat-add': {
+      const c = { id: uniqueCategoryId('danh-muc-moi'), name: '', icon: '' };
+      autoCategoryIds.add(c);
+      s.categories.push(c);
+      saveDraft();
+      render();
+      app.querySelector(`[data-cat-field="name"][data-index="${s.categories.length - 1}"]`)?.focus();
+      return true;
+    }
+    default: return false;
+  }
+  saveDraft();
+  render();
+  return true;
+};
+
+const onCategoryInput = (el) => {
+  const c = state.settings.categories[Number(el.dataset.index)];
+  if (!c) return;
+  const field = el.dataset.catField;
+  if (field === 'icon') c.icon = el.value.trim();
+  if (field === 'name') {
+    c.name = el.value.replace(/\s+/g, ' ').trimStart();
+    if (autoCategoryIds.has(c)) {
+      setCategoryId(c, uniqueCategoryId(slugify(c.name) || 'danh-muc-moi', c));
+      const idInput = app.querySelector(`[data-cat-field="id"][data-index="${el.dataset.index}"]`);
+      if (idInput) idInput.value = c.id;
+    }
+  }
+  if (field === 'id') {
+    autoCategoryIds.delete(c);
+    setCategoryId(c, slugify(el.value));
+  }
+  saveDraft();
+  renderBar();
+};
+
+const onHomeFiles = async (el) => {
+  const files = [...(el.files || [])];
+  if (!files.length) return;
+  const paths = await processImages(el.dataset.action === 'cat-upload' ? files.slice(0, 1) : files);
+  if (!paths.length) return;
+  if (el.dataset.action === 'header-upload') state.settings.headerImages.push(...paths);
+  else state.settings.categoryImages[state.settings.categories[Number(el.dataset.index)].id] = paths[0];
+  saveDraft();
+  render();
+};
+
 const lines = (value) => (Array.isArray(value) ? value : []).join('\n');
 const specLines = (value) => (Array.isArray(value) ? value : []).map((row) => `${row.label}: ${row.value}`).join('\n');
 
@@ -314,8 +522,8 @@ const renderEdit = () => {
         <div class="wide"><label>Đường dẫn (slug)</label><input data-field="slug" data-id="${id}" value="${esc(p.slug)}">
           <div class="hint ${before && before.slug !== p.slug ? 'warn' : ''}" data-slug-hint>${before && before.slug !== p.slug ? 'Đổi đường dẫn làm link cũ trên Google/Facebook bị lỗi 404. Chỉ đổi khi thật cần.' : `${esc(state.siteUrl)}/san-pham/${esc(p.slug)}/`}</div></div>
         <div><label>Danh mục</label><select data-field="categoryId" data-id="${id}">
-          ${state.categories.map((cat) => `<option value="${esc(cat.id)}" ${cat.id === p.categoryId ? 'selected' : ''}>${esc(cat.name)}</option>`).join('')}
-          ${state.categories.some((cat) => cat.id === p.categoryId) ? '' : `<option value="${esc(p.categoryId)}" selected>${esc(p.categoryId || '— chọn —')}</option>`}
+          ${categoriesNow().map((cat) => `<option value="${esc(cat.id)}" ${cat.id === p.categoryId ? 'selected' : ''}>${esc(cat.name)}</option>`).join('')}
+          ${categoriesNow().some((cat) => cat.id === p.categoryId) ? '' : `<option value="${esc(p.categoryId)}" selected>${esc(p.categoryId || '— chọn —')}</option>`}
         </select></div>
         <div><label>Nhãn</label><select data-field="tag" data-id="${id}">
           ${['', 'Bán chạy', 'Nổi bật', 'Mới', 'Sale'].map((t) => `<option value="${t}" ${t === (p.tag || '') ? 'selected' : ''}>${t || '(không)'}</option>`).join('')}
@@ -580,7 +788,7 @@ const bulkApply = () => {
 const newProduct = () => {
   const id = `pl_${Date.now().toString(36)}`;
   return {
-    id, sku: '', categoryId: state.category || state.categories[0]?.id || '', name: '', price: 0, originalPrice: null,
+    id, sku: '', categoryId: state.category || categoriesNow()[0]?.id || '', name: '', price: 0, originalPrice: null,
     shortDesc: '', description: '', usage: '', tag: '', weight: null, hidden: false,
     optionGroups: [], optionImages: {}, images: [], variants: [], slug: '', seoTitle: '', seoDescription: '',
     content: { intro: '', highlights: [], specs: [], steps: [], care: [] },
@@ -620,7 +828,10 @@ const encodeWebp = async (bitmap, width) => {
   return new Uint8Array(await encode(ctx.getImageData(0, 0, w, h), { quality: 82 }));
 };
 
-const addImages = async (product, files) => {
+// Resizes picked files to WebP 900/720/480 px, keeps them as pending uploads and
+// returns their public paths (/assets/products/uploads/<name>.webp).
+const processImages = async (files) => {
+  const paths = [];
   for (const file of files) {
     toast(`Đang xử lý ${file.name}…`);
     let bitmap;
@@ -635,15 +846,21 @@ const addImages = async (product, files) => {
     state.images[`assets/products/uploads/${base}.webp`] = bytesToBase64(full);
     state.images[`assets/products/responsive/${base}-720.webp`] = bytesToBase64(medium);
     state.images[`assets/products/responsive/${base}-480.webp`] = bytesToBase64(small);
-    product.images = [...(product.images || []), `/assets/products/uploads/${base}.webp`];
+    paths.push(`/assets/products/uploads/${base}.webp`);
     bitmap.close?.();
   }
-  toast('Đã thêm ảnh');
+  if (paths.length) toast('Đã thêm ảnh');
+  return paths;
+};
+
+const addImages = async (product, files) => {
+  const paths = await processImages(files);
+  product.images = [...(product.images || []), ...paths];
   saveDraft();
   render();
 };
 
-// Only send new images that are still used somewhere in the products.
+// Only send new images that are still used somewhere in the products or settings.
 const imagesToPublish = () => {
   const used = new Set();
   const walk = (value) => {
@@ -652,6 +869,7 @@ const imagesToPublish = () => {
     else if (value && typeof value === 'object') Object.values(value).forEach(walk);
   };
   walk(state.products);
+  walk(state.settings);
   return Object.entries(state.images).filter(([path]) => {
     const upload = path.startsWith('assets/products/uploads/')
       ? path
@@ -677,7 +895,15 @@ const checkBeforePublish = () => {
       if (!g.values.length) problems.push(`"${p.name}": nhóm phân loại ${gi + 1} (${g.name}) chưa có lựa chọn nào`);
     });
     if (p.optionGroups?.length && !p.variants?.some((v) => v.price > 0)) problems.push(`"${p.name}": chưa có phân loại nào có giá bán`);
+    if (p.categoryId && !categoriesNow().some((c) => c.id === p.categoryId)) problems.push(`"${p.name}": danh mục "${p.categoryId}" không còn trong danh sách danh mục`);
   }
+  const ids = new Set();
+  categoriesNow().forEach((c, i) => {
+    if (!c.name.trim()) problems.push(`Danh mục #${i + 1} chưa có tên`);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(c.id)) problems.push(`Danh mục "${c.name}": mã đường dẫn chỉ dùng a-z, 0-9 và dấu gạch`);
+    if (ids.has(c.id)) problems.push(`Hai danh mục trùng mã "${c.id}"`);
+    ids.add(c.id);
+  });
   return problems;
 };
 
@@ -691,15 +917,18 @@ const publish = async () => {
       method: 'POST',
       body: JSON.stringify({
         baseSha: state.baseSha,
-        productsSha: state.productsSha,
-        products: state.products,
+        // Only what changed is sent, so the other file is never overwritten with an old copy.
+        ...(productsChanged() ? { productsSha: state.productsSha, products: state.products } : {}),
+        ...(settingsChanged() ? { settingsSha: state.settingsSha, settings: state.settings } : {}),
         images: imagesToPublish(),
         message: changeSummary(),
       }),
     });
     state.baseSha = result.commitSha;
-    state.productsSha = result.productsSha;
+    if (result.productsSha) state.productsSha = result.productsSha;
+    if (result.settingsSha) state.settingsSha = result.settingsSha;
     state.original = clone(state.products);
+    state.originalSettings = clone(state.settings);
     state.images = {};
     state.autoSlug.clear();
     clearDraft();
@@ -762,6 +991,7 @@ const showChanges = () => {
     const parts = c.fields.map((f) => describeField(f, c.before, c.product)).filter(Boolean);
     return `<li class="diff"><button class="link" data-action="edit" data-id="${esc(keyOf(c.product))}">${esc(c.product.name)}</button><br>${parts.join(' · ')}</li>`;
   });
+  if (settingsChanged()) items.push(`<li class="diff"><button class="link" data-action="tab" data-tab="home">Trang chủ &amp; danh mục</button><br>${esc(settingsChangeParts().join(', '))}</li>`);
   showDialog('Thay đổi chưa xuất bản', `<ul>${items.join('')}</ul>`);
 };
 
@@ -772,6 +1002,14 @@ document.addEventListener('click', async (event) => {
   if (!el || el.tagName === 'INPUT' && el.type === 'file') return;
   const action = el.dataset.action;
   const product = state.view === 'edit' ? findProduct(state.editId) : null;
+  if (action === 'tab') {
+    if (dialog.open) dialog.close();
+    state.view = el.dataset.tab === 'home' ? 'home' : 'list';
+    render();
+    window.scrollTo(0, 0);
+    return;
+  }
+  if (state.view === 'home' && homeAction(action, el)) return;
   switch (action) {
     case 'edit':
       if (dialog.open) dialog.close();
@@ -916,6 +1154,7 @@ document.addEventListener('click', async (event) => {
     case 'discard-all':
       if (!confirm('Huỷ mọi thay đổi chưa xuất bản?')) return;
       state.products = clone(state.original);
+      state.settings = clone(state.originalSettings);
       state.images = {};
       state.selected.clear();
       clearDraft();
@@ -949,6 +1188,7 @@ document.addEventListener('input', (event) => {
   }
   if (el.dataset.field && el.type !== 'checkbox' && el.tagName !== 'SELECT') onFieldChange(el);
   if (el.dataset.vfield) onVariantFieldChange(el);
+  if (el.dataset.catField) onCategoryInput(el);
 });
 
 // Price / crossed-out price / weight / SKU of one row of the variant table.
@@ -1006,6 +1246,26 @@ document.addEventListener('change', (event) => {
     return;
   }
   if (onVariantStructureChange(el)) return;
+  if (el.dataset.action === 'header-upload' || el.dataset.action === 'cat-upload') {
+    onHomeFiles(el);
+    return;
+  }
+  if (el.id === 'featured-pick' && el.value) {
+    state.settings.featuredIds.push(el.value);
+    saveDraft();
+    render();
+    return;
+  }
+  // A category name/id is tidied once the field is left (trailing spaces, empty id).
+  if (el.dataset.catField) {
+    const c = state.settings.categories[Number(el.dataset.index)];
+    if (c) {
+      c.name = c.name.trim();
+      if (!c.id) setCategoryId(c, uniqueCategoryId(slugify(c.name) || 'danh-muc-moi', c));
+    }
+    saveDraft();
+    render();
+  }
   if (el.dataset.field && (el.type === 'checkbox' || el.tagName === 'SELECT')) {
     onFieldChange(el);
     if (el.tagName === 'SELECT' && el.dataset.field.includes('.image')) render();
@@ -1025,7 +1285,7 @@ document.addEventListener('focusout', (event) => {
 });
 
 window.addEventListener('beforeunload', (event) => {
-  if (changeList().length && !readDraft()) event.preventDefault();
+  if (changeCount() && !readDraft()) event.preventDefault();
 });
 
 // ---------- start ----------
@@ -1039,18 +1299,22 @@ const start = async () => {
       siteUrl: data.siteUrl || state.siteUrl,
       original: data.products,
       products: clone(data.products),
-      categories: data.categories.length ? data.categories : [...new Set(data.products.map((p) => p.categoryId))].map((id) => ({ id, name: id })),
+      settingsSha: data.settingsSha,
+      originalSettings: data.settings,
+      settings: clone(data.settings),
     });
     const draft = readDraft();
     if (draft?.products) {
-      if (draft.productsSha === data.productsSha) {
+      // A draft is only reusable when neither file changed on the site since it was saved.
+      if (draft.productsSha === data.productsSha && (!draft.settings || draft.settingsSha === data.settingsSha)) {
         state.products = draft.products;
+        if (draft.settings) state.settings = draft.settings;
         state.images = draft.images || {};
         toast('Đã mở lại bản nháp chưa xuất bản');
       } else {
         showDialog(
           'Có bản nháp cũ',
-          '<p>Máy này còn bản nháp chưa xuất bản, nhưng sản phẩm trên web đã đổi sau đó. Bản nháp không dùng được nữa.</p>',
+          '<p>Máy này còn bản nháp chưa xuất bản, nhưng dữ liệu trên web đã đổi sau đó. Bản nháp không dùng được nữa.</p>',
           '<button class="danger" data-action="reload-fresh">Bỏ bản nháp</button>',
         );
       }
@@ -1065,6 +1329,7 @@ const start = async () => {
 
 const renderLogin = (message = '') => {
   bar.hidden = true;
+  if (tabsEl) tabsEl.hidden = true;
   document.getElementById('logout').hidden = true;
   app.innerHTML = `<form class="card login" id="login-form">
     <h2>Đăng nhập</h2>
@@ -1091,7 +1356,7 @@ document.addEventListener('submit', async (event) => {
 });
 
 document.getElementById('logout').addEventListener('click', async () => {
-  if (changeList().length && !confirm('Còn thay đổi chưa xuất bản (vẫn lưu nháp trên máy này). Vẫn đăng xuất?')) return;
+  if (changeCount() && !confirm('Còn thay đổi chưa xuất bản (vẫn lưu nháp trên máy này). Vẫn đăng xuất?')) return;
   await api('/api/logout', { method: 'POST', body: '{}' }).catch(() => {});
   renderLogin();
 });

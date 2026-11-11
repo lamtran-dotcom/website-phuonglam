@@ -1057,8 +1057,38 @@ const normalizeSettings = (value = {}) => {
   for (const [categoryId, src] of Object.entries(rawCategoryImages)) {
     if (src) categoryImages[normalizeCategoryId(categoryId)] = src;
   }
-  return { featuredIds, headerImages, categoryImages, shipping: normalizeShippingSettings(value.shipping) };
+  const settings = { featuredIds, headerImages, categoryImages, shipping: normalizeShippingSettings(value.shipping) };
+  const categories = normalizeCategories(value.categories);
+  if (categories.length) settings.categories = categories;
+  return settings;
 };
+
+// Category list shown in the menu, on the homepage and as /danh-muc/<id>/ pages.
+// Stored in data/settings.json (edited in the online admin) and written into
+// assets/js/site-data.js as CATEGORIES on every build.
+const normalizeCategories = (value) => {
+  const seen = new Set();
+  const categories = [];
+  for (const item of Array.isArray(value) ? value : []) {
+    const id = String(item?.id || '').trim();
+    const name = String(item?.name || '').replace(/\s+/g, ' ').trim();
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id) || !name || seen.has(id)) continue;
+    seen.add(id);
+    categories.push({ id, name, icon: String(item.icon || '').trim() });
+  }
+  return categories;
+};
+
+const replaceSiteDataCategories = (categories) => {
+  const siteDataPath = path.join(paths.jsDir, 'site-data.js');
+  if (!categories?.length || !fs.existsSync(siteDataPath)) return;
+  const source = fs.readFileSync(siteDataPath, 'utf8');
+  const block = `const CATEGORIES = [\n${categories.map((c) => `  { id: ${jsString(c.id)}, name: ${jsString(c.name)}, icon: ${jsString(c.icon)} },`).join('\n')}\n];`;
+  const next = source.replace(/const CATEGORIES = \[[\s\S]*?\n\];/, block);
+  if (next !== source) fs.writeFileSync(siteDataPath, next);
+};
+
+const jsString = (value) => `'${String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
 
 const readInlineJson = (source, marker, fallback) => {
   const pattern = new RegExp(`/\\*${marker}\\*/([\\s\\S]*?)/\\*END_${marker}\\*/`);
@@ -1076,7 +1106,7 @@ const writeInlineJson = (source, marker, value) => {
   return source.replace(pattern, `/*${marker}*/${jsonForInlineScript(value)}/*END_${marker}*/`);
 };
 
-const ensureSettingsJson = () => {
+const ensureSettingsJson = (fallbackCategories = []) => {
   const appPath = path.join(paths.jsDir, 'app.jsx');
   let settings;
   if (fs.existsSync(paths.settings)) {
@@ -1089,6 +1119,10 @@ const ensureSettingsJson = () => {
       categoryImages: readInlineJson(source, 'BAKED_CATEGORY_IMAGES', {}),
       shipping: readInlineJson(source, 'BAKED_SHIPPING', {}),
     });
+  }
+  if (!settings.categories) {
+    const seeded = normalizeCategories(fallbackCategories);
+    if (seeded.length) settings.categories = seeded;
   }
   ensureDir(path.dirname(paths.settings));
   fs.writeFileSync(paths.settings, JSON.stringify(settings, null, 2) + '\n');
@@ -2225,7 +2259,11 @@ const main = () => {
   const products = updateProductsJson();
   verifyResponsiveProductImages(products);
   replaceSiteDataProducts(products);
-  const settings = ensureSettingsJson();
+  const settings = ensureSettingsJson(initialData.categories);
+  if (settings.categories) {
+    replaceSiteDataCategories(settings.categories);
+    initialData.categories = settings.categories;
+  }
   bakeSettingsIntoApp(settings);
   writeOrderPricing(products, settings.shipping);
   writeHomeContent({ products, categories: initialData.categories, blogPosts: initialData.blogPosts, settings });
@@ -2271,4 +2309,4 @@ if (require.main === module) {
   else main();
 }
 
-module.exports = { writeOrderPricing, contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage, sortBlogPostsNewestFirst };
+module.exports = { normalizeSettings, normalizeCategories, writeOrderPricing, contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage, sortBlogPostsNewestFirst };

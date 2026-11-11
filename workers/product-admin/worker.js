@@ -13,6 +13,7 @@
 const GITHUB_API = 'https://api.github.com';
 const PRODUCTS_PATH = 'data/products.json';
 const SITE_DATA_PATH = 'assets/js/site-data.js';
+const SETTINGS_PATH = 'data/settings.json';
 const DEPLOY_WORKFLOW = 'deploy-pages.yml';
 const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
 const MAX_IMAGES_PER_PUBLISH = 60;
@@ -241,36 +242,91 @@ export const validateImages = (images) => {
 
 const getCatalog = async (gh, cfg) => {
   const sha = await headSha(gh, cfg);
-  const [products, siteData] = await Promise.all([
+  const [products, settingsFile, siteData] = await Promise.all([
     readFile(gh, cfg.repo, PRODUCTS_PATH, sha),
+    readFile(gh, cfg.repo, SETTINGS_PATH, sha),
     readFile(gh, cfg.repo, SITE_DATA_PATH, sha).catch(() => ({ text: '' })),
   ]);
+  const settings = JSON.parse(settingsFile.text);
+  // Older settings.json files have no category list; the storefront's one is the fallback.
+  if (!Array.isArray(settings.categories) || !settings.categories.length) {
+    settings.categories = parseCategories(siteData.text).map((c) => ({ ...c, icon: c.icon || '' }));
+  }
   return {
     ok: true,
     baseSha: sha,
     productsSha: products.sha,
     products: JSON.parse(products.text),
-    categories: parseCategories(siteData.text),
+    settingsSha: settingsFile.sha,
+    settings,
+    categories: settings.categories,
     siteUrl: cfg.siteUrl,
   };
 };
 
+const ASSET_PATH = /^\/assets\/[A-Za-z0-9._/-]+\.(?:webp|jpe?g|png)$/;
+
+export const validateSettings = (settings) => {
+  if (!settings || typeof settings !== 'object' || Array.isArray(settings)) return ['Cài đặt trang chủ không hợp lệ'];
+  const errors = [];
+  const { featuredIds, headerImages, categoryImages, categories, shipping } = settings;
+  if (!Array.isArray(featuredIds) || featuredIds.length > 50 || featuredIds.some((id) => typeof id !== 'string' || !id)) errors.push('Danh sách sản phẩm bán chạy không hợp lệ');
+  if (!Array.isArray(headerImages) || headerImages.length > 20 || headerImages.some((src) => !ASSET_PATH.test(String(src)))) errors.push('Ảnh header không hợp lệ');
+  if (!categoryImages || typeof categoryImages !== 'object' || Array.isArray(categoryImages)
+    || Object.values(categoryImages).some((src) => !ASSET_PATH.test(String(src)))) errors.push('Ảnh danh mục không hợp lệ');
+  if (!shipping || typeof shipping !== 'object') errors.push('Thiếu cài đặt phí ship');
+  if (!Array.isArray(categories) || !categories.length || categories.length > 50) errors.push('Cần ít nhất một danh mục');
+  else {
+    const ids = new Set();
+    categories.forEach((c, i) => {
+      if (!SLUG.test(c?.id || '')) errors.push(`Danh mục #${i + 1}: mã đường dẫn chỉ dùng a-z, 0-9 và dấu gạch`);
+      else if (ids.has(c.id)) errors.push(`Danh mục trùng mã ${c.id}`);
+      ids.add(c?.id);
+      if (!String(c?.name || '').trim()) errors.push(`Danh mục #${i + 1}: thiếu tên`);
+    });
+  }
+  return errors;
+};
+
 const publish = async (gh, cfg, body, email) => {
-  const { baseSha, productsSha, products, images, message } = body || {};
-  if (!/^[0-9a-f]{40}$/.test(baseSha || '') || !/^[0-9a-f]{40}$/.test(productsSha || '')) throw new HttpError(400, 'Thiếu phiên bản gốc, tải lại trang');
-  const productErrors = validateProducts(products);
+  // products and settings are each optional: only what changed is sent, so a publish
+  // never overwrites the other file with a stale copy.
+  const { baseSha, productsSha, products, settingsSha, settings, images, message } = body || {};
+  const isSha = (value) => /^[0-9a-f]{40}$/.test(value || '');
+  if (!isSha(baseSha) || (products !== undefined && !isSha(productsSha)) || (settings !== undefined && !isSha(settingsSha))) {
+    throw new HttpError(400, 'Thiếu phiên bản gốc, tải lại trang');
+  }
+  if (products === undefined && settings === undefined) throw new HttpError(400, 'Không có gì để xuất bản');
   const { errors: imageErrors, files } = validateImages(images);
-  const errors = [...productErrors, ...imageErrors];
+  const errors = [
+    ...(products !== undefined ? validateProducts(products) : []),
+    ...(settings !== undefined ? validateSettings(settings) : []),
+    ...imageErrors,
+  ];
   if (errors.length) return json({ ok: false, error: 'Dữ liệu chưa hợp lệ', details: errors.slice(0, 30) }, 422);
 
   const head = await headSha(gh, cfg);
-  if (head !== baseSha && (await fileSha(gh, cfg.repo, PRODUCTS_PATH, head)) !== productsSha) {
-    throw new HttpError(409, 'Sản phẩm vừa được sửa ở nơi khác. Tải lại dữ liệu mới rồi làm lại thay đổi.');
+  if (head !== baseSha) {
+    if (products !== undefined && (await fileSha(gh, cfg.repo, PRODUCTS_PATH, head)) !== productsSha) {
+      throw new HttpError(409, 'Sản phẩm vừa được sửa ở nơi khác. Tải lại dữ liệu mới rồi làm lại thay đổi.');
+    }
+    if (settings !== undefined && (await fileSha(gh, cfg.repo, SETTINGS_PATH, head)) !== settingsSha) {
+      throw new HttpError(409, 'Trang chủ/danh mục vừa được sửa ở nơi khác. Tải lại dữ liệu mới rồi làm lại thay đổi.');
+    }
   }
 
-  const text = `${JSON.stringify(products, null, 2)}\n`;
-  const productsBlob = await gh('POST', `/repos/${cfg.repo}/git/blobs`, { content: text, encoding: 'utf-8' });
-  const tree = [{ path: PRODUCTS_PATH, mode: '100644', type: 'blob', sha: productsBlob.sha }];
+  const tree = [];
+  const result = {};
+  if (products !== undefined) {
+    const blob = await gh('POST', `/repos/${cfg.repo}/git/blobs`, { content: `${JSON.stringify(products, null, 2)}\n`, encoding: 'utf-8' });
+    tree.push({ path: PRODUCTS_PATH, mode: '100644', type: 'blob', sha: blob.sha });
+    result.productsSha = blob.sha;
+  }
+  if (settings !== undefined) {
+    const blob = await gh('POST', `/repos/${cfg.repo}/git/blobs`, { content: `${JSON.stringify(settings, null, 2)}\n`, encoding: 'utf-8' });
+    tree.push({ path: SETTINGS_PATH, mode: '100644', type: 'blob', sha: blob.sha });
+    result.settingsSha = blob.sha;
+  }
   for (const file of files) {
     const blob = await gh('POST', `/repos/${cfg.repo}/git/blobs`, { content: file.base64, encoding: 'base64' });
     tree.push({ path: file.path, mode: '100644', type: 'blob', sha: blob.sha });
@@ -278,7 +334,7 @@ const publish = async (gh, cfg, body, email) => {
 
   const headCommit = await gh('GET', `/repos/${cfg.repo}/git/commits/${head}`);
   const newTree = await gh('POST', `/repos/${cfg.repo}/git/trees`, { base_tree: headCommit.tree.sha, tree });
-  if (newTree.sha === headCommit.tree.sha) return json({ ok: true, unchanged: true, commitSha: head, productsSha: productsBlob.sha });
+  if (newTree.sha === headCommit.tree.sha) return json({ ok: true, unchanged: true, commitSha: head, ...result });
 
   const summary = String(message || '').replace(/\s+/g, ' ').trim().slice(0, 200) || 'Cập nhật sản phẩm';
   const commit = await gh('POST', `/repos/${cfg.repo}/git/commits`, {
@@ -292,7 +348,7 @@ const publish = async (gh, cfg, body, email) => {
     if (error.githubStatus === 422) throw new HttpError(409, 'Có thay đổi khác vừa được đẩy lên. Bấm Xuất bản lại.');
     throw error;
   }
-  return json({ ok: true, commitSha: commit.sha, productsSha: productsBlob.sha, commitUrl: `https://github.com/${cfg.repo}/commit/${commit.sha}` });
+  return json({ ok: true, commitSha: commit.sha, ...result, commitUrl: `https://github.com/${cfg.repo}/commit/${commit.sha}` });
 };
 
 const getStatus = async (gh, cfg, sha, fetchImpl) => {

@@ -83,6 +83,8 @@ const normalizeSettings = (value = {}) => {
     headerImages: Array.isArray(value.headerImages) ? value.headerImages.filter(Boolean) : [],
     categoryImages,
     shipping: normalizeShippingSettings(value.shipping),
+    // Edited in the online admin; kept as is so a save here does not drop it.
+    ...(Array.isArray(value.categories) && value.categories.length ? { categories: value.categories } : {}),
   };
 };
 

@@ -119,6 +119,32 @@ main { max-width: 1180px; margin: 0 auto; padding: 16px; }
 .orphans { margin-top: 12px; padding: 10px 12px; border-radius: 8px; background: #fff7d6; font-size: 13px; }
 .orphans ul { margin: 6px 0 0; padding-left: 18px; }
 .orphans button { padding: 2px 8px; margin-left: 6px; }
+.tabs { display: flex; gap: 4px; max-width: 1180px; margin: 0 auto; padding: 12px 16px 0; overflow-x: auto; }
+.tabs button { border: 0; background: none; padding: 8px 14px; border-radius: 999px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.tabs button.on { background: var(--ink); color: #fff; }
+.featured { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 6px; }
+.featured li { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.featured li.muted { opacity: .6; }
+.featured .thumb { width: 40px; height: 40px; }
+.featured .fnum { width: 20px; text-align: center; color: var(--muted); font-size: 13px; }
+.featured .fname { flex: 1; min-width: 0; }
+.featured button { padding: 4px 10px; }
+.cats { display: grid; gap: 8px; }
+.cat { display: grid; grid-template-columns: 86px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.cat-img { display: grid; justify-items: center; gap: 4px; font-size: 12px; }
+.cat-img .thumb { width: 64px; height: 64px; }
+.cat-img .mini { margin: 0; color: var(--brand); font-weight: 600; cursor: pointer; font-size: 12px; }
+.cat-img .mini input { display: none; }
+.cat-img .link { font-size: 12px; }
+.cat-row { display: flex; gap: 8px; }
+.cat-row .cat-icon { width: 56px; flex: 0 0 56px; text-align: center; }
+.cat-id { width: 180px; padding: 2px 6px; font-size: 12px; }
+.cat-tools { display: flex; gap: 4px; }
+.cat-tools button { padding: 6px 10px; }
+@media (max-width: 760px) {
+  .cat { grid-template-columns: 72px minmax(0, 1fr); }
+  .cat-tools { grid-column: 2; }
+}
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
 .chip { font-size: 12px; background: #f1efe8; border-radius: 999px; padding: 2px 10px; }
 .variants { width: 100%; border-collapse: collapse; }

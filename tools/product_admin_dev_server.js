@@ -26,7 +26,7 @@ const readBody = (req) => new Promise((resolve) => {
 });
 
 const main = async () => {
-  const { parseCategories, validateProducts, validateImages } = await import(pathToFileURL(path.join(root, 'workers', 'product-admin', 'worker.js')).href);
+  const { parseCategories, validateProducts, validateImages, validateSettings } = await import(pathToFileURL(path.join(root, 'workers', 'product-admin', 'worker.js')).href);
   let publishes = 0;
 
   http.createServer(async (req, res) => {
@@ -46,23 +46,36 @@ const main = async () => {
       return send(res, 401, { ok: false, error: 'Chưa đăng nhập' });
     }
     if (url.pathname === '/api/catalog') {
+      const settings = JSON.parse(fs.readFileSync(path.join(root, 'data', 'settings.json'), 'utf8'));
+      if (!settings.categories?.length) settings.categories = parseCategories(fs.readFileSync(path.join(root, 'assets', 'js', 'site-data.js'), 'utf8'));
       return send(res, 200, {
         ok: true,
         baseSha: fakeSha(publishes),
         productsSha: fakeSha(publishes + 1000),
         products: JSON.parse(fs.readFileSync(path.join(root, 'data', 'products.json'), 'utf8')),
-        categories: parseCategories(fs.readFileSync(path.join(root, 'assets', 'js', 'site-data.js'), 'utf8')),
+        settingsSha: fakeSha(publishes + 2000),
+        settings,
+        categories: settings.categories,
         siteUrl: 'https://phuonglam.com',
       });
     }
     if (url.pathname === '/api/publish' && req.method === 'POST') {
       const body = JSON.parse(await readBody(req));
       const { errors: imageErrors, files } = validateImages(body.images);
-      const errors = [...validateProducts(body.products), ...imageErrors];
+      const errors = [
+        ...(body.products !== undefined ? validateProducts(body.products) : []),
+        ...(body.settings !== undefined ? validateSettings(body.settings) : []),
+        ...imageErrors,
+      ];
       if (errors.length) return send(res, 422, { ok: false, error: 'Dữ liệu chưa hợp lệ', details: errors });
       publishes += 1;
-      console.log(`[dev] publish #${publishes}: "${body.message}" · ${body.products.length} products · ${files.length} images (not written)`);
-      return send(res, 200, { ok: true, commitSha: fakeSha(publishes), productsSha: fakeSha(publishes + 1000) });
+      console.log(`[dev] publish #${publishes}: "${body.message}" · products ${body.products ? body.products.length : '-'} · settings ${body.settings ? 'yes' : '-'} · ${files.length} images (not written)`);
+      return send(res, 200, {
+        ok: true,
+        commitSha: fakeSha(publishes),
+        ...(body.products ? { productsSha: fakeSha(publishes + 1000) } : {}),
+        ...(body.settings ? { settingsSha: fakeSha(publishes + 2000) } : {}),
+      });
     }
     if (url.pathname === '/api/status') return send(res, 200, { ok: true, state: 'live', runUrl: '', liveSha: '' });
 

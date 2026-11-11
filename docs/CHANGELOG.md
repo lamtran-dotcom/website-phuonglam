@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-11 — Admin v2: homepage and categories tab
+- New tab "Trang chủ & danh mục": header slider images, best sellers (order, add from list, remove), categories (rename, icon, reorder, image, add new; delete only when empty).
+- Category list moved from hand-written `assets/js/site-data.js` to `data/settings.json` → `categories` (seeded with the current 10, values unchanged); the build writes it back into `CATEGORIES`, so new categories get `/danh-muc/<id>/` pages and sitemap entries. The old local admin keeps `categories` when it saves settings.
+- Worker publishes `products.json` and/or `settings.json` (only what changed, each with its own 409 check). Tests: 3 new Worker tests, 1 build test.
+
 ## 2026-11-11 — Admin v2: Shopee-style variants and a shipping section
 - "Thông tin bán hàng": add up to 2 option groups, add/rename/reorder/remove values (Enter to add), image per value of group 1, table of every combination with Bán switch, giá bán, giá gạch, cân nặng, SKU, and "Áp dụng cho tất cả phân loại". Plain products show price/SKU and "+ Thêm nhóm phân loại".
 - "Vận chuyển": product weight (gram) with a warning when missing; empty variant weights use it.

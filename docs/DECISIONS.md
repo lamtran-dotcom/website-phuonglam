@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-11-11 - Categories are data in settings.json
+Decision: The category list (id, name, icon, order) is stored in `data/settings.json` → `categories` and written into `assets/js/site-data.js` `CATEGORIES` by every build. The online admin edits it; a published id is never changed (it is the `/danh-muc/<id>/` URL) and a category can be deleted only when no product uses it.
+Reason: Categories were hand-written in a generated-looking JS file, so the owner could not add or rename one without code changes.
+Impact: Edit categories in the admin or `settings.json`, not in `site-data.js` (the build overwrites it). `categoryFallback` in the build still makes pages for old ids so removed categories do not 404.
+Status: Active
+
 ### 2026-11-11 - Products are edited in an online admin (Admin v2)
 Decision: A Cloudflare Worker (`workers/product-admin/`) serves a product admin behind a single owner password (signed HttpOnly session cookie, login rate-limited) and commits `data/products.json` plus resized images straight to `main` through the GitHub API; GitHub Actions builds and deploys as before. Edits are batched into one commit per publish; a publish is refused when `data/products.json` changed since loading. Images are resized in the browser.
 Reason: The local admin needed the Mac, a running server and git, so products could not be edited from a phone; bulk price changes meant opening every product. Data stays in git (no database) because 38 products do not need one and git gives history and rollback.

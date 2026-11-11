@@ -119,3 +119,16 @@ test('blog posts sort newest date first, higher id first on the same day', () =>
   assert.deepEqual(sortBlogPostsNewestFirst(posts).map((post) => post.id), [26, 21, 20, 11, 10]);
   assert.deepEqual(posts.map((post) => post.id), [10, 20, 26, 21, 11]);
 });
+
+test('settings keep a clean category list for menus and /danh-muc/ pages', () => {
+  const { normalizeSettings, normalizeCategories } = require('./build_static_site');
+  assert.deepEqual(normalizeCategories([
+    { id: 'nen-thom', name: ' Nến  Xông ', icon: '🕯️' },
+    { id: 'nen-thom', name: 'Trùng id' },
+    { id: 'Có Dấu', name: 'Sai id' },
+    { id: 'moi', name: '' },
+    { id: 'go-thom', name: 'Gỗ thơm' },
+  ]), [{ id: 'nen-thom', name: 'Nến Xông', icon: '🕯️' }, { id: 'go-thom', name: 'Gỗ thơm', icon: '' }]);
+  assert.equal('categories' in normalizeSettings({}), false);
+  assert.deepEqual(normalizeSettings({ categories: [{ id: 'a', name: 'A' }] }).categories, [{ id: 'a', name: 'A', icon: '' }]);
+});

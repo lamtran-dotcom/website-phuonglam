@@ -17,8 +17,8 @@ Browser ──► Cloudflare Worker "phuonglam-admin"
               │  POST /api/login with the owner password → signed HttpOnly cookie (30 days)
               │  every other /api call checks that cookie; 5 login tries/min per IP
               │
-              ├─ GET  /api/catalog   products.json + categories + base commit sha
-              ├─ POST /api/publish   one commit: products.json + new images
+              ├─ GET  /api/catalog   products.json + settings.json + base commit sha
+              ├─ POST /api/publish   one commit: products.json and/or settings.json + new images
               └─ GET  /api/status    GitHub Actions run for a commit
                                         │
                                         ▼
@@ -55,9 +55,17 @@ Browser ──► Cloudflare Worker "phuonglam-admin"
   `product.price` follows the cheapest variant. Weight: "Vận chuyển" holds the product weight;
   an empty variant weight falls back to it (same rule as cart and order Worker).
 
+- Tab "Trang chủ & danh mục" edits `data/settings.json`: header slider images (order,
+  add, remove), best sellers (`featuredIds`, order; static home shows 6, app up to 12),
+  categories (name, icon, order, image, add; delete only when no product uses it; the id
+  of a published category is fixed because it is the /danh-muc/<id>/ URL).
+  Categories now live in `settings.json` → `categories`; every build writes them into
+  `assets/js/site-data.js` (`CATEGORIES`) and makes their pages and sitemap entries.
+  Only the changed file(s) are sent, each with its own conflict check.
+
 ## Setup (one time)
 See "Admin v2 (online)" in `docs/SETUP.md`.
 
 ## Not done yet
 - Restore-previous-version button (use git history / GitHub revert meanwhile).
-- Blog, orders, homepage settings, shipping settings.
+- Blog, orders, shipping settings.

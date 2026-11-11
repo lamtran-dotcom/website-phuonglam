@@ -37,5 +37,57 @@
     "extraKgFee": 4000,
     "expressFee": 15000,
     "defaultItemWeight": 500
-  }
+  },
+  "categories": [
+    {
+      "id": "nen-thom",
+      "name": "Nến Xông",
+      "icon": "🕯️"
+    },
+    {
+      "id": "combo",
+      "name": "Combo Xông Nhà",
+      "icon": "🎁"
+    },
+    {
+      "id": "thao-moc-xong",
+      "name": "Thảo Mộc Xông",
+      "icon": "🌿"
+    },
+    {
+      "id": "go-thom",
+      "name": "Gỗ thơm",
+      "icon": "🪵"
+    },
+    {
+      "id": "phu-kien",
+      "name": "Phụ Kiện Xông",
+      "icon": "✨"
+    },
+    {
+      "id": "tui-thom",
+      "name": "Túi thơm",
+      "icon": "🪴"
+    },
+    {
+      "id": "bep-xong",
+      "name": "Đèn Xông Tinh Dầu",
+      "icon": "🔥"
+    },
+    {
+      "id": "nu-tram",
+      "name": "Nụ Trầm",
+      "icon": "🌸"
+    },
+    {
+      "id": "nen-tru",
+      "name": "Nến Trụ",
+      "icon": "🕯"
+    },
+    {
+      "id": "nen-ly",
+      "name": "Nến Ly",
+      "icon": "🫙"
+    }
+  ]
 }

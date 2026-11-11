@@ -22,6 +22,8 @@ const fakeGitHub = async ({ productsText = JSON.stringify([product('a')], null, 
     head: sha('1'),
     productsSha: sha('b'),
     productsAtHead: sha('b'),
+    settingsSha: sha('5'),
+    settingsAtHead: sha('5'),
     calls: [],
     blobs: [],
     refUpdate: null,
@@ -39,6 +41,11 @@ const fakeGitHub = async ({ productsText = JSON.stringify([product('a')], null, 
     if (method === 'GET' && p === '/contents/data/products.json') {
       const atHead = url.searchParams.get('ref') === state.head;
       return reply({ sha: atHead ? state.productsAtHead : state.productsSha, content: Buffer.from(productsText).toString('base64') });
+    }
+    if (method === 'GET' && p === '/contents/data/settings.json') {
+      const atHead = url.searchParams.get('ref') === state.head;
+      const settings = { featuredIds: ['a'], headerImages: [], categoryImages: {}, shipping: { firstKgFee: 16000 } };
+      return reply({ sha: atHead ? state.settingsAtHead : state.settingsSha, content: Buffer.from(JSON.stringify(settings)).toString('base64') });
     }
     if (method === 'GET' && p === '/contents/assets/js/site-data.js') {
       return reply({ sha: sha('c'), content: Buffer.from("const CATEGORIES = [\n  { id: 'combo', name: 'Combo Xông Nhà', icon: 'x' },\n];").toString('base64') });
@@ -147,7 +154,7 @@ test('catalog returns products, categories and base versions', async () => {
   assert.equal(body.baseSha, sha('1'));
   assert.equal(body.productsSha, sha('b'));
   assert.equal(body.products[0].id, 'a');
-  assert.deepEqual(body.categories, [{ id: 'combo', name: 'Combo Xông Nhà' }]);
+  assert.deepEqual(body.categories, [{ id: 'combo', name: 'Combo Xông Nhà', icon: '' }]);
 });
 
 test('publish writes products and images in one fast-forward commit', async () => {
@@ -262,4 +269,54 @@ test('a rejected GitHub token is reported as a server error, not as "signed out"
   const res = await call(badToken, '/api/catalog', { token: await signToken() });
   assert.equal(res.status, 502);
   assert.match(res.body.error, /Token GitHub sai/);
+});
+
+const settings = (extra = {}) => ({
+  featuredIds: ['a'],
+  headerImages: ['/assets/products/uploads/h1.webp'],
+  categoryImages: { combo: '/assets/media/generated/c.jpg' },
+  categories: [{ id: 'combo', name: 'Combo Xông Nhà', icon: '🎁' }, { id: 'danh-muc-moi', name: 'Mới', icon: '' }],
+  shipping: { firstKgFee: 16000 },
+  ...extra,
+});
+
+test('catalog includes settings, with categories from site-data when settings has none', async () => {
+  const { fetchImpl } = await fakeGitHub();
+  const { body } = await call(fetchImpl, '/api/catalog', { token: await signToken() });
+  assert.equal(body.settingsSha, sha('5'));
+  assert.deepEqual(body.settings.featuredIds, ['a']);
+  assert.deepEqual(body.settings.categories, [{ id: 'combo', name: 'Combo Xông Nhà', icon: '' }]);
+});
+
+test('publishing only settings writes settings.json and leaves products.json alone', async () => {
+  const { state, fetchImpl } = await fakeGitHub();
+  const res = await call(fetchImpl, '/api/publish', {
+    method: 'POST', token: await signToken(), body: { baseSha: sha('1'), settingsSha: sha('5'), settings: settings(), message: 'Trang chủ' },
+  });
+  assert.equal(res.status, 200, JSON.stringify(res.body));
+  assert.deepEqual(state.tree.tree.map((e) => e.path), ['data/settings.json']);
+  assert.equal(state.blobs[0].content, `${JSON.stringify(settings(), null, 2)}\n`);
+  assert.ok(res.body.settingsSha);
+  assert.equal(res.body.productsSha, undefined);
+});
+
+test('settings publish is refused when settings.json changed elsewhere, and validated', async () => {
+  const token = await signToken();
+  const changed = await fakeGitHub();
+  changed.state.settingsAtHead = sha('6');
+  const conflict = await call(changed.fetchImpl, '/api/publish', {
+    method: 'POST', token, body: { baseSha: sha('0'), settingsSha: sha('5'), settings: settings() },
+  });
+  assert.equal(conflict.status, 409);
+
+  const { fetchImpl } = await fakeGitHub();
+  const bad = await call(fetchImpl, '/api/publish', {
+    method: 'POST',
+    token,
+    body: { baseSha: sha('1'), settingsSha: sha('5'), settings: settings({ headerImages: ['javascript:alert(1)'], categories: [{ id: 'Sai Mã', name: '' }] }) },
+  });
+  assert.equal(bad.status, 422);
+  assert.match(bad.body.details.join('\n'), /Ảnh header/);
+  assert.match(bad.body.details.join('\n'), /mã đường dẫn/);
+  assert.equal((await call(fetchImpl, '/api/publish', { method: 'POST', token, body: { baseSha: sha('1') } })).status, 400);
 });
