@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-11 — Orders are charged at current web prices
+- The order Worker (`workers/order-webhook/worker.js`) recomputes item prices, weight and shipping from `/assets/js/order-pricing.json` (written by every build) and sends that amount as THU COD; when the customer's total differs, Telegram shows both and asks the shop to call first. Orders are never rejected for this; if the price list cannot be read, the order goes through with a warning.
+- Carts saved in the browser are re-priced from the current catalog when the storefront opens, so customers see today's price before ordering.
+
 ## 2026-11-11 — Codebase audit: delete what is not used
 - Storefront bundle: old in-app admin, sample orders, unreachable in-app blog-post page, export/tweak leftovers and dead helpers removed (`app.jsx` 4,950 → 3,035 lines, `app.min.js` 252 KB → 160 KB). Logo click goes home at once (the hidden 5-click admin entry made it wait 600 ms).
 - Repo: 568 images no page references (≈31 MB), `_headers` (ignored by GitHub Pages), the `compress-images` workflow (its output was never used), three April product backups, `reports/`, the Shopee mirror script and the April QA report deleted.

@@ -2196,6 +2196,28 @@ const optimizeIndexRuntime = (settings = {}) => {
   fs.writeFileSync(indexPath, html);
 };
 
+// Public price list the order Worker reads to recompute every order
+// (workers/order-webhook/worker.js). Generated on each build, not committed.
+const writeOrderPricing = (products, shipping) => {
+  const catalog = {};
+  for (const product of products) {
+    const variants = {};
+    (Array.isArray(product.variants) ? product.variants : []).forEach((variant, index) => {
+      variants[variant.id || `variant_${index}`] = {
+        price: Number(variant.price) || 0,
+        weight: Number(variant.weight) || Number(product.weight) || 0,
+      };
+    });
+    catalog[product.id] = {
+      price: Number(product.price) || 0,
+      weight: Number(product.weight) || 0,
+      hidden: isHiddenProduct(product),
+      variants,
+    };
+  }
+  fs.writeFileSync(path.join(paths.jsDir, 'order-pricing.json'), `${JSON.stringify({ shipping, products: catalog })}\n`);
+};
+
 const main = () => {
   ensureDir(paths.cssDir);
   ensureDir(paths.jsDir);
@@ -2205,6 +2227,7 @@ const main = () => {
   replaceSiteDataProducts(products);
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
+  writeOrderPricing(products, settings.shipping);
   writeHomeContent({ products, categories: initialData.categories, blogPosts: initialData.blogPosts, settings });
   compileAppJs();
   optimizeIndexRuntime(settings);
@@ -2218,6 +2241,7 @@ const buildProductPagesOnly = () => {
   const products = JSON.parse(fs.readFileSync(paths.products, 'utf8'));
   writeStaticCss();
   replaceSiteDataProducts(products);
+  writeOrderPricing(products, ensureSettingsJson().shipping);
   compileAppJs();
   const siteDataPath = path.join(paths.jsDir, 'site-data.js');
   const initialData = fs.existsSync(siteDataPath)
@@ -2247,4 +2271,4 @@ if (require.main === module) {
   else main();
 }
 
-module.exports = { contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage, sortBlogPostsNewestFirst };
+module.exports = { writeOrderPricing, contentVersion, isHiddenProduct, productSitemapUrls, renderProductPage, INFO_PAGES, infoPageUrls, renderInfoPage, sortBlogPostsNewestFirst };

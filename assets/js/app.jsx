@@ -515,6 +515,22 @@ const buildCartItem = (product, variant = null) => {
   };
 };
 
+// A cart saved in the browser keeps the price from when each item was added. Refresh price
+// and weight from the current catalog so checkout shows what the order Worker will charge.
+const repriceCartItem = (item) => {
+  const product = PRODUCTS.find(entry => String(entry.id) === String(item?.id));
+  if (!product) return item;
+  if (item.selectedVariant?.id) {
+    const variant = normalizeProductVariants(product).find(entry => entry.id === item.selectedVariant.id);
+    if (!variant) return item;
+    return { ...item, price: variant.price, originalPrice: variant.originalPrice, weight: variant.weight || product.weight };
+  }
+  const price = Number(product.price) || 0;
+  if (!price) return item;
+  return { ...item, price, originalPrice: product.originalPrice ? Number(product.originalPrice) : null, weight: product.weight };
+};
+const repriceCart = (cart) => (Array.isArray(cart) ? cart.map(repriceCartItem) : []);
+
 const getCartItemKey = (item) => item.cartKey || (item.selectedVariant?.id ? `${item.id}__${item.selectedVariant.id}` : String(item.id));
 
 const animateAddToCart = (sourceEl, imageSrc) => {
@@ -2925,7 +2941,7 @@ const App = () => {
     }
   });
   const [cart, setCart] = React.useState(() => {
-    try { return JSON.parse(localStorage.getItem('phuonglam-cart')) || []; } catch { return []; }
+    try { return repriceCart(JSON.parse(localStorage.getItem('phuonglam-cart'))); } catch { return []; }
   });
   const productImages = BAKED_IMAGES;
   const categoryImages = BAKED_CATEGORY_IMAGES;
@@ -2948,7 +2964,7 @@ const App = () => {
       if (event.key !== 'phuonglam-cart') return;
       try {
         const nextCart = JSON.parse(event.newValue || '[]');
-        setCart(Array.isArray(nextCart) ? nextCart : []);
+        setCart(repriceCart(nextCart));
       } catch {
         setCart([]);
       }
