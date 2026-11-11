@@ -21,7 +21,7 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Fixed Decisions
 - Public website remains static-first for speed and SEO.
-- Admin remains local-only unless a later task explicitly adds hosted backend/auth.
+- Products are edited in the online Admin v2 (`workers/product-admin/`, Cloudflare Worker behind Cloudflare Access, commits to `main` via GitHub API). The old local admin stays for blog/orders/settings until moved. See `docs/ADMIN-V2.md`.
 - Product/category/blog pages should be readable without depending on React runtime.
 - Generated/local indexes such as `.codegraph/` must not be committed.
 - Future Codex sessions must use `AGENTS.md` and this file as the durable project memory.
@@ -45,6 +45,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Admin v2 (online product admin), first version — 2026-11-11, built but NOT deployed: `workers/product-admin/worker.js` (API: Access JWT + email check, `/api/catalog`, `/api/publish` one commit with products.json + images, 409 if products.json changed since load, `/api/status`), `public/` UI (list, inline/bulk price edits, editor, browser WebP resize with jsquash fallback for Safari, draft in localStorage). Tests: `tools/product_admin_worker.test.js`; local preview: `tools/product_admin_dev_server.js` (port 8788, fake API). Verified in preview: bulk +8.000đ, change list, publish payload, image upload (native + fallback), mobile layout. Owner uses it alone; owner has Cloudflare access. Next: owner runs setup in `docs/SETUP.md` "Admin v2", then a real test publish. Only products.json is committed; committed generated pages lag until a local build (CI builds live site fresh).
+
 Order price check — 2026-11-11: Worker source recomputes prices/shipping from `/assets/js/order-pricing.json` (build output, git-ignored) and flags differences in Telegram; storefront re-prices saved carts on load (`repriceCart` in app.jsx). Tests: `tools/order_worker.test.js`. Site part pushed; **the Worker itself must be pasted into the Cloudflare dashboard by the seller** (no wrangler login on this Mac) — until then the live Worker still trusts the browser.
 
 Codebase audit — 2026-11-11 (pushed live): deleted the old React in-app admin and its localStorage overrides from `assets/js/app.jsx` (bundle 252 → 160 KB; all editing is in `admin-upload.html`), `SAMPLE_ORDERS`/`BLOG_ARTICLES` from `site-data.js`, the unused blog ZIP flow in `tools/local_admin_server.js`, 568 unreferenced images, `_headers`, `compress-images.yml`, old backups/reports/mirror script. `_config.yml` is only the exclude list read by `tools/prepare_pages_artifact.js`. Category "Từ …đ" labels are computed (`getCategoryFromLabel` in app.jsx, `fromLabel` in the build); `CATEGORIES` has no `from` field. `tools/generate_responsive_product_images.py` also covers `settings.json` images. Verified in a local preview: home, static product → cart → checkout review (no order sent), blog list, `cam-on/`, category page; no console errors, no missing images. Kept on purpose: `data/seo-keywords.json`, `data/social-keywords.json` (reference notes), reviews tool, 5-minute scheduled-post cron. Not done: legacy extraction paths in `externalizeIndex`; Worker still trusts client prices.
@@ -108,6 +110,7 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - Instatic is early 0.0.x software; keep it as inspiration rather than a production migration target.
 
 ## Next Suggested Task
+- Admin v2: deploy + Cloudflare Access setup (docs/SETUP.md), real test publish, then variant option editing.
 - `cam-on/`: seller prints the QR to `https://phuonglam.com/cam-on/`; optional later: tag orders from the card, real gift/discount tied to the countdown.
 - Confirm HCMC delivery rules with the fulfillment provider and finish local admin upload/draft browser checks.
 - Recheck Search Console and compare full 28-day performance windows after reports refresh.

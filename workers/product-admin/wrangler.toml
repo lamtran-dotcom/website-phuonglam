@@ -1,0 +1,21 @@
+# Deploy: cd workers/product-admin && npx wrangler deploy
+# Secrets (set once each): npx wrangler secret put GITHUB_TOKEN | ACCESS_TEAM_DOMAIN | ACCESS_AUD | ADMIN_EMAIL
+# Then in the dashboard: Workers & Pages → phuonglam-admin → Settings → Domains & Routes
+# → workers.dev → enable Cloudflare Access. Details: docs/SETUP.md "Admin v2 (online)".
+name = "phuonglam-admin"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+preview_urls = false
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[vars]
+GITHUB_REPO = "lamtran-dotcom/website-phuonglam"
+GITHUB_BRANCH = "main"
+SITE_URL = "https://phuonglam.com"
+# ACCESS_TEAM_DOMAIN, ACCESS_AUD, ADMIN_EMAIL and GITHUB_TOKEN are secrets
+# (npx wrangler secret put <NAME>) so they are not written into this public repo.
