@@ -12,7 +12,10 @@
 - [ ] Seller: review health/feng-shui wording in older posts (bồ kết, vỏ bưởi, đèn xông).
 - [ ] After the 2 queued posts publish, add links to them from related posts (product/category pages pick them up automatically).
 - [ ] Search Console: request indexing for the 7 retitled posts after deploy.
-- [ ] Generate the missing 480px responsive copies for 7 homepage product images (404 live).
+- [x] Responsive copies for category/hero images from `settings.json` (were 404 on the homepage) (2026-11-11).
+- [x] Codebase audit: dead files, 568 unreferenced images, old in-app admin, ZIP upload flow removed (2026-11-11).
+- [ ] Optional: simplify `externalizeIndex` in `tools/build_static_site.js` (inline-script/base64 extraction paths are legacy now that nothing exports a single-file index.html).
+- [ ] Order Worker still trusts prices sent by the browser; recompute totals from product data server-side.
 - [x] Draft `cam-on/` thank-you landing page with ordering via the existing checkout (2026-11-09).
 - [x] `cam-on/` products: 6 bestsellers + đèn xông gốm + tinh dầu 10ml + bộ bếp xông cao cấp + thanh gỗ Palo Santo (2026-11-09).
 - [ ] Discount code for `cam-on/`: checkout field, settings/admin config, Worker re-checks the code and amount.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-11 — Codebase audit: delete what is not used
+- Storefront bundle: old in-app admin, sample orders, unreachable in-app blog-post page, export/tweak leftovers and dead helpers removed (`app.jsx` 4,950 → 3,035 lines, `app.min.js` 252 KB → 160 KB). Logo click goes home at once (the hidden 5-click admin entry made it wait 600 ms).
+- Repo: 568 images no page references (≈31 MB), `_headers` (ignored by GitHub Pages), the `compress-images` workflow (its output was never used), three April product backups, `reports/`, the Shopee mirror script and the April QA report deleted.
+- Admin server: unused blog ZIP upload flow removed.
+- Fixed while auditing: category and hero images from `settings.json` now get 480/720 px copies (14 requests were 404 on every homepage visit); category cards show "Từ …đ" from real prices (all ten hand-typed labels were wrong).
+
 ## 2026-11-10 — Thảo mộc price increase
 - 9 products in Thảo Mộc Xông: every selling price +8.000đ (product and variants); crossed-out prices +15% rounded to 1.000đ. The duplicate Túi Thơm product kept its prices (seller choice).
 

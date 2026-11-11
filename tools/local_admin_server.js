@@ -48,7 +48,6 @@ const files = {
   responsiveGenerator: path.join(root, 'tools', 'generate_responsive_product_images.py'),
 };
 
-const imageExts = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']);
 
 const siteUrl = 'https://phuonglam.com';
 const githubRepo = 'lamtran-dotcom/website-phuonglam';
@@ -1477,13 +1476,12 @@ const copyBlogAsset = ({ sourcePath, slug }) => {
   return `/assets/blog/${outName}`;
 };
 
-const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides = new Map(), tempDir = os.tmpdir() }) => {
+const normalizeBlogHtml = ({ html, htmlPath = '', category, slug }) => {
   html = String(html || '').replace(/\r\n?/g, '\n').replace(/<!--\s*(?:prompt\s+)?ảnh\s*\d+[\s\S]*?-->\s*/gi, '');
   const dir = htmlPath ? path.dirname(htmlPath) : root;
   const publicUrl = `/blog/${category}/${slug}/`;
   const canonical = `${siteUrl}${publicUrl}`;
   const copied = new Map();
-  const copiedOverrides = new Map();
   const rewriteBlogHref = (href) => {
     const suffix = href.match(/[?#].*$/)?.[0] || '';
     const clean = href.split(/[?#]/)[0].replace(/\/+$/, '');
@@ -1495,18 +1493,6 @@ const normalizeBlogHtml = ({ html, htmlPath = '', category, slug, imageOverrides
   const resolveAsset = (assetUrl) => {
     if (!assetUrl || /^(https?:)?\/\//i.test(assetUrl) || assetUrl.startsWith('/') || assetUrl.startsWith('data:')) return assetUrl;
     const cleanUrl = assetUrl.split('#')[0].split('?')[0];
-    const overrideKey = normalizeAssetKey(cleanUrl);
-    const override = imageOverrides.get(overrideKey);
-    if (override?.data) {
-      if (copiedOverrides.has(overrideKey)) return copiedOverrides.get(overrideKey);
-      const ext = path.extname(override.filename) || (override.type?.includes('png') ? '.png' : '.jpg');
-      const tempName = `${Date.now()}-${Math.random().toString(36).slice(2)}-${safeName(override.filename || `blog-image${ext}`)}`;
-      const tempPath = path.join(tempDir, tempName);
-      fs.writeFileSync(tempPath, override.data);
-      const nextUrl = copyBlogAsset({ sourcePath: tempPath, slug });
-      copiedOverrides.set(overrideKey, nextUrl);
-      return nextUrl;
-    }
     const sourcePath = path.normalize(path.join(dir, decodeURIComponent(cleanUrl)));
     if (!sourcePath.startsWith(path.dirname(dir)) && !sourcePath.startsWith(dir)) return assetUrl;
     if (!fs.existsSync(sourcePath) || fs.statSync(sourcePath).isDirectory()) return assetUrl;
@@ -1644,7 +1630,7 @@ const buildBlogHtmlUpload = ({ fields, persist }) => {
     const htmlWithImages = prompts.length
       ? replaceImagePromptsWithFigures({ html: rawHtml, prompts, imageFiles, slug, persist, tempDir })
       : rawHtml;
-    const normalized = normalizeBlogHtml({ html: htmlWithImages, category, slug, tempDir });
+    const normalized = normalizeBlogHtml({ html: htmlWithImages, category, slug });
     return { category, slug, prompts, normalized };
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
@@ -1737,129 +1723,6 @@ const writeScheduledBlog = ({ result, publishAt }) => {
 const removeBlogPostFromSiteData = (slug) => {
   const posts = readBlogPostsFromSiteData();
   replaceBlogPostsInSiteData(posts.filter((post) => String(post.slug) !== slug));
-};
-
-const findHtmlFile = (dir) => {
-  const htmlFiles = walkFiles(dir).filter((file) => /\.html?$/i.test(file));
-  return htmlFiles.find((file) => path.basename(file).toLowerCase() === 'index.html') || htmlFiles[0] || '';
-};
-
-const assertSafeZipEntries = (entries) => {
-  if (entries.some((entry) => path.isAbsolute(entry) || entry.split(/[\\/]+/).includes('..'))) {
-    throw new Error('File ZIP có đường dẫn không an toàn');
-  }
-};
-
-const extractZipToTemp = (zipField) => {
-  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'phuonglam-blog-'));
-  try {
-    const zipPath = path.join(tempDir, safeName(zipField.filename || 'blog.zip'));
-    const extractDir = path.join(tempDir, 'extract');
-    fs.writeFileSync(zipPath, zipField.data);
-    fs.mkdirSync(extractDir, { recursive: true });
-    const list = spawnSync('unzip', ['-Z1', zipPath], { encoding: 'utf8' });
-    if (list.status !== 0) throw new Error(list.stderr || 'Không đọc được file ZIP');
-    const entries = list.stdout.split('\n').filter(Boolean);
-    assertSafeZipEntries(entries);
-    const unzip = spawnSync('unzip', ['-q', zipPath, '-d', extractDir], { encoding: 'utf8' });
-    if (unzip.status !== 0) throw new Error(unzip.stderr || 'Không giải nén được file ZIP');
-    return { tempDir, extractDir };
-  } catch (error) {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-    throw error;
-  }
-};
-
-const normalizeAssetKey = (assetUrl = '') =>
-  decodeURIComponent(String(assetUrl).split('#')[0].split('?')[0]).replace(/^\.\//, '');
-
-const getLocalImageRefs = ({ html, htmlPath }) => {
-  const dir = path.dirname(htmlPath);
-  const seen = new Set();
-  const refs = [];
-  const pushRef = (assetUrl) => {
-    if (!assetUrl || /^(https?:)?\/\//i.test(assetUrl) || assetUrl.startsWith('/') || assetUrl.startsWith('data:')) return;
-    const cleanUrl = assetUrl.split('#')[0].split('?')[0];
-    const ext = path.extname(cleanUrl).toLowerCase();
-    if (!imageExts.has(ext)) return;
-    const sourcePath = path.normalize(path.join(dir, decodeURIComponent(cleanUrl)));
-    if (!sourcePath.startsWith(path.dirname(dir)) && !sourcePath.startsWith(dir)) return;
-    if (!fs.existsSync(sourcePath) || fs.statSync(sourcePath).isDirectory()) return;
-    const key = normalizeAssetKey(assetUrl);
-    if (seen.has(key)) return;
-    seen.add(key);
-    refs.push({ assetUrl: cleanUrl, sourcePath });
-  };
-  html.replace(/\b(?:src|href)=["']([^"']+\.(?:png|jpe?g|webp|gif|svg)(?:[?#][^"']*)?)["']/gi, (match, assetUrl) => {
-    pushRef(assetUrl);
-    return match;
-  });
-  return refs;
-};
-
-const collectBlogPreviewImages = (zipField) => {
-  const { tempDir, extractDir } = extractZipToTemp(zipField);
-  try {
-    const htmlPath = findHtmlFile(extractDir);
-    if (!htmlPath) throw new Error('ZIP phải có ít nhất 1 file HTML');
-    const rawHtml = fs.readFileSync(htmlPath, 'utf8');
-    if (!rawHtml.includes('<html') && !rawHtml.includes('<!DOCTYPE')) throw new Error('File HTML trong ZIP không hợp lệ');
-    const refs = getLocalImageRefs({ html: rawHtml, htmlPath });
-    const seenPaths = new Set(refs.map(ref => ref.sourcePath));
-    const extraRefs = walkFiles(extractDir)
-      .filter((file) => imageExts.has(path.extname(file).toLowerCase()) && !seenPaths.has(file))
-      .map((sourcePath) => ({ assetUrl: path.relative(path.dirname(htmlPath), sourcePath), sourcePath }));
-    return [...refs, ...extraRefs].slice(0, 5).map((ref, index) => {
-      const ext = path.extname(ref.sourcePath).toLowerCase();
-      const type = mime[ext] || 'application/octet-stream';
-      return {
-        index,
-        assetUrl: ref.assetUrl,
-        label: path.basename(ref.assetUrl),
-        dataUrl: `data:${type};base64,${fs.readFileSync(ref.sourcePath).toString('base64')}`,
-      };
-    });
-  } finally {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-  }
-};
-
-const extractBlogImageOverrides = (fields) => {
-  let targets = [];
-  try {
-    targets = JSON.parse(fields.blogImageTargets || '[]');
-  } catch {
-    targets = [];
-  }
-  const overrides = new Map();
-  targets.forEach((target, index) => {
-    const file = fields[`blogImage${index}`];
-    if (!file?.data || !file.filename) return;
-    overrides.set(normalizeAssetKey(target), file);
-  });
-  return overrides;
-};
-
-const unpackBlogZip = ({ zipField, category, requestedSlug, imageOverrides = new Map() }) => {
-  const { tempDir, extractDir } = extractZipToTemp(zipField);
-  try {
-    const htmlPath = findHtmlFile(extractDir);
-    if (!htmlPath) throw new Error('ZIP phải có ít nhất 1 file HTML');
-    const rawHtml = fs.readFileSync(htmlPath, 'utf8');
-    if (!rawHtml.includes('<html') && !rawHtml.includes('<!DOCTYPE')) throw new Error('File HTML trong ZIP không hợp lệ');
-    const canonicalPath = rawHtml.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i)?.[1] || '';
-    const canonicalSlug = canonicalPath.split('?')[0].replace(/\/$/, '').split('/').pop();
-    const slug = safeName(requestedSlug || canonicalSlug || path.basename(htmlPath, path.extname(htmlPath)));
-    if (!slug) throw new Error('Không xác định được slug bài viết');
-    const normalized = normalizeBlogHtml({ html: rawHtml, htmlPath, category, slug, imageOverrides, tempDir });
-    const outDir = path.join(root, 'blog', category, slug);
-    fs.mkdirSync(outDir, { recursive: true });
-    fs.writeFileSync(path.join(outDir, 'index.html'), normalized.html);
-    upsertBlogPost({ category, slug, meta: normalized.meta });
-    return { slug, url: `/blog/${category}/${slug}/` };
-  } finally {
-    fs.rmSync(tempDir, { recursive: true, force: true });
-  }
 };
 
 const normalizeBlogPostForAdmin = (post) => {

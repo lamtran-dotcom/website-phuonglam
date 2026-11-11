@@ -45,6 +45,8 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
+Codebase audit — 2026-11-11 (pushed live): deleted the old React in-app admin and its localStorage overrides from `assets/js/app.jsx` (bundle 252 → 160 KB; all editing is in `admin-upload.html`), `SAMPLE_ORDERS`/`BLOG_ARTICLES` from `site-data.js`, the unused blog ZIP flow in `tools/local_admin_server.js`, 568 unreferenced images, `_headers`, `compress-images.yml`, old backups/reports/mirror script. `_config.yml` is only the exclude list read by `tools/prepare_pages_artifact.js`. Category "Từ …đ" labels are computed (`getCategoryFromLabel` in app.jsx, `fromLabel` in the build); `CATEGORIES` has no `from` field. `tools/generate_responsive_product_images.py` also covers `settings.json` images. Verified in a local preview: home, static product → cart → checkout review (no order sent), blog list, `cam-on/`, category page; no console errors, no missing images. Kept on purpose: `data/seo-keywords.json`, `data/social-keywords.json` (reference notes), reviews tool, 5-minute scheduled-post cron. Not done: legacy extraction paths in `externalizeIndex`; Worker still trusts client prices.
+
 Thảo mộc price increase — 2026-11-10 (pushed live): the 9 products in category `thao-moc-xong` got every selling price +8.000đ (seller chose flat +8.000đ over +15%), crossed-out `originalPrice` +15% rounded to 1.000đ; Túi Thơm "bản sao" excluded. Edited `data/products.json`, rebuilt pages. Category label "từ 45.000đ" on the homepage is hand-typed and was not changed.
 
 SEO report fixes — 2026-11-10 (committed and pushed live): 20 live blog posts fixed per the checklist report; the checker script's own checks (title/description length, JSON-LD, links, alt, dates agree across page + `datePublished` + `BLOG_POSTS`, og:image ≥1200 px) all pass. Dates: `datePublished` kept as the truth except `huong-dan-dung-bep` (restored to the original 2026-04-26, the admin had overwritten it with 2026-10-13); display + `BLOG_POSTS.date` aligned to it; `phan-biet` keeps the seller's original 25/04/2025. Featured/og images for 5 posts now use existing ≥1200 px images already on the site (nothing upscaled); swap in real originals later if wanted. C4/C5 wording applied with seller approval; admin template fixes in `tools/local_admin_server.js` with tests. Still not checked: P1/P2 (mobile layout/popup), and soft claims the AI checker may flag (e.g. cited "kháng khuẩn, đuổi côn trùng" quote in vỏ bưởi). Details in `docs/CHANGELOG.md`.
@@ -101,7 +103,6 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - Verify current HCMC delivery coverage with the shop/provider.
 - Legacy product claims/specifications need seller confirmation.
 - Search Console summary remains on its Sep 21 snapshot; check after Google refreshes.
-- Homepage requests 480px responsive copies that do not exist for 7 product images (e.g. `assets/products/responsive/1777285327929-nen-tru-480.webp` → 404 live too); those cards may show broken images on phones. Found 2026-11-09, not fixed.
 - Instatic is early 0.0.x software; keep it as inspiration rather than a production migration target.
 
 ## Next Suggested Task

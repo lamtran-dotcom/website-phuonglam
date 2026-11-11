@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-11-11 - The storefront bundle has no admin; catalog data has one source
+Decision: The old React in-app admin (logo 5-click, localStorage overrides, sample orders, single-file export, tweaks panel) is removed from `app.jsx`. Products come only from `site-data.js` (generated from `data/products.json`), settings only from the `BAKED_*` blocks. Category "Từ …đ" labels are computed from the cheapest visible product instead of typed by hand.
+Reason: It was reachable only on localhost, showed made-up orders, and was a third of the bundle every customer downloaded; hand-typed price labels were wrong for every category.
+Impact: All editing happens in `admin-upload.html` via `tools/local_admin_server.js`. Supersedes the "in-app admin is localhost-only" part of the 2026-10-08 decision. Unreferenced images are deleted from the repo (recoverable from git history).
+Status: Active
+
 ### 2026-10-08 - Hide internal files from GitHub Pages with Jekyll exclude
 Decision: `_config.yml` lists repository paths that must not be served (project memory, docs, tools, data, reports, scheduled posts, admin UI, launcher). Files stay in git.
 Reason: GitHub Pages served every committed file, exposing internal notes, admin code and unpublished scheduled posts.

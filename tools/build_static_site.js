@@ -1105,15 +1105,6 @@ const bakeSettingsIntoApp = (settings) => {
   fs.writeFileSync(appPath, source);
 };
 
-const bakeProductsIntoApp = (products) => {
-  const appPath = path.join(paths.jsDir, 'app.jsx');
-  let source = fs.readFileSync(appPath, 'utf8');
-  // Product data already lives in site-data.js. Keep the baked slot empty to
-  // avoid shipping and parsing the same catalog twice on the storefront.
-  source = writeInlineJson(source, 'BAKED_PRODUCTS', []);
-  fs.writeFileSync(appPath, source);
-};
-
 const renderStaticBuyBox = (product) => {
   const variants = normalizeProductVariants(product);
   const optionGroups = getStaticOptionGroups(product, variants);
@@ -1200,7 +1191,6 @@ const renderStaticBuyScript = (product) => {
   const purchasePanel = form.querySelector('[data-purchase-panel]');
   const addCartButton = form.querySelector('.buy-btn');
   const buyNowButton = form.querySelector('[data-buy-now]');
-  const priceEl = document.querySelector('[data-buy-price]');
   const originalEl = document.querySelector('[data-buy-original]');
   const statusEl = form.querySelector('[data-buy-status]');
   const mainImage = document.querySelector('.product-image');
@@ -1951,12 +1941,18 @@ const writeHomeContent = ({ products, categories, blogPosts, settings }) => {
     : visible.filter(product => product.tag === 'Bán chạy' || product.tag === 'Nổi bật').slice(0, 6);
   const heroImage = settings.headerImages?.[0] || '/assets/media/generated/embedded-002.jpg';
   const comboImage = settings.categoryImages?.combo || firstImage(visible.find(product => product.categoryId === 'combo') || {});
+  // Cheapest visible product per category; same rule as getCategoryFromLabel in app.jsx.
+  const fromLabel = (categoryId) => {
+    const prices = visible.filter(product => product.categoryId === categoryId)
+      .map(product => getStaticPriceInfo(product).price).filter(price => price > 0);
+    return prices.length ? `Từ ${Math.min(...prices).toLocaleString('vi-VN')}đ` : '';
+  };
   const categoryLinks = categories.map(category => {
     const image = settings.categoryImages?.[category.id] || '';
     return `<a href="/danh-muc/${escapeHtml(category.id)}/">
       ${image ? `<img src="${escapeHtml(image)}"${responsiveImageAttrs(image, '(max-width: 767px) 45vw, 280px')} alt="${escapeHtml(category.name)}" loading="lazy" />` : ''}
       <span>${escapeHtml(category.name)}</span>
-      ${category.from ? `<small>${escapeHtml(category.from)}</small>` : ''}
+      ${fromLabel(category.id) ? `<small>${escapeHtml(fromLabel(category.id))}</small>` : ''}
     </a>`;
   }).join('\n');
   const cards = featured.map(product => `<a class="home-static-card" href="/san-pham/${escapeHtml(product.slug)}/">
@@ -2207,7 +2203,6 @@ const main = () => {
   const products = updateProductsJson();
   verifyResponsiveProductImages(products);
   replaceSiteDataProducts(products);
-  bakeProductsIntoApp(products);
   const settings = ensureSettingsJson();
   bakeSettingsIntoApp(settings);
   writeHomeContent({ products, categories: initialData.categories, blogPosts: initialData.blogPosts, settings });
@@ -2223,7 +2218,6 @@ const buildProductPagesOnly = () => {
   const products = JSON.parse(fs.readFileSync(paths.products, 'utf8'));
   writeStaticCss();
   replaceSiteDataProducts(products);
-  bakeProductsIntoApp(products);
   compileAppJs();
   const siteDataPath = path.join(paths.jsDir, 'site-data.js');
   const initialData = fs.existsSync(siteDataPath)

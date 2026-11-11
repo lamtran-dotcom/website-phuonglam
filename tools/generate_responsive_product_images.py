@@ -10,6 +10,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 PRODUCTS_PATH = ROOT / "data" / "products.json"
+SETTINGS_PATH = ROOT / "data" / "settings.json"
 OUTPUT_DIR = ROOT / "assets" / "products" / "responsive"
 WIDTHS = (480, 720)
 
@@ -70,8 +71,13 @@ def main() -> int:
     if args.images:
         images = sorted(set(args.images))
     else:
-        products = json.loads(PRODUCTS_PATH.read_text(encoding="utf-8"))
-        images = sorted(set(walk_images(products)))
+        # The storefront builds srcset for every image under uploads/ and mirrored/,
+        # including the category and hero images kept in settings.json.
+        sources = [json.loads(path.read_text(encoding="utf-8")) for path in (PRODUCTS_PATH, SETTINGS_PATH) if path.exists()]
+        images = sorted(
+            image for image in set(walk_images(sources))
+            if image.startswith(("/assets/products/uploads/", "/assets/products/mirrored/"))
+        )
 
     missing_sources = [public_path for public_path in images if not source_path(public_path).exists()]
     missing_responsive = [
