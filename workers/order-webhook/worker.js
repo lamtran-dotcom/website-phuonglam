@@ -71,7 +71,7 @@ async function loadPricing() {
 // Same rule as calculateShipping in assets/js/app.jsx: free up to the area's weight limit;
 // above it the first started kg costs firstKgFee, each further started kg extraKgFee;
 // express adds a flat fee.
-export function shippingFee({ weight, city, express }, rules) {
+function shippingFee({ weight, city, express }, rules) {
   const freeLimit = isHoChiMinhCity(city) ? rules.hcmFreeWeight : rules.otherFreeWeight;
   const overweight = Math.max(0, weight - freeLimit);
   const extraSteps = Math.ceil(Math.max(0, overweight - 1000) / 1000);
@@ -79,7 +79,7 @@ export function shippingFee({ weight, city, express }, rules) {
   return base + (express ? rules.expressFee : 0);
 }
 
-export function priceOrder(order, pricing) {
+function priceOrder(order, pricing) {
   const sentItems = Array.isArray(order.items) ? order.items : [];
   const sent = {
     subtotal: Number(order.subtotal) || 0,
@@ -127,7 +127,7 @@ export function priceOrder(order, pricing) {
   return { verified: true, items, subtotal, shipping, total: subtotal + shipping, sent };
 }
 
-export function itemsMessage(orderId, checked) {
+function itemsMessage(orderId, checked) {
   const lines = [`📦 <b>SẢN PHẨM #${orderId}</b>`, ""];
   checked.items.forEach((item, index) => {
     let line = `${index + 1}. ${html(item.name)} × ${item.qty} = ${formatVnd(item.lineTotal)}`;

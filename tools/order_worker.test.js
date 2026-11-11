@@ -4,11 +4,13 @@ const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 
-// worker.js is an ES module deployed as-is to Cloudflare; load a copy as .mjs.
+// worker.js is deployed as-is to Cloudflare, which only accepts the default export there.
+// Load a copy as .mjs that also exports the helpers under test.
 const loadWorker = async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'order-worker-'));
   const file = path.join(dir, 'worker.mjs');
-  fs.copyFileSync(path.join(__dirname, '..', 'workers', 'order-webhook', 'worker.js'), file);
+  const source = fs.readFileSync(path.join(__dirname, '..', 'workers', 'order-webhook', 'worker.js'), 'utf8');
+  fs.writeFileSync(file, `${source}\nexport { priceOrder, itemsMessage, shippingFee };\n`);
   return import(file);
 };
 
