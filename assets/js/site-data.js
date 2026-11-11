@@ -3987,6 +3987,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 30,
+    "title": "Xông nhà đầu năm mới: hiểu tục Tết và tự xông thảo mộc",
+    "excerpt": "Xông nhà đầu năm đúng cách: phân biệt tục xông đất và xông thảo mộc, chọn ngày, phối mùi Tết và dùng bếp niêu an toàn. Đọc ngay.",
+    "date": "11 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "xong-nha-dau-nam",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/xong-nha-dau-nam/",
+    "image": "/assets/blog/xong-nha-dau-nam-1794280516592-1-cach-tu-xong-nha-dau-nam-bang-thao-moc-tren-bep-nieu.webp",
+    "coverImage": "/assets/blog/xong-nha-dau-nam-1794280516592-1-cach-tu-xong-nha-dau-nam-bang-thao-moc-tren-bep-nieu.webp"
+  },
+  {
     "id": 29,
     "title": "Xông nhà cuối năm: làm ngày nào, dùng gì? | Phương Lâm",
     "excerpt": "Xông nhà cuối năm nên làm ngày nào, dùng gì và thực hiện ra sao? Xem checklist, 2 cách xông cùng lưu ý an toàn để chuẩn bị nhà cửa đón Tết.",
