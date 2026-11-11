@@ -256,3 +256,10 @@ test('non-api paths are served from static assets without auth', async () => {
   const res = await handle(new Request('https://admin.example.workers.dev/'), env, () => { throw new Error('no fetch'); });
   assert.equal(await res.text(), 'asset');
 });
+
+test('a rejected GitHub token is reported as a server error, not as "signed out"', async () => {
+  const badToken = async () => new Response(JSON.stringify({ message: 'Bad credentials' }), { status: 401 });
+  const res = await call(badToken, '/api/catalog', { token: await signToken() });
+  assert.equal(res.status, 502);
+  assert.match(res.body.error, /Token GitHub sai/);
+});

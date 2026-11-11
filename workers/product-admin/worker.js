@@ -138,7 +138,13 @@ const github = (env, fetchImpl) => async (method, path, body) => {
     body: body ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) {
-    const error = new HttpError(res.status === 404 ? 502 : res.status, `GitHub ${method} ${path.split('?')[0]} lỗi ${res.status}`);
+    // Never pass GitHub's 401/403 through: the UI would read them as "not signed in".
+    const message = res.status === 401
+      ? 'Token GitHub sai hoặc đã hết hạn. Tạo token mới rồi chạy: npx wrangler secret put GITHUB_TOKEN'
+      : res.status === 403 || res.status === 404
+        ? `Token GitHub thiếu quyền (${method} ${path.split('?')[0]} → ${res.status})`
+        : `GitHub ${method} ${path.split('?')[0]} lỗi ${res.status}`;
+    const error = new HttpError(res.status === 409 || res.status === 422 ? res.status : 502, message);
     error.githubStatus = res.status;
     throw error;
   }
