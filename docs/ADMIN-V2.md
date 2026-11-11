@@ -46,11 +46,18 @@ Browser ──► Cloudflare Worker "phuonglam-admin"
   cookie is `<expiry>.<HMAC>` keyed from the password, so changing the password signs
   every device out. Cloudflare Access was not used: its Free plan needs a payment card.
 
+- Variants are edited Shopee-style (`public/variants.js`): up to 2 groups, values can be
+  added/renamed/reordered/removed, group-1 values can have an image (`optionImages`), and
+  the table lists every combination with a "Bán" switch, price, crossed-out price, weight
+  and SKU. Data stays sparse (a combination without a variant is not for sale). Products
+  imported with a flat variant list become one group "Phân loại" on their first structural
+  edit. Variants whose value is not in the group list are shown and only deleted on request.
+  `product.price` follows the cheapest variant. Weight: "Vận chuyển" holds the product weight;
+  an empty variant weight falls back to it (same rule as cart and order Worker).
+
 ## Setup (one time)
 See "Admin v2 (online)" in `docs/SETUP.md`.
 
 ## Not done yet
-- Adding/removing option values that regenerate the variant matrix (variants can be
-  edited, duplicated and deleted; new option combinations still need the old admin).
 - Restore-previous-version button (use git history / GitHub revert meanwhile).
 - Blog, orders, homepage settings, shipping settings.

@@ -2,6 +2,8 @@
 // Edits stay in a browser draft until "Xuất bản", which sends all products plus new
 // images to /api/publish as one commit. See docs/ADMIN-V2.md.
 
+import * as Variants from './variants.js';
+
 const DRAFT_KEY = 'pl-admin-draft-v1';
 // WebP encoder for browsers whose canvas cannot write WebP (Safari / iPhone).
 const WEBP_ENCODER = 'https://cdn.jsdelivr.net/npm/@jsquash/webp@1.4.0/encode.js/+esm';
@@ -294,9 +296,7 @@ const renderEdit = () => {
   const before = originalOf(p);
   const id = esc(keyOf(p));
   const c = p.content || {};
-  const hasVariants = p.variants?.length > 0;
   const liveUrl = before && !before.hidden ? `${state.siteUrl}/san-pham/${before.slug}/` : '';
-  const imageOptions = (selected) => `<option value="">—</option>${(p.images || []).map((src, i) => `<option value="${esc(src)}" ${src === selected ? 'selected' : ''}>Ảnh ${i + 1}</option>`).join('')}${selected && !(p.images || []).includes(selected) ? `<option value="${esc(selected)}" selected>Ảnh riêng</option>` : ''}`;
 
   app.innerHTML = `
     <div class="edit-head">
@@ -320,11 +320,6 @@ const renderEdit = () => {
         <div><label>Nhãn</label><select data-field="tag" data-id="${id}">
           ${['', 'Bán chạy', 'Nổi bật', 'Mới', 'Sale'].map((t) => `<option value="${t}" ${t === (p.tag || '') ? 'selected' : ''}>${t || '(không)'}</option>`).join('')}
         </select></div>
-        <div><label>SKU</label><input data-field="sku" data-id="${id}" value="${esc(p.sku)}"></div>
-        <div><label>Cân nặng (gram)</label><input inputmode="numeric" data-field="weight" data-type="int" data-id="${id}" value="${esc(p.weight ?? '')}"></div>
-        ${hasVariants ? '' : `
-        <div><label>Giá bán (đ)</label><input inputmode="numeric" data-field="price" data-id="${id}" value="${esc(money(p.price))}"></div>
-        <div><label>Giá gạch (đ, để trống nếu không có)</label><input inputmode="numeric" data-field="originalPrice" data-id="${id}" value="${esc(money(p.originalPrice))}"></div>`}
         <div class="wide"><label class="toggle"><input type="checkbox" data-field="hidden" data-id="${id}" ${p.hidden ? 'checked' : ''}> Ẩn sản phẩm khỏi web</label></div>
       </div>
     </section>
@@ -343,28 +338,9 @@ const renderEdit = () => {
       </div>
     </section>
 
-    ${hasVariants ? `
-    <section class="card"><h2>Phân loại (${p.variants.length})</h2>
-      <div class="chips">${(p.optionGroups || []).map((g) => `<span class="chip">${esc(g.name)}: ${g.values.length} lựa chọn</span>`).join('')}</div>
-      <div class="apply-all">
-        <div><label>Giá bán tất cả</label><input inputmode="numeric" id="all-price"></div>
-        <div><label>Giá gạch tất cả</label><input inputmode="numeric" id="all-originalPrice"></div>
-        <div><label>Cân nặng tất cả (g)</label><input inputmode="numeric" id="all-weight"></div>
-        <button data-action="variants-apply">Áp cho mọi dòng</button>
-      </div>
-      <div class="scroll-x"><table class="variants">
-        <thead><tr><th>Tên phân loại</th><th>Giá bán</th><th>Giá gạch</th><th>Cân nặng (g)</th><th>Ảnh</th><th></th></tr></thead>
-        <tbody>${p.variants.map((v, i) => `<tr>
-          <td><input data-field="variants.${i}.name" data-id="${id}" value="${esc(v.name)}"></td>
-          <td class="num"><input inputmode="numeric" data-field="variants.${i}.price" data-type="money" data-id="${id}" value="${esc(money(v.price))}"></td>
-          <td class="num"><input inputmode="numeric" data-field="variants.${i}.originalPrice" data-type="money" data-id="${id}" value="${esc(money(v.originalPrice))}"></td>
-          <td class="num"><input inputmode="numeric" data-field="variants.${i}.weight" data-type="int" data-id="${id}" value="${esc(v.weight ?? '')}"></td>
-          <td>${v.image ? `<img src="${esc(imageUrl(v.image))}" alt="">` : ''} <select data-field="variants.${i}.image" data-id="${id}">${imageOptions(v.image)}</select></td>
-          <td><button class="danger" data-action="variant-remove" data-index="${i}" aria-label="Xoá dòng">✕</button></td>
-        </tr>`).join('')}</tbody>
-      </table></div>
-      <div class="hint">Dòng có giá 0 sẽ không hiện trên web. Thêm lựa chọn mới (size, mùi…) vẫn làm ở admin cũ.</div>
-    </section>` : ''}
+    ${renderSales(p)}
+
+    ${renderShipping(p)}
 
     <section class="card"><h2>Nội dung</h2>
       <div class="grid">
@@ -384,6 +360,128 @@ const renderEdit = () => {
       </div>
       <div class="serp" data-serp>${serp(p)}</div>
     </section>`;
+};
+
+// ---------- sales info (Shopee-style variants) ----------
+
+const imagePicker = (p, selected, attrs) => `<select ${attrs}>
+  <option value="">Không ảnh</option>
+  ${(p.images || []).map((src, i) => `<option value="${esc(src)}" ${src === selected ? 'selected' : ''}>Ảnh ${i + 1}${i === 0 ? ' (bìa)' : ''}</option>`).join('')}
+  ${selected && !(p.images || []).includes(selected) ? `<option value="${esc(selected)}" selected>Ảnh riêng</option>` : ''}
+</select>`;
+
+const moneyInput = (value, attrs) => `<input inputmode="numeric" ${attrs} value="${esc(money(value))}">`;
+
+const renderGroup = (view, group, gi) => `
+  <div class="vgroup">
+    <div class="vgroup-head">
+      <span class="vgroup-label">Phân loại ${gi + 1}</span>
+      <input data-var-group-name="${gi}" value="${esc(group.name)}" placeholder="Tên nhóm, vd: Màu sắc, Kích thước" aria-label="Tên nhóm phân loại ${gi + 1}">
+      <button class="danger" data-action="var-remove-group" data-group="${gi}">Xoá nhóm</button>
+    </div>
+    <div class="vvalues">
+      ${group.values.map((value, vi) => `<div class="vvalue">
+        ${gi === 0 ? `<span class="vthumb">${view.optionImages?.[group.name]?.[value] ? `<img src="${esc(imageUrl(view.optionImages[group.name][value]))}" alt="">` : ''}</span>
+          ${imagePicker(view, view.optionImages?.[group.name]?.[value] || '', `data-var-image="${gi}" data-value="${esc(value)}" aria-label="Ảnh cho ${esc(value)}"`)}` : ''}
+        <input data-var-value="${gi}" data-index="${vi}" value="${esc(value)}" aria-label="Lựa chọn ${vi + 1}">
+        <button data-action="var-move-value" data-group="${gi}" data-index="${vi}" data-step="-1" ${vi === 0 ? 'disabled' : ''} aria-label="Lên">↑</button>
+        <button data-action="var-move-value" data-group="${gi}" data-index="${vi}" data-step="1" ${vi === group.values.length - 1 ? 'disabled' : ''} aria-label="Xuống">↓</button>
+        <button class="danger" data-action="var-remove-value" data-group="${gi}" data-index="${vi}" aria-label="Xoá lựa chọn">✕</button>
+      </div>`).join('')}
+      <div class="vvalue add"><input data-var-new="${gi}" placeholder="+ Thêm lựa chọn (gõ rồi Enter)"></div>
+    </div>
+  </div>`;
+
+const renderVariantTable = (p, view) => {
+  const groups = view.optionGroups.filter((g) => g.values.length);
+  const combos = Variants.combinations(view);
+  if (!combos.length) return '<p class="hint">Thêm ít nhất một lựa chọn để tạo bảng phân loại.</p>';
+  const firstSpan = groups.length === 2 ? groups[1].values.length : 1;
+  const rows = combos.map((combo, index) => {
+    const variant = Variants.findVariant(view, combo);
+    const real = variant && p.variants.find((v) => v.id === variant.id);
+    const comboAttr = esc(JSON.stringify(combo));
+    const groupCells = groups.map((g, gi) => {
+      if (gi === 0 && groups.length === 2) return index % firstSpan === 0 ? `<td class="vcell" rowspan="${firstSpan}">${esc(combo[g.name])}</td>` : '';
+      return `<td class="vcell">${esc(combo[g.name])}</td>`;
+    }).join('');
+    if (!real) {
+      return `<tr class="off">${groupCells}<td colspan="4" class="hint">Không bán</td>
+        <td><label class="toggle"><input type="checkbox" data-var-sale="${comboAttr}"> Bán</label></td></tr>`;
+    }
+    const vid = esc(real.id);
+    return `<tr>${groupCells}
+      <td class="num">${moneyInput(real.price, `data-vfield="price" data-vid="${vid}" aria-label="Giá bán"`)}</td>
+      <td class="num">${moneyInput(real.originalPrice, `data-vfield="originalPrice" data-vid="${vid}" aria-label="Giá gạch"`)}</td>
+      <td class="num"><input inputmode="numeric" data-vfield="weight" data-vid="${vid}" value="${esc(real.weight ?? '')}" placeholder="${esc(p.weight ?? '')}" aria-label="Cân nặng"></td>
+      <td><input data-vfield="sku" data-vid="${vid}" value="${esc(real.sku || '')}" aria-label="SKU phân loại"></td>
+      <td><label class="toggle"><input type="checkbox" data-var-sale="${comboAttr}" checked> Bán</label></td></tr>`;
+  }).join('');
+  return `<div class="scroll-x"><table class="variants">
+    <thead><tr>${groups.map((g) => `<th>${esc(g.name)}</th>`).join('')}<th>Giá bán (đ) *</th><th>Giá gạch (đ)</th><th>Cân nặng (g)</th><th>SKU</th><th></th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+};
+
+const renderSales = (p) => {
+  const id = esc(keyOf(p));
+  // Imported products without groups are shown as one group; the data changes only on edit.
+  const view = Variants.ensureGroups(clone(p));
+  const hasGroups = view.optionGroups.length > 0;
+  if (!hasGroups) {
+    return `<section class="card"><h2>Thông tin bán hàng</h2>
+      <div class="grid">
+        <div><label>Giá bán (đ) *</label><input inputmode="numeric" data-field="price" data-id="${id}" value="${esc(money(p.price))}"></div>
+        <div><label>Giá gạch (đ, để trống nếu không có)</label><input inputmode="numeric" data-field="originalPrice" data-id="${id}" value="${esc(money(p.originalPrice))}"></div>
+        <div><label>SKU</label><input data-field="sku" data-id="${id}" value="${esc(p.sku)}"></div>
+      </div>
+      <div class="vadd"><button data-action="var-add-group">+ Thêm nhóm phân loại</button>
+        <span class="hint">Ví dụ: Màu sắc, Kích thước, Mùi hương. Tối đa ${Variants.MAX_GROUPS} nhóm.</span></div>
+    </section>`;
+  }
+  const orphans = Variants.orphanVariants(p);
+  return `<section class="card"><h2>Thông tin bán hàng</h2>
+    <h3>Phân loại hàng</h3>
+    ${view.optionGroups.map((g, gi) => renderGroup(view, g, gi)).join('')}
+    ${view.optionGroups.length < Variants.MAX_GROUPS ? `<div class="vadd"><button data-action="var-add-group">+ Thêm nhóm phân loại ${view.optionGroups.length + 1}</button></div>` : ''}
+
+    <h3>Danh sách phân loại hàng <span class="hint">(${p.variants.length} đang bán)</span></h3>
+    <div class="apply-all">
+      <div><label>Giá bán</label><input inputmode="numeric" id="all-price" placeholder="đ"></div>
+      <div><label>Giá gạch</label><input inputmode="numeric" id="all-originalPrice" placeholder="đ"></div>
+      <div><label>Cân nặng</label><input inputmode="numeric" id="all-weight" placeholder="gram"></div>
+      <button data-action="var-apply-all">Áp dụng cho tất cả phân loại</button>
+    </div>
+    ${renderVariantTable(p, view)}
+    <div class="hint">Cân nặng để trống = dùng cân nặng chung ở mục Vận chuyển. Bỏ tick "Bán" để ngừng bán tổ hợp đó.</div>
+    ${orphans.length ? `<div class="orphans"><b>${orphans.length} phân loại cũ không thuộc lựa chọn nào</b> (đang không hiện trên web):
+      <ul>${orphans.map((v) => `<li>${esc(v.name)} · ${esc(money(v.price))}đ <button class="danger" data-action="var-remove-orphan" data-vid="${esc(v.id)}">Xoá</button></li>`).join('')}</ul></div>` : ''}
+  </section>`;
+};
+
+const renderShipping = (p) => {
+  const id = esc(keyOf(p));
+  const missing = !p.weight && !(p.variants || []).every((v) => v.weight);
+  return `<section class="card"><h2>Vận chuyển</h2>
+    <div class="grid">
+      <div><label>Cân nặng sau đóng gói (gram) *</label>
+        <input inputmode="numeric" data-field="weight" data-type="int" data-id="${id}" value="${esc(p.weight ?? '')}" placeholder="vd 300">
+        <div class="hint ${missing ? 'warn' : ''}">${missing ? 'Chưa có cân nặng: phí ship sẽ tính theo mức mặc định.' : 'Phí ship tính theo tổng cân nặng giỏ hàng.'}${p.variants?.length ? ' Phân loại để trống cân nặng sẽ dùng số này.' : ''}</div></div>
+    </div>
+  </section>`;
+};
+
+// Runs a structural variant change on the product being edited, then redraws.
+const variantOp = (fn, focusSelector) => {
+  const p = findProduct(state.editId);
+  if (!p) return;
+  try {
+    fn(p);
+  } catch (error) {
+    toast(error.message);
+  }
+  saveDraft();
+  render();
+  if (focusSelector) app.querySelector(focusSelector)?.focus();
 };
 
 const serp = (p) => `<div class="u">phuonglam.com › san-pham › ${esc(p.slug)}</div>
@@ -575,6 +673,10 @@ const checkBeforePublish = () => {
     if (!p.categoryId) problems.push(`"${p.name}": chưa chọn danh mục`);
     if (!p.hidden && !p.variants?.length && !p.price) problems.push(`"${p.name}": đang hiện nhưng giá bán = 0`);
     if (!p.hidden && !p.images?.length) problems.push(`"${p.name}": đang hiện nhưng chưa có ảnh`);
+    (p.optionGroups || []).forEach((g, gi) => {
+      if (!g.values.length) problems.push(`"${p.name}": nhóm phân loại ${gi + 1} (${g.name}) chưa có lựa chọn nào`);
+    });
+    if (p.optionGroups?.length && !p.variants?.some((v) => v.price > 0)) problems.push(`"${p.name}": chưa có phân loại nào có giá bán`);
   }
   return problems;
 };
@@ -765,21 +867,49 @@ document.addEventListener('click', async (event) => {
       render();
       break;
     }
-    case 'variant-remove':
-      if (!confirm('Xoá dòng phân loại này?')) return;
-      product.variants.splice(Number(el.dataset.index), 1);
-      saveDraft();
-      render();
-      break;
-    case 'variants-apply': {
-      for (const field of ['price', 'originalPrice', 'weight']) {
-        const value = parseMoney(document.getElementById(`all-${field}`).value);
-        if (value != null) product.variants.forEach((v) => { v[field] = value; });
-      }
-      saveDraft();
-      render();
+    case 'var-add-group': {
+      const next = Variants.ensureGroups(clone(product)).optionGroups.length;
+      variantOp((p) => Variants.addGroup(p), `[data-var-group-name="${next}"]`);
+      app.querySelector(`[data-var-group-name="${next}"]`)?.select();
       break;
     }
+    case 'var-remove-group': {
+      const gi = Number(el.dataset.group);
+      const name = Variants.ensureGroups(clone(product)).optionGroups[gi]?.name;
+      const last = Variants.ensureGroups(clone(product)).optionGroups.length === 1;
+      if (!confirm(last
+        ? `Xoá nhóm "${name}"? Sản phẩm sẽ không còn phân loại, giữ giá thấp nhất làm giá bán.`
+        : `Xoá nhóm "${name}"? Các dòng sẽ gộp lại theo nhóm còn lại.`)) return;
+      variantOp((p) => Variants.removeGroup(p, gi));
+      break;
+    }
+    case 'var-remove-value': {
+      const gi = Number(el.dataset.group);
+      const vi = Number(el.dataset.index);
+      const value = Variants.ensureGroups(clone(product)).optionGroups[gi]?.values[vi];
+      if (!confirm(`Xoá lựa chọn "${value}" và các dòng phân loại của nó?`)) return;
+      variantOp((p) => Variants.removeValue(p, gi, vi));
+      break;
+    }
+    case 'var-move-value':
+      variantOp((p) => Variants.moveValue(p, Number(el.dataset.group), Number(el.dataset.index), Number(el.dataset.step)));
+      break;
+    case 'var-apply-all': {
+      const values = Object.fromEntries(['price', 'originalPrice', 'weight']
+        .map((field) => [field, parseMoney(document.getElementById(`all-${field}`).value)])
+        .filter(([, value]) => value != null));
+      if (!Object.keys(values).length) return toast('Nhập giá hoặc cân nặng để áp dụng');
+      variantOp((p) => {
+        p.variants.forEach((v) => Object.assign(v, values));
+        Variants.syncProductPrice(p);
+      });
+      toast(`Đã áp dụng cho ${product.variants.length} phân loại`);
+      break;
+    }
+    case 'var-remove-orphan':
+      if (!confirm('Xoá phân loại cũ này?')) return;
+      variantOp((p) => { p.variants = p.variants.filter((v) => v.id !== el.dataset.vid); });
+      break;
     case 'show-changes':
       showChanges();
       break;
@@ -818,7 +948,50 @@ document.addEventListener('input', (event) => {
     return;
   }
   if (el.dataset.field && el.type !== 'checkbox' && el.tagName !== 'SELECT') onFieldChange(el);
+  if (el.dataset.vfield) onVariantFieldChange(el);
 });
+
+// Price / crossed-out price / weight / SKU of one row of the variant table.
+const onVariantFieldChange = (el) => {
+  const product = findProduct(state.editId);
+  const variant = product?.variants.find((v) => v.id === el.dataset.vid);
+  if (!variant) return;
+  const field = el.dataset.vfield;
+  if (field === 'sku') variant.sku = el.value.trim();
+  else if (field === 'price') variant.price = parseMoney(el.value) ?? 0;
+  else variant[field] = parseMoney(el.value);
+  if (field === 'price' || field === 'originalPrice') Variants.syncProductPrice(product);
+  saveDraft();
+  renderBar();
+};
+
+// Structural variant edits (group names, values, images, on/off) run on "change",
+// i.e. when the field is left or Enter is pressed, then the table is rebuilt.
+const onVariantStructureChange = (el) => {
+  const d = el.dataset;
+  if (d.varGroupName !== undefined) {
+    variantOp((p) => Variants.renameGroup(p, Number(d.varGroupName), el.value));
+    return true;
+  }
+  if (d.varValue !== undefined) {
+    variantOp((p) => Variants.renameValue(p, Number(d.varValue), Number(d.index), el.value));
+    return true;
+  }
+  if (d.varNew !== undefined) {
+    if (!el.value.trim()) return true;
+    variantOp((p) => Variants.addValue(p, Number(d.varNew), el.value), `[data-var-new="${d.varNew}"]`);
+    return true;
+  }
+  if (d.varImage !== undefined) {
+    variantOp((p) => Variants.setValueImage(p, Number(d.varImage), d.value, el.value));
+    return true;
+  }
+  if (d.varSale !== undefined) {
+    variantOp((p) => Variants.setComboOnSale(p, JSON.parse(d.varSale), el.checked));
+    return true;
+  }
+  return false;
+};
 
 document.addEventListener('change', (event) => {
   const el = event.target;
@@ -832,6 +1005,7 @@ document.addEventListener('change', (event) => {
     if (product && el.files?.length) addImages(product, [...el.files]);
     return;
   }
+  if (onVariantStructureChange(el)) return;
   if (el.dataset.field && (el.type === 'checkbox' || el.tagName === 'SELECT')) {
     onFieldChange(el);
     if (el.tagName === 'SELECT' && el.dataset.field.includes('.image')) render();
@@ -841,7 +1015,7 @@ document.addEventListener('change', (event) => {
 // Money inputs show thousands separators once the field loses focus.
 document.addEventListener('focusout', (event) => {
   const el = event.target;
-  const field = el.dataset?.field || '';
+  const field = el.dataset?.field || el.dataset?.vfield || '';
   if (el.tagName === 'INPUT' && (field === 'price' || field === 'originalPrice' || el.dataset.type === 'money')) {
     el.value = money(parseMoney(el.value));
     const row = el.closest('.row');

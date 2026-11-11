@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-11 — Admin v2: Shopee-style variants and a shipping section
+- "Thông tin bán hàng": add up to 2 option groups, add/rename/reorder/remove values (Enter to add), image per value of group 1, table of every combination with Bán switch, giá bán, giá gạch, cân nặng, SKU, and "Áp dụng cho tất cả phân loại". Plain products show price/SKU and "+ Thêm nhóm phân loại".
+- "Vận chuyển": product weight (gram) with a warning when missing; empty variant weights use it.
+- Existing data is kept: sparse combinations stay off, flat imported lists become one group only when edited, the 6 hidden Vàng/Đỏ variants of "Nến tealight 4 giờ loại Trơn" are listed instead of deleted. Logic in `workers/product-admin/public/variants.js`, 7 tests in `tools/product_admin_variants.test.js` (one runs over every real product).
+
 ## 2026-11-11 — Online product admin (Admin v2), first version
 - New `workers/product-admin/`: Cloudflare Worker + plain-JS UI. Product list with search/category filter, inline price/crossed-out price/hide, bulk price changes (+/− đ or %, set, rounded to 1.000đ, applied to variants too), product page editor (basic info, images with browser-side WebP 900/720/480 resize incl. an iPhone fallback encoder, variant table with apply-to-all, structured content that regenerates `description`, Google preview), add/duplicate/delete, change list, one-commit publish and deploy status.
 - Login: one owner password (HttpOnly SameSite=Strict session cookie signed with a password-derived key, 30 days, 5 tries/min/IP); publish is refused when `data/products.json` changed since loading. 11 tests in `tools/product_admin_worker.test.js`. Deployed to https://phuonglam-admin.tranquanglam1998.workers.dev; secrets set and login verified by the owner; a bad GitHub token is now reported instead of bouncing back to the login form.
