@@ -31,3 +31,6 @@ handoff.md
 .codegraph/
 _site/
 _site_check/
+
+# Wrangler local cache (account info)
+.wrangler/
