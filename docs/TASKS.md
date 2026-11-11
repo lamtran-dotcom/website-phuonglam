@@ -1,7 +1,7 @@
 # Tasks
 
 ## Now
-- [ ] Admin v2: owner does the one-time setup in `docs/SETUP.md` "Admin v2", then a real test publish (e.g. one price change) and check the live page.
+- [ ] Admin v2: owner sets `ADMIN_PASSWORD` and `GITHUB_TOKEN` secrets (`docs/SETUP.md` "Admin v2"), then a real test publish (e.g. one price change) and check the live page.
 - [ ] Admin v2 next: add/remove option values (regenerate variant matrix), restore-previous-version button, then move homepage settings, shipping, blog and orders off the old local admin.
 - [x] Apply the checklist report fixes to the 20 live posts, incl. dates, I1 images, C4/C5 wording (2026-11-10, pushed).
 - [ ] Optional: replace the 5 reused ≥1200 px featured images (huong-dan-dung-bep, bo-ket, vo-buoi, nen-tealight-khong-khoi, phan-biet) with dedicated originals.

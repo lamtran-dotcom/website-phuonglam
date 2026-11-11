@@ -21,7 +21,7 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 
 ## Fixed Decisions
 - Public website remains static-first for speed and SEO.
-- Products are edited in the online Admin v2 (`workers/product-admin/`, Cloudflare Worker behind Cloudflare Access, commits to `main` via GitHub API). The old local admin stays for blog/orders/settings until moved. See `docs/ADMIN-V2.md`.
+- Products are edited in the online Admin v2 (`workers/product-admin/`, Cloudflare Worker with owner-password login, commits to `main` via GitHub API, live at https://phuonglam-admin.tranquanglam1998.workers.dev). The old local admin stays for blog/orders/settings until moved. See `docs/ADMIN-V2.md`.
 - Product/category/blog pages should be readable without depending on React runtime.
 - Generated/local indexes such as `.codegraph/` must not be committed.
 - Future Codex sessions must use `AGENTS.md` and this file as the durable project memory.
@@ -45,7 +45,7 @@ The site is a static GitHub Pages-style website. Public pages are generated from
 - `sitemap.xml`, `robots.txt`: search engine discovery files.
 
 ## Latest Completed Task
-Admin v2 (online product admin), first version — 2026-11-11, built but NOT deployed: `workers/product-admin/worker.js` (API: Access JWT + email check, `/api/catalog`, `/api/publish` one commit with products.json + images, 409 if products.json changed since load, `/api/status`), `public/` UI (list, inline/bulk price edits, editor, browser WebP resize with jsquash fallback for Safari, draft in localStorage). Tests: `tools/product_admin_worker.test.js`; local preview: `tools/product_admin_dev_server.js` (port 8788, fake API). Verified in preview: bulk +8.000đ, change list, publish payload, image upload (native + fallback), mobile layout. Owner uses it alone; owner has Cloudflare access. Next: owner runs setup in `docs/SETUP.md` "Admin v2", then a real test publish. Only products.json is committed; committed generated pages lag until a local build (CI builds live site fresh).
+Admin v2 (online product admin), first version — 2026-11-11, DEPLOYED to https://phuonglam-admin.tranquanglam1998.workers.dev (Cloudflare account Tranquanglam1998; wrangler logged in on this Mac). Login switched from Cloudflare Access to one owner password (`ADMIN_PASSWORD` secret, HMAC session cookie, 5 tries/min/IP) because Zero Trust Free needs a card. Owner must still set secrets `ADMIN_PASSWORD` and `GITHUB_TOKEN`. `workers/product-admin/worker.js` (API: session check, `/api/catalog`, `/api/publish` one commit with products.json + images, 409 if products.json changed since load, `/api/status`), `public/` UI (list, inline/bulk price edits, editor, browser WebP resize with jsquash fallback for Safari, draft in localStorage). Tests: `tools/product_admin_worker.test.js`; local preview: `tools/product_admin_dev_server.js` (port 8788, fake API). Verified in preview: bulk +8.000đ, change list, publish payload, image upload (native + fallback), mobile layout. Owner uses it alone. Next: owner sets the two secrets, then a real test publish. Only products.json is committed; committed generated pages lag until a local build (CI builds live site fresh).
 
 Order price check — 2026-11-11: Worker source recomputes prices/shipping from `/assets/js/order-pricing.json` (build output, git-ignored) and flags differences in Telegram; storefront re-prices saved carts on load (`repriceCart` in app.jsx). Tests: `tools/order_worker.test.js`. Site part pushed; **the Worker itself must be pasted into the Cloudflare dashboard by the seller** (no wrangler login on this Mac) — until then the live Worker still trusts the browser.
 
@@ -110,7 +110,7 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - Instatic is early 0.0.x software; keep it as inspiration rather than a production migration target.
 
 ## Next Suggested Task
-- Admin v2: deploy + Cloudflare Access setup (docs/SETUP.md), real test publish, then variant option editing.
+- Admin v2: owner sets `ADMIN_PASSWORD` + `GITHUB_TOKEN` secrets, real test publish, then variant option editing.
 - `cam-on/`: seller prints the QR to `https://phuonglam.com/cam-on/`; optional later: tag orders from the card, real gift/discount tied to the countdown.
 - Confirm HCMC delivery rules with the fulfillment provider and finish local admin upload/draft browser checks.
 - Recheck Search Console and compare full 28-day performance windows after reports refresh.

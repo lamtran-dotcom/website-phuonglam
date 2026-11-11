@@ -2,7 +2,7 @@
 
 ## 2026-11-11 — Online product admin (Admin v2), first version
 - New `workers/product-admin/`: Cloudflare Worker + plain-JS UI. Product list with search/category filter, inline price/crossed-out price/hide, bulk price changes (+/− đ or %, set, rounded to 1.000đ, applied to variants too), product page editor (basic info, images with browser-side WebP 900/720/480 resize incl. an iPhone fallback encoder, variant table with apply-to-all, structured content that regenerates `description`, Google preview), add/duplicate/delete, change list, one-commit publish and deploy status.
-- API checks the Cloudflare Access token and email on every call; publish is refused when `data/products.json` changed since loading. 9 tests in `tools/product_admin_worker.test.js`. Not deployed yet: needs the one-time Cloudflare/GitHub setup in `docs/SETUP.md`.
+- Login: one owner password (HttpOnly SameSite=Strict session cookie signed with a password-derived key, 30 days, 5 tries/min/IP); publish is refused when `data/products.json` changed since loading. 11 tests in `tools/product_admin_worker.test.js`. Deployed to https://phuonglam-admin.tranquanglam1998.workers.dev; owner still sets the `ADMIN_PASSWORD` and `GITHUB_TOKEN` secrets.
 
 ## 2026-11-11 — Orders are charged at current web prices
 - The order Worker (`workers/order-webhook/worker.js`) recomputes item prices, weight and shipping from `/assets/js/order-pricing.json` (written by every build) and sends that amount as THU COD; when the customer's total differs, Telegram shows both and asks the shop to call first. Orders are never rejected for this; if the price list cannot be read, the order goes through with a warning.

@@ -2,13 +2,13 @@
 // The UI in ./public is served as static assets; this file is the /api/* backend.
 // Design and setup: docs/ADMIN-V2.md and docs/SETUP.md.
 //
-// Every /api call must carry a valid Cloudflare Access JWT for ADMIN_EMAIL. Publishing
+// Every /api call except /api/login needs the owner's session cookie. Publishing
 // writes data/products.json and new images to the repository in one commit; GitHub
 // Actions then builds and deploys the site as for any other push.
 //
 // Env: GITHUB_TOKEN (secret, fine-grained, this repo only: contents read/write,
-// actions read), ACCESS_TEAM_DOMAIN (e.g. "phuonglam.cloudflareaccess.com"),
-// ACCESS_AUD, ADMIN_EMAIL, optional GITHUB_REPO, GITHUB_BRANCH, SITE_URL.
+// actions read), ADMIN_PASSWORD (secret, ≥12 chars), optional LOGIN_LIMITER
+// (rate-limit binding), GITHUB_REPO, GITHUB_BRANCH, SITE_URL.
 
 const GITHUB_API = 'https://api.github.com';
 const PRODUCTS_PATH = 'data/products.json';
@@ -45,61 +45,80 @@ const bytesToBase64 = (bytes) => {
   return btoa(binary);
 };
 const base64ToBytes = (base64) => Uint8Array.from(atob(String(base64).replace(/\s/g, '')), (c) => c.charCodeAt(0));
-const base64UrlToBytes = (value) => base64ToBytes(value.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - (value.length % 4)) % 4));
-const base64UrlToJson = (value) => JSON.parse(new TextDecoder().decode(base64UrlToBytes(value)));
 
-// ---------- Cloudflare Access ----------
+// ---------- password login ----------
+// One owner password (secret ADMIN_PASSWORD). A successful login sets an HttpOnly,
+// SameSite=Strict cookie "<expiry>.<hmac>" signed with a key derived from the password,
+// so changing the password signs every device out.
 
-let certCache = { domain: '', keys: [], expires: 0 };
+const SESSION_COOKIE = 'pl_admin';
+const SESSION_DAYS = 30;
+const MIN_PASSWORD_LENGTH = 12;
+const encoder = new TextEncoder();
 
-const accessKeys = async (domain, fetchImpl, force = false) => {
-  if (!force && certCache.domain === domain && certCache.expires > Date.now()) return certCache.keys;
-  const res = await fetchImpl(`https://${domain}/cdn-cgi/access/certs`);
-  if (!res.ok) throw new HttpError(502, 'Không tải được khóa Cloudflare Access');
-  const { keys = [] } = await res.json();
-  certCache = { domain, keys, expires: Date.now() + 60 * 60 * 1000 };
-  return keys;
+const toHex = (buffer) => [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, '0')).join('');
+const sha256 = async (text) => new Uint8Array(await crypto.subtle.digest('SHA-256', encoder.encode(text)));
+
+const sessionKey = async (password) => crypto.subtle.importKey(
+  'raw', await sha256(`pl-admin-session:${password}`), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify'],
+);
+
+const configuredPassword = (env) => {
+  const password = String(env.ADMIN_PASSWORD || '');
+  if (password.length < MIN_PASSWORD_LENGTH) throw new HttpError(500, `Worker chưa có ADMIN_PASSWORD (tối thiểu ${MIN_PASSWORD_LENGTH} ký tự)`);
+  return password;
 };
 
-export const resetAccessCache = () => { certCache = { domain: '', keys: [], expires: 0 }; };
+// Compares SHA-256 digests in constant time so the check does not leak how much matched.
+const samePassword = async (given, expected) => {
+  const [a, b] = await Promise.all([sha256(given), sha256(expected)]);
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) diff |= a[i] ^ b[i];
+  return diff === 0;
+};
 
-export const verifyAccess = async (request, env, fetchImpl) => {
-  const { ACCESS_TEAM_DOMAIN: domain, ACCESS_AUD: aud, ADMIN_EMAIL: email } = env;
-  if (!domain || !aud || !email) throw new HttpError(500, 'Worker thiếu cấu hình ACCESS_TEAM_DOMAIN / ACCESS_AUD / ADMIN_EMAIL');
-  const token = request.headers.get('Cf-Access-Jwt-Assertion') || '';
-  const parts = token.split('.');
-  if (parts.length !== 3) throw new HttpError(401, 'Chưa đăng nhập');
+export const createSession = async (env, now = Date.now()) => {
+  const expires = Math.floor(now / 1000) + SESSION_DAYS * 86400;
+  const signature = await crypto.subtle.sign('HMAC', await sessionKey(configuredPassword(env)), encoder.encode(String(expires)));
+  return `${expires}.${toHex(signature)}`;
+};
 
-  let header;
-  let payload;
-  try {
-    header = base64UrlToJson(parts[0]);
-    payload = base64UrlToJson(parts[1]);
-  } catch {
-    throw new HttpError(401, 'Phiên đăng nhập không hợp lệ');
-  }
-  if (header.alg !== 'RS256') throw new HttpError(401, 'Phiên đăng nhập không hợp lệ');
+const readCookie = (request, name) => {
+  const header = request.headers.get('Cookie') || '';
+  const match = header.split(/;\s*/).find((part) => part.startsWith(`${name}=`));
+  return match ? match.slice(name.length + 1) : '';
+};
 
-  let jwk = (await accessKeys(domain, fetchImpl)).find((key) => key.kid === header.kid);
-  if (!jwk) jwk = (await accessKeys(domain, fetchImpl, true)).find((key) => key.kid === header.kid);
-  if (!jwk) throw new HttpError(401, 'Phiên đăng nhập không hợp lệ');
-
-  const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
-  const valid = await crypto.subtle.verify(
-    'RSASSA-PKCS1-v1_5',
-    key,
-    base64UrlToBytes(parts[2]),
-    new TextEncoder().encode(`${parts[0]}.${parts[1]}`),
-  );
+export const verifySession = async (request, env) => {
+  const password = configuredPassword(env);
+  const [expires, signature] = readCookie(request, SESSION_COOKIE).split('.');
+  if (!/^\d+$/.test(expires || '') || !/^[0-9a-f]{64}$/.test(signature || '')) throw new HttpError(401, 'Chưa đăng nhập');
+  if (Number(expires) < Math.floor(Date.now() / 1000)) throw new HttpError(401, 'Phiên đăng nhập đã hết hạn');
+  const bytes = Uint8Array.from(signature.match(/../g), (pair) => parseInt(pair, 16));
+  const valid = await crypto.subtle.verify('HMAC', await sessionKey(password), bytes, encoder.encode(expires));
   if (!valid) throw new HttpError(401, 'Phiên đăng nhập không hợp lệ');
+  return 'owner';
+};
 
-  const now = Math.floor(Date.now() / 1000);
-  const audiences = Array.isArray(payload.aud) ? payload.aud : [payload.aud];
-  if (!audiences.includes(aud)) throw new HttpError(401, 'Phiên đăng nhập không dành cho trang này');
-  if (payload.iss !== `https://${domain}`) throw new HttpError(401, 'Phiên đăng nhập không hợp lệ');
-  if (!payload.exp || payload.exp < now) throw new HttpError(401, 'Phiên đăng nhập đã hết hạn, tải lại trang');
-  if (String(payload.email || '').toLowerCase() !== String(email).toLowerCase()) throw new HttpError(403, 'Email này không có quyền quản lý');
-  return payload.email;
+const sessionCookie = (value, maxAge) => `${SESSION_COOKIE}=${value}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
+
+const login = async (request, env) => {
+  const password = configuredPassword(env);
+  if (env.LOGIN_LIMITER) {
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const { success } = await env.LOGIN_LIMITER.limit({ key: `login:${ip}` });
+    if (!success) throw new HttpError(429, 'Thử sai quá nhiều lần. Đợi 1 phút rồi thử lại.');
+  }
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    throw new HttpError(400, 'JSON không hợp lệ');
+  }
+  if (!(await samePassword(String(body?.password || ''), password))) throw new HttpError(401, 'Sai mật khẩu');
+  const res = json({ ok: true });
+  res.headers.append('Set-Cookie', sessionCookie(await createSession(env), SESSION_DAYS * 86400));
+  return res;
 };
 
 // ---------- GitHub ----------
@@ -255,7 +274,7 @@ const publish = async (gh, cfg, body, email) => {
 
   const summary = String(message || '').replace(/\s+/g, ' ').trim().slice(0, 200) || 'Cập nhật sản phẩm';
   const commit = await gh('POST', `/repos/${cfg.repo}/git/commits`, {
-    message: `Admin: ${summary}\n\nPublished from the online product admin by ${email}.`,
+    message: `Admin: ${summary}\n\nPublished from the online product admin (${email}).`,
     tree: newTree.sha,
     parents: [head],
   });
@@ -297,7 +316,13 @@ export const handle = async (request, env, fetchImpl = globalThis.fetch.bind(glo
       if (origin && origin !== url.origin) throw new HttpError(403, 'Sai nguồn yêu cầu');
       if (!String(request.headers.get('Content-Type') || '').startsWith('application/json')) throw new HttpError(415, 'Cần JSON');
     }
-    const email = await verifyAccess(request, env, fetchImpl);
+    if (url.pathname === '/api/login' && request.method === 'POST') return await login(request, env);
+    if (url.pathname === '/api/logout' && request.method === 'POST') {
+      const res = json({ ok: true });
+      res.headers.append('Set-Cookie', sessionCookie('', 0));
+      return res;
+    }
+    const email = await verifySession(request, env);
     if (!env.GITHUB_TOKEN) throw new HttpError(500, 'Worker thiếu GITHUB_TOKEN');
     const cfg = settings(env);
     const gh = github(env, fetchImpl);

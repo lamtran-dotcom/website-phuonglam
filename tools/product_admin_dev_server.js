@@ -1,7 +1,7 @@
 // Local preview of the online product admin (workers/product-admin) without Cloudflare.
 // Serves the UI and a fake API backed by data/products.json. "Xuất bản" here only
 // validates and logs; it never writes files, commits or pushes.
-// Run: node tools/product_admin_dev_server.js  →  http://localhost:8788
+// Run: node tools/product_admin_dev_server.js  →  http://localhost:8788 (password: dev-password-123)
 const fs = require('node:fs');
 const http = require('node:http');
 const path = require('node:path');
@@ -12,6 +12,7 @@ const publicDir = path.join(root, 'workers', 'product-admin', 'public');
 const port = Number(process.env.PORT || 8788);
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp' };
 const fakeSha = (n) => String(n).padStart(40, '0');
+const DEV_PASSWORD = 'dev-password-123';
 
 const send = (res, status, body, type = 'application/json; charset=utf-8') => {
   res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' });
@@ -30,6 +31,20 @@ const main = async () => {
 
   http.createServer(async (req, res) => {
     const url = new URL(req.url, `http://localhost:${port}`);
+    // Fake login for the preview only; the real Worker signs and checks a session cookie.
+    if (url.pathname === '/api/login' && req.method === 'POST') {
+      const { password } = JSON.parse(await readBody(req) || '{}');
+      if (password !== DEV_PASSWORD) return send(res, 401, { ok: false, error: 'Sai mật khẩu' });
+      res.setHeader('Set-Cookie', 'pl_admin=dev; Path=/; HttpOnly; SameSite=Strict');
+      return send(res, 200, { ok: true });
+    }
+    if (url.pathname === '/api/logout') {
+      res.setHeader('Set-Cookie', 'pl_admin=; Path=/; Max-Age=0');
+      return send(res, 200, { ok: true });
+    }
+    if (url.pathname.startsWith('/api/') && !/(?:^|;\s*)pl_admin=dev(?:;|$)/.test(req.headers.cookie || '')) {
+      return send(res, 401, { ok: false, error: 'Chưa đăng nhập' });
+    }
     if (url.pathname === '/api/catalog') {
       return send(res, 200, {
         ok: true,

@@ -882,9 +882,44 @@ const start = async () => {
       }
     }
     render();
+    document.getElementById('logout').hidden = false;
   } catch (error) {
+    if (error.status === 401) return renderLogin();
     app.innerHTML = `<p class="empty">${esc(error.message)}</p><p class="empty"><button onclick="location.reload()">Tải lại</button></p>`;
   }
 };
+
+const renderLogin = (message = '') => {
+  bar.hidden = true;
+  document.getElementById('logout').hidden = true;
+  app.innerHTML = `<form class="card login" id="login-form">
+    <h2>Đăng nhập</h2>
+    <label for="password">Mật khẩu quản lý</label>
+    <input type="password" id="password" autocomplete="current-password" required>
+    ${message ? `<p class="hint bad">${esc(message)}</p>` : ''}
+    <button class="primary" type="submit">Vào trang quản lý</button>
+  </form>`;
+  document.getElementById('password').focus();
+};
+
+document.addEventListener('submit', async (event) => {
+  if (event.target.id !== 'login-form') return;
+  event.preventDefault();
+  const button = event.target.querySelector('button');
+  button.disabled = true;
+  try {
+    await api('/api/login', { method: 'POST', body: JSON.stringify({ password: document.getElementById('password').value }) });
+    app.innerHTML = '<p class="loading">Đang tải dữ liệu…</p>';
+    await start();
+  } catch (error) {
+    renderLogin(error.status === 401 ? 'Sai mật khẩu' : error.message);
+  }
+});
+
+document.getElementById('logout').addEventListener('click', async () => {
+  if (changeList().length && !confirm('Còn thay đổi chưa xuất bản (vẫn lưu nháp trên máy này). Vẫn đăng xuất?')) return;
+  await api('/api/logout', { method: 'POST', body: '{}' }).catch(() => {});
+  renderLogin();
+});
 
 start();

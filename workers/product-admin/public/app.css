@@ -21,7 +21,7 @@ button:disabled { opacity: .5; cursor: default; }
 button.primary { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); font-weight: 600; }
 button.danger { color: var(--danger); }
 button.link { border: 0; background: none; padding: 0; color: var(--brand); text-align: left; font-weight: 600; }
-input[type=text], input:not([type]), select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: #fff; }
+input[type=text], input[type=password], input[type=search], input:not([type]), select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: #fff; }
 textarea { min-height: 84px; resize: vertical; }
 input:focus, select:focus, textarea:focus { outline: 2px solid color-mix(in srgb, var(--brand) 40%, transparent); border-color: var(--brand); }
 label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
@@ -31,6 +31,10 @@ label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px
 
 .topbar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; background: var(--card); border-bottom: 1px solid var(--line); }
 .brand { font-weight: 700; }
+.top-right { display: flex; align-items: center; gap: 12px; }
+.login { max-width: 360px; margin: 48px auto; }
+.login input { margin-bottom: 12px; }
+.login button { width: 100%; }
 .brand span { font-weight: 400; color: var(--muted); }
 .deploy { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: #eef6ec; color: var(--brand); white-space: nowrap; }
 .deploy.failed { background: #fdecea; color: var(--danger); }

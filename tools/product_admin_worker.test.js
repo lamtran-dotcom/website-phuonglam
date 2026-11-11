@@ -1,5 +1,5 @@
 // Tests for workers/product-admin/worker.js (online product admin API) with a fake
-// GitHub and a locally signed Cloudflare Access token.
+// GitHub and the owner password session.
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const test = require('node:test');
@@ -8,32 +8,8 @@ const { pathToFileURL } = require('node:url');
 const workerUrl = pathToFileURL(path.join(__dirname, '..', 'workers', 'product-admin', 'worker.js')).href;
 const loadWorker = () => import(workerUrl);
 
-const TEAM = 'shop.cloudflareaccess.com';
-const AUD = 'aud-123';
-const EMAIL = 'owner@example.com';
+const PASSWORD = 'mat-khau-du-dai-123';
 const sha = (char) => char.repeat(40);
-
-const b64url = (data) => Buffer.from(data).toString('base64url');
-
-let keyPair;
-const keys = async () => {
-  keyPair ||= await crypto.subtle.generateKey(
-    { name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' },
-    true,
-    ['sign', 'verify'],
-  );
-  return keyPair;
-};
-
-const signToken = async (overrides = {}) => {
-  const { privateKey } = await keys();
-  const header = b64url(JSON.stringify({ alg: 'RS256', kid: 'k1' }));
-  const payload = b64url(JSON.stringify({
-    aud: [AUD], iss: `https://${TEAM}`, email: EMAIL, exp: Math.floor(Date.now() / 1000) + 600, ...overrides,
-  }));
-  const signature = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', privateKey, Buffer.from(`${header}.${payload}`));
-  return `${header}.${payload}.${b64url(new Uint8Array(signature))}`;
-};
 
 const product = (id, extra = {}) => ({
   id, name: `SP ${id}`, slug: `sp-${id}`, categoryId: 'combo', price: 100000, originalPrice: 150000,
@@ -42,8 +18,6 @@ const product = (id, extra = {}) => ({
 
 // Minimal in-memory GitHub covering the endpoints the Worker calls.
 const fakeGitHub = async ({ productsText = JSON.stringify([product('a')], null, 2) + '\n' } = {}) => {
-  const { publicKey } = await keys();
-  const jwk = { ...(await crypto.subtle.exportKey('jwk', publicKey)), kid: 'k1' };
   const state = {
     head: sha('1'),
     productsSha: sha('b'),
@@ -59,7 +33,6 @@ const fakeGitHub = async ({ productsText = JSON.stringify([product('a')], null, 
     const method = init.method || 'GET';
     const body = init.body ? JSON.parse(init.body) : null;
     state.calls.push(`${method} ${url.pathname}`);
-    if (url.host === TEAM) return reply({ keys: [jwk] });
     if (url.host === 'phuonglam.com') return reply({ commit: sha('9') });
     const p = url.pathname.replace('/repos/lamtran-dotcom/website-phuonglam', '');
     if (method === 'GET' && p === '/git/ref/heads/main') return reply({ object: { sha: state.head } });
@@ -96,15 +69,15 @@ const fakeGitHub = async ({ productsText = JSON.stringify([product('a')], null, 
   return { state, fetchImpl };
 };
 
-const env = { ACCESS_TEAM_DOMAIN: TEAM, ACCESS_AUD: AUD, ADMIN_EMAIL: EMAIL, GITHUB_TOKEN: 'token', ASSETS: { fetch: () => new Response('asset') } };
+const env = { ADMIN_PASSWORD: PASSWORD, GITHUB_TOKEN: 'token', ASSETS: { fetch: () => new Response('asset') } };
+const signToken = async (overrides = {}) => (await loadWorker()).createSession({ ...env, ...overrides });
 
 const call = async (fetchImpl, pathname, { method = 'GET', token, body, headers = {} } = {}) => {
-  const { handle, resetAccessCache } = await loadWorker();
-  resetAccessCache();
+  const { handle } = await loadWorker();
   const request = new Request(`https://admin.example.workers.dev${pathname}`, {
     method,
     headers: {
-      ...(token ? { 'Cf-Access-Jwt-Assertion': token } : {}),
+      ...(token ? { Cookie: `pl_admin=${token}` } : {}),
       ...(body ? { 'Content-Type': 'application/json' } : {}),
       ...headers,
     },
@@ -121,15 +94,48 @@ const webp = () => {
   return bytes.toString('base64');
 };
 
-test('api rejects requests without a valid Access token', async () => {
+test('api rejects requests without a valid session', async () => {
   const { fetchImpl } = await fakeGitHub();
+  const good = await signToken();
+  const [expires, signature] = good.split('.');
   assert.equal((await call(fetchImpl, '/api/catalog')).status, 401);
-  assert.equal((await call(fetchImpl, '/api/catalog', { token: 'a.b.c' })).status, 401);
-  assert.equal((await call(fetchImpl, '/api/catalog', { token: await signToken({ email: 'other@example.com' }) })).status, 403);
-  assert.equal((await call(fetchImpl, '/api/catalog', { token: await signToken({ aud: ['other'] }) })).status, 401);
-  assert.equal((await call(fetchImpl, '/api/catalog', { token: await signToken({ exp: 1 }) })).status, 401);
-  const forged = (await signToken()).replace(/\.[^.]+$/, `.${b64url('nope')}`);
-  assert.equal((await call(fetchImpl, '/api/catalog', { token: forged })).status, 401);
+  assert.equal((await call(fetchImpl, '/api/catalog', { token: 'abc' })).status, 401);
+  assert.equal((await call(fetchImpl, '/api/catalog', { token: `${Number(expires) + 1}.${signature}` })).status, 401);
+  assert.equal((await call(fetchImpl, '/api/catalog', { token: `${expires}.${'0'.repeat(64)}` })).status, 401);
+  const { createSession } = await loadWorker();
+  const expired = await createSession(env, Date.now() - 31 * 86400 * 1000);
+  assert.equal((await call(fetchImpl, '/api/catalog', { token: expired })).status, 401);
+  const oldPassword = await signToken({ ADMIN_PASSWORD: 'mat-khau-cu-da-doi-roi' });
+  assert.equal((await call(fetchImpl, '/api/catalog', { token: oldPassword })).status, 401);
+  assert.equal((await call(fetchImpl, '/api/catalog', { token: good })).status, 200);
+});
+
+test('login checks the password and sets a strict HttpOnly session cookie', async () => {
+  const { fetchImpl } = await fakeGitHub();
+  const { handle } = await loadWorker();
+  const login = (password, extraEnv = {}) => handle(new Request('https://admin.example.workers.dev/api/login', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }),
+  }), { ...env, ...extraEnv }, fetchImpl);
+
+  assert.equal((await login('sai')).status, 401);
+  const ok = await login(PASSWORD);
+  assert.equal(ok.status, 200);
+  const cookie = ok.headers.get('Set-Cookie');
+  assert.match(cookie, /^pl_admin=\d+\.[0-9a-f]{64}; Path=\/; HttpOnly; Secure; SameSite=Strict; Max-Age=2592000$/);
+  const token = cookie.split(';')[0].slice('pl_admin='.length);
+  assert.equal((await call(fetchImpl, '/api/me', { token })).status, 200);
+
+  const limited = await login(PASSWORD, { LOGIN_LIMITER: { limit: async () => ({ success: false }) } });
+  assert.equal(limited.status, 429);
+  assert.equal((await login(PASSWORD, { ADMIN_PASSWORD: 'ngan' })).status, 500);
+});
+
+test('logout clears the session cookie', async () => {
+  const { handle } = await loadWorker();
+  const res = await handle(new Request('https://admin.example.workers.dev/api/logout', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}',
+  }), env);
+  assert.match(res.headers.get('Set-Cookie'), /^pl_admin=; .*Max-Age=0$/);
 });
 
 test('catalog returns products, categories and base versions', async () => {
@@ -230,7 +236,7 @@ test('post requests need JSON from the same origin', async () => {
   assert.equal(crossSite.status, 403);
   const { handle } = await loadWorker();
   const form = await handle(new Request('https://admin.example.workers.dev/api/publish', {
-    method: 'POST', headers: { 'Cf-Access-Jwt-Assertion': token, 'Content-Type': 'text/plain' }, body: '{}',
+    method: 'POST', headers: { Cookie: `pl_admin=${token}`, 'Content-Type': 'text/plain' }, body: '{}',
   }), env, fetchImpl);
   assert.equal(form.status, 415);
 });

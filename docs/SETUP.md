@@ -97,20 +97,16 @@ After `codegraph init`, future Codex tasks should use CodeGraph first to inspect
 - For scheduled SEO posts, Content AI Studio pushes a queue entry to `scheduled-posts/`. The `Publish Scheduled Blog Posts` GitHub Actions workflow checks at offset five-minute marks on the default branch, so the Mac does not need to remain on. GitHub may execute a few minutes after the requested time; use a schedule at least five minutes in the future. The Content AI Studio schedule panel shows the queue, recorded publications, and a link to the latest job.
 
 ## Admin v2 (online product admin)
-Code: `workers/product-admin/` (design: `docs/ADMIN-V2.md`). One-time setup, all free:
+Code: `workers/product-admin/` (design: `docs/ADMIN-V2.md`). Live at https://phuonglam-admin.tranquanglam1998.workers.dev (Cloudflare account Tranquanglam1998). One-time setup, all free:
 
 1. **GitHub token.** github.com → Settings → Developer settings → Fine-grained tokens → Generate. Repository access: only `website-phuonglam`. Permissions: Contents = Read and write, Actions = Read-only. Pick an expiry (e.g. 1 year) and note the date: the admin stops publishing when it expires.
 2. **Deploy the Worker.** In a terminal:
    `cd workers/product-admin && npx wrangler login && npx wrangler deploy`
    It prints the URL, e.g. `https://phuonglam-admin.<account>.workers.dev`.
-3. **Turn on Cloudflare Access.** Cloudflare dashboard → Workers & Pages → `phuonglam-admin` → Settings → Domains & Routes → `workers.dev` → Enable Cloudflare Access. Open "Manage Cloudflare Access" and set the policy to Allow → Include → Emails → the owner's email only. (First use of Zero Trust asks to pick the Free plan.)
-   Note two values: the application's **Audience (AUD) tag** (Access → Applications → the app → Overview) and the **team domain** (Zero Trust → Settings → Custom pages, e.g. `shopname.cloudflareaccess.com`).
-4. **Secrets.** In `workers/product-admin`:
+3. **Secrets.** In `workers/product-admin`, type each value when asked (never commit them):
+   `npx wrangler secret put ADMIN_PASSWORD` (at least 12 characters; changing it signs out every device)
    `npx wrangler secret put GITHUB_TOKEN`
-   `npx wrangler secret put ACCESS_TEAM_DOMAIN` (just the host, no https://)
-   `npx wrangler secret put ACCESS_AUD`
-   `npx wrangler secret put ADMIN_EMAIL`
-5. Open the workers.dev URL, enter the emailed code, edit, press **Xuất bản**. The header shows when the site is live (1–2 min).
+4. Open the workers.dev URL, enter the password, edit, press **Xuất bản**. The header shows when the site is live (1–2 min).
 
-Local preview with a fake API (never writes or pushes): `node tools/product_admin_dev_server.js` → http://localhost:8788.
+Local preview with a fake API (never writes or pushes): `node tools/product_admin_dev_server.js` → http://localhost:8788, password `dev-password-123`.
 Later changes to the admin: edit files, then `npx wrangler deploy` again from `workers/product-admin`.

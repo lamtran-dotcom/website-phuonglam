@@ -12,9 +12,10 @@ source of product data.
 ## How it works
 
 ```
-Browser ──► Cloudflare Worker "phuonglam-admin" (workers.dev URL)
-              │  Cloudflare Access in front: email one-time code, one allowed email
-              │  Worker re-checks the Access JWT and the email on every /api call
+Browser ──► Cloudflare Worker "phuonglam-admin"
+              │  https://phuonglam-admin.tranquanglam1998.workers.dev
+              │  POST /api/login with the owner password → signed HttpOnly cookie (30 days)
+              │  every other /api call checks that cookie; 5 login tries/min per IP
               │
               ├─ GET  /api/catalog   products.json + categories + base commit sha
               ├─ POST /api/publish   one commit: products.json + new images
@@ -40,6 +41,10 @@ Browser ──► Cloudflare Worker "phuonglam-admin" (workers.dev URL)
 - Only the products JSON and images are committed. Generated pages are rebuilt by
   CI for the live site; the committed copies of generated files catch up the next
   time the old admin or a local build runs.
+
+- Login is a single owner password (secret `ADMIN_PASSWORD`, ≥12 chars). The session
+  cookie is `<expiry>.<HMAC>` keyed from the password, so changing the password signs
+  every device out. Cloudflare Access was not used: its Free plan needs a payment card.
 
 ## Setup (one time)
 See "Admin v2 (online)" in `docs/SETUP.md`.

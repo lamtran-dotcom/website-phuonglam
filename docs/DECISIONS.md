@@ -3,9 +3,9 @@
 ## Decision Log
 
 ### 2026-11-11 - Products are edited in an online admin (Admin v2)
-Decision: A Cloudflare Worker (`workers/product-admin/`) serves a product admin behind Cloudflare Access (one allowed email) and commits `data/products.json` plus resized images straight to `main` through the GitHub API; GitHub Actions builds and deploys as before. Edits are batched into one commit per publish; a publish is refused when `data/products.json` changed since loading. Images are resized in the browser.
+Decision: A Cloudflare Worker (`workers/product-admin/`) serves a product admin behind a single owner password (signed HttpOnly session cookie, login rate-limited) and commits `data/products.json` plus resized images straight to `main` through the GitHub API; GitHub Actions builds and deploys as before. Edits are batched into one commit per publish; a publish is refused when `data/products.json` changed since loading. Images are resized in the browser.
 Reason: The local admin needed the Mac, a running server and git, so products could not be edited from a phone; bulk price changes meant opening every product. Data stays in git (no database) because 38 products do not need one and git gives history and rollback.
-Impact: Supersedes "Admin remains local-only" for products only. The old local admin stays for blog/orders/settings until they move. Worker secrets: a fine-grained GitHub token limited to this repo (contents + actions read), Access team domain/AUD, allowed email. See `docs/ADMIN-V2.md`.
+Impact: Supersedes "Admin remains local-only" for products only. The old local admin stays for blog/orders/settings until they move. Worker secrets: `ADMIN_PASSWORD` and a fine-grained GitHub token limited to this repo (contents + actions read). Cloudflare Access was dropped because the Zero Trust Free plan requires a payment card (owner's choice). See `docs/ADMIN-V2.md`.
 Status: Active
 
 ### 2026-11-11 - The order Worker charges the site's current prices
