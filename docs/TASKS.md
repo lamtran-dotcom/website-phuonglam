@@ -3,7 +3,7 @@
 ## Now
 - [x] Checkout street suggestions (TP.HCM, street → old district) + full-address paste parsing, no API key (2026-11-12).
 - [ ] Optional: ward from house number needs a paid VN address API (Goong / VietMap) via a Worker.
-- [ ] Deploy the order Worker so Telegram shows "Anh/Chị" (code ready; needs owner OK).
+- [x] Order Worker deployed with Anh/Chị in Telegram (2026-11-12, version 4fccc33b).
 - [x] Admin v2: secrets set, login and catalog work (2026-11-11).
 - [ ] Admin v2: first real publish (e.g. one price change) and check the live page.
 - [ ] Owner: delete the GitHub token that was exposed in the chat log (keep only the newer `phuonglam-admin` token).
