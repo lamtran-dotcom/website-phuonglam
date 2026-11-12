@@ -1,7 +1,9 @@
 # Tasks
 
 ## Now
-- [ ] Checkout address autocomplete like Coolmate (type house number + street → suggestions fill ward/district/city). Free OSM/Photon gives street + district only, and OSM wards are post-merger. Needs a VN address API key (Goong ~30k req/month free, or VietMap v4 with pre/post-merger formats), proxied through a Worker so the key stays secret. Waiting for owner to pick and create the key.
+- [x] Checkout street suggestions (TP.HCM, street → old district) + full-address paste parsing, no API key (2026-11-12).
+- [ ] Optional: ward from house number needs a paid VN address API (Goong / VietMap) via a Worker.
+- [ ] Deploy the order Worker so Telegram shows "Anh/Chị" (code ready; needs owner OK).
 - [x] Admin v2: secrets set, login and catalog work (2026-11-11).
 - [ ] Admin v2: first real publish (e.g. one price change) and check the live page.
 - [ ] Owner: delete the GitHub token that was exposed in the chat log (keep only the newer `phuonglam-admin` token).

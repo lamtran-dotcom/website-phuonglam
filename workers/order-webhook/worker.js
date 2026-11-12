@@ -30,7 +30,7 @@ export default {
       const delivery = [
         `🛒 <b>ĐƠN MỚI #${orderId}</b>`,
         "",
-        `Tên: <code>${html(order.customerName)}</code>`,
+        `Tên: ${order.salutation === "Anh" || order.salutation === "Chị" ? `${order.salutation} ` : ""}<code>${html(order.customerName)}</code>`,
         "",
         `SĐT: <code>${html(order.phone)}</code>`,
         "",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-12 — Checkout and cart like Coolmate
+- Address field first: typing house number + street suggests TP.HCM streets with their old district (4.599 streets from OpenStreetMap, `assets/js/hcm-streets.json`, rebuilt by `node tools/fetch_hcm_streets.js`); picking one fills TP.HCM + district and opens that district's ward list. Pasting a whole address ("…, P. Phú Trung, Q. Tân Phú, HCM") fills province/district/ward by itself. Wards cannot be guessed from the house number without a paid address API.
+- Field errors show a red "!" icon; "Anh/Chị" select before the name (saved in the profile, sent with the order).
+- Cart: dismissible "Freeship đơn từ 150k · Đổi trả trong 7 ngày" banner, crossed-out original prices, "(tiết kiệm Xk)" under the subtotal and "(Giảm X% so với giá gốc)" under the total, also in the checkout summary.
+- Not copied on purpose: "N người đang thêm vào giỏ" (made-up numbers), login/Google, coupons, online payment.
+
 ## 2026-11-12 — Checkout phone field shows errors while filling
 - Leaving the phone field with a wrong number shows a red border and "Số điện thoại chưa đủ số" / "Số điện thoại không hợp lệ"; the error clears as soon as the number is right. Accepts mobile 03/05/07/08/09 + 8 digits, landline 02…, and +84 (rewritten to 0…).
 

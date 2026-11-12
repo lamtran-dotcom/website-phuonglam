@@ -1945,6 +1945,10 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
   };
   const removeItem = (cartKey) => setCart(prev => prev.filter(item => getCartItemKey(item) !== cartKey));
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const savings = getCartSavings(cart);
+  const [showPerkBanner, setShowPerkBanner] = React.useState(() => {
+    try { return sessionStorage.getItem('phuonglam-cart-perk-hidden') !== '1'; } catch { return true; }
+  });
   const shippingInfo = calculateShipping(cart);
   const shipping = shippingInfo.fee;
   const total = subtotal + shipping;
@@ -1961,6 +1965,16 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
   return (
     <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px' }}>
       <h1 style={{ ...cartStyles.title, fontSize: isMobile ? 22 : 28 }}>Giỏ hàng của bạn</h1>
+      {showPerkBanner && (
+        <div style={cartStyles.perkBanner} role="note">
+          <span style={cartStyles.perkIcon} aria-hidden="true">!</span>
+          <span style={{ flex: 1 }}>Freeship đơn từ {shortVnd(SHIPPING_RULES.smallOrderThreshold)} · Đổi trả trong 7 ngày</span>
+          <button type="button" style={cartStyles.perkClose} aria-label="Ẩn thông báo" onClick={() => {
+            setShowPerkBanner(false);
+            try { sessionStorage.setItem('phuonglam-cart-perk-hidden', '1'); } catch { /* storage off */ }
+          }}>×</button>
+        </div>
+      )}
       <div style={{ ...cartStyles.layout, gridTemplateColumns: isMobile ? '1fr' : '1fr 340px', gap: isMobile ? 20 : 32 }}>
         {/* Items */}
         <div style={cartStyles.items}>
@@ -1999,7 +2013,10 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
                         <span style={cartStyles.qtyNum}>{item.qty}</span>
                         <button style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, +1)}>+</button>
                       </div>
-                      <span style={{ fontSize: 15, fontWeight: 700, color: '#318223' }}>{(item.price * item.qty).toLocaleString('vi-VN')}đ</span>
+                      <span style={{ fontSize: 15, fontWeight: 700, color: '#318223', textAlign: 'right' }}>
+                        {(item.price * item.qty).toLocaleString('vi-VN')}đ
+                        {Number(item.originalPrice) > item.price && <span style={{ ...cartStyles.oldPrice, display: 'block' }}>{(Number(item.originalPrice) * item.qty).toLocaleString('vi-VN')}đ</span>}
+                      </span>
                     </div>
                   </div>
                 </>
@@ -2013,7 +2030,10 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
                       {item.selectedVariant && <div style={cartStyles.itemVariant}>Phân loại: {item.selectedVariant.name}</div>}
                     </div>
                   </div>
-                  <div style={cartStyles.priceCol}>{item.price.toLocaleString('vi-VN')}đ</div>
+                  <div style={cartStyles.priceCol}>
+                    {item.price.toLocaleString('vi-VN')}đ
+                    {Number(item.originalPrice) > item.price && <div style={cartStyles.oldPrice}>{Number(item.originalPrice).toLocaleString('vi-VN')}đ</div>}
+                  </div>
                   <div style={cartStyles.qtyCol}>
                     <div style={cartStyles.qtyControl}>
                       <button style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, -1)}>−</button>
@@ -2040,7 +2060,10 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
           <div style={cartStyles.summaryTitle}>Tóm tắt đơn hàng</div>
           <div style={cartStyles.summaryRow}>
             <span>Tạm tính</span>
-            <span>{subtotal.toLocaleString('vi-VN')}đ</span>
+            <span style={{ textAlign: 'right' }}>
+              {subtotal.toLocaleString('vi-VN')}đ
+              {savings.saved > 0 && <span style={cartStyles.savedNote}>(tiết kiệm {shortVnd(savings.saved)})</span>}
+            </span>
           </div>
           <div style={cartStyles.summaryRow}>
             <span>Phí vận chuyển</span>
@@ -2055,9 +2078,12 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
             Phí cuối cùng cập nhật theo địa chỉ và hình thức giao ở bước đặt hàng.
           </div>
           <div style={cartStyles.divider} />
-          <div style={{ ...cartStyles.summaryRow, fontWeight: 700, fontSize: 17 }}>
+          <div style={cartStyles.totalBox}>
             <span>Tổng cộng</span>
-            <span style={{ color: '#318223' }}>{total.toLocaleString('vi-VN')}đ</span>
+            <span style={{ textAlign: 'right' }}>
+              <span style={{ color: '#318223', fontSize: 19 }}>{total.toLocaleString('vi-VN')}đ</span>
+              {savings.percent > 0 && <span style={cartStyles.percentNote}>(Giảm {savings.percent}% so với giá gốc)</span>}
+            </span>
           </div>
           <button style={cartStyles.ctaBtn} onClick={() => setPage({ name: 'checkout' })}>
             Tiến hành đặt hàng →
@@ -2090,6 +2116,13 @@ const cartStyles = {
   summary: { background: '#fff', borderRadius: 14, border: '1px solid #f0f0f0', padding: '24px', position: 'sticky', top: 80 },
   summaryTitle: { fontSize: 16, fontWeight: 700, color: '#1a1a1a', marginBottom: 20 },
   summaryRow: { display: 'flex', justifyContent: 'space-between', fontSize: 14, color: '#555', marginBottom: 12 },
+  perkBanner: { display: 'flex', alignItems: 'center', gap: 10, background: '#eaf4e9', color: '#25651b', borderRadius: 10, padding: '10px 14px', marginBottom: 16, fontSize: 14, fontWeight: 600 },
+  perkIcon: { width: 20, height: 20, borderRadius: '50%', background: '#318223', color: '#fff', fontSize: 12, fontWeight: 800, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  perkClose: { border: 0, background: 'none', color: '#25651b', fontSize: 22, lineHeight: 1, cursor: 'pointer', padding: '0 4px' },
+  oldPrice: { fontSize: 12, color: '#aaa', textDecoration: 'line-through', fontWeight: 500, marginTop: 2 },
+  savedNote: { display: 'block', fontSize: 12, color: '#888', fontStyle: 'italic', fontWeight: 400 },
+  totalBox: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f5f8f3', borderRadius: 10, padding: '14px 14px', fontWeight: 700, fontSize: 16, marginBottom: 4 },
+  percentNote: { display: 'block', fontSize: 12, color: '#d9534f', fontWeight: 500, marginTop: 2 },
   freeShipNote: { fontSize: 12, color: '#318223', background: '#eaf4e9', padding: '8px 12px', borderRadius: 8, marginBottom: 12 },
   divider: { borderTop: '1px solid #f0f0f0', margin: '16px 0' },
   ctaBtn: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '100%', background: '#318223', color: '#fff', border: 'none', padding: '14px 0', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 16, textDecoration: 'none' },
@@ -2174,9 +2207,14 @@ const PROVINCE_ALIASES = {
   tpdanang: 'Đà Nẵng', tpcantho: 'Cần Thơ', tphaiphong: 'Hải Phòng',
 };
 
+// "Q1", "Q. Tân Phú", "q tan phu", "P12", "P.Phú Trung" → "Quận …" / "Phường …" before matching.
+const expandAddressPrefix = (value) => String(value || '').trim()
+  .replace(/^q(?:\.\s*|\s+|(?=\d))/i, 'Quận ')
+  .replace(/^p(?:\.\s*|\s+|(?=\d))/i, 'Phường ');
+
 // Returns the canonical option for typed text (accents, spacing and "Tỉnh"/"TP" prefixes ignored), or ''.
 const matchAddressOption = (value, options) => {
-  const typed = normalizeAddressText(value);
+  const typed = normalizeAddressText(expandAddressPrefix(value));
   if (!typed) return '';
   const stripped = typed.replace(/^(tinh|thanhpho|tp|quan|huyen|thixa|phuong|xa|thitran)/, '');
   const exact = options.find(option => [typed, stripped].includes(normalizeAddressText(option))
@@ -2184,6 +2222,91 @@ const matchAddressOption = (value, options) => {
   if (exact) return exact;
   const alias = PROVINCE_ALIASES[typed] || PROVINCE_ALIASES[stripped];
   return alias && options.includes(alias) ? alias : '';
+};
+
+// A whole address typed or pasted in one line ("173/5/19 Khuông Việt, Phú Trung, Tân Phú, HCM")
+// is read from the end: province, then district, then ward; what is left is the street part.
+// Returns null when no known province/district/ward is found.
+const parseFullAddress = (text) => {
+  const parts = String(text || '').split(',').map(part => part.trim()).filter(Boolean);
+  if (parts.length < 2) return null;
+  const rest = [...parts];
+  let city = matchAddressOption(rest[rest.length - 1], PROVINCE_OPTIONS);
+  if (city) rest.pop();
+  let district = '';
+  let ward = '';
+  const districtsOf = (province) => Object.keys(OLD_ADDRESS_OPTIONS[province] || {});
+  if (city && rest.length > 1) {
+    district = matchAddressOption(rest[rest.length - 1], districtsOf(city));
+    if (district) rest.pop();
+  } else if (!city) {
+    // No province typed: a district name that exists in only one province decides it.
+    const found = Object.keys(OLD_ADDRESS_OPTIONS)
+      .map(province => [province, matchAddressOption(rest[rest.length - 1], districtsOf(province))])
+      .filter(([, d]) => d);
+    if (found.length === 1) {
+      [[city, district]] = found;
+      rest.pop();
+    }
+  }
+  if (city && rest.length > 1) {
+    const wards = district
+      ? OLD_ADDRESS_OPTIONS[city][district]
+      : [...new Set(districtsOf(city).flatMap(d => OLD_ADDRESS_OPTIONS[city][d]))];
+    ward = matchAddressOption(rest[rest.length - 1], wards);
+    if (ward) {
+      rest.pop();
+      if (!district) {
+        // Only fill the district when the ward name belongs to exactly one district.
+        const owners = districtsOf(city).filter(d => OLD_ADDRESS_OPTIONS[city][d].includes(ward));
+        if (owners.length === 1) district = owners[0];
+      }
+    } else if (!district && city) {
+      // No ward list for this province: keep the typed ward as is.
+      if (!districtsOf(city).length && rest.length > 1) ward = rest.pop();
+    }
+  }
+  if (!city && !district && !ward) return null;
+  return { address: rest.join(', '), city, district, ward };
+};
+
+// Street names of TP.HCM with their pre-2025 districts (assets/js/hcm-streets.json, built by
+// tools/fetch_hcm_streets.py from OpenStreetMap). Loaded once, only when the address field is used.
+let hcmStreetsPromise = null;
+const loadHcmStreets = () => {
+  hcmStreetsPromise = hcmStreetsPromise || fetch('/assets/js/hcm-streets.json')
+    .then(res => (res.ok ? res.json() : null))
+    .then(data => data && {
+      districts: data.districts,
+      list: Object.entries(data.streets).map(([name, ids]) => ({ name, key: normalizeAddressText(name), ids })),
+    })
+    .catch(() => null);
+  return hcmStreetsPromise;
+};
+
+// "173/5/19 Khuông" → { number: '173/5/19', street: 'Khuông' }
+const splitHouseNumber = (text) => {
+  const match = String(text || '').trim().match(/^((?:số\s*)?\d[\w/-]*)\s+(.+)$/i);
+  return match ? { number: match[1], street: match[2] } : { number: '', street: String(text || '').trim() };
+};
+
+const suggestHcmStreets = (streets, text, limit = 6) => {
+  if (!streets) return [];
+  const { number, street } = splitHouseNumber(text);
+  const key = normalizeAddressText(street).replace(/^duong/, '');
+  if (key.length < 2) return [];
+  const starts = streets.list.filter(item => item.key.startsWith(key));
+  const contains = streets.list.filter(item => !item.key.startsWith(key) && item.key.includes(key));
+  const results = [];
+  for (const item of [...starts, ...contains]) {
+    for (const id of item.ids) {
+      const address = [number, item.name].filter(Boolean).join(' ');
+      const district = streets.districts[id];
+      results.push({ key: `${item.name}|${district}`, label: `${address}, ${district}, TP.HCM`, address, city: 'TP.HCM', district, ward: '' });
+      if (results.length >= limit) return results;
+    }
+  }
+  return results;
 };
 
 // Accepts spaces, dots, dashes and +84/84 prefixes; returns a 0xxxxxxxxx number or the cleaned input.
@@ -2204,7 +2327,7 @@ const phoneError = (value) => {
 };
 
 const CHECKOUT_PROFILE_KEY = 'phuonglam-checkout-profile';
-const CHECKOUT_PROFILE_FIELDS = ['name', 'phone', 'city', 'district', 'ward', 'address'];
+const CHECKOUT_PROFILE_FIELDS = ['salutation', 'name', 'phone', 'city', 'district', 'ward', 'address'];
 
 const loadCheckoutProfile = () => {
   try {
@@ -2258,6 +2381,21 @@ const SHIPPING_RULES = {
   ...BAKED_SHIPPING,
 };
 
+// Money saved against crossed-out prices, and that as a share of the crossed-out total.
+const getCartSavings = (cart) => {
+  let saved = 0;
+  let subtotal = 0;
+  for (const item of cart) {
+    const qty = Number(item.qty) || 1;
+    const price = Number(item.price) || 0;
+    const original = Number(item.originalPrice) || 0;
+    subtotal += price * qty;
+    if (original > price) saved += (original - price) * qty;
+  }
+  return { saved, percent: saved > 0 ? Math.round((saved / (subtotal + saved)) * 100) : 0 };
+};
+const shortVnd = (value) => (value >= 1000 ? `${Math.round(value / 1000).toLocaleString('vi-VN')}k` : `${value}đ`);
+
 // Item total still needed for free shipping (0 when the cart already qualifies).
 const getFreeshipGap = (subtotal) => Math.max(0, SHIPPING_RULES.smallOrderThreshold - subtotal);
 const SHIPPING_STEP_WEIGHT = 1000;
@@ -2302,7 +2440,11 @@ const calculateShipping = (cart, { city = '', deliveryMethod = 'standard' } = {}
 
 const CHECKOUT_AUTOCOMPLETE = { name: 'name', phone: 'tel', address: 'street-address', note: 'off' };
 
-const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setErrors, type = 'text', multiline = false, onCommit, validate }) => {
+const FieldError = ({ message }) => (message
+  ? <span style={coStyles.error} role="alert"><span style={coStyles.errorIcon} aria-hidden="true">!</span>{message}</span>
+  : null);
+
+const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setErrors, type = 'text', multiline = false, onCommit, validate, prefix = null }) => {
   const ref = React.useRef(null);
   React.useLayoutEffect(() => {
     if (ref.current && ref.current !== document.activeElement) {
@@ -2342,14 +2484,14 @@ const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setError
             rows={2}
             style={{ ...coStyles.input, minHeight: 64, resize: 'vertical', borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
           />
-        : <input
+        : <div style={prefix ? coStyles.prefixRow : undefined}>{prefix}<input
             {...inputProps}
             style={{ ...coStyles.input, borderColor: errors[id] ? '#e84848' : '#e8e8e8' }}
             type={type}
             inputMode={type === 'tel' ? 'tel' : undefined}
-          />
+          /></div>
       }
-      {errors[id] && <span style={coStyles.error}>{errors[id]}</span>}
+      <FieldError message={errors[id]} />
     </div>
   );
 };
@@ -2450,17 +2592,127 @@ const CheckoutSuggestField = ({ id, label, options, placeholder, form, setForm, 
           ))}
         </div>
       )}
-      {errors[id] && <span style={coStyles.error}>{errors[id]}</span>}
+      <FieldError message={errors[id]} />
     </div>
   );
 };
 
 
 
+// "Số nhà, tên đường" with suggestions: TP.HCM streets with their district, or a whole
+// pasted address split into province/district/ward. Picking one fills those fields too.
+const CheckoutAddressField = ({ form, setForm, errors, setErrors }) => {
+  const ref = React.useRef(null);
+  const [text, setText] = React.useState(form.address || '');
+  const [open, setOpen] = React.useState(false);
+  const [streets, setStreets] = React.useState(null);
+  const [active, setActive] = React.useState(-1);
+
+  React.useLayoutEffect(() => {
+    if (ref.current && ref.current !== document.activeElement && ref.current.value !== (form.address || '')) {
+      ref.current.value = form.address || '';
+      setText(form.address || '');
+    }
+  });
+
+  const parsed = parseFullAddress(text);
+  const suggestions = [];
+  if (parsed && parsed.address) {
+    suggestions.push({ key: 'parsed', ...parsed, label: [parsed.address, parsed.ward, parsed.district, parsed.city].filter(Boolean).join(', ') });
+  }
+  if (!parsed && (!form.city || form.city === 'TP.HCM')) suggestions.push(...suggestHcmStreets(streets, text));
+
+  const update = (value) => {
+    setText(value);
+    setForm(f => ({ ...f, address: value }));
+    setErrors(er => ({ ...er, address: '' }));
+  };
+
+  const apply = (item) => {
+    if (ref.current) ref.current.value = item.address;
+    setText(item.address);
+    setOpen(false);
+    setActive(-1);
+    setForm(f => {
+      const city = item.city || f.city;
+      const district = item.district || (item.city && item.city !== f.city ? '' : f.district);
+      const keepWard = !item.ward && district === f.district && city === f.city;
+      return { ...f, address: item.address, city, district, ward: item.ward || (keepWard ? f.ward : '') };
+    });
+    setErrors(er => ({ ...er, address: '', city: '', ward: '' }));
+    // Next empty piece: the ward list of that district opens by itself.
+    if (!item.ward) setTimeout(() => document.getElementById('checkout-ward')?.focus(), 60);
+  };
+
+  return (
+    <div style={coStyles.field}>
+      <label style={coStyles.label} htmlFor="checkout-address">Địa chỉ (số nhà, tên đường) *</label>
+      <div style={{ position: 'relative' }}>
+      <input
+        ref={ref}
+        id="checkout-address"
+        name="address"
+        type="text"
+        defaultValue={form.address || ''}
+        placeholder="Ví dụ: 173/5/19 Khuông Việt"
+        autoComplete="street-address"
+        enterKeyHint="next"
+        style={{ ...coStyles.input, borderColor: errors.address ? '#e84848' : '#e8e8e8' }}
+        onFocus={() => {
+          setOpen(true);
+          loadHcmStreets().then(setStreets);
+        }}
+        onChange={e => {
+          update(e.target.value);
+          setOpen(true);
+          setActive(-1);
+        }}
+        onKeyDown={e => {
+          if (!open || !suggestions.length) return;
+          if (e.key === 'ArrowDown') { e.preventDefault(); setActive(i => Math.min(suggestions.length - 1, i + 1)); }
+          if (e.key === 'ArrowUp') { e.preventDefault(); setActive(i => Math.max(-1, i - 1)); }
+          if (e.key === 'Enter' && active >= 0) { e.preventDefault(); apply(suggestions[active]); }
+          if (e.key === 'Escape') setOpen(false);
+        }}
+        onBlur={e => {
+          // A pasted full address fills the other fields even if no suggestion was clicked.
+          const whole = parseFullAddress(e.target.value);
+          if (whole && whole.address && whole.city && !form.city) apply(whole);
+          else update(e.target.value.trim());
+          setTimeout(() => setOpen(false), 150);
+        }}
+      />
+      {open && text.trim().length >= 2 && suggestions.length > 0 && (
+        <div style={coStyles.suggestBox} role="listbox">
+          <button type="button" style={{ ...coStyles.suggestItem, color: '#666' }} onMouseDown={e => { e.preventDefault(); setOpen(false); }}>
+            ✓ {text.trim()}
+          </button>
+          {suggestions.map((item, index) => (
+            <button
+              key={item.key}
+              type="button"
+              role="option"
+              aria-selected={index === active}
+              style={{ ...coStyles.suggestItem, background: index === active ? '#f0f8ed' : undefined }}
+              onMouseDown={e => { e.preventDefault(); apply(item); }}
+            >
+              {item.label}
+            </button>
+          ))}
+          {suggestions.some(item => item.key !== 'parsed') && <div style={coStyles.suggestCredit}>Tên đường: © OpenStreetMap</div>}
+        </div>
+      )}
+      </div>
+      <div style={coStyles.fieldHint}>Gõ số nhà + tên đường rồi chọn gợi ý, hoặc dán nguyên địa chỉ (có phường, quận, tỉnh) để tự điền.</div>
+      <FieldError message={errors.address} />
+    </div>
+  );
+};
+
 const CheckoutPage = ({ cart, setCart, setPage }) => {
   const isMobile = useIsMobile();
   const [step, setStep] = React.useState(1); // 1=info, 2=confirm, 3=success
-  const [form, setForm] = React.useState(() => ({ name: '', phone: '', city: '', district: '', ward: '', address: '', note: '', ...loadCheckoutProfile() }));
+  const [form, setForm] = React.useState(() => ({ salutation: '', name: '', phone: '', city: '', district: '', ward: '', address: '', note: '', ...loadCheckoutProfile() }));
   const [rememberProfile, setRememberProfile] = React.useState(true);
   const [deliveryMethod, setDeliveryMethod] = React.useState('standard');
   const [errors, setErrors] = React.useState({});
@@ -2477,6 +2729,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
   const deliveryNote = selectedDeliveryMethod === 'express'
     ? 'Hỏa tốc: giao trong 1 giờ, áp dụng cho địa chỉ nội thành TP.HCM.'
     : getStandardDeliveryNote(form.city);
+  const checkoutSavings = getCartSavings(cart);
   const shippingInfo = calculateShipping(cart, {
     city: form.city,
     deliveryMethod: selectedDeliveryMethod,
@@ -2502,7 +2755,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     if (!form.address.trim()) e.address = 'Vui lòng nhập số nhà, tên đường';
     setForm(f => ({ ...f, phone: isValidPhone(phone) ? phone : f.phone, city: city || f.city }));
     setErrors(e);
-    const firstError = ['name', 'phone', 'city', 'ward', 'address'].find(key => e[key]);
+    const firstError = ['name', 'phone', 'address', 'city', 'ward'].find(key => e[key]);
     if (firstError) {
       const field = document.getElementById(`checkout-${firstError}`);
       if (field) {
@@ -2529,6 +2782,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 
   const buildOrderPayload = () => ({
     customerName: form.name.trim(),
+    salutation: form.salutation || '',
     phone: normalizePhone(form.phone),
     address: fullAddress,
     note: form.note.trim(),
@@ -2603,7 +2857,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
       <div style={coStyles.successIcon}>✓</div>
       <h2 style={{ fontSize: 26, fontWeight: 800, color: '#1a1a1a', marginBottom: 12 }}>Đặt hàng thành công!</h2>
       <p style={{ color: '#666', lineHeight: 1.7, marginBottom: 8 }}>
-        Cảm ơn <strong>{form.name}</strong>! Đơn hàng của bạn đã được tiếp nhận.
+        Cảm ơn <strong>{[form.salutation, form.name].filter(Boolean).join(' ')}</strong>! Đơn hàng của bạn đã được tiếp nhận.
       </p>
       <p style={{ color: '#888', fontSize: 13, marginBottom: 32 }}>
         Chúng tôi sẽ liên hệ xác nhận qua số <strong>{form.phone}</strong> trong vòng 30 phút.
@@ -2648,17 +2902,31 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         {step === 1 && (
           <div style={coStyles.formCard}>
             <h2 style={coStyles.cardTitle}>Thông tin giao hàng</h2>
-            <div style={coStyles.formHint}>Gõ không dấu cũng được, ví dụ "hcm", "ha noi". Chọn gợi ý hoặc tự nhập theo địa chỉ hiện tại.</div>
+            <div style={coStyles.formHint}>Địa chỉ theo tên cũ (trước sáp nhập). Gõ không dấu cũng được, ví dụ "hcm", "ha noi".</div>
             <div style={isMobile ? undefined : coStyles.fieldPair}>
-              <CheckoutField id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+              <CheckoutField
+                id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors}
+                prefix={(
+                  <select
+                    aria-label="Danh xưng"
+                    value={form.salutation || ''}
+                    onChange={e => setForm(f => ({ ...f, salutation: e.target.value }))}
+                    style={coStyles.salutation}
+                  >
+                    <option value="">Anh/Chị</option>
+                    <option value="Anh">Anh</option>
+                    <option value="Chị">Chị</option>
+                  </select>
+                )}
+              />
               <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901 234 567" type="tel" validate={phoneError} onCommit={value => (isValidPhone(value) ? normalizePhone(value) : value)} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             </div>
+            <CheckoutAddressField form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={cityOptions} placeholder="Gõ tỉnh/thành phố để chọn" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
             <div style={isMobile ? undefined : coStyles.fieldPair}>
               <CheckoutSuggestField id="district" label="Quận/Huyện (nếu có)" options={districtOptions} placeholder={form.city ? 'Bỏ trống nếu địa chỉ mới không có' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
               <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Gõ phường/xã' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             </div>
-            <CheckoutField id="address" label="Số nhà, tên đường *" placeholder="Ví dụ: 12/3 Lê Lợi" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             <div style={coStyles.field}>
               <label style={coStyles.label}>Vận chuyển *</label>
               <div style={coStyles.shippingOptions}>
@@ -2700,7 +2968,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
           <div style={coStyles.formCard}>
             <h2 style={coStyles.cardTitle}>Xác nhận đơn hàng</h2>
             <div style={coStyles.confirmInfo}>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Người nhận</span><span style={coStyles.confirmVal}>{form.name}</span></div>
+              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Người nhận</span><span style={coStyles.confirmVal}>{[form.salutation, form.name].filter(Boolean).join(' ')}</span></div>
               <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Số điện thoại</span><span style={coStyles.confirmVal}>{form.phone}</span></div>
               <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Tỉnh/Thành phố</span><span style={coStyles.confirmVal}>{form.city}</span></div>
               <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Quận/Huyện</span><span style={coStyles.confirmVal}>{form.district}</span></div>
@@ -2734,7 +3002,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
               </div>
             ))}
             <div style={coStyles.summaryDivider} />
-            <div style={coStyles.summaryRow}><span>Tạm tính</span><span>{subtotal.toLocaleString('vi-VN')}đ</span></div>
+            <div style={coStyles.summaryRow}><span>Tạm tính</span><span style={{ textAlign: 'right' }}>{subtotal.toLocaleString('vi-VN')}đ{checkoutSavings.saved > 0 && <span style={cartStyles.savedNote}>(tiết kiệm {shortVnd(checkoutSavings.saved)})</span>}</span></div>
             <div style={coStyles.summaryRow}>
               <span>Vận chuyển</span>
               <span style={{ color: shipping === 0 ? '#318223' : 'inherit' }}>{shipping === 0 ? 'Miễn phí' : `${shipping.toLocaleString('vi-VN')}đ`}</span>
@@ -2743,9 +3011,12 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
               <strong>{deliveryMethodLabel}</strong> · {deliveryNote}
             </div>
             <div style={coStyles.summaryDivider} />
-            <div style={{ ...coStyles.summaryRow, fontWeight: 700, fontSize: 16 }}>
+            <div style={cartStyles.totalBox}>
               <span>Tổng cộng</span>
-              <span style={{ color: '#318223' }}>{total.toLocaleString('vi-VN')}đ</span>
+              <span style={{ textAlign: 'right' }}>
+                <span style={{ color: '#318223', fontSize: 18 }}>{total.toLocaleString('vi-VN')}đ</span>
+                {checkoutSavings.percent > 0 && <span style={cartStyles.percentNote}>(Giảm {checkoutSavings.percent}% so với giá gốc)</span>}
+              </span>
             </div>
             {step === 2 && (
               <div style={coStyles.confirmActions}>
@@ -2797,7 +3068,12 @@ const coStyles = {
   shippingDesc: { display: 'block', color: '#777', fontSize: 12, lineHeight: 1.45 },
   shippingUnavailable: { marginTop: 8, color: '#9a6a1f', background: '#fff8e8', borderRadius: 8, padding: '8px 10px', fontSize: 12, lineHeight: 1.5 },
   shippingNote: { marginTop: 8, color: '#318223', fontSize: 13, lineHeight: 1.5, fontWeight: 700 },
-  error: { fontSize: 12, color: '#e84848', marginTop: 4, display: 'block' },
+  error: { fontSize: 12.5, color: '#e84848', marginTop: 6, display: 'flex', alignItems: 'center', gap: 6 },
+  errorIcon: { width: 16, height: 16, borderRadius: '50%', background: '#e84848', color: '#fff', fontSize: 11, fontWeight: 800, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 },
+  fieldHint: { fontSize: 12, color: '#888', marginTop: 6, lineHeight: 1.4 },
+  suggestCredit: { fontSize: 11, color: '#aaa', padding: '6px 14px', textAlign: 'right' },
+  prefixRow: { display: 'flex', gap: 8 },
+  salutation: { flex: '0 0 96px', border: '1.5px solid #e8e8e8', borderRadius: 10, padding: '0 8px', fontSize: 15, background: '#fff', color: '#1a1a1a', fontFamily: 'inherit' },
   primaryBtn: { width: '100%', background: '#318223', color: '#fff', border: 'none', padding: '14px', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer', marginTop: 8 },
   secondaryBtn: { background: '#fff', color: '#318223', border: '1.5px solid #318223', padding: '13px 20px', borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: 'pointer' },
   confirmActions: { display: 'flex', gap: 12, marginTop: 24, justifyContent: 'center', flexWrap: 'wrap' },
