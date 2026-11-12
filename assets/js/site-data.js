@@ -3988,6 +3988,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 31,
+    "title": "Cách xông nhà mới trước khi về ở: chuẩn bị và thực hiện",
+    "excerpt": "Cách xông nhà mới trước khi về ở với checklist đồ cần mua, thứ tự từng phòng và lưu ý riêng cho chung cư, nhà thuê. Xem hướng dẫn ngay.",
+    "date": "12 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "cach-xong-nha-moi",
+    "tag": "Hướng dẫn",
+    "url": "/blog/huong-dan-xong/cach-xong-nha-moi/",
+    "image": "/assets/blog/cach-xong-nha-moi-1794369032175-1-cach-xong-nha-moi-bang-bep-nieu-dat-nung-va-thao-moc-kho.webp",
+    "coverImage": "/assets/blog/cach-xong-nha-moi-1794369032175-1-cach-xong-nha-moi-bang-bep-nieu-dat-nung-va-thao-moc-kho.webp"
+  },
+  {
     "id": 30,
     "title": "Xông nhà đầu năm mới: hiểu tục Tết và tự xông thảo mộc",
     "excerpt": "Xông nhà đầu năm đúng cách: phân biệt tục xông đất và xông thảo mộc, chọn ngày, phối mùi Tết và dùng bếp niêu an toàn. Đọc ngay.",
