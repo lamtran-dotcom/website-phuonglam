@@ -118,7 +118,7 @@ const ShippingPromotion = ({ setPage }) => {
               <h2 className="shipping-promo-title" id="shipping-promo-title" style={{ ...shippingPromoStyles.title, fontSize: isMobile ? 27 : 38 }}>Ưu đãi giao thường,<br />giá web tốt hơn sàn</h2>
               <div className="shipping-promo-highlight" style={shippingPromoStyles.highlight}>
                 <span style={shippingPromoStyles.highlightLabel}>VẬN CHUYỂN</span>
-                <strong>Freeship toàn quốc</strong>
+                <strong>Freeship toàn quốc đơn từ {SHIPPING_RULES.smallOrderThreshold.toLocaleString('vi-VN')}đ</strong>
                 <strong>Giao hỏa tốc trong vòng 1 giờ tại nội thành TP.HCM</strong>
               </div>
               <div className="shipping-promo-price-compare" style={{ ...shippingPromoStyles.priceCompare, ...(isMobile ? shippingPromoStyles.priceCompareMobile : {}) }}>
@@ -2049,7 +2049,10 @@ const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
             </span>
           </div>
           <div style={cartStyles.freeShipNote}>
-            Phí vận chuyển cuối cùng cập nhật theo địa chỉ và hình thức giao ở bước đặt hàng.
+            {getFreeshipGap(subtotal) > 0
+              ? `Mua thêm ${getFreeshipGap(subtotal).toLocaleString('vi-VN')}đ để được miễn phí giao hàng. `
+              : 'Đơn của bạn được miễn phí giao thường. '}
+            Phí cuối cùng cập nhật theo địa chỉ và hình thức giao ở bước đặt hàng.
           </div>
           <div style={cartStyles.divider} />
           <div style={{ ...cartStyles.summaryRow, fontWeight: 700, fontSize: 17 }}>
@@ -2232,7 +2235,7 @@ const getStandardDeliveryNote = (city) => {
 };
 
 // Fee settings come from data/settings.json (`shipping`, edited in the admin); the build bakes them here.
-const BAKED_SHIPPING = /*BAKED_SHIPPING*/{"hcmFreeWeight":5000,"otherFreeWeight":3000,"firstKgFee":16000,"extraKgFee":4000,"expressFee":15000,"defaultItemWeight":500}/*END_BAKED_SHIPPING*/;
+const BAKED_SHIPPING = /*BAKED_SHIPPING*/{"hcmFreeWeight":5000,"otherFreeWeight":3000,"firstKgFee":16000,"extraKgFee":4000,"expressFee":15000,"defaultItemWeight":500,"smallOrderThreshold":150000,"smallOrderFee":20000}/*END_BAKED_SHIPPING*/;
 const SHIPPING_RULES = {
   hcmFreeWeight: 5000,
   otherFreeWeight: 3000,
@@ -2240,8 +2243,13 @@ const SHIPPING_RULES = {
   extraKgFee: 4000,
   expressFee: 15000,
   defaultItemWeight: 500,
+  smallOrderThreshold: 150000,
+  smallOrderFee: 20000,
   ...BAKED_SHIPPING,
 };
+
+// Item total still needed for free shipping (0 when the cart already qualifies).
+const getFreeshipGap = (subtotal) => Math.max(0, SHIPPING_RULES.smallOrderThreshold - subtotal);
 const SHIPPING_STEP_WEIGHT = 1000;
 
 const getCartWeight = (cart) => cart.reduce((sum, item) => {
@@ -2261,10 +2269,15 @@ const calculateShipping = (cart, { city = '', deliveryMethod = 'standard' } = {}
   const extraStepFee = overweight > 0
     ? Math.ceil(extraWeightAfterFirstKg / SHIPPING_STEP_WEIGHT) * SHIPPING_RULES.extraKgFee
     : 0;
-  const baseShippingFee = overweight > 0 ? SHIPPING_RULES.firstKgFee + extraStepFee : 0;
+  const weightFee = overweight > 0 ? SHIPPING_RULES.firstKgFee + extraStepFee : 0;
+  // Below the item-total threshold a flat fee replaces free shipping (same rule as the order Worker).
+  const subtotal = cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.qty) || 1), 0);
+  const smallOrderFee = getFreeshipGap(subtotal) > 0 ? SHIPPING_RULES.smallOrderFee : 0;
+  const baseShippingFee = weightFee + smallOrderFee;
   const urgentShippingFee = deliveryMethod === 'express' ? SHIPPING_RULES.expressFee : 0;
   return {
     fee: baseShippingFee + urgentShippingFee,
+    smallOrderFee,
     weight,
     area,
     freeWeightLimit,

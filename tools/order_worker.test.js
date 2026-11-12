@@ -81,3 +81,18 @@ test('the build writes the price list the Worker reads', () => {
     if (before) fs.writeFileSync(target, before); else fs.rmSync(target, { force: true });
   }
 });
+
+test('orders under the freeship threshold pay the flat small-order fee', async () => {
+  const { priceOrder, shippingFee } = await loadWorker();
+  const small = { ...rules, smallOrderThreshold: 150000, smallOrderFee: 20000 };
+  assert.equal(shippingFee({ weight: 500, city: 'Hà Nội', express: false, subtotal: 149000 }, small), 20000);
+  assert.equal(shippingFee({ weight: 500, city: 'Hà Nội', express: false, subtotal: 150000 }, small), 0);
+  assert.equal(shippingFee({ weight: 500, city: 'Hồ Chí Minh', express: true, subtotal: 50000 }, small), 35000);
+  // A heavy cheap order still pays the weight fee on top.
+  assert.equal(shippingFee({ weight: 3500, city: 'Hà Nội', express: false, subtotal: 100000 }, small), 36000);
+  const order = { city: 'Huế', deliveryMethod: 'Giao thường', subtotal: 64000, shipping: 0, total: 64000,
+    items: [{ id: 'herb', variantId: 'v50', name: 'Hồi 50g', qty: 1, price: 23000 }, { id: 'plain', variantId: '', name: 'Lá dứa', qty: 1, price: 41000 }] };
+  const checked = priceOrder(order, { ...pricing, shipping: small });
+  assert.equal(checked.shipping, 20000);
+  assert.equal(checked.total, 84000);
+});

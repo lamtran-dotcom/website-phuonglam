@@ -38,7 +38,9 @@
     "firstKgFee": 16000,
     "extraKgFee": 4000,
     "expressFee": 15000,
-    "defaultItemWeight": 500
+    "defaultItemWeight": 500,
+    "smallOrderThreshold": 150000,
+    "smallOrderFee": 20000
   },
   "categories": [
     {

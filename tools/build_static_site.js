@@ -1802,7 +1802,7 @@ const INFO_PAGES = [
     sections: [
       { h2: 'Giao hàng tại TP.HCM', html: '<ul><li><strong>Nội thành TP.HCM:</strong> giao hỏa tốc trong 1 giờ.</li><li><strong>Ngoại thành TP.HCM:</strong> giao từ 1–3 ngày.</li></ul>' },
       { h2: 'Các tỉnh thành khác', html: `<p>Phương Lâm giao hàng toàn quốc. Giao thường mất <strong>1–3 ngày tùy khu vực</strong>. Bạn có thể hỏi nhanh qua Zalo <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a>.</p>` },
-      { h2: 'Phí vận chuyển', html: '<p>Phí vận chuyển được tính và hiển thị ở bước thanh toán. Các ưu đãi vận chuyển đang áp dụng được thông báo trên website.</p>' },
+      { h2: 'Phí vận chuyển', html: '<p>{{SHIPPING_RULE}}</p><p>Phí vận chuyển cuối cùng được tính và hiển thị ở bước thanh toán.</p>' },
       { h2: 'Hàng bể vỡ khi vận chuyển', html: '<p>Nếu sản phẩm bị hư hỏng hoặc bể vỡ trong quá trình giao, Phương Lâm đổi sản phẩm mới theo <a href="/chinh-sach-doi-tra/">chính sách đổi trả</a>.</p>' },
     ],
   },
@@ -1825,14 +1825,26 @@ const INFO_PAGES = [
 
 const infoPageUrls = () => INFO_PAGES.map((page) => `${siteUrl}/${page.path}/`);
 
-const renderInfoPage = (page) => {
+const formatDong = (value) => `${Number(value).toLocaleString('vi-VN')}đ`;
+
+// Shipping rule in words, from data/settings.json so the policy page matches checkout.
+const shippingRuleHtml = (shipping) => {
+  const s = normalizeShippingSettings(shipping);
+  const kg = (grams) => `${(grams / 1000).toLocaleString('vi-VN')} kg`;
+  return `<strong>Miễn phí giao thường</strong> cho đơn có tiền hàng từ <strong>${formatDong(s.smallOrderThreshold)}</strong>; `
+    + `đơn dưới mức này phí giao là <strong>${formatDong(s.smallOrderFee)}</strong>. `
+    + `Đơn nặng trên ${kg(s.hcmFreeWeight)} (TP.HCM) hoặc ${kg(s.otherFreeWeight)} (tỉnh khác) tính thêm ${formatDong(s.firstKgFee)} cho kg đầu vượt mức và ${formatDong(s.extraKgFee)} mỗi kg tiếp theo. `
+    + `Giao hỏa tốc nội thành TP.HCM cộng thêm ${formatDong(s.expressFee)}.`;
+};
+
+const renderInfoPage = (page, shipping = {}) => {
   const url = `${siteUrl}/${page.path}/`;
   const body = `<main class="seo-main">
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Trang chủ</a> / ${escapeHtml(page.breadcrumb)}</nav>
     <article class="info-page">
       <h1>${escapeHtml(page.h1)}</h1>
       <p class="info-lead">${escapeHtml(page.lead)}</p>
-      ${page.sections.map((section) => `<section><h2>${escapeHtml(section.h2)}</h2>${section.html}</section>`).join('\n      ')}
+      ${page.sections.map((section) => `<section><h2>${escapeHtml(section.h2)}</h2>${section.html.replace('{{SHIPPING_RULE}}', shippingRuleHtml(shipping))}</section>`).join('\n      ')}
     </article>
   </main>`;
   return pageShell({
@@ -1852,10 +1864,11 @@ const renderInfoPage = (page) => {
 };
 
 const writeInfoPages = () => {
+  const shipping = fs.existsSync(paths.settings) ? JSON.parse(fs.readFileSync(paths.settings, 'utf8')).shipping : {};
   for (const page of INFO_PAGES) {
     const dir = path.join(root, page.path);
     ensureDir(dir);
-    fs.writeFileSync(path.join(dir, 'index.html'), renderInfoPage(page));
+    fs.writeFileSync(path.join(dir, 'index.html'), renderInfoPage(page, shipping));
   }
 };
 

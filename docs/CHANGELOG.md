@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-12 — Small orders pay 20.000đ shipping
+- Item total under 150.000đ: flat 20.000đ shipping (TP.HCM and provinces). From 150.000đ: free standard shipping up to 5 kg (TP.HCM) / 3 kg (provinces), weight fee above as before; express still +15.000đ. Values are `shipping.smallOrderThreshold` / `smallOrderFee` in `data/settings.json` (also editable in the old admin "Phí ship").
+- Same rule in `calculateShipping` (app.jsx) and the order Worker `shippingFee`. Cart shows "Mua thêm …đ để được miễn phí giao hàng"; promo popup says "Freeship toàn quốc đơn từ 150.000đ"; the shipping policy page text is generated from the settings.
+
 ## 2026-11-11 — Admin v2: a picture per variant
 - Variant table has an "Ảnh" column: click the box to upload (WebP 900/720/480) or pick one of the product's pictures; it is the picture shown when a customer picks that variant. Group-1 values can also get an uploaded picture (used for rows without their own).
 

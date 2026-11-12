@@ -7,6 +7,9 @@ const DEFAULT_SHIPPING = Object.freeze({
   extraKgFee: 4000,
   expressFee: 15000,
   defaultItemWeight: 500,
+  // Orders whose item total is below the threshold pay a flat fee instead of free shipping.
+  smallOrderThreshold: 150000,
+  smallOrderFee: 20000,
 });
 
 const SHIPPING_LIMITS = Object.freeze({
@@ -16,6 +19,8 @@ const SHIPPING_LIMITS = Object.freeze({
   extraKgFee: 1000000,
   expressFee: 1000000,
   defaultItemWeight: 50000,
+  smallOrderThreshold: 100000000,
+  smallOrderFee: 1000000,
 });
 
 // Unknown keys are dropped; a missing or invalid number falls back to its default.

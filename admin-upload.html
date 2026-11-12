@@ -907,7 +907,9 @@
       ['firstKgFee', 'Phí kg đầu tiên vượt mức', 'đ', 16000, 1000000],
       ['extraKgFee', 'Phí mỗi kg tiếp theo', 'đ', 4000, 1000000],
       ['expressFee', 'Phụ phí hỏa tốc nội thành TP.HCM', 'đ', 15000, 1000000],
-      ['defaultItemWeight', 'Cân nặng tạm tính khi sản phẩm chưa nhập', 'kg', 500, 50000]
+      ['defaultItemWeight', 'Cân nặng tạm tính khi sản phẩm chưa nhập', 'kg', 500, 50000],
+      ['smallOrderThreshold', 'Freeship cho đơn từ', 'đ', 150000, 100000000],
+      ['smallOrderFee', 'Phí ship đơn dưới mức freeship', 'đ', 20000, 1000000]
     ];
 
     function normalizeShipping(value) {
@@ -933,7 +935,7 @@
       };
       return `
         <h2>Phí ship theo cân nặng</h2>
-        <p class="muted">Đơn dưới mức miễn phí: 0đ. Vượt mức: tính phí kg đầu tiên, mỗi kg tiếp theo cộng thêm (lẻ kg làm tròn lên). Khách chỉ thấy số tiền cuối cùng. Bấm "Lưu local" rồi "Đăng lên web" để áp dụng.</p>
+        <p class="muted">Đơn có tiền hàng dưới mức freeship trả phí ship cố định. Từ mức đó trở lên: miễn phí đến mức cân nặng. Vượt mức: tính phí kg đầu tiên, mỗi kg tiếp theo cộng thêm (lẻ kg làm tròn lên). Khách chỉ thấy số tiền cuối cùng. Bấm "Lưu local" rồi "Đăng lên web" để áp dụng.</p>
         <div class="shipping-grid">
           ${SHIPPING_FIELDS.map(([key, label, unit]) => {
             const value = unit === 'kg' ? shipping[key] / 1000 : shipping[key];

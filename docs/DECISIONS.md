@@ -2,6 +2,12 @@
 
 ## Decision Log
 
+### 2026-11-12 - Free shipping needs an item total of 150.000đ
+Decision: Orders with an item total below `shipping.smallOrderThreshold` (150.000đ) pay `smallOrderFee` (20.000đ) on top of any weight fee; from the threshold standard shipping is free up to the weight limits. Express adds its fee in both cases.
+Reason: Seller choice (2026-11-12) to stop free shipping on very small orders.
+Impact: The rule lives in three places that must change together: `calculateShipping` in app.jsx, `shippingFee` in the order Worker, `shippingRuleHtml` in the build (policy page).
+Status: Active
+
 ### 2026-11-11 - Categories are data in settings.json
 Decision: The category list (id, name, icon, order) is stored in `data/settings.json` → `categories` and written into `assets/js/site-data.js` `CATEGORIES` by every build. The online admin edits it; a published id is never changed (it is the `/danh-muc/<id>/` URL) and a category can be deleted only when no product uses it.
 Reason: Categories were hand-written in a generated-looking JS file, so the owner could not add or rename one without code changes.

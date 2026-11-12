@@ -70,13 +70,14 @@ async function loadPricing() {
 
 // Same rule as calculateShipping in assets/js/app.jsx: free up to the area's weight limit;
 // above it the first started kg costs firstKgFee, each further started kg extraKgFee;
-// express adds a flat fee.
-function shippingFee({ weight, city, express }, rules) {
+// an item total below smallOrderThreshold adds smallOrderFee; express adds a flat fee.
+function shippingFee({ weight, city, express, subtotal = Infinity }, rules) {
   const freeLimit = isHoChiMinhCity(city) ? rules.hcmFreeWeight : rules.otherFreeWeight;
   const overweight = Math.max(0, weight - freeLimit);
   const extraSteps = Math.ceil(Math.max(0, overweight - 1000) / 1000);
   const base = overweight > 0 ? rules.firstKgFee + extraSteps * rules.extraKgFee : 0;
-  return base + (express ? rules.expressFee : 0);
+  const smallOrder = subtotal < (Number(rules.smallOrderThreshold) || 0) ? Number(rules.smallOrderFee) || 0 : 0;
+  return base + smallOrder + (express ? rules.expressFee : 0);
 }
 
 function priceOrder(order, pricing) {
@@ -123,7 +124,7 @@ function priceOrder(order, pricing) {
 
   const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
   const express = String(order.deliveryMethod || "").toLowerCase().includes("hỏa tốc");
-  const shipping = items.length ? shippingFee({ weight, city: order.city, express }, rules) : 0;
+  const shipping = items.length ? shippingFee({ weight, city: order.city, express, subtotal }, rules) : 0;
   return { verified: true, items, subtotal, shipping, total: subtotal + shipping, sent };
 }
 

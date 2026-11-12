@@ -28,3 +28,11 @@ test('app.jsx carries the shipping bake marker and no hard-coded rule names', ()
   assert.doesNotMatch(source, /overweightFee|urgentFee|freeWeightLimit\[/);
   assert.doesNotMatch(source, /1–4 giờ|4 tiếng/);
 });
+
+test('the small-order fee settings have defaults and limits', () => {
+  assert.equal(DEFAULT_SHIPPING.smallOrderThreshold, 150000);
+  assert.equal(DEFAULT_SHIPPING.smallOrderFee, 20000);
+  const settings = normalizeShippingSettings({ smallOrderThreshold: '200000', smallOrderFee: -5 });
+  assert.equal(settings.smallOrderThreshold, 200000);
+  assert.equal(settings.smallOrderFee, 20000);
+});
