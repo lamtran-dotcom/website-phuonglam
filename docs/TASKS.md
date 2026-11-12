@@ -20,7 +20,9 @@
 - [x] Codebase audit: dead files, 568 unreferenced images, old in-app admin, ZIP upload flow removed (2026-11-11).
 - [ ] Optional: simplify `externalizeIndex` in `tools/build_static_site.js` (inline-script/base64 extraction paths are legacy now that nothing exports a single-file index.html).
 - [x] Order Worker recomputes prices and shipping from the site price list (code 2026-11-11).
-- [ ] Seller: paste the new `workers/order-webhook/worker.js` into the Cloudflare dashboard (Worker `phuonglam-order-webhook`) and deploy.
+- [x] Order Worker deployed with wrangler (2026-11-12, version 0164caaa, compat 2026-04-28, `--keep-vars`): server-side prices + small-order fee.
+- [ ] Owner: place one small test order and check both Telegram messages and the THU COD amount (expect +20.000đ ship under 150.000đ).
+- [ ] Owner: the Telegram bot token was printed in a deploy log in the chat; revoke it in BotFather, then set the new one as a secret (`npx wrangler secret put TELEGRAM_BOT_TOKEN --name phuonglam-order-webhook`) and delete the plain-text variable.
 - [x] Draft `cam-on/` thank-you landing page with ordering via the existing checkout (2026-11-09).
 - [x] `cam-on/` products: 6 bestsellers + đèn xông gốm + tinh dầu 10ml + bộ bếp xông cao cấp + thanh gỗ Palo Santo (2026-11-09).
 - [ ] Discount code for `cam-on/`: checkout field, settings/admin config, Worker re-checks the code and amount.
