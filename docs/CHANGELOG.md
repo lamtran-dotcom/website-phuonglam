@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-12 — One-page checkout like Coolmate
+- Cart and checkout are one page: left "Thông tin của bạn" (Anh/Chị + name, phone, address with suggestions, Tỉnh / Quận / Phường in one row, delivery, optional "Ghi chú khác", remember) and "Phương thức thanh toán" (COD); right "Giỏ hàng" (picture, name, variant chip, −/+, crossed-out price, Xóa, freeship banner) and "Tóm tắt đơn hàng". On phones the cart comes first.
+- A bar fixed at the bottom shows the total, "Tiết kiệm …đ" and the ĐẶT HÀNG button, which checks the fields and sends the order at once (the Thông tin → Xác nhận → Hoàn tất steps are gone; the success screen stays).
+- `tools/preview_static_server.js` serves the built site locally for checks.
+
 ## 2026-11-12 — Checkout and cart like Coolmate
 - Address field first: typing house number + street suggests TP.HCM streets with their old district (4.599 streets from OpenStreetMap, `assets/js/hcm-streets.json`, rebuilt by `node tools/fetch_hcm_streets.js`); picking one fills TP.HCM + district and opens that district's ward list. Pasting a whole address ("…, P. Phú Trung, Q. Tân Phú, HCM") fills province/district/ward by itself. Wards cannot be guessed from the house number without a paid address API.
 - Field errors show a red "!" icon; "Anh/Chị" select before the name (saved in the profile, sent with the order).

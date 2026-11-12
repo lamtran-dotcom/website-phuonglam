@@ -1936,164 +1936,8 @@ const ppStyles = {
 
 
 
-const CartPage = ({ cart, setCart, setPage, productImages = {} }) => {
-  const isMobile = useIsMobile();
-  const updateQty = (cartKey, delta) => {
-    setCart(prev => prev.map(item =>
-      getCartItemKey(item) === cartKey ? { ...item, qty: Math.max(1, item.qty + delta) } : item
-    ));
-  };
-  const removeItem = (cartKey) => setCart(prev => prev.filter(item => getCartItemKey(item) !== cartKey));
-  const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const savings = getCartSavings(cart);
-  const [showPerkBanner, setShowPerkBanner] = React.useState(() => {
-    try { return sessionStorage.getItem('phuonglam-cart-perk-hidden') !== '1'; } catch { return true; }
-  });
-  const shippingInfo = calculateShipping(cart);
-  const shipping = shippingInfo.fee;
-  const total = subtotal + shipping;
-
-  if (cart.length === 0) return (
-    <div style={{ maxWidth: 600, margin: '80px auto', textAlign: 'center', padding: '0 24px' }}>
-      <div style={{ fontSize: 64, marginBottom: 16 }}>🛒</div>
-      <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1a1a1a', marginBottom: 12 }}>Giỏ hàng trống</h2>
-      <p style={{ color: '#888', marginBottom: 28 }}>Hãy thêm sản phẩm yêu thích vào giỏ nhé!</p>
-      <a href="/" style={cartStyles.ctaBtn}>Tiếp tục mua sắm</a>
-    </div>
-  );
-
-  return (
-    <div style={{ maxWidth: 1320, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px' }}>
-      <h1 style={{ ...cartStyles.title, fontSize: isMobile ? 22 : 28 }}>Giỏ hàng của bạn</h1>
-      {showPerkBanner && (
-        <div style={cartStyles.perkBanner} role="note">
-          <span style={cartStyles.perkIcon} aria-hidden="true">!</span>
-          <span style={{ flex: 1 }}>Freeship đơn từ {shortVnd(SHIPPING_RULES.smallOrderThreshold)} · Đổi trả trong 7 ngày</span>
-          <button type="button" style={cartStyles.perkClose} aria-label="Ẩn thông báo" onClick={() => {
-            setShowPerkBanner(false);
-            try { sessionStorage.setItem('phuonglam-cart-perk-hidden', '1'); } catch { /* storage off */ }
-          }}>×</button>
-        </div>
-      )}
-      <div style={{ ...cartStyles.layout, gridTemplateColumns: isMobile ? '1fr' : '1fr 340px', gap: isMobile ? 20 : 32 }}>
-        {/* Items */}
-        <div style={cartStyles.items}>
-          {!isMobile && (
-            <div style={cartStyles.itemsHead}>
-              <span style={cartStyles.colLabel}>Sản phẩm</span>
-              <span style={cartStyles.colLabel}>Đơn giá</span>
-              <span style={cartStyles.colLabel}>Số lượng</span>
-              <span style={cartStyles.colLabel}>Thành tiền</span>
-              <span style={{ width: 32 }}></span>
-            </div>
-          )}
-          {cart.map(item => {
-            const itemKey = getCartItemKey(item);
-            const itemHref = productUrl(item);
-            const handleItemLink = (event) => {
-              if (itemHref !== '#') return;
-              event.preventDefault();
-              setPage({ name: 'product', id: item.id });
-            };
-            return (
-            <div key={itemKey} style={isMobile ? { padding: '14px 14px', borderBottom: '1px solid #f5f5f5', display: 'flex', gap: 12, alignItems: 'flex-start' } : cartStyles.row}>
-              {isMobile ? (
-                <>
-                  <ImgPlaceholder label={item.name} w={64} h={64} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="64px" />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                      <a href={itemHref} style={{ ...cartStyles.itemName, marginBottom: 2 }} onClick={handleItemLink}>{item.name}</a>
-                      <button style={{ ...cartStyles.removeBtn, color: '#bbb', marginLeft: 8, flexShrink: 0 }} onClick={() => removeItem(itemKey)} title="Xóa">✕</button>
-                    </div>
-                    <div style={{ ...cartStyles.itemCat, marginBottom: 8 }}>{CATEGORIES.find(c => c.id === item.categoryId)?.name}</div>
-                    {item.selectedVariant && <div style={cartStyles.itemVariant}>Phân loại: {item.selectedVariant.name}</div>}
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div style={cartStyles.qtyControl}>
-                        <button style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, -1)}>−</button>
-                        <span style={cartStyles.qtyNum}>{item.qty}</span>
-                        <button style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, +1)}>+</button>
-                      </div>
-                      <span style={{ fontSize: 15, fontWeight: 700, color: '#318223', textAlign: 'right' }}>
-                        {(item.price * item.qty).toLocaleString('vi-VN')}đ
-                        {Number(item.originalPrice) > item.price && <span style={{ ...cartStyles.oldPrice, display: 'block' }}>{(Number(item.originalPrice) * item.qty).toLocaleString('vi-VN')}đ</span>}
-                      </span>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div style={cartStyles.productCol}>
-                    <ImgPlaceholder label={item.name} w={84} h={84} bg="#f0f5ef" style={{ borderRadius: 10, flexShrink: 0 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="84px" />
-                    <div style={{ minWidth: 0 }}>
-                      <a href={itemHref} style={cartStyles.itemName} onClick={handleItemLink}>{item.name}</a>
-                      <div style={cartStyles.itemCat}>{CATEGORIES.find(c => c.id === item.categoryId)?.name}</div>
-                      {item.selectedVariant && <div style={cartStyles.itemVariant}>Phân loại: {item.selectedVariant.name}</div>}
-                    </div>
-                  </div>
-                  <div style={cartStyles.priceCol}>
-                    {item.price.toLocaleString('vi-VN')}đ
-                    {Number(item.originalPrice) > item.price && <div style={cartStyles.oldPrice}>{Number(item.originalPrice).toLocaleString('vi-VN')}đ</div>}
-                  </div>
-                  <div style={cartStyles.qtyCol}>
-                    <div style={cartStyles.qtyControl}>
-                      <button style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, -1)}>−</button>
-                      <span style={cartStyles.qtyNum}>{item.qty}</span>
-                      <button style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, +1)}>+</button>
-                    </div>
-                  </div>
-                  <div style={{ ...cartStyles.priceCol, color: '#318223', fontWeight: 700 }}>
-                    {(item.price * item.qty).toLocaleString('vi-VN')}đ
-                  </div>
-                  <button style={cartStyles.removeBtn} onClick={() => removeItem(itemKey)} title="Xóa">✕</button>
-                </>
-              )}
-            </div>
-            );
-          })}
-          <div style={{ textAlign: 'left', marginTop: 16 }}>
-            <a href="/" style={cartStyles.continueBtn}>← Tiếp tục mua sắm</a>
-          </div>
-        </div>
-
-        {/* Summary */}
-        <div style={cartStyles.summary}>
-          <div style={cartStyles.summaryTitle}>Tóm tắt đơn hàng</div>
-          <div style={cartStyles.summaryRow}>
-            <span>Tạm tính</span>
-            <span style={{ textAlign: 'right' }}>
-              {subtotal.toLocaleString('vi-VN')}đ
-              {savings.saved > 0 && <span style={cartStyles.savedNote}>(tiết kiệm {shortVnd(savings.saved)})</span>}
-            </span>
-          </div>
-          <div style={cartStyles.summaryRow}>
-            <span>Phí vận chuyển</span>
-            <span style={{ color: shipping === 0 ? '#318223' : 'inherit' }}>
-              {shipping === 0 ? 'Miễn phí' : `${shipping.toLocaleString('vi-VN')}đ`}
-            </span>
-          </div>
-          <div style={cartStyles.freeShipNote}>
-            {getFreeshipGap(subtotal) > 0
-              ? `Mua thêm ${getFreeshipGap(subtotal).toLocaleString('vi-VN')}đ để được miễn phí giao hàng. `
-              : 'Đơn của bạn được miễn phí giao thường. '}
-            Phí cuối cùng cập nhật theo địa chỉ và hình thức giao ở bước đặt hàng.
-          </div>
-          <div style={cartStyles.divider} />
-          <div style={cartStyles.totalBox}>
-            <span>Tổng cộng</span>
-            <span style={{ textAlign: 'right' }}>
-              <span style={{ color: '#318223', fontSize: 19 }}>{total.toLocaleString('vi-VN')}đ</span>
-              {savings.percent > 0 && <span style={cartStyles.percentNote}>(Giảm {savings.percent}% so với giá gốc)</span>}
-            </span>
-          </div>
-          <button style={cartStyles.ctaBtn} onClick={() => setPage({ name: 'checkout' })}>
-            Tiến hành đặt hàng →
-          </button>
-          <div style={cartStyles.secureBadge}>🔒 Thanh toán an toàn · Đổi trả 7 ngày</div>
-        </div>
-      </div>
-    </div>
-  );
-};
+// The cart is the checkout: one page with the items, delivery details and the order button.
+const CartPage = (props) => <CheckoutPage {...props} />;
 
 const cartStyles = {
   title: { fontSize: 28, fontWeight: 800, color: '#1a1a1a', marginBottom: 28, letterSpacing: '-0.5px' },
@@ -2709,38 +2553,45 @@ const CheckoutAddressField = ({ form, setForm, errors, setErrors }) => {
   );
 };
 
-const CheckoutPage = ({ cart, setCart, setPage }) => {
+// One page, like a marketplace checkout: who/where on the left, the cart with pictures and
+// the totals on the right, and a bar at the bottom whose "ĐẶT HÀNG" button sends the order
+// straight away (no separate confirm step).
+const CheckoutPage = ({ cart, setCart, setPage, productImages = {} }) => {
   const isMobile = useIsMobile();
-  const [step, setStep] = React.useState(1); // 1=info, 2=confirm, 3=success
+  const [placed, setPlaced] = React.useState(false);
   const [form, setForm] = React.useState(() => ({ salutation: '', name: '', phone: '', city: '', district: '', ward: '', address: '', note: '', ...loadCheckoutProfile() }));
   const [rememberProfile, setRememberProfile] = React.useState(true);
   const [deliveryMethod, setDeliveryMethod] = React.useState('standard');
+  const [showNote, setShowNote] = React.useState(() => Boolean(form.note));
   const [errors, setErrors] = React.useState({});
   const [orderSending, setOrderSending] = React.useState(false);
   const [orderError, setOrderError] = React.useState('');
   const [orderReceipt, setOrderReceipt] = React.useState(null);
+  const [showPerkBanner, setShowPerkBanner] = React.useState(() => {
+    try { return sessionStorage.getItem('phuonglam-cart-perk-hidden') !== '1'; } catch { return true; }
+  });
+
+  const updateQty = (cartKey, delta) => setCart(prev => prev.map(item =>
+    getCartItemKey(item) === cartKey ? { ...item, qty: Math.max(1, item.qty + delta) } : item));
+  const removeItem = (cartKey) => setCart(prev => prev.filter(item => getCartItemKey(item) !== cartKey));
 
   const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const itemCount = cart.reduce((s, i) => s + i.qty, 0);
   const hasCandleCup = cart.some(item => item.categoryId === 'nen-ly');
-  const isHcmAddress = isHoChiMinhCity(form.city);
-  const canUseExpress = isHcmAddress;
+  const canUseExpress = isHoChiMinhCity(form.city);
   const selectedDeliveryMethod = deliveryMethod;
   const deliveryMethodLabel = selectedDeliveryMethod === 'express' ? 'Hỏa tốc' : 'Giao thường';
   const deliveryNote = selectedDeliveryMethod === 'express'
     ? 'Hỏa tốc: giao trong 1 giờ, áp dụng cho địa chỉ nội thành TP.HCM.'
     : getStandardDeliveryNote(form.city);
-  const checkoutSavings = getCartSavings(cart);
-  const shippingInfo = calculateShipping(cart, {
-    city: form.city,
-    deliveryMethod: selectedDeliveryMethod,
-  });
+  const savings = getCartSavings(cart);
+  const shippingInfo = calculateShipping(cart, { city: form.city, deliveryMethod: selectedDeliveryMethod });
   const shipping = shippingInfo.fee;
   const total = subtotal + shipping;
+  const freeshipGap = getFreeshipGap(subtotal);
 
   React.useEffect(() => {
-    if (!canUseExpress && deliveryMethod === 'express') {
-      setDeliveryMethod('standard');
-    }
+    if (!canUseExpress && deliveryMethod === 'express') setDeliveryMethod('standard');
   }, [canUseExpress, deliveryMethod]);
 
   const validate = () => {
@@ -2749,10 +2600,10 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     const city = matchAddressOption(form.city, PROVINCE_OPTIONS);
     if (!form.name.trim()) e.name = 'Vui lòng nhập họ tên';
     if (!isValidPhone(phone)) e.phone = phoneError(phone) || 'Vui lòng nhập số điện thoại';
-    if (!form.city.trim()) e.city = 'Vui lòng chọn tỉnh/thành phố';
-    else if (!city) e.city = 'Chọn tỉnh/thành phố trong danh sách gợi ý';
-    if (!form.ward.trim()) e.ward = 'Vui lòng nhập phường/xã';
     if (!form.address.trim()) e.address = 'Vui lòng nhập số nhà, tên đường';
+    if (!form.city.trim()) e.city = 'Chọn tỉnh/thành phố';
+    else if (!city) e.city = 'Chọn trong danh sách gợi ý';
+    if (!form.ward.trim()) e.ward = 'Chọn phường/xã';
     setForm(f => ({ ...f, phone: isValidPhone(phone) ? phone : f.phone, city: city || f.city }));
     setErrors(e);
     const firstError = ['name', 'phone', 'address', 'city', 'ward'].find(key => e[key]);
@@ -2763,7 +2614,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         field.focus({ preventScroll: true });
       }
     }
-    return Object.keys(e).length === 0;
+    return !firstError;
   };
 
   const saveCheckoutProfile = () => {
@@ -2775,17 +2626,16 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     safeSetLocalStorage(CHECKOUT_PROFILE_KEY, JSON.stringify(profile));
   };
 
-  const handleSubmit = () => {
-    setOrderError('');
-    if (validate()) setStep(2);
-  };
+  const fullAddress = [form.address, form.ward, form.district, form.city].filter(Boolean).join(', ');
+  const districtOptions = form.city ? Object.keys(OLD_ADDRESS_OPTIONS[form.city] || {}) : [];
+  const wardOptions = form.city ? ((OLD_ADDRESS_OPTIONS[form.city] || {})[form.district] || []) : [];
 
   const buildOrderPayload = () => ({
     customerName: form.name.trim(),
     salutation: form.salutation || '',
     phone: normalizePhone(form.phone),
     address: fullAddress,
-    note: form.note.trim(),
+    note: showNote ? form.note.trim() : '',
     city: form.city,
     district: form.district,
     ward: form.ward,
@@ -2811,9 +2661,10 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     })),
   });
 
-  const handleConfirm = async () => {
-    if (orderSending) return;
+  const placeOrder = async () => {
+    if (orderSending || !cart.length) return;
     setOrderError('');
+    if (!validate()) return;
     setOrderSending(true);
     try {
       const response = await fetch(ORDER_WEBHOOK_URL, {
@@ -2822,9 +2673,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         body: JSON.stringify(buildOrderPayload()),
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.ok === false) {
-        throw new Error(result.error || 'Không gửi được đơn hàng');
-      }
+      if (!response.ok || result.ok === false) throw new Error(result.error || 'Không gửi được đơn hàng');
       setOrderReceipt({
         reference: result.orderId || result.order?.id || result.id || '',
         items: cart.map(item => ({ ...item })),
@@ -2833,8 +2682,8 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
         total,
       });
       saveCheckoutProfile();
+      setPlaced(true);
       setCart([]);
-      setStep(3);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error('Order webhook failed', error);
@@ -2844,15 +2693,8 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     }
   };
 
-  const fullAddress = [form.address, form.ward, form.district, form.city].filter(Boolean).join(', ');
-  const cityOptions = PROVINCE_OPTIONS;
-  const districtOptions = form.city ? Object.keys(OLD_ADDRESS_OPTIONS[form.city] || {}) : [];
-  const wardOptions = form.city
-    ? ((OLD_ADDRESS_OPTIONS[form.city] || {})[form.district] || [])
-    : [];
-
   // SUCCESS
-  if (step === 3) return (
+  if (placed) return (
     <div style={{ maxWidth: 540, margin: '80px auto', textAlign: 'center', padding: '0 24px' }}>
       <div style={coStyles.successIcon}>✓</div>
       <h2 style={{ fontSize: 26, fontWeight: 800, color: '#1a1a1a', marginBottom: 12 }}>Đặt hàng thành công!</h2>
@@ -2884,159 +2726,171 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     </div>
   );
 
-  return (
-    <div style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '16px 16px' : '32px 24px' }}>
-      {/* Steps */}
-      <div style={{ ...coStyles.steps, ...(isMobile ? coStyles.stepsMobile : {}) }}>
-        {['Thông tin', 'Xác nhận', 'Hoàn tất'].map((s, i) => (
-          <div key={s} style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 4 : 8, minWidth: 0 }}>
-            <div style={{ ...coStyles.stepDot, ...(isMobile ? coStyles.stepDotMobile : {}), background: step > i ? '#318223' : step === i + 1 ? '#318223' : '#e0e0e0', color: step >= i + 1 ? '#fff' : '#aaa' }}>{step > i + 1 ? '✓' : i + 1}</div>
-            <span style={{ fontSize: isMobile ? 11 : 13, whiteSpace: 'nowrap', fontWeight: step === i + 1 ? 700 : 400, color: step === i + 1 ? '#1a1a1a' : '#aaa' }}>{s}</span>
-            {i < 2 && <div style={{ ...coStyles.stepLine, ...(isMobile ? coStyles.stepLineMobile : {}) }} />}
-          </div>
-        ))}
+  if (!cart.length) return (
+    <div style={{ maxWidth: 600, margin: '80px auto', textAlign: 'center', padding: '0 24px' }}>
+      <div style={{ fontSize: 64, marginBottom: 16 }}>🛒</div>
+      <h2 style={{ fontSize: 22, fontWeight: 700, color: '#1a1a1a', marginBottom: 12 }}>Giỏ hàng trống</h2>
+      <p style={{ color: '#888', marginBottom: 28 }}>Hãy thêm sản phẩm yêu thích vào giỏ nhé!</p>
+      <a href="/" style={cartStyles.ctaBtn}>Tiếp tục mua sắm</a>
+    </div>
+  );
+
+  const infoCard = (
+    <section style={coStyles.formCard} aria-labelledby="checkout-info-title">
+      <h2 id="checkout-info-title" style={coStyles.bigTitle}>Thông tin của bạn</h2>
+      <div style={isMobile ? undefined : coStyles.fieldPair}>
+        <CheckoutField
+          id="name" label="Họ tên *" placeholder="Nhập họ tên của bạn" form={form} setForm={setForm} errors={errors} setErrors={setErrors}
+          prefix={(
+            <select aria-label="Danh xưng" value={form.salutation || ''} onChange={e => setForm(f => ({ ...f, salutation: e.target.value }))} style={coStyles.salutation}>
+              <option value="">Anh/Chị</option>
+              <option value="Anh">Anh</option>
+              <option value="Chị">Chị</option>
+            </select>
+          )}
+        />
+        <CheckoutField id="phone" label="Số điện thoại *" placeholder="Nhập số điện thoại" type="tel" validate={phoneError} onCommit={value => (isValidPhone(value) ? normalizePhone(value) : value)} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+      </div>
+      <CheckoutAddressField form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+      <div style={isMobile ? undefined : coStyles.fieldTriple}>
+        <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={PROVINCE_OPTIONS} placeholder="Chọn tỉnh/thành phố" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
+        <CheckoutSuggestField id="district" label="Quận/Huyện" options={districtOptions} placeholder={form.city ? 'Chọn quận/huyện' : 'Chọn tỉnh trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
+        <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Chọn phường/xã' : 'Chọn tỉnh trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
       </div>
 
-      <div style={{ ...coStyles.layout, gridTemplateColumns: isMobile ? '1fr' : '1fr 360px', gap: isMobile ? 16 : 28 }}>
-        {/* STEP 1: Form */}
-        {step === 1 && (
-          <div style={coStyles.formCard}>
-            <h2 style={coStyles.cardTitle}>Thông tin giao hàng</h2>
-            <div style={coStyles.formHint}>Địa chỉ theo tên cũ (trước sáp nhập). Gõ không dấu cũng được, ví dụ "hcm", "ha noi".</div>
-            <div style={isMobile ? undefined : coStyles.fieldPair}>
-              <CheckoutField
-                id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors}
-                prefix={(
-                  <select
-                    aria-label="Danh xưng"
-                    value={form.salutation || ''}
-                    onChange={e => setForm(f => ({ ...f, salutation: e.target.value }))}
-                    style={coStyles.salutation}
-                  >
-                    <option value="">Anh/Chị</option>
-                    <option value="Anh">Anh</option>
-                    <option value="Chị">Chị</option>
-                  </select>
-                )}
-              />
-              <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901 234 567" type="tel" validate={phoneError} onCommit={value => (isValidPhone(value) ? normalizePhone(value) : value)} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            </div>
-            <CheckoutAddressField form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={cityOptions} placeholder="Gõ tỉnh/thành phố để chọn" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
-            <div style={isMobile ? undefined : coStyles.fieldPair}>
-              <CheckoutSuggestField id="district" label="Quận/Huyện (nếu có)" options={districtOptions} placeholder={form.city ? 'Bỏ trống nếu địa chỉ mới không có' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, ward: '' }))} />
-              <CheckoutSuggestField id="ward" label="Phường/Xã *" options={wardOptions} placeholder={form.city ? 'Gõ phường/xã' : 'Chọn tỉnh/thành phố trước'} disabled={!form.city} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            </div>
-            <div style={coStyles.field}>
-              <label style={coStyles.label}>Vận chuyển *</label>
-              <div style={coStyles.shippingOptions}>
-                <button
-                  type="button"
-                  style={{ ...coStyles.shippingOption, ...(selectedDeliveryMethod === 'standard' ? coStyles.shippingOptionActive : {}) }}
-                  onClick={() => setDeliveryMethod('standard')}
-                >
-                  <span style={coStyles.shippingTitle}>Giao thường</span>
-                  <span style={coStyles.shippingDesc}>{getStandardDeliveryNote(form.city)}</span>
-                </button>
-                {canUseExpress && (
-                  <button
-                    type="button"
-                    style={{ ...coStyles.shippingOption, ...(selectedDeliveryMethod === 'express' ? coStyles.shippingOptionActive : {}) }}
-                    onClick={() => setDeliveryMethod('express')}
-                  >
-                    <span style={coStyles.shippingTitle}>Hỏa tốc</span>
-                    <span style={coStyles.shippingDesc}>Nhận trong 1 giờ · +{SHIPPING_RULES.expressFee.toLocaleString('vi-VN')}đ</span>
-                  </button>
-                )}
-              </div>
-              {!canUseExpress && (
-                <div style={coStyles.shippingUnavailable}>Hỏa tốc chỉ áp dụng cho khách chọn địa chỉ TP.HCM.</div>
-              )}
-              <div style={coStyles.shippingNote}>{deliveryNote}</div>
-            </div>
-            <CheckoutField id="note" label="Ghi chú (tùy chọn)" placeholder="Ghi chú thêm cho người giao hàng..." multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-            <label style={coStyles.rememberRow}>
-              <input type="checkbox" checked={rememberProfile} onChange={e => setRememberProfile(e.target.checked)} style={{ accentColor: '#318223' }} />
-              <span>Lưu thông tin trên máy này cho lần đặt sau</span>
-            </label>
-            <button style={coStyles.primaryBtn} onClick={handleSubmit}>Xem lại đơn hàng →</button>
-          </div>
-        )}
-
-        {/* STEP 2: Confirm */}
-        {step === 2 && (
-          <div style={coStyles.formCard}>
-            <h2 style={coStyles.cardTitle}>Xác nhận đơn hàng</h2>
-            <div style={coStyles.confirmInfo}>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Người nhận</span><span style={coStyles.confirmVal}>{[form.salutation, form.name].filter(Boolean).join(' ')}</span></div>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Số điện thoại</span><span style={coStyles.confirmVal}>{form.phone}</span></div>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Tỉnh/Thành phố</span><span style={coStyles.confirmVal}>{form.city}</span></div>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Quận/Huyện</span><span style={coStyles.confirmVal}>{form.district}</span></div>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Phường/Xã</span><span style={coStyles.confirmVal}>{form.ward}</span></div>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Địa chỉ</span><span style={coStyles.confirmVal}>{fullAddress}</span></div>
-              <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Vận chuyển</span><span style={coStyles.confirmVal}>{deliveryMethodLabel} - {deliveryNote}</span></div>
-              {form.note && <div style={coStyles.confirmRow}><span style={coStyles.confirmLabel}>Ghi chú</span><span style={coStyles.confirmVal}>{form.note}</span></div>}
-            </div>
-            <div style={coStyles.payMethod}>
-              <div style={coStyles.cardTitle}>Phương thức thanh toán</div>
-              <label style={coStyles.payOption}>
-                <input type="radio" name="pay" defaultChecked style={{ accentColor: '#318223' }} />
-                <span>Thanh toán khi nhận hàng (COD)</span>
-              </label>
-            </div>
-          </div>
-        )}
-
-        {/* ORDER SUMMARY */}
-        <div>
-          <div style={coStyles.summary}>
-            <div style={coStyles.cardTitle}>Đơn hàng ({cart.reduce((s, i) => s + i.qty, 0)} sản phẩm)</div>
-            {cart.map(item => (
-              <div key={getCartItemKey(item)} style={coStyles.summaryItem}>
-                <div style={coStyles.summaryItemLeft}>
-                  <div style={coStyles.summaryName}>{item.name}</div>
-                  {item.selectedVariant && <div style={{ fontSize: 12, color: '#318223', fontWeight: 600, marginTop: 3 }}>Phân loại: {item.selectedVariant.name}</div>}
-                  <div style={{ fontSize: 12, color: '#aaa' }}>x{item.qty}</div>
-                </div>
-                <div style={coStyles.summaryItemPrice}>{(item.price * item.qty).toLocaleString('vi-VN')}đ</div>
-              </div>
-            ))}
-            <div style={coStyles.summaryDivider} />
-            <div style={coStyles.summaryRow}><span>Tạm tính</span><span style={{ textAlign: 'right' }}>{subtotal.toLocaleString('vi-VN')}đ{checkoutSavings.saved > 0 && <span style={cartStyles.savedNote}>(tiết kiệm {shortVnd(checkoutSavings.saved)})</span>}</span></div>
-            <div style={coStyles.summaryRow}>
-              <span>Vận chuyển</span>
-              <span style={{ color: shipping === 0 ? '#318223' : 'inherit' }}>{shipping === 0 ? 'Miễn phí' : `${shipping.toLocaleString('vi-VN')}đ`}</span>
-            </div>
-            <div style={coStyles.summaryDelivery}>
-              <strong>{deliveryMethodLabel}</strong> · {deliveryNote}
-            </div>
-            <div style={coStyles.summaryDivider} />
-            <div style={cartStyles.totalBox}>
-              <span>Tổng cộng</span>
-              <span style={{ textAlign: 'right' }}>
-                <span style={{ color: '#318223', fontSize: 18 }}>{total.toLocaleString('vi-VN')}đ</span>
-                {checkoutSavings.percent > 0 && <span style={cartStyles.percentNote}>(Giảm {checkoutSavings.percent}% so với giá gốc)</span>}
-              </span>
-            </div>
-            {step === 2 && (
-              <div style={coStyles.confirmActions}>
-                <button style={coStyles.secondaryBtnSmall} onClick={() => setStep(1)}>← Sửa thông tin</button>
-                <button
-                  style={{ ...coStyles.primaryBtnSmall, opacity: orderSending ? 0.72 : 1, cursor: orderSending ? 'wait' : 'pointer' }}
-                  onClick={handleConfirm}
-                  disabled={orderSending}
-                >
-                  {orderSending ? 'Đang gửi đơn...' : 'Xác nhận đặt hàng'}
-                </button>
-                {orderError && <div style={coStyles.orderError}>{orderError}</div>}
-              </div>
-            )}
-          </div>
-          {hasCandleCup && (
-            <div style={coStyles.candleDeliveryNote}>
-              Nến ly giao toàn quốc. Hỏa tốc trong 1 giờ áp dụng tại nội thành TP.HCM.
-            </div>
+      <div style={coStyles.field}>
+        <label style={coStyles.label}>Vận chuyển</label>
+        <div style={coStyles.shippingOptions}>
+          <button type="button" style={{ ...coStyles.shippingOption, ...(selectedDeliveryMethod === 'standard' ? coStyles.shippingOptionActive : {}) }} onClick={() => setDeliveryMethod('standard')}>
+            <span style={coStyles.shippingTitle}>Giao thường</span>
+            <span style={coStyles.shippingDesc}>{getStandardDeliveryNote(form.city)}</span>
+          </button>
+          {canUseExpress && (
+            <button type="button" style={{ ...coStyles.shippingOption, ...(selectedDeliveryMethod === 'express' ? coStyles.shippingOptionActive : {}) }} onClick={() => setDeliveryMethod('express')}>
+              <span style={coStyles.shippingTitle}>Hỏa tốc</span>
+              <span style={coStyles.shippingDesc}>Nhận trong 1 giờ · +{SHIPPING_RULES.expressFee.toLocaleString('vi-VN')}đ</span>
+            </button>
           )}
+        </div>
+        {!canUseExpress && <div style={coStyles.fieldHint}>ⓘ Hỏa tốc trong 1 giờ chỉ áp dụng cho địa chỉ TP.HCM.</div>}
+      </div>
+
+      <label style={coStyles.rememberRow}>
+        <input type="checkbox" checked={showNote} onChange={e => setShowNote(e.target.checked)} style={{ accentColor: '#318223' }} />
+        <span>Ghi chú khác</span>
+      </label>
+      {showNote && <CheckoutField id="note" label="Ghi chú" placeholder="Ví dụ: giao giờ hành chính, gọi trước khi giao…" multiline form={form} setForm={setForm} errors={errors} setErrors={setErrors} />}
+      <label style={coStyles.rememberRow}>
+        <input type="checkbox" checked={rememberProfile} onChange={e => setRememberProfile(e.target.checked)} style={{ accentColor: '#318223' }} />
+        <span>Lưu thông tin trên máy này cho lần đặt sau</span>
+      </label>
+    </section>
+  );
+
+  const paymentCard = (
+    <section style={coStyles.formCard} aria-labelledby="checkout-pay-title">
+      <h2 id="checkout-pay-title" style={coStyles.bigTitle}>Phương thức thanh toán</h2>
+      <label style={{ ...coStyles.payChoice, ...coStyles.payChoiceActive }}>
+        <input type="radio" name="pay" checked readOnly style={{ accentColor: '#318223', width: 18, height: 18 }} />
+        <span style={coStyles.payIcon} aria-hidden="true">💵</span>
+        <span><strong>Thanh toán khi nhận hàng (COD)</strong><br /><span style={{ fontSize: 13, color: '#777' }}>Kiểm tra hàng rồi mới trả tiền</span></span>
+      </label>
+    </section>
+  );
+
+  const cartCard = (
+    <section style={coStyles.formCard} aria-labelledby="checkout-cart-title">
+      <h2 id="checkout-cart-title" style={coStyles.bigTitle}>Giỏ hàng <span style={coStyles.countNote}>({itemCount})</span></h2>
+      {showPerkBanner && (
+        <div style={cartStyles.perkBanner} role="note">
+          <span style={cartStyles.perkIcon} aria-hidden="true">!</span>
+          <span style={{ flex: 1 }}>
+            {freeshipGap > 0 ? `Mua thêm ${freeshipGap.toLocaleString('vi-VN')}đ để được freeship` : `Đơn của bạn được freeship`} · Đổi trả trong 7 ngày
+          </span>
+          <button type="button" style={cartStyles.perkClose} aria-label="Ẩn thông báo" onClick={() => {
+            setShowPerkBanner(false);
+            try { sessionStorage.setItem('phuonglam-cart-perk-hidden', '1'); } catch { /* storage off */ }
+          }}>×</button>
+        </div>
+      )}
+      {cart.map(item => {
+        const itemKey = getCartItemKey(item);
+        const original = Number(item.originalPrice) || 0;
+        return (
+          <div key={itemKey} style={coStyles.cartItem}>
+            <a href={productUrl(item)} style={{ flexShrink: 0 }}>
+              <ImgPlaceholder label={item.name} w={isMobile ? 76 : 96} h={isMobile ? 76 : 96} bg="#f0f5ef" style={{ borderRadius: 10 }} src={item.selectedVariant?.image || getProductDisplayImage(item, productImages)} responsiveSizes="96px" />
+            </a>
+            <div style={coStyles.cartItemBody}>
+              <div style={coStyles.cartItemTop}>
+                <a href={productUrl(item)} style={coStyles.cartItemName}>{item.name}</a>
+                <div style={coStyles.cartItemPrice}>
+                  {(item.price * item.qty).toLocaleString('vi-VN')}đ
+                  {original > item.price && <div style={cartStyles.oldPrice}>{(original * item.qty).toLocaleString('vi-VN')}đ</div>}
+                </div>
+              </div>
+              {item.selectedVariant && <span style={coStyles.variantChip}>{item.selectedVariant.name}</span>}
+              <div style={coStyles.cartItemActions}>
+                <div style={cartStyles.qtyControl}>
+                  <button type="button" style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, -1)} aria-label="Giảm số lượng">−</button>
+                  <span style={cartStyles.qtyNum}>{item.qty}</span>
+                  <button type="button" style={cartStyles.qtyBtn} onClick={() => updateQty(itemKey, +1)} aria-label="Tăng số lượng">+</button>
+                </div>
+                <button type="button" style={coStyles.removeLink} onClick={() => removeItem(itemKey)}>🗑 Xóa</button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+      {hasCandleCup && <div style={coStyles.fieldHint}>Nến ly giao toàn quốc. Hỏa tốc trong 1 giờ áp dụng tại nội thành TP.HCM.</div>}
+    </section>
+  );
+
+  const summaryCard = (
+    <section style={coStyles.formCard} aria-labelledby="checkout-sum-title">
+      <h2 id="checkout-sum-title" style={coStyles.bigTitle}>Tóm tắt đơn hàng</h2>
+      <div style={coStyles.summaryRow}>
+        <span>Tạm tính</span>
+        <span style={{ textAlign: 'right' }}>{subtotal.toLocaleString('vi-VN')}đ{savings.saved > 0 && <span style={cartStyles.savedNote}>(tiết kiệm {shortVnd(savings.saved)})</span>}</span>
+      </div>
+      <div style={coStyles.summaryRow}>
+        <span>Phí giao hàng</span>
+        <span style={{ color: shipping === 0 ? '#318223' : 'inherit' }}>{shipping === 0 ? 'Miễn phí' : `${shipping.toLocaleString('vi-VN')}đ`}</span>
+      </div>
+      <div style={{ ...coStyles.fieldHint, marginBottom: 12 }}>{deliveryMethodLabel} · {deliveryNote}</div>
+      <div style={cartStyles.totalBox}>
+        <span>Tổng cộng</span>
+        <span style={{ textAlign: 'right' }}>
+          <span style={{ color: '#318223', fontSize: 19 }}>{total.toLocaleString('vi-VN')}đ</span>
+          {savings.percent > 0 && <span style={cartStyles.percentNote}>(Giảm {savings.percent}% so với giá gốc)</span>}
+        </span>
+      </div>
+    </section>
+  );
+
+  return (
+    <div style={{ maxWidth: 1200, margin: '0 auto', padding: isMobile ? '16px 12px 120px' : '32px 24px 120px' }}>
+      {isMobile ? (
+        <div style={{ display: 'grid', gap: 14 }}>{cartCard}{infoCard}{paymentCard}{summaryCard}</div>
+      ) : (
+        <div style={coStyles.onePage}>
+          <div style={{ display: 'grid', gap: 20, alignContent: 'start' }}>{infoCard}{paymentCard}</div>
+          <div style={{ display: 'grid', gap: 20, alignContent: 'start' }}>{cartCard}{summaryCard}</div>
+        </div>
+      )}
+
+      <div style={coStyles.orderBar} role="region" aria-label="Đặt hàng">
+        <div style={coStyles.orderBarInner}>
+          {(orderError || Object.values(errors).some(Boolean)) && (
+            <div style={coStyles.orderBarError}>{orderError || 'Vui lòng kiểm tra lại thông tin giao hàng.'}</div>
+          )}
+          <div style={coStyles.orderBarTotal}>
+            <div style={{ fontSize: isMobile ? 20 : 24, fontWeight: 800, color: '#318223' }}>{total.toLocaleString('vi-VN')}đ</div>
+            {savings.saved > 0 && <div style={{ fontSize: 12, color: '#777' }}>Tiết kiệm {savings.saved.toLocaleString('vi-VN')}đ</div>}
+          </div>
+          <button type="button" style={{ ...coStyles.orderBarBtn, opacity: orderSending ? 0.7 : 1, cursor: orderSending ? 'wait' : 'pointer' }} onClick={placeOrder} disabled={orderSending}>
+            {orderSending ? 'ĐANG GỬI…' : 'ĐẶT HÀNG'}
+          </button>
         </div>
       </div>
     </div>
@@ -3044,6 +2898,26 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
 };
 
 const coStyles = {
+  onePage: { display: 'grid', gridTemplateColumns: 'minmax(0, 1.05fr) minmax(0, 1fr)', gap: 24, alignItems: 'start' },
+  bigTitle: { fontSize: 22, fontWeight: 800, color: '#1a1a1a', margin: '0 0 18px' },
+  countNote: { fontSize: 15, color: '#888', fontWeight: 600 },
+  fieldTriple: { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 12 },
+  payChoice: { display: 'flex', alignItems: 'center', gap: 12, border: '1.5px solid #e8e8e8', borderRadius: 12, padding: '14px 16px', cursor: 'pointer' },
+  payChoiceActive: { borderColor: '#318223', background: '#f5faf3' },
+  payIcon: { fontSize: 24 },
+  cartItem: { display: 'flex', gap: 14, padding: '14px 0', borderBottom: '1px solid #f0f0ec' },
+  cartItemBody: { flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 8 },
+  cartItemTop: { display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'flex-start' },
+  cartItemName: { fontSize: 15, fontWeight: 600, color: '#1a1a1a', textDecoration: 'none', lineHeight: 1.35 },
+  cartItemPrice: { fontSize: 15, fontWeight: 800, color: '#1a1a1a', textAlign: 'right', whiteSpace: 'nowrap' },
+  variantChip: { alignSelf: 'flex-start', background: '#f2f2ee', borderRadius: 999, padding: '5px 12px', fontSize: 13, color: '#444', maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' },
+  cartItemActions: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 },
+  removeLink: { border: 0, background: 'none', color: '#888', fontSize: 13, cursor: 'pointer', padding: 4 },
+  orderBar: { position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 40, background: '#fff', borderTop: '1px solid #e8e8e4', boxShadow: '0 -8px 24px rgba(0,0,0,0.06)', paddingBottom: 'env(safe-area-inset-bottom)' },
+  orderBarInner: { maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 16, padding: '10px 16px', flexWrap: 'wrap' },
+  orderBarTotal: { textAlign: 'right', marginLeft: 'auto' },
+  orderBarBtn: { border: 0, borderRadius: 12, background: '#318223', color: '#fff', fontWeight: 800, fontSize: 16, letterSpacing: 0.5, padding: '15px 36px', minWidth: 170, fontFamily: 'inherit' },
+  orderBarError: { flexBasis: '100%', color: '#e84848', fontSize: 13, textAlign: 'right' },
   steps: { display: 'flex', alignItems: 'center', gap: 0, marginBottom: 36, justifyContent: 'center', width: '100%', boxSizing: 'border-box' },
   stepsMobile: { justifyContent: 'space-between', gap: 2, marginBottom: 24, overflow: 'hidden' },
   stepDot: { width: 28, height: 28, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 700 },
@@ -3332,7 +3206,7 @@ const App = () => {
       case 'category': return <CategoryPage cat={page.cat} setPage={navigateTo} addToCart={addToCart} productImages={productImages} />;
       case 'product':  return <ProductPage productId={page.id} setPage={navigateTo} goBack={goBack} addToCart={addToCart} productImages={productImages} />;
       case 'cart':     return <CartPage cart={cart} setCart={setCart} setPage={navigateTo} productImages={productImages} />;
-      case 'checkout': return <CheckoutPage cart={cart} setCart={setCart} setPage={navigateTo} />;
+      case 'checkout': return <CheckoutPage cart={cart} setCart={setCart} setPage={navigateTo} productImages={productImages} />;
       case 'blog':     return <BlogPage setPage={navigateTo} />;
       default:         return <HomePage setPage={navigateTo} addToCart={addToCart} productImages={productImages} featuredIds={featuredIds} categoryImages={categoryImages} headerImages={headerImages} />;
     }
