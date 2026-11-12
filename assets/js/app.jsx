@@ -2693,7 +2693,7 @@ const CheckoutAddressField = ({ form, setForm, errors, setErrors }) => {
               type="button"
               role="option"
               aria-selected={index === active}
-              style={{ ...coStyles.suggestItem, background: index === active ? '#f0f8ed' : undefined }}
+              style={{ ...coStyles.suggestItem, background: index === active ? '#f0f8ed' : '#fff' }}
               onMouseDown={e => { e.preventDefault(); apply(item); }}
             >
               {item.label}
