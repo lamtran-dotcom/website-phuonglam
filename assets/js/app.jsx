@@ -2193,6 +2193,16 @@ const normalizePhone = (value) => {
   return digits.replace(/\+/g, '');
 };
 
+// Vietnamese numbers: mobile 03/05/07/08/09 + 8 digits, or landline 02 + 8–9 digits.
+const isValidPhone = (value) => /^0(?:[35789]\d{8}|2\d{8,9})$/.test(normalizePhone(value));
+const phoneError = (value) => {
+  const phone = normalizePhone(value);
+  if (!phone) return '';
+  if (isValidPhone(phone)) return '';
+  if (/^0[35789]\d{0,7}$/.test(phone) || /^02\d{0,7}$/.test(phone)) return 'Số điện thoại chưa đủ số';
+  return 'Số điện thoại không hợp lệ';
+};
+
 const CHECKOUT_PROFILE_KEY = 'phuonglam-checkout-profile';
 const CHECKOUT_PROFILE_FIELDS = ['name', 'phone', 'city', 'district', 'ward', 'address'];
 
@@ -2292,7 +2302,7 @@ const calculateShipping = (cart, { city = '', deliveryMethod = 'standard' } = {}
 
 const CHECKOUT_AUTOCOMPLETE = { name: 'name', phone: 'tel', address: 'street-address', note: 'off' };
 
-const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setErrors, type = 'text', multiline = false, onCommit }) => {
+const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setErrors, type = 'text', multiline = false, onCommit, validate }) => {
   const ref = React.useRef(null);
   React.useLayoutEffect(() => {
     if (ref.current && ref.current !== document.activeElement) {
@@ -2301,14 +2311,16 @@ const CheckoutField = ({ id, label, placeholder, form, setForm, errors, setError
   });
 
   // Sync on every change, not only on blur, so browser autofill of unfocused fields is kept.
-  const syncValue = (value) => {
+  // While typing, an error already on screen is re-checked (so it clears as soon as the
+  // value is right); a new error only appears when the field is left.
+  const syncValue = (value, leaving = false) => {
     setForm(f => ({ ...f, [id]: value }));
-    setErrors(er => ({ ...er, [id]: '' }));
+    setErrors(er => ({ ...er, [id]: validate && (leaving || er[id]) ? validate(value) : '' }));
   };
   const commitValue = (value) => {
     const next = onCommit ? onCommit(value) : value;
     if (ref.current && next !== value) ref.current.value = next;
-    syncValue(next);
+    syncValue(next, true);
   };
   const inputProps = {
     ref,
@@ -2483,12 +2495,12 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
     const phone = normalizePhone(form.phone);
     const city = matchAddressOption(form.city, PROVINCE_OPTIONS);
     if (!form.name.trim()) e.name = 'Vui lòng nhập họ tên';
-    if (!/^0\d{9}$/.test(phone)) e.phone = 'Số điện thoại gồm 10 số, ví dụ 0901234567';
+    if (!isValidPhone(phone)) e.phone = phoneError(phone) || 'Vui lòng nhập số điện thoại';
     if (!form.city.trim()) e.city = 'Vui lòng chọn tỉnh/thành phố';
     else if (!city) e.city = 'Chọn tỉnh/thành phố trong danh sách gợi ý';
     if (!form.ward.trim()) e.ward = 'Vui lòng nhập phường/xã';
     if (!form.address.trim()) e.address = 'Vui lòng nhập số nhà, tên đường';
-    setForm(f => ({ ...f, phone: /^0\d{9}$/.test(phone) ? phone : f.phone, city: city || f.city }));
+    setForm(f => ({ ...f, phone: isValidPhone(phone) ? phone : f.phone, city: city || f.city }));
     setErrors(e);
     const firstError = ['name', 'phone', 'city', 'ward', 'address'].find(key => e[key]);
     if (firstError) {
@@ -2639,7 +2651,7 @@ const CheckoutPage = ({ cart, setCart, setPage }) => {
             <div style={coStyles.formHint}>Gõ không dấu cũng được, ví dụ "hcm", "ha noi". Chọn gợi ý hoặc tự nhập theo địa chỉ hiện tại.</div>
             <div style={isMobile ? undefined : coStyles.fieldPair}>
               <CheckoutField id="name" label="Họ và tên *" placeholder="Nguyễn Văn A" form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
-              <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901 234 567" type="tel" onCommit={value => { const phone = normalizePhone(value); return /^0\d{9}$/.test(phone) ? phone : value; }} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
+              <CheckoutField id="phone" label="Số điện thoại *" placeholder="0901 234 567" type="tel" validate={phoneError} onCommit={value => (isValidPhone(value) ? normalizePhone(value) : value)} form={form} setForm={setForm} errors={errors} setErrors={setErrors} />
             </div>
             <CheckoutSuggestField id="city" label="Tỉnh/Thành phố *" options={cityOptions} placeholder="Gõ tỉnh/thành phố để chọn" form={form} setForm={setForm} errors={errors} setErrors={setErrors} onValueChange={() => setForm(f => ({ ...f, district: '', ward: '' }))} />
             <div style={isMobile ? undefined : coStyles.fieldPair}>

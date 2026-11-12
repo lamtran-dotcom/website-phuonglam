@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-11-12 — Checkout phone field shows errors while filling
+- Leaving the phone field with a wrong number shows a red border and "Số điện thoại chưa đủ số" / "Số điện thoại không hợp lệ"; the error clears as soon as the number is right. Accepts mobile 03/05/07/08/09 + 8 digits, landline 02…, and +84 (rewritten to 0…).
+
 ## 2026-11-12 — Small orders pay 20.000đ shipping
 - Item total under 150.000đ: flat 20.000đ shipping (TP.HCM and provinces). From 150.000đ: free standard shipping up to 5 kg (TP.HCM) / 3 kg (provinces), weight fee above as before; express still +15.000đ. Values are `shipping.smallOrderThreshold` / `smallOrderFee` in `data/settings.json` (also editable in the old admin "Phí ship").
 - Same rule in `calculateShipping` (app.jsx) and the order Worker `shippingFee`. Cart shows "Mua thêm …đ để được miễn phí giao hàng"; promo popup says "Freeship toàn quốc đơn từ 150.000đ"; the shipping policy page text is generated from the settings.
