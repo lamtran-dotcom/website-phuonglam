@@ -670,14 +670,15 @@ const PRODUCTS = [
     ],
     "optionImages": {},
     "images": [
+      "/assets/products/uploads/1794453501545-nen-tea-lights-apollo-imex-am-ap.webp",
       "/assets/products/uploads/1777435799447-chatgpt-image-14-52-27-22-thg-4-2026.webp",
       "/assets/products/uploads/1777435820024-image.webp",
       "/assets/products/uploads/1777455636813-chatgpt-image-16-12-04-29-thg-4-2026.webp",
       "/assets/products/uploads/1777455528964-chatgpt-image-16-31-23-29-thg-4-2026.webp",
-      "/assets/products/uploads/1777435857424-bo-ket-xong-nha-phuong-lam-202604280416-bep-xong-thao-moc-bo-ket-nen-tealight.webp",
       "/assets/products/uploads/1777435866129-nen-tealight-ban-tho-gia-dinh.webp",
-      "/assets/products/uploads/1777435871149-bo-ket-xong-nha-phuong-lam-202604280416-luu-y-an-toan-xong-nha-bo-ket.webp",
-      "/assets/products/uploads/1791376424822-image.webp"
+      "/assets/products/uploads/1791376424822-image.webp",
+      "/assets/products/uploads/1794453528407-lo-dat-thao-moc-ben-hoa-mai-2.webp",
+      "/assets/products/uploads/1794453534297-chatgpt-image-11-00-19-18-thg-5-2026.webp"
     ],
     "reviews": [
       {
