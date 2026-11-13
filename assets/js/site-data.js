@@ -3988,6 +3988,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 32,
+    "title": "Xông nhà tẩy uế: khi nào nên xông, xông bằng gì và cách làm tại nhà",
+    "excerpt": "Xông nhà tẩy uế khi nào, dùng thảo mộc gì và làm ra sao tại nhà? Đọc hướng dẫn thực tế, an toàn và chọn bộ xông phù hợp.",
+    "date": "13 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "xong-nha-tay-ue",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/xong-nha-tay-ue/",
+    "image": "/assets/blog/xong-nha-tay-ue-1794454072141-1-bep-dat-nung-xong-nha-tay-ue-voi-thao-moc-kho-trong-khong-gi.webp",
+    "coverImage": "/assets/blog/xong-nha-tay-ue-1794454072141-1-bep-dat-nung-xong-nha-tay-ue-voi-thao-moc-kho-trong-khong-gi.webp"
+  },
+  {
     "id": 31,
     "title": "Cách xông nhà mới trước khi về ở: chuẩn bị và thực hiện",
     "excerpt": "Cách xông nhà mới trước khi về ở với checklist đồ cần mua, thứ tự từng phòng và lưu ý riêng cho chung cư, nhà thuê. Xem hướng dẫn ngay.",
