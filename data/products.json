@@ -5413,7 +5413,7 @@
     "categoryId": "combo",
     "name": "Bộ xông nhà thảo mộc mini 10 cm Phương Lâm",
     "price": 130000,
-    "originalPrice": 0,
+    "originalPrice": 169000,
     "shortDesc": "Bộ xông nhà mini gồm bếp niêu đất nung 10 cm, gói thảo mộc, vỉ 10 nến tealight 4 giờ và đế đựng nến; bản FULL thêm dĩa lót bếp. Hợp phòng nhỏ, căn hộ, góc làm việc.",
     "description": "Bộ xông nhà mini với bếp niêu đất nung 10 cm, gọn cho phòng ngủ, căn hộ, cửa hàng nhỏ hoặc góc làm việc. Chọn bản thường hoặc bản FULL và gói thảo mộc theo phân loại.\n\nĐiểm nổi bật:\n- Bếp niêu đất nung cỡ 10 cm, nhỏ gọn, dễ cầm và đặt ở nhiều góc.\n- Có sẵn vỉ 10 viên nến tealight 4 giờ và đế đựng nến.\n- Bản FULL thêm dĩa lót bếp và gói thảo mộc combo.\n- Nhiều gói thảo mộc phối sẵn để chọn theo mùi và dịp dùng.\n\nThông số:\n- Bản thường gồm: 1 bếp niêu đất nung 10 cm, 1 gói thảo mộc, vỉ 10 nến tealight 4 giờ, 1 đế đựng nến\n- Bản FULL gồm: 1 bếp niêu đất nung 10 cm, 1 gói combo thảo mộc, vỉ 10 nến tealight 4 giờ, 1 đế đựng nến, 1 dĩa lót bếp\n- Kích thước bếp: 10 cm\n- Chất liệu bếp: đất nung\n\nCách dùng:\n1. Đặt bếp trên mặt phẳng, chịu nhiệt, xa vật dễ cháy.\n2. Đặt nến vào đế, đưa vào lòng bếp rồi châm lửa.\n3. Cho lượng thảo mộc vừa phải lên mặt bếp.\n4. Mở cửa cho thông thoáng trong lúc xông.\n5. Tắt nến, chờ bếp nguội hẳn rồi đổ thảo mộc đã dùng.\n\nLưu ý & bảo quản:\n- Luôn có người trông khi nến đang cháy.\n- Để bếp xa rèm, giấy, trẻ nhỏ và vật nuôi.\n- Không chạm hoặc di chuyển bếp khi còn nóng.\n- Giữ đồ đất nung khô ráo, tránh va đập; cất thảo mộc trong túi kín.",
     "usage": "",
@@ -5508,7 +5508,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Thư Giãn"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_02",
@@ -5516,11 +5517,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014984526-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Tẩy Uế"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_03",
@@ -5528,11 +5530,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014987304-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Xua Muỗi"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_04",
@@ -5540,11 +5543,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014990059-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Nhà Mới"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_05",
@@ -5552,11 +5556,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014993078-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông 12 loại TM"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_06",
@@ -5564,11 +5569,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014999316-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Khử Mùi"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_07",
@@ -5576,11 +5582,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014996231-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Thanh Lọc kk"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_08",
@@ -5588,11 +5595,12 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795015002169-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Giải Cảm"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_09",
@@ -5604,7 +5612,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Thư Giãn"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_10",
@@ -5616,7 +5625,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Tẩy Uế"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_11",
@@ -5628,7 +5638,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Xua Muỗi"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_12",
@@ -5640,7 +5651,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Nhà Mới"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_13",
@@ -5652,7 +5664,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông 12 loại TM"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_14",
@@ -5664,7 +5677,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Khử Mùi"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_15",
@@ -5676,7 +5690,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Thanh Lọc kk"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_16",
@@ -5688,7 +5703,8 @@
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Giải Cảm"
-        }
+        },
+        "originalPrice": 191000
       }
     ],
     "reviews": null,
