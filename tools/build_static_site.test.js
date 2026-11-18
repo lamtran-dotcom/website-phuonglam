@@ -51,6 +51,7 @@ test('policy and contact pages carry only confirmed facts and are listed for the
   assert.deepEqual(infoPageUrls(), [
     'https://phuonglam.com/chinh-sach-doi-tra/',
     'https://phuonglam.com/chinh-sach-van-chuyen/',
+    'https://phuonglam.com/chinh-sach-bao-mat/',
     'https://phuonglam.com/lien-he/',
   ]);
   const html = Object.fromEntries(INFO_PAGES.map(page => [page.path, renderInfoPage(page)]));
@@ -61,6 +62,10 @@ test('policy and contact pages carry only confirmed facts and are listed for the
   assert.match(html['chinh-sach-van-chuyen'], /hỏa tốc trong 1 giờ/);
   assert.match(html['chinh-sach-van-chuyen'], /1–3 ngày/);
   assert.match(html['lien-he'], /https:\/\/zalo\.me\/0773829593/);
+  // Meta requires a public privacy policy and a data-deletion instruction for the Facebook app.
+  assert.match(html['chinh-sach-bao-mat'], /<section id="xoa-du-lieu">/);
+  assert.match(html['chinh-sach-bao-mat'], /không bán thông tin/);
+  assert.match(html['chinh-sach-bao-mat'], /fanpage/);
   for (const [dir, page] of Object.entries(html)) {
     assert.match(page, new RegExp(`<link rel="canonical" href="https://phuonglam\\.com/${dir}/" />`));
     assert.doesNotMatch(page, /name="robots"/);

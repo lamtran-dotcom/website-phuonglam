@@ -1,5 +1,8 @@
 # Changelog
 
+## 2026-11-18 (privacy policy page)
+- Added `/chinh-sach-bao-mat/` (data collected at checkout, use, sharing with the shipping carrier, Facebook app note, deletion request section `#xoa-du-lieu`). Footer link on all static pages, link on the contact page, sitemap entry. `INFO_PAGES` sections accept an optional `id`. Test updated.
+
 ## 2026-11-12 — One-page checkout like Coolmate
 - Cart and checkout are one page: left "Thông tin của bạn" (Anh/Chị + name, phone, address with suggestions, Tỉnh / Quận / Phường in one row, delivery, optional "Ghi chú khác", remember) and "Phương thức thanh toán" (COD); right "Giỏ hàng" (picture, name, variant chip, −/+, crossed-out price, Xóa, freeship banner) and "Tóm tắt đơn hàng". On phones the cart comes first.
 - A bar fixed at the bottom shows the total, "Tiết kiệm …đ" and the ĐẶT HÀNG button, which checks the fields and sends the order at once (the Thông tin → Xác nhận → Hoàn tất steps are gone; the success screen stays).

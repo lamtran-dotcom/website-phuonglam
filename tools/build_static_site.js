@@ -919,6 +919,7 @@ const pageShell = ({ title, description, canonical, image, schema, body, scripts
     <nav class="seo-footer-links" aria-label="Hỗ trợ khách hàng">
       <a href="/chinh-sach-doi-tra/">Chính sách đổi trả</a>
       <a href="/chinh-sach-van-chuyen/">Chính sách vận chuyển</a>
+      <a href="/chinh-sach-bao-mat/">Chính sách bảo mật</a>
       <a href="/lien-he/">Liên hệ</a>
     </nav>
     <div>Zalo/Hotline: 077 3829 593</div>
@@ -1807,6 +1808,23 @@ const INFO_PAGES = [
     ],
   },
   {
+    path: 'chinh-sach-bao-mat',
+    title: 'Chính sách bảo mật | Phương Lâm',
+    breadcrumb: 'Chính sách bảo mật',
+    description: 'Phương Lâm thu thập tên, số điện thoại, địa chỉ khi bạn đặt hàng để giao hàng và hỗ trợ. Cách chúng tôi dùng, bảo vệ thông tin và cách bạn yêu cầu xem, sửa, xóa dữ liệu.',
+    h1: 'Chính sách bảo mật',
+    lead: 'Phương Lâm chỉ dùng thông tin của bạn để giao hàng và hỗ trợ đơn hàng. Trang này giải thích chúng tôi thu thập gì, dùng vào việc gì và bạn có những quyền nào.',
+    sections: [
+      { h2: 'Thông tin chúng tôi thu thập', html: '<p>Khi bạn đặt hàng trên website, chúng tôi thu thập thông tin bạn tự nhập vào mẫu đặt hàng:</p><ul><li>Họ tên.</li><li>Số điện thoại.</li><li>Tỉnh/thành phố và địa chỉ nhận hàng.</li><li>Ghi chú đơn hàng (nếu bạn nhập).</li></ul><p>Khi bạn nhắn tin cho Phương Lâm qua Zalo, Facebook hoặc Instagram, chúng tôi nhìn thấy nội dung tin nhắn và tên hiển thị bạn dùng trên nền tảng đó.</p>' },
+      { h2: 'Chúng tôi dùng thông tin để làm gì', html: '<ul><li>Xác nhận và giao đơn hàng của bạn.</li><li>Liên hệ khi cần xác nhận địa chỉ, giờ giao hoặc tình trạng đơn.</li><li>Hỗ trợ đổi trả, bảo hành theo <a href="/chinh-sach-doi-tra/">chính sách đổi trả</a>.</li><li>Trả lời tin nhắn và câu hỏi của bạn.</li></ul><p>Chúng tôi không bán thông tin của bạn cho bên khác.</p>' },
+      { h2: 'Chia sẻ thông tin', html: '<p>Chúng tôi chỉ chia sẻ thông tin cần thiết để giao hàng (họ tên, số điện thoại, địa chỉ) cho đơn vị vận chuyển thực hiện đơn của bạn. Ngoài trường hợp này, chúng tôi chỉ cung cấp thông tin khi có yêu cầu hợp pháp từ cơ quan có thẩm quyền.</p>' },
+      { h2: 'Fanpage Facebook và ứng dụng đăng bài', html: '<p>Phương Lâm dùng một ứng dụng Facebook của riêng shop chỉ để đăng bài lên fanpage <a href="https://www.facebook.com/nenphuonglam" rel="noopener">Nến Phương Lâm</a>. Ứng dụng này không thu thập, không lưu và không xử lý dữ liệu cá nhân của người dùng Facebook.</p>' },
+      { h2: 'Lưu trữ và bảo vệ', html: '<p>Thông tin đơn hàng được lưu trong thời gian cần thiết để giao hàng, đổi trả và đối soát đơn hàng. Chúng tôi chỉ cho phép người phụ trách đơn hàng của Phương Lâm truy cập thông tin này.</p>' },
+      { id: 'xoa-du-lieu', h2: 'Quyền của bạn và yêu cầu xóa dữ liệu', html: `<p>Bạn có thể yêu cầu xem, sửa hoặc xóa thông tin cá nhân mà Phương Lâm đang giữ. Cách làm:</p><ol><li>Nhắn Zalo <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a> hoặc gọi số này.</li><li>Cho biết họ tên và số điện thoại đã dùng khi đặt hàng, và nói rõ bạn muốn xem, sửa hay xóa thông tin.</li><li>Phương Lâm xử lý yêu cầu và phản hồi cho bạn. Thông tin đơn hàng cần giữ lại theo quy định pháp luật sẽ được giữ lại, các thông tin còn lại được xóa.</li></ol>` },
+      { h2: 'Liên hệ', html: `<p>Mọi câu hỏi về chính sách này, vui lòng liên hệ Zalo CSKH <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a> hoặc xem trang <a href="/lien-he/">Liên hệ</a>.</p>` },
+    ],
+  },
+  {
     path: 'lien-he',
     title: 'Liên hệ Phương Lâm | Zalo CSKH 077 3829 593',
     breadcrumb: 'Liên hệ',
@@ -1818,7 +1836,7 @@ const INFO_PAGES = [
       { h2: 'Chăm sóc khách hàng', html: `<div class="info-box"><p><strong>Zalo CSKH:</strong> <a href="${ZALO_URL}" rel="noopener">${ZALO_PHONE}</a><br><strong>Điện thoại:</strong> <a href="tel:+84773829593">${ZALO_PHONE}</a></p><p>Zalo CSKH trả lời và tiếp nhận thông tin nhanh chóng.</p></div>` },
       { h2: 'Cửa hàng', html: '<p>Phường Tân Phú, TP. Hồ Chí Minh<br>Giờ làm việc: 8:00 – 20:00 mỗi ngày</p>' },
       { h2: 'Mạng xã hội', html: '<ul><li><a href="https://www.facebook.com/nenphuonglam" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/nen.phuonglam/" rel="noopener">Instagram</a></li></ul>' },
-      { h2: 'Xem thêm', html: '<p><a href="/chinh-sach-doi-tra/">Chính sách đổi trả</a> · <a href="/chinh-sach-van-chuyen/">Chính sách vận chuyển</a></p>' },
+      { h2: 'Xem thêm', html: '<p><a href="/chinh-sach-doi-tra/">Chính sách đổi trả</a> · <a href="/chinh-sach-van-chuyen/">Chính sách vận chuyển</a> · <a href="/chinh-sach-bao-mat/">Chính sách bảo mật</a></p>' },
     ],
   },
 ];
@@ -1844,7 +1862,7 @@ const renderInfoPage = (page, shipping = {}) => {
     <article class="info-page">
       <h1>${escapeHtml(page.h1)}</h1>
       <p class="info-lead">${escapeHtml(page.lead)}</p>
-      ${page.sections.map((section) => `<section><h2>${escapeHtml(section.h2)}</h2>${section.html.replace('{{SHIPPING_RULE}}', shippingRuleHtml(shipping))}</section>`).join('\n      ')}
+      ${page.sections.map((section) => `<section${section.id ? ` id="${section.id}"` : ''}><h2>${escapeHtml(section.h2)}</h2>${section.html.replace('{{SHIPPING_RULE}}', shippingRuleHtml(shipping))}</section>`).join('\n      ')}
     </article>
   </main>`;
   return pageShell({
