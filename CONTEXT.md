@@ -122,3 +122,5 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - `cam-on/`: seller prints the QR to `https://phuonglam.com/cam-on/`; optional later: tag orders from the card, real gift/discount tied to the countdown.
 - Confirm HCMC delivery rules with the fulfillment provider and finish local admin upload/draft browser checks.
 - Recheck Search Console and compare full 28-day performance windows after reports refresh.
+
+Shopee → web list — 2026-11-18: 65 Shopee listings tagged S01–S65; 14 exist only on Shopee and can be posted on request ("đăng S44"). List + posting steps: `docs/SHOPEE-PRODUCTS.md`. The full 65-row table (ID → Shopee item id) was not saved; fill in item ids as each product is posted.

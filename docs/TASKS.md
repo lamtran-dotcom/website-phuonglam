@@ -63,6 +63,7 @@
 - [ ] Review whether existing setup instructions need screenshots or operator notes.
 
 ## Later
+- [ ] Đăng các món chỉ có trên Shopee lên web theo yêu cầu chủ shop ("đăng S44"). Danh sách: `docs/SHOPEE-PRODUCTS.md`.
 - [ ] Decide whether production should stay on GitHub Pages or move to Cloudflare Pages/VPS.
 - [ ] Consider a separate hosted admin/backend only if business workflow requires editing away from the local Mac.
 
