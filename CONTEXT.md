@@ -124,3 +124,5 @@ Checkout display — 2026-09-28: removed the customer-visible free-shipping thre
 - Recheck Search Console and compare full 28-day performance windows after reports refresh.
 
 Shopee → web list — 2026-11-18: 65 Shopee listings tagged S01–S65; 14 exist only on Shopee and can be posted on request ("đăng S44"). List + posting steps: `docs/SHOPEE-PRODUCTS.md`. Full 65-row table with Shopee item ids copied from `Content AI Studio/rules/shopee-products.md`.
+
+S44 images — 2026-11-18 (`715e1c9`, live-checked): cover reordered to match Shopee (s44-1 full set first); `optionImages['Tùy chọn']` + variant images set (10cm → s44-5, full → s44-1). Shopee's 'Loại' group has no images. Storefront by design shows no pill thumbnails on the first option group; later groups show the first matching variant's image, so all 'Loại' pills show the 10cm picture (same pattern as Palo Santo). Shopee image #2 is only a voucher overlay frame, not a product photo.
