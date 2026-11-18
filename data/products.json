@@ -5452,12 +5452,17 @@
         ]
       }
     ],
-    "optionImages": {},
+    "optionImages": {
+      "Tùy chọn": {
+        "Bộ Xông 10cm": "/assets/products/uploads/1795012108137-s44-5.webp",
+        "Bộ Xông full 10cm": "/assets/products/uploads/1795012106100-s44-1.webp"
+      }
+    },
     "images": [
+      "/assets/products/uploads/1795012106100-s44-1.webp",
       "/assets/products/uploads/1795012106712-s44-2.webp",
       "/assets/products/uploads/1795012107160-s44-3.webp",
       "/assets/products/uploads/1795012107695-s44-4.webp",
-      "/assets/products/uploads/1795012106100-s44-1.webp",
       "/assets/products/uploads/1795012108137-s44-5.webp"
     ],
     "variants": [
@@ -5467,7 +5472,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Thư Giãn"
@@ -5479,7 +5484,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Tẩy Uế"
@@ -5491,7 +5496,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Xua Muỗi"
@@ -5503,7 +5508,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Nhà Mới"
@@ -5515,7 +5520,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông 12 loại TM"
@@ -5527,7 +5532,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Khử Mùi"
@@ -5539,7 +5544,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Thanh Lọc kk"
@@ -5551,7 +5556,7 @@
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012108137-s44-5.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Giải Cảm"
@@ -5563,7 +5568,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Thư Giãn"
@@ -5575,7 +5580,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Tẩy Uế"
@@ -5587,7 +5592,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Xua Muỗi"
@@ -5599,7 +5604,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Nhà Mới"
@@ -5611,7 +5616,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông 12 loại TM"
@@ -5623,7 +5628,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Khử Mùi"
@@ -5635,7 +5640,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Thanh Lọc kk"
@@ -5647,7 +5652,7 @@
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Giải Cảm"
