@@ -662,7 +662,8 @@ const renderSales = (p) => {
     <h3>Danh sách phân loại hàng <span class="hint">(${p.variants.length} đang bán)</span></h3>
     <div class="apply-all">
       <div><label>Giá bán</label><input inputmode="numeric" id="all-price" placeholder="đ"></div>
-      <div><label>Giá gạch</label><input inputmode="numeric" id="all-originalPrice" placeholder="đ"></div>
+      <div><label>Giá gạch</label><input id="all-originalPrice" placeholder="đ hoặc 50%">
+        <div class="markup">${[30, 50].map((n) => `<button type="button" data-action="var-markup" data-pct="${n}">+${n}%</button>`).join('')}</div></div>
       <div><label>Cân nặng</label><input inputmode="numeric" id="all-weight" placeholder="gram"></div>
       <button data-action="var-apply-all">Áp dụng cho tất cả phân loại</button>
     </div>
@@ -1147,16 +1148,21 @@ document.addEventListener('click', async (event) => {
     case 'var-move-value':
       variantOp((p) => Variants.moveValue(p, Number(el.dataset.group), Number(el.dataset.index), Number(el.dataset.step)));
       break;
+    case 'var-markup':
     case 'var-apply-all': {
+      // Giá gạch accepts "50%": each variant's crossed-out price = its selling price + 50%.
+      const pct = action === 'var-markup' ? Number(el.dataset.pct) : Variants.parsePercent(document.getElementById('all-originalPrice').value);
       const values = Object.fromEntries(['price', 'originalPrice', 'weight']
+        .filter((field) => !(field === 'originalPrice' && pct != null))
         .map((field) => [field, parseMoney(document.getElementById(`all-${field}`).value)])
         .filter(([, value]) => value != null));
-      if (!Object.keys(values).length) return toast('Nhập giá hoặc cân nặng để áp dụng');
+      if (!Object.keys(values).length && pct == null) return toast('Nhập giá hoặc cân nặng để áp dụng');
       variantOp((p) => {
         p.variants.forEach((v) => Object.assign(v, values));
+        if (pct != null) Variants.markupOriginalPrices(p, pct);
         Variants.syncProductPrice(p);
       });
-      toast(`Đã áp dụng cho ${product.variants.length} phân loại`);
+      toast(pct != null ? `Giá gạch = giá bán + ${pct}% cho ${product.variants.length} phân loại` : `Đã áp dụng cho ${product.variants.length} phân loại`);
       break;
     }
     case 'var-remove-orphan':

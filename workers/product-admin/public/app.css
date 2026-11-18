@@ -160,6 +160,8 @@ main { max-width: 1180px; margin: 0 auto; padding: 16px; }
 .variants select { min-width: 110px; }
 .apply-all { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; margin-bottom: 12px; padding: 10px; background: #faf9f6; border-radius: 8px; }
 .apply-all > div { width: 130px; }
+.apply-all .markup { display: flex; gap: 4px; margin-top: 4px; }
+.apply-all .markup button { padding: 2px 8px; font-size: 12px; }
 .scroll-x { overflow-x: auto; }
 
 .serp { border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-top: 12px; font-family: Arial, sans-serif; }

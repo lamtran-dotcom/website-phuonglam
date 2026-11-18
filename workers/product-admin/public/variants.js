@@ -74,6 +74,19 @@ const createVariant = (product, options) => {
 
 // Keeps product.price / originalPrice equal to the cheapest variant on sale, which is
 // what the storefront shows as "from" price.
+// "50%" -> 50; anything else -> null (then the field is read as money).
+export const parsePercent = (text) => {
+  const m = String(text || '').match(/^\s*(\d+(?:[.,]\d+)?)\s*%\s*$/);
+  return m ? Number(m[1].replace(',', '.')) : null;
+};
+
+// Crossed-out price = selling price + pct%, rounded to 1.000đ. Variants without a price keep theirs.
+export const markupOriginalPrices = (product, pct) => {
+  for (const v of product.variants || []) {
+    if (Number(v.price) > 0) v.originalPrice = Math.round((v.price * (1 + pct / 100)) / 1000) * 1000;
+  }
+};
+
 export const syncProductPrice = (product) => {
   const onSale = (product.variants || []).filter((v) => Number(v.price) > 0);
   if (!onSale.length) return;

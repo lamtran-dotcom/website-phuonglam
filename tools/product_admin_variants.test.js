@@ -136,3 +136,15 @@ test('every real product survives a no-op structural edit unchanged', async () =
     assert.deepEqual(p.optionGroups, original.optionGroups, original.name);
   }
 });
+
+test('crossed-out price from a percent markup', async () => {
+  const V = await load();
+  assert.equal(V.parsePercent('50%'), 50);
+  assert.equal(V.parsePercent(' 12,5 % '), 12.5);
+  assert.equal(V.parsePercent('50000'), null);
+  const p = plain({ variants: [{ id: 'a', price: 130000 }, { id: 'b', price: 147000 }, { id: 'c', price: 0 }] });
+  V.markupOriginalPrices(p, 50);
+  assert.deepEqual(p.variants.map((v) => v.originalPrice), [195000, 221000, undefined]);
+  V.markupOriginalPrices(p, 30);
+  assert.deepEqual(p.variants.map((v) => v.originalPrice), [169000, 191000, undefined]);
+});
