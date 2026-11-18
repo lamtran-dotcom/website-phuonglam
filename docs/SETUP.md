@@ -97,7 +97,7 @@ After `codegraph init`, future Codex tasks should use CodeGraph first to inspect
 - For scheduled SEO posts, Content AI Studio pushes a queue entry to `scheduled-posts/`. The `Publish Scheduled Blog Posts` GitHub Actions workflow checks at offset five-minute marks on the default branch, so the Mac does not need to remain on. GitHub may execute a few minutes after the requested time; use a schedule at least five minutes in the future. The Content AI Studio schedule panel shows the queue, recorded publications, and a link to the latest job.
 
 ## Admin v2 (online product admin)
-Code: `workers/product-admin/` (design: `docs/ADMIN-V2.md`). Live at https://phuonglam-admin.tranquanglam1998.workers.dev (Cloudflare account Tranquanglam1998). One-time setup, all free:
+Code: `workers/product-admin/` (design: `docs/ADMIN-V2.md`). Use https://phuonglam-admin.pages.dev (fast front door, `workers/admin-pages/`, forwards to the Worker; redeploy it with `cd workers/admin-pages && npx wrangler pages deploy` only if `_worker.js` changes). The Worker itself is at https://phuonglam-admin.tranquanglam1998.workers.dev, but the owner's ISP throttles uploads there (Cloudflare account Tranquanglam1998). One-time setup, all free:
 
 1. **GitHub token.** github.com → Settings → Developer settings → Fine-grained tokens → Generate. Repository access: only `website-phuonglam`. Permissions: Contents = Read and write, Actions = Read-only. Pick an expiry (e.g. 1 year) and note the date: the admin stops publishing when it expires.
 2. **Deploy the Worker.** In a terminal:
