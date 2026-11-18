@@ -303,7 +303,8 @@
         "Chờ bếp nguội hẳn rồi đổ thảo mộc đã xông và lau bằng khăn khô.",
         "Các món đất nung bể vỡ do vận chuyển hoặc lỗi sản xuất được đổi mới."
       ]
-    }
+    },
+    "code": "S10"
   },
   {
     "id": "shopee_28991652145",
@@ -612,7 +613,8 @@
         "Không chạm hoặc di chuyển bếp khi còn nóng.",
         "Giữ đồ đất nung khô ráo, tránh va đập; cất thảo mộc trong túi kín."
       ]
-    }
+    },
+    "code": "S22"
   },
   {
     "id": "p_1777474804043_1b5kn",
@@ -778,7 +780,8 @@
         "Không chạm, di chuyển hoặc lau bếp khi còn nóng.",
         "Để nơi khô ráo, tránh va đập vì đất nung có thể sứt hoặc vỡ."
       ]
-    }
+    },
+    "code": "S04"
   },
   {
     "id": 1,
@@ -1507,7 +1510,8 @@
         "Buộc kín túi sau khi dùng.",
         "Để nơi khô ráo, tránh nắng gắt và ẩm để giữ mùi lâu."
       ]
-    }
+    },
+    "code": "S51"
   },
   {
     "id": "shopee_57058955812",
@@ -1611,7 +1615,8 @@
         "Để xa tầm tay trẻ em và vật nuôi.",
         "Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng để nến không mềm hoặc biến dạng."
       ]
-    }
+    },
+    "code": "S58"
   },
   {
     "id": "shopee_54450013830",
@@ -1708,7 +1713,8 @@
         "Để xa tầm tay trẻ em và vật nuôi.",
         "Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng để nến không mềm hoặc biến dạng."
       ]
-    }
+    },
+    "code": "S07"
   },
   {
     "id": "shopee_48452789252",
@@ -1767,7 +1773,8 @@
         "Tránh rơi, va đập mạnh vì đất nung, gốm có thể sứt hoặc vỡ.",
         "Hàng làm thủ công nên màu có thể đậm nhạt khác nhau theo mẻ nung."
       ]
-    }
+    },
+    "code": "S53"
   },
   {
     "id": "shopee_41330081336",
@@ -1864,7 +1871,8 @@
         "Tránh rơi, va đập mạnh vì đất nung, gốm có thể sứt hoặc vỡ.",
         "Hàng làm thủ công nên màu có thể đậm nhạt khác nhau theo mẻ nung."
       ]
-    }
+    },
+    "code": "S38"
   },
   {
     "id": "shopee_40170692234",
@@ -1945,7 +1953,8 @@
         "Để xa vật dễ cháy, trẻ nhỏ và vật nuôi.",
         "Đậy kín hũ nụ chưa dùng, để nơi khô ráo, tránh ẩm."
       ]
-    }
+    },
+    "code": "S41"
   },
   {
     "id": "shopee_29011454025",
@@ -2080,7 +2089,8 @@
         "Để xa tầm tay trẻ em và vật nuôi.",
         "Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng để nến không mềm hoặc biến dạng."
       ]
-    }
+    },
+    "code": "S11"
   },
   {
     "id": "shopee_28422178672",
@@ -2152,7 +2162,8 @@
         "Tránh rơi, va đập mạnh vì đất nung, gốm có thể sứt hoặc vỡ.",
         "Hàng làm thủ công nên màu có thể đậm nhạt khác nhau theo mẻ nung."
       ]
-    }
+    },
+    "code": "S31"
   },
   {
     "id": "shopee_28251842874",
@@ -2268,7 +2279,8 @@
         "Với đèn xông, không để khay cạn nước khi nến còn cháy.",
         "Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng để nến không mềm hoặc biến dạng."
       ]
-    }
+    },
+    "code": "S40"
   },
   {
     "id": "shopee_26007254880",
@@ -2487,7 +2499,8 @@
         "Đóng kín túi sau khi mở, để nơi khô ráo; không dùng khi có dấu hiệu ẩm mốc.",
         "Không dùng thảo mộc thay cho thuốc."
       ]
-    }
+    },
+    "code": "S01"
   },
   {
     "id": "shopee_23752423694",
@@ -2584,7 +2597,8 @@
         "Tránh rơi, va đập mạnh vì đất nung, gốm có thể sứt hoặc vỡ.",
         "Hàng làm thủ công nên màu có thể đậm nhạt khác nhau theo mẻ nung."
       ]
-    }
+    },
+    "code": "S15"
   },
   {
     "id": "shopee_22361508205",
@@ -2668,7 +2682,8 @@
         "Tránh để nước nóng hoặc bếp nóng tiếp xúc với da.",
         "Bảo quản khô ráo, kín, tránh ẩm."
       ]
-    }
+    },
+    "code": "S43"
   },
   {
     "id": "shopee_22353875434",
@@ -2805,7 +2820,8 @@
         "Đóng kín túi sau khi mở, để nơi khô ráo; không dùng khi có dấu hiệu ẩm mốc.",
         "Không uống hoặc dùng trên da nếu bao bì không hướng dẫn."
       ]
-    }
+    },
+    "code": "S13"
   },
   {
     "id": "shopee_22080262041",
@@ -2999,7 +3015,8 @@
         "Đặt đèn trên mặt phẳng, xa vật dễ cháy; không để nến cháy khi không có người trông.",
         "Chờ đèn nguội rồi mới lau; tránh rơi, va đập."
       ]
-    }
+    },
+    "code": "S08"
   },
   {
     "id": "shopee_19636361517",
@@ -3203,7 +3220,8 @@
         "Với đèn xông, không để khay cạn nước khi nến còn cháy.",
         "Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng để nến không mềm hoặc biến dạng."
       ]
-    }
+    },
+    "code": "S05"
   },
   {
     "id": "shopee_6203380691",
@@ -3299,7 +3317,8 @@
         "Không di chuyển ly khi nến đang cháy.",
         "Bảo quản nơi thoáng mát, tránh bụi và ánh nắng trực tiếp."
       ]
-    }
+    },
+    "code": "S55"
   },
   {
     "id": "shopee_4903385000",
@@ -3393,7 +3412,8 @@
         "Không di chuyển ly khi nến đang cháy.",
         "Bảo quản nơi thoáng mát, tránh bụi và ánh nắng trực tiếp."
       ]
-    }
+    },
+    "code": "S54"
   },
   {
     "id": "shopee_54367578815",
@@ -3595,7 +3615,8 @@
         "Tránh nước và ánh nắng trực tiếp; bảo quản nơi khô ráo.",
         "Ngưng dùng nếu thấy khó chịu với mùi hương."
       ]
-    }
+    },
+    "code": "S30"
   },
   {
     "id": "p_1791429972397_g7kgf",
@@ -3937,7 +3958,8 @@
         "Gỗ tự nhiên nên màu sắc, kích thước và độ đậm của hương có thể khác nhau giữa các lô.",
         "Bảo quản nơi khô ráo, tránh ẩm."
       ]
-    }
+    },
+    "code": "S33"
   },
   {
     "id": "shopee_56102764086",
@@ -4036,7 +4058,8 @@
         "Đan thủ công nên màu và đường đan có thể chênh nhẹ giữa các sản phẩm.",
         "Bảo quản nơi khô ráo, thoáng khí."
       ]
-    }
+    },
+    "code": "S25"
   },
   {
     "id": "shopee_53859220256",
@@ -4099,7 +4122,8 @@
         "Để nơi khô ráo, thoáng mát, tránh ẩm; không dùng khi có dấu hiệu ẩm mốc.",
         "Thảo mộc tự nhiên nên màu có thể thay đổi nhẹ."
       ]
-    }
+    },
+    "code": "S37"
   },
   {
     "id": "shopee_50267690045",
@@ -4238,7 +4262,8 @@
         "Gỗ tự nhiên nên màu sắc, kích thước và độ đậm của hương có thể khác nhau giữa các lô.",
         "Bảo quản nơi khô ráo, tránh ẩm."
       ]
-    }
+    },
+    "code": "S29"
   },
   {
     "id": "shopee_48864137960",
@@ -4404,7 +4429,8 @@
         "Gỗ tự nhiên nên màu sắc, kích thước và độ đậm của hương có thể khác nhau giữa các lô.",
         "Bảo quản nơi khô ráo, tránh ẩm."
       ]
-    }
+    },
+    "code": "S06"
   },
   {
     "id": "shopee_47417886680",
@@ -4542,7 +4568,8 @@
         "Gỗ tự nhiên nên màu, vân gỗ và độ đậm của hương có thể khác nhau giữa các thanh.",
         "Bảo quản nơi khô ráo, tránh ẩm."
       ]
-    }
+    },
+    "code": "S35"
   },
   {
     "id": "shopee_46517698279",
@@ -4667,7 +4694,8 @@
         "Gỗ tự nhiên nên màu sắc, kích thước và độ đậm của hương có thể khác nhau giữa các lô.",
         "Bảo quản nơi khô ráo, tránh ẩm."
       ]
-    }
+    },
+    "code": "S36"
   },
   {
     "id": "shopee_25659397266",
@@ -4782,7 +4810,8 @@
         "Không để bếp xông đang cháy khi không có người trông; để xa trẻ nhỏ và vật nuôi.",
         "Đóng kín túi sau khi mở, để nơi khô ráo; không dùng khi có dấu hiệu ẩm mốc."
       ]
-    }
+    },
+    "code": "S42"
   },
   {
     "id": "shopee_25314272283",
@@ -4907,7 +4936,8 @@
         "Không để bếp xông đang cháy khi không có người trông; để xa trẻ nhỏ và vật nuôi.",
         "Đóng kín túi sau khi mở, để nơi khô ráo; không dùng khi có dấu hiệu ẩm mốc."
       ]
-    }
+    },
+    "code": "S27"
   },
   {
     "id": "shopee_25158793608",
@@ -5019,7 +5049,8 @@
       "care": [
         "Bảo quản nơi khô ráo, thoáng mát; đóng kín túi sau khi mở."
       ]
-    }
+    },
+    "code": "S23"
   },
   {
     "id": "shopee_24656264608",
@@ -5133,7 +5164,8 @@
         "Không để bếp xông đang cháy khi không có người trông; để xa trẻ nhỏ và vật nuôi.",
         "Đóng kín túi sau khi mở, để nơi khô ráo; không dùng khi có dấu hiệu ẩm mốc."
       ]
-    }
+    },
+    "code": "S52"
   },
   {
     "id": "shopee_24604156053",
@@ -5372,7 +5404,8 @@
         "Để xa tầm tay trẻ em.",
         "Đậy kín nắp, để nơi thoáng mát, tránh nắng."
       ]
-    }
+    },
+    "code": "S09"
   },
   {
     "id": "shopee_53710267498",
@@ -5659,6 +5692,7 @@
         }
       }
     ],
-    "reviews": null
+    "reviews": null,
+    "code": "S44"
   }
 ]

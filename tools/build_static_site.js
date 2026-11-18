@@ -1611,7 +1611,7 @@ const renderProductPage = ({ product, categoryName, relatedProducts = [], guideP
         ${gallery}
       </div>
       <div>
-        <p class="product-kicker">${escapeHtml(categoryName)}</p>
+        <p class="product-kicker">${escapeHtml(categoryName)}${product.code ? ` · Mã ${escapeHtml(product.code)}` : ''}</p>
         <h1>${escapeHtml(product.name)}</h1>
         <div class="price" data-buy-price>${priceInfo.hasVariants ? '<span class="price-prefix">Giá từ </span>' : ''}<span class="price-current">${formatVnd(priceInfo.price)}</span>${priceInfo.originalPrice ? `<span class="original-price" data-buy-original>${formatVnd(priceInfo.originalPrice)}</span>` : '<span class="original-price" data-buy-original hidden></span>'}</div>
         ${summary ? `<p class="meta-list summary-box">${escapeHtml(summary)}</p>` : ''}

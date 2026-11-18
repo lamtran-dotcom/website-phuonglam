@@ -157,7 +157,7 @@ const clearDraft = () => {
 
 const FIELD_LABELS = {
   name: 'Tên', slug: 'Đường dẫn', categoryId: 'Danh mục', price: 'Giá bán', originalPrice: 'Giá gạch',
-  hidden: 'Ẩn/hiện', tag: 'Nhãn', weight: 'Cân nặng', sku: 'SKU', images: 'Ảnh', variants: 'Phân loại',
+  hidden: 'Ẩn/hiện', code: 'Mã SP', tag: 'Nhãn', weight: 'Cân nặng', sku: 'SKU', images: 'Ảnh', variants: 'Phân loại',
   shortDesc: 'Mô tả ngắn', content: 'Nội dung', description: 'Mô tả', seoTitle: 'Tiêu đề Google', seoDescription: 'Mô tả Google',
 };
 
@@ -256,7 +256,7 @@ const renderBar = () => {
 const visibleProducts = () => {
   const q = slugify(state.search).replace(/-/g, ' ');
   return state.products.filter((p) => (!state.category || p.categoryId === state.category)
-    && (!q || slugify(`${p.name} ${p.sku} ${p.slug}`).replace(/-/g, ' ').includes(q)));
+    && (!q || slugify(`${p.code || ''} ${p.name} ${p.sku} ${p.slug}`).replace(/-/g, ' ').includes(q)));
 };
 
 const priceCell = (product, field, cls) => {
@@ -277,7 +277,7 @@ const renderList = () => {
   const selectedCount = state.selected.size;
   app.innerHTML = `
     <div class="toolbar">
-      <input type="search" id="search" placeholder="Tìm tên, SKU…" value="${esc(state.search)}">
+      <input type="search" id="search" placeholder="Tìm mã (vd S44), tên, SKU…" value="${esc(state.search)}">
       <select id="category">
         <option value="">Tất cả danh mục (${state.products.length})</option>
         ${categoriesNow().map((c) => `<option value="${esc(c.id)}" ${c.id === state.category ? 'selected' : ''}>${esc(c.name)} (${state.products.filter((p) => p.categoryId === c.id).length})</option>`).join('')}
@@ -312,7 +312,7 @@ const renderList = () => {
           <input class="c" type="checkbox" data-action="select" data-id="${esc(keyOf(p))}" ${state.selected.has(keyOf(p)) ? 'checked' : ''} aria-label="Chọn">
           ${img ? `<img class="thumb t" src="${esc(imageUrl(img))}" alt="" loading="lazy">` : '<div class="thumb t"></div>'}
           <div class="name"><button class="link" data-action="edit" data-id="${esc(keyOf(p))}">${esc(p.name || '(chưa có tên)')}</button>
-            <div class="sub">${p.variants?.length ? `${p.variants.length} phân loại` : 'Không phân loại'}${p.tag ? ` · ${esc(p.tag)}` : ''}</div></div>
+            <div class="sub">${p.code ? `<b>${esc(p.code)}</b> · ` : ''}${p.variants?.length ? `${p.variants.length} phân loại` : 'Không phân loại'}${p.tag ? ` · ${esc(p.tag)}` : ''}</div></div>
           <div class="cat sub">${esc(categoryName(p.categoryId))}</div>
           ${priceCell(p, 'price', 'p')}
           ${priceCell(p, 'originalPrice', 'o')}
@@ -525,6 +525,7 @@ const renderEdit = () => {
           ${categoriesNow().map((cat) => `<option value="${esc(cat.id)}" ${cat.id === p.categoryId ? 'selected' : ''}>${esc(cat.name)}</option>`).join('')}
           ${categoriesNow().some((cat) => cat.id === p.categoryId) ? '' : `<option value="${esc(p.categoryId)}" selected>${esc(p.categoryId || '— chọn —')}</option>`}
         </select></div>
+        <div><label>Mã SP (vd S44, khớp tin Shopee)</label><input data-field="code" data-id="${id}" value="${esc(p.code || '')}"></div>
         <div><label>Nhãn</label><select data-field="tag" data-id="${id}">
           ${['', 'Bán chạy', 'Nổi bật', 'Mới', 'Sale'].map((t) => `<option value="${t}" ${t === (p.tag || '') ? 'selected' : ''}>${t || '(không)'}</option>`).join('')}
         </select></div>
@@ -741,6 +742,10 @@ const onFieldChange = (el) => {
     const slugInput = app.querySelector('[data-field="slug"]');
     if (slugInput) slugInput.value = product.slug;
   }
+  if (field === 'code') {
+    product.code = el.value.trim().toUpperCase();
+    if (!product.code) delete product.code;
+  }
   if (field === 'slug') {
     state.autoSlug.delete(keyOf(product));
     product.slug = slugify(el.value) || el.value;
@@ -889,7 +894,10 @@ const imagesToPublish = () => {
 const checkBeforePublish = () => {
   const problems = [];
   const slugs = new Map();
+  const codes = new Map();
   for (const p of state.products) {
+    if (p.code && codes.has(p.code)) problems.push(`"${p.name}" trùng mã ${p.code} với "${codes.get(p.code)}"`);
+    if (p.code) codes.set(p.code, p.name);
     if (!p.name.trim()) problems.push('Có sản phẩm chưa có tên');
     if (!p.slug) problems.push(`"${p.name}": thiếu đường dẫn`);
     if (slugs.has(p.slug)) problems.push(`"${p.name}" trùng đường dẫn với "${slugs.get(p.slug)}"`);
@@ -1041,6 +1049,7 @@ document.addEventListener('click', async (event) => {
     case 'duplicate': {
       const source = findProduct(el.dataset.id);
       const copy = { ...clone(source), id: `pl_${Date.now().toString(36)}`, name: `${source.name} (bản sao)`, hidden: true };
+      delete copy.code;
       copy.slug = uniqueSlug(`${source.slug}-ban-sao`, copy.id);
       copy.variants = (copy.variants || []).map((v, i) => ({ ...v, id: `${copy.id}_v${i}` }));
       state.products.splice(state.products.indexOf(source) + 1, 0, copy);
