@@ -105,11 +105,13 @@ export const composeDescription = (content) => {
 
 // ---------- API ----------
 
+const API_TIMEOUT_MS = 120000;
 const api = async (path, options = {}) => {
   let res;
   try {
-    res = await fetch(path, { ...options, redirect: 'manual', headers: { ...(options.body ? { 'Content-Type': 'application/json' } : {}) } });
-  } catch {
+    res = await fetch(path, { ...options, signal: AbortSignal.timeout(API_TIMEOUT_MS), redirect: 'manual', headers: { ...(options.body ? { 'Content-Type': 'application/json' } : {}) } });
+  } catch (error) {
+    if (error?.name === 'TimeoutError') throw new Error('Máy chủ không trả lời sau 2 phút. Bản nháp vẫn còn: tải lại trang rồi bấm Xuất bản lại.');
     throw new Error('Mất kết nối hoặc phiên đăng nhập đã hết hạn. Tải lại trang.');
   }
   if (res.type === 'opaqueredirect' || res.status === 401) throw Object.assign(new Error('Phiên đăng nhập đã hết hạn. Tải lại trang để đăng nhập lại.'), { status: 401 });

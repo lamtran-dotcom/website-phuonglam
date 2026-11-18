@@ -126,9 +126,15 @@ const login = async (request, env) => {
 
 // ---------- GitHub ----------
 
+// A hung GitHub call would leave the admin on "Đang xuất bản…" forever.
+const GITHUB_TIMEOUT_MS = 20000;
+
 const github = (env, fetchImpl) => async (method, path, body) => {
-  const res = await fetchImpl(`${GITHUB_API}${path}`, {
+  let res;
+  try {
+    res = await fetchImpl(`${GITHUB_API}${path}`, {
     method,
+    signal: AbortSignal.timeout(GITHUB_TIMEOUT_MS),
     headers: {
       Authorization: `Bearer ${env.GITHUB_TOKEN}`,
       Accept: 'application/vnd.github+json',
@@ -138,6 +144,10 @@ const github = (env, fetchImpl) => async (method, path, body) => {
     },
     body: body ? JSON.stringify(body) : undefined,
   });
+  } catch (error) {
+    if (error?.name !== 'TimeoutError' && error?.name !== 'AbortError') throw error;
+    throw new HttpError(504, `GitHub không phản hồi (${method} ${path.split('?')[0]}). Bấm Xuất bản lại sau ít phút.`);
+  }
   if (!res.ok) {
     // Never pass GitHub's 401/403 through: the UI would read them as "not signed in".
     const message = res.status === 401
