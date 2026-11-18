@@ -22,7 +22,10 @@ const send = (res, status, body, type = 'application/json; charset=utf-8') => {
 const readBody = (req) => new Promise((resolve) => {
   const chunks = [];
   req.on('data', (chunk) => chunks.push(chunk));
-  req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+  req.on('end', () => {
+    const raw = Buffer.concat(chunks);
+    resolve((req.headers['x-body-encoding'] === 'gzip' ? require('node:zlib').gunzipSync(raw) : raw).toString('utf8'));
+  });
 });
 
 const main = async () => {

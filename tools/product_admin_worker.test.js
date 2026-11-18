@@ -88,7 +88,7 @@ const call = async (fetchImpl, pathname, { method = 'GET', token, body, headers 
       ...(body ? { 'Content-Type': 'application/json' } : {}),
       ...headers,
     },
-    body: body ? JSON.stringify(body) : undefined,
+    body: body === undefined ? undefined : (body instanceof Uint8Array ? body : JSON.stringify(body)),
   });
   const res = await handle(request, env, fetchImpl);
   return { status: res.status, body: await res.json().catch(() => null) };
@@ -319,4 +319,15 @@ test('settings publish is refused when settings.json changed elsewhere, and vali
   assert.match(bad.body.details.join('\n'), /Ảnh header/);
   assert.match(bad.body.details.join('\n'), /mã đường dẫn/);
   assert.equal((await call(fetchImpl, '/api/publish', { method: 'POST', token, body: { baseSha: sha('1') } })).status, 400);
+});
+
+test('publish accepts a gzip-compressed body', async () => {
+  const { state, fetchImpl } = await fakeGitHub();
+  const products = [product('a', { price: 99000 })];
+  const zipped = require('node:zlib').gzipSync(JSON.stringify({ baseSha: sha('1'), productsSha: sha('b'), products, images: [] }));
+  const { status, body } = await call(fetchImpl, '/api/publish', {
+    method: 'POST', token: await signToken(), body: new Uint8Array(zipped), headers: { 'X-Body-Encoding': 'gzip' },
+  });
+  assert.equal(status, 200, JSON.stringify(body));
+  assert.equal(state.blobs[0].content, `${JSON.stringify(products, null, 2)}\n`);
 });

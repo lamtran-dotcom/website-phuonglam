@@ -406,7 +406,9 @@ export const handle = async (request, env, fetchImpl = globalThis.fetch.bind(glo
     if (url.pathname === '/api/publish' && request.method === 'POST') {
       let body;
       try {
-        body = await request.json();
+        body = request.headers.get('X-Body-Encoding') === 'gzip'
+          ? await new Response(request.body.pipeThrough(new DecompressionStream('gzip'))).json()
+          : await request.json();
       } catch {
         throw new HttpError(400, 'JSON không hợp lệ');
       }
