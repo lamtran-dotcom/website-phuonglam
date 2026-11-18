@@ -3983,6 +3983,246 @@ const PRODUCTS = [
         }
       }
     ]
+  },
+  {
+    "id": "shopee_53710267498",
+    "sku": "SP-53710267498",
+    "categoryId": "combo",
+    "name": "Bộ xông nhà thảo mộc mini 10 cm Phương Lâm",
+    "price": 130000,
+    "originalPrice": 0,
+    "shortDesc": "Bộ xông nhà mini gồm bếp niêu đất nung 10 cm, gói thảo mộc, vỉ 10 nến tealight 4 giờ và đế đựng nến; bản FULL thêm dĩa lót bếp. Hợp phòng nhỏ, căn hộ, góc làm việc.",
+    "tag": "",
+    "weight": 1000,
+    "hidden": false,
+    "slug": "bo-xong-nha-thao-moc-mini-10cm-bep-nieu-dat-nung",
+    "seoTitle": "Bộ xông nhà thảo mộc mini 10 cm bếp đất nung | Phương Lâm",
+    "seoDescription": "Bộ xông nhà mini Phương Lâm: bếp niêu đất nung 10 cm, gói thảo mộc, 10 nến tealight 4 giờ và đế nến. Chọn bản thường hoặc FULL theo phân loại.",
+    "optionGroups": [
+      {
+        "name": "Tùy chọn",
+        "values": [
+          "Bộ Xông 10cm",
+          "Bộ Xông full 10cm"
+        ]
+      },
+      {
+        "name": "Loại",
+        "values": [
+          "Bộ Thư Giãn",
+          "Bộ Xông Tẩy Uế",
+          "Bộ Xông Xua Muỗi",
+          "Bộ Xông Nhà Mới",
+          "Bộ Xông 12 loại TM",
+          "Bộ Xông Khử Mùi",
+          "Bộ Xông Thanh Lọc kk",
+          "Bộ Xông Giải Cảm"
+        ]
+      }
+    ],
+    "optionImages": {},
+    "images": [
+      "/assets/products/uploads/1795012106712-s44-2.webp",
+      "/assets/products/uploads/1795012107160-s44-3.webp",
+      "/assets/products/uploads/1795012107695-s44-4.webp",
+      "/assets/products/uploads/1795012106100-s44-1.webp",
+      "/assets/products/uploads/1795012108137-s44-5.webp"
+    ],
+    "variants": [
+      {
+        "id": "shopee_s44_01",
+        "name": "Bộ Xông 10cm - Bộ Thư Giãn",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Thư Giãn"
+        }
+      },
+      {
+        "id": "shopee_s44_02",
+        "name": "Bộ Xông 10cm - Bộ Xông Tẩy Uế",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông Tẩy Uế"
+        }
+      },
+      {
+        "id": "shopee_s44_03",
+        "name": "Bộ Xông 10cm - Bộ Xông Xua Muỗi",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông Xua Muỗi"
+        }
+      },
+      {
+        "id": "shopee_s44_04",
+        "name": "Bộ Xông 10cm - Bộ Xông Nhà Mới",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông Nhà Mới"
+        }
+      },
+      {
+        "id": "shopee_s44_05",
+        "name": "Bộ Xông 10cm - Bộ Xông 12 loại TM",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông 12 loại TM"
+        }
+      },
+      {
+        "id": "shopee_s44_06",
+        "name": "Bộ Xông 10cm - Bộ Xông Khử Mùi",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông Khử Mùi"
+        }
+      },
+      {
+        "id": "shopee_s44_07",
+        "name": "Bộ Xông 10cm - Bộ Xông Thanh Lọc kk",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông Thanh Lọc kk"
+        }
+      },
+      {
+        "id": "shopee_s44_08",
+        "name": "Bộ Xông 10cm - Bộ Xông Giải Cảm",
+        "sku": "",
+        "price": 130000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông 10cm",
+          "Loại": "Bộ Xông Giải Cảm"
+        }
+      },
+      {
+        "id": "shopee_s44_09",
+        "name": "Bộ Xông full 10cm - Bộ Thư Giãn",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Thư Giãn"
+        }
+      },
+      {
+        "id": "shopee_s44_10",
+        "name": "Bộ Xông full 10cm - Bộ Xông Tẩy Uế",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông Tẩy Uế"
+        }
+      },
+      {
+        "id": "shopee_s44_11",
+        "name": "Bộ Xông full 10cm - Bộ Xông Xua Muỗi",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông Xua Muỗi"
+        }
+      },
+      {
+        "id": "shopee_s44_12",
+        "name": "Bộ Xông full 10cm - Bộ Xông Nhà Mới",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông Nhà Mới"
+        }
+      },
+      {
+        "id": "shopee_s44_13",
+        "name": "Bộ Xông full 10cm - Bộ Xông 12 loại TM",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông 12 loại TM"
+        }
+      },
+      {
+        "id": "shopee_s44_14",
+        "name": "Bộ Xông full 10cm - Bộ Xông Khử Mùi",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông Khử Mùi"
+        }
+      },
+      {
+        "id": "shopee_s44_15",
+        "name": "Bộ Xông full 10cm - Bộ Xông Thanh Lọc kk",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông Thanh Lọc kk"
+        }
+      },
+      {
+        "id": "shopee_s44_16",
+        "name": "Bộ Xông full 10cm - Bộ Xông Giải Cảm",
+        "sku": "",
+        "price": 147000,
+        "weight": 1000,
+        "image": "",
+        "options": {
+          "Tùy chọn": "Bộ Xông full 10cm",
+          "Loại": "Bộ Xông Giải Cảm"
+        }
+      }
+    ],
+    "reviews": null
   }
 ];
 
