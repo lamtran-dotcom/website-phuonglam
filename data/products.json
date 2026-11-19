@@ -1961,8 +1961,8 @@
     "sku": "PL-004",
     "categoryId": "nen-thom",
     "name": "Nến tealight 4 giờ hương lài",
-    "price": 60000,
-    "originalPrice": null,
+    "price": 55000,
+    "originalPrice": 72000,
     "shortDesc": "Nến tealight hương lài, vỏ nhôm, sáp cọ, cháy khoảng 4 giờ mỗi viên, không khói. Chọn 20, 50 hoặc 100 viên.",
     "description": "Nến tealight 4 giờ hương lài cháy khoảng 4 tiếng mỗi viên, không khói, tỏa mùi lài nhẹ khi đốt. Dùng trang trí tiệc, phòng ngủ, spa, quán cà phê hoặc đốt đèn xông.\n\nĐiểm nổi bật:\n- Hương lài nhẹ khi đốt.\n- Cháy khoảng 4 giờ, không khói.\n- Vỏ nhôm, sáp cọ.\n- Quy cách 20, 50 hoặc 100 viên.\n\nThông số:\n- Hương: lài\n- Thời gian cháy: khoảng 4 giờ/viên\n- Kích thước 1 viên: 3,8 x 3,8 x 1,6 cm\n- Khối lượng: khoảng 13 g/viên\n- Chất liệu: vỏ nhôm, sáp cọ\n- Quy cách: 2 vỉ (20 viên), hộp 50 viên, hộp 100 viên\n- Xuất xứ: Việt Nam\n\nCách dùng:\n1. Trang trí: đặt nến trong ly, khay hoặc đế chịu nhiệt trên mặt phẳng rồi châm lửa ở tim nến.\n2. Đèn xông tinh dầu: cho nước và vài giọt tinh dầu vào khay, đặt nến vào khoang đốt rồi châm lửa.\n3. Tắt nến bằng cách nhấn nhẹ tim xuống phần sáp lỏng rồi dựng lại; hạn chế thổi để tránh bắn sáp.\n\nLưu ý & bảo quản:\n- Đặt nến xa rèm, giấy, vải, gỗ mỏng và vật dễ cháy.\n- Không di chuyển nến khi đang cháy hoặc sáp còn nóng; không để nến cháy khi không có người trông.\n- Để xa tầm tay trẻ em và vật nuôi.\n- Bảo quản nơi khô ráo, thoáng mát, tránh nắng nóng để nến không mềm hoặc biến dạng.",
     "usage": "",
@@ -1970,12 +1970,6 @@
     "weight": 200,
     "hidden": false,
     "optionGroups": [
-      {
-        "name": "Màu",
-        "values": [
-          "Hương lài"
-        ]
-      },
       {
         "name": "Số lượng",
         "values": [
@@ -1985,7 +1979,13 @@
         ]
       }
     ],
-    "optionImages": {},
+    "optionImages": {
+      "Số lượng": {
+        "2 Vỉ 4h = 20 viên": "/assets/products/uploads/1795061555762-chatgpt-image-19-39-43-29-thg-4-2026.webp",
+        "50 Viên 4h": "/assets/products/uploads/1795061572266-q231.webp",
+        "Hộp 100 Viên 4h": "/assets/products/uploads/1795061576050-21312.webp"
+      }
+    },
     "images": [
       "/assets/products/uploads/1777466312414-image.webp",
       "/assets/products/mirrored/5c62b76f.webp",
@@ -1999,40 +1999,37 @@
     "variants": [
       {
         "id": "shopee_variant_185395649762",
-        "name": "Hộp 50v 4h - Lài",
+        "name": "50 Viên 4h",
         "sku": "",
         "price": 115000,
-        "originalPrice": 160000,
+        "originalPrice": 150000,
         "weight": 700,
         "image": "/assets/products/mirrored/a11cc19a.webp",
         "options": {
-          "Màu": "Hương lài",
           "Số lượng": "50 Viên 4h"
         }
       },
       {
         "id": "shopee_variant_185395649763",
-        "name": "2Vỉ 4h/20v - Lài",
+        "name": "2 Vỉ 4h = 20 viên",
         "sku": "",
         "price": 55000,
-        "originalPrice": 70000,
+        "originalPrice": 72000,
         "weight": 200,
         "image": "/assets/products/mirrored/de9ea08a.webp",
         "options": {
-          "Màu": "Hương lài",
           "Số lượng": "2 Vỉ 4h = 20 viên"
         }
       },
       {
         "id": "shopee_variant_185395649761",
-        "name": "Hộp 100v 4h - Lài",
+        "name": "Hộp 100 Viên 4h",
         "sku": "",
         "price": 220000,
-        "originalPrice": 320000,
+        "originalPrice": 286000,
         "weight": 1500,
         "image": "/assets/products/mirrored/42235667.webp",
         "options": {
-          "Màu": "Hương lài",
           "Số lượng": "Hộp 100 Viên 4h"
         }
       }
