@@ -10,6 +10,7 @@
 <meta name="theme-color" content="#318223" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="stylesheet" href="/assets/css/noel.css?v=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -54,33 +55,39 @@
   .perks li { background: #eef6eb; color: var(--green-dark); border-radius: 999px; padding: 4px 10px; font-size: 12px; font-weight: 600; }
 
   /* Promo poster with countdown */
-  .promo { position: relative; overflow: hidden; margin-top: 12px; border-radius: 18px; padding: 18px 16px 18px; color: #4a3510; text-align: center;
-    background: linear-gradient(135deg, #fff7df 0%, #fde5a6 100%); border: 1.5px solid #f1cf7c; box-shadow: 0 10px 24px rgba(176,109,8,.16); }
+  .promo { position: relative; overflow: hidden; margin-top: 12px; border-radius: 18px; padding: 18px 16px 18px; color: #fff; text-align: center;
+    background: linear-gradient(135deg, #c0392b 0%, #8e1c14 100%); border: 1.5px solid #f4c542; box-shadow: 0 10px 24px rgba(142,28,20,.28); }
+  .promo::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .55;
+    background-image: radial-gradient(circle at 20px 25px, #fff 2px, transparent 3px), radial-gradient(circle at 70px 80px, #fff 1.5px, transparent 2.5px);
+    background-size: 90px 90px, 130px 130px; animation: snow 9s linear infinite; }
+  .promo > * { position: relative; z-index: 1; }
+  .promo > .promo-badge { position: absolute; }
   .promo[hidden] { display: none; }
   .promo::before { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent); transform: skewX(-20deg); animation: shine 3.2s ease-in-out infinite; }
   .promo-badge { position: absolute; top: 10px; right: 10px; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center;
-    background: radial-gradient(circle at 35% 30%, #f2b33d, #c47f08 70%); color: #fff; font-weight: 800; font-size: 19px; transform: rotate(12deg);
+    background: radial-gradient(circle at 35% 30%, #ffe08a, #e0a412 70%); color: #7d1410; font-weight: 800; font-size: 19px; transform: rotate(12deg);
     box-shadow: 0 4px 12px rgba(176,109,8,.32); animation: wiggle 2.4s ease-in-out infinite; }
-  .promo-kicker { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #9a5d00; }
+  .promo-kicker { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #ffe08a; }
   .promo h2 { margin: 0 64px 4px; font-size: 21px; line-height: 1.25; }
-  .promo h2 em { font-style: normal; color: #b06d08; font-size: 1.25em; }
+  .promo h2 em { font-style: normal; color: #ffe08a; font-size: 1.25em; }
   .promo-sub { margin: 0 0 10px; font-size: 13px; font-weight: 600; }
   .countdown { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 16px; }
-  .cd-unit { min-width: 92px; background: linear-gradient(180deg, #dc9a1c, #b06d08); color: #fff; border-radius: 16px; padding: 8px 6px 6px; box-shadow: 0 6px 14px rgba(176,109,8,.32); }
+  .cd-unit { min-width: 92px; background: linear-gradient(180deg, #3a9a2c, #1f5f17); color: #fff; border-radius: 16px; padding: 8px 6px 6px; box-shadow: 0 6px 14px rgba(0,0,0,.25); border: 1px solid rgba(255,255,255,.25); }
   .cd-num { display: block; font-size: 48px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
   .cd-num.tick { animation: tick .35s ease-out; }
   .cd-label { display: block; font-size: 12px; font-weight: 600; margin-top: 4px; opacity: .9; }
-  .cd-sep { font-size: 40px; font-weight: 800; color: #b06d08; padding-bottom: 18px; animation: blink 1s steps(1) infinite; }
+  .cd-sep { font-size: 40px; font-weight: 800; color: #ffe08a; padding-bottom: 18px; animation: blink 1s steps(1) infinite; }
   .promo-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 34px; border-radius: 999px;
-    background: var(--green); color: #fff; font-weight: 800; font-size: 17px; text-decoration: none; animation: pulse 1.6s ease-in-out infinite; }
+    background: #fff; color: #8e1c14; font-weight: 800; font-size: 17px; text-decoration: none; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes snow { to { background-position: 30px 90px, -20px 260px; } }
   @keyframes shine { 0% { left: -60%; } 60%, 100% { left: 130%; } }
   @keyframes wiggle { 0%, 100% { transform: rotate(12deg) scale(1); } 50% { transform: rotate(-6deg) scale(1.08); } }
   @keyframes tick { 0% { transform: translateY(-8px) scale(1.15); opacity: .4; } 100% { transform: none; opacity: 1; } }
   @keyframes blink { 50% { opacity: .3; } }
-  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(49,130,35,.55); transform: scale(1); } 50% { box-shadow: 0 0 0 10px rgba(49,130,35,0); transform: scale(1.04); } }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.6); transform: scale(1); } 50% { box-shadow: 0 0 0 10px rgba(255,255,255,0); transform: scale(1.04); } }
   @media (prefers-reduced-motion: reduce) {
-    .promo::before, .promo-badge, .cd-num.tick, .cd-sep, .promo-cta { animation: none; }
+    .promo::before, .promo::after, .promo-badge, .cd-num.tick, .cd-sep, .promo-cta { animation: none; }
   }
 
   .section-title { font-size: 18px; margin: 18px 0 10px; }
@@ -163,9 +170,9 @@
   </section>
 
   <section class="promo" id="promo" hidden aria-label="Ưu đãi">
-    <div class="promo-badge" aria-hidden="true">-20%</div>
-    <p class="promo-kicker">Ưu đãi khách quay lại</p>
-    <h2>Giá đã giảm <em>20%</em> so với sàn</h2>
+    <div class="promo-badge" aria-hidden="true">-30%</div>
+    <p class="promo-kicker">🎄 Ưu đãi Giáng sinh</p>
+    <h2>Giá web đã giảm sẵn <em>30%</em> so với sàn</h2>
     <p class="promo-sub">Ưu đãi kết thúc sau</p>
     <div class="countdown" role="timer" aria-live="off">
       <div class="cd-unit"><span class="cd-num" data-cd="m">00</span><span class="cd-label">Phút</span></div>

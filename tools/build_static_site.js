@@ -880,6 +880,7 @@ const pageShell = ({ title, description, canonical, image, schema, body, scripts
   <meta property="og:description" content="${escapeHtml(description)}" />
   ${image ? `<meta property="og:image" content="${escapeHtml(absoluteUrl(image))}" />` : ''}
   <link rel="stylesheet" href="/assets/css/static-seo.css?v=${staticCssVersion()}" />
+  <link rel="stylesheet" href="/assets/css/noel.css?v=${contentVersion(path.join(paths.cssDir, 'noel.css'))}" />
   <script type="application/ld+json">${jsonForHtml(schema)}</script>
 </head>
 <body>
