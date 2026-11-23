@@ -1971,6 +1971,12 @@
     "hidden": false,
     "optionGroups": [
       {
+        "name": "Màu",
+        "values": [
+          "Hương lài"
+        ]
+      },
+      {
         "name": "Số lượng",
         "values": [
           "2 Vỉ 4h = 20 viên",
@@ -2006,6 +2012,7 @@
         "weight": 700,
         "image": "/assets/products/mirrored/a11cc19a.webp",
         "options": {
+          "Màu": "Hương lài",
           "Số lượng": "50 Viên 4h"
         }
       },
@@ -2018,6 +2025,7 @@
         "weight": 200,
         "image": "/assets/products/mirrored/de9ea08a.webp",
         "options": {
+          "Màu": "Hương lài",
           "Số lượng": "2 Vỉ 4h = 20 viên"
         }
       },
@@ -2030,6 +2038,7 @@
         "weight": 1500,
         "image": "/assets/products/mirrored/42235667.webp",
         "options": {
+          "Màu": "Hương lài",
           "Số lượng": "Hộp 100 Viên 4h"
         }
       }

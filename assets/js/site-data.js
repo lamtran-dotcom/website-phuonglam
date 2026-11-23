@@ -274,7 +274,8 @@ const PRODUCTS = [
     ],
     "slug": "bo-bep-xong-cao-cap-xong-thao-xong-nha-thu-gian-day-du",
     "seoTitle": "Bộ bếp xông thảo mộc cao cấp 5 món | Phương Lâm",
-    "seoDescription": "Bộ xông nhà cao cấp 5 món: bếp niêu đất nung, dĩa lót, đế nến có tay cầm, 10 nến tealight 4 giờ và thảo mộc. Bếp 13 cm hoặc 16 cm, dùng được ngay."
+    "seoDescription": "Bộ xông nhà cao cấp 5 món: bếp niêu đất nung, dĩa lót, đế nến có tay cầm, 10 nến tealight 4 giờ và thảo mộc. Bếp 13 cm hoặc 16 cm, dùng được ngay.",
+    "code": "S10"
   },
   {
     "id": "shopee_28991652145",
@@ -545,7 +546,8 @@ const PRODUCTS = [
     ],
     "slug": "bo-xong-nha-tay-ue-thao-moc-khu-mui-thu-hut-may-man",
     "seoTitle": "Bộ xông nhà thảo mộc bếp niêu đất nung | Phương Lâm",
-    "seoDescription": "Bộ xông nhà thảo mộc Phương Lâm gồm bếp niêu đất nung, nến tealight, đế nến và gói thảo mộc phối sẵn. Chọn bếp 13 cm hoặc 16 cm theo phân loại."
+    "seoDescription": "Bộ xông nhà thảo mộc Phương Lâm gồm bếp niêu đất nung, nến tealight, đế nến và gói thảo mộc phối sẵn. Chọn bếp 13 cm hoặc 16 cm theo phân loại.",
+    "code": "S22"
   },
   {
     "id": "p_1777474804043_1b5kn",
@@ -637,7 +639,8 @@ const PRODUCTS = [
     ],
     "slug": "bep-xong-le-xong-thao-moc-bo-ket-khu-mui-thom-nha",
     "seoTitle": "Bếp xông thảo mộc đất nung bán lẻ | Phương Lâm",
-    "seoDescription": "Bếp xông thảo mộc đất nung bán lẻ gồm bếp và nắp, cỡ 13 cm hoặc 16 cm. Dùng với nến tealight để làm nóng thảo mộc khô khi xông nhà."
+    "seoDescription": "Bếp xông thảo mộc đất nung bán lẻ gồm bếp và nắp, cỡ 13 cm hoặc 16 cm. Dùng với nến tealight để làm nóng thảo mộc khô khi xông nhà.",
+    "code": "S04"
   },
   {
     "id": 1,
@@ -1201,7 +1204,8 @@ const PRODUCTS = [
     ],
     "slug": "que-thanh-xuat-khau-yen-bai-nau-an-pha-tra-thom-dam-tu-nhien",
     "seoTitle": "Quế thanh Yên Bái khô, đã cạo vỏ | Phương Lâm",
-    "seoDescription": "Quế thanh Yên Bái khô nguyên thanh, đã cạo vỏ, thơm ấm. Dùng nấu phở, bò kho, pha trà quế hoặc tạo hương. Túi 50 g, 100 g, 200 g."
+    "seoDescription": "Quế thanh Yên Bái khô nguyên thanh, đã cạo vỏ, thơm ấm. Dùng nấu phở, bò kho, pha trà quế hoặc tạo hương. Túi 50 g, 100 g, 200 g.",
+    "code": "S51"
   },
   {
     "id": "shopee_57058955812",
@@ -1269,7 +1273,8 @@ const PRODUCTS = [
     ],
     "slug": "nen-tealight-8-gio-trang-tri-tiec-anh-sang-am-chay-on-dinh-l-phuong-lam",
     "seoTitle": "Nến tealight vỏ mica trong suốt 8 giờ | Phương Lâm",
-    "seoDescription": "Nến tealight vỏ mica trong suốt, cháy khoảng 8 giờ/viên, ánh sáng đẹp cho trang trí bàn tiệc, phòng ngủ, spa. Chọn 5, 10, 20 hoặc 50 viên."
+    "seoDescription": "Nến tealight vỏ mica trong suốt, cháy khoảng 8 giờ/viên, ánh sáng đẹp cho trang trí bàn tiệc, phòng ngủ, spa. Chọn 5, 10, 20 hoặc 50 viên.",
+    "code": "S58"
   },
   {
     "id": "shopee_54450013830",
@@ -1326,7 +1331,8 @@ const PRODUCTS = [
     ],
     "slug": "nen-tru-trang-72h-trang-tri-ban-tiec-chay-em-khong-khoi",
     "seoTitle": "Nến trụ trắng không khói 3 cỡ S, M, L | Phương Lâm",
-    "seoDescription": "Nến trụ trắng không khói, cỡ S 7x10 cm (48 giờ), M 7x15 cm (68 giờ), L 7x20 cm (90 giờ). Trang trí bàn tiệc, tiệc cưới, nhà hàng, phòng khách."
+    "seoDescription": "Nến trụ trắng không khói, cỡ S 7x10 cm (48 giờ), M 7x15 cm (68 giờ), L 7x20 cm (90 giờ). Trang trí bàn tiệc, tiệc cưới, nhà hàng, phòng khách.",
+    "code": "S07"
   },
   {
     "id": "shopee_48452789252",
@@ -1347,7 +1353,8 @@ const PRODUCTS = [
     "variants": [],
     "slug": "ly-dung-nen-dat-nung-dung-bep-xong-an-toan-tien-cam",
     "seoTitle": "Ly đựng nến đất nung có tay cầm | Phương Lâm",
-    "seoDescription": "Ly đất nung có tay cầm để đặt nến tealight vào bếp xông thảo mộc, bếp bồ kết, đèn xông và lấy ra dễ dàng, hứng sáp giữ bếp sạch. Bán lẻ 1 ly."
+    "seoDescription": "Ly đất nung có tay cầm để đặt nến tealight vào bếp xông thảo mộc, bếp bồ kết, đèn xông và lấy ra dễ dàng, hứng sáp giữ bếp sạch. Bán lẻ 1 ly.",
+    "code": "S53"
   },
   {
     "id": "shopee_41330081336",
@@ -1414,7 +1421,8 @@ const PRODUCTS = [
     ],
     "slug": "bo-phu-kien-xong-nha-dat-nung-dung-bep-nieu-tien-loi",
     "seoTitle": "Phụ kiện bếp xông: nắp, đế nến, rế lót | Phương Lâm",
-    "seoDescription": "Phụ kiện thay thế cho bếp xông niêu: nắp đất nung cỡ 13 cm, 16 cm, đế đựng nến và rế lót. Bán lẻ từng món theo phân loại."
+    "seoDescription": "Phụ kiện thay thế cho bếp xông niêu: nắp đất nung cỡ 13 cm, 16 cm, đế đựng nến và rế lót. Bán lẻ từng món theo phân loại.",
+    "code": "S38"
   },
   {
     "id": "shopee_40170692234",
@@ -1464,15 +1472,16 @@ const PRODUCTS = [
     ],
     "slug": "nu-tram-huong-tu-nhien-xong-nha-thien-dinh-thom-diu",
     "seoTitle": "Nụ trầm hương cho thác khói, lư xông | Phương Lâm",
-    "seoDescription": "Nụ trầm hương dùng với thác khói hoặc lư xông, mỗi nụ cháy khoảng 20–30 phút. Chọn hũ 40 nụ hoặc 65 nụ. Đậy kín, bảo quản nơi khô ráo."
+    "seoDescription": "Nụ trầm hương dùng với thác khói hoặc lư xông, mỗi nụ cháy khoảng 20–30 phút. Chọn hũ 40 nụ hoặc 65 nụ. Đậy kín, bảo quản nơi khô ráo.",
+    "code": "S41"
   },
   {
     "id": "shopee_29011454025",
     "sku": "PL-004",
     "categoryId": "nen-thom",
     "name": "Nến tealight 4 giờ hương lài",
-    "price": 60000,
-    "originalPrice": null,
+    "price": 55000,
+    "originalPrice": 72000,
     "shortDesc": "Nến tealight hương lài, vỏ nhôm, sáp cọ, cháy khoảng 4 giờ mỗi viên, không khói. Chọn 20, 50 hoặc 100 viên.",
     "tag": "Sale",
     "weight": 200,
@@ -1493,7 +1502,13 @@ const PRODUCTS = [
         ]
       }
     ],
-    "optionImages": {},
+    "optionImages": {
+      "Số lượng": {
+        "2 Vỉ 4h = 20 viên": "/assets/products/uploads/1795061555762-chatgpt-image-19-39-43-29-thg-4-2026.webp",
+        "50 Viên 4h": "/assets/products/uploads/1795061572266-q231.webp",
+        "Hộp 100 Viên 4h": "/assets/products/uploads/1795061576050-21312.webp"
+      }
+    },
     "images": [
       "/assets/products/uploads/1777466312414-image.webp",
       "/assets/products/mirrored/5c62b76f.webp",
@@ -1507,10 +1522,10 @@ const PRODUCTS = [
     "variants": [
       {
         "id": "shopee_variant_185395649762",
-        "name": "Hộp 50v 4h - Lài",
+        "name": "50 Viên 4h",
         "sku": "",
         "price": 115000,
-        "originalPrice": 160000,
+        "originalPrice": 150000,
         "weight": 700,
         "image": "/assets/products/mirrored/a11cc19a.webp",
         "options": {
@@ -1520,10 +1535,10 @@ const PRODUCTS = [
       },
       {
         "id": "shopee_variant_185395649763",
-        "name": "2Vỉ 4h/20v - Lài",
+        "name": "2 Vỉ 4h = 20 viên",
         "sku": "",
         "price": 55000,
-        "originalPrice": 70000,
+        "originalPrice": 72000,
         "weight": 200,
         "image": "/assets/products/mirrored/de9ea08a.webp",
         "options": {
@@ -1533,10 +1548,10 @@ const PRODUCTS = [
       },
       {
         "id": "shopee_variant_185395649761",
-        "name": "Hộp 100v 4h - Lài",
+        "name": "Hộp 100 Viên 4h",
         "sku": "",
         "price": 220000,
-        "originalPrice": 320000,
+        "originalPrice": 286000,
         "weight": 1500,
         "image": "/assets/products/mirrored/42235667.webp",
         "options": {
@@ -1547,7 +1562,8 @@ const PRODUCTS = [
     ],
     "slug": "nen-tealight-4-gio-huong-lai-trang-tri-tiec-khong-khoi-l-phuong-lam",
     "seoTitle": "Nến tealight hương lài cháy 4 giờ | Phương Lâm",
-    "seoDescription": "Nến tealight hương lài cháy khoảng 4 giờ/viên, không khói, vỏ nhôm, sáp cọ. Trang trí tiệc, phòng ngủ, spa, quán cà phê. Chọn 20, 50 hoặc 100 viên."
+    "seoDescription": "Nến tealight hương lài cháy khoảng 4 giờ/viên, không khói, vỏ nhôm, sáp cọ. Trang trí tiệc, phòng ngủ, spa, quán cà phê. Chọn 20, 50 hoặc 100 viên.",
+    "code": "S11"
   },
   {
     "id": "shopee_28422178672",
@@ -1589,7 +1605,8 @@ const PRODUCTS = [
     ],
     "slug": "nap-bep-nieu-xong-thao-moc-dat-nung-chiunhiet",
     "seoTitle": "Nắp đất nung cho bếp niêu xông thảo mộc | Phương Lâm",
-    "seoDescription": "Nắp đất nung thay thế cho bếp niêu xông thảo mộc, đường kính 13 cm hoặc 15 cm, làm từ đất sét. Đặt thảo mộc lên nắp, đốt nến bên dưới để tỏa hương."
+    "seoDescription": "Nắp đất nung thay thế cho bếp niêu xông thảo mộc, đường kính 13 cm hoặc 15 cm, làm từ đất sét. Đặt thảo mộc lên nắp, đốt nến bên dưới để tỏa hương.",
+    "code": "S31"
   },
   {
     "id": "shopee_28251842874",
@@ -1657,7 +1674,8 @@ const PRODUCTS = [
     ],
     "slug": "nen-tealight-8-gio-vo-nhom-xong-thao-moc-tinh-dau-l-phuong-lam",
     "seoTitle": "Nến tealight 8 giờ vỏ nhôm không khói | Phương Lâm",
-    "seoDescription": "Nến tealight vỏ nhôm cháy khoảng 8 giờ/viên, không khói, không mùi, cao 2,5 cm. Dùng cho đèn xông tinh dầu, bếp xông thảo mộc, trang trí. Chọn 5–50 viên."
+    "seoDescription": "Nến tealight vỏ nhôm cháy khoảng 8 giờ/viên, không khói, không mùi, cao 2,5 cm. Dùng cho đèn xông tinh dầu, bếp xông thảo mộc, trang trí. Chọn 5–50 viên.",
+    "code": "S40"
   },
   {
     "id": "shopee_26007254880",
@@ -1845,7 +1863,8 @@ const PRODUCTS = [
     ],
     "slug": "thao-moc-xong-nha-tu-nhien-tay-ue-khu-mui-xua-con-trung-nhieu-loai-tu-chon",
     "seoTitle": "Thảo mộc khô xông nhà mua lẻ nhiều loại | Phương Lâm",
-    "seoDescription": "Thảo mộc khô xông nhà bán lẻ từng loại: quế, bồ kết, vỏ bưởi, sả, bạc hà, oải hương, lát cam, gừng… Tự phối theo sở thích. Gói 30–100 g."
+    "seoDescription": "Thảo mộc khô xông nhà bán lẻ từng loại: quế, bồ kết, vỏ bưởi, sả, bạc hà, oải hương, lát cam, gừng… Tự phối theo sở thích. Gói 30–100 g.",
+    "code": "S01"
   },
   {
     "id": "shopee_23752423694",
@@ -1904,7 +1923,8 @@ const PRODUCTS = [
     ],
     "slug": "de-dung-nen-tealight-dung-xong-tinh-dau-thao-moc",
     "seoTitle": "Đế gốm đựng nến tealight có cán dài | Phương Lâm",
-    "seoDescription": "Đế gốm sứ trắng hoặc đen có cán dài, đựng nến tealight cho đèn xông tinh dầu và bếp xông, đặt và thay nến không chạm tay vào chỗ nóng. Dài 8,3 cm."
+    "seoDescription": "Đế gốm sứ trắng hoặc đen có cán dài, đựng nến tealight cho đèn xông tinh dầu và bếp xông, đặt và thay nến không chạm tay vào chỗ nóng. Dài 8,3 cm.",
+    "code": "S15"
   },
   {
     "id": "shopee_22361508205",
@@ -1959,7 +1979,8 @@ const PRODUCTS = [
     ],
     "slug": "bo-ket-kho-goi-dau-xong-nha-khu-mui-thom-tu-nhien",
     "seoTitle": "Bồ kết khô gội đầu, xông nhà | Phương Lâm",
-    "seoDescription": "Bồ kết khô dùng nấu nước gội đầu hoặc xông với bếp xông thảo mộc. Túi 100 g, 200 g, 500 g. Hướng dẫn nấu nước gội và bảo quản."
+    "seoDescription": "Bồ kết khô dùng nấu nước gội đầu hoặc xông với bếp xông thảo mộc. Túi 100 g, 200 g, 500 g. Hướng dẫn nấu nước gội và bảo quản.",
+    "code": "S43"
   },
   {
     "id": "shopee_22353875434",
@@ -2064,7 +2085,8 @@ const PRODUCTS = [
     ],
     "slug": "combo-thao-moc-xong-nha-phuong-lam-thanh-tay-xua-con-trung",
     "seoTitle": "Combo thảo mộc khô xông nhà phối sẵn | Phương Lâm",
-    "seoDescription": "Combo thảo mộc khô phối sẵn theo gói: thư giãn, nhà mới, khử mùi, combo 12 loại… Dùng với bếp xông để xông nhà. Thành phần ghi trên từng gói."
+    "seoDescription": "Combo thảo mộc khô phối sẵn theo gói: thư giãn, nhà mới, khử mùi, combo 12 loại… Dùng với bếp xông để xông nhà. Thành phần ghi trên từng gói.",
+    "code": "S13"
   },
   {
     "id": "shopee_22080262041",
@@ -2219,7 +2241,8 @@ const PRODUCTS = [
     ],
     "slug": "den-xong-tinh-dau-dot-nen-trang-tri-phong-ngu-sang-trong",
     "seoTitle": "Đèn xông tinh dầu gốm sứ dùng nến tealight | Phương Lâm",
-    "seoDescription": "Đèn xông tinh dầu gốm sứ dùng nến tealight, mẫu hoa trắng, búp sen, đài sen, có đế trắng. Không cần điện, vừa xông tinh dầu vừa trang trí phòng."
+    "seoDescription": "Đèn xông tinh dầu gốm sứ dùng nến tealight, mẫu hoa trắng, búp sen, đài sen, có đế trắng. Không cần điện, vừa xông tinh dầu vừa trang trí phòng.",
+    "code": "S08"
   },
   {
     "id": "shopee_19636361517",
@@ -2370,7 +2393,8 @@ const PRODUCTS = [
     ],
     "slug": "vi-nen-tealight-2h-4h-khong-khoi-khong-mui-10-vien-vi",
     "seoTitle": "Hộp 10 nến tealight 2 giờ, 4 giờ | Phương Lâm",
-    "seoDescription": "Hộp 10 viên nến tealight vỏ nhôm, chọn loại 2 giờ hoặc 4 giờ, trắng, trơn hoặc hương lài. Dùng cho đèn xông, bếp xông, hâm trà, trang trí."
+    "seoDescription": "Hộp 10 viên nến tealight vỏ nhôm, chọn loại 2 giờ hoặc 4 giờ, trắng, trơn hoặc hương lài. Dùng cho đèn xông, bếp xông, hâm trà, trang trí.",
+    "code": "S05"
   },
   {
     "id": "shopee_6203380691",
@@ -2427,7 +2451,8 @@ const PRODUCTS = [
     ],
     "slug": "nen-ly-72h-no-lon-tho-cung-khong-khoi-phuong-lam",
     "seoTitle": "Nến ly nơ lớn thờ cúng cháy 3–4 ngày | Phương Lâm",
-    "seoDescription": "Nến ly nơ lớn thờ cúng cao 14 cm, cháy liên tục khoảng 3–4 ngày, không mùi, ít khói. Hộp 6 ly, màu vàng, đỏ hoặc trắng (Thánh Giá)."
+    "seoDescription": "Nến ly nơ lớn thờ cúng cao 14 cm, cháy liên tục khoảng 3–4 ngày, không mùi, ít khói. Hộp 6 ly, màu vàng, đỏ hoặc trắng (Thánh Giá).",
+    "code": "S55"
   },
   {
     "id": "shopee_4903385000",
@@ -2482,7 +2507,8 @@ const PRODUCTS = [
     ],
     "slug": "nen-ly-no-dai-120h-tho-cung-no-dai-khong-khoi-trang-nghiem",
     "seoTitle": "Nến ly nơ đại thờ cúng cháy 120 giờ | Phương Lâm",
-    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 120 giờ (5 ngày), không mùi, không khói. Hộp 6 ly (3 cặp), chọn màu vàng, đỏ hoặc trắng."
+    "seoDescription": "Nến ly nơ đại thờ cúng cao 22 cm, cháy liên tục khoảng 120 giờ (5 ngày), không mùi, không khói. Hộp 6 ly (3 cặp), chọn màu vàng, đỏ hoặc trắng.",
+    "code": "S54"
   },
   {
     "id": "shopee_54367578815",
@@ -2646,7 +2672,8 @@ const PRODUCTS = [
           "PHÂN LOẠI": "Hoa đại hồi thay thế"
         }
       }
-    ]
+    ],
+    "code": "S30"
   },
   {
     "id": "p_1791429972397_g7kgf",
@@ -2918,7 +2945,8 @@ const PRODUCTS = [
           "Phân Loại": "Thanh Gỗ Palo 4g"
         }
       }
-    ]
+    ],
+    "code": "S33"
   },
   {
     "id": "shopee_56102764086",
@@ -2977,7 +3005,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "re-lot-bep-xong-thao-moc-dan-thu-cong-phuong-lam"
+    "slug": "re-lot-bep-xong-thao-moc-dan-thu-cong-phuong-lam",
+    "code": "S25"
   },
   {
     "id": "shopee_53859220256",
@@ -3006,7 +3035,8 @@ const PRODUCTS = [
       "/assets/products/uploads/1791518811639-shopee-vn-11134207-81ztc-mndsc29a9mh05b.webp"
     ],
     "variants": [],
-    "slug": "la-dua-kho-tu-nhien-100g-phuong-lam"
+    "slug": "la-dua-kho-tu-nhien-100g-phuong-lam",
+    "code": "S37"
   },
   {
     "id": "shopee_50267690045",
@@ -3113,7 +3143,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "go-xa-xi-do-dam-bao-xong-nha-phuong-lam"
+    "slug": "go-xa-xi-do-dam-bao-xong-nha-phuong-lam",
+    "code": "S29"
   },
   {
     "id": "shopee_48864137960",
@@ -3241,7 +3272,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "thanh-go-palo-santo-tu-nhien-10cm-phuong-lam"
+    "slug": "thanh-go-palo-santo-tu-nhien-10cm-phuong-lam",
+    "code": "S06"
   },
   {
     "id": "shopee_47417886680",
@@ -3346,7 +3378,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "thanh-go-xa-xi-do-10cm-de-ban-treo-phong-phuong-lam"
+    "slug": "thanh-go-xa-xi-do-10cm-de-ban-treo-phong-phuong-lam",
+    "code": "S35"
   },
   {
     "id": "shopee_46517698279",
@@ -3439,7 +3472,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "go-ngoc-am-hoang-dan-dam-go-xong-nha-phuong-lam"
+    "slug": "go-ngoc-am-hoang-dan-dam-go-xong-nha-phuong-lam",
+    "code": "S36"
   },
   {
     "id": "shopee_25659397266",
@@ -3520,7 +3554,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "la-khuynh-diep-kho-xong-nha-phuong-lam"
+    "slug": "la-khuynh-diep-kho-xong-nha-phuong-lam",
+    "code": "S42"
   },
   {
     "id": "shopee_25314272283",
@@ -3615,7 +3650,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "hoa-dai-hoi-kho-xong-nha-nau-an-phuong-lam"
+    "slug": "hoa-dai-hoi-kho-xong-nha-nau-an-phuong-lam",
+    "code": "S27"
   },
   {
     "id": "shopee_25158793608",
@@ -3695,7 +3731,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "lat-cam-vang-say-kho-xong-nha-pha-tra-phuong-lam"
+    "slug": "lat-cam-vang-say-kho-xong-nha-pha-tra-phuong-lam",
+    "code": "S23"
   },
   {
     "id": "shopee_24656264608",
@@ -3776,7 +3813,8 @@ const PRODUCTS = [
         }
       }
     ],
-    "slug": "la-nguyet-que-kho-xong-nha-lam-gia-vi-phuong-lam"
+    "slug": "la-nguyet-que-kho-xong-nha-lam-gia-vi-phuong-lam",
+    "code": "S52"
   },
   {
     "id": "shopee_24604156053",
@@ -3982,7 +4020,8 @@ const PRODUCTS = [
           "Mùi Hương": "Hoa Lê Anh"
         }
       }
-    ]
+    ],
+    "code": "S09"
   },
   {
     "id": "shopee_53710267498",
@@ -3990,7 +4029,7 @@ const PRODUCTS = [
     "categoryId": "combo",
     "name": "Bộ xông nhà thảo mộc mini 10 cm Phương Lâm",
     "price": 130000,
-    "originalPrice": 0,
+    "originalPrice": 169000,
     "shortDesc": "Bộ xông nhà mini gồm bếp niêu đất nung 10 cm, gói thảo mộc, vỉ 10 nến tealight 4 giờ và đế đựng nến; bản FULL thêm dĩa lót bếp. Hợp phòng nhỏ, căn hộ, góc làm việc.",
     "tag": "",
     "weight": 1000,
@@ -4020,13 +4059,17 @@ const PRODUCTS = [
         ]
       }
     ],
-    "optionImages": {},
+    "optionImages": {
+      "Tùy chọn": {
+        "Bộ Xông 10cm": "/assets/products/uploads/1795012108137-s44-5.webp",
+        "Bộ Xông full 10cm": "/assets/products/uploads/1795012106100-s44-1.webp"
+      }
+    },
     "images": [
+      "/assets/products/uploads/1795012106100-s44-1.webp",
       "/assets/products/uploads/1795012106712-s44-2.webp",
       "/assets/products/uploads/1795012107160-s44-3.webp",
-      "/assets/products/uploads/1795012107695-s44-4.webp",
-      "/assets/products/uploads/1795012106100-s44-1.webp",
-      "/assets/products/uploads/1795012108137-s44-5.webp"
+      "/assets/products/uploads/1795012107695-s44-4.webp"
     ],
     "variants": [
       {
@@ -4035,11 +4078,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014969889-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Thư Giãn"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_02",
@@ -4047,11 +4091,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014984526-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Tẩy Uế"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_03",
@@ -4059,11 +4104,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014987304-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Xua Muỗi"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_04",
@@ -4071,11 +4117,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014990059-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Nhà Mới"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_05",
@@ -4083,11 +4130,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014993078-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông 12 loại TM"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_06",
@@ -4095,11 +4143,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014999316-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Khử Mùi"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_07",
@@ -4107,11 +4156,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795014996231-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Thanh Lọc kk"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_08",
@@ -4119,11 +4169,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 130000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795015002169-bo-xong-anh-dai-dien.webp",
         "options": {
           "Tùy chọn": "Bộ Xông 10cm",
           "Loại": "Bộ Xông Giải Cảm"
-        }
+        },
+        "originalPrice": 169000
       },
       {
         "id": "shopee_s44_09",
@@ -4131,11 +4182,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Thư Giãn"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_10",
@@ -4143,11 +4195,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Tẩy Uế"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_11",
@@ -4155,11 +4208,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Xua Muỗi"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_12",
@@ -4167,11 +4221,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Nhà Mới"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_13",
@@ -4179,11 +4234,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông 12 loại TM"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_14",
@@ -4191,11 +4247,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Khử Mùi"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_15",
@@ -4203,11 +4260,12 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Thanh Lọc kk"
-        }
+        },
+        "originalPrice": 191000
       },
       {
         "id": "shopee_s44_16",
@@ -4215,14 +4273,16 @@ const PRODUCTS = [
         "sku": "",
         "price": 147000,
         "weight": 1000,
-        "image": "",
+        "image": "/assets/products/uploads/1795012106100-s44-1.webp",
         "options": {
           "Tùy chọn": "Bộ Xông full 10cm",
           "Loại": "Bộ Xông Giải Cảm"
-        }
+        },
+        "originalPrice": 191000
       }
     ],
-    "reviews": null
+    "reviews": null,
+    "code": "S44"
   }
 ];
 
