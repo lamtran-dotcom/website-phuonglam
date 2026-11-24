@@ -4288,6 +4288,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 33,
+    "title": "Nến trên bàn thờ bốc cháy: Vì sao và xử lý thế nào?",
+    "excerpt": "Nến trên bàn thờ bốc cháy có thể do bấc dài hoặc gió lùa. Xem cách xử lý, đặt nến thờ an toàn và kiểm tra bàn thờ trước khi ngủ.",
+    "date": "24 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "nen-ban-tho-boc-chay",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/nen-ban-tho-boc-chay/",
+    "image": "/assets/blog/nen-ban-tho-boc-chay-1795439205841-1-nen-tho-dang-chay-tren-ban-tho-gon-gang-xa-do-trang-tri.webp",
+    "coverImage": "/assets/blog/nen-ban-tho-boc-chay-1795439205841-1-nen-tho-dang-chay-tren-ban-tho-gon-gang-xa-do-trang-tri.webp"
+  },
+  {
     "id": 32,
     "title": "Xông nhà tẩy uế: khi nào nên xông, xông bằng gì và cách làm tại nhà",
     "excerpt": "Xông nhà tẩy uế khi nào, dùng thảo mộc gì và làm ra sao tại nhà? Đọc hướng dẫn thực tế, an toàn và chọn bộ xông phù hợp.",
