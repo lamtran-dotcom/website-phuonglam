@@ -4288,6 +4288,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 34,
+    "title": "Gỗ thơm xông nhà là gì? Các loại gỗ và cách chọn",
+    "excerpt": "Gỗ thơm xông nhà có những loại nào, chọn dăm hay thanh gỗ? Xem bảng so sánh mùi hương và cách dùng phù hợp cho phòng ngủ, phòng thờ, ô tô.",
+    "date": "25 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "go-thom-xong-nha",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/go-thom-xong-nha/",
+    "image": "/assets/blog/go-thom-xong-nha-1795440569531-1-go-thom-xong-nha-gom-ngoc-am-xa-xi-do-va-thanh-palo-santo-ch.webp",
+    "coverImage": "/assets/blog/go-thom-xong-nha-1795440569531-1-go-thom-xong-nha-gom-ngoc-am-xa-xi-do-va-thanh-palo-santo-ch.webp"
+  },
+  {
     "id": 33,
     "title": "Nến trên bàn thờ bốc cháy: Vì sao và xử lý thế nào?",
     "excerpt": "Nến trên bàn thờ bốc cháy có thể do bấc dài hoặc gió lùa. Xem cách xử lý, đặt nến thờ an toàn và kiểm tra bàn thờ trước khi ngủ.",
