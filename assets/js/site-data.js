@@ -4288,6 +4288,18 @@ const PRODUCTS = [
 
 const BLOG_POSTS = [
   {
+    "id": 35,
+    "title": "Gỗ ngọc am là gỗ gì? Mùi hương, cách dùng và giữ thơm",
+    "excerpt": "Gỗ ngọc am có mùi thế nào, thơm được bao lâu và dùng ra sao? Xem cách xông, giữ hương, so sánh với bách xanh và xá xị để chọn loại phù hợp.",
+    "date": "26 tháng 11, 2026",
+    "readTime": "3 phút đọc",
+    "slug": "go-ngoc-am-la-go-gi",
+    "tag": "Kiến thức",
+    "url": "/blog/kien-thuc/go-ngoc-am-la-go-gi/",
+    "image": "/assets/blog/go-ngoc-am-la-go-gi-1795493797282-1-go-ngoc-am-chua-dot-dat-trong-phong-khach-canh-dia-gom.webp",
+    "coverImage": "/assets/blog/go-ngoc-am-la-go-gi-1795493797282-1-go-ngoc-am-chua-dot-dat-trong-phong-khach-canh-dia-gom.webp"
+  },
+  {
     "id": 34,
     "title": "Gỗ thơm xông nhà là gì? Các loại gỗ và cách chọn",
     "excerpt": "Gỗ thơm xông nhà có những loại nào, chọn dăm hay thanh gỗ? Xem bảng so sánh mùi hương và cách dùng phù hợp cho phòng ngủ, phòng thờ, ô tô.",
